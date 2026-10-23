@@ -228,6 +228,7 @@ config, and artifact path.
 - `figures/fig06_intervention_forest.png` — named vs random-neuron effects.
 - `figures/fig07_ncmcm_verification.png` — distributed vs reimplemented p-values.
 - `figures/fig08_observed_vs_rollout.png` — observed trajectory vs model rollout.
+- `figures/fig09_phase2_summary.png` — corrected branching, RIVL specificity, Randi MAE, behaviour increment.
 
 ---
 
