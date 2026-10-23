@@ -29,6 +29,8 @@ artifacts/**/test_predictions.npz
 # Generated heavy outputs
 figures/*.gif
 reports/*.pdf
+reports/phase2b_optogenetic_atlas/randi_trial_table.csv.gz
+reports/phase2b_optogenetic_atlas/benchmark_oof_*.csv.gz
 
 # OS/editor
 .DS_Store

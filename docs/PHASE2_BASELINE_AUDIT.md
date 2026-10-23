@@ -109,3 +109,17 @@ independent checks:
 4. Build an experimental-response benchmark with held-out animals/stimulated
    neurons and simple baselines.
 5. Extend the app and reports only after the above evidence exists.
+
+## Phase 2 execution status (appended after completion)
+
+| Gate | Final status | Evidence |
+|---|---|---|
+| A. Scientific audit | ✅ completed | corrected branching, intervention, behaviour, BunDLe reports |
+| B. Experimental intervention data | ✅ acquired and parsed | Randi 2023, 110 animals, 3,371 valid events, verified hash |
+| C. Scientific evaluation | ✅ external benchmark run | no positive transfer; see `INTERVENTION_GENERALIZATION_RESULTS.md` |
+| D. Simulation | ✅ specificity audited | 6 models, 26 cells, 19 controls/model; nonspecific |
+| E. Application | ✅ 7 tabs, AppTest passes | optogenetic tab added |
+| F. Git | ✅ additive commits on Phase 2 branch | no reset/squash/force-push |
+
+The baseline itself is unchanged. The Phase 2 branch does not rewrite the
+starting commit or the Phase 1 reports.

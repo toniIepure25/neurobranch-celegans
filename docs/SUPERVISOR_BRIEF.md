@@ -18,7 +18,12 @@ A reproducible Python platform for *C. elegans* whole-brain calcium imaging:
 - NC-MCM artifact verification and an independent Python port of the lag-2 Markov test;
 - branching analysis with a shuffled null and projection-stability check;
 - paired virtual-perturbation engine with cluster bootstrap, OOD flags, and random-neuron controls;
-- 6-tab Streamlit/Plotly app, Typer CLI, 23 passing tests, 8 figures, full provenance manifests.
+- 7-tab Streamlit/Plotly app, Typer CLI, 43 passing tests, 8 figures, full provenance manifests.
+
+**Phase 2 additions (this brief section 2.5):** corrected branching nulls on all
+five worms; intervention specificity audit across 6 models; Randi 2023
+optogenetic atlas (110 animals, 3,371 events) with external benchmark; incremental
+behaviour benchmark; 7-tab app; Phase 2 reports and tests.
 
 Code: `D:\ComputaCenter\NeuroBranch\neurobranch-celegans`.
 Primary commands: `neurobranch data audit`, `train dynamics`, `reproduce ncmcm`, `reproduce bundlenet`, `branching analyze`, `simulate intervention`, `report`, `app`.
@@ -54,12 +59,16 @@ tuning success.
 Worm 0, 328 held-out REV frames, 3-D PCA, k=40, 20-frame horizon:
 
 - observed mean local outcome entropy: **0.578 bits**
-- shuffled null: **0.960 bits**
-- excess: **−0.382 bits**, permutation p = **1.0**
+- iid shuffled null: **0.961 bits**
+- block-10 null: **0.905 bits**
+- excess: **−0.383 bits**, one-sided excess p = 1.0, **deficit p = 0.0050**
 
-The projection is moderately stable across dimensions (Spearman 0.71–0.77), but
-the observed neighbourhoods are *less* diverse than chance. A 3-D branch is not a
-bifurcation.
+The Phase 1 p=1.0 was a one-sided excess test. The corrected two-sided audit
+shows a significant **deficit**, not excess: local outcomes are *more*
+predictable than chance. This is not branching. The deficit replicates in 4/5
+worms under iid/block-10 nulls (p≈0.005), but not in worm 3 (block-10 p=0.68),
+and is weaker under the circular-shift null (worms 0/4 p<0.05; worm 1 p=0.08;
+worms 2/3 not significant). A 3-D branch is not a bifurcation.
 
 ### 2.3 Virtual perturbation effects are nonspecific
 
@@ -74,6 +83,26 @@ candidate is at the 79th percentile of arbitrary cells. The first control versio
 sampled candidates by mistake; it was fixed and re-run. The corrected result is a
 strong negative result about specificity.
 
+**Phase 2 extension.** Across 6 models (MLP seeds 17/23/31, residual MLP, VAR,
+GRU), RIVL +2 is never significant against 19 matched controls (p=0.10–1.00). In
+MLP 23 the effect is 0.733 but the control max is 0.767; in the residual MLP it is
+exactly 0. The effect is threshold-like: RIVL is 0.011 at +1, 0.333 at +2, 0.667
+at +3, and negative at −1/−2. `OLQVL` (0.667) and `OLQVR` (0.633) exceed RIVL at
++2. This is an off-support stress response, not a specific cell effect.
+
+### 2.5 Phase 2 external data
+
+- **Randi 2023:** archive verified against OSF metadata (SHA256
+  `d6e7b3…6ce836`); 110 animals, 3,371 valid events, 259 stimulated / 305
+  recorded cells. Repeated-stimulation reliability median r=0.090.
+- Held-out events: connectome ridge MAE 6.1112 vs global mean 6.1113, paired
+  Δ=−0.000086, 95% CI [−0.0177, +0.0165], 50.2% bootstrap wins. Held-out targets:
+  5.7467 vs 5.7251. Held-out animals: 5.7919 vs 5.7249. **No model beats the
+  constant mean.**
+- **Behaviour increment:** state+neural is worse on balanced accuracy and every
+  proper scoring rule (blocked Δlog loss +0.011, forward +0.218), while transition
+  accuracy rises. No incremental calibrated value.
+
 ### 2.4 Reproduction status
 
 - **NC-MCM:** distributed p at K=3: 0.636, 0.157, 0.096, 0.603, 0.979; our Python port (1000 surrogates): 0.659, 0.149, 0.084, 0.626, 0.983. Agreement within 0.023. We verified artifacts and ported the test; we did not retrain the full pipeline.
@@ -87,10 +116,12 @@ The project does **not** support the claim that these models recover causal
 population dynamics from Kato's data. It supports a narrower, useful claim:
 
 > Under a leakage-audited blocked evaluation on five worms, standard latent and
-> neural dynamics models do not beat persistence; apparent branching is below a
-> shuffled null; and model-ranked perturbations are not distinguishable from
-> arbitrary-cell perturbations. These are benchmarks that a stronger method must
-> beat before causal language is warranted.
+> neural dynamics models do not beat persistence; local outcome diversity is
+> *below* a geometry-preserving null (predictability, not branching); model-ranked
+> perturbations are not distinguishable from arbitrary-cell perturbations; and
+> pre-stimulus state does not predict external optogenetic responses better than
+> a constant. These are benchmarks that a stronger method must beat before causal
+> language is warranted.
 
 The value for the collaboration is the negative benchmark, the artifact
 verification, and the explicitly falsifiable next experiment — not a new
@@ -135,11 +166,15 @@ attractive 3-D plot.
 
 ## 5. Recommended next step
 
-Run the preregistered RIVL/RIVR optogenetic experiment in
-[`NEXT_EXPERIMENTS.md`](NEXT_EXPERIMENTS.md), with sham and random-neuron
-controls, and pre-register the model's directional prediction. In parallel, run a
-time-varying model class under the strict-forward split to test whether the
-negative dynamics result is caused by non-stationarity.
+The Phase 2 priority is an **independent behavioural dataset**, not another
+virtual scan. The current RIVL/RIVR experiment remains worth running only with a
+pre-registered cell set, dose–response range, sham controls, and a new cohort; the
+Phase 2 specificity audit removes the original justification for a single-cell
+test.
+
+In parallel, test a time-varying model under the strict-forward split and a
+causal-filter encoder. See [`PHASE2_NEXT_EXPERIMENTS.md`](PHASE2_NEXT_EXPERIMENTS.md)
+for falsifiable stop conditions.
 
 Both are designed to fail informatively. Neither requires another attractive 3-D
 visualization.

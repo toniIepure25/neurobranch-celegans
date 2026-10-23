@@ -23,22 +23,28 @@
 | Latent models: PCA+MLP, PCA+kNN | ✅ same 105-run suite |
 | BunDLe-Net | ✅ official 3-D artifacts evaluated; PyTorch reimplementation trained (partial reproduction) |
 | NC-MCM | ✅ distributed artifacts verified; lag-2 Markov test ported to Python; behaviour decoder cross-validated |
-| Branching analysis | ✅ empirical + model-based; null test and projection-stability test |
+| Branching analysis | ✅ empirical + model-based; **corrected two-sided null test** (Phase 2) |
 | Virtual perturbation engine | ✅ paired baselines, common random numbers, multi-seed uncertainty, OOD support flags, random-neuron controls |
-| Sparse candidate search | ✅ 13 named cells × 2 amplitudes + 19 non-candidate random controls |
-| Interactive 3-D app | ✅ Streamlit + Plotly, 6 tabs |
+| Sparse candidate search | ✅ 13 named cells × 2 amplitudes + 19 non-candidate controls; **Phase 2 specificity audit** |
+| Randi 2023 optogenetic atlas | ✅ 110 animals, 3,371 events parsed; external response benchmark (**negative**) |
+| Independent behaviour | ❌ not acquired; Kato-only incremental behaviour audit is negative |
+| Interactive 3-D app | ✅ Streamlit + Plotly, 7 tabs |
 | CLI | ✅ Typer, documented commands |
-| Tests | ✅ 23 passed (unit, integration, scientific) |
+| Tests | ✅ 43 passed (unit, integration, scientific; includes Phase 2) |
 | Figures | ✅ 8 static PNGs + interactive HTML |
 | Causal validation | ❌ not attempted; evidence gate refuses unsupported claims |
 
 The headline result is deliberately unflattering: on held-out data, **no neural
 dynamics model clearly beats a persistence baseline**, behaviour decoding is far
-below label persistence, apparent branching shows *less* local outcome diversity
-than a shuffled null, and the top named-neuron virtual effect is **within the
-range of arbitrary non-candidate cells** (4/19 controls match or exceed it,
-empirical p≈0.21), so it is not specific. These are findings, not bugs; they are preserved in
-[`docs/RESULTS.md`](docs/RESULTS.md) and [`docs/LIMITATIONS.md`](docs/LIMITATIONS.md).
+below label persistence and adds no incremental calibration value, apparent
+branching is actually *lower* local entropy than a geometry-preserving null in
+4/5 worms (predictability, not branching), and the top named-neuron virtual effect
+is **within the range of arbitrary non-candidate cells** (4/19 controls match or
+exceed it, empirical p≈0.21), so it is not specific. The external Randi 2023
+optogenetic benchmark also fails to beat a constant-mean baseline on held-out
+animals. These are findings, not bugs; they are preserved in
+[`docs/RESULTS.md`](docs/RESULTS.md), [`docs/PHASE2_SCIENTIFIC_LIMITATIONS.md`](docs/PHASE2_SCIENTIFIC_LIMITATIONS.md)
+and [`docs/LIMITATIONS.md`](docs/LIMITATIONS.md).
 
 ---
 
@@ -92,6 +98,15 @@ neurobranch report
 neurobranch app
 ```
 
+Phase 2 audits (require local raw data; outputs are committed under `reports/`):
+
+```bash
+python scripts/phase2a_branching_audit.py
+python scripts/phase2a_intervention_audit.py
+python scripts/phase2a_optogenetic_benchmark.py
+python scripts/phase2a_behavior_benchmark.py
+```
+
 The `simulate intervention` command prints the standing warning and writes a
 JSON summary containing the baseline and virtual distributions, bootstrap CI,
 trajectory displacement, OOD fraction, and the causal-status object.
@@ -112,16 +127,17 @@ neurobranch-celegans/
 ├─ references/external/          cloned upstream repositories (not committed)
 ├─ src/neurobranch/
 │  ├─ behavior/                  runs, transitions, entropies
-│  ├─ branching/                 local outcome diversity, null test, dimension stability
+│  ├─ branching/                 local outcome diversity, corrected null tests, synthetic fixtures
 │  ├─ cli/                       Typer entry point
-│  ├─ data/                      Kato HDF5 loader, provenance, synthetic generator
+│  ├─ data/                      Kato loader, Randi optogenetic adapter, provenance
 │  ├─ dynamics/                  baselines, neural/latent models, training, checkpoints
-│  ├─ evaluation/                metrics, bootstrap, transition distances, rollouts
-│  ├─ interventions/             specs, paired engine, OOD, evidence gate, search
+│  ├─ evaluation/                metrics, bootstrap, rollouts, Randi and behaviour benchmarks
+│  ├─ interventions/             specs, paired engine, OOD, evidence gate, specificity audit
 │  ├─ preprocessing/             leakage-safe split/scaling/windowing
 │  ├─ representation/            BunDLe-Net artifact integration + reimplementation
 │  ├─ reproduction/              NC-MCM verification
 │  └─ reporting/                 tables and figures from saved artifacts
+├─ scripts/                      Phase 2 audit and benchmark entry points
 └─ tests/                        unit / integration / scientific
 ```
 
@@ -176,6 +192,17 @@ config, and artifact path.
 | [`docs/SUPERVISOR_BRIEF.md`](docs/SUPERVISOR_BRIEF.md) | Two-page status and discussion points for Denis Kovačević |
 | [`docs/POTENTIAL_PAPER.md`](docs/POTENTIAL_PAPER.md) | Paper framing, claims, figures, and what is still missing |
 | [`docs/RESULTS.md`](docs/RESULTS.md) | Exact quantitative results and negative findings |
+| [`docs/PHASE2_BASELINE_AUDIT.md`](docs/PHASE2_BASELINE_AUDIT.md) | Pre-Phase-2 baseline, inherited state, gates |
+| [`docs/BRANCHING_STATISTICAL_AUDIT.md`](docs/BRANCHING_STATISTICAL_AUDIT.md) | Corrected branching nulls and synthetic power checks |
+| [`docs/BUNDLENET_REPRODUCTION_AUDIT.md`](docs/BUNDLENET_REPRODUCTION_AUDIT.md) | Transductive artifact vs causal partial reimplementation |
+| [`docs/NEURON_IDENTITY_MAPPING.md`](docs/NEURON_IDENTITY_MAPPING.md) | Kato↔Randi canonical names and ambiguity |
+| [`docs/INTERVENTION_DATASET_AUDIT.md`](docs/INTERVENTION_DATASET_AUDIT.md) | Randi 2023 provenance, schema, coverage |
+| [`docs/INTERVENTION_GENERALIZATION_RESULTS.md`](docs/INTERVENTION_GENERALIZATION_RESULTS.md) | Specificity audit + external optogenetic benchmark |
+| [`docs/BEHAVIORAL_GENERALIZATION.md`](docs/BEHAVIORAL_GENERALIZATION.md) | Incremental behaviour prediction (negative) |
+| [`docs/RELATED_WORK_NEBULA.md`](docs/RELATED_WORK_NEBULA.md) | NEBULA positioning and evaluation gates |
+| [`docs/PHASE2_METHODOLOGY.md`](docs/PHASE2_METHODOLOGY.md) | Phase 2 protocols, splits, statistics |
+| [`docs/PHASE2_SCIENTIFIC_LIMITATIONS.md`](docs/PHASE2_SCIENTIFIC_LIMITATIONS.md) | Phase 2-specific limitations |
+| [`docs/PHASE2_NEXT_EXPERIMENTS.md`](docs/PHASE2_NEXT_EXPERIMENTS.md) | Falsifiable next experiments |
 | [`docs/REPRODUCING.md`](docs/REPRODUCING.md) | Operator recipe with expected numbers and known nondeterminism |
 | [`docs/DECISIONS.md`](docs/DECISIONS.md) | Design decisions and rejected alternatives |
 | [`docs/METHODOLOGY.md`](docs/METHODOLOGY.md) | Splits, models, metrics, branching and perturbation definitions |

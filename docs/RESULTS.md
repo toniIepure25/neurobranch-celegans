@@ -379,7 +379,95 @@ one. It also motivates the biological experiment in
 
 ---
 
-## 8. What would change our mind
+## 8. Phase 2: robustness, specificity, and external data
+
+Phase 2 is additive. It does **not** replace the Phase 1 tables above. Full
+protocols and artifacts are in the Phase 2 reports linked at the end of this
+section.
+
+### 8.1 Branching: the one-sided null was read backwards
+
+The Phase 1 `p = 1.0` was a one-sided test for **excess** entropy. Corrected
+two-sided tests on all five worms show the opposite direction: observed local
+entropy is **below** a geometry-preserving null in 4/5 worms (iid/block-10
+p ≈ 0.005). That is local predictability, **not branching**.
+
+| Worm | Mean entropy | iid null | block-10 null | p_deficit (iid / block-10) | min p_excess | shift p (two-sided) |
+|---:|---:|---:|---:|---:|---:|---:|
+| 0 | 0.578 | 0.961 | 0.905 | 0.00498 / 0.00498 | 0.985 | 0.0398 |
+| 1 | 0.625 | 0.978 | 0.933 | 0.00498 / 0.00498 | 0.965 | 0.0796 |
+| 2 | 0.780 | 0.880 | 0.847 | 0.00498 / 0.0448 | 0.821 | 0.368 |
+| 3 | 0.889 | 0.924 | 0.860 | 0.0249 / 0.677 | 0.0896 | 0.338 |
+| 4 | 0.603 | 0.948 | 0.887 | 0.00498 / 0.00498 | 0.955 | 0.0995 |
+
+No worm shows significant excess. Worm 3 is not significant under the block
+null. Synthetic ground-truth fixtures show the test has little power for genuine
+stochastic branching and can be fooled by projection width. Detail:
+[`BRANCHING_STATISTICAL_AUDIT.md`](BRANCHING_STATISTICAL_AUDIT.md).
+
+### 8.2 Intervention: RIVL is not specific
+
+Phase 1's top effect (RIVL +2, ΔP(TURN) = 0.333 [0.167, 0.533]) was scanned across
+6 models, 26 candidate cells and 19 matched non-candidate controls per model.
+
+| Model | RIVL +2 ΔP | Controls ≥ RIVL | Empirical p | Control max |
+|---|---:|---:|---:|---:|
+| MLP 17 | 0.333 | 4/19 | 0.25 | 0.667 (OLQVL) |
+| MLP 23 | 0.733 | 2/19 | 0.15 | 0.767 |
+| MLP 31 | 0.267 | 6/19 | 0.35 | 0.567 |
+| Residual MLP 17 | 0.000 | 19/19 | 1.00 | 0.000 |
+| VAR 17 | 0.544 | 2/19 | 0.15 | 0.544 |
+| GRU 17 | 0.367 | 1/19 | 0.10 | 0.422 |
+
+No model survives `p < 0.05`. Amplitude sensitivity shows a threshold at +3 and
+sign reversal at negative amplitudes; `OLQVL` and `OLQVR` exceed RIVL at +2. The
+effect is an off-support stress response, not a specific causal candidate.
+Detail:
+[`INTERVENTION_GENERALIZATION_RESULTS.md`](INTERVENTION_GENERALIZATION_RESULTS.md).
+
+### 8.3 Randi 2023 optogenetic atlas: no positive transfer
+
+3,371 valid events, 110 animals, 259 stimulated cells, 305 recorded cells.
+Repeated-stimulation response reliability is only median r = 0.090 (925 pairs).
+Models fitted on pre-stimulus state, target identity, recorded cell, and
+connectome edges were compared with a constant training mean.
+
+| Protocol | Global-mean MAE | Best non-constant | MAE | Δ vs global |
+|---|---:|---|---:|---:|
+| held-out events | 6.1113 | connectome ridge | 6.1112 | −0.000086 (95% CI [−0.0177, +0.0165]) |
+| held-out targets | 5.7251 | connectome ridge | 5.7467 | +0.0216 |
+| held-out animals | 5.7249 | neuron mean | 5.7919 | +0.0670 |
+
+The event-level tie is a coin flip (50.2% of bootstrap resamples favor the
+connectome model). New targets and new animals are worse than the constant. This
+is a negative benchmark result, not evidence that the atlas is uninformative.
+Detail: [`INTERVENTION_DATASET_AUDIT.md`](INTERVENTION_DATASET_AUDIT.md).
+
+### 8.4 Behaviour: neural activity does not add calibrated predictive value
+
+Paired `state + neural − state` on five Kato worms:
+
+| Protocol | Δ balanced accuracy | Δ log loss | Δ Brier | Δ transition accuracy |
+|---|---:|---:|---:|---:|
+| blocked | −0.0147 (0/5 wins) | +0.0114 (2/5) | +0.0126 (0/5) | +0.1789 (5/5) |
+| forward | −0.1272 (0/5) | +0.2182 (0/5) | +0.0711 (0/5) | +0.2784 (4/5) |
+
+Neural activity detects that a rare transition will occur, but every proper
+scoring rule and balanced metric gets worse. This is not incremental predictive
+value. Detail: [`BEHAVIORAL_GENERALIZATION.md`](BEHAVIORAL_GENERALIZATION.md).
+
+### 8.5 Phase 2 verdicts
+
+| Phase 1 statement | Phase 2 verdict | Evidence |
+|---|---|---|
+| No learned model robustly beats persistence | **Confirmed** | Phase 1 rerun + Phase 2 behaviour audit |
+| Apparent branching is below shuffled null | **Confirmed, direction corrected**: significant local-entropy *deficit* in 4/5 worms, not branching | corrected nulls |
+| Behaviour decoding below label persistence | **Confirmed**, and it adds no calibrated increment | incremental contrasts |
+| Top RIVL virtual effect is nonspecific | **Confirmed and strengthened**: 0/6 models significant; controls larger; amplitude threshold | specificity audit |
+| Real optogenetic responses are predictable | **Rejected** under this benchmark | Randi external test |
+| A virtual perturbation is causal | **Unresolved and untested**; no biological validation | evidence gate |
+
+## 9. What would change our mind
 
 | Claim | Falsifier | Current status |
 |---|---|---|

@@ -2,8 +2,8 @@
 
 ## Working title
 
-**"Persistence Wins: A Leakage-Audited Benchmark for Whole-Brain Dynamics, Latent
-Branching, and Virtual Perturbation in *C. elegans*"**
+**"Persistence Wins: A Leakage-Audited Benchmark for Whole-Brain Dynamics,
+Branching, Virtual Perturbation, and Optogenetic Prediction in *C. elegans*"**
 
 Alternative: *"What a 3-D Branch Does Not Prove: Negative Benchmarks for Latent
 Dynamics and Virtual Perturbation in Whole-Brain Calcium Imaging."*
@@ -14,10 +14,12 @@ Dynamics and Virtual Perturbation in Whole-Brain Calcium Imaging."*
 
 We provide a reproducible, leakage-audited benchmark showing that on the standard
 Kato et al. (2015) five-worm dataset, neural and latent dynamics models do not
-beat persistence, apparent 3-D branching is below a shuffled null, and
-model-ranked virtual perturbations are not distinguishable from arbitrary-cell
-perturbations — and we argue that these negatives are the correct baseline for
-causal claims in computational neuroscience.
+beat persistence, local outcome diversity is *below* a geometry-preserving null
+(predictability, not branching), and model-ranked virtual perturbations are not
+distinguishable from arbitrary-cell perturbations. On the Randi et al. (2023)
+optogenetic atlas, pre-stimulus state and connectome features do not beat a
+constant mean on held-out animals. We argue that these negatives are the correct
+baseline for causal claims in computational neuroscience.
 
 ---
 
@@ -31,10 +33,15 @@ tests:
 
 1. **"Latent dynamics capture whole-brain dynamics."** On an honest blocked split,
    no learned model beats persistence; under a strict forward split, most collapse.
-2. **"Trajectories branch."** In a 3-D projection, local outcome diversity is
-   *lower* than a shuffled null at reversal frames. A branch is not a bifurcation.
+2. **"Trajectories branch."** In a 3-D projection, local outcome entropy is
+   *lower* than a geometry-preserving null in 4/5 worms. That is local
+   predictability, not a bifurcation; the Phase 1 one-sided p=1.0 was read in the
+   wrong direction.
 3. **"Virtual perturbations identify control points."** The top model-ranked cell
    is exceeded by 4/19 arbitrary non-candidate cells; the effect is nonspecific.
+4. **"Optogenetic responses are predictable from pre-stimulus state."** On 3,371
+   Randi events, every learned model is worse than the constant mean on held-out
+   targets and animals; the event-level connectome tie is a coin flip.
 
 The paper also documents a concrete methodological failure — a "random" control
 that sampled the candidate cells — and shows how the conclusion changes when it is
@@ -48,10 +55,12 @@ fixed. That is a useful cautionary contribution.
 |---|---|---|
 | C1 | Leakage-audited dual benchmark (blocked interpolation + strict forward) on all five Kato worms | 105 + 35 runs, manifests, tests |
 | C2 | Persistence and label-persistence are strong baselines that most latent/neural models fail to beat | Paired CIs, 3 seeds |
-| C3 | A shuffled-null and projection-stability protocol for "branching" | 328 frames, 100 permutations, 8/16/32-D |
-| C4 | A paired virtual-perturbation engine with OOD flags and a corrected random-neuron control | 26 candidates + 19 controls, bootstrap CIs |
+| C3 | Corrected two-sided branching nulls, block/shift nulls, synthetic power checks, all five worms | 4/5 entropy deficit; no excess |
+| C4 | A paired virtual-perturbation engine with OOD flags and matched non-candidate controls | 26 candidates + 19 controls/model × 6 models; none significant |
 | C5 | Artifact-level verification of BunDLe-Net and NC-MCM, separating leaky upstream artifacts from held-out claims | kNN/silhouette, Markov p port, deviations |
-| C6 | Open, reproducible platform (CLI, app, tests, manifests) | 23 tests, 8 figures, run manifests |
+| C6 | Open, reproducible platform (CLI, app, tests, manifests) | Phase 2 tests, 7-tab app |
+| C7 | External Randi 2023 optogenetic benchmark with event/target/animal splits and reliability ceiling | 110 animals, 3,371 events; negative |
+| C8 | Incremental behaviour benchmark on transition frames and proper scoring rules | No calibrated increment |
 
 ---
 
@@ -80,7 +89,7 @@ full intervention scan, projection-dimension stability.
 | 1 | Observational prediction | Weak; no model beats persistence |
 | 2 | Simulator consistency | Partial; transition marginals can match while rollouts fail |
 | 3 | Biological plausibility | Not assessed |
-| 4 | Intervention generalization | Not assessed; virtual effects nonspecific |
+| 4 | Intervention generalization | Assessed and negative: internal nonspecific; external optogenetic benchmark below constant |
 | 5 | Causal identification | Not attempted; explicitly disclaimed |
 
 The paper should stay at levels 1–2 and use the failures at levels 4–5 as the
@@ -98,10 +107,15 @@ to "the brain does".
 - "Under a strict chronological split, the tested nonlinear models fail, which is
   consistent with non-stationarity."
 - "In a 3-D PCA projection, local outcome entropy at held-out reversal frames is
-  lower than a shuffled null; this is evidence against a simple branching
-  interpretation of that projection."
+  lower than a geometry-preserving null; this is evidence for local
+  predictability, not branching."
 - "The top model-ranked perturbation is not distinguishable from arbitrary
-  non-candidate cells in the fitted model."
+  non-candidate cells in the fitted model, across six architectures and seeds."
+- "On the Randi atlas, pre-stimulus state and connectome features do not beat a
+  constant mean on held-out targets or animals; the event-level tie is within
+  ±0.018 MAE."
+- "Neural activity improves transition detection but degrades calibrated
+  next-state prediction relative to a state-only model."
 - "The official BunDLe-Net embedding is behaviour-separated in the upstream-fitted
   artifact, with embedding-level leakage; our blocked-holdout reimplementation is
   substantially worse."

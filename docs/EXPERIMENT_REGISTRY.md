@@ -199,8 +199,30 @@ external artifacts are absent.
 |---|---|
 | Command | `neurobranch app` or `python -m streamlit run app/streamlit_app.py` |
 | URL | <http://localhost:8501> |
-| Smoke test | Streamlit health `ok`; `AppTest` executed 6 tabs with **0 exceptions** |
-| Tabs | Overview, 3-D latent, Branching, Virtual perturbation, Reproduction, Audit |
+| Smoke test | Streamlit health `ok`; `AppTest` executed 7 tabs with **0 exceptions** |
+| Tabs | Overview, 3-D latent, Branching, Virtual perturbation, Optogenetic (Randi), Reproduction, Audit |
+
+---
+
+## E11. Phase 2 audits
+
+| Field | Value |
+|---|---|
+| Branch | `research/phase2-intervention-validation` |
+| Branching command | `python scripts/phase2a_branching_audit.py` |
+| Branching outputs | `reports/phase2a_scientific_audit/branching/` |
+| Intervention command | `python scripts/phase2a_intervention_audit.py` |
+| Intervention outputs | `reports/phase2a_scientific_audit/intervention/` |
+| Behaviour command | `python scripts/phase2a_behavior_benchmark.py` |
+| Behaviour outputs | `reports/phase2a_scientific_audit/behavior/` |
+| Randi command | `python scripts/phase2a_optogenetic_benchmark.py` |
+| Randi outputs | `reports/phase2b_optogenetic_atlas/` |
+| Randi raw data | `data/raw/randi2023/exported_data/` (not tracked) |
+| Randi hash | `d6e7b3d93175b40b7ae17bde2182835e9c2144388142c522ee9be3832f6ce836` |
+| Negative result | pre-stimulus/connectome models do not beat constant mean on held-out targets/animals |
+| Tests | `43 passed`; ruff clean |
+
+Phase 2 reports are listed in `README.md` and `docs/PHASE2_METHODOLOGY.md`.
 
 ---
 

@@ -179,8 +179,18 @@ reintroduced; that number is leaked.
 neurobranch branching analyze --worm 0
 ```
 
-Expected: 328 candidate frames, mean entropy ≈0.578 bits, null mean ≈0.960,
-p=1.0. The command runs 100 permutations and takes ~1 min.
+Expected: 328 candidate frames, mean entropy ≈0.578 bits, iid null ≈0.961,
+one-sided excess p=1.0, **deficit p≈0.005**. The Phase 1 command asks only the
+excess direction. The corrected all-worm audit is:
+
+```powershell
+python scripts/phase2a_branching_audit.py
+```
+
+Expected: 4/5 worms show a significant deficit under iid/block-10 nulls; no worm
+shows significant excess; worm 3 is not significant under block-10; the
+circular-shift null is weaker. See
+[`BRANCHING_STATISTICAL_AUDIT.md`](BRANCHING_STATISTICAL_AUDIT.md).
 
 ---
 
@@ -227,6 +237,16 @@ print(ctrl.describe())
 The random controls **must** exclude candidate cells; the code does this. If you
 modify it, preserve that exclusion or the specificity test becomes circular.
 
+Phase 2 scans six models, 26 candidate cells and 19 controls per model:
+
+```powershell
+python scripts/phase2a_intervention_audit.py
+```
+
+Expected: RIVL +2 ranges from 0.000 (residual MLP) to 0.733 (MLP 23); no model
+reaches p<0.05 against matched controls; the maximum control is 0.667–0.767 in
+the MLP models; `OLQVL` exceeds RIVL at +2. Runtime is ~20–40 min on CPU.
+
 ---
 
 ## 9. Reports and figures
@@ -258,8 +278,8 @@ python -m streamlit run app/streamlit_app.py --server.port 8501
 ```
 
 Open <http://localhost:8501>. The app needs at least one model checkpoint and the
-raw data. It has six tabs: Overview, 3-D latent, Branching, Virtual perturbation,
-Reproduction, Audit.
+raw data. It has seven tabs: Overview, 3-D latent, Branching, Virtual
+perturbation, Optogenetic (Randi), Reproduction, Audit.
 
 Smoke test without a browser:
 
@@ -271,7 +291,7 @@ print("exceptions:", len(at.exception), "tabs:", len(at.tabs))
 '@ | python -
 ```
 
-Expected: 0 exceptions, 6 tabs.
+Expected: 0 exceptions, 7 tabs.
 
 ---
 
@@ -282,8 +302,8 @@ python -m pytest -q
 python -m ruff check src tests app
 ```
 
-Expected: 23 passed; lint clean. Scientific tests skip gracefully if the raw data
-or external artifacts are absent; in this checkout all 23 run.
+Expected: 43 passed; lint clean. Scientific tests skip gracefully if the raw data
+or external artifacts are absent; in this checkout all 43 run.
 
 ---
 
@@ -303,3 +323,83 @@ or external artifacts are absent; in this checkout all 23 run.
 If you need a publication-grade rerun, start from a tagged commit, keep the
 manifest writer enabled during the run, and report the resulting `run_manifest.json`
 rather than regenerating it afterwards.
+
+---
+
+## 13. Phase 2 Randi 2023 audit
+
+### 13.1 Download and verify
+
+The raw archive is 523,093,816 bytes and is not committed.
+
+```powershell
+New-Item -ItemType Directory -Force data/raw/randi2023 | Out-Null
+curl.exe -L --fail https://osf.io/9mecf/download -o data/raw/randi2023/exported_data.tar.gz
+Get-FileHash data/raw/randi2023/exported_data.tar.gz -Algorithm SHA256
+```
+
+Expected SHA256:
+
+```text
+d6e7b3d93175b40b7ae17bde2182835e9c2144388142c522ee9be3832f6ce836
+```
+
+Extract:
+
+```powershell
+tar -xzf data/raw/randi2023/exported_data.tar.gz -C data/raw/randi2023
+```
+
+The archive contains `exported_data/` with 678 files. The adapter expects that
+directory. See [`INTERVENTION_DATASET_AUDIT.md`](INTERVENTION_DATASET_AUDIT.md)
+for schema and coverage.
+
+### 13.2 Connectome reference
+
+The connectome feature table uses the pumpprobe reference CSV. In this checkout:
+
+```text
+references/external/aconnectome_witvliet_2020_8_utf8.csv
+```
+
+The original file is UTF-16LE; it was converted to UTF-8. The benchmark degrades
+to six models if the file is absent (no connectome ridge).
+
+### 13.3 Run
+
+```powershell
+python scripts/phase2a_optogenetic_benchmark.py
+```
+
+Expected (on the verified archive):
+
+- trial table: 237,639 rows, 3,371 events, 110 animals, 259 targets, 305
+  recorded neurons;
+- reliability: 580 groups, 925 pairs, median r ≈0.090;
+- held-out events: global mean MAE 6.1113, connectome ridge 6.1112, paired
+  Δ≈−0.000086, 95% CI [−0.0177, +0.0165];
+- held-out targets: global 5.7251, connectome 5.7467;
+- held-out animals: global 5.7249, neuron mean 5.7919.
+
+No learned model beats the constant mean on targets or animals. This is a
+negative result; do not tune on the test folds.
+
+### 13.4 Behaviour benchmark
+
+```powershell
+python scripts/phase2a_behavior_benchmark.py
+```
+
+Expected: blocked and forward tables under
+`reports/phase2a_scientific_audit/behavior/`. State+neural has higher transition
+accuracy but worse balanced accuracy, log loss and Brier than state-only. See
+[`BEHAVIORAL_GENERALIZATION.md`](BEHAVIORAL_GENERALIZATION.md).
+
+### 13.5 Runtime and nondeterminism
+
+- Randi parse + benchmark: ~10–20 min on CPU, ~1.2 GB raw data.
+- Intervention audit: ~20–40 min.
+- Branching audit: ~5–10 min.
+- Bootstrap CIs vary slightly across runs; point estimates should match to the
+  printed precision. Model fits use fixed seeds where specified; CPU threading
+  can still change the last digits.

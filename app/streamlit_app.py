@@ -160,7 +160,17 @@ Z_pca, pca = project_pca(worm_id)
 test_frames = np.flatnonzero(data.masks["test"])
 train_frames = np.flatnonzero(data.masks["train"])
 
-tabs = st.tabs(["Overview", "3-D latent", "Branching", "Virtual perturbation", "Reproduction", "Audit"])
+tabs = st.tabs(
+    [
+        "Overview",
+        "3-D latent",
+        "Branching",
+        "Virtual perturbation",
+        "Optogenetic (Randi)",
+        "Reproduction",
+        "Audit",
+    ]
+)
 
 with tabs[0]:
     c1, c2, c3, c4 = st.columns(4)
@@ -257,7 +267,10 @@ with tabs[2]:
         c1.metric("Reversal states", summ["n"])
         c2.metric("Mean entropy", f"{summ['mean_entropy_bits']:.2f} bits")
         c3.metric("Majority prob.", f"{summ['mean_majority_probability']:.2f}")
-        st.caption("A permutation null that shuffles outcomes while preserving geometry is reported in docs/RESULTS.md; observed diversity did not exceed it.")
+        st.caption(
+            "Corrected audit: observed diversity was *below* geometry-preserving nulls in 4/5 worms "
+            "(entropy deficit, not excess). No worm showed significant excess. See docs/BRANCHING_STATISTICAL_AUDIT.md."
+        )
         top = summ["top_frames"][0]
         fig = go.Figure(
             go.Bar(
@@ -333,9 +346,48 @@ with tabs[3]:
         if res.notes:
             for n in res.notes:
                 st.warning(n)
-        st.caption("A large effect at ±2 SD is an off-support stress test. Random-neuron controls produced effects of similar magnitude (docs/RESULTS.md).")
+        st.caption(
+            "A large effect at ±2 SD is an off-support stress test. Matched random-neuron controls produced "
+            "equal or larger effects in every audited architecture; this is not a specific RIVL result."
+        )
 
 with tabs[4]:
+    st.subheader("Randi et al. optogenetic propagation atlas")
+    st.warning(
+        "Experimental data, but this benchmark is not a biological validation of NeuroBranch. "
+        "It asks whether pre-stimulus state predicts independently measured responses."
+    )
+    cov_path = ROOT / "reports" / "phase2b_optogenetic_atlas" / "randi_coverage.json"
+    rel_path = ROOT / "reports" / "phase2b_optogenetic_atlas" / "response_reliability.json"
+    agg_path = ROOT / "reports" / "phase2b_optogenetic_atlas" / "benchmark_aggregate_response.csv"
+    cov = load_optional_json(cov_path)
+    rel = load_optional_json(rel_path)
+    if cov:
+        c1, c2, c3, c4 = st.columns(4)
+        c1.metric("Animals", cov["n_animals"])
+        c2.metric("Valid stimulations", cov["n_events"])
+        c3.metric("Stimulated cells", cov["n_stimulated_neurons"])
+        c4.metric("Recorded cells", cov["n_recorded_neurons"])
+    if rel:
+        r = rel.get("response", {})
+        st.metric("Repeated-stimulation response r (median)", f"{r.get('median_pairwise_r', float('nan')):.3f}")
+        st.caption(
+            f"{r.get('n_pairs', 0)} repeated event pairs; low repeatability bounds single-trial predictability."
+        )
+    if agg_path.exists():
+        agg = pd.read_csv(agg_path)
+        st.dataframe(
+            agg[["task", "model", "mae_mean", "pearson_mean", "sign_accuracy_mean"]],
+            use_container_width=True,
+        )
+        st.caption(
+            "Every learned model was worse than a constant training-mean baseline on held-out events, "
+            "targets, and animals (negative result retained)."
+        )
+    else:
+        st.info("Run scripts/phase2a_optogenetic_benchmark.py after downloading the Randi OSF archive.")
+
+with tabs[5]:
     st.subheader("Reproduction artifacts")
     st.markdown("**NC-MCM** — Python port of the lag-2 surrogate Markov test applied to the distributed cluster labels.")
     ncm = ROOT / "artifacts" / "reproduction_ncmcm.csv"
@@ -356,14 +408,15 @@ with tabs[4]:
     if bl:
         st.json({"metrics": bl["metrics"], "deviations": bl["metadata"]["deviations"]}, expanded=False)
 
-with tabs[5]:
+with tabs[6]:
     st.subheader("Dataset audit")
     path = ROOT / "reports" / "recording_summary.csv"
     if path.exists():
         st.dataframe(pd.read_csv(path), use_container_width=True)
     st.markdown(
         "Raw recordings are immutable. `WT_NoStim` is observational; no optogenetic or histamine "
-        "intervention data were used for fitting. See `docs/DATA_PROVENANCE.md`."
+        "intervention data were used for fitting. The Randi optogenetic atlas is used only in the "
+        "external response benchmark, not to train the dynamics. See `docs/DATA_PROVENANCE.md`."
     )
     st.code(
         "uv run neurobranch data audit\nuv run neurobranch train dynamics --config configs/experiments/blocked_suite.yaml\nuv run neurobranch report",
