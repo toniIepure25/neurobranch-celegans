@@ -1,0 +1,74 @@
+[build-system]
+requires = ["setuptools>=69", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "neurobranch"
+version = "0.1.0"
+description = "Reproducible C. elegans neural-population dynamics, branching, and virtual-perturbation research platform"
+readme = "README.md"
+requires-python = ">=3.10,<3.14"
+license = { text = "MIT" }
+authors = [{ name = "NeuroBranch contributors" }]
+keywords = ["computational neuroscience", "C. elegans", "latent dynamics", "causal inference", "connectomics"]
+classifiers = [
+  "Programming Language :: Python :: 3",
+  "Topic :: Scientific/Engineering :: Artificial Intelligence",
+  "Topic :: Scientific/Engineering :: Bio-Informatics",
+]
+dependencies = [
+  "numpy>=1.26",
+  "scipy>=1.11",
+  "pandas>=2.1",
+  "scikit-learn>=1.4",
+  "matplotlib>=3.8",
+  "plotly>=5.20",
+  "streamlit>=1.35",
+  "torch>=2.2",
+  "h5py>=3.10",
+  "PyYAML>=6.0",
+  "typer>=0.12",
+  "rich>=13.7",
+]
+
+[project.optional-dependencies]
+dev = [
+  "pytest>=8",
+  "pytest-timeout>=2.3",
+  "ruff>=0.5",
+  "mypy>=1.10",
+]
+gpu = ["torch>=2.2"]
+
+[project.scripts]
+neurobranch = "neurobranch.cli.main:app"
+
+[tool.setuptools]
+package-dir = { "" = "src" }
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-ra --strict-markers --basetemp=.pytest_tmp"
+markers = [
+  "integration: end-to-end pipeline test",
+  "scientific: scientific sanity/validity test",
+  "slow: takes more than a few seconds",
+  "requires_data: needs the downloaded Kato dataset",
+]
+filterwarnings = ["ignore::DeprecationWarning", "ignore::RuntimeWarning"]
+
+[tool.ruff]
+line-length = 110
+target-version = "py310"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B", "SIM"]
+ignore = ["E501", "B905"]
+
+[tool.mypy]
+python_version = "3.10"
+warn_unused_ignores = true
+ignore_missing_imports = true

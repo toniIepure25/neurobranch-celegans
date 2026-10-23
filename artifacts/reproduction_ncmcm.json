@@ -1,0 +1,1072 @@
+[
+  {
+    "available": true,
+    "worm_id": 1,
+    "source": "references\\external\\nc-mcm\\precomputed_results\\nc_mcm_model_worm_1.npz",
+    "n_frames": 3137,
+    "selected_k": 3,
+    "markov_p_precomputed": 0.636,
+    "markov_p_reimplemented": 0.659,
+    "markov_p_abs_diff": 0.02300000000000002,
+    "transition_matrix": [
+      [
+        0.9,
+        0.007320644216691069,
+        0.009150326797385621
+      ],
+      [
+        0.058333333333333334,
+        0.9802342606149341,
+        0.00849673202614379
+      ],
+      [
+        0.041666666666666664,
+        0.012445095168374817,
+        0.9823529411764705
+      ]
+    ],
+    "dwell": {
+      "1": {
+        "n_runs": 24,
+        "mean_frames": 10.0
+      },
+      "2": {
+        "n_runs": 27,
+        "mean_frames": 50.592592592592595
+      },
+      "3": {
+        "n_runs": 28,
+        "mean_frames": 54.67857142857143
+      }
+    },
+    "behavior_composition": {
+      "1": {
+        "dt": 0.29583333333333334,
+        "fwd": 0.0,
+        "nostate": 0.0,
+        "rev1": 0.0,
+        "rev2": 0.05,
+        "revsus": 0.24583333333333332,
+        "slow": 0.041666666666666664,
+        "vt": 0.36666666666666664
+      },
+      "2": {
+        "dt": 0.0014641288433382138,
+        "fwd": 0.03367496339677892,
+        "nostate": 0.0,
+        "rev1": 0.1698389458272328,
+        "rev2": 0.007320644216691069,
+        "revsus": 0.7276720351390923,
+        "slow": 0.0,
+        "vt": 0.060029282576866766
+      },
+      "3": {
+        "dt": 0.045721750489875895,
+        "fwd": 0.039843239712606136,
+        "nostate": 0.4082299150881777,
+        "rev1": 0.06662312214239059,
+        "rev2": 0.0,
+        "revsus": 0.0,
+        "slow": 0.43827563683866755,
+        "vt": 0.0013063357282821686
+      }
+    },
+    "decoder_cv": {
+      "accuracy": 0.7641058335989799,
+      "balanced_accuracy": 0.6197373730795368,
+      "confusion": [
+        [
+          96,
+          4,
+          15,
+          0,
+          0,
+          15,
+          11,
+          2
+        ],
+        [
+          0,
+          59,
+          10,
+          27,
+          0,
+          8,
+          3,
+          0
+        ],
+        [
+          4,
+          32,
+          488,
+          10,
+          0,
+          0,
+          90,
+          1
+        ],
+        [
+          0,
+          18,
+          13,
+          226,
+          0,
+          68,
+          9,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          22
+        ],
+        [
+          16,
+          3,
+          0,
+          25,
+          0,
+          990,
+          0,
+          19
+        ],
+        [
+          55,
+          1,
+          202,
+          0,
+          0,
+          0,
+          412,
+          11
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          30,
+          16,
+          126
+        ]
+      ],
+      "n": 3137,
+      "state_order": [
+        "dt",
+        "fwd",
+        "nostate",
+        "rev1",
+        "rev2",
+        "revsus",
+        "slow",
+        "vt"
+      ]
+    },
+    "state_counts": {
+      "dt": 143,
+      "fwd": 107,
+      "nostate": 625,
+      "rev1": 334,
+      "rev2": 22,
+      "revsus": 1053,
+      "slow": 681,
+      "vt": 172
+    },
+    "artifact_state_names": [
+      "rev2",
+      "rev1",
+      "slow",
+      "vt",
+      "nostate",
+      "revsus",
+      "fwd",
+      "dt"
+    ],
+    "state_name_note": "The distributed arr_3 is not aligned with the integer codes; observed counts match STATE_ORDER (b=1 -> dt, ..., b=8 -> vt). We use STATE_ORDER.",
+    "markov_p_curve": [
+      1.0,
+      0.08099999999999996,
+      0.636,
+      1.0,
+      0.997,
+      0.999,
+      0.998,
+      1.0,
+      1.0,
+      0.995,
+      0.981,
+      0.9390000000000001,
+      0.905,
+      0.915,
+      0.5780000000000001,
+      0.642,
+      0.41300000000000003,
+      0.5900000000000001,
+      0.29400000000000004,
+      0.276
+    ],
+    "p_curve_note": "p is the fraction of first-order Markov surrogates whose lag-2 heterogeneity is at least the observed value; high p means the first-order Markov null is not rejected."
+  },
+  {
+    "available": true,
+    "worm_id": 2,
+    "source": "references\\external\\nc-mcm\\precomputed_results\\nc_mcm_model_worm_2.npz",
+    "n_frames": 3134,
+    "selected_k": 3,
+    "markov_p_precomputed": 0.15700000000000003,
+    "markov_p_reimplemented": 0.14900000000000002,
+    "markov_p_abs_diff": 0.008000000000000007,
+    "transition_matrix": [
+      [
+        0.9492502883506344,
+        0.012328767123287671,
+        0.031017369727047148
+      ],
+      [
+        0.01730103806228374,
+        0.9876712328767123,
+        0.004962779156327543
+      ],
+      [
+        0.03344867358708189,
+        0.0,
+        0.9640198511166254
+      ]
+    ],
+    "dwell": {
+      "1": {
+        "n_runs": 44,
+        "mean_frames": 19.704545454545453
+      },
+      "2": {
+        "n_runs": 19,
+        "mean_frames": 76.89473684210526
+      },
+      "3": {
+        "n_runs": 29,
+        "mean_frames": 27.79310344827586
+      }
+    },
+    "behavior_composition": {
+      "1": {
+        "dt": 0.08304498269896193,
+        "fwd": 0.09342560553633218,
+        "nostate": 0.0196078431372549,
+        "rev1": 0.3460207612456747,
+        "rev2": 0.011534025374855825,
+        "revsus": 0.4463667820069204,
+        "slow": 0.0,
+        "vt": 0.0
+      },
+      "2": {
+        "dt": 0.059548254620123205,
+        "fwd": 0.0,
+        "nostate": 0.7481177275838466,
+        "rev1": 0.015058179329226557,
+        "rev2": 0.0013689253935660506,
+        "revsus": 0.0,
+        "slow": 0.15879534565366188,
+        "vt": 0.017111567419575632
+      },
+      "3": {
+        "dt": 0.01240694789081886,
+        "fwd": 0.0,
+        "nostate": 0.0,
+        "rev1": 0.1141439205955335,
+        "rev2": 0.01240694789081886,
+        "revsus": 0.78287841191067,
+        "slow": 0.0,
+        "vt": 0.07816377171215881
+      }
+    },
+    "decoder_cv": {
+      "accuracy": 0.683152520740268,
+      "balanced_accuracy": 0.4817546965684655,
+      "confusion": [
+        [
+          100,
+          0,
+          35,
+          8,
+          0,
+          25,
+          1,
+          0
+        ],
+        [
+          6,
+          12,
+          3,
+          41,
+          0,
+          18,
+          0,
+          1
+        ],
+        [
+          39,
+          0,
+          662,
+          20,
+          0,
+          2,
+          387,
+          0
+        ],
+        [
+          3,
+          0,
+          22,
+          316,
+          0,
+          69,
+          4,
+          0
+        ],
+        [
+          1,
+          0,
+          0,
+          13,
+          0,
+          7,
+          1,
+          0
+        ],
+        [
+          19,
+          0,
+          0,
+          53,
+          6,
+          940,
+          0,
+          0
+        ],
+        [
+          1,
+          0,
+          170,
+          0,
+          0,
+          0,
+          61,
+          0
+        ],
+        [
+          0,
+          0,
+          2,
+          3,
+          0,
+          24,
+          9,
+          50
+        ]
+      ],
+      "n": 3134,
+      "state_order": [
+        "dt",
+        "fwd",
+        "nostate",
+        "rev1",
+        "rev2",
+        "revsus",
+        "slow",
+        "vt"
+      ]
+    },
+    "state_counts": {
+      "dt": 169,
+      "fwd": 81,
+      "nostate": 1110,
+      "rev1": 414,
+      "rev2": 22,
+      "revsus": 1018,
+      "slow": 232,
+      "vt": 88
+    },
+    "artifact_state_names": [
+      "rev2",
+      "rev1",
+      "slow",
+      "vt",
+      "nostate",
+      "revsus",
+      "fwd",
+      "dt"
+    ],
+    "state_name_note": "The distributed arr_3 is not aligned with the integer codes; observed counts match STATE_ORDER (b=1 -> dt, ..., b=8 -> vt). We use STATE_ORDER.",
+    "markov_p_curve": [
+      1.0,
+      0.6839999999999999,
+      0.15700000000000003,
+      0.485,
+      0.607,
+      0.5509999999999999,
+      0.988,
+      0.993,
+      0.903,
+      0.964,
+      0.937,
+      0.9339999999999999,
+      0.671,
+      0.753,
+      0.628,
+      0.32699999999999996,
+      0.14800000000000002,
+      0.261,
+      0.07299999999999995,
+      0.655
+    ],
+    "p_curve_note": "p is the fraction of first-order Markov surrogates whose lag-2 heterogeneity is at least the observed value; high p means the first-order Markov null is not rejected."
+  },
+  {
+    "available": true,
+    "worm_id": 3,
+    "source": "references\\external\\nc-mcm\\precomputed_results\\nc_mcm_model_worm_3.npz",
+    "n_frames": 3059,
+    "selected_k": 3,
+    "markov_p_precomputed": 0.09599999999999997,
+    "markov_p_reimplemented": 0.08399999999999996,
+    "markov_p_abs_diff": 0.01200000000000001,
+    "transition_matrix": [
+      [
+        0.9496314496314496,
+        0.010924369747899159,
+        0.026565464895635674
+      ],
+      [
+        0.014742014742014743,
+        0.9865546218487395,
+        0.003795066413662239
+      ],
+      [
+        0.03562653562653563,
+        0.0025210084033613447,
+        0.969639468690702
+      ]
+    ],
+    "dwell": {
+      "1": {
+        "n_runs": 42,
+        "mean_frames": 19.404761904761905
+      },
+      "2": {
+        "n_runs": 16,
+        "mean_frames": 74.375
+      },
+      "3": {
+        "n_runs": 32,
+        "mean_frames": 32.9375
+      }
+    },
+    "behavior_composition": {
+      "1": {
+        "dt": 0.09325153374233129,
+        "fwd": 0.0,
+        "nostate": 0.00245398773006135,
+        "rev1": 0.0,
+        "rev2": 0.0785276073619632,
+        "revsus": 0.7214723926380369,
+        "slow": 0.0,
+        "vt": 0.10429447852760736
+      },
+      "2": {
+        "dt": 0.0453781512605042,
+        "fwd": 0.0025210084033613447,
+        "nostate": 0.7840336134453781,
+        "rev1": 0.0016806722689075631,
+        "rev2": 0.010084033613445379,
+        "revsus": 0.0,
+        "slow": 0.08907563025210084,
+        "vt": 0.06722689075630252
+      },
+      "3": {
+        "dt": 0.0,
+        "fwd": 0.17647058823529413,
+        "nostate": 0.015180265654648957,
+        "rev1": 0.2514231499051233,
+        "rev2": 0.0,
+        "revsus": 0.538899430740038,
+        "slow": 0.0,
+        "vt": 0.018026565464895637
+      }
+    },
+    "decoder_cv": {
+      "accuracy": 0.7917620137299771,
+      "balanced_accuracy": 0.5618611029736013,
+      "confusion": [
+        [
+          59,
+          17,
+          4,
+          0,
+          0,
+          27,
+          9,
+          14
+        ],
+        [
+          0,
+          115,
+          4,
+          22,
+          0,
+          48,
+          0,
+          0
+        ],
+        [
+          1,
+          10,
+          883,
+          7,
+          0,
+          2,
+          44,
+          4
+        ],
+        [
+          0,
+          21,
+          22,
+          179,
+          0,
+          45,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          59,
+          0,
+          17
+        ],
+        [
+          9,
+          9,
+          1,
+          69,
+          32,
+          1032,
+          0,
+          4
+        ],
+        [
+          4,
+          4,
+          66,
+          0,
+          0,
+          2,
+          26,
+          4
+        ],
+        [
+          2,
+          0,
+          1,
+          1,
+          0,
+          43,
+          9,
+          128
+        ]
+      ],
+      "n": 3059,
+      "state_order": [
+        "dt",
+        "fwd",
+        "nostate",
+        "rev1",
+        "rev2",
+        "revsus",
+        "slow",
+        "vt"
+      ]
+    },
+    "state_counts": {
+      "dt": 130,
+      "fwd": 189,
+      "nostate": 951,
+      "rev1": 267,
+      "rev2": 76,
+      "revsus": 1156,
+      "slow": 106,
+      "vt": 184
+    },
+    "artifact_state_names": [
+      "rev2",
+      "rev1",
+      "slow",
+      "vt",
+      "nostate",
+      "revsus",
+      "fwd",
+      "dt"
+    ],
+    "state_name_note": "The distributed arr_3 is not aligned with the integer codes; observed counts match STATE_ORDER (b=1 -> dt, ..., b=8 -> vt). We use STATE_ORDER.",
+    "markov_p_curve": [
+      1.0,
+      0.0010000000000000009,
+      0.09599999999999997,
+      0.971,
+      0.986,
+      0.972,
+      0.872,
+      0.874,
+      0.75,
+      0.391,
+      0.879,
+      0.646,
+      0.41800000000000004,
+      0.41300000000000003,
+      0.389,
+      0.349,
+      0.18600000000000005,
+      0.16600000000000004,
+      0.09899999999999998,
+      0.038000000000000034
+    ],
+    "p_curve_note": "p is the fraction of first-order Markov surrogates whose lag-2 heterogeneity is at least the observed value; high p means the first-order Markov null is not rejected."
+  },
+  {
+    "available": true,
+    "worm_id": 4,
+    "source": "references\\external\\nc-mcm\\precomputed_results\\nc_mcm_model_worm_4.npz",
+    "n_frames": 3311,
+    "selected_k": 3,
+    "markov_p_precomputed": 0.603,
+    "markov_p_reimplemented": 0.626,
+    "markov_p_abs_diff": 0.02300000000000002,
+    "transition_matrix": [
+      [
+        0.9786561264822135,
+        0.00426049908703591,
+        0.0472636815920398
+      ],
+      [
+        0.0007905138339920949,
+        0.9951308581862447,
+        0.01990049751243781
+      ],
+      [
+        0.020553359683794466,
+        0.0006086427267194157,
+        0.9328358208955224
+      ]
+    ],
+    "dwell": {
+      "1": {
+        "n_runs": 27,
+        "mean_frames": 46.851851851851855
+      },
+      "2": {
+        "n_runs": 9,
+        "mean_frames": 182.66666666666666
+      },
+      "3": {
+        "n_runs": 27,
+        "mean_frames": 14.88888888888889
+      }
+    },
+    "behavior_composition": {
+      "1": {
+        "dt": 0.03241106719367589,
+        "fwd": 0.02450592885375494,
+        "nostate": 0.0015810276679841897,
+        "rev1": 0.10039525691699605,
+        "rev2": 0.0007905138339920949,
+        "revsus": 0.7960474308300395,
+        "slow": 0.0,
+        "vt": 0.04426877470355731
+      },
+      "2": {
+        "dt": 0.023114355231143552,
+        "fwd": 0.0,
+        "nostate": 0.9057177615571776,
+        "rev1": 0.0006082725060827251,
+        "rev2": 0.0,
+        "revsus": 0.0,
+        "slow": 0.038929440389294405,
+        "vt": 0.031630170316301706
+      },
+      "3": {
+        "dt": 0.009950248756218905,
+        "fwd": 0.12935323383084577,
+        "nostate": 0.0845771144278607,
+        "rev1": 0.6194029850746269,
+        "rev2": 0.09203980099502487,
+        "revsus": 0.0,
+        "slow": 0.0,
+        "vt": 0.06467661691542288
+      }
+    },
+    "decoder_cv": {
+      "accuracy": 0.854726668680157,
+      "balanced_accuracy": 0.5180270322890276,
+      "confusion": [
+        [
+          37,
+          5,
+          24,
+          0,
+          0,
+          16,
+          0,
+          1
+        ],
+        [
+          0,
+          40,
+          4,
+          17,
+          0,
+          20,
+          0,
+          2
+        ],
+        [
+          10,
+          7,
+          1481,
+          20,
+          0,
+          2,
+          0,
+          5
+        ],
+        [
+          0,
+          13,
+          41,
+          241,
+          0,
+          67,
+          0,
+          15
+        ],
+        [
+          0,
+          0,
+          9,
+          0,
+          0,
+          0,
+          0,
+          29
+        ],
+        [
+          8,
+          18,
+          0,
+          19,
+          0,
+          941,
+          0,
+          21
+        ],
+        [
+          0,
+          0,
+          55,
+          9,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          5,
+          19,
+          9,
+          0,
+          11,
+          0,
+          90
+        ]
+      ],
+      "n": 3311,
+      "state_order": [
+        "dt",
+        "fwd",
+        "nostate",
+        "rev1",
+        "rev2",
+        "revsus",
+        "slow",
+        "vt"
+      ]
+    },
+    "state_counts": {
+      "dt": 83,
+      "fwd": 83,
+      "nostate": 1525,
+      "rev1": 377,
+      "rev2": 38,
+      "revsus": 1007,
+      "slow": 64,
+      "vt": 134
+    },
+    "artifact_state_names": [
+      "rev2",
+      "rev1",
+      "slow",
+      "vt",
+      "nostate",
+      "revsus",
+      "fwd",
+      "dt"
+    ],
+    "state_name_note": "The distributed arr_3 is not aligned with the integer codes; observed counts match STATE_ORDER (b=1 -> dt, ..., b=8 -> vt). We use STATE_ORDER.",
+    "markov_p_curve": [
+      1.0,
+      0.0,
+      0.603,
+      0.6950000000000001,
+      0.754,
+      0.993,
+      0.993,
+      0.855,
+      0.769,
+      0.7150000000000001,
+      0.789,
+      0.548,
+      0.565,
+      0.256,
+      0.29400000000000004,
+      0.359,
+      0.474,
+      0.19399999999999995,
+      0.132,
+      0.04500000000000004
+    ],
+    "p_curve_note": "p is the fraction of first-order Markov surrogates whose lag-2 heterogeneity is at least the observed value; high p means the first-order Markov null is not rejected."
+  },
+  {
+    "available": true,
+    "worm_id": 5,
+    "source": "references\\external\\nc-mcm\\precomputed_results\\nc_mcm_model_worm_5.npz",
+    "n_frames": 3021,
+    "selected_k": 3,
+    "markov_p_precomputed": 0.979,
+    "markov_p_reimplemented": 0.983,
+    "markov_p_abs_diff": 0.0040000000000000036,
+    "transition_matrix": [
+      [
+        0.9879518072289156,
+        0.05,
+        0.0
+      ],
+      [
+        0.012048192771084338,
+        0.88125,
+        0.016291698991466253
+      ],
+      [
+        0.0,
+        0.06875,
+        0.9837083010085338
+      ]
+    ],
+    "dwell": {
+      "1": {
+        "n_runs": 17,
+        "mean_frames": 83.0
+      },
+      "2": {
+        "n_runs": 38,
+        "mean_frames": 8.421052631578947
+      },
+      "3": {
+        "n_runs": 22,
+        "mean_frames": 58.63636363636363
+      }
+    },
+    "behavior_composition": {
+      "1": {
+        "dt": 0.01771793054571226,
+        "fwd": 0.0,
+        "nostate": 0.6817859673990078,
+        "rev1": 0.0,
+        "rev2": 0.004961020552799433,
+        "revsus": 0.0,
+        "slow": 0.258681785967399,
+        "vt": 0.0368532955350815
+      },
+      "2": {
+        "dt": 0.203125,
+        "fwd": 0.19375,
+        "nostate": 0.084375,
+        "rev1": 0.25625,
+        "rev2": 0.03125,
+        "revsus": 0.0,
+        "slow": 0.0,
+        "vt": 0.23125
+      },
+      "3": {
+        "dt": 0.0031007751937984496,
+        "fwd": 0.011627906976744186,
+        "nostate": 0.0,
+        "rev1": 0.06434108527131784,
+        "rev2": 0.0007751937984496124,
+        "revsus": 0.8441860465116279,
+        "slow": 0.0,
+        "vt": 0.07596899224806201
+      }
+    },
+    "decoder_cv": {
+      "accuracy": 0.7881496193313472,
+      "balanced_accuracy": 0.5569586199441028,
+      "confusion": [
+        [
+          33,
+          22,
+          3,
+          0,
+          0,
+          19,
+          11,
+          6
+        ],
+        [
+          1,
+          41,
+          8,
+          5,
+          0,
+          9,
+          0,
+          13
+        ],
+        [
+          8,
+          5,
+          859,
+          7,
+          0,
+          0,
+          100,
+          10
+        ],
+        [
+          0,
+          20,
+          15,
+          98,
+          0,
+          30,
+          2,
+          0
+        ],
+        [
+          2,
+          12,
+          0,
+          0,
+          0,
+          1,
+          3,
+          0
+        ],
+        [
+          6,
+          6,
+          0,
+          14,
+          0,
+          1057,
+          0,
+          6
+        ],
+        [
+          2,
+          3,
+          262,
+          0,
+          0,
+          0,
+          98,
+          0
+        ],
+        [
+          0,
+          2,
+          4,
+          0,
+          0,
+          21,
+          2,
+          195
+        ]
+      ],
+      "n": 3021,
+      "state_order": [
+        "dt",
+        "fwd",
+        "nostate",
+        "rev1",
+        "rev2",
+        "revsus",
+        "slow",
+        "vt"
+      ]
+    },
+    "state_counts": {
+      "dt": 94,
+      "fwd": 77,
+      "nostate": 989,
+      "rev1": 165,
+      "rev2": 18,
+      "revsus": 1089,
+      "slow": 365,
+      "vt": 224
+    },
+    "artifact_state_names": [
+      "rev2",
+      "rev1",
+      "slow",
+      "vt",
+      "nostate",
+      "revsus",
+      "fwd",
+      "dt"
+    ],
+    "state_name_note": "The distributed arr_3 is not aligned with the integer codes; observed counts match STATE_ORDER (b=1 -> dt, ..., b=8 -> vt). We use STATE_ORDER.",
+    "markov_p_curve": [
+      1.0,
+      0.029000000000000026,
+      0.979,
+      0.43899999999999995,
+      0.242,
+      0.52,
+      0.864,
+      0.37,
+      0.6950000000000001,
+      0.728,
+      0.28700000000000003,
+      0.44499999999999995,
+      0.482,
+      0.263,
+      0.43799999999999994,
+      0.886,
+      0.399,
+      0.15600000000000003,
+      0.14,
+      0.09799999999999998
+    ],
+    "p_curve_note": "p is the fraction of first-order Markov surrogates whose lag-2 heterogeneity is at least the observed value; high p means the first-order Markov null is not rejected."
+  }
+]

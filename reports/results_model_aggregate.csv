@@ -1,0 +1,8 @@
+model,one_step_r2_mean,one_step_r2_sd,behavior_accuracy_mean,behavior_persistence_mean,transition_tv_mean,transition_tv_persistence,rollout_mse_h3_mean,n_runs
+mlp_residual,0.3723,0.1523,0.8,0.9713,0.3242,0.3908,0.532,15
+var,0.3655,0.0465,0.8053,0.9713,0.1717,0.3908,0.492,15
+persistence,0.3613,0.1708,0.8053,0.9713,0.2167,0.3908,0.4882,15
+latent_mlp,0.2509,0.0622,0.8235,0.9713,0.3267,0.3908,0.5656,15
+latent_knn,0.25,0.0658,0.8153,0.9713,0.2836,0.3908,0.6722,15
+gru,0.2135,0.0682,0.813,0.9708,0.2233,0.3925,0.6192,15
+mlp,0.2095,0.0667,0.8324,0.9713,0.1833,0.3908,0.6708,15

@@ -1,0 +1,14 @@
+name: rivl_plus2
+targets: [RIVL]
+mode: additive
+amplitude: 2.0
+onset: 0
+duration: 12
+horizon: 12
+n_initial: 30
+seeds: [0, 1, 2]
+initial_behavior: REV
+target_behavior: TURN
+notes: >
+  Model-dependent stress test. RIVL was top-ranked in one worm, but random
+  neurons produced effects of similar or larger magnitude. Not causally validated.

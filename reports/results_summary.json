@@ -1,0 +1,620 @@
+{
+  "epistemic_status": "MODEL-DEPENDENT VIRTUAL PERTURBATION \u2014 NOT CAUSALLY VALIDATED.",
+  "primary_split": "blocked contiguous middle block; not forward forecasting",
+  "blocked_models": [
+    {
+      "model": "mlp_residual",
+      "one_step_r2_mean": 0.3723,
+      "one_step_r2_sd": 0.1523,
+      "behavior_accuracy_mean": 0.8,
+      "behavior_persistence_mean": 0.9713,
+      "transition_tv_mean": 0.3242,
+      "transition_tv_persistence": 0.3908,
+      "rollout_mse_h3_mean": 0.532,
+      "n_runs": 15
+    },
+    {
+      "model": "var",
+      "one_step_r2_mean": 0.3655,
+      "one_step_r2_sd": 0.0465,
+      "behavior_accuracy_mean": 0.8053,
+      "behavior_persistence_mean": 0.9713,
+      "transition_tv_mean": 0.1717,
+      "transition_tv_persistence": 0.3908,
+      "rollout_mse_h3_mean": 0.492,
+      "n_runs": 15
+    },
+    {
+      "model": "persistence",
+      "one_step_r2_mean": 0.3613,
+      "one_step_r2_sd": 0.1708,
+      "behavior_accuracy_mean": 0.8053,
+      "behavior_persistence_mean": 0.9713,
+      "transition_tv_mean": 0.2167,
+      "transition_tv_persistence": 0.3908,
+      "rollout_mse_h3_mean": 0.4882,
+      "n_runs": 15
+    },
+    {
+      "model": "latent_mlp",
+      "one_step_r2_mean": 0.2509,
+      "one_step_r2_sd": 0.0622,
+      "behavior_accuracy_mean": 0.8235,
+      "behavior_persistence_mean": 0.9713,
+      "transition_tv_mean": 0.3267,
+      "transition_tv_persistence": 0.3908,
+      "rollout_mse_h3_mean": 0.5656,
+      "n_runs": 15
+    },
+    {
+      "model": "latent_knn",
+      "one_step_r2_mean": 0.25,
+      "one_step_r2_sd": 0.0658,
+      "behavior_accuracy_mean": 0.8153,
+      "behavior_persistence_mean": 0.9713,
+      "transition_tv_mean": 0.2836,
+      "transition_tv_persistence": 0.3908,
+      "rollout_mse_h3_mean": 0.6722,
+      "n_runs": 15
+    },
+    {
+      "model": "gru",
+      "one_step_r2_mean": 0.2135,
+      "one_step_r2_sd": 0.0682,
+      "behavior_accuracy_mean": 0.813,
+      "behavior_persistence_mean": 0.9708,
+      "transition_tv_mean": 0.2233,
+      "transition_tv_persistence": 0.3925,
+      "rollout_mse_h3_mean": 0.6192,
+      "n_runs": 15
+    },
+    {
+      "model": "mlp",
+      "one_step_r2_mean": 0.2095,
+      "one_step_r2_sd": 0.0667,
+      "behavior_accuracy_mean": 0.8324,
+      "behavior_persistence_mean": 0.9713,
+      "transition_tv_mean": 0.1833,
+      "transition_tv_persistence": 0.3908,
+      "rollout_mse_h3_mean": 0.6708,
+      "n_runs": 15
+    }
+  ],
+  "paired_vs_persistence": [
+    {
+      "model": "mlp_residual",
+      "mean_paired_delta_r2_vs_persistence": 0.011,
+      "wins_vs_persistence": 7,
+      "n_pairs": 15
+    },
+    {
+      "model": "var",
+      "mean_paired_delta_r2_vs_persistence": 0.0042,
+      "wins_vs_persistence": 6,
+      "n_pairs": 15
+    },
+    {
+      "model": "persistence",
+      "mean_paired_delta_r2_vs_persistence": 0.0,
+      "wins_vs_persistence": 0,
+      "n_pairs": 15
+    },
+    {
+      "model": "latent_mlp",
+      "mean_paired_delta_r2_vs_persistence": -0.1104,
+      "wins_vs_persistence": 3,
+      "n_pairs": 15
+    },
+    {
+      "model": "latent_knn",
+      "mean_paired_delta_r2_vs_persistence": -0.1113,
+      "wins_vs_persistence": 3,
+      "n_pairs": 15
+    },
+    {
+      "model": "gru",
+      "mean_paired_delta_r2_vs_persistence": -0.1478,
+      "wins_vs_persistence": 5,
+      "n_pairs": 15
+    },
+    {
+      "model": "mlp",
+      "mean_paired_delta_r2_vs_persistence": -0.1518,
+      "wins_vs_persistence": 3,
+      "n_pairs": 15
+    }
+  ],
+  "forward_stress": [
+    {
+      "model": "gru",
+      "one_step_r2_mean": -1.2583,
+      "behavior_accuracy_mean": 0.6039,
+      "behavior_persistence_mean": 0.9821,
+      "transition_tv_mean": 0.2505
+    },
+    {
+      "model": "latent_knn",
+      "one_step_r2_mean": -0.8931,
+      "behavior_accuracy_mean": 0.7388,
+      "behavior_persistence_mean": 0.982,
+      "transition_tv_mean": 0.2197
+    },
+    {
+      "model": "latent_mlp",
+      "one_step_r2_mean": -0.9005,
+      "behavior_accuracy_mean": 0.7027,
+      "behavior_persistence_mean": 0.982,
+      "transition_tv_mean": 0.193
+    },
+    {
+      "model": "mlp",
+      "one_step_r2_mean": -1.111,
+      "behavior_accuracy_mean": 0.5989,
+      "behavior_persistence_mean": 0.982,
+      "transition_tv_mean": 0.288
+    },
+    {
+      "model": "mlp_residual",
+      "one_step_r2_mean": 0.4071,
+      "behavior_accuracy_mean": 0.7167,
+      "behavior_persistence_mean": 0.982,
+      "transition_tv_mean": 0.293
+    },
+    {
+      "model": "persistence",
+      "one_step_r2_mean": 0.3984,
+      "behavior_accuracy_mean": 0.6315,
+      "behavior_persistence_mean": 0.982,
+      "transition_tv_mean": 0.2255
+    },
+    {
+      "model": "var",
+      "one_step_r2_mean": -0.7034,
+      "behavior_accuracy_mean": 0.6315,
+      "behavior_persistence_mean": 0.982,
+      "transition_tv_mean": 0.278
+    }
+  ],
+  "ncmcm": [
+    {
+      "worm_id": 1,
+      "K": 3,
+      "p_precomputed": 0.636,
+      "p_reimplemented": 0.659,
+      "decoder_accuracy": 0.7641058335989799,
+      "decoder_balanced_accuracy": 0.6197373730795368
+    },
+    {
+      "worm_id": 2,
+      "K": 3,
+      "p_precomputed": 0.15700000000000003,
+      "p_reimplemented": 0.14900000000000002,
+      "decoder_accuracy": 0.683152520740268,
+      "decoder_balanced_accuracy": 0.4817546965684655
+    },
+    {
+      "worm_id": 3,
+      "K": 3,
+      "p_precomputed": 0.09599999999999997,
+      "p_reimplemented": 0.08399999999999996,
+      "decoder_accuracy": 0.7917620137299771,
+      "decoder_balanced_accuracy": 0.5618611029736013
+    },
+    {
+      "worm_id": 4,
+      "K": 3,
+      "p_precomputed": 0.603,
+      "p_reimplemented": 0.626,
+      "decoder_accuracy": 0.854726668680157,
+      "decoder_balanced_accuracy": 0.5180270322890276
+    },
+    {
+      "worm_id": 5,
+      "K": 3,
+      "p_precomputed": 0.979,
+      "p_reimplemented": 0.983,
+      "decoder_accuracy": 0.7881496193313472,
+      "decoder_balanced_accuracy": 0.5569586199441028
+    }
+  ],
+  "bundlenet_lite": {
+    "metrics": {
+      "n_embedded": 3123,
+      "knn_accuracy": 0.40669856459330145,
+      "knn_macro_f1": 0.3038939196318862,
+      "n_train": 1869,
+      "n_test": 627,
+      "silhouette_fine": -0.06418222188949585,
+      "trustworthiness": 0.7569995075277896,
+      "model": "bundlenet_lite_pytorch",
+      "best_epoch": 16,
+      "best_val_loss": 0.1778276562690735,
+      "window": 15,
+      "latent_dim": 3,
+      "n_train_windows": 1853,
+      "n_test_windows": 612
+    },
+    "deviations": [
+      "PyTorch rather than TensorFlow/Keras",
+      "Keras Normalization is left unadapted in upstream code and is therefore identity",
+      "blocked split rather than upstream 7-fold random KFold",
+      "causal one-pass 4th-order low-pass at the upstream 0.05 normalized cutoff; upstream uses zero-phase filtfilt, which is acausal and would leak held-out frames into earlier inputs",
+      "no PCA initialisation / best-of-5 initialisation",
+      "120 epochs vs upstream 2000"
+    ]
+  },
+  "bundlenet_official": [
+    {
+      "worm_id": 0,
+      "knn_leaky": 0.9840510366826156,
+      "silhouette": 0.48578334981272614,
+      "pca3_silhouette": -0.008249626494944096
+    },
+    {
+      "worm_id": 1,
+      "knn_leaky": 0.9808612440191388,
+      "silhouette": 0.5467179141463195,
+      "pca3_silhouette": 0.012037046253681183
+    },
+    {
+      "worm_id": 2,
+      "knn_leaky": 0.9738562091503268,
+      "silhouette": 0.5358670520920457,
+      "pca3_silhouette": 0.1039978414773941
+    },
+    {
+      "worm_id": 3,
+      "knn_leaky": 0.9788519637462235,
+      "silhouette": 0.5651388540804357,
+      "pca3_silhouette": 0.06341346353292465
+    },
+    {
+      "worm_id": 4,
+      "knn_leaky": 0.9486754966887417,
+      "silhouette": 0.44652158020588506,
+      "pca3_silhouette": 0.029901528730988503
+    }
+  ],
+  "branching_worm0": {
+    "summary": {
+      "n": 328,
+      "mean_entropy_bits": 0.5779823990267984,
+      "median_entropy_bits": 0.6690158350565576,
+      "fraction_entropy_gt_0_5": 0.5975609756097561,
+      "mean_majority_probability": 0.7894817073170731
+    },
+    "permutation": {
+      "mean_entropy": 0.5779823990267984,
+      "null_mean": 0.9602077761897959,
+      "null_sd": 0.008788463953223774,
+      "excess_entropy_bits": -0.38222537716299754,
+      "p_value": 1.0,
+      "n_candidate_states": 328
+    },
+    "latent_dim_spearman": {
+      "dim_8": 0.764843885384578,
+      "dim_16": 0.7066412648533374,
+      "dim_32": 0.7215174925736478
+    }
+  },
+  "intervention_search_top": [
+    {
+      "candidate": "RIVL",
+      "amplitude": 2.0,
+      "target": "TURN",
+      "baseline_prob": 0.1333333333333333,
+      "intervention_prob": 0.4666666666666667,
+      "delta_prob": 0.3333333333333333,
+      "ci_low": 0.1666666666666666,
+      "ci_high": 0.5333333333333333,
+      "mean_displacement": 0.4222432073772245,
+      "ood_fraction": 0.1055555555555555,
+      "n_initial": 30,
+      "n_seeds": 3,
+      "abs_delta": 0.3333333333333333,
+      "rank": 1
+    },
+    {
+      "candidate": "RIVR",
+      "amplitude": 2.0,
+      "target": "TURN",
+      "baseline_prob": 0.1333333333333333,
+      "intervention_prob": 0.3666666666666666,
+      "delta_prob": 0.2333333333333333,
+      "ci_low": 0.1,
+      "ci_high": 0.3999999999999999,
+      "mean_displacement": 0.405166847491805,
+      "ood_fraction": 0.174074074074074,
+      "n_initial": 30,
+      "n_seeds": 3,
+      "abs_delta": 0.2333333333333333,
+      "rank": 2
+    },
+    {
+      "candidate": "AIBR",
+      "amplitude": 2.0,
+      "target": "TURN",
+      "baseline_prob": 0.1333333333333333,
+      "intervention_prob": 0.3,
+      "delta_prob": 0.1666666666666666,
+      "ci_low": 0.0333333333333333,
+      "ci_high": 0.3333333333333333,
+      "mean_displacement": 0.4204019665946217,
+      "ood_fraction": 0.1342592592592592,
+      "n_initial": 30,
+      "n_seeds": 3,
+      "abs_delta": 0.1666666666666666,
+      "rank": 3
+    },
+    {
+      "candidate": "DB01",
+      "amplitude": 2.0,
+      "target": "TURN",
+      "baseline_prob": 0.1333333333333333,
+      "intervention_prob": 0.3,
+      "delta_prob": 0.1666666666666666,
+      "ci_low": 0.0333333333333333,
+      "ci_high": 0.3,
+      "mean_displacement": 0.3792648656713005,
+      "ood_fraction": 0.1398148148148148,
+      "n_initial": 30,
+      "n_seeds": 3,
+      "abs_delta": 0.1666666666666666,
+      "rank": 4
+    },
+    {
+      "candidate": "AVEL",
+      "amplitude": 2.0,
+      "target": "TURN",
+      "baseline_prob": 0.1333333333333333,
+      "intervention_prob": 0.3,
+      "delta_prob": 0.1666666666666666,
+      "ci_low": 0.0333333333333333,
+      "ci_high": 0.3333333333333333,
+      "mean_displacement": 0.3735053712955718,
+      "ood_fraction": 0.1074074074074074,
+      "n_initial": 30,
+      "n_seeds": 3,
+      "abs_delta": 0.1666666666666666,
+      "rank": 5
+    },
+    {
+      "candidate": "AVBL",
+      "amplitude": 2.0,
+      "target": "TURN",
+      "baseline_prob": 0.1333333333333333,
+      "intervention_prob": 0.2888888888888888,
+      "delta_prob": 0.1555555555555555,
+      "ci_low": 0.0497222222222222,
+      "ci_high": 0.2888888888888888,
+      "mean_displacement": 0.3579909779312927,
+      "ood_fraction": 0.0981481481481481,
+      "n_initial": 30,
+      "n_seeds": 3,
+      "abs_delta": 0.1555555555555555,
+      "rank": 6
+    },
+    {
+      "candidate": "RIML",
+      "amplitude": -2.0,
+      "target": "TURN",
+      "baseline_prob": 0.1333333333333333,
+      "intervention_prob": 0.2666666666666666,
+      "delta_prob": 0.1333333333333333,
+      "ci_low": 0.0333333333333333,
+      "ci_high": 0.2666666666666666,
+      "mean_displacement": 0.3255720866319224,
+      "ood_fraction": 0.1157407407407407,
+      "n_initial": 30,
+      "n_seeds": 3,
+      "abs_delta": 0.1333333333333333,
+      "rank": 7
+    },
+    {
+      "candidate": "AVEL",
+      "amplitude": -2.0,
+      "target": "TURN",
+      "baseline_prob": 0.1333333333333333,
+      "intervention_prob": 0.0333333333333333,
+      "delta_prob": -0.1,
+      "ci_low": -0.2,
+      "ci_high": 0.0,
+      "mean_displacement": 0.3311557254012437,
+      "ood_fraction": 0.0842592592592592,
+      "n_initial": 30,
+      "n_seeds": 3,
+      "abs_delta": 0.1,
+      "rank": 8
+    },
+    {
+      "candidate": "DB01",
+      "amplitude": -2.0,
+      "target": "TURN",
+      "baseline_prob": 0.1333333333333333,
+      "intervention_prob": 0.0333333333333333,
+      "delta_prob": -0.1,
+      "ci_low": -0.2,
+      "ci_high": 0.0,
+      "mean_displacement": 0.4011001854631569,
+      "ood_fraction": 0.2101851851851852,
+      "n_initial": 30,
+      "n_seeds": 3,
+      "abs_delta": 0.1,
+      "rank": 9
+    },
+    {
+      "candidate": "AVBL",
+      "amplitude": -2.0,
+      "target": "TURN",
+      "baseline_prob": 0.1333333333333333,
+      "intervention_prob": 0.0333333333333333,
+      "delta_prob": -0.1,
+      "ci_low": -0.2,
+      "ci_high": 0.0,
+      "mean_displacement": 0.3295100672303678,
+      "ood_fraction": 0.0712962962962963,
+      "n_initial": 30,
+      "n_seeds": 3,
+      "abs_delta": 0.1,
+      "rank": 10
+    }
+  ],
+  "random_controls": {
+    "mean_abs_delta": 0.19415204678362566,
+    "max_abs_delta": 0.6666666666666667,
+    "rows": [
+      {
+        "neuron": "RIFR",
+        "delta_prob": 0.0777777777777777,
+        "ci_low": 0.0,
+        "ci_high": 0.1724999999999997,
+        "ood_fraction": 0.1314814814814814,
+        "mean_displacement": 0.2984718268486749
+      },
+      {
+        "neuron": "ASKR",
+        "delta_prob": -0.0666666666666666,
+        "ci_low": -0.1666666666666666,
+        "ci_high": 0.0,
+        "ood_fraction": 0.1074074074074074,
+        "mean_displacement": 0.3415516444813138
+      },
+      {
+        "neuron": "SABVL",
+        "delta_prob": -0.0666666666666666,
+        "ci_low": -0.1666666666666666,
+        "ci_high": 0.0,
+        "ood_fraction": 0.0777777777777777,
+        "mean_displacement": 0.3464029478272306
+      },
+      {
+        "neuron": "ALA",
+        "delta_prob": 0.0,
+        "ci_low": 0.0,
+        "ci_high": 0.0,
+        "ood_fraction": 0.112037037037037,
+        "mean_displacement": 0.321847116341556
+      },
+      {
+        "neuron": "OLQVL",
+        "delta_prob": 0.6666666666666667,
+        "ci_low": 0.5,
+        "ci_high": 0.8333333333333334,
+        "ood_fraction": 0.3768518518518518,
+        "mean_displacement": 0.5623823612844021
+      },
+      {
+        "neuron": "OLQDR",
+        "delta_prob": 0.5888888888888889,
+        "ci_low": 0.4222222222222222,
+        "ci_high": 0.7724999999999997,
+        "ood_fraction": 0.2296296296296296,
+        "mean_displacement": 0.4784320127483642
+      },
+      {
+        "neuron": "ASKL",
+        "delta_prob": 0.1222222222222222,
+        "ci_low": 0.0333333333333333,
+        "ci_high": 0.2444444444444444,
+        "ood_fraction": 0.1398148148148148,
+        "mean_displacement": 0.3109742664163371
+      },
+      {
+        "neuron": "VB02",
+        "delta_prob": -0.0666666666666666,
+        "ci_low": -0.1666666666666666,
+        "ci_high": 0.0,
+        "ood_fraction": 0.0935185185185185,
+        "mean_displacement": 0.2895480277952021
+      },
+      {
+        "neuron": "RMER",
+        "delta_prob": -0.0444444444444444,
+        "ci_low": -0.1111111111111111,
+        "ci_high": 0.0,
+        "ood_fraction": 0.1157407407407407,
+        "mean_displacement": 0.3495168612654737
+      },
+      {
+        "neuron": "AVFL",
+        "delta_prob": 0.1111111111111111,
+        "ci_low": 0.0111111111111111,
+        "ci_high": 0.2333333333333333,
+        "ood_fraction": 0.125,
+        "mean_displacement": 0.3241552907059783
+      },
+      {
+        "neuron": "RMED",
+        "delta_prob": -0.0444444444444444,
+        "ci_low": -0.1111111111111111,
+        "ci_high": 0.0,
+        "ood_fraction": 0.0611111111111111,
+        "mean_displacement": 0.3235952614421867
+      },
+      {
+        "neuron": "URYDR",
+        "delta_prob": 0.2222222222222222,
+        "ci_low": 0.0999999999999999,
+        "ci_high": 0.3666666666666666,
+        "ood_fraction": 0.1027777777777777,
+        "mean_displacement": 0.3753161392478547
+      },
+      {
+        "neuron": "URYDL",
+        "delta_prob": 0.3222222222222222,
+        "ci_low": 0.1888888888888888,
+        "ci_high": 0.505833333333333,
+        "ood_fraction": 0.1361111111111111,
+        "mean_displacement": 0.4243647430610447
+      },
+      {
+        "neuron": "RID",
+        "delta_prob": 0.0777777777777777,
+        "ci_low": 0.0,
+        "ci_high": 0.1724999999999997,
+        "ood_fraction": 0.0981481481481481,
+        "mean_displacement": 0.2697725899345815
+      },
+      {
+        "neuron": "RMEL",
+        "delta_prob": 0.0,
+        "ci_low": 0.0,
+        "ci_high": 0.0,
+        "ood_fraction": 0.0953703703703703,
+        "mean_displacement": 0.3009781009552337
+      },
+      {
+        "neuron": "OLQDL",
+        "delta_prob": 0.4777777777777778,
+        "ci_low": 0.3222222222222221,
+        "ci_high": 0.6555555555555556,
+        "ood_fraction": 0.137037037037037,
+        "mean_displacement": 0.4237181589452926
+      },
+      {
+        "neuron": "RMEV",
+        "delta_prob": -0.0333333333333333,
+        "ci_low": -0.1,
+        "ci_high": 0.0,
+        "ood_fraction": 0.0527777777777777,
+        "mean_displacement": 0.2660452880304613
+      },
+      {
+        "neuron": "DB02",
+        "delta_prob": -0.0666666666666666,
+        "ci_low": -0.1666666666666666,
+        "ci_high": 0.0,
+        "ood_fraction": 0.0879629629629629,
+        "mean_displacement": 0.2879953662711768
+      },
+      {
+        "neuron": "OLQVR",
+        "delta_prob": 0.6333333333333334,
+        "ci_low": 0.4666666666666667,
+        "ci_high": 0.8,
+        "ood_fraction": 0.1777777777777777,
+        "mean_displacement": 0.4905238938556108
+      }
+    ]
+  }
+}

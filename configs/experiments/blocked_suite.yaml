@@ -1,0 +1,41 @@
+name: blocked_suite
+notes: >
+  Primary interpolation benchmark. A contiguous middle block of each worm is
+  held out; training uses earlier and later contiguous blocks. Windows never
+  cross split boundaries. This is NOT a forward-forecasting protocol; see
+  configs/experiments/forward_stress.yaml for the strict chronological stress test.
+data:
+  dataset: kato2015
+  path: data/raw/kato2015/WT_NoStim.mat
+  exclude_behavior_neurons: true
+  smoothing_sigma_frames: 0.0
+  detrend_window_frames: 0
+split:
+  mode: blocked
+  n_blocks: 5
+  test_block: 2
+  val_block: 4
+  purge_frames: 12
+model:
+  latent_dim: 16
+  hidden_dim: 128
+  history: 1
+  dropout: 0.0
+  behavior_weight: 0.2
+  n_behaviors: 4
+train:
+  epochs: 60
+  batch_size: 256
+  learning_rate: 0.001
+  weight_decay: 0.0001
+  patience: 15
+  seed: 17
+  num_threads: 4
+evaluation:
+  horizons: [1, 3, 5, 10]
+  seeds: [17, 23, 31]
+  bootstrap_samples: 400
+  transition_horizon: 20
+  branching_k: 40
+  min_neighbors: 15
+output_dir: artifacts/runs/blocked_suite

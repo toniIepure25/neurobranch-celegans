@@ -1,0 +1,57 @@
+name: dim
+data:
+  dataset: kato2015
+  path: data/raw/kato2015/WT_NoStim.mat
+  exclude_behavior_neurons: true
+  min_identified_neurons: 5
+  macrostates: true
+  smoothing_sigma_frames: 0.0
+  detrend_window_frames: 0
+  detrend_warmup_frames: 0
+split:
+  mode: blocked
+  train_fraction: 0.7
+  val_fraction: 0.15
+  test_fraction: 0.15
+  purge_frames: 12
+  n_blocks: 5
+  test_block: 2
+  val_block: 4
+  holdout_worm: 4
+  seed: 17
+model:
+  name: latent_mlp
+  latent_dim: 8
+  hidden_dim: 128
+  history: 1
+  dropout: 0.0
+  behavior_weight: 0.2
+  n_behaviors: 4
+  gamma: 0.9
+  window: 15
+train:
+  epochs: 40
+  batch_size: 256
+  learning_rate: 0.001
+  weight_decay: 0.0001
+  patience: 12
+  grad_clip: 1.0
+  seed: 17
+  device: auto
+  num_threads: 4
+  noise_std: 0.0
+evaluation:
+  horizons:
+  - 1
+  - 3
+  - 5
+  seeds:
+  - 17
+  - 23
+  - 31
+  bootstrap_samples: 500
+  transition_horizon: 15
+  branching_k: 40
+  min_neighbors: 15
+output_dir: artifacts/runs
+notes: ''

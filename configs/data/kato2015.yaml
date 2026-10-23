@@ -1,0 +1,8 @@
+name: kato2015
+dataset: kato2015
+path: data/raw/kato2015/WT_NoStim.mat
+source: "Kato et al. 2015, Cell 163:656-669; OSF project 2395t"
+sha256_expected: 7531811c1718e26a0455f59cb2f8188cf25809278cfea85770dfe03315a0098a
+notes: >
+  Five wild-type, unstimulated, immobilised worms. Behaviour labels are derived
+  from calcium signals in AVA/SMD/RIB; they are not independent ground truth.

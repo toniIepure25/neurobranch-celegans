@@ -1,0 +1,1701 @@
+[
+  {
+    "intervention": {
+      "name": "AVEL_-2.0",
+      "targets": [
+        "AVEL"
+      ],
+      "mode": "additive",
+      "amplitude": -2.0,
+      "onset": 0,
+      "duration": 12,
+      "horizon": 12,
+      "n_initial": 30,
+      "seeds": [
+        0,
+        1,
+        2
+      ],
+      "initial_behavior": "REV",
+      "target_behavior": "TURN",
+      "notes": ""
+    },
+    "worm_id": 0,
+    "causal_status": {
+      "level": "observational_model",
+      "validated": false,
+      "label": "MODEL-DEPENDENT VIRTUAL PERTURBATION - NOT CAUSALLY VALIDATED",
+      "reasons": [
+        "The dynamics model was fitted only to observational recordings.",
+        "No randomized or targeted perturbation of these neurons was performed.",
+        "Latent state, model class, and noise assumptions are not identified from data."
+      ]
+    },
+    "baseline_distribution": {
+      "FWD": 0.13333333333333333,
+      "REV": 0.7333333333333333,
+      "TURN": 0.13333333333333333,
+      "NOSTATE": 0.0
+    },
+    "intervention_distribution": {
+      "FWD": 0.13333333333333333,
+      "REV": 0.8333333333333334,
+      "TURN": 0.03333333333333333,
+      "NOSTATE": 0.0
+    },
+    "delta": {
+      "FWD": 0.0,
+      "REV": 0.10000000000000009,
+      "TURN": -0.1,
+      "NOSTATE": 0.0
+    },
+    "delta_target": -0.1,
+    "delta_target_ci": [
+      -0.2,
+      0.0
+    ],
+    "n_initial": 30,
+    "n_seeds": 3,
+    "mean_trajectory_displacement": 0.3311557254012437,
+    "max_trajectory_displacement": 1.0021645218701212,
+    "ood_fraction": 0.08425925925925926,
+    "baseline_turn_rate": 0.13333333333333333,
+    "notes": []
+  },
+  {
+    "intervention": {
+      "name": "AVEL_+2.0",
+      "targets": [
+        "AVEL"
+      ],
+      "mode": "additive",
+      "amplitude": 2.0,
+      "onset": 0,
+      "duration": 12,
+      "horizon": 12,
+      "n_initial": 30,
+      "seeds": [
+        0,
+        1,
+        2
+      ],
+      "initial_behavior": "REV",
+      "target_behavior": "TURN",
+      "notes": ""
+    },
+    "worm_id": 0,
+    "causal_status": {
+      "level": "observational_model",
+      "validated": false,
+      "label": "MODEL-DEPENDENT VIRTUAL PERTURBATION - NOT CAUSALLY VALIDATED",
+      "reasons": [
+        "The dynamics model was fitted only to observational recordings.",
+        "No randomized or targeted perturbation of these neurons was performed.",
+        "Latent state, model class, and noise assumptions are not identified from data."
+      ]
+    },
+    "baseline_distribution": {
+      "FWD": 0.13333333333333333,
+      "REV": 0.7333333333333333,
+      "TURN": 0.13333333333333333,
+      "NOSTATE": 0.0
+    },
+    "intervention_distribution": {
+      "FWD": 0.1,
+      "REV": 0.6,
+      "TURN": 0.3,
+      "NOSTATE": 0.0
+    },
+    "delta": {
+      "FWD": -0.033333333333333326,
+      "REV": -0.1333333333333333,
+      "TURN": 0.16666666666666666,
+      "NOSTATE": 0.0
+    },
+    "delta_target": 0.16666666666666666,
+    "delta_target_ci": [
+      0.03333333333333333,
+      0.3333333333333333
+    ],
+    "n_initial": 30,
+    "n_seeds": 3,
+    "mean_trajectory_displacement": 0.3735053712955718,
+    "max_trajectory_displacement": 1.369182961509364,
+    "ood_fraction": 0.10740740740740741,
+    "baseline_turn_rate": 0.13333333333333333,
+    "notes": [
+      "10.7% of intervention states lie beyond the 99th percentile of training latent support",
+      "Amplitude is large in standardized model units; interpret as a stress test, not a dose"
+    ]
+  },
+  {
+    "intervention": {
+      "name": "AVER_-2.0",
+      "targets": [
+        "AVER"
+      ],
+      "mode": "additive",
+      "amplitude": -2.0,
+      "onset": 0,
+      "duration": 12,
+      "horizon": 12,
+      "n_initial": 30,
+      "seeds": [
+        0,
+        1,
+        2
+      ],
+      "initial_behavior": "REV",
+      "target_behavior": "TURN",
+      "notes": ""
+    },
+    "worm_id": 0,
+    "causal_status": {
+      "level": "observational_model",
+      "validated": false,
+      "label": "MODEL-DEPENDENT VIRTUAL PERTURBATION - NOT CAUSALLY VALIDATED",
+      "reasons": [
+        "The dynamics model was fitted only to observational recordings.",
+        "No randomized or targeted perturbation of these neurons was performed.",
+        "Latent state, model class, and noise assumptions are not identified from data."
+      ]
+    },
+    "baseline_distribution": {
+      "FWD": 0.13333333333333333,
+      "REV": 0.7333333333333333,
+      "TURN": 0.13333333333333333,
+      "NOSTATE": 0.0
+    },
+    "intervention_distribution": {
+      "FWD": 0.13333333333333333,
+      "REV": 0.8,
+      "TURN": 0.06666666666666667,
+      "NOSTATE": 0.0
+    },
+    "delta": {
+      "FWD": 0.0,
+      "REV": 0.06666666666666676,
+      "TURN": -0.06666666666666667,
+      "NOSTATE": 0.0
+    },
+    "delta_target": -0.06666666666666667,
+    "delta_target_ci": [
+      -0.16666666666666666,
+      0.0
+    ],
+    "n_initial": 30,
+    "n_seeds": 3,
+    "mean_trajectory_displacement": 0.2866348812928945,
+    "max_trajectory_displacement": 0.8335055846532045,
+    "ood_fraction": 0.10462962962962963,
+    "baseline_turn_rate": 0.13333333333333333,
+    "notes": [
+      "10.5% of intervention states lie beyond the 99th percentile of training latent support",
+      "Target transition-probability change is small (<0.10) and may not be robust"
+    ]
+  },
+  {
+    "intervention": {
+      "name": "AVER_+2.0",
+      "targets": [
+        "AVER"
+      ],
+      "mode": "additive",
+      "amplitude": 2.0,
+      "onset": 0,
+      "duration": 12,
+      "horizon": 12,
+      "n_initial": 30,
+      "seeds": [
+        0,
+        1,
+        2
+      ],
+      "initial_behavior": "REV",
+      "target_behavior": "TURN",
+      "notes": ""
+    },
+    "worm_id": 0,
+    "causal_status": {
+      "level": "observational_model",
+      "validated": false,
+      "label": "MODEL-DEPENDENT VIRTUAL PERTURBATION - NOT CAUSALLY VALIDATED",
+      "reasons": [
+        "The dynamics model was fitted only to observational recordings.",
+        "No randomized or targeted perturbation of these neurons was performed.",
+        "Latent state, model class, and noise assumptions are not identified from data."
+      ]
+    },
+    "baseline_distribution": {
+      "FWD": 0.13333333333333333,
+      "REV": 0.7333333333333333,
+      "TURN": 0.13333333333333333,
+      "NOSTATE": 0.0
+    },
+    "intervention_distribution": {
+      "FWD": 0.13333333333333333,
+      "REV": 0.6777777777777778,
+      "TURN": 0.18888888888888888,
+      "NOSTATE": 0.0
+    },
+    "delta": {
+      "FWD": 0.0,
+      "REV": -0.05555555555555547,
+      "TURN": 0.05555555555555555,
+      "NOSTATE": 0.0
+    },
+    "delta_target": 0.05555555555555555,
+    "delta_target_ci": [
+      0.0,
+      0.13333333333333333
+    ],
+    "n_initial": 30,
+    "n_seeds": 3,
+    "mean_trajectory_displacement": 0.2913477827476058,
+    "max_trajectory_displacement": 0.7494481360612562,
+    "ood_fraction": 0.08981481481481482,
+    "baseline_turn_rate": 0.13333333333333333,
+    "notes": [
+      "Target transition-probability change is small (<0.10) and may not be robust",
+      "Amplitude is large in standardized model units; interpret as a stress test, not a dose"
+    ]
+  },
+  {
+    "intervention": {
+      "name": "AVBL_-2.0",
+      "targets": [
+        "AVBL"
+      ],
+      "mode": "additive",
+      "amplitude": -2.0,
+      "onset": 0,
+      "duration": 12,
+      "horizon": 12,
+      "n_initial": 30,
+      "seeds": [
+        0,
+        1,
+        2
+      ],
+      "initial_behavior": "REV",
+      "target_behavior": "TURN",
+      "notes": ""
+    },
+    "worm_id": 0,
+    "causal_status": {
+      "level": "observational_model",
+      "validated": false,
+      "label": "MODEL-DEPENDENT VIRTUAL PERTURBATION - NOT CAUSALLY VALIDATED",
+      "reasons": [
+        "The dynamics model was fitted only to observational recordings.",
+        "No randomized or targeted perturbation of these neurons was performed.",
+        "Latent state, model class, and noise assumptions are not identified from data."
+      ]
+    },
+    "baseline_distribution": {
+      "FWD": 0.13333333333333333,
+      "REV": 0.7333333333333333,
+      "TURN": 0.13333333333333333,
+      "NOSTATE": 0.0
+    },
+    "intervention_distribution": {
+      "FWD": 0.1,
+      "REV": 0.8666666666666667,
+      "TURN": 0.03333333333333333,
+      "NOSTATE": 0.0
+    },
+    "delta": {
+      "FWD": -0.033333333333333326,
+      "REV": 0.13333333333333341,
+      "TURN": -0.1,
+      "NOSTATE": 0.0
+    },
+    "delta_target": -0.1,
+    "delta_target_ci": [
+      -0.2,
+      0.0
+    ],
+    "n_initial": 30,
+    "n_seeds": 3,
+    "mean_trajectory_displacement": 0.3295100672303678,
+    "max_trajectory_displacement": 0.9378977246564076,
+    "ood_fraction": 0.0712962962962963,
+    "baseline_turn_rate": 0.13333333333333333,
+    "notes": []
+  },
+  {
+    "intervention": {
+      "name": "AVBL_+2.0",
+      "targets": [
+        "AVBL"
+      ],
+      "mode": "additive",
+      "amplitude": 2.0,
+      "onset": 0,
+      "duration": 12,
+      "horizon": 12,
+      "n_initial": 30,
+      "seeds": [
+        0,
+        1,
+        2
+      ],
+      "initial_behavior": "REV",
+      "target_behavior": "TURN",
+      "notes": ""
+    },
+    "worm_id": 0,
+    "causal_status": {
+      "level": "observational_model",
+      "validated": false,
+      "label": "MODEL-DEPENDENT VIRTUAL PERTURBATION - NOT CAUSALLY VALIDATED",
+      "reasons": [
+        "The dynamics model was fitted only to observational recordings.",
+        "No randomized or targeted perturbation of these neurons was performed.",
+        "Latent state, model class, and noise assumptions are not identified from data."
+      ]
+    },
+    "baseline_distribution": {
+      "FWD": 0.13333333333333333,
+      "REV": 0.7333333333333333,
+      "TURN": 0.13333333333333333,
+      "NOSTATE": 0.0
+    },
+    "intervention_distribution": {
+      "FWD": 0.13333333333333333,
+      "REV": 0.5777777777777777,
+      "TURN": 0.28888888888888886,
+      "NOSTATE": 0.0
+    },
+    "delta": {
+      "FWD": 0.0,
+      "REV": -0.15555555555555556,
+      "TURN": 0.15555555555555553,
+      "NOSTATE": 0.0
+    },
+    "delta_target": 0.15555555555555553,
+    "delta_target_ci": [
+      0.04972222222222224,
+      0.28888888888888886
+    ],
+    "n_initial": 30,
+    "n_seeds": 3,
+    "mean_trajectory_displacement": 0.3579909779312927,
+    "max_trajectory_displacement": 1.1133942061627147,
+    "ood_fraction": 0.09814814814814815,
+    "baseline_turn_rate": 0.13333333333333333,
+    "notes": [
+      "Amplitude is large in standardized model units; interpret as a stress test, not a dose"
+    ]
+  },
+  {
+    "intervention": {
+      "name": "AVBR_-2.0",
+      "targets": [
+        "AVBR"
+      ],
+      "mode": "additive",
+      "amplitude": -2.0,
+      "onset": 0,
+      "duration": 12,
+      "horizon": 12,
+      "n_initial": 30,
+      "seeds": [
+        0,
+        1,
+        2
+      ],
+      "initial_behavior": "REV",
+      "target_behavior": "TURN",
+      "notes": ""
+    },
+    "worm_id": 0,
+    "causal_status": {
+      "level": "observational_model",
+      "validated": false,
+      "label": "MODEL-DEPENDENT VIRTUAL PERTURBATION - NOT CAUSALLY VALIDATED",
+      "reasons": [
+        "The dynamics model was fitted only to observational recordings.",
+        "No randomized or targeted perturbation of these neurons was performed.",
+        "Latent state, model class, and noise assumptions are not identified from data."
+      ]
+    },
+    "baseline_distribution": {
+      "FWD": 0.13333333333333333,
+      "REV": 0.7333333333333333,
+      "TURN": 0.13333333333333333,
+      "NOSTATE": 0.0
+    },
+    "intervention_distribution": {
+      "FWD": 0.1,
+      "REV": 0.8333333333333334,
+      "TURN": 0.06666666666666667,
+      "NOSTATE": 0.0
+    },
+    "delta": {
+      "FWD": -0.033333333333333326,
+      "REV": 0.10000000000000009,
+      "TURN": -0.06666666666666667,
+      "NOSTATE": 0.0
+    },
+    "delta_target": -0.06666666666666667,
+    "delta_target_ci": [
+      -0.16666666666666666,
+      0.0
+    ],
+    "n_initial": 30,
+    "n_seeds": 3,
+    "mean_trajectory_displacement": 0.2920495603489213,
+    "max_trajectory_displacement": 0.9580883524815418,
+    "ood_fraction": 0.0824074074074074,
+    "baseline_turn_rate": 0.13333333333333333,
+    "notes": [
+      "Target transition-probability change is small (<0.10) and may not be robust"
+    ]
+  },
+  {
+    "intervention": {
+      "name": "AVBR_+2.0",
+      "targets": [
+        "AVBR"
+      ],
+      "mode": "additive",
+      "amplitude": 2.0,
+      "onset": 0,
+      "duration": 12,
+      "horizon": 12,
+      "n_initial": 30,
+      "seeds": [
+        0,
+        1,
+        2
+      ],
+      "initial_behavior": "REV",
+      "target_behavior": "TURN",
+      "notes": ""
+    },
+    "worm_id": 0,
+    "causal_status": {
+      "level": "observational_model",
+      "validated": false,
+      "label": "MODEL-DEPENDENT VIRTUAL PERTURBATION - NOT CAUSALLY VALIDATED",
+      "reasons": [
+        "The dynamics model was fitted only to observational recordings.",
+        "No randomized or targeted perturbation of these neurons was performed.",
+        "Latent state, model class, and noise assumptions are not identified from data."
+      ]
+    },
+    "baseline_distribution": {
+      "FWD": 0.13333333333333333,
+      "REV": 0.7333333333333333,
+      "TURN": 0.13333333333333333,
+      "NOSTATE": 0.0
+    },
+    "intervention_distribution": {
+      "FWD": 0.2,
+      "REV": 0.6666666666666666,
+      "TURN": 0.13333333333333333,
+      "NOSTATE": 0.0
+    },
+    "delta": {
+      "FWD": 0.06666666666666668,
+      "REV": -0.06666666666666665,
+      "TURN": 0.0,
+      "NOSTATE": 0.0
+    },
+    "delta_target": 0.0,
+    "delta_target_ci": [
+      0.0,
+      0.0
+    ],
+    "n_initial": 30,
+    "n_seeds": 3,
+    "mean_trajectory_displacement": 0.327943425878747,
+    "max_trajectory_displacement": 1.1317651728215352,
+    "ood_fraction": 0.06481481481481481,
+    "baseline_turn_rate": 0.13333333333333333,
+    "notes": [
+      "Target transition-probability change is small (<0.10) and may not be robust",
+      "Amplitude is large in standardized model units; interpret as a stress test, not a dose"
+    ]
+  },
+  {
+    "intervention": {
+      "name": "AIBL_-2.0",
+      "targets": [
+        "AIBL"
+      ],
+      "mode": "additive",
+      "amplitude": -2.0,
+      "onset": 0,
+      "duration": 12,
+      "horizon": 12,
+      "n_initial": 30,
+      "seeds": [
+        0,
+        1,
+        2
+      ],
+      "initial_behavior": "REV",
+      "target_behavior": "TURN",
+      "notes": ""
+    },
+    "worm_id": 0,
+    "causal_status": {
+      "level": "observational_model",
+      "validated": false,
+      "label": "MODEL-DEPENDENT VIRTUAL PERTURBATION - NOT CAUSALLY VALIDATED",
+      "reasons": [
+        "The dynamics model was fitted only to observational recordings.",
+        "No randomized or targeted perturbation of these neurons was performed.",
+        "Latent state, model class, and noise assumptions are not identified from data."
+      ]
+    },
+    "baseline_distribution": {
+      "FWD": 0.13333333333333333,
+      "REV": 0.7333333333333333,
+      "TURN": 0.13333333333333333,
+      "NOSTATE": 0.0
+    },
+    "intervention_distribution": {
+      "FWD": 0.17777777777777778,
+      "REV": 0.7555555555555555,
+      "TURN": 0.06666666666666667,
+      "NOSTATE": 0.0
+    },
+    "delta": {
+      "FWD": 0.04444444444444445,
+      "REV": 0.022222222222222254,
+      "TURN": -0.06666666666666667,
+      "NOSTATE": 0.0
+    },
+    "delta_target": -0.06666666666666667,
+    "delta_target_ci": [
+      -0.16666666666666666,
+      0.0
+    ],
+    "n_initial": 30,
+    "n_seeds": 3,
+    "mean_trajectory_displacement": 0.3903776456644669,
+    "max_trajectory_displacement": 1.0956414091553324,
+    "ood_fraction": 0.1527777777777778,
+    "baseline_turn_rate": 0.13333333333333333,
+    "notes": [
+      "15.3% of intervention states lie beyond the 99th percentile of training latent support",
+      "Target transition-probability change is small (<0.10) and may not be robust"
+    ]
+  },
+  {
+    "intervention": {
+      "name": "AIBL_+2.0",
+      "targets": [
+        "AIBL"
+      ],
+      "mode": "additive",
+      "amplitude": 2.0,
+      "onset": 0,
+      "duration": 12,
+      "horizon": 12,
+      "n_initial": 30,
+      "seeds": [
+        0,
+        1,
+        2
+      ],
+      "initial_behavior": "REV",
+      "target_behavior": "TURN",
+      "notes": ""
+    },
+    "worm_id": 0,
+    "causal_status": {
+      "level": "observational_model",
+      "validated": false,
+      "label": "MODEL-DEPENDENT VIRTUAL PERTURBATION - NOT CAUSALLY VALIDATED",
+      "reasons": [
+        "The dynamics model was fitted only to observational recordings.",
+        "No randomized or targeted perturbation of these neurons was performed.",
+        "Latent state, model class, and noise assumptions are not identified from data."
+      ]
+    },
+    "baseline_distribution": {
+      "FWD": 0.13333333333333333,
+      "REV": 0.7333333333333333,
+      "TURN": 0.13333333333333333,
+      "NOSTATE": 0.0
+    },
+    "intervention_distribution": {
+      "FWD": 0.1,
+      "REV": 0.6777777777777778,
+      "TURN": 0.2222222222222222,
+      "NOSTATE": 0.0
+    },
+    "delta": {
+      "FWD": -0.033333333333333326,
+      "REV": -0.05555555555555547,
+      "TURN": 0.08888888888888888,
+      "NOSTATE": 0.0
+    },
+    "delta_target": 0.08888888888888888,
+    "delta_target_ci": [
+      0.0,
+      0.2
+    ],
+    "n_initial": 30,
+    "n_seeds": 3,
+    "mean_trajectory_displacement": 0.422371751643769,
+    "max_trajectory_displacement": 1.4157730592525448,
+    "ood_fraction": 0.1175925925925926,
+    "baseline_turn_rate": 0.13333333333333333,
+    "notes": [
+      "11.8% of intervention states lie beyond the 99th percentile of training latent support",
+      "Target transition-probability change is small (<0.10) and may not be robust",
+      "Amplitude is large in standardized model units; interpret as a stress test, not a dose"
+    ]
+  },
+  {
+    "intervention": {
+      "name": "AIBR_-2.0",
+      "targets": [
+        "AIBR"
+      ],
+      "mode": "additive",
+      "amplitude": -2.0,
+      "onset": 0,
+      "duration": 12,
+      "horizon": 12,
+      "n_initial": 30,
+      "seeds": [
+        0,
+        1,
+        2
+      ],
+      "initial_behavior": "REV",
+      "target_behavior": "TURN",
+      "notes": ""
+    },
+    "worm_id": 0,
+    "causal_status": {
+      "level": "observational_model",
+      "validated": false,
+      "label": "MODEL-DEPENDENT VIRTUAL PERTURBATION - NOT CAUSALLY VALIDATED",
+      "reasons": [
+        "The dynamics model was fitted only to observational recordings.",
+        "No randomized or targeted perturbation of these neurons was performed.",
+        "Latent state, model class, and noise assumptions are not identified from data."
+      ]
+    },
+    "baseline_distribution": {
+      "FWD": 0.13333333333333333,
+      "REV": 0.7333333333333333,
+      "TURN": 0.13333333333333333,
+      "NOSTATE": 0.0
+    },
+    "intervention_distribution": {
+      "FWD": 0.13333333333333333,
+      "REV": 0.8333333333333334,
+      "TURN": 0.03333333333333333,
+      "NOSTATE": 0.0
+    },
+    "delta": {
+      "FWD": 0.0,
+      "REV": 0.10000000000000009,
+      "TURN": -0.1,
+      "NOSTATE": 0.0
+    },
+    "delta_target": -0.1,
+    "delta_target_ci": [
+      -0.2,
+      0.0
+    ],
+    "n_initial": 30,
+    "n_seeds": 3,
+    "mean_trajectory_displacement": 0.3815182431042538,
+    "max_trajectory_displacement": 1.1834086951478966,
+    "ood_fraction": 0.09537037037037037,
+    "baseline_turn_rate": 0.13333333333333333,
+    "notes": []
+  },
+  {
+    "intervention": {
+      "name": "AIBR_+2.0",
+      "targets": [
+        "AIBR"
+      ],
+      "mode": "additive",
+      "amplitude": 2.0,
+      "onset": 0,
+      "duration": 12,
+      "horizon": 12,
+      "n_initial": 30,
+      "seeds": [
+        0,
+        1,
+        2
+      ],
+      "initial_behavior": "REV",
+      "target_behavior": "TURN",
+      "notes": ""
+    },
+    "worm_id": 0,
+    "causal_status": {
+      "level": "observational_model",
+      "validated": false,
+      "label": "MODEL-DEPENDENT VIRTUAL PERTURBATION - NOT CAUSALLY VALIDATED",
+      "reasons": [
+        "The dynamics model was fitted only to observational recordings.",
+        "No randomized or targeted perturbation of these neurons was performed.",
+        "Latent state, model class, and noise assumptions are not identified from data."
+      ]
+    },
+    "baseline_distribution": {
+      "FWD": 0.13333333333333333,
+      "REV": 0.7333333333333333,
+      "TURN": 0.13333333333333333,
+      "NOSTATE": 0.0
+    },
+    "intervention_distribution": {
+      "FWD": 0.1,
+      "REV": 0.6,
+      "TURN": 0.3,
+      "NOSTATE": 0.0
+    },
+    "delta": {
+      "FWD": -0.033333333333333326,
+      "REV": -0.1333333333333333,
+      "TURN": 0.16666666666666666,
+      "NOSTATE": 0.0
+    },
+    "delta_target": 0.16666666666666666,
+    "delta_target_ci": [
+      0.03333333333333333,
+      0.3333333333333333
+    ],
+    "n_initial": 30,
+    "n_seeds": 3,
+    "mean_trajectory_displacement": 0.4204019665946217,
+    "max_trajectory_displacement": 1.3325395824464845,
+    "ood_fraction": 0.13425925925925927,
+    "baseline_turn_rate": 0.13333333333333333,
+    "notes": [
+      "13.4% of intervention states lie beyond the 99th percentile of training latent support",
+      "Amplitude is large in standardized model units; interpret as a stress test, not a dose"
+    ]
+  },
+  {
+    "intervention": {
+      "name": "RIML_-2.0",
+      "targets": [
+        "RIML"
+      ],
+      "mode": "additive",
+      "amplitude": -2.0,
+      "onset": 0,
+      "duration": 12,
+      "horizon": 12,
+      "n_initial": 30,
+      "seeds": [
+        0,
+        1,
+        2
+      ],
+      "initial_behavior": "REV",
+      "target_behavior": "TURN",
+      "notes": ""
+    },
+    "worm_id": 0,
+    "causal_status": {
+      "level": "observational_model",
+      "validated": false,
+      "label": "MODEL-DEPENDENT VIRTUAL PERTURBATION - NOT CAUSALLY VALIDATED",
+      "reasons": [
+        "The dynamics model was fitted only to observational recordings.",
+        "No randomized or targeted perturbation of these neurons was performed.",
+        "Latent state, model class, and noise assumptions are not identified from data."
+      ]
+    },
+    "baseline_distribution": {
+      "FWD": 0.13333333333333333,
+      "REV": 0.7333333333333333,
+      "TURN": 0.13333333333333333,
+      "NOSTATE": 0.0
+    },
+    "intervention_distribution": {
+      "FWD": 0.13333333333333333,
+      "REV": 0.6,
+      "TURN": 0.26666666666666666,
+      "NOSTATE": 0.0
+    },
+    "delta": {
+      "FWD": 0.0,
+      "REV": -0.1333333333333333,
+      "TURN": 0.13333333333333333,
+      "NOSTATE": 0.0
+    },
+    "delta_target": 0.13333333333333333,
+    "delta_target_ci": [
+      0.03333333333333333,
+      0.26666666666666666
+    ],
+    "n_initial": 30,
+    "n_seeds": 3,
+    "mean_trajectory_displacement": 0.32557208663192244,
+    "max_trajectory_displacement": 0.9783493189312384,
+    "ood_fraction": 0.11574074074074074,
+    "baseline_turn_rate": 0.13333333333333333,
+    "notes": [
+      "11.6% of intervention states lie beyond the 99th percentile of training latent support"
+    ]
+  },
+  {
+    "intervention": {
+      "name": "RIML_+2.0",
+      "targets": [
+        "RIML"
+      ],
+      "mode": "additive",
+      "amplitude": 2.0,
+      "onset": 0,
+      "duration": 12,
+      "horizon": 12,
+      "n_initial": 30,
+      "seeds": [
+        0,
+        1,
+        2
+      ],
+      "initial_behavior": "REV",
+      "target_behavior": "TURN",
+      "notes": ""
+    },
+    "worm_id": 0,
+    "causal_status": {
+      "level": "observational_model",
+      "validated": false,
+      "label": "MODEL-DEPENDENT VIRTUAL PERTURBATION - NOT CAUSALLY VALIDATED",
+      "reasons": [
+        "The dynamics model was fitted only to observational recordings.",
+        "No randomized or targeted perturbation of these neurons was performed.",
+        "Latent state, model class, and noise assumptions are not identified from data."
+      ]
+    },
+    "baseline_distribution": {
+      "FWD": 0.13333333333333333,
+      "REV": 0.7333333333333333,
+      "TURN": 0.13333333333333333,
+      "NOSTATE": 0.0
+    },
+    "intervention_distribution": {
+      "FWD": 0.1111111111111111,
+      "REV": 0.8222222222222222,
+      "TURN": 0.06666666666666667,
+      "NOSTATE": 0.0
+    },
+    "delta": {
+      "FWD": -0.022222222222222227,
+      "REV": 0.0888888888888889,
+      "TURN": -0.06666666666666667,
+      "NOSTATE": 0.0
+    },
+    "delta_target": -0.06666666666666667,
+    "delta_target_ci": [
+      -0.16666666666666666,
+      0.0
+    ],
+    "n_initial": 30,
+    "n_seeds": 3,
+    "mean_trajectory_displacement": 0.3339552377680547,
+    "max_trajectory_displacement": 0.8263935082893775,
+    "ood_fraction": 0.08148148148148149,
+    "baseline_turn_rate": 0.13333333333333333,
+    "notes": [
+      "Target transition-probability change is small (<0.10) and may not be robust",
+      "Amplitude is large in standardized model units; interpret as a stress test, not a dose"
+    ]
+  },
+  {
+    "intervention": {
+      "name": "RIMR_-2.0",
+      "targets": [
+        "RIMR"
+      ],
+      "mode": "additive",
+      "amplitude": -2.0,
+      "onset": 0,
+      "duration": 12,
+      "horizon": 12,
+      "n_initial": 30,
+      "seeds": [
+        0,
+        1,
+        2
+      ],
+      "initial_behavior": "REV",
+      "target_behavior": "TURN",
+      "notes": ""
+    },
+    "worm_id": 0,
+    "causal_status": {
+      "level": "observational_model",
+      "validated": false,
+      "label": "MODEL-DEPENDENT VIRTUAL PERTURBATION - NOT CAUSALLY VALIDATED",
+      "reasons": [
+        "The dynamics model was fitted only to observational recordings.",
+        "No randomized or targeted perturbation of these neurons was performed.",
+        "Latent state, model class, and noise assumptions are not identified from data."
+      ]
+    },
+    "baseline_distribution": {
+      "FWD": 0.13333333333333333,
+      "REV": 0.7333333333333333,
+      "TURN": 0.13333333333333333,
+      "NOSTATE": 0.0
+    },
+    "intervention_distribution": {
+      "FWD": 0.13333333333333333,
+      "REV": 0.6444444444444445,
+      "TURN": 0.2222222222222222,
+      "NOSTATE": 0.0
+    },
+    "delta": {
+      "FWD": 0.0,
+      "REV": -0.0888888888888888,
+      "TURN": 0.08888888888888888,
+      "NOSTATE": 0.0
+    },
+    "delta_target": 0.08888888888888888,
+    "delta_target_ci": [
+      0.016388888888888904,
+      0.18888888888888886
+    ],
+    "n_initial": 30,
+    "n_seeds": 3,
+    "mean_trajectory_displacement": 0.3271510664527614,
+    "max_trajectory_displacement": 1.0502853864690547,
+    "ood_fraction": 0.08981481481481482,
+    "baseline_turn_rate": 0.13333333333333333,
+    "notes": [
+      "Target transition-probability change is small (<0.10) and may not be robust"
+    ]
+  },
+  {
+    "intervention": {
+      "name": "RIMR_+2.0",
+      "targets": [
+        "RIMR"
+      ],
+      "mode": "additive",
+      "amplitude": 2.0,
+      "onset": 0,
+      "duration": 12,
+      "horizon": 12,
+      "n_initial": 30,
+      "seeds": [
+        0,
+        1,
+        2
+      ],
+      "initial_behavior": "REV",
+      "target_behavior": "TURN",
+      "notes": ""
+    },
+    "worm_id": 0,
+    "causal_status": {
+      "level": "observational_model",
+      "validated": false,
+      "label": "MODEL-DEPENDENT VIRTUAL PERTURBATION - NOT CAUSALLY VALIDATED",
+      "reasons": [
+        "The dynamics model was fitted only to observational recordings.",
+        "No randomized or targeted perturbation of these neurons was performed.",
+        "Latent state, model class, and noise assumptions are not identified from data."
+      ]
+    },
+    "baseline_distribution": {
+      "FWD": 0.13333333333333333,
+      "REV": 0.7333333333333333,
+      "TURN": 0.13333333333333333,
+      "NOSTATE": 0.0
+    },
+    "intervention_distribution": {
+      "FWD": 0.1,
+      "REV": 0.8666666666666667,
+      "TURN": 0.03333333333333333,
+      "NOSTATE": 0.0
+    },
+    "delta": {
+      "FWD": -0.033333333333333326,
+      "REV": 0.13333333333333341,
+      "TURN": -0.1,
+      "NOSTATE": 0.0
+    },
+    "delta_target": -0.1,
+    "delta_target_ci": [
+      -0.2,
+      0.0
+    ],
+    "n_initial": 30,
+    "n_seeds": 3,
+    "mean_trajectory_displacement": 0.2948868044035403,
+    "max_trajectory_displacement": 0.933234693462053,
+    "ood_fraction": 0.09259259259259259,
+    "baseline_turn_rate": 0.13333333333333333,
+    "notes": [
+      "Amplitude is large in standardized model units; interpret as a stress test, not a dose"
+    ]
+  },
+  {
+    "intervention": {
+      "name": "RIVL_-2.0",
+      "targets": [
+        "RIVL"
+      ],
+      "mode": "additive",
+      "amplitude": -2.0,
+      "onset": 0,
+      "duration": 12,
+      "horizon": 12,
+      "n_initial": 30,
+      "seeds": [
+        0,
+        1,
+        2
+      ],
+      "initial_behavior": "REV",
+      "target_behavior": "TURN",
+      "notes": ""
+    },
+    "worm_id": 0,
+    "causal_status": {
+      "level": "observational_model",
+      "validated": false,
+      "label": "MODEL-DEPENDENT VIRTUAL PERTURBATION - NOT CAUSALLY VALIDATED",
+      "reasons": [
+        "The dynamics model was fitted only to observational recordings.",
+        "No randomized or targeted perturbation of these neurons was performed.",
+        "Latent state, model class, and noise assumptions are not identified from data."
+      ]
+    },
+    "baseline_distribution": {
+      "FWD": 0.13333333333333333,
+      "REV": 0.7333333333333333,
+      "TURN": 0.13333333333333333,
+      "NOSTATE": 0.0
+    },
+    "intervention_distribution": {
+      "FWD": 0.13333333333333333,
+      "REV": 0.8222222222222222,
+      "TURN": 0.044444444444444446,
+      "NOSTATE": 0.0
+    },
+    "delta": {
+      "FWD": 0.0,
+      "REV": 0.0888888888888889,
+      "TURN": -0.08888888888888888,
+      "NOSTATE": 0.0
+    },
+    "delta_target": -0.08888888888888888,
+    "delta_target_ci": [
+      -0.2,
+      0.0
+    ],
+    "n_initial": 30,
+    "n_seeds": 3,
+    "mean_trajectory_displacement": 0.3183707215997151,
+    "max_trajectory_displacement": 1.0421567253427804,
+    "ood_fraction": 0.11666666666666667,
+    "baseline_turn_rate": 0.13333333333333333,
+    "notes": [
+      "11.7% of intervention states lie beyond the 99th percentile of training latent support",
+      "Target transition-probability change is small (<0.10) and may not be robust"
+    ]
+  },
+  {
+    "intervention": {
+      "name": "RIVL_+2.0",
+      "targets": [
+        "RIVL"
+      ],
+      "mode": "additive",
+      "amplitude": 2.0,
+      "onset": 0,
+      "duration": 12,
+      "horizon": 12,
+      "n_initial": 30,
+      "seeds": [
+        0,
+        1,
+        2
+      ],
+      "initial_behavior": "REV",
+      "target_behavior": "TURN",
+      "notes": ""
+    },
+    "worm_id": 0,
+    "causal_status": {
+      "level": "observational_model",
+      "validated": false,
+      "label": "MODEL-DEPENDENT VIRTUAL PERTURBATION - NOT CAUSALLY VALIDATED",
+      "reasons": [
+        "The dynamics model was fitted only to observational recordings.",
+        "No randomized or targeted perturbation of these neurons was performed.",
+        "Latent state, model class, and noise assumptions are not identified from data."
+      ]
+    },
+    "baseline_distribution": {
+      "FWD": 0.13333333333333333,
+      "REV": 0.7333333333333333,
+      "TURN": 0.13333333333333333,
+      "NOSTATE": 0.0
+    },
+    "intervention_distribution": {
+      "FWD": 0.1,
+      "REV": 0.43333333333333335,
+      "TURN": 0.4666666666666667,
+      "NOSTATE": 0.0
+    },
+    "delta": {
+      "FWD": -0.033333333333333326,
+      "REV": -0.29999999999999993,
+      "TURN": 0.33333333333333337,
+      "NOSTATE": 0.0
+    },
+    "delta_target": 0.33333333333333337,
+    "delta_target_ci": [
+      0.16666666666666666,
+      0.5333333333333333
+    ],
+    "n_initial": 30,
+    "n_seeds": 3,
+    "mean_trajectory_displacement": 0.4222432073772245,
+    "max_trajectory_displacement": 1.2425851030326207,
+    "ood_fraction": 0.10555555555555556,
+    "baseline_turn_rate": 0.13333333333333333,
+    "notes": [
+      "10.6% of intervention states lie beyond the 99th percentile of training latent support",
+      "Amplitude is large in standardized model units; interpret as a stress test, not a dose"
+    ]
+  },
+  {
+    "intervention": {
+      "name": "RIVR_-2.0",
+      "targets": [
+        "RIVR"
+      ],
+      "mode": "additive",
+      "amplitude": -2.0,
+      "onset": 0,
+      "duration": 12,
+      "horizon": 12,
+      "n_initial": 30,
+      "seeds": [
+        0,
+        1,
+        2
+      ],
+      "initial_behavior": "REV",
+      "target_behavior": "TURN",
+      "notes": ""
+    },
+    "worm_id": 0,
+    "causal_status": {
+      "level": "observational_model",
+      "validated": false,
+      "label": "MODEL-DEPENDENT VIRTUAL PERTURBATION - NOT CAUSALLY VALIDATED",
+      "reasons": [
+        "The dynamics model was fitted only to observational recordings.",
+        "No randomized or targeted perturbation of these neurons was performed.",
+        "Latent state, model class, and noise assumptions are not identified from data."
+      ]
+    },
+    "baseline_distribution": {
+      "FWD": 0.13333333333333333,
+      "REV": 0.7333333333333333,
+      "TURN": 0.13333333333333333,
+      "NOSTATE": 0.0
+    },
+    "intervention_distribution": {
+      "FWD": 0.13333333333333333,
+      "REV": 0.8333333333333334,
+      "TURN": 0.03333333333333333,
+      "NOSTATE": 0.0
+    },
+    "delta": {
+      "FWD": 0.0,
+      "REV": 0.10000000000000009,
+      "TURN": -0.1,
+      "NOSTATE": 0.0
+    },
+    "delta_target": -0.1,
+    "delta_target_ci": [
+      -0.2,
+      0.0
+    ],
+    "n_initial": 30,
+    "n_seeds": 3,
+    "mean_trajectory_displacement": 0.31403559289795396,
+    "max_trajectory_displacement": 0.8236973475078735,
+    "ood_fraction": 0.08981481481481482,
+    "baseline_turn_rate": 0.13333333333333333,
+    "notes": []
+  },
+  {
+    "intervention": {
+      "name": "RIVR_+2.0",
+      "targets": [
+        "RIVR"
+      ],
+      "mode": "additive",
+      "amplitude": 2.0,
+      "onset": 0,
+      "duration": 12,
+      "horizon": 12,
+      "n_initial": 30,
+      "seeds": [
+        0,
+        1,
+        2
+      ],
+      "initial_behavior": "REV",
+      "target_behavior": "TURN",
+      "notes": ""
+    },
+    "worm_id": 0,
+    "causal_status": {
+      "level": "observational_model",
+      "validated": false,
+      "label": "MODEL-DEPENDENT VIRTUAL PERTURBATION - NOT CAUSALLY VALIDATED",
+      "reasons": [
+        "The dynamics model was fitted only to observational recordings.",
+        "No randomized or targeted perturbation of these neurons was performed.",
+        "Latent state, model class, and noise assumptions are not identified from data."
+      ]
+    },
+    "baseline_distribution": {
+      "FWD": 0.13333333333333333,
+      "REV": 0.7333333333333333,
+      "TURN": 0.13333333333333333,
+      "NOSTATE": 0.0
+    },
+    "intervention_distribution": {
+      "FWD": 0.1111111111111111,
+      "REV": 0.5222222222222223,
+      "TURN": 0.36666666666666664,
+      "NOSTATE": 0.0
+    },
+    "delta": {
+      "FWD": -0.022222222222222227,
+      "REV": -0.21111111111111103,
+      "TURN": 0.2333333333333333,
+      "NOSTATE": 0.0
+    },
+    "delta_target": 0.2333333333333333,
+    "delta_target_ci": [
+      0.1,
+      0.39999999999999997
+    ],
+    "n_initial": 30,
+    "n_seeds": 3,
+    "mean_trajectory_displacement": 0.40516684749180504,
+    "max_trajectory_displacement": 1.3245465495527404,
+    "ood_fraction": 0.17407407407407408,
+    "baseline_turn_rate": 0.13333333333333333,
+    "notes": [
+      "17.4% of intervention states lie beyond the 99th percentile of training latent support",
+      "Amplitude is large in standardized model units; interpret as a stress test, not a dose"
+    ]
+  },
+  {
+    "intervention": {
+      "name": "VA01_-2.0",
+      "targets": [
+        "VA01"
+      ],
+      "mode": "additive",
+      "amplitude": -2.0,
+      "onset": 0,
+      "duration": 12,
+      "horizon": 12,
+      "n_initial": 30,
+      "seeds": [
+        0,
+        1,
+        2
+      ],
+      "initial_behavior": "REV",
+      "target_behavior": "TURN",
+      "notes": ""
+    },
+    "worm_id": 0,
+    "causal_status": {
+      "level": "observational_model",
+      "validated": false,
+      "label": "MODEL-DEPENDENT VIRTUAL PERTURBATION - NOT CAUSALLY VALIDATED",
+      "reasons": [
+        "The dynamics model was fitted only to observational recordings.",
+        "No randomized or targeted perturbation of these neurons was performed.",
+        "Latent state, model class, and noise assumptions are not identified from data."
+      ]
+    },
+    "baseline_distribution": {
+      "FWD": 0.13333333333333333,
+      "REV": 0.7333333333333333,
+      "TURN": 0.13333333333333333,
+      "NOSTATE": 0.0
+    },
+    "intervention_distribution": {
+      "FWD": 0.13333333333333333,
+      "REV": 0.7333333333333333,
+      "TURN": 0.13333333333333333,
+      "NOSTATE": 0.0
+    },
+    "delta": {
+      "FWD": 0.0,
+      "REV": 0.0,
+      "TURN": 0.0,
+      "NOSTATE": 0.0
+    },
+    "delta_target": 0.0,
+    "delta_target_ci": [
+      0.0,
+      0.0
+    ],
+    "n_initial": 30,
+    "n_seeds": 3,
+    "mean_trajectory_displacement": 0.2812760165412987,
+    "max_trajectory_displacement": 0.8440997397435469,
+    "ood_fraction": 0.10185185185185185,
+    "baseline_turn_rate": 0.13333333333333333,
+    "notes": [
+      "10.2% of intervention states lie beyond the 99th percentile of training latent support",
+      "Target transition-probability change is small (<0.10) and may not be robust"
+    ]
+  },
+  {
+    "intervention": {
+      "name": "VA01_+2.0",
+      "targets": [
+        "VA01"
+      ],
+      "mode": "additive",
+      "amplitude": 2.0,
+      "onset": 0,
+      "duration": 12,
+      "horizon": 12,
+      "n_initial": 30,
+      "seeds": [
+        0,
+        1,
+        2
+      ],
+      "initial_behavior": "REV",
+      "target_behavior": "TURN",
+      "notes": ""
+    },
+    "worm_id": 0,
+    "causal_status": {
+      "level": "observational_model",
+      "validated": false,
+      "label": "MODEL-DEPENDENT VIRTUAL PERTURBATION - NOT CAUSALLY VALIDATED",
+      "reasons": [
+        "The dynamics model was fitted only to observational recordings.",
+        "No randomized or targeted perturbation of these neurons was performed.",
+        "Latent state, model class, and noise assumptions are not identified from data."
+      ]
+    },
+    "baseline_distribution": {
+      "FWD": 0.13333333333333333,
+      "REV": 0.7333333333333333,
+      "TURN": 0.13333333333333333,
+      "NOSTATE": 0.0
+    },
+    "intervention_distribution": {
+      "FWD": 0.13333333333333333,
+      "REV": 0.8,
+      "TURN": 0.06666666666666667,
+      "NOSTATE": 0.0
+    },
+    "delta": {
+      "FWD": 0.0,
+      "REV": 0.06666666666666676,
+      "TURN": -0.06666666666666667,
+      "NOSTATE": 0.0
+    },
+    "delta_target": -0.06666666666666667,
+    "delta_target_ci": [
+      -0.16666666666666666,
+      0.0
+    ],
+    "n_initial": 30,
+    "n_seeds": 3,
+    "mean_trajectory_displacement": 0.27331488932787745,
+    "max_trajectory_displacement": 0.6837580888770293,
+    "ood_fraction": 0.1,
+    "baseline_turn_rate": 0.13333333333333333,
+    "notes": [
+      "Target transition-probability change is small (<0.10) and may not be robust",
+      "Amplitude is large in standardized model units; interpret as a stress test, not a dose"
+    ]
+  },
+  {
+    "intervention": {
+      "name": "VB01_-2.0",
+      "targets": [
+        "VB01"
+      ],
+      "mode": "additive",
+      "amplitude": -2.0,
+      "onset": 0,
+      "duration": 12,
+      "horizon": 12,
+      "n_initial": 30,
+      "seeds": [
+        0,
+        1,
+        2
+      ],
+      "initial_behavior": "REV",
+      "target_behavior": "TURN",
+      "notes": ""
+    },
+    "worm_id": 0,
+    "causal_status": {
+      "level": "observational_model",
+      "validated": false,
+      "label": "MODEL-DEPENDENT VIRTUAL PERTURBATION - NOT CAUSALLY VALIDATED",
+      "reasons": [
+        "The dynamics model was fitted only to observational recordings.",
+        "No randomized or targeted perturbation of these neurons was performed.",
+        "Latent state, model class, and noise assumptions are not identified from data."
+      ]
+    },
+    "baseline_distribution": {
+      "FWD": 0.13333333333333333,
+      "REV": 0.7333333333333333,
+      "TURN": 0.13333333333333333,
+      "NOSTATE": 0.0
+    },
+    "intervention_distribution": {
+      "FWD": 0.1,
+      "REV": 0.7222222222222222,
+      "TURN": 0.17777777777777778,
+      "NOSTATE": 0.0
+    },
+    "delta": {
+      "FWD": -0.033333333333333326,
+      "REV": -0.011111111111111072,
+      "TURN": 0.04444444444444445,
+      "NOSTATE": 0.0
+    },
+    "delta_target": 0.04444444444444445,
+    "delta_target_ci": [
+      0.0,
+      0.12222222222222223
+    ],
+    "n_initial": 30,
+    "n_seeds": 3,
+    "mean_trajectory_displacement": 0.371419188379463,
+    "max_trajectory_displacement": 1.0044850463748736,
+    "ood_fraction": 0.09351851851851851,
+    "baseline_turn_rate": 0.13333333333333333,
+    "notes": [
+      "Target transition-probability change is small (<0.10) and may not be robust"
+    ]
+  },
+  {
+    "intervention": {
+      "name": "VB01_+2.0",
+      "targets": [
+        "VB01"
+      ],
+      "mode": "additive",
+      "amplitude": 2.0,
+      "onset": 0,
+      "duration": 12,
+      "horizon": 12,
+      "n_initial": 30,
+      "seeds": [
+        0,
+        1,
+        2
+      ],
+      "initial_behavior": "REV",
+      "target_behavior": "TURN",
+      "notes": ""
+    },
+    "worm_id": 0,
+    "causal_status": {
+      "level": "observational_model",
+      "validated": false,
+      "label": "MODEL-DEPENDENT VIRTUAL PERTURBATION - NOT CAUSALLY VALIDATED",
+      "reasons": [
+        "The dynamics model was fitted only to observational recordings.",
+        "No randomized or targeted perturbation of these neurons was performed.",
+        "Latent state, model class, and noise assumptions are not identified from data."
+      ]
+    },
+    "baseline_distribution": {
+      "FWD": 0.13333333333333333,
+      "REV": 0.7333333333333333,
+      "TURN": 0.13333333333333333,
+      "NOSTATE": 0.0
+    },
+    "intervention_distribution": {
+      "FWD": 0.15555555555555556,
+      "REV": 0.7888888888888889,
+      "TURN": 0.05555555555555555,
+      "NOSTATE": 0.0
+    },
+    "delta": {
+      "FWD": 0.022222222222222227,
+      "REV": 0.05555555555555558,
+      "TURN": -0.07777777777777778,
+      "NOSTATE": 0.0
+    },
+    "delta_target": -0.07777777777777778,
+    "delta_target_ci": [
+      -0.17777777777777778,
+      0.0
+    ],
+    "n_initial": 30,
+    "n_seeds": 3,
+    "mean_trajectory_displacement": 0.35580756719004725,
+    "max_trajectory_displacement": 0.9523463467073183,
+    "ood_fraction": 0.16944444444444445,
+    "baseline_turn_rate": 0.13333333333333333,
+    "notes": [
+      "16.9% of intervention states lie beyond the 99th percentile of training latent support",
+      "Target transition-probability change is small (<0.10) and may not be robust",
+      "Amplitude is large in standardized model units; interpret as a stress test, not a dose"
+    ]
+  },
+  {
+    "intervention": {
+      "name": "DB01_-2.0",
+      "targets": [
+        "DB01"
+      ],
+      "mode": "additive",
+      "amplitude": -2.0,
+      "onset": 0,
+      "duration": 12,
+      "horizon": 12,
+      "n_initial": 30,
+      "seeds": [
+        0,
+        1,
+        2
+      ],
+      "initial_behavior": "REV",
+      "target_behavior": "TURN",
+      "notes": ""
+    },
+    "worm_id": 0,
+    "causal_status": {
+      "level": "observational_model",
+      "validated": false,
+      "label": "MODEL-DEPENDENT VIRTUAL PERTURBATION - NOT CAUSALLY VALIDATED",
+      "reasons": [
+        "The dynamics model was fitted only to observational recordings.",
+        "No randomized or targeted perturbation of these neurons was performed.",
+        "Latent state, model class, and noise assumptions are not identified from data."
+      ]
+    },
+    "baseline_distribution": {
+      "FWD": 0.13333333333333333,
+      "REV": 0.7333333333333333,
+      "TURN": 0.13333333333333333,
+      "NOSTATE": 0.0
+    },
+    "intervention_distribution": {
+      "FWD": 0.1111111111111111,
+      "REV": 0.8555555555555555,
+      "TURN": 0.03333333333333333,
+      "NOSTATE": 0.0
+    },
+    "delta": {
+      "FWD": -0.022222222222222227,
+      "REV": 0.12222222222222223,
+      "TURN": -0.1,
+      "NOSTATE": 0.0
+    },
+    "delta_target": -0.1,
+    "delta_target_ci": [
+      -0.2,
+      0.0
+    ],
+    "n_initial": 30,
+    "n_seeds": 3,
+    "mean_trajectory_displacement": 0.40110018546315696,
+    "max_trajectory_displacement": 1.0143228439705763,
+    "ood_fraction": 0.2101851851851852,
+    "baseline_turn_rate": 0.13333333333333333,
+    "notes": [
+      "21.0% of intervention states lie beyond the 99th percentile of training latent support"
+    ]
+  },
+  {
+    "intervention": {
+      "name": "DB01_+2.0",
+      "targets": [
+        "DB01"
+      ],
+      "mode": "additive",
+      "amplitude": 2.0,
+      "onset": 0,
+      "duration": 12,
+      "horizon": 12,
+      "n_initial": 30,
+      "seeds": [
+        0,
+        1,
+        2
+      ],
+      "initial_behavior": "REV",
+      "target_behavior": "TURN",
+      "notes": ""
+    },
+    "worm_id": 0,
+    "causal_status": {
+      "level": "observational_model",
+      "validated": false,
+      "label": "MODEL-DEPENDENT VIRTUAL PERTURBATION - NOT CAUSALLY VALIDATED",
+      "reasons": [
+        "The dynamics model was fitted only to observational recordings.",
+        "No randomized or targeted perturbation of these neurons was performed.",
+        "Latent state, model class, and noise assumptions are not identified from data."
+      ]
+    },
+    "baseline_distribution": {
+      "FWD": 0.13333333333333333,
+      "REV": 0.7333333333333333,
+      "TURN": 0.13333333333333333,
+      "NOSTATE": 0.0
+    },
+    "intervention_distribution": {
+      "FWD": 0.13333333333333333,
+      "REV": 0.5666666666666667,
+      "TURN": 0.3,
+      "NOSTATE": 0.0
+    },
+    "delta": {
+      "FWD": 0.0,
+      "REV": -0.16666666666666663,
+      "TURN": 0.16666666666666666,
+      "NOSTATE": 0.0
+    },
+    "delta_target": 0.16666666666666666,
+    "delta_target_ci": [
+      0.03333333333333333,
+      0.3
+    ],
+    "n_initial": 30,
+    "n_seeds": 3,
+    "mean_trajectory_displacement": 0.3792648656713005,
+    "max_trajectory_displacement": 0.9077482200975291,
+    "ood_fraction": 0.1398148148148148,
+    "baseline_turn_rate": 0.13333333333333333,
+    "notes": [
+      "14.0% of intervention states lie beyond the 99th percentile of training latent support",
+      "Amplitude is large in standardized model units; interpret as a stress test, not a dose"
+    ]
+  }
+]

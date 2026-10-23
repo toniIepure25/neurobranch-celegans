@@ -1,0 +1,212 @@
+{
+  "dataset": "Kato et al. 2015 WT_NoStim, OSF project 2395t",
+  "source_file": "D:\\ComputaCenter\\NeuroBranch\\neurobranch-celegans\\data\\raw\\kato2015\\WT_NoStim.mat",
+  "source_sha256": "7531811c1718e26a0455f59cb2f8188cf25809278cfea85770dfe03315a0098a",
+  "n_worms": 5,
+  "n_frames_total": 15662,
+  "n_named_cells_total": 192,
+  "state_order": [
+    "dt",
+    "fwd",
+    "nostate",
+    "rev1",
+    "rev2",
+    "revsus",
+    "slow",
+    "vt"
+  ],
+  "macro_order": [
+    "FWD",
+    "REV",
+    "TURN",
+    "NOSTATE"
+  ],
+  "behavior_label_neurons": [
+    "AVAL",
+    "AVAR",
+    "SMDDR",
+    "SMDDL",
+    "SMDVR",
+    "SMDVL",
+    "RIBR",
+    "RIBL"
+  ],
+  "recordings": [
+    {
+      "worm_id": 0,
+      "dataset_name": "TS20140715e_lite-1_punc-31_NLS3_2eggs_56um_1mMTet_basal_1080s",
+      "n_frames": 3137,
+      "n_neurons_total": 109,
+      "n_identified": 38,
+      "n_unidentified_numeric": 71,
+      "n_behavior_label_neurons_present": 6,
+      "duration_seconds": 1080.0,
+      "fps": 2.9046296296296297,
+      "start_time": 0.0,
+      "end_time": 1079.6557220274146,
+      "missing_named_label_neurons": [
+        "RIBR",
+        "SMDDL"
+      ],
+      "macro_counts": {
+        "FWD": 1306,
+        "NOSTATE": 22,
+        "REV": 1303,
+        "TURN": 506
+      },
+      "state_counts": {
+        "dt": 172,
+        "fwd": 681,
+        "nostate": 22,
+        "rev1": 107,
+        "rev2": 143,
+        "revsus": 1053,
+        "slow": 625,
+        "vt": 334
+      },
+      "nan_fraction": 0.0,
+      "source_sha256": "7531811c1718e26a0455f59cb2f8188cf25809278cfea85770dfe03315a0098a"
+    },
+    {
+      "worm_id": 1,
+      "dataset_name": "TS20140715f_lite-1_punc-31_NLS3_3eggs_56um_1mMTet_basal_1080s",
+      "n_frames": 3134,
+      "n_neurons_total": 135,
+      "n_identified": 44,
+      "n_unidentified_numeric": 91,
+      "n_behavior_label_neurons_present": 8,
+      "duration_seconds": 1080.0,
+      "fps": 2.901851851851852,
+      "start_time": 0.0,
+      "end_time": 1079.6553924696873,
+      "missing_named_label_neurons": [],
+      "macro_counts": {
+        "FWD": 1342,
+        "NOSTATE": 22,
+        "REV": 1268,
+        "TURN": 502
+      },
+      "state_counts": {
+        "dt": 88,
+        "fwd": 232,
+        "nostate": 22,
+        "rev1": 81,
+        "rev2": 169,
+        "revsus": 1018,
+        "slow": 1110,
+        "vt": 414
+      },
+      "nan_fraction": 0.0,
+      "source_sha256": "7531811c1718e26a0455f59cb2f8188cf25809278cfea85770dfe03315a0098a"
+    },
+    {
+      "worm_id": 2,
+      "dataset_name": "TS20140905c_lite-1_punc-31_NLS3_AVHJ_0eggs_1mMTet_basal_1080s",
+      "n_frames": 3059,
+      "n_neurons_total": 131,
+      "n_identified": 32,
+      "n_unidentified_numeric": 99,
+      "n_behavior_label_neurons_present": 8,
+      "duration_seconds": 1080.0,
+      "fps": 2.8324074074074073,
+      "start_time": 0.0,
+      "end_time": 1079.6469434455705,
+      "missing_named_label_neurons": [],
+      "macro_counts": {
+        "FWD": 1057,
+        "NOSTATE": 76,
+        "REV": 1475,
+        "TURN": 451
+      },
+      "state_counts": {
+        "dt": 184,
+        "fwd": 106,
+        "nostate": 76,
+        "rev1": 189,
+        "rev2": 130,
+        "revsus": 1156,
+        "slow": 951,
+        "vt": 267
+      },
+      "nan_fraction": 0.0,
+      "source_sha256": "7531811c1718e26a0455f59cb2f8188cf25809278cfea85770dfe03315a0098a"
+    },
+    {
+      "worm_id": 3,
+      "dataset_name": "TS20140926d_lite-1_punc-31_NLS3_RIV_2eggs_1mMTet_basal_1080s",
+      "n_frames": 3311,
+      "n_neurons_total": 125,
+      "n_identified": 47,
+      "n_unidentified_numeric": 78,
+      "n_behavior_label_neurons_present": 7,
+      "duration_seconds": 1080.0,
+      "fps": 3.0657407407407407,
+      "start_time": 0.0,
+      "end_time": 1079.6738145575355,
+      "missing_named_label_neurons": [
+        "SMDVL"
+      ],
+      "macro_counts": {
+        "FWD": 1589,
+        "NOSTATE": 38,
+        "REV": 1173,
+        "TURN": 511
+      },
+      "state_counts": {
+        "dt": 134,
+        "fwd": 64,
+        "nostate": 38,
+        "rev1": 83,
+        "rev2": 83,
+        "revsus": 1007,
+        "slow": 1525,
+        "vt": 377
+      },
+      "nan_fraction": 0.0,
+      "source_sha256": "7531811c1718e26a0455f59cb2f8188cf25809278cfea85770dfe03315a0098a"
+    },
+    {
+      "worm_id": 4,
+      "dataset_name": "TS20141221b_THK178_lite-1_punc-31_NLS3_6eggs_1mMTet_basal_1080s",
+      "n_frames": 3021,
+      "n_neurons_total": 129,
+      "n_identified": 31,
+      "n_unidentified_numeric": 98,
+      "n_behavior_label_neurons_present": 8,
+      "duration_seconds": 1080.0,
+      "fps": 2.797222222222222,
+      "start_time": 0.0,
+      "end_time": 1079.6425024826217,
+      "missing_named_label_neurons": [],
+      "macro_counts": {
+        "FWD": 1354,
+        "NOSTATE": 18,
+        "REV": 1260,
+        "TURN": 389
+      },
+      "state_counts": {
+        "dt": 224,
+        "fwd": 365,
+        "nostate": 18,
+        "rev1": 77,
+        "rev2": 94,
+        "revsus": 1089,
+        "slow": 989,
+        "vt": 165
+      },
+      "nan_fraction": 0.0,
+      "source_sha256": "7531811c1718e26a0455f59cb2f8188cf25809278cfea85770dfe03315a0098a"
+    }
+  ],
+  "provenance": {
+    "osf_project": "https://osf.io/2395t/",
+    "download_url": "https://osf.io/download/na4f9/",
+    "paper_doi": "10.1016/j.cell.2015.09.034"
+  },
+  "caveats": [
+    "Behaviour labels are inferred from calcium signals in AVA/SMD/RIB and are not independent observations.",
+    "The 109-135 segmented traces per worm are not the full 302-neuron connectome.",
+    "No intervention was performed in WT_NoStim.",
+    "Unidentified numeric traces are not assigned cell identities."
+  ]
+}

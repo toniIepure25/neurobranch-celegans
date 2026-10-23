@@ -1,0 +1,15 @@
+name: delayed_aval_off
+targets: [AVAL, AVAR]
+mode: clamp
+amplitude: -2.0
+onset: 0
+duration: 15
+horizon: 15
+n_initial: 32
+seeds: [0, 1, 2]
+initial_behavior: REV
+target_behavior: TURN
+notes: >
+  Illustrative virtual perturbation only. AVAL/AVAR are excluded from the
+  predictor set because they define the behaviour labels, so the default model
+  cannot represent this intervention. The CLI must refuse it with a clear error.

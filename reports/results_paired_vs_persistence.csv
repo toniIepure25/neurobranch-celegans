@@ -1,0 +1,8 @@
+model,mean_paired_delta_r2_vs_persistence,wins_vs_persistence,n_pairs
+mlp_residual,0.011,7,15
+var,0.0042,6,15
+persistence,0.0,0,15
+latent_mlp,-0.1104,3,15
+latent_knn,-0.1113,3,15
+gru,-0.1478,5,15
+mlp,-0.1518,3,15

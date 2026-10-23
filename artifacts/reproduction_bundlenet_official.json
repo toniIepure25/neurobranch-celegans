@@ -1,0 +1,142 @@
+[
+  {
+    "available": true,
+    "worm_id": 0,
+    "official": {
+      "source": "references\\external\\nc-mcm\\precomputed_results\\bundlenet_consistent_embedding_worm_0.npz",
+      "n": 3121,
+      "note": "Official artifact distributed with the NC-MCM repository; not retrained here."
+    },
+    "evaluation_note": "The embedding was fitted upstream on all frames. The kNN classifier is fit on train labels and scored on test labels, but the test embeddings were seen during upstream training, so this is embedding-level leakage, not held-out generalization.",
+    "official_label_counts": {
+      "dt": 172,
+      "fwd": 681,
+      "nostate": 22,
+      "rev1": 107,
+      "rev2": 143,
+      "revsus": 1053,
+      "slow": 609,
+      "vt": 334
+    },
+    "official_silhouette_fine": 0.48578334981272614,
+    "official_median_step": 0.06492827275627866,
+    "official_trajectory_extent": 2.671120762825012,
+    "official_knn_accuracy": 0.9840510366826156,
+    "official_knn_macro_f1": 0.9757724450117983,
+    "official_knn_n_train": 1867,
+    "official_knn_n_test": 627,
+    "pca3_silhouette_fine": -0.008249626494944096
+  },
+  {
+    "available": true,
+    "worm_id": 1,
+    "official": {
+      "source": "references\\external\\nc-mcm\\precomputed_results\\bundlenet_consistent_embedding_worm_1.npz",
+      "n": 3118,
+      "note": "Official artifact distributed with the NC-MCM repository; not retrained here."
+    },
+    "evaluation_note": "The embedding was fitted upstream on all frames. The kNN classifier is fit on train labels and scored on test labels, but the test embeddings were seen during upstream training, so this is embedding-level leakage, not held-out generalization.",
+    "official_label_counts": {
+      "dt": 88,
+      "fwd": 232,
+      "nostate": 22,
+      "rev1": 81,
+      "rev2": 169,
+      "revsus": 1004,
+      "slow": 1108,
+      "vt": 414
+    },
+    "official_silhouette_fine": 0.5467179141463195,
+    "official_median_step": 0.05177115031353509,
+    "official_trajectory_extent": 2.18651807308197,
+    "official_knn_accuracy": 0.9808612440191388,
+    "official_knn_macro_f1": 0.9755734407819521,
+    "official_knn_n_train": 1865,
+    "official_knn_n_test": 627,
+    "pca3_silhouette_fine": 0.012037046253681183
+  },
+  {
+    "available": true,
+    "worm_id": 2,
+    "official": {
+      "source": "references\\external\\nc-mcm\\precomputed_results\\bundlenet_consistent_embedding_worm_2.npz",
+      "n": 3043,
+      "note": "Official artifact distributed with the NC-MCM repository; not retrained here."
+    },
+    "evaluation_note": "The embedding was fitted upstream on all frames. The kNN classifier is fit on train labels and scored on test labels, but the test embeddings were seen during upstream training, so this is embedding-level leakage, not held-out generalization.",
+    "official_label_counts": {
+      "dt": 184,
+      "fwd": 106,
+      "nostate": 62,
+      "rev1": 189,
+      "rev2": 130,
+      "revsus": 1156,
+      "slow": 949,
+      "vt": 267
+    },
+    "official_silhouette_fine": 0.5358670520920457,
+    "official_median_step": 0.03820011110262371,
+    "official_trajectory_extent": 2.0294764041900635,
+    "official_knn_accuracy": 0.9738562091503268,
+    "official_knn_macro_f1": 0.8787167659666905,
+    "official_knn_n_train": 1820,
+    "official_knn_n_test": 612,
+    "pca3_silhouette_fine": 0.1039978414773941
+  },
+  {
+    "available": true,
+    "worm_id": 3,
+    "official": {
+      "source": "references\\external\\nc-mcm\\precomputed_results\\bundlenet_consistent_embedding_worm_3.npz",
+      "n": 3295,
+      "note": "Official artifact distributed with the NC-MCM repository; not retrained here."
+    },
+    "evaluation_note": "The embedding was fitted upstream on all frames. The kNN classifier is fit on train labels and scored on test labels, but the test embeddings were seen during upstream training, so this is embedding-level leakage, not held-out generalization.",
+    "official_label_counts": {
+      "dt": 134,
+      "fwd": 64,
+      "nostate": 38,
+      "rev1": 83,
+      "rev2": 83,
+      "revsus": 993,
+      "slow": 1523,
+      "vt": 377
+    },
+    "official_silhouette_fine": 0.5651388540804357,
+    "official_median_step": 0.02460026567842451,
+    "official_trajectory_extent": 2.847994327545166,
+    "official_knn_accuracy": 0.9788519637462235,
+    "official_knn_macro_f1": 0.9541344010494368,
+    "official_knn_n_train": 1971,
+    "official_knn_n_test": 662,
+    "pca3_silhouette_fine": 0.06341346353292465
+  },
+  {
+    "available": true,
+    "worm_id": 4,
+    "official": {
+      "source": "references\\external\\nc-mcm\\precomputed_results\\bundlenet_consistent_embedding_worm_4.npz",
+      "n": 3005,
+      "note": "Official artifact distributed with the NC-MCM repository; not retrained here."
+    },
+    "evaluation_note": "The embedding was fitted upstream on all frames. The kNN classifier is fit on train labels and scored on test labels, but the test embeddings were seen during upstream training, so this is embedding-level leakage, not held-out generalization.",
+    "official_label_counts": {
+      "dt": 224,
+      "fwd": 365,
+      "nostate": 9,
+      "rev1": 77,
+      "rev2": 94,
+      "revsus": 1084,
+      "slow": 987,
+      "vt": 165
+    },
+    "official_silhouette_fine": 0.44652158020588506,
+    "official_median_step": 0.05526425533563137,
+    "official_trajectory_extent": 2.835041046142578,
+    "official_knn_accuracy": 0.9486754966887417,
+    "official_knn_macro_f1": 0.8953519642667319,
+    "official_knn_n_train": 1797,
+    "official_knn_n_test": 604,
+    "pca3_silhouette_fine": 0.029901528730988503
+  }
+]

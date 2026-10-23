@@ -1,0 +1,19 @@
+{
+  "observational_only": true,
+  "causal_validation": false,
+  "behaviour_labels_circular": true,
+  "excluded_behaviour_neurons": [
+    "AVAL",
+    "AVAR",
+    "SMDDR",
+    "SMDDL",
+    "SMDVR",
+    "SMDVL",
+    "RIBR",
+    "RIBL"
+  ],
+  "official_bundlenet_evaluation_is_in_sample": true,
+  "primary_split_uses_future_blocks_for_training": true,
+  "forward_stress_included": true,
+  "random_controls_included": true
+}

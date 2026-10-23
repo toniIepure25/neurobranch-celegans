@@ -1,0 +1,159 @@
+{
+  "n_random": 19,
+  "mean_abs_delta": 0.19415204678362574,
+  "max_abs_delta": 0.6666666666666667,
+  "rows": [
+    {
+      "neuron": "RIFR",
+      "delta_prob": 0.07777777777777778,
+      "ci_low": 0.0,
+      "ci_high": 0.17249999999999974,
+      "ood_fraction": 0.13148148148148148,
+      "mean_displacement": 0.29847182684867496
+    },
+    {
+      "neuron": "ASKR",
+      "delta_prob": -0.06666666666666667,
+      "ci_low": -0.16666666666666666,
+      "ci_high": 0.0,
+      "ood_fraction": 0.10740740740740741,
+      "mean_displacement": 0.3415516444813138
+    },
+    {
+      "neuron": "SABVL",
+      "delta_prob": -0.06666666666666667,
+      "ci_low": -0.16666666666666666,
+      "ci_high": 0.0,
+      "ood_fraction": 0.07777777777777778,
+      "mean_displacement": 0.34640294782723063
+    },
+    {
+      "neuron": "ALA",
+      "delta_prob": 0.0,
+      "ci_low": 0.0,
+      "ci_high": 0.0,
+      "ood_fraction": 0.11203703703703703,
+      "mean_displacement": 0.32184711634155605
+    },
+    {
+      "neuron": "OLQVL",
+      "delta_prob": 0.6666666666666667,
+      "ci_low": 0.5,
+      "ci_high": 0.8333333333333334,
+      "ood_fraction": 0.3768518518518518,
+      "mean_displacement": 0.5623823612844021
+    },
+    {
+      "neuron": "OLQDR",
+      "delta_prob": 0.5888888888888889,
+      "ci_low": 0.4222222222222222,
+      "ci_high": 0.7724999999999997,
+      "ood_fraction": 0.22962962962962963,
+      "mean_displacement": 0.4784320127483642
+    },
+    {
+      "neuron": "ASKL",
+      "delta_prob": 0.1222222222222222,
+      "ci_low": 0.03333333333333333,
+      "ci_high": 0.24444444444444444,
+      "ood_fraction": 0.1398148148148148,
+      "mean_displacement": 0.31097426641633713
+    },
+    {
+      "neuron": "VB02",
+      "delta_prob": -0.06666666666666667,
+      "ci_low": -0.16666666666666666,
+      "ci_high": 0.0,
+      "ood_fraction": 0.09351851851851851,
+      "mean_displacement": 0.28954802779520217
+    },
+    {
+      "neuron": "RMER",
+      "delta_prob": -0.04444444444444444,
+      "ci_low": -0.11111111111111113,
+      "ci_high": 0.0,
+      "ood_fraction": 0.11574074074074074,
+      "mean_displacement": 0.34951686126547377
+    },
+    {
+      "neuron": "AVFL",
+      "delta_prob": 0.1111111111111111,
+      "ci_low": 0.01111111111111111,
+      "ci_high": 0.23333333333333334,
+      "ood_fraction": 0.125,
+      "mean_displacement": 0.32415529070597837
+    },
+    {
+      "neuron": "RMED",
+      "delta_prob": -0.04444444444444444,
+      "ci_low": -0.11111111111111113,
+      "ci_high": 0.0,
+      "ood_fraction": 0.06111111111111111,
+      "mean_displacement": 0.3235952614421867
+    },
+    {
+      "neuron": "URYDR",
+      "delta_prob": 0.22222222222222224,
+      "ci_low": 0.09999999999999999,
+      "ci_high": 0.36666666666666664,
+      "ood_fraction": 0.10277777777777777,
+      "mean_displacement": 0.37531613924785473
+    },
+    {
+      "neuron": "URYDL",
+      "delta_prob": 0.3222222222222222,
+      "ci_low": 0.18888888888888886,
+      "ci_high": 0.505833333333333,
+      "ood_fraction": 0.1361111111111111,
+      "mean_displacement": 0.4243647430610447
+    },
+    {
+      "neuron": "RID",
+      "delta_prob": 0.07777777777777778,
+      "ci_low": 0.0,
+      "ci_high": 0.17249999999999974,
+      "ood_fraction": 0.09814814814814815,
+      "mean_displacement": 0.2697725899345815
+    },
+    {
+      "neuron": "RMEL",
+      "delta_prob": 0.0,
+      "ci_low": 0.0,
+      "ci_high": 0.0,
+      "ood_fraction": 0.09537037037037037,
+      "mean_displacement": 0.3009781009552337
+    },
+    {
+      "neuron": "OLQDL",
+      "delta_prob": 0.47777777777777786,
+      "ci_low": 0.32222222222222213,
+      "ci_high": 0.6555555555555556,
+      "ood_fraction": 0.13703703703703704,
+      "mean_displacement": 0.42371815894529263
+    },
+    {
+      "neuron": "RMEV",
+      "delta_prob": -0.033333333333333326,
+      "ci_low": -0.1,
+      "ci_high": 0.0,
+      "ood_fraction": 0.05277777777777778,
+      "mean_displacement": 0.26604528803046135
+    },
+    {
+      "neuron": "DB02",
+      "delta_prob": -0.06666666666666667,
+      "ci_low": -0.16666666666666666,
+      "ci_high": 0.0,
+      "ood_fraction": 0.08796296296296297,
+      "mean_displacement": 0.2879953662711768
+    },
+    {
+      "neuron": "OLQVR",
+      "delta_prob": 0.6333333333333334,
+      "ci_low": 0.4666666666666667,
+      "ci_high": 0.8,
+      "ood_fraction": 0.17777777777777778,
+      "mean_displacement": 0.4905238938556108
+    }
+  ]
+}

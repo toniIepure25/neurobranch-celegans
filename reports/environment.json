@@ -1,0 +1,24 @@
+{
+  "package": "neurobranch",
+  "version": "0.1.0",
+  "created_utc": "2026-10-23T15:10:23.668930+00:00",
+  "command": "python.exe -",
+  "git": {
+    "commit": null,
+    "dirty": true,
+    "branch": null
+  },
+  "environment": {
+    "python": "3.13.5 (tags/v3.13.5:6cb20a2, Jun 11 2025, 16:15:46) [MSC v.1943 64 bit (AMD64)]",
+    "python_version": "3.13.5",
+    "platform": "Windows-10-10.0.19045-SP0",
+    "machine": "AMD64",
+    "processor": "AMD64 Family 25 Model 80 Stepping 0, AuthenticAMD",
+    "numpy": "2.3.1",
+    "scipy": "1.16.0",
+    "sklearn": "1.9.1",
+    "torch": "2.7.1+cpu",
+    "cuda_available": false,
+    "torch_num_threads": 6
+  }
+}

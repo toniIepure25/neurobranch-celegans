@@ -1,0 +1,66 @@
+{
+  "intervention": {
+    "name": "rivl_plus2",
+    "targets": [
+      "RIVL"
+    ],
+    "mode": "additive",
+    "amplitude": 2.0,
+    "onset": 0,
+    "duration": 12,
+    "horizon": 12,
+    "n_initial": 30,
+    "seeds": [
+      0,
+      1,
+      2
+    ],
+    "initial_behavior": "REV",
+    "target_behavior": "TURN",
+    "notes": "Model-dependent stress test. RIVL was top-ranked in one worm, but random neurons produced effects of similar or larger magnitude. Not causally validated.\n"
+  },
+  "worm_id": 0,
+  "causal_status": {
+    "level": "observational_model",
+    "validated": false,
+    "label": "MODEL-DEPENDENT VIRTUAL PERTURBATION - NOT CAUSALLY VALIDATED",
+    "reasons": [
+      "The dynamics model was fitted only to observational recordings.",
+      "No randomized or targeted perturbation of these neurons was performed.",
+      "Latent state, model class, and noise assumptions are not identified from data."
+    ]
+  },
+  "baseline_distribution": {
+    "FWD": 0.13333333333333333,
+    "REV": 0.7333333333333333,
+    "TURN": 0.13333333333333333,
+    "NOSTATE": 0.0
+  },
+  "intervention_distribution": {
+    "FWD": 0.1,
+    "REV": 0.43333333333333335,
+    "TURN": 0.4666666666666667,
+    "NOSTATE": 0.0
+  },
+  "delta": {
+    "FWD": -0.033333333333333326,
+    "REV": -0.29999999999999993,
+    "TURN": 0.33333333333333337,
+    "NOSTATE": 0.0
+  },
+  "delta_target": 0.33333333333333337,
+  "delta_target_ci": [
+    0.16666666666666666,
+    0.5333333333333333
+  ],
+  "n_initial": 30,
+  "n_seeds": 3,
+  "mean_trajectory_displacement": 0.422775877064881,
+  "max_trajectory_displacement": 1.2421864166394994,
+  "ood_fraction": 0.10648148148148148,
+  "baseline_turn_rate": 0.13333333333333333,
+  "notes": [
+    "10.6% of intervention states lie beyond the 99th percentile of training latent support",
+    "Amplitude is large in standardized model units; interpret as a stress test, not a dose"
+  ]
+}
