@@ -1,0 +1,20 @@
+{
+  "response": {
+    "n_events": 675,
+    "mae_global": 6.111281239336205,
+    "mae_connectome": 6.11119462320066,
+    "paired_delta_connectome_minus_global": -8.661613554483694e-05,
+    "delta_ci_low": -0.017660752467145036,
+    "delta_ci_high": 0.01652054272760034,
+    "fraction_bootstrap_connectome_better": 0.502
+  },
+  "response_residual": {
+    "n_events": 675,
+    "mae_global": 5.980886426684825,
+    "mae_connectome": 5.980922706073904,
+    "paired_delta_connectome_minus_global": 3.627938907868611e-05,
+    "delta_ci_low": -0.017933645150512833,
+    "delta_ci_high": 0.016908819669997712,
+    "fraction_bootstrap_connectome_better": 0.4945
+  }
+}

@@ -1,0 +1,227 @@
+{
+  "n_common": 13,
+  "models": [
+    "mlp_seed17",
+    "mlp_seed23",
+    "mlp_seed31",
+    "mlp_residual_seed17",
+    "var_seed17",
+    "gru_seed17"
+  ],
+  "candidates": [
+    "AIBL",
+    "AIBR",
+    "AVBL",
+    "AVBR",
+    "AVEL",
+    "AVER",
+    "DB01",
+    "RIML",
+    "RIMR",
+    "RIVL",
+    "RIVR",
+    "VA01",
+    "VB01"
+  ],
+  "spearman_matrix": [
+    [
+      1.0,
+      0.5435092273695057,
+      0.6952494056769295,
+      NaN,
+      0.07616974781037561,
+      0.6174947766449358
+    ],
+    [
+      0.5435092273695058,
+      0.9999999999999999,
+      0.5337604247726025,
+      NaN,
+      0.5792723697927562,
+      0.39244186046511625
+    ],
+    [
+      0.6952494056769295,
+      0.5337604247726025,
+      1.0,
+      NaN,
+      0.10668660443639373,
+      0.7862922386435112
+    ],
+    [
+      NaN,
+      NaN,
+      NaN,
+      NaN,
+      NaN,
+      NaN
+    ],
+    [
+      0.07616974781037561,
+      0.5792723697927561,
+      0.10668660443639372,
+      NaN,
+      0.9999999999999999,
+      -0.04899318550485997
+    ],
+    [
+      0.6174947766449359,
+      0.39244186046511625,
+      0.7862922386435112,
+      NaN,
+      -0.04899318550485997,
+      0.9999999999999999
+    ]
+  ],
+  "pairwise": [
+    {
+      "model_a": "mlp_seed17",
+      "model_b": "mlp_seed23",
+      "spearman": 0.5435092273695057,
+      "top_k_overlap": 2,
+      "top_k": 5
+    },
+    {
+      "model_a": "mlp_seed17",
+      "model_b": "mlp_seed31",
+      "spearman": 0.6952494056769295,
+      "top_k_overlap": 3,
+      "top_k": 5
+    },
+    {
+      "model_a": "mlp_seed17",
+      "model_b": "mlp_residual_seed17",
+      "spearman": NaN,
+      "top_k_overlap": 2,
+      "top_k": 5
+    },
+    {
+      "model_a": "mlp_seed17",
+      "model_b": "var_seed17",
+      "spearman": 0.07616974781037561,
+      "top_k_overlap": 3,
+      "top_k": 5
+    },
+    {
+      "model_a": "mlp_seed17",
+      "model_b": "gru_seed17",
+      "spearman": 0.6174947766449358,
+      "top_k_overlap": 4,
+      "top_k": 5
+    },
+    {
+      "model_a": "mlp_seed23",
+      "model_b": "mlp_seed31",
+      "spearman": 0.5337604247726025,
+      "top_k_overlap": 3,
+      "top_k": 5
+    },
+    {
+      "model_a": "mlp_seed23",
+      "model_b": "mlp_residual_seed17",
+      "spearman": NaN,
+      "top_k_overlap": 3,
+      "top_k": 5
+    },
+    {
+      "model_a": "mlp_seed23",
+      "model_b": "var_seed17",
+      "spearman": 0.5792723697927562,
+      "top_k_overlap": 3,
+      "top_k": 5
+    },
+    {
+      "model_a": "mlp_seed23",
+      "model_b": "gru_seed17",
+      "spearman": 0.39244186046511625,
+      "top_k_overlap": 2,
+      "top_k": 5
+    },
+    {
+      "model_a": "mlp_seed31",
+      "model_b": "mlp_residual_seed17",
+      "spearman": NaN,
+      "top_k_overlap": 1,
+      "top_k": 5
+    },
+    {
+      "model_a": "mlp_seed31",
+      "model_b": "var_seed17",
+      "spearman": 0.10668660443639373,
+      "top_k_overlap": 3,
+      "top_k": 5
+    },
+    {
+      "model_a": "mlp_seed31",
+      "model_b": "gru_seed17",
+      "spearman": 0.7862922386435112,
+      "top_k_overlap": 2,
+      "top_k": 5
+    },
+    {
+      "model_a": "mlp_residual_seed17",
+      "model_b": "var_seed17",
+      "spearman": NaN,
+      "top_k_overlap": 2,
+      "top_k": 5
+    },
+    {
+      "model_a": "mlp_residual_seed17",
+      "model_b": "gru_seed17",
+      "spearman": NaN,
+      "top_k_overlap": 2,
+      "top_k": 5
+    },
+    {
+      "model_a": "var_seed17",
+      "model_b": "gru_seed17",
+      "spearman": -0.04899318550485997,
+      "top_k_overlap": 3,
+      "top_k": 5
+    }
+  ],
+  "top_sets": {
+    "mlp_seed17": [
+      "AIBR",
+      "AVEL",
+      "DB01",
+      "RIVL",
+      "RIVR"
+    ],
+    "mlp_seed23": [
+      "AIBL",
+      "AVBL",
+      "AVBR",
+      "RIVL",
+      "RIVR"
+    ],
+    "mlp_seed31": [
+      "AIBL",
+      "AVER",
+      "DB01",
+      "RIVL",
+      "RIVR"
+    ],
+    "mlp_residual_seed17": [
+      "AIBL",
+      "AIBR",
+      "AVBL",
+      "AVBR",
+      "AVEL"
+    ],
+    "var_seed17": [
+      "AIBL",
+      "AVEL",
+      "RIMR",
+      "RIVL",
+      "RIVR"
+    ],
+    "gru_seed17": [
+      "AIBR",
+      "AVEL",
+      "RIML",
+      "RIVL",
+      "RIVR"
+    ]
+  }
+}

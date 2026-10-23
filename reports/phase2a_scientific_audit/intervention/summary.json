@@ -1,0 +1,39 @@
+{
+  "candidate_cells": [
+    "AIBL",
+    "AIBR",
+    "AVBL",
+    "AVBR",
+    "AVEL",
+    "AVER",
+    "DB01",
+    "RIML",
+    "RIMR",
+    "RIVL",
+    "RIVR",
+    "VA01",
+    "VB01"
+  ],
+  "models_run": [
+    "mlp_seed17",
+    "mlp_seed23",
+    "mlp_seed31",
+    "mlp_residual_seed17",
+    "var_seed17",
+    "gru_seed17"
+  ],
+  "n_candidate_cells": 26,
+  "n_controls_per_model": 19,
+  "match_criteria": [
+    "same standardized additive amplitude",
+    "same initial-state distribution and seed",
+    "same simulation seeds",
+    "same horizon and target behaviour",
+    "controls are non-candidate named predictor cells"
+  ],
+  "notes": [
+    "Matching on observed effect would be circular and is not done.",
+    "Candidate list is literature-motivated, not selected from this worm's effects.",
+    "All effects are model-dependent virtual perturbations, not biological interventions."
+  ]
+}

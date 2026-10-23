@@ -1,0 +1,62 @@
+{
+  "mlp_seed17": {
+    "best_candidate_abs_delta": 0.33333333333333337,
+    "control_max_abs_delta": 0.6666666666666667,
+    "control_mean_abs_delta": 0.19415204678362574,
+    "p_max_control_ge_best": 0.25,
+    "n_controls": 19,
+    "n_candidate_cells": 26,
+    "resolution": 0.05,
+    "interpretation": "not specific if this p is not small; controls were selected without using effects"
+  },
+  "mlp_seed23": {
+    "best_candidate_abs_delta": 0.7333333333333334,
+    "control_max_abs_delta": 0.7666666666666667,
+    "control_mean_abs_delta": 0.2777777777777778,
+    "p_max_control_ge_best": 0.15,
+    "n_controls": 19,
+    "n_candidate_cells": 26,
+    "resolution": 0.05,
+    "interpretation": "not specific if this p is not small; controls were selected without using effects"
+  },
+  "mlp_seed31": {
+    "best_candidate_abs_delta": 0.4222222222222222,
+    "control_max_abs_delta": 0.5666666666666667,
+    "control_mean_abs_delta": 0.17192982456140352,
+    "p_max_control_ge_best": 0.2,
+    "n_controls": 19,
+    "n_candidate_cells": 26,
+    "resolution": 0.05,
+    "interpretation": "not specific if this p is not small; controls were selected without using effects"
+  },
+  "mlp_residual_seed17": {
+    "best_candidate_abs_delta": 0.0,
+    "control_max_abs_delta": 0.0,
+    "control_mean_abs_delta": 0.0,
+    "p_max_control_ge_best": 1.0,
+    "n_controls": 19,
+    "n_candidate_cells": 26,
+    "resolution": 0.05,
+    "interpretation": "not specific if this p is not small; controls were selected without using effects"
+  },
+  "var_seed17": {
+    "best_candidate_abs_delta": 0.5444444444444445,
+    "control_max_abs_delta": 0.5444444444444445,
+    "control_mean_abs_delta": 0.29239766081871343,
+    "p_max_control_ge_best": 0.15,
+    "n_controls": 19,
+    "n_candidate_cells": 26,
+    "resolution": 0.05,
+    "interpretation": "not specific if this p is not small; controls were selected without using effects"
+  },
+  "gru_seed17": {
+    "best_candidate_abs_delta": 0.3666666666666667,
+    "control_max_abs_delta": 0.4222222222222223,
+    "control_mean_abs_delta": 0.08538011695906432,
+    "p_max_control_ge_best": 0.1,
+    "n_controls": 19,
+    "n_candidate_cells": 26,
+    "resolution": 0.05,
+    "interpretation": "not specific if this p is not small; controls were selected without using effects"
+  }
+}
