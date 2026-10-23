@@ -209,6 +209,7 @@ def branching_analyze(
 
     from neurobranch.branching import (
         candidate_frames,
+        corrected_branching_test,
         entropy_across_latent_dims,
         local_outcome_diversity,
         permutation_branching_test,
@@ -227,6 +228,9 @@ def branching_analyze(
         "worm_id": worm,
         "summary": summarize_branching(res, top_n=20),
         "permutation": permutation_branching_test(Z, data, cand, k=40, horizon=20, n_permutations=100),
+        "corrected": corrected_branching_test(
+            Z, data, cand, k=40, horizon=20, n_permutations=500, seed=0
+        ),
         "latent_dim_stability": entropy_across_latent_dims(data)["spearman_vs_base"],
         "caveat": "Local outcome diversity in a projection is not a bifurcation.",
     }

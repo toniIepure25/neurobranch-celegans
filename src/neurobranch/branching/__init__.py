@@ -16,6 +16,7 @@ import numpy as np
 from scipy.stats import spearmanr
 
 from neurobranch.behavior import conditional_entropy, next_state_after_leaving
+from neurobranch.branching.stats import compare_null_specs
 from neurobranch.data.kato import MACRO_ORDER
 from neurobranch.preprocessing import WormData, split_starts
 
@@ -137,6 +138,51 @@ def permutation_branching_test(
         "excess_entropy_bits": observed_mean - float(np.mean(null)),
         "p_value": p,
         "n_candidate_states": int(len(obs)),
+    }
+
+
+def outcome_sequence(data: WormData, frames: np.ndarray, *, horizon: int = 20) -> np.ndarray:
+    """First post-leaving macro outcome for each candidate frame."""
+    return np.asarray([_outcome(data, int(t), horizon) for t in np.asarray(frames, dtype=int)])
+
+
+def corrected_branching_test(
+    Z: np.ndarray,
+    data: WormData,
+    frames: np.ndarray,
+    *,
+    k: int = 40,
+    horizon: int = 20,
+    n_permutations: int = 500,
+    seed: int = 0,
+) -> dict[str, Any]:
+    """Sensitivity analysis over i.i.d., block, and circular-shift nulls.
+
+    The primary statistic is still the mean local outcome entropy.  The
+    two-sided p-value is reported alongside one-sided excess and deficit so a
+    significant *deficit* is not mislabelled as evidence for branching.
+    """
+    outcomes = outcome_sequence(data, frames, horizon=horizon)
+    specs = compare_null_specs(
+        Z,
+        frames,
+        outcomes,
+        k=k,
+        n_permutations=n_permutations,
+        block_sizes=(10, 30, 60),
+        seed=seed,
+    )
+    return {
+        "definition": {
+            "outcome": "first macro state different from the current state within the horizon",
+            "statistic": "mean Shannon entropy of kNN outcome distributions",
+            "test": "observed mean local entropy vs geometry-unrelated outcome null",
+            "primary_null": "block permutation (block sizes 10/30/60)",
+            "directions": "excess and deficit reported separately; two-sided p = 2*min(one-sided)",
+            "sampling_unit_caveat": "candidate frames overlap in time; block bootstrap is used for the mean",
+        },
+        "outcome_counts": {s: int(np.sum(outcomes == s)) for s in MACRO_ORDER},
+        "tests": specs,
     }
 
 

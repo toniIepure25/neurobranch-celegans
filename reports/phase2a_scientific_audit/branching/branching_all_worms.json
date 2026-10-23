@@ -1,0 +1,672 @@
+{
+  "worm0": {
+    "n_candidate_frames": 328,
+    "pca_explained_variance": [
+      0.22804324328899384,
+      0.1988667994737625,
+      0.10365710407495499
+    ],
+    "corrected": {
+      "definition": {
+        "outcome": "first macro state different from the current state within the horizon",
+        "statistic": "mean Shannon entropy of kNN outcome distributions",
+        "test": "observed mean local entropy vs geometry-unrelated outcome null",
+        "primary_null": "block permutation (block sizes 10/30/60)",
+        "directions": "excess and deficit reported separately; two-sided p = 2*min(one-sided)",
+        "sampling_unit_caveat": "candidate frames overlap in time; block bootstrap is used for the mean"
+      },
+      "outcome_counts": {
+        "FWD": 0,
+        "REV": 194,
+        "TURN": 134,
+        "NOSTATE": 0
+      },
+      "tests": [
+        {
+          "mean_entropy": 0.5779823990267984,
+          "null_mean": 0.9607632606925642,
+          "null_sd": 0.008513560609434635,
+          "null_q025": 0.9448566775243114,
+          "null_q975": 0.9745978547640183,
+          "excess_entropy_bits": -0.38278086166576586,
+          "p_value": 1.0,
+          "p_excess": 1.0,
+          "p_deficit": 0.004975124378109453,
+          "p_two_sided": 0.009950248756218905,
+          "null_method": "iid",
+          "null_block_size": 18,
+          "n_candidate_states": 328,
+          "n_permutations": 200,
+          "n_valid_null": 200,
+          "test_direction": "excess = observed > null; deficit = observed < null",
+          "mean_entropy_ci_low": 0.44802617696438857,
+          "mean_entropy_ci_high": 0.6974704521037429
+        },
+        {
+          "mean_entropy": 0.5779823990267984,
+          "null_mean": 0.9046963676013117,
+          "null_sd": 0.031105483160758875,
+          "null_q025": 0.8386565796979314,
+          "null_q975": 0.9531734407281549,
+          "excess_entropy_bits": -0.3267139685745133,
+          "p_value": 1.0,
+          "p_excess": 1.0,
+          "p_deficit": 0.004975124378109453,
+          "p_two_sided": 0.009950248756218905,
+          "null_method": "block",
+          "null_block_size": 10,
+          "n_candidate_states": 328,
+          "n_permutations": 200,
+          "n_valid_null": 200,
+          "test_direction": "excess = observed > null; deficit = observed < null",
+          "mean_entropy_ci_low": 0.4584019712967726,
+          "mean_entropy_ci_high": 0.688970413456366
+        },
+        {
+          "mean_entropy": 0.5779823990267984,
+          "null_mean": 0.8767166007655994,
+          "null_sd": 0.04487500945108349,
+          "null_q025": 0.7722375364508798,
+          "null_q975": 0.9366004288097681,
+          "excess_entropy_bits": -0.29873420173880105,
+          "p_value": 1.0,
+          "p_excess": 1.0,
+          "p_deficit": 0.004975124378109453,
+          "p_two_sided": 0.009950248756218905,
+          "null_method": "block",
+          "null_block_size": 30,
+          "n_candidate_states": 328,
+          "n_permutations": 200,
+          "n_valid_null": 200,
+          "test_direction": "excess = observed > null; deficit = observed < null",
+          "mean_entropy_ci_low": 0.4629735800016445,
+          "mean_entropy_ci_high": 0.6947251986038327
+        },
+        {
+          "mean_entropy": 0.5779823990267984,
+          "null_mean": 0.8653858171953354,
+          "null_sd": 0.058086886823264475,
+          "null_q025": 0.7146301543512759,
+          "null_q975": 0.9304728941755471,
+          "excess_entropy_bits": -0.287403418168537,
+          "p_value": 1.0,
+          "p_excess": 1.0,
+          "p_deficit": 0.004975124378109453,
+          "p_two_sided": 0.009950248756218905,
+          "null_method": "block",
+          "null_block_size": 60,
+          "n_candidate_states": 328,
+          "n_permutations": 200,
+          "n_valid_null": 200,
+          "test_direction": "excess = observed > null; deficit = observed < null",
+          "mean_entropy_ci_low": 0.49191571577254745,
+          "mean_entropy_ci_high": 0.6763186670772212
+        },
+        {
+          "mean_entropy": 0.5779823990267984,
+          "null_mean": 0.844362056936072,
+          "null_sd": 0.0789604125038413,
+          "null_q025": 0.6140902072964803,
+          "null_q975": 0.9316428703754328,
+          "excess_entropy_bits": -0.26637965790927365,
+          "p_value": 0.9850746268656716,
+          "p_excess": 0.9850746268656716,
+          "p_deficit": 0.01990049751243781,
+          "p_two_sided": 0.03980099502487562,
+          "null_method": "shift",
+          "null_block_size": 18,
+          "n_candidate_states": 328,
+          "n_permutations": 200,
+          "n_valid_null": 200,
+          "test_direction": "excess = observed > null; deficit = observed < null",
+          "mean_entropy_ci_low": 0.44802617696438857,
+          "mean_entropy_ci_high": 0.6974704521037429
+        }
+      ]
+    },
+    "latent_dimension_sensitivity": {
+      "spearman_vs_3d": {
+        "dim_8": 0.764843885384578,
+        "dim_16": 0.7066412648533374,
+        "dim_32": 0.7215174925736478
+      },
+      "n_common_frames": 328
+    }
+  },
+  "worm1": {
+    "n_candidate_frames": 248,
+    "pca_explained_variance": [
+      0.20552986860275269,
+      0.12956945598125458,
+      0.09614016115665436
+    ],
+    "corrected": {
+      "definition": {
+        "outcome": "first macro state different from the current state within the horizon",
+        "statistic": "mean Shannon entropy of kNN outcome distributions",
+        "test": "observed mean local entropy vs geometry-unrelated outcome null",
+        "primary_null": "block permutation (block sizes 10/30/60)",
+        "directions": "excess and deficit reported separately; two-sided p = 2*min(one-sided)",
+        "sampling_unit_caveat": "candidate frames overlap in time; block bootstrap is used for the mean"
+      },
+      "outcome_counts": {
+        "FWD": 0,
+        "REV": 136,
+        "TURN": 112,
+        "NOSTATE": 0
+      },
+      "tests": [
+        {
+          "mean_entropy": 0.6251150709233952,
+          "null_mean": 0.9780073015296178,
+          "null_sd": 0.006530332770394337,
+          "null_q025": 0.9621676628354614,
+          "null_q975": 0.9876652933699822,
+          "excess_entropy_bits": -0.35289223060622255,
+          "p_value": 1.0,
+          "p_excess": 1.0,
+          "p_deficit": 0.004975124378109453,
+          "p_two_sided": 0.009950248756218905,
+          "null_method": "iid",
+          "null_block_size": 16,
+          "n_candidate_states": 248,
+          "n_permutations": 200,
+          "n_valid_null": 200,
+          "test_direction": "excess = observed > null; deficit = observed < null",
+          "mean_entropy_ci_low": 0.5041626061664011,
+          "mean_entropy_ci_high": 0.7427163277818204
+        },
+        {
+          "mean_entropy": 0.6251150709233952,
+          "null_mean": 0.9331616672419767,
+          "null_sd": 0.02486439259116627,
+          "null_q025": 0.8683197529322829,
+          "null_q975": 0.9671115652181195,
+          "excess_entropy_bits": -0.30804659631858144,
+          "p_value": 1.0,
+          "p_excess": 1.0,
+          "p_deficit": 0.004975124378109453,
+          "p_two_sided": 0.009950248756218905,
+          "null_method": "block",
+          "null_block_size": 10,
+          "n_candidate_states": 248,
+          "n_permutations": 200,
+          "n_valid_null": 200,
+          "test_direction": "excess = observed > null; deficit = observed < null",
+          "mean_entropy_ci_low": 0.5086082387710286,
+          "mean_entropy_ci_high": 0.7378249776171517
+        },
+        {
+          "mean_entropy": 0.6251150709233952,
+          "null_mean": 0.9001276488638507,
+          "null_sd": 0.03954162268652694,
+          "null_q025": 0.7977622749380614,
+          "null_q975": 0.9515830442760284,
+          "excess_entropy_bits": -0.2750125779404554,
+          "p_value": 1.0,
+          "p_excess": 1.0,
+          "p_deficit": 0.004975124378109453,
+          "p_two_sided": 0.009950248756218905,
+          "null_method": "block",
+          "null_block_size": 30,
+          "n_candidate_states": 248,
+          "n_permutations": 200,
+          "n_valid_null": 200,
+          "test_direction": "excess = observed > null; deficit = observed < null",
+          "mean_entropy_ci_low": 0.5177355460391896,
+          "mean_entropy_ci_high": 0.7295109869180182
+        },
+        {
+          "mean_entropy": 0.6251150709233952,
+          "null_mean": 0.8863298298574829,
+          "null_sd": 0.05881697372375537,
+          "null_q025": 0.7395193552592069,
+          "null_q975": 0.9445224454868221,
+          "excess_entropy_bits": -0.26121475893408763,
+          "p_value": 0.9950248756218906,
+          "p_excess": 0.9950248756218906,
+          "p_deficit": 0.009950248756218905,
+          "p_two_sided": 0.01990049751243781,
+          "null_method": "block",
+          "null_block_size": 60,
+          "n_candidate_states": 248,
+          "n_permutations": 200,
+          "n_valid_null": 200,
+          "test_direction": "excess = observed > null; deficit = observed < null",
+          "mean_entropy_ci_low": 0.5421612447989747,
+          "mean_entropy_ci_high": 0.710505175009404
+        },
+        {
+          "mean_entropy": 0.6251150709233952,
+          "null_mean": 0.8640268628084656,
+          "null_sd": 0.09352121061740493,
+          "null_q025": 0.5444537388971824,
+          "null_q975": 0.9413263835714081,
+          "excess_entropy_bits": -0.2389117918850704,
+          "p_value": 0.9651741293532339,
+          "p_excess": 0.9651741293532339,
+          "p_deficit": 0.03980099502487562,
+          "p_two_sided": 0.07960199004975124,
+          "null_method": "shift",
+          "null_block_size": 16,
+          "n_candidate_states": 248,
+          "n_permutations": 200,
+          "n_valid_null": 200,
+          "test_direction": "excess = observed > null; deficit = observed < null",
+          "mean_entropy_ci_low": 0.5041626061664011,
+          "mean_entropy_ci_high": 0.7427163277818204
+        }
+      ]
+    },
+    "latent_dimension_sensitivity": {
+      "spearman_vs_3d": {
+        "dim_8": 0.7829848393790976,
+        "dim_16": 0.8095798982241225,
+        "dim_32": 0.7784098450556418
+      },
+      "n_common_frames": 248
+    }
+  },
+  "worm2": {
+    "n_candidate_frames": 383,
+    "pca_explained_variance": [
+      0.22873695194721222,
+      0.12871995568275452,
+      0.06276951730251312
+    ],
+    "corrected": {
+      "definition": {
+        "outcome": "first macro state different from the current state within the horizon",
+        "statistic": "mean Shannon entropy of kNN outcome distributions",
+        "test": "observed mean local entropy vs geometry-unrelated outcome null",
+        "primary_null": "block permutation (block sizes 10/30/60)",
+        "directions": "excess and deficit reported separately; two-sided p = 2*min(one-sided)",
+        "sampling_unit_caveat": "candidate frames overlap in time; block bootstrap is used for the mean"
+      },
+      "outcome_counts": {
+        "FWD": 0,
+        "REV": 263,
+        "TURN": 120,
+        "NOSTATE": 0
+      },
+      "tests": [
+        {
+          "mean_entropy": 0.7804290212748662,
+          "null_mean": 0.8803237578940177,
+          "null_sd": 0.012797164368180838,
+          "null_q025": 0.8543834118420733,
+          "null_q975": 0.9020571670230477,
+          "excess_entropy_bits": -0.09989473661915149,
+          "p_value": 1.0,
+          "p_excess": 1.0,
+          "p_deficit": 0.004975124378109453,
+          "p_two_sided": 0.009950248756218905,
+          "null_method": "iid",
+          "null_block_size": 20,
+          "n_candidate_states": 383,
+          "n_permutations": 200,
+          "n_valid_null": 200,
+          "test_direction": "excess = observed > null; deficit = observed < null",
+          "mean_entropy_ci_low": 0.6984982456358221,
+          "mean_entropy_ci_high": 0.8539449256853625
+        },
+        {
+          "mean_entropy": 0.7804290212748662,
+          "null_mean": 0.8466470492323305,
+          "null_sd": 0.029407878417918882,
+          "null_q025": 0.7696287043683672,
+          "null_q975": 0.8906641044165435,
+          "excess_entropy_bits": -0.06621802795746423,
+          "p_value": 0.9601990049751243,
+          "p_excess": 0.9601990049751243,
+          "p_deficit": 0.04477611940298507,
+          "p_two_sided": 0.08955223880597014,
+          "null_method": "block",
+          "null_block_size": 10,
+          "n_candidate_states": 383,
+          "n_permutations": 200,
+          "n_valid_null": 200,
+          "test_direction": "excess = observed > null; deficit = observed < null",
+          "mean_entropy_ci_low": 0.6960630955822872,
+          "mean_entropy_ci_high": 0.844758570876176
+        },
+        {
+          "mean_entropy": 0.7804290212748662,
+          "null_mean": 0.825993836658578,
+          "null_sd": 0.03886985413868452,
+          "null_q025": 0.7410810535359446,
+          "null_q975": 0.8897785031039717,
+          "excess_entropy_bits": -0.04556481538371171,
+          "p_value": 0.8656716417910447,
+          "p_excess": 0.8656716417910447,
+          "p_deficit": 0.13930348258706468,
+          "p_two_sided": 0.27860696517412936,
+          "null_method": "block",
+          "null_block_size": 30,
+          "n_candidate_states": 383,
+          "n_permutations": 200,
+          "n_valid_null": 200,
+          "test_direction": "excess = observed > null; deficit = observed < null",
+          "mean_entropy_ci_low": 0.6992999250398716,
+          "mean_entropy_ci_high": 0.8583067312843008
+        },
+        {
+          "mean_entropy": 0.7804290212748662,
+          "null_mean": 0.8255918514027754,
+          "null_sd": 0.03583526498148303,
+          "null_q025": 0.7425642366967926,
+          "null_q975": 0.8830262982837833,
+          "excess_entropy_bits": -0.045162830127909115,
+          "p_value": 0.9054726368159204,
+          "p_excess": 0.9054726368159204,
+          "p_deficit": 0.09950248756218906,
+          "p_two_sided": 0.19900497512437812,
+          "null_method": "block",
+          "null_block_size": 60,
+          "n_candidate_states": 383,
+          "n_permutations": 200,
+          "n_valid_null": 200,
+          "test_direction": "excess = observed > null; deficit = observed < null",
+          "mean_entropy_ci_low": 0.6963593771391624,
+          "mean_entropy_ci_high": 0.8479850508894413
+        },
+        {
+          "mean_entropy": 0.7804290212748662,
+          "null_mean": 0.8137970976913026,
+          "null_sd": 0.05457218524474107,
+          "null_q025": 0.680370468615198,
+          "null_q975": 0.8754059033425559,
+          "excess_entropy_bits": -0.033368076416436354,
+          "p_value": 0.8208955223880597,
+          "p_excess": 0.8208955223880597,
+          "p_deficit": 0.18407960199004975,
+          "p_two_sided": 0.3681592039800995,
+          "null_method": "shift",
+          "null_block_size": 20,
+          "n_candidate_states": 383,
+          "n_permutations": 200,
+          "n_valid_null": 200,
+          "test_direction": "excess = observed > null; deficit = observed < null",
+          "mean_entropy_ci_low": 0.6984982456358221,
+          "mean_entropy_ci_high": 0.8539449256853625
+        }
+      ]
+    },
+    "latent_dimension_sensitivity": {
+      "spearman_vs_3d": {
+        "dim_8": 0.37635327451490036,
+        "dim_16": 0.3495238017477005,
+        "dim_32": 0.30102818908004747
+      },
+      "n_common_frames": 383
+    }
+  },
+  "worm3": {
+    "n_candidate_frames": 226,
+    "pca_explained_variance": [
+      0.22877687215805054,
+      0.19691047072410583,
+      0.08529023826122284
+    ],
+    "corrected": {
+      "definition": {
+        "outcome": "first macro state different from the current state within the horizon",
+        "statistic": "mean Shannon entropy of kNN outcome distributions",
+        "test": "observed mean local entropy vs geometry-unrelated outcome null",
+        "primary_null": "block permutation (block sizes 10/30/60)",
+        "directions": "excess and deficit reported separately; two-sided p = 2*min(one-sided)",
+        "sampling_unit_caveat": "candidate frames overlap in time; block bootstrap is used for the mean"
+      },
+      "outcome_counts": {
+        "FWD": 0,
+        "REV": 146,
+        "TURN": 80,
+        "NOSTATE": 0
+      },
+      "tests": [
+        {
+          "mean_entropy": 0.889245775754284,
+          "null_mean": 0.9241154097674277,
+          "null_sd": 0.015553284763299337,
+          "null_q025": 0.89459653157022,
+          "null_q975": 0.9480680534182405,
+          "excess_entropy_bits": -0.03486963401314369,
+          "p_value": 0.9800995024875622,
+          "p_excess": 0.9800995024875622,
+          "p_deficit": 0.024875621890547265,
+          "p_two_sided": 0.04975124378109453,
+          "null_method": "iid",
+          "null_block_size": 15,
+          "n_candidate_states": 226,
+          "n_permutations": 200,
+          "n_valid_null": 200,
+          "test_direction": "excess = observed > null; deficit = observed < null",
+          "mean_entropy_ci_low": 0.8300161847333016,
+          "mean_entropy_ci_high": 0.9366988156398973
+        },
+        {
+          "mean_entropy": 0.889245775754284,
+          "null_mean": 0.8597509243576673,
+          "null_sd": 0.049844707750144254,
+          "null_q025": 0.7281113057314527,
+          "null_q975": 0.9204779498980673,
+          "excess_entropy_bits": 0.029494851396616673,
+          "p_value": 0.3283582089552239,
+          "p_excess": 0.3283582089552239,
+          "p_deficit": 0.6766169154228856,
+          "p_two_sided": 0.6567164179104478,
+          "null_method": "block",
+          "null_block_size": 10,
+          "n_candidate_states": 226,
+          "n_permutations": 200,
+          "n_valid_null": 200,
+          "test_direction": "excess = observed > null; deficit = observed < null",
+          "mean_entropy_ci_low": 0.8380702553925247,
+          "mean_entropy_ci_high": 0.9351829744884593
+        },
+        {
+          "mean_entropy": 0.889245775754284,
+          "null_mean": 0.8207675579954207,
+          "null_sd": 0.05956901707079931,
+          "null_q025": 0.6718106599611465,
+          "null_q975": 0.9064367581386451,
+          "excess_entropy_bits": 0.06847821775886331,
+          "p_value": 0.08955223880597014,
+          "p_excess": 0.08955223880597014,
+          "p_deficit": 0.9154228855721394,
+          "p_two_sided": 0.1791044776119403,
+          "null_method": "block",
+          "null_block_size": 30,
+          "n_candidate_states": 226,
+          "n_permutations": 200,
+          "n_valid_null": 200,
+          "test_direction": "excess = observed > null; deficit = observed < null",
+          "mean_entropy_ci_low": 0.8228093075553837,
+          "mean_entropy_ci_high": 0.9377962560519161
+        },
+        {
+          "mean_entropy": 0.889245775754284,
+          "null_mean": 0.856713570857126,
+          "null_sd": 0.03659060418984296,
+          "null_q025": 0.7776439943907334,
+          "null_q975": 0.9157844288428136,
+          "excess_entropy_bits": 0.032532204897158024,
+          "p_value": 0.1890547263681592,
+          "p_excess": 0.1890547263681592,
+          "p_deficit": 0.8557213930348259,
+          "p_two_sided": 0.3781094527363184,
+          "null_method": "block",
+          "null_block_size": 60,
+          "n_candidate_states": 226,
+          "n_permutations": 200,
+          "n_valid_null": 200,
+          "test_direction": "excess = observed > null; deficit = observed < null",
+          "mean_entropy_ci_low": 0.8130677726517581,
+          "mean_entropy_ci_high": 0.9362096608777697
+        },
+        {
+          "mean_entropy": 0.889245775754284,
+          "null_mean": 0.8322463797902767,
+          "null_sd": 0.06667674879951888,
+          "null_q025": 0.6600696450333666,
+          "null_q975": 0.9246150662993122,
+          "excess_entropy_bits": 0.05699939596400727,
+          "p_value": 0.1691542288557214,
+          "p_excess": 0.1691542288557214,
+          "p_deficit": 0.835820895522388,
+          "p_two_sided": 0.3383084577114428,
+          "null_method": "shift",
+          "null_block_size": 15,
+          "n_candidate_states": 226,
+          "n_permutations": 200,
+          "n_valid_null": 200,
+          "test_direction": "excess = observed > null; deficit = observed < null",
+          "mean_entropy_ci_low": 0.8300161847333016,
+          "mean_entropy_ci_high": 0.9366988156398973
+        }
+      ]
+    },
+    "latent_dimension_sensitivity": {
+      "spearman_vs_3d": {
+        "dim_8": 0.34014569450128607,
+        "dim_16": 0.2104375650716579,
+        "dim_32": 0.1511623183357939
+      },
+      "n_common_frames": 226
+    }
+  },
+  "worm4": {
+    "n_candidate_frames": 412,
+    "pca_explained_variance": [
+      0.1906951665878296,
+      0.11414584517478943,
+      0.08103817701339722
+    ],
+    "corrected": {
+      "definition": {
+        "outcome": "first macro state different from the current state within the horizon",
+        "statistic": "mean Shannon entropy of kNN outcome distributions",
+        "test": "observed mean local entropy vs geometry-unrelated outcome null",
+        "primary_null": "block permutation (block sizes 10/30/60)",
+        "directions": "excess and deficit reported separately; two-sided p = 2*min(one-sided)",
+        "sampling_unit_caveat": "candidate frames overlap in time; block bootstrap is used for the mean"
+      },
+      "outcome_counts": {
+        "FWD": 0,
+        "REV": 252,
+        "TURN": 160,
+        "NOSTATE": 0
+      },
+      "tests": [
+        {
+          "mean_entropy": 0.6028789911025229,
+          "null_mean": 0.9480998731939522,
+          "null_sd": 0.007954128504721623,
+          "null_q025": 0.9318695931810266,
+          "null_q975": 0.9621659779669138,
+          "excess_entropy_bits": -0.3452208820914293,
+          "p_value": 1.0,
+          "p_excess": 1.0,
+          "p_deficit": 0.004975124378109453,
+          "p_two_sided": 0.009950248756218905,
+          "null_method": "iid",
+          "null_block_size": 20,
+          "n_candidate_states": 412,
+          "n_permutations": 200,
+          "n_valid_null": 200,
+          "test_direction": "excess = observed > null; deficit = observed < null",
+          "mean_entropy_ci_low": 0.5092644416771553,
+          "mean_entropy_ci_high": 0.6916797985987015
+        },
+        {
+          "mean_entropy": 0.6028789911025229,
+          "null_mean": 0.8865307047378508,
+          "null_sd": 0.03388918274308875,
+          "null_q025": 0.8122043884073853,
+          "null_q975": 0.9345030398303908,
+          "excess_entropy_bits": -0.28365171363532793,
+          "p_value": 1.0,
+          "p_excess": 1.0,
+          "p_deficit": 0.004975124378109453,
+          "p_two_sided": 0.009950248756218905,
+          "null_method": "block",
+          "null_block_size": 10,
+          "n_candidate_states": 412,
+          "n_permutations": 200,
+          "n_valid_null": 200,
+          "test_direction": "excess = observed > null; deficit = observed < null",
+          "mean_entropy_ci_low": 0.5138239531390539,
+          "mean_entropy_ci_high": 0.6802428217958525
+        },
+        {
+          "mean_entropy": 0.6028789911025229,
+          "null_mean": 0.8655544054184869,
+          "null_sd": 0.03828289862930557,
+          "null_q025": 0.7748125181246249,
+          "null_q975": 0.9191902567683918,
+          "excess_entropy_bits": -0.2626754143159641,
+          "p_value": 1.0,
+          "p_excess": 1.0,
+          "p_deficit": 0.004975124378109453,
+          "p_two_sided": 0.009950248756218905,
+          "null_method": "block",
+          "null_block_size": 30,
+          "n_candidate_states": 412,
+          "n_permutations": 200,
+          "n_valid_null": 200,
+          "test_direction": "excess = observed > null; deficit = observed < null",
+          "mean_entropy_ci_low": 0.5006320908172319,
+          "mean_entropy_ci_high": 0.6886866545622639
+        },
+        {
+          "mean_entropy": 0.6028789911025229,
+          "null_mean": 0.8391714152181491,
+          "null_sd": 0.051596866742915005,
+          "null_q025": 0.7261074138255473,
+          "null_q975": 0.9092342238690705,
+          "excess_entropy_bits": -0.23629242411562623,
+          "p_value": 1.0,
+          "p_excess": 1.0,
+          "p_deficit": 0.004975124378109453,
+          "p_two_sided": 0.009950248756218905,
+          "null_method": "block",
+          "null_block_size": 60,
+          "n_candidate_states": 412,
+          "n_permutations": 200,
+          "n_valid_null": 200,
+          "test_direction": "excess = observed > null; deficit = observed < null",
+          "mean_entropy_ci_low": 0.47977239767928037,
+          "mean_entropy_ci_high": 0.6896700974848824
+        },
+        {
+          "mean_entropy": 0.6028789911025229,
+          "null_mean": 0.8099669061865521,
+          "null_sd": 0.09344125345039729,
+          "null_q025": 0.5748769916752905,
+          "null_q975": 0.8970135745575536,
+          "excess_entropy_bits": -0.20708791508402924,
+          "p_value": 0.9552238805970149,
+          "p_excess": 0.9552238805970149,
+          "p_deficit": 0.04975124378109453,
+          "p_two_sided": 0.09950248756218906,
+          "null_method": "shift",
+          "null_block_size": 20,
+          "n_candidate_states": 412,
+          "n_permutations": 200,
+          "n_valid_null": 200,
+          "test_direction": "excess = observed > null; deficit = observed < null",
+          "mean_entropy_ci_low": 0.5092644416771553,
+          "mean_entropy_ci_high": 0.6916797985987015
+        }
+      ]
+    },
+    "latent_dimension_sensitivity": {
+      "spearman_vs_3d": {
+        "dim_8": 0.757210990804941,
+        "dim_16": 0.7330405989955417,
+        "dim_32": 0.7126937889712279
+      },
+      "n_common_frames": 412
+    }
+  }
+}

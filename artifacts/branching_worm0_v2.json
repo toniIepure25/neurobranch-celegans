@@ -1,0 +1,484 @@
+{
+  "worm_id": 0,
+  "summary": {
+    "n": 328,
+    "mean_entropy_bits": 0.5779823990267984,
+    "median_entropy_bits": 0.6690158350565576,
+    "fraction_entropy_gt_0_5": 0.5975609756097561,
+    "mean_majority_probability": 0.7894817073170731,
+    "top_frames": [
+      {
+        "frame": 1640,
+        "entropy": 1.0,
+        "majority_probability": 0.5,
+        "counts": {
+          "FWD": 0,
+          "REV": 20,
+          "TURN": 20,
+          "NOSTATE": 0
+        },
+        "probabilities": {
+          "FWD": 0.0,
+          "REV": 0.5,
+          "TURN": 0.5,
+          "NOSTATE": 0.0
+        }
+      },
+      {
+        "frame": 1642,
+        "entropy": 1.0,
+        "majority_probability": 0.5,
+        "counts": {
+          "FWD": 0,
+          "REV": 20,
+          "TURN": 20,
+          "NOSTATE": 0
+        },
+        "probabilities": {
+          "FWD": 0.0,
+          "REV": 0.5,
+          "TURN": 0.5,
+          "NOSTATE": 0.0
+        }
+      },
+      {
+        "frame": 1651,
+        "entropy": 1.0,
+        "majority_probability": 0.5,
+        "counts": {
+          "FWD": 0,
+          "REV": 20,
+          "TURN": 20,
+          "NOSTATE": 0
+        },
+        "probabilities": {
+          "FWD": 0.0,
+          "REV": 0.5,
+          "TURN": 0.5,
+          "NOSTATE": 0.0
+        }
+      },
+      {
+        "frame": 1656,
+        "entropy": 1.0,
+        "majority_probability": 0.5,
+        "counts": {
+          "FWD": 0,
+          "REV": 20,
+          "TURN": 20,
+          "NOSTATE": 0
+        },
+        "probabilities": {
+          "FWD": 0.0,
+          "REV": 0.5,
+          "TURN": 0.5,
+          "NOSTATE": 0.0
+        }
+      },
+      {
+        "frame": 1668,
+        "entropy": 1.0,
+        "majority_probability": 0.5,
+        "counts": {
+          "FWD": 0,
+          "REV": 20,
+          "TURN": 20,
+          "NOSTATE": 0
+        },
+        "probabilities": {
+          "FWD": 0.0,
+          "REV": 0.5,
+          "TURN": 0.5,
+          "NOSTATE": 0.0
+        }
+      },
+      {
+        "frame": 1736,
+        "entropy": 1.0,
+        "majority_probability": 0.5,
+        "counts": {
+          "FWD": 0,
+          "REV": 20,
+          "TURN": 20,
+          "NOSTATE": 0
+        },
+        "probabilities": {
+          "FWD": 0.0,
+          "REV": 0.5,
+          "TURN": 0.5,
+          "NOSTATE": 0.0
+        }
+      },
+      {
+        "frame": 1741,
+        "entropy": 1.0,
+        "majority_probability": 0.5,
+        "counts": {
+          "FWD": 0,
+          "REV": 20,
+          "TURN": 20,
+          "NOSTATE": 0
+        },
+        "probabilities": {
+          "FWD": 0.0,
+          "REV": 0.5,
+          "TURN": 0.5,
+          "NOSTATE": 0.0
+        }
+      },
+      {
+        "frame": 1746,
+        "entropy": 1.0,
+        "majority_probability": 0.5,
+        "counts": {
+          "FWD": 0,
+          "REV": 20,
+          "TURN": 20,
+          "NOSTATE": 0
+        },
+        "probabilities": {
+          "FWD": 0.0,
+          "REV": 0.5,
+          "TURN": 0.5,
+          "NOSTATE": 0.0
+        }
+      },
+      {
+        "frame": 1797,
+        "entropy": 1.0,
+        "majority_probability": 0.5,
+        "counts": {
+          "FWD": 0,
+          "REV": 20,
+          "TURN": 20,
+          "NOSTATE": 0
+        },
+        "probabilities": {
+          "FWD": 0.0,
+          "REV": 0.5,
+          "TURN": 0.5,
+          "NOSTATE": 0.0
+        }
+      },
+      {
+        "frame": 1805,
+        "entropy": 1.0,
+        "majority_probability": 0.5,
+        "counts": {
+          "FWD": 0,
+          "REV": 20,
+          "TURN": 20,
+          "NOSTATE": 0
+        },
+        "probabilities": {
+          "FWD": 0.0,
+          "REV": 0.5,
+          "TURN": 0.5,
+          "NOSTATE": 0.0
+        }
+      },
+      {
+        "frame": 1376,
+        "entropy": 0.99819587904281,
+        "majority_probability": 0.525,
+        "counts": {
+          "FWD": 0,
+          "REV": 19,
+          "TURN": 21,
+          "NOSTATE": 0
+        },
+        "probabilities": {
+          "FWD": 0.0,
+          "REV": 0.475,
+          "TURN": 0.525,
+          "NOSTATE": 0.0
+        }
+      },
+      {
+        "frame": 1639,
+        "entropy": 0.99819587904281,
+        "majority_probability": 0.525,
+        "counts": {
+          "FWD": 0,
+          "REV": 21,
+          "TURN": 19,
+          "NOSTATE": 0
+        },
+        "probabilities": {
+          "FWD": 0.0,
+          "REV": 0.525,
+          "TURN": 0.475,
+          "NOSTATE": 0.0
+        }
+      },
+      {
+        "frame": 1644,
+        "entropy": 0.99819587904281,
+        "majority_probability": 0.525,
+        "counts": {
+          "FWD": 0,
+          "REV": 19,
+          "TURN": 21,
+          "NOSTATE": 0
+        },
+        "probabilities": {
+          "FWD": 0.0,
+          "REV": 0.475,
+          "TURN": 0.525,
+          "NOSTATE": 0.0
+        }
+      },
+      {
+        "frame": 1655,
+        "entropy": 0.99819587904281,
+        "majority_probability": 0.525,
+        "counts": {
+          "FWD": 0,
+          "REV": 21,
+          "TURN": 19,
+          "NOSTATE": 0
+        },
+        "probabilities": {
+          "FWD": 0.0,
+          "REV": 0.525,
+          "TURN": 0.475,
+          "NOSTATE": 0.0
+        }
+      },
+      {
+        "frame": 1657,
+        "entropy": 0.99819587904281,
+        "majority_probability": 0.525,
+        "counts": {
+          "FWD": 0,
+          "REV": 19,
+          "TURN": 21,
+          "NOSTATE": 0
+        },
+        "probabilities": {
+          "FWD": 0.0,
+          "REV": 0.475,
+          "TURN": 0.525,
+          "NOSTATE": 0.0
+        }
+      },
+      {
+        "frame": 1659,
+        "entropy": 0.99819587904281,
+        "majority_probability": 0.525,
+        "counts": {
+          "FWD": 0,
+          "REV": 21,
+          "TURN": 19,
+          "NOSTATE": 0
+        },
+        "probabilities": {
+          "FWD": 0.0,
+          "REV": 0.525,
+          "TURN": 0.475,
+          "NOSTATE": 0.0
+        }
+      },
+      {
+        "frame": 1660,
+        "entropy": 0.99819587904281,
+        "majority_probability": 0.525,
+        "counts": {
+          "FWD": 0,
+          "REV": 19,
+          "TURN": 21,
+          "NOSTATE": 0
+        },
+        "probabilities": {
+          "FWD": 0.0,
+          "REV": 0.475,
+          "TURN": 0.525,
+          "NOSTATE": 0.0
+        }
+      },
+      {
+        "frame": 1662,
+        "entropy": 0.99819587904281,
+        "majority_probability": 0.525,
+        "counts": {
+          "FWD": 0,
+          "REV": 19,
+          "TURN": 21,
+          "NOSTATE": 0
+        },
+        "probabilities": {
+          "FWD": 0.0,
+          "REV": 0.475,
+          "TURN": 0.525,
+          "NOSTATE": 0.0
+        }
+      },
+      {
+        "frame": 1663,
+        "entropy": 0.99819587904281,
+        "majority_probability": 0.525,
+        "counts": {
+          "FWD": 0,
+          "REV": 21,
+          "TURN": 19,
+          "NOSTATE": 0
+        },
+        "probabilities": {
+          "FWD": 0.0,
+          "REV": 0.525,
+          "TURN": 0.475,
+          "NOSTATE": 0.0
+        }
+      },
+      {
+        "frame": 1665,
+        "entropy": 0.99819587904281,
+        "majority_probability": 0.525,
+        "counts": {
+          "FWD": 0,
+          "REV": 19,
+          "TURN": 21,
+          "NOSTATE": 0
+        },
+        "probabilities": {
+          "FWD": 0.0,
+          "REV": 0.475,
+          "TURN": 0.525,
+          "NOSTATE": 0.0
+        }
+      }
+    ]
+  },
+  "permutation": {
+    "mean_entropy": 0.5779823990267984,
+    "null_mean": 0.9602077761897959,
+    "null_sd": 0.008788463953223774,
+    "excess_entropy_bits": -0.38222537716299754,
+    "p_value": 1.0,
+    "n_candidate_states": 328
+  },
+  "corrected": {
+    "definition": {
+      "outcome": "first macro state different from the current state within the horizon",
+      "statistic": "mean Shannon entropy of kNN outcome distributions",
+      "test": "observed mean local entropy vs geometry-unrelated outcome null",
+      "primary_null": "block permutation (block sizes 10/30/60)",
+      "directions": "excess and deficit reported separately; two-sided p = 2*min(one-sided)",
+      "sampling_unit_caveat": "candidate frames overlap in time; block bootstrap is used for the mean"
+    },
+    "outcome_counts": {
+      "FWD": 0,
+      "REV": 194,
+      "TURN": 134,
+      "NOSTATE": 0
+    },
+    "tests": [
+      {
+        "mean_entropy": 0.5779823990267984,
+        "null_mean": 0.9606686887193534,
+        "null_sd": 0.008500153816140173,
+        "null_q025": 0.9445052841620009,
+        "null_q975": 0.9747680543051088,
+        "excess_entropy_bits": -0.382686289692555,
+        "p_value": 1.0,
+        "p_excess": 1.0,
+        "p_deficit": 0.001996007984031936,
+        "p_two_sided": 0.003992015968063872,
+        "null_method": "iid",
+        "null_block_size": 18,
+        "n_candidate_states": 328,
+        "n_permutations": 500,
+        "n_valid_null": 500,
+        "test_direction": "excess = observed > null; deficit = observed < null",
+        "mean_entropy_ci_low": 0.44802617696438857,
+        "mean_entropy_ci_high": 0.6974704521037429
+      },
+      {
+        "mean_entropy": 0.5779823990267984,
+        "null_mean": 0.9051245619729191,
+        "null_sd": 0.0318107683990197,
+        "null_q025": 0.827791956110017,
+        "null_q975": 0.9498582580141407,
+        "excess_entropy_bits": -0.32714216294612075,
+        "p_value": 1.0,
+        "p_excess": 1.0,
+        "p_deficit": 0.001996007984031936,
+        "p_two_sided": 0.003992015968063872,
+        "null_method": "block",
+        "null_block_size": 10,
+        "n_candidate_states": 328,
+        "n_permutations": 500,
+        "n_valid_null": 500,
+        "test_direction": "excess = observed > null; deficit = observed < null",
+        "mean_entropy_ci_low": 0.4584019712967726,
+        "mean_entropy_ci_high": 0.688970413456366
+      },
+      {
+        "mean_entropy": 0.5779823990267984,
+        "null_mean": 0.8798688276035822,
+        "null_sd": 0.046178393586830326,
+        "null_q025": 0.770186933160758,
+        "null_q975": 0.9367548566809435,
+        "excess_entropy_bits": -0.3018864285767838,
+        "p_value": 1.0,
+        "p_excess": 1.0,
+        "p_deficit": 0.001996007984031936,
+        "p_two_sided": 0.003992015968063872,
+        "null_method": "block",
+        "null_block_size": 30,
+        "n_candidate_states": 328,
+        "n_permutations": 500,
+        "n_valid_null": 500,
+        "test_direction": "excess = observed > null; deficit = observed < null",
+        "mean_entropy_ci_low": 0.4629735800016445,
+        "mean_entropy_ci_high": 0.6947251986038327
+      },
+      {
+        "mean_entropy": 0.5779823990267984,
+        "null_mean": 0.8624602537849141,
+        "null_sd": 0.05881332907214557,
+        "null_q025": 0.7068551214072261,
+        "null_q975": 0.9308154716554491,
+        "excess_entropy_bits": -0.2844778547581157,
+        "p_value": 1.0,
+        "p_excess": 1.0,
+        "p_deficit": 0.001996007984031936,
+        "p_two_sided": 0.003992015968063872,
+        "null_method": "block",
+        "null_block_size": 60,
+        "n_candidate_states": 328,
+        "n_permutations": 500,
+        "n_valid_null": 500,
+        "test_direction": "excess = observed > null; deficit = observed < null",
+        "mean_entropy_ci_low": 0.49191571577254745,
+        "mean_entropy_ci_high": 0.6763186670772212
+      },
+      {
+        "mean_entropy": 0.5779823990267984,
+        "null_mean": 0.8428291900731574,
+        "null_sd": 0.08134838594556977,
+        "null_q025": 0.609447241554815,
+        "null_q975": 0.9313337475578091,
+        "excess_entropy_bits": -0.264846791046359,
+        "p_value": 0.9780439121756487,
+        "p_excess": 0.9780439121756487,
+        "p_deficit": 0.023952095808383235,
+        "p_two_sided": 0.04790419161676647,
+        "null_method": "shift",
+        "null_block_size": 18,
+        "n_candidate_states": 328,
+        "n_permutations": 500,
+        "n_valid_null": 500,
+        "test_direction": "excess = observed > null; deficit = observed < null",
+        "mean_entropy_ci_low": 0.44802617696438857,
+        "mean_entropy_ci_high": 0.6974704521037429
+      }
+    ]
+  },
+  "latent_dim_stability": {
+    "dim_8": 0.764843885384578,
+    "dim_16": 0.7066412648533374,
+    "dim_32": 0.7215174925736478
+  },
+  "caveat": "Local outcome diversity in a projection is not a bifurcation."
+}
