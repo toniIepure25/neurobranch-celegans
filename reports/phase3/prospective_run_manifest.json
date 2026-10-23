@@ -1,0 +1,57 @@
+{
+  "generated_utc": "2026-10-23T19:33:45.552202+00:00",
+  "git_branch": "research/phase3-neural-generalization",
+  "git_head": "104d6c826473d695953663b7bbcce55a4fd611d0",
+  "git_dirty": false,
+  "python": "3.13.5",
+  "platform": "Windows-10-10.0.19045-SP0",
+  "versions": {
+    "numpy": "2.3.1",
+    "pandas": "2.3.3",
+    "scipy": "1.16.0",
+    "scikit_learn": "1.9.1"
+  },
+  "dataset": {
+    "doi": "doi:10.5061/dryad.w9ghx3g4v",
+    "manifest": "data/raw/baskoylu2026/manifest.json",
+    "manifest_sha256": "22baa4eb575aafb656477101651e88f9bffe023042433661c1c2c4556b31e5ce",
+    "labels_sha256": "7645ad1d112f4a412c84994597a81ad6aae809c275d65befcf68a1d482025d72"
+  },
+  "analysis": {
+    "target": "reversal onset in (t, t+H]",
+    "horizons_s": [
+      3,
+      6,
+      12
+    ],
+    "primary_horizon_s": 6,
+    "split": "leave-one-animal-out",
+    "primary_model": "L2 logistic regression",
+    "C": 0.1,
+    "bootstrap_resamples": 10000,
+    "bootstrap_seed": 17
+  },
+  "primary_result": {
+    "delta_log_loss": -0.007007939121905143,
+    "ci95": [
+      -0.01482840340493261,
+      0.0005340144375070247
+    ],
+    "n_negative": 20,
+    "n": 27,
+    "criterion_met": false
+  },
+  "artifacts": {
+    "reports/phase3/prospective_c_sensitivity.csv": "ba3a44e816983cb9f7de4ef9f7ba047a0d314226c50ec7a46bef9dbbe5a79ef0",
+    "reports/phase3/prospective_deltas_12s.csv": "4d5bf61a00d1190b0cab2ecb865eeb9c9d268a43bc9ec61b663ab95015a52bb8",
+    "reports/phase3/prospective_deltas_3s.csv": "284843c55d987ae1d2783ae029aede84b4638f59e8b5f6a2013c2b533d0a6405",
+    "reports/phase3/prospective_deltas_6s.csv": "b6dec3960652e2b05a3d984d80a5a82adf593832a8fac9fe88ea74b67163d38a",
+    "reports/phase3/prospective_deltas_all.csv": "791e78add7ae2320905c8785b7fdf20f2c38184e27e25f77f1c1d2e41e5a56dc",
+    "reports/phase3/prospective_metrics_12s.csv": "3db977467ed0571b6b9ced11d91a464d1c437d831797d44481d88d53e0318e83",
+    "reports/phase3/prospective_metrics_3s.csv": "7eebd5eb057bc2e9771a290122b670b8ddd878fd9c2699bbaf1ca69545f75c5c",
+    "reports/phase3/prospective_metrics_6s.csv": "ee8ec69c3e22fb044ac7b38b50d36e3c5a2c7d1a4a204df475ea48e34b16c897",
+    "reports/phase3/prospective_metrics_all.csv": "396ed96b26aed2cb673771a44a028b6fba90fd567f373e9148584a7f2d66ceb2",
+    "reports/phase3/prospective_summary.json": "7cbad928c5e0a3f69758548c267b0d3bf16acc131626dd2aa0d4f89e0772aa7e",
+    "reports/phase3/prospective_within_animal_metrics.csv": "562451536031620835efb3dc93d8c58227f836cc3ebe3645e8fd9b58c9bf7fe6"
+  }
+}
