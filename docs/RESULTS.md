@@ -8,9 +8,10 @@ Nothing here is a causal claim. The intervention section is explicitly
 > **Headline.** Under an honest blocked split, no neural dynamics model clearly
 > beats persistence; under a strict forward split, most nonlinear models collapse.
 > Behaviour decoding is well below label persistence. Apparent 3-D branching is
-> *less* diverse than a shuffled null. Named-neuron virtual effects are *smaller*
-> than effects from randomly sampled non-candidate neurons. These are negative
-> results and they are the main scientific output.
+> *less* diverse than a shuffled null. The top named-neuron virtual effect is
+> *within the range* of arbitrary non-candidate neurons (4/19 controls match or
+> exceed it, empirical p≈0.21), so it is not specific. These are negative results
+> and they are the main scientific output.
 
 ---
 

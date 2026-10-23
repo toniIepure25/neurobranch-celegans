@@ -181,9 +181,9 @@ effect (OLQVL) has OOD 0.377; the top candidate RIVL has OOD 0.106. Neither is
 
 > "In the fitted MLP, a +2 SD virtual edit to RIVL increased the model's predicted
 > TURN probability by 0.333 (95% frame-bootstrap CI 0.167–0.533), with 10.6% of
-> simulated states outside training support. This effect is not larger than those
-> produced by arbitrary non-candidate cells (empirical p≈0.21) and is therefore
-> not evidence of a specific biological role."
+> simulated states outside training support. This effect is within the range
+> produced by arbitrary non-candidate cells (4/19 match or exceed it, empirical
+> p≈0.21) and is therefore not evidence of a specific biological role."
 
 **Incorrect:**
 

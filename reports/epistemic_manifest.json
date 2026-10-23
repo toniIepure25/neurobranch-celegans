@@ -12,7 +12,9 @@
     "RIBR",
     "RIBL"
   ],
-  "official_bundlenet_evaluation_is_in_sample": true,
+  "official_bundlenet_encoder_seen_all_frames": true,
+  "official_bundlenet_knn_has_embedding_leakage": true,
+  "bundlenet_lite_uses_causal_filter": true,
   "primary_split_uses_future_blocks_for_training": true,
   "forward_stress_included": true,
   "random_controls_included": true
