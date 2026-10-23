@@ -7,6 +7,7 @@ import numpy as np
 import pytest
 
 from neurobranch.behavior.prospective import (
+    _causal_shift,
     _metrics,
     behavior_matrix,
     causal_zscore,
@@ -123,6 +124,13 @@ def test_causal_zscore_does_not_use_future():
     changed[15:] = 1e6
     z2 = causal_zscore(changed)
     assert np.allclose(z[:15], z2[:15])
+
+
+def test_causal_shift_does_not_wrap_future_to_start():
+    x = np.arange(20, dtype=float)[:, None]
+    shifted = _causal_shift(x, frames=5)
+    assert np.allclose(shifted[:5], 0.0)
+    assert np.allclose(shifted[5:, 0], x[:-5, 0])
 
 
 def test_behavior_features_do_not_use_future(recording):

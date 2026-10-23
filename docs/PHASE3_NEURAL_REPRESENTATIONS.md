@@ -45,7 +45,7 @@ representations.
 
 | Control | Δ at 6 s | 95% CI | Verdict |
 |---|---:|---|---|
-| Time-shifted neural features | +0.00132 | [-0.00166, +0.00446] | null, as expected |
+| Causal delayed neural features (211 frames) | -0.00345 | [-0.00851, +0.00175] | small; not a clean null |
 | Behaviour + neural vs quadratic behaviour | -0.00524 | [-0.01334, +0.00301] | no robust increment |
 | Identified neurons | -0.00172 | [-0.01054, +0.00699] | no increment |
 | Within-animal forward | +0.00288 | n/a (27 animals, 9 improved) | worse |
@@ -54,6 +54,8 @@ The quadratic behavioural state is the key control. It lowers the behaviour-only
 log loss from 0.5927 to 0.5869 and shrinks the neural increment from -0.00701 to
 -0.00524, with a CI that crosses zero. A representation that only captures
 nonlinear behavioural state is not evidence of a transition-specific neural code.
+The causal delayed control also improves slightly (Δ=-0.00345), which points to
+slow state information rather than a precise pre-transition code.
 
 ## 4. Representation geometry is not the test
 

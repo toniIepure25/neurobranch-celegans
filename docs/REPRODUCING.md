@@ -501,10 +501,10 @@ python -m pytest -q
 python -m ruff check src tests scripts
 ```
 
-Expected: 57 passed. The Phase 3 tests cover HDF5 parsing, the 0-based exclusive
+Expected: 58 passed. The Phase 3 tests cover HDF5 parsing, the 0-based exclusive
 event convention, timestamps, identity ambiguity, causal z-scoring, horizon
-labels, purged chronological splits, calibration diagnostics, the app tabs and
-the Randi target schema.
+labels, purged chronological splits, calibration diagnostics, causal delayed
+controls, the app tabs and the Randi target schema.
 
 ### 14.8 Nondeterminism
 

@@ -120,6 +120,14 @@ def _lag(x: np.ndarray, lag: int, idx: np.ndarray) -> np.ndarray:
     return np.asarray(x)[src]
 
 
+def _causal_shift(x: np.ndarray, frames: int = 211) -> np.ndarray:
+    """Delay features by ``frames`` without wrapping future rows to the start."""
+    out = np.empty_like(x)
+    out[:frames] = x[0]
+    out[frames:] = x[:-frames]
+    return out
+
+
 def _run_age(rec: FreelyMovingRecording) -> np.ndarray:
     """Frames since the last reversal offset (0 while reversing)."""
     age = np.zeros(rec.n_frames, dtype=np.float64)
@@ -334,7 +342,7 @@ def build_designs(
                 behavior_quadratic=bq[idx],
                 state=s[idx],
                 population=p[idx],
-                population_shift=np.roll(p, 211, axis=0)[idx],
+                population_shift=_causal_shift(p)[idx],
                 identified=ident[idx] if ident is not None else None,
                 age=age,
             )

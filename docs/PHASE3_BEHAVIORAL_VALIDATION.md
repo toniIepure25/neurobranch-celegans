@@ -97,21 +97,26 @@ model selection and it cannot replace the primary test.
 
 ## 5. Negative controls and sensitivity
 
-### Time-shifted neural control
+### Causal delayed neural control
 
-Circularly shifting the neural features by 211 frames within each animal destroys
-their alignment with the behaviour while preserving their marginal distribution
-and autocorrelation. The shifted control did **not** improve:
+Delaying the neural features by 211 frames within each animal (edge-padded, no
+wrap-around) destroys their frame alignment with behaviour while preserving their
+marginal distribution and autocorrelation. The delayed control was **not a clean
+null**: it also improved slightly, with CIs that include zero.
 
-| Horizon | Δ shifted neural | 95% CI | Animals improved |
+| Horizon | Δ delayed neural | 95% CI | Animals improved |
 |---:|---:|---|---:|
-| 3 s | +0.00142 | [-0.00011, +0.00298] | 9/27 |
-| 6 s | +0.00132 | [-0.00166, +0.00446] | 13/27 |
-| 12 s | +0.00229 | [-0.00210, +0.00731] | 13/27 |
+| 3 s | -0.00129 | [-0.00378, +0.00130] | 16/27 |
+| 6 s | -0.00345 | [-0.00851, +0.00175] | 18/27 |
+| 12 s | -0.00174 | [-0.00828, +0.00556] | 16/27 |
 
-This is the expected null and argues against a trivial preprocessing artifact.
-It does not rule out a shared arousal/session variable that is temporally
-correlated with behaviour.
+The earlier circular-wrap version of this control produced +0.0013 at 6 s because
+the first 211 rows received future tail values. After fixing the control to be
+strictly causal, the delayed features retain enough slow behavioural/arousal
+information to improve a little. This does **not** support a transition-specific
+neural code; it weakens that interpretation. It also means the primary neural
+increment cannot be cleanly separated from a slowly varying state variable by this
+control alone.
 
 ### Nonlinear behavioural-state control
 
@@ -190,8 +195,11 @@ within-animal forward setting.
    absent for identity-aligned neurons, and reverses within-animal. The most
    parsimonious explanation is residual behavioural/arousal state, not a
    transition-specific neural code.
-4. The time-shifted control is null, which rules out a trivial alignment bug but
-   not a shared slowly varying session variable.
+4. The causal delayed control is not null: delayed population activity also gives
+   a small improvement (6 s Δ -0.00345, CI includes zero). This is consistent with
+   a slow arousal/session variable and argues against a transition-specific neural
+   code. It also removes the earlier claim that a time-shifted null validated the
+   small primary effect.
 5. Transition accuracy alone would have been misleading: at 12 s, 60.8% of rows
    are positive, so a constant classifier is 60.8% "accurate" while its log loss
    is poor.

@@ -27,112 +27,144 @@
         "mean_brier": 0.12545689848954725,
         "mean_balanced_accuracy": 0.610033278352991,
         "mean_auprc": 0.5170332729625615,
-        "mean_prevalence": 0.1893990351629027
+        "mean_prevalence": 0.1893990351629027,
+        "mean_calibration_slope": 1.0570898078217459,
+        "mean_calibration_intercept": 0.03154058631639966
       },
       "behavior_all": {
         "mean_log_loss": 0.407479370931645,
         "mean_brier": 0.1253659526458694,
         "mean_balanced_accuracy": 0.6220422569435909,
         "mean_auprc": 0.5160905074251954,
-        "mean_prevalence": 0.1893990351629027
+        "mean_prevalence": 0.1893990351629027,
+        "mean_calibration_slope": 0.9294811169756755,
+        "mean_calibration_intercept": -0.12428888621572137
       },
       "behavior_identified": {
         "mean_log_loss": 0.40703425758823997,
         "mean_brier": 0.12519759703503233,
         "mean_balanced_accuracy": 0.620841920488632,
         "mean_auprc": 0.5209086491532667,
-        "mean_prevalence": 0.1893990351629027
+        "mean_prevalence": 0.1893990351629027,
+        "mean_calibration_slope": 0.9585673419556701,
+        "mean_calibration_intercept": -0.10044739678550017
       },
       "behavior_neural": {
         "mean_log_loss": 0.40563357595160987,
         "mean_brier": 0.12478472507482448,
         "mean_balanced_accuracy": 0.6113259119214831,
         "mean_auprc": 0.5150927226771025,
-        "mean_prevalence": 0.1893990351629027
+        "mean_prevalence": 0.1893990351629027,
+        "mean_calibration_slope": 1.0186242260391132,
+        "mean_calibration_intercept": -0.00786687217959903
       },
       "behavior_neural_no_counts": {
         "mean_log_loss": 0.40542169878621437,
         "mean_brier": 0.12474963937096,
         "mean_balanced_accuracy": 0.6116187882669879,
         "mean_auprc": 0.514985365334825,
-        "mean_prevalence": 0.1893990351629027
+        "mean_prevalence": 0.1893990351629027,
+        "mean_calibration_slope": 1.022027959129336,
+        "mean_calibration_intercept": -0.006349491731714257
       },
       "behavior_neural_no_rolling": {
         "mean_log_loss": 0.430201375416355,
         "mean_brier": 0.13312396523786302,
         "mean_balanced_accuracy": 0.5675726476606846,
         "mean_auprc": 0.4560463582978666,
-        "mean_prevalence": 0.1893990351629027
+        "mean_prevalence": 0.1893990351629027,
+        "mean_calibration_slope": 1.0492987212104528,
+        "mean_calibration_intercept": 0.031353105653423474
       },
       "behavior_neural_pca": {
         "mean_log_loss": 0.4042594478653083,
         "mean_brier": 0.1242865939385226,
         "mean_balanced_accuracy": 0.6134433680324669,
         "mean_auprc": 0.521206828592321,
-        "mean_prevalence": 0.1893990351629027
+        "mean_prevalence": 0.1893990351629027,
+        "mean_calibration_slope": 1.045598464725074,
+        "mean_calibration_intercept": 0.020251149204083167
       },
       "behavior_neural_quadratic": {
         "mean_log_loss": 0.3969962569585465,
         "mean_brier": 0.12243240460651256,
         "mean_balanced_accuracy": 0.6305324261142482,
         "mean_auprc": 0.5378307579720456,
-        "mean_prevalence": 0.1893990351629027
+        "mean_prevalence": 0.1893990351629027,
+        "mean_calibration_slope": 0.9804261381856725,
+        "mean_calibration_intercept": -0.0666948759369635
       },
       "behavior_neural_shift": {
-        "mean_log_loss": 0.41011524359068124,
-        "mean_brier": 0.12593549763537693,
-        "mean_balanced_accuracy": 0.6103000667367425,
-        "mean_auprc": 0.5126798760518635,
-        "mean_prevalence": 0.1893990351629027
+        "mean_log_loss": 0.4074053335831004,
+        "mean_brier": 0.12506267365235205,
+        "mean_balanced_accuracy": 0.6160300864210875,
+        "mean_auprc": 0.5194461624341523,
+        "mean_prevalence": 0.1893990351629027,
+        "mean_calibration_slope": 1.0323530934709124,
+        "mean_calibration_intercept": -0.003099744889027064
       },
       "behavior_no_counts": {
         "mean_log_loss": 0.40869328206287314,
         "mean_brier": 0.12550978359789602,
         "mean_balanced_accuracy": 0.6104540053373865,
         "mean_auprc": 0.5165969107653741,
-        "mean_prevalence": 0.1893990351629027
+        "mean_prevalence": 0.1893990351629027,
+        "mean_calibration_slope": 1.0565601812548813,
+        "mean_calibration_intercept": 0.03092349074576002
       },
       "behavior_no_rolling": {
         "mean_log_loss": 0.4332482954334239,
         "mean_brier": 0.133763270768837,
         "mean_balanced_accuracy": 0.5625542494044294,
         "mean_auprc": 0.4602561684920625,
-        "mean_prevalence": 0.1893990351629027
+        "mean_prevalence": 0.1893990351629027,
+        "mean_calibration_slope": 1.094372479168166,
+        "mean_calibration_intercept": 0.09106640924331914
       },
       "behavior_quadratic": {
         "mean_log_loss": 0.3987744158860217,
         "mean_brier": 0.1224721160810046,
         "mean_balanced_accuracy": 0.6266008182535223,
         "mean_auprc": 0.541559746493479,
-        "mean_prevalence": 0.1893990351629027
+        "mean_prevalence": 0.1893990351629027,
+        "mean_calibration_slope": 1.011981509670778,
+        "mean_calibration_intercept": -0.02959337143833944
       },
       "constant": {
         "mean_log_loss": 0.4862514656441831,
         "mean_brier": 0.15379834428065836,
         "mean_balanced_accuracy": 0.5,
         "mean_auprc": 0.1893990351629027,
-        "mean_prevalence": 0.1893990351629027
+        "mean_prevalence": 0.1893990351629027,
+        "mean_calibration_slope": 0.6956589440146183,
+        "mean_calibration_intercept": -0.4694451976183308
       },
       "markov": {
         "mean_log_loss": 0.4811715988712016,
         "mean_brier": 0.15230791306229494,
         "mean_balanced_accuracy": 0.5,
         "mean_auprc": 0.23726986001014674,
-        "mean_prevalence": 0.1893990351629027
+        "mean_prevalence": 0.1893990351629027,
+        "mean_calibration_slope": 1.4167174015516537,
+        "mean_calibration_intercept": 0.5698872966293274
       },
       "neural": {
         "mean_log_loss": 0.48534003687031096,
         "mean_brier": 0.1535084098026056,
         "mean_balanced_accuracy": 0.5,
         "mean_auprc": 0.21892138037902042,
-        "mean_prevalence": 0.1893990351629027
+        "mean_prevalence": 0.1893990351629027,
+        "mean_calibration_slope": 0.594018720623434,
+        "mean_calibration_intercept": -0.6188802221308544
       },
       "state": {
         "mean_log_loss": 0.4389771314614323,
         "mean_brier": 0.1359572742506021,
         "mean_balanced_accuracy": 0.5469771986386883,
         "mean_auprc": 0.4583333375671086,
-        "mean_prevalence": 0.1893990351629027
+        "mean_prevalence": 0.1893990351629027,
+        "mean_calibration_slope": 1.1452674944269385,
+        "mean_calibration_intercept": 0.1593826515917959
       },
       "delta_state": {
         "mean": 0.030282184079197114,
@@ -171,12 +203,12 @@
         "n": 27
       },
       "delta_behavior_neural_shift": {
-        "mean": 0.001420296208445962,
+        "mean": -0.0012896137991347924,
         "ci95": [
-          -0.00011124074172892775,
-          0.002982726674480516
+          -0.003781605018257681,
+          0.001299913077846896
         ],
-        "n_negative": 9,
+        "n_negative": 16,
         "n": 27
       },
       "delta_behavior_neural_no_counts": {
@@ -349,13 +381,13 @@
         "mean_calibration_intercept": -0.04317993968184971
       },
       "behavior_neural_shift": {
-        "mean_log_loss": 0.5939764016099711,
-        "mean_brier": 0.20265731093542255,
-        "mean_balanced_accuracy": 0.6171703031181041,
-        "mean_auprc": 0.5837103214844958,
+        "mean_log_loss": 0.5892080408551643,
+        "mean_brier": 0.20052435226915272,
+        "mean_balanced_accuracy": 0.6242153269621169,
+        "mean_auprc": 0.5926879003735573,
         "mean_prevalence": 0.3546812059555848,
-        "mean_calibration_slope": 0.963342339288526,
-        "mean_calibration_intercept": -0.0197023396257719
+        "mean_calibration_slope": 0.9805468923310374,
+        "mean_calibration_intercept": -0.012159732506969938
       },
       "behavior_no_counts": {
         "mean_log_loss": 0.592902842841753,
@@ -457,12 +489,12 @@
         "n": 27
       },
       "delta_behavior_neural_shift": {
-        "mean": 0.0013223022592921037,
+        "mean": -0.0034460584955148745,
         "ci95": [
-          -0.0016575167881619423,
-          0.004462583994718918
+          -0.008509674067978165,
+          0.0017476711101774244
         ],
-        "n_negative": 13,
+        "n_negative": 18,
         "n": 27
       },
       "delta_behavior_neural_no_counts": {
@@ -567,112 +599,144 @@
         "mean_brier": 0.21921694218057425,
         "mean_balanced_accuracy": 0.594464678962301,
         "mean_auprc": 0.7505444061289338,
-        "mean_prevalence": 0.6080132774538854
+        "mean_prevalence": 0.6080132774538854,
+        "mean_calibration_slope": 0.9482470255251778,
+        "mean_calibration_intercept": 0.11568436820645625
       },
       "behavior_all": {
         "mean_log_loss": 0.6229002892292885,
         "mean_brier": 0.21512304560155715,
         "mean_balanced_accuracy": 0.6180974663214074,
         "mean_auprc": 0.7516627373609601,
-        "mean_prevalence": 0.6080132774538854
+        "mean_prevalence": 0.6080132774538854,
+        "mean_calibration_slope": 0.7484539813422764,
+        "mean_calibration_intercept": 0.17399341310596797
       },
       "behavior_identified": {
         "mean_log_loss": 0.6216217920229878,
         "mean_brier": 0.21513036454834003,
         "mean_balanced_accuracy": 0.6174053231254235,
         "mean_auprc": 0.7555336585953214,
-        "mean_prevalence": 0.6080132774538854
+        "mean_prevalence": 0.6080132774538854,
+        "mean_calibration_slope": 0.7843873794957884,
+        "mean_calibration_intercept": 0.16385952057380196
       },
       "behavior_neural": {
         "mean_log_loss": 0.6208387122894601,
         "mean_brier": 0.2153344642745543,
         "mean_balanced_accuracy": 0.6171764876472992,
         "mean_auprc": 0.7524925616292338,
-        "mean_prevalence": 0.6080132774538854
+        "mean_prevalence": 0.6080132774538854,
+        "mean_calibration_slope": 0.912287186614978,
+        "mean_calibration_intercept": 0.13070742865022428
       },
       "behavior_neural_no_counts": {
         "mean_log_loss": 0.6205051966430809,
         "mean_brier": 0.21523322741073858,
         "mean_balanced_accuracy": 0.617142127474584,
         "mean_auprc": 0.753065853354092,
-        "mean_prevalence": 0.6080132774538854
+        "mean_prevalence": 0.6080132774538854,
+        "mean_calibration_slope": 0.9179338431604965,
+        "mean_calibration_intercept": 0.1329509586050595
       },
       "behavior_neural_no_rolling": {
         "mean_log_loss": 0.650026697185467,
         "mean_brier": 0.22864930336414244,
         "mean_balanced_accuracy": 0.569117267178281,
         "mean_auprc": 0.7125069002446632,
-        "mean_prevalence": 0.6080132774538854
+        "mean_prevalence": 0.6080132774538854,
+        "mean_calibration_slope": 0.920458822900953,
+        "mean_calibration_intercept": 0.13156813594383981
       },
       "behavior_neural_pca": {
         "mean_log_loss": 0.6191122029378681,
         "mean_brier": 0.21479650537652198,
         "mean_balanced_accuracy": 0.6138974964353756,
         "mean_auprc": 0.7581399061253008,
-        "mean_prevalence": 0.6080132774538854
+        "mean_prevalence": 0.6080132774538854,
+        "mean_calibration_slope": 0.9559495683039841,
+        "mean_calibration_intercept": 0.12005787537566241
       },
       "behavior_neural_quadratic": {
         "mean_log_loss": 0.6224832231035613,
         "mean_brier": 0.2158506342420237,
         "mean_balanced_accuracy": 0.6175978692371122,
         "mean_auprc": 0.7588568665983078,
-        "mean_prevalence": 0.6080132774538854
+        "mean_prevalence": 0.6080132774538854,
+        "mean_calibration_slope": 0.8533958713143408,
+        "mean_calibration_intercept": 0.14974974358414422
       },
       "behavior_neural_shift": {
-        "mean_log_loss": 0.6305459671974626,
-        "mean_brier": 0.22005500500042444,
-        "mean_balanced_accuracy": 0.5955685086998102,
-        "mean_auprc": 0.7473367233773438,
-        "mean_prevalence": 0.6080132774538854
+        "mean_log_loss": 0.6265187313676117,
+        "mean_brier": 0.2179745469122724,
+        "mean_balanced_accuracy": 0.6043268494620521,
+        "mean_auprc": 0.7539014214493741,
+        "mean_prevalence": 0.6080132774538854,
+        "mean_calibration_slope": 0.9137234059996656,
+        "mean_calibration_intercept": 0.1271570416850871
       },
       "behavior_no_counts": {
         "mean_log_loss": 0.6276961203422331,
         "mean_brier": 0.2189802174225884,
         "mean_balanced_accuracy": 0.5944968592808154,
         "mean_auprc": 0.750693464822067,
-        "mean_prevalence": 0.6080132774538854
+        "mean_prevalence": 0.6080132774538854,
+        "mean_calibration_slope": 0.9565606656263265,
+        "mean_calibration_intercept": 0.11484953747862947
       },
       "behavior_no_rolling": {
         "mean_log_loss": 0.6546016505534369,
         "mean_brier": 0.2311831602157517,
         "mean_balanced_accuracy": 0.5419920852179464,
         "mean_auprc": 0.7110436100097458,
-        "mean_prevalence": 0.6080132774538854
+        "mean_prevalence": 0.6080132774538854,
+        "mean_calibration_slope": 0.9747725482464373,
+        "mean_calibration_intercept": 0.08112379193910838
       },
       "behavior_quadratic": {
         "mean_log_loss": 0.6281724554956413,
         "mean_brier": 0.2193076451988045,
         "mean_balanced_accuracy": 0.5993372094791805,
         "mean_auprc": 0.7574421797919312,
-        "mean_prevalence": 0.6080132774538854
+        "mean_prevalence": 0.6080132774538854,
+        "mean_calibration_slope": 0.8765749614954729,
+        "mean_calibration_intercept": 0.13688256710891022
       },
       "constant": {
         "mean_log_loss": 0.6729731491820429,
         "mean_brier": 0.23994142194510418,
         "mean_balanced_accuracy": 0.5,
         "mean_auprc": 0.6080132774538854,
-        "mean_prevalence": 0.6080132774538854
+        "mean_prevalence": 0.6080132774538854,
+        "mean_calibration_slope": 0.1548026339243544,
+        "mean_calibration_intercept": 0.42496230393606954
       },
       "markov": {
         "mean_log_loss": 0.6705805636139318,
         "mean_brier": 0.2387833250769791,
         "mean_balanced_accuracy": 0.5,
         "mean_auprc": 0.6298917098299597,
-        "mean_prevalence": 0.6080132774538854
+        "mean_prevalence": 0.6080132774538854,
+        "mean_calibration_slope": 0.9752956355539583,
+        "mean_calibration_intercept": 0.10745822876960999
       },
       "neural": {
         "mean_log_loss": 0.6705500495923657,
         "mean_brier": 0.23857263814847574,
         "mean_balanced_accuracy": 0.5200786978168266,
         "mean_auprc": 0.6562179238355257,
-        "mean_prevalence": 0.6080132774538854
+        "mean_prevalence": 0.6080132774538854,
+        "mean_calibration_slope": 0.8796372432547754,
+        "mean_calibration_intercept": 0.15976303947803283
       },
       "state": {
         "mean_log_loss": 0.6555561368719499,
         "mean_brier": 0.23159048573035104,
         "mean_balanced_accuracy": 0.5413482757695453,
         "mean_auprc": 0.7134781644193623,
-        "mean_prevalence": 0.6080132774538854
+        "mean_prevalence": 0.6080132774538854,
+        "mean_calibration_slope": 0.9885370918343506,
+        "mean_calibration_intercept": 0.07179076847141948
       },
       "delta_state": {
         "mean": 0.027300602394203625,
@@ -711,12 +775,12 @@
         "n": 27
       },
       "delta_behavior_neural_shift": {
-        "mean": 0.0022904327197163323,
+        "mean": -0.0017368031101345155,
         "ci95": [
-          -0.0020987465499607283,
-          0.007313344844080332
+          -0.008282436527927869,
+          0.005559222631254134
         ],
-        "n_negative": 13,
+        "n_negative": 16,
         "n": 27
       },
       "delta_behavior_neural_no_counts": {

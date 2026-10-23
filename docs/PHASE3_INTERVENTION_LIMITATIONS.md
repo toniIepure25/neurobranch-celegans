@@ -31,10 +31,10 @@ A feature can predict a transition because it is:
 - a downstream readout of the same latent state;
 - a confound of animal identity or preparation.
 
-Phase 3 tried to reduce the first two with causal features, animal-disjoint
-splits, nonlinear behavioural controls and time-shifted nulls. It did **not**
-establish that any neuron is necessary or sufficient. A predictive coefficient is
-not an intervention target.
+Phase 3 reduced some alternatives with causal features, event-free eligibility,
+animal-disjoint splits, nonlinear behavioural controls and causal delayed-feature
+controls. It did **not** establish that any neuron is necessary or sufficient. A
+predictive coefficient is not an intervention target.
 
 The distinction used throughout Phase 3 is:
 

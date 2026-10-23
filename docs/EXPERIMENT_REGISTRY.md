@@ -246,7 +246,7 @@ Phase 2 reports are listed in `README.md` and `docs/PHASE2_METHODOLOGY.md`.
 | Cross-animal outputs | `reports/phase3/cross_animal_dynamics.csv/.json` |
 | Figures | `python scripts/phase3_make_figures.py` → `reports/phase3/figures/` |
 | Manifest | `python scripts/phase3_write_manifest.py` |
-| Tests | `57 passed`; ruff clean |
+| Tests | `58 passed`; ruff clean |
 
 Phase 3 does not perform an intervention and does not establish causal control.
 

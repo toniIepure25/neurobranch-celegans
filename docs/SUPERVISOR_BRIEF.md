@@ -123,14 +123,16 @@ normalisation, L2 logistic C=0.1, animal bootstrap.
 | + population neural | 0.5856 | −0.00701 | [−0.01483, +0.00053] | 20/27 |
 | + train-only PCA(10) | 0.5842 | −0.00841 | [−0.01475, −0.00220] | 20/27 |
 | + identified 52 neurons | 0.5909 | −0.00172 | [−0.01054, +0.00699] | 13/27 |
-| Time-shifted neural null | 0.5940 | +0.00132 | [−0.00166, +0.00446] | 13/27 |
+| Causal delayed neural (211 frames) | 0.5892 | −0.00345 | [−0.00851, +0.00175] | 18/27 |
 
 The primary criterion (CI upper < 0, ≥70% animals) is **not met**. The direction
 is stable at 3/6/12 s, but the increment shrinks against a quadratic behavioural
 state (Δ=−0.00524 [−0.01334, +0.00301]), is absent for identity-aligned neurons,
 and is negative within-animal (+0.00288, 9/27 improved). Calibration is good
 (slope 0.963 for the neural model), so the null is not a probability-scale
-artifact. This is an honest inconclusive/negative result.
+artifact. The causal delayed control also improves slightly (−0.00345, CI includes
+zero); delayed activity still carries slow state information, so it is not a clean
+null. This is an honest inconclusive/negative result.
 
 Randi Phase 3 target/shape audit: peak, mean and integral all have repeated
 r≈0.09; per-neuron shape r=0.048; repeated-event averaging is worse than a global

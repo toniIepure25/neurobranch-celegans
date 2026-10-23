@@ -90,12 +90,15 @@ experiment or a new positive result.
 | Population summaries (primary) | -0.00701 | [-0.01483, +0.00053] | inconclusive |
 | Train-only PCA(10) | -0.00841 | [-0.01475, -0.00220] | secondary positive |
 | Identified 52 neurons | -0.00172 | [-0.01054, +0.00699] | no |
-| Time-shifted neural null | +0.00132 | [-0.00166, +0.00446] | null, as expected |
+| Causal delayed neural features | -0.00345 | [-0.00851, +0.00175] | small, not a clean null |
 
 The PCA result is not robust: adding neural features to a **quadratic behavioural
 state** gives Δ=-0.00524 [-0.01334, +0.00301]; the identified-neuron
 representation is weaker than anonymous population summaries; the within-animal
-forward task is worse with neural activity (+0.00288, 9/27 improved).
+forward task is worse with neural activity (+0.00288, 9/27 improved). The causal
+delayed-feature control also improves slightly (6 s Δ -0.00345), so delayed
+activity still carries slow behavioural/arousal information and the control is
+not a clean null.
 
 Decision: **STOP** for a robust frozen-representation claim. The PCA lead is
 worth a preregistered replication, not a conclusion. Details:
@@ -163,7 +166,7 @@ new optogenetics rig.
 - One-time JLD2→TSV NeuroPAL export via vendored Julia script; Python pipeline
   has no Julia dependency at analysis time.
 - Causal features, train-only scalers/PCA, animal-disjoint splits, chronological
-  purge, time-shifted null, quadratic-behaviour control, C sensitivity.
+  purge, causal delayed-feature control, quadratic-behaviour control, C sensitivity.
 - New Phase 3 Randi target/context/temporal-shape analysis.
 - New cross-animal dynamics probe.
 - New Streamlit **Prospective Behavior** tab; all seven Phase 2 tabs retained.
@@ -201,3 +204,17 @@ new optogenetics rig.
 
 > All virtual interventions remain a **MODEL-DEPENDENT VIRTUAL PERTURBATION —
 > NOT CAUSALLY VALIDATED.**
+
+## 12. Deviations from the locked plan
+
+- The separate matched pre-event/transition-state analysis in plan §9 was **not**
+  run as an independent matched analysis. The prospective horizon benchmark is the
+  implemented transition test; a matched pre-event comparison remains future work.
+- The temporal control was implemented as a causal 211-frame delay, not a circular
+  shift. The circular version used future rows at the start and was replaced after
+  the causality audit; the corrected control is not a clean null.
+- Hyperparameter selection was fixed at C=0.1 as preregistered; no inner search was
+  run. Sensitivity at C=0.03/0.3 is reported but is not a model-selection result.
+- RQ5 is a one-step cross-animal ridge/logistic probe, not a multi-step generative
+  simulator generalisation test.
+- No new animals, optogenetic stimulation, or causal intervention were performed.

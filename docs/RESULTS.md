@@ -486,14 +486,16 @@ onset in `(t, t+6 s]`, using original traces and causal normalisation.
 | + population neural | 0.5856 | âˆ’0.00701 | [âˆ’0.01483, +0.00053] | 20/27 |
 | + train-only PCA(10) | 0.5842 | âˆ’0.00841 | [âˆ’0.01475, âˆ’0.00220] | 20/27 |
 | + identified 52 neurons | 0.5909 | âˆ’0.00172 | [âˆ’0.01054, +0.00699] | 13/27 |
-| Time-shifted neural null | 0.5940 | +0.00132 | [âˆ’0.00166, +0.00446] | 13/27 |
+| Causal delayed neural (211 frames) | 0.5892 | -0.00345 | [-0.00851, +0.00175] | 18/27 |
 
 The prespecified criterion (CI upper < 0, â‰¥70% animals improved) is **not met**
 for the primary model. The direction is consistent at 3/6/12 s, but the increment
 shrinks against a quadratic behavioural baseline (6 s Î” = âˆ’0.00524
 [âˆ’0.01334, +0.00301]), is absent for identity-aligned neurons, and reverses in
-the within-animal forward task (+0.00288, 9/27 improved). This is **inconclusive/
-negative**, not evidence of absence.
+the within-animal forward task (+0.00288, 9/27 improved). The causal delayed
+control also improves slightly (âˆ’0.00345), so it is not a clean null and the
+small increment may reflect slow behavioural/arousal state. This is
+**inconclusive/negative**, not evidence of absence.
 
 Randi target reanalysis: peak/mean/integral reliability all r â‰ˆ 0.09; full
 temporal shape per-neuron median r = 0.048; repeated-event averaging is worse

@@ -29,10 +29,10 @@
 | Randi 2023 optogenetic atlas | ✅ 110 animals, 3,371 events parsed; Phase 3 target/shape/context audit (**negative**) |
 | Independent freely-moving behaviour | ✅ Baskoylu & Flavell 2026, 27 animals, 1,162 reversals, SHA256-verified |
 | Prospective behaviour benchmark | ✅ animal-disjoint 3/6/12 s; primary neural increment **inconclusive** |
-| Frozen neural representation | ✅ population, PCA, identified-neuron and null controls; **not robust** |
+| Frozen neural representation | ✅ population, PCA, identified-neuron, quadratic and causal-delay controls; **not robust** |
 | Interactive 3-D app | ✅ Streamlit + Plotly, 8 tabs (7 Phase 2 tabs preserved) |
 | CLI | ✅ Typer, documented commands |
-| Tests | ✅ 57 passed (unit, integration, scientific; includes Phase 2 + Phase 3) |
+| Tests | ✅ 58 passed (unit, integration, scientific; includes Phase 2 + Phase 3) |
 | Figures | ✅ 8 static PNGs + 6 Phase 3 figures + interactive HTML |
 | Causal validation | ❌ not attempted; evidence gate refuses unsupported claims |
 
@@ -121,7 +121,8 @@ python scripts/export_neuropal.jl                  # one-time JLD2 -> TSV (Julia
 
 The Phase 3 headline is a **negative/inconclusive** primary result: adding
 population neural activity to behavioural history gives Δ log loss -0.0070 at 6 s,
-95% animal CI [-0.0148, +0.0005]. The time-shifted null is flat, a quadratic
+95% animal CI [-0.0148, +0.0005]. A causal delayed-feature control also improves
+slightly (Δ -0.0035), so it is not a clean null; a quadratic
 behavioural baseline removes the significance, identified neurons do not help,
 and within-animal forward prediction is worse. Randi repeated responses remain at
 r≈0.09 and repeated-event averaging is worse than a global mean. See

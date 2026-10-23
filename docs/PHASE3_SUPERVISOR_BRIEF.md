@@ -49,7 +49,7 @@ experiment was performed.
 | + population neural | 0.5856 | -0.00701 | [-0.01483, +0.00053] | 20/27 |
 | + PCA(10) neural | 0.5842 | -0.00841 | [-0.01475, -0.00220] | 20/27 |
 | + identified 52 neurons | 0.5909 | -0.00172 | [-0.01054, +0.00699] | 13/27 |
-| Time-shifted neural null | 0.5940 | +0.00132 | [-0.00166, +0.00446] | 13/27 |
+| Causal delayed neural (211 frames) | 0.5892 | -0.00345 | [-0.00851, +0.00175] | 18/27 |
 
 The prespecified criterion (CI upper < 0, ≥70% animals) is **not met** for the
 primary model. The direction is consistent at 3/6/12 s, but the CI is fragile.
@@ -59,7 +59,9 @@ primary model. The direction is consistent at 3/6/12 s, but the CI is fragile.
 - Quadratic behavioural state: Δ shrinks to -0.00524, CI [-0.01334, +0.00301].
 - Within-animal forward: Δ +0.00288 (neural worse), 9/27 improved.
 - C sensitivity: direction stable, significance only at C=0.3 (not prespecified).
-- Time-shifted null: no improvement, as expected.
+- Causal delayed neural (211 frames): Δ -0.00345, CI includes zero; delayed
+  activity still carries slow behavioural/arousal information, so this is not a
+  clean null and weakens a transition-specific interpretation.
 
 ### Randi
 
@@ -153,7 +155,15 @@ collaboration.
 3. Confirm that no wet-lab intervention is expected within 6 ECTS.
 4. Confirm the branch remains local until the supervisor authorises a push.
 
-## 10. Bottom line
+## 10. Execution caveats
+
+- The matched pre-event analysis in plan §9 was not run as a separate analysis;
+  the prospective horizon benchmark is the implemented transition test.
+- The temporal control was corrected to a causal delay; it is not a clean null.
+- RQ5 is one-step, not a multi-step generative generalisation test.
+- No new animals or wet-lab interventions were performed.
+
+## 11. Bottom line
 
 Phase 3 is a rigorous observational benchmark with a small, fragile neural lead
 and a clear causal boundary. It does **not** show that a neuron controls a
