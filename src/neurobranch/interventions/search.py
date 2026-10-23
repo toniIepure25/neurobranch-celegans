@@ -105,6 +105,7 @@ def run_sparse_search(
                 "ood_fraction": r.ood_fraction,
                 "n_initial": r.n_initial,
                 "n_seeds": r.n_seeds,
+                "causal_status": r.causal_status.label,
             }
         )
     df = pd.DataFrame(rows)
@@ -158,6 +159,7 @@ def random_control(
                 "ci_high": r.delta_ci[1],
                 "ood_fraction": r.ood_fraction,
                 "mean_displacement": r.mean_trajectory_displacement,
+                "causal_status": r.causal_status.label,
             }
         )
     return pd.DataFrame(rows)

@@ -311,6 +311,7 @@
       "ood_fraction": 0.1055555555555555,
       "n_initial": 30,
       "n_seeds": 3,
+      "causal_status": "MODEL-DEPENDENT VIRTUAL PERTURBATION \u2014 NOT CAUSALLY VALIDATED.",
       "abs_delta": 0.3333333333333333,
       "rank": 1
     },
@@ -327,6 +328,7 @@
       "ood_fraction": 0.174074074074074,
       "n_initial": 30,
       "n_seeds": 3,
+      "causal_status": "MODEL-DEPENDENT VIRTUAL PERTURBATION \u2014 NOT CAUSALLY VALIDATED.",
       "abs_delta": 0.2333333333333333,
       "rank": 2
     },
@@ -343,6 +345,7 @@
       "ood_fraction": 0.1342592592592592,
       "n_initial": 30,
       "n_seeds": 3,
+      "causal_status": "MODEL-DEPENDENT VIRTUAL PERTURBATION \u2014 NOT CAUSALLY VALIDATED.",
       "abs_delta": 0.1666666666666666,
       "rank": 3
     },
@@ -359,6 +362,7 @@
       "ood_fraction": 0.1398148148148148,
       "n_initial": 30,
       "n_seeds": 3,
+      "causal_status": "MODEL-DEPENDENT VIRTUAL PERTURBATION \u2014 NOT CAUSALLY VALIDATED.",
       "abs_delta": 0.1666666666666666,
       "rank": 4
     },
@@ -375,6 +379,7 @@
       "ood_fraction": 0.1074074074074074,
       "n_initial": 30,
       "n_seeds": 3,
+      "causal_status": "MODEL-DEPENDENT VIRTUAL PERTURBATION \u2014 NOT CAUSALLY VALIDATED.",
       "abs_delta": 0.1666666666666666,
       "rank": 5
     },
@@ -391,6 +396,7 @@
       "ood_fraction": 0.0981481481481481,
       "n_initial": 30,
       "n_seeds": 3,
+      "causal_status": "MODEL-DEPENDENT VIRTUAL PERTURBATION \u2014 NOT CAUSALLY VALIDATED.",
       "abs_delta": 0.1555555555555555,
       "rank": 6
     },
@@ -407,6 +413,7 @@
       "ood_fraction": 0.1157407407407407,
       "n_initial": 30,
       "n_seeds": 3,
+      "causal_status": "MODEL-DEPENDENT VIRTUAL PERTURBATION \u2014 NOT CAUSALLY VALIDATED.",
       "abs_delta": 0.1333333333333333,
       "rank": 7
     },
@@ -423,6 +430,7 @@
       "ood_fraction": 0.0842592592592592,
       "n_initial": 30,
       "n_seeds": 3,
+      "causal_status": "MODEL-DEPENDENT VIRTUAL PERTURBATION \u2014 NOT CAUSALLY VALIDATED.",
       "abs_delta": 0.1,
       "rank": 8
     },
@@ -439,6 +447,7 @@
       "ood_fraction": 0.2101851851851852,
       "n_initial": 30,
       "n_seeds": 3,
+      "causal_status": "MODEL-DEPENDENT VIRTUAL PERTURBATION \u2014 NOT CAUSALLY VALIDATED.",
       "abs_delta": 0.1,
       "rank": 9
     },
@@ -455,6 +464,7 @@
       "ood_fraction": 0.0712962962962963,
       "n_initial": 30,
       "n_seeds": 3,
+      "causal_status": "MODEL-DEPENDENT VIRTUAL PERTURBATION \u2014 NOT CAUSALLY VALIDATED.",
       "abs_delta": 0.1,
       "rank": 10
     }
@@ -469,7 +479,8 @@
         "ci_low": 0.0,
         "ci_high": 0.1724999999999997,
         "ood_fraction": 0.1314814814814814,
-        "mean_displacement": 0.2984718268486749
+        "mean_displacement": 0.2984718268486749,
+        "causal_status": "MODEL-DEPENDENT VIRTUAL PERTURBATION \u2014 NOT CAUSALLY VALIDATED."
       },
       {
         "neuron": "ASKR",
@@ -477,7 +488,8 @@
         "ci_low": -0.1666666666666666,
         "ci_high": 0.0,
         "ood_fraction": 0.1074074074074074,
-        "mean_displacement": 0.3415516444813138
+        "mean_displacement": 0.3415516444813138,
+        "causal_status": "MODEL-DEPENDENT VIRTUAL PERTURBATION \u2014 NOT CAUSALLY VALIDATED."
       },
       {
         "neuron": "SABVL",
@@ -485,7 +497,8 @@
         "ci_low": -0.1666666666666666,
         "ci_high": 0.0,
         "ood_fraction": 0.0777777777777777,
-        "mean_displacement": 0.3464029478272306
+        "mean_displacement": 0.3464029478272306,
+        "causal_status": "MODEL-DEPENDENT VIRTUAL PERTURBATION \u2014 NOT CAUSALLY VALIDATED."
       },
       {
         "neuron": "ALA",
@@ -493,7 +506,8 @@
         "ci_low": 0.0,
         "ci_high": 0.0,
         "ood_fraction": 0.112037037037037,
-        "mean_displacement": 0.321847116341556
+        "mean_displacement": 0.321847116341556,
+        "causal_status": "MODEL-DEPENDENT VIRTUAL PERTURBATION \u2014 NOT CAUSALLY VALIDATED."
       },
       {
         "neuron": "OLQVL",
@@ -501,7 +515,8 @@
         "ci_low": 0.5,
         "ci_high": 0.8333333333333334,
         "ood_fraction": 0.3768518518518518,
-        "mean_displacement": 0.5623823612844021
+        "mean_displacement": 0.5623823612844021,
+        "causal_status": "MODEL-DEPENDENT VIRTUAL PERTURBATION \u2014 NOT CAUSALLY VALIDATED."
       },
       {
         "neuron": "OLQDR",
@@ -509,7 +524,8 @@
         "ci_low": 0.4222222222222222,
         "ci_high": 0.7724999999999997,
         "ood_fraction": 0.2296296296296296,
-        "mean_displacement": 0.4784320127483642
+        "mean_displacement": 0.4784320127483642,
+        "causal_status": "MODEL-DEPENDENT VIRTUAL PERTURBATION \u2014 NOT CAUSALLY VALIDATED."
       },
       {
         "neuron": "ASKL",
@@ -517,7 +533,8 @@
         "ci_low": 0.0333333333333333,
         "ci_high": 0.2444444444444444,
         "ood_fraction": 0.1398148148148148,
-        "mean_displacement": 0.3109742664163371
+        "mean_displacement": 0.3109742664163371,
+        "causal_status": "MODEL-DEPENDENT VIRTUAL PERTURBATION \u2014 NOT CAUSALLY VALIDATED."
       },
       {
         "neuron": "VB02",
@@ -525,7 +542,8 @@
         "ci_low": -0.1666666666666666,
         "ci_high": 0.0,
         "ood_fraction": 0.0935185185185185,
-        "mean_displacement": 0.2895480277952021
+        "mean_displacement": 0.2895480277952021,
+        "causal_status": "MODEL-DEPENDENT VIRTUAL PERTURBATION \u2014 NOT CAUSALLY VALIDATED."
       },
       {
         "neuron": "RMER",
@@ -533,7 +551,8 @@
         "ci_low": -0.1111111111111111,
         "ci_high": 0.0,
         "ood_fraction": 0.1157407407407407,
-        "mean_displacement": 0.3495168612654737
+        "mean_displacement": 0.3495168612654737,
+        "causal_status": "MODEL-DEPENDENT VIRTUAL PERTURBATION \u2014 NOT CAUSALLY VALIDATED."
       },
       {
         "neuron": "AVFL",
@@ -541,7 +560,8 @@
         "ci_low": 0.0111111111111111,
         "ci_high": 0.2333333333333333,
         "ood_fraction": 0.125,
-        "mean_displacement": 0.3241552907059783
+        "mean_displacement": 0.3241552907059783,
+        "causal_status": "MODEL-DEPENDENT VIRTUAL PERTURBATION \u2014 NOT CAUSALLY VALIDATED."
       },
       {
         "neuron": "RMED",
@@ -549,7 +569,8 @@
         "ci_low": -0.1111111111111111,
         "ci_high": 0.0,
         "ood_fraction": 0.0611111111111111,
-        "mean_displacement": 0.3235952614421867
+        "mean_displacement": 0.3235952614421867,
+        "causal_status": "MODEL-DEPENDENT VIRTUAL PERTURBATION \u2014 NOT CAUSALLY VALIDATED."
       },
       {
         "neuron": "URYDR",
@@ -557,7 +578,8 @@
         "ci_low": 0.0999999999999999,
         "ci_high": 0.3666666666666666,
         "ood_fraction": 0.1027777777777777,
-        "mean_displacement": 0.3753161392478547
+        "mean_displacement": 0.3753161392478547,
+        "causal_status": "MODEL-DEPENDENT VIRTUAL PERTURBATION \u2014 NOT CAUSALLY VALIDATED."
       },
       {
         "neuron": "URYDL",
@@ -565,7 +587,8 @@
         "ci_low": 0.1888888888888888,
         "ci_high": 0.505833333333333,
         "ood_fraction": 0.1361111111111111,
-        "mean_displacement": 0.4243647430610447
+        "mean_displacement": 0.4243647430610447,
+        "causal_status": "MODEL-DEPENDENT VIRTUAL PERTURBATION \u2014 NOT CAUSALLY VALIDATED."
       },
       {
         "neuron": "RID",
@@ -573,7 +596,8 @@
         "ci_low": 0.0,
         "ci_high": 0.1724999999999997,
         "ood_fraction": 0.0981481481481481,
-        "mean_displacement": 0.2697725899345815
+        "mean_displacement": 0.2697725899345815,
+        "causal_status": "MODEL-DEPENDENT VIRTUAL PERTURBATION \u2014 NOT CAUSALLY VALIDATED."
       },
       {
         "neuron": "RMEL",
@@ -581,7 +605,8 @@
         "ci_low": 0.0,
         "ci_high": 0.0,
         "ood_fraction": 0.0953703703703703,
-        "mean_displacement": 0.3009781009552337
+        "mean_displacement": 0.3009781009552337,
+        "causal_status": "MODEL-DEPENDENT VIRTUAL PERTURBATION \u2014 NOT CAUSALLY VALIDATED."
       },
       {
         "neuron": "OLQDL",
@@ -589,7 +614,8 @@
         "ci_low": 0.3222222222222221,
         "ci_high": 0.6555555555555556,
         "ood_fraction": 0.137037037037037,
-        "mean_displacement": 0.4237181589452926
+        "mean_displacement": 0.4237181589452926,
+        "causal_status": "MODEL-DEPENDENT VIRTUAL PERTURBATION \u2014 NOT CAUSALLY VALIDATED."
       },
       {
         "neuron": "RMEV",
@@ -597,7 +623,8 @@
         "ci_low": -0.1,
         "ci_high": 0.0,
         "ood_fraction": 0.0527777777777777,
-        "mean_displacement": 0.2660452880304613
+        "mean_displacement": 0.2660452880304613,
+        "causal_status": "MODEL-DEPENDENT VIRTUAL PERTURBATION \u2014 NOT CAUSALLY VALIDATED."
       },
       {
         "neuron": "DB02",
@@ -605,7 +632,8 @@
         "ci_low": -0.1666666666666666,
         "ci_high": 0.0,
         "ood_fraction": 0.0879629629629629,
-        "mean_displacement": 0.2879953662711768
+        "mean_displacement": 0.2879953662711768,
+        "causal_status": "MODEL-DEPENDENT VIRTUAL PERTURBATION \u2014 NOT CAUSALLY VALIDATED."
       },
       {
         "neuron": "OLQVR",
@@ -613,7 +641,8 @@
         "ci_low": 0.4666666666666667,
         "ci_high": 0.8,
         "ood_fraction": 0.1777777777777777,
-        "mean_displacement": 0.4905238938556108
+        "mean_displacement": 0.4905238938556108,
+        "causal_status": "MODEL-DEPENDENT VIRTUAL PERTURBATION \u2014 NOT CAUSALLY VALIDATED."
       }
     ]
   }

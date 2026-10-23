@@ -23,7 +23,7 @@
   "causal_status": {
     "level": "observational_model",
     "validated": false,
-    "label": "MODEL-DEPENDENT VIRTUAL PERTURBATION - NOT CAUSALLY VALIDATED",
+    "label": "MODEL-DEPENDENT VIRTUAL PERTURBATION \u2014 NOT CAUSALLY VALIDATED.",
     "reasons": [
       "The dynamics model was fitted only to observational recordings.",
       "No randomized or targeted perturbation of these neurons was performed.",
