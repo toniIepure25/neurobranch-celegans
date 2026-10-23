@@ -290,7 +290,9 @@ or external artifacts are absent; in this checkout all 23 run.
 ## 12. What is not reproducible from this repo alone
 
 - The exact historical Git commit of the long training runs: the manifests were
-  written after the runs and may show a dirty tree. See
+  written after the runs, before the first commit, and therefore show
+  `git.commit = null` and a dirty tree. `reports/posthoc_git_state.json` records
+  only the later assembly commit. See
   [`VALIDATION_PROTOCOL.md`](VALIDATION_PROTOCOL.md#6-reproducibility-audit).
 - Bitwise-identical results across machines: CPU threading and PyTorch kernels are
   not deterministic. Expect small differences in R² and p-values.

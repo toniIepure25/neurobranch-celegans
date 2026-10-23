@@ -1,12 +1,13 @@
 {
   "package": "neurobranch",
   "version": "0.1.0",
-  "created_utc": "2026-10-23T15:10:23.668930+00:00",
+  "created_utc": "2026-10-23T15:22:35.056650+00:00",
+  "note": "Assembly environment; not the training environment snapshot.",
   "command": "python.exe -",
   "git": {
-    "commit": null,
+    "commit": "f64e761163e0aa0c9b5176889d1e0e194c4166b1",
     "dirty": true,
-    "branch": null
+    "branch": "master"
   },
   "environment": {
     "python": "3.13.5 (tags/v3.13.5:6cb20a2, Jun 11 2025, 16:15:46) [MSC v.1943 64 bit (AMD64)]",

@@ -1,0 +1,21 @@
+{
+  "note": "Run manifests for E2/E3 were written after training, when the repository had no commit. This file records the commit at which the analysed artifacts, figures and docs were assembled. It is not the training commit and does not prove historical reproducibility.",
+  "assembly_git": {
+    "commit": "f64e761163e0aa0c9b5176889d1e0e194c4166b1",
+    "dirty": false,
+    "branch": "master"
+  },
+  "environment": {
+    "python": "3.13.5 (tags/v3.13.5:6cb20a2, Jun 11 2025, 16:15:46) [MSC v.1943 64 bit (AMD64)]",
+    "python_version": "3.13.5",
+    "platform": "Windows-10-10.0.19045-SP0",
+    "machine": "AMD64",
+    "processor": "AMD64 Family 25 Model 80 Stepping 0, AuthenticAMD",
+    "numpy": "2.3.1",
+    "scipy": "1.16.0",
+    "sklearn": "1.9.1",
+    "torch": "2.7.1+cpu",
+    "cuda_available": false,
+    "torch_num_threads": 6
+  }
+}

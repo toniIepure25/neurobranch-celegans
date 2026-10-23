@@ -203,8 +203,11 @@ different label set. Not available in this dataset.
 | Bitwise determinism | **Not claimed** (CPU threading/PyTorch kernels) |
 
 The manifests for E2/E3 were generated after the runs from the saved configs and
-data, because the manifest writer was added later. They record the current Git
-state, which may be dirty. They do **not** prove the exact historical commit.
+data, because the manifest writer was added later. At that point the repository
+had no commit, so their `git.commit` is `null`; they record a dirty tree. They do
+**not** prove the exact historical commit. `reports/posthoc_git_state.json` records
+the commit at which the analysed artifacts, figures and docs were assembled; it is
+explicitly post-hoc and is not a training commit.
 This is stated rather than hidden. A future rerun should be done from a clean
 commit with the manifest writer active.
 
