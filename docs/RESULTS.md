@@ -208,8 +208,8 @@ Gaussian noise 0.05, `γ=0.9`, early stopping on validation, 120 epochs maximum.
 **A filter-leakage correction changed this result.** The first version of the
 reimplementation applied the upstream **zero-phase** `filtfilt` to the whole
 recording before splitting. That is acausal: future test frames entered earlier
-training inputs. With that filter the same model scored kNN 0.624, macro F1 0.474,
-silhouette 0.145. Replacing it with a one-pass causal Butterworth filter (same
+training inputs. With that filter the same architecture and training budget scored
+kNN 0.624, macro F1 0.474, silhouette 0.145. Replacing it with a one-pass causal Butterworth filter (same
 0.05 normalized cutoff) drops kNN to 0.407 and silhouette below zero. The higher
 number was leakage, not representation quality. Both numbers are reported here to
 make the failure mode auditable.
