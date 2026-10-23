@@ -1,7 +1,7 @@
 {
-  "generated_utc": "2026-10-23T19:33:45.552202+00:00",
+  "generated_utc": "2026-10-23T19:49:39.298837+00:00",
   "git_branch": "research/phase3-neural-generalization",
-  "git_head": "104d6c826473d695953663b7bbcce55a4fd611d0",
+  "git_head": "87c9f18ee4fde83476b709acf474b21542278e20",
   "git_dirty": false,
   "python": "3.13.5",
   "platform": "Windows-10-10.0.19045-SP0",
@@ -43,15 +43,15 @@
   },
   "artifacts": {
     "reports/phase3/prospective_c_sensitivity.csv": "ba3a44e816983cb9f7de4ef9f7ba047a0d314226c50ec7a46bef9dbbe5a79ef0",
-    "reports/phase3/prospective_deltas_12s.csv": "4d5bf61a00d1190b0cab2ecb865eeb9c9d268a43bc9ec61b663ab95015a52bb8",
-    "reports/phase3/prospective_deltas_3s.csv": "284843c55d987ae1d2783ae029aede84b4638f59e8b5f6a2013c2b533d0a6405",
-    "reports/phase3/prospective_deltas_6s.csv": "b6dec3960652e2b05a3d984d80a5a82adf593832a8fac9fe88ea74b67163d38a",
-    "reports/phase3/prospective_deltas_all.csv": "791e78add7ae2320905c8785b7fdf20f2c38184e27e25f77f1c1d2e41e5a56dc",
-    "reports/phase3/prospective_metrics_12s.csv": "3db977467ed0571b6b9ced11d91a464d1c437d831797d44481d88d53e0318e83",
-    "reports/phase3/prospective_metrics_3s.csv": "7eebd5eb057bc2e9771a290122b670b8ddd878fd9c2699bbaf1ca69545f75c5c",
-    "reports/phase3/prospective_metrics_6s.csv": "ee8ec69c3e22fb044ac7b38b50d36e3c5a2c7d1a4a204df475ea48e34b16c897",
-    "reports/phase3/prospective_metrics_all.csv": "396ed96b26aed2cb673771a44a028b6fba90fd567f373e9148584a7f2d66ceb2",
-    "reports/phase3/prospective_summary.json": "7cbad928c5e0a3f69758548c267b0d3bf16acc131626dd2aa0d4f89e0772aa7e",
+    "reports/phase3/prospective_deltas_12s.csv": "d1d7de892d13c07770e7ad22421e4f68c3e58a440b809da6ccf45fb862ca82b8",
+    "reports/phase3/prospective_deltas_3s.csv": "721e726ba861fbbe77ea4b9a9a16fe056eb0e0f4887d9a7b2a8c9ed5541277e6",
+    "reports/phase3/prospective_deltas_6s.csv": "beefbd8dc8daa40c92f049bfaf5dc17ed597202dc2848fb66b78c39db6781d5e",
+    "reports/phase3/prospective_deltas_all.csv": "332112f1b856cce55e441dc08fdcff81c9d229f25e6ca3a59b06cc1927af4707",
+    "reports/phase3/prospective_metrics_12s.csv": "dbc71a3eff085bcdb0d6481e6823dc443a393bfbaa3f7f9be29c844de59cd428",
+    "reports/phase3/prospective_metrics_3s.csv": "9d29d493bf5107677f29e70ca65ec0cc5579e8a3614079817fcacc876cb79051",
+    "reports/phase3/prospective_metrics_6s.csv": "34ac3045dc60bbc84c620e8b00fbbe664fd20cfec5f298c5eb1ae7bede717fae",
+    "reports/phase3/prospective_metrics_all.csv": "c19df01d03c77318bd3267876f88eda97db0fb105e12144a8453969ba26f01c3",
+    "reports/phase3/prospective_summary.json": "9b3baa9fb8dbb35b77b495817a3bb2174b0e4c68f9954570a0d1267764e40e58",
     "reports/phase3/prospective_within_animal_metrics.csv": "562451536031620835efb3dc93d8c58227f836cc3ebe3645e8fd9b58c9bf7fe6"
   }
 }
