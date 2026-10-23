@@ -1,0 +1,22 @@
+{
+  "response": {
+    "n_groups": 580,
+    "n_pairs": 925,
+    "median_pairwise_r": 0.09004566582266281,
+    "mean_pairwise_r": 0.08474934389485615,
+    "fraction_positive": 0.6324324324324324,
+    "q25": -0.12615059369201934,
+    "q75": 0.2971556797011995,
+    "interpretation": "pairwise response-profile correlation across repeated stimulations of the same target in the same animal"
+  },
+  "response_residual": {
+    "n_groups": 580,
+    "n_pairs": 925,
+    "median_pairwise_r": 0.09004566582266287,
+    "mean_pairwise_r": 0.08474934389485615,
+    "fraction_positive": 0.6324324324324324,
+    "q25": -0.1261505936920194,
+    "q75": 0.2971556797011996,
+    "interpretation": "pairwise response-profile correlation across repeated stimulations of the same target in the same animal"
+  }
+}
