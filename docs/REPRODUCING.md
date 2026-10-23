@@ -244,7 +244,7 @@ python scripts/phase2a_intervention_audit.py
 ```
 
 Expected: RIVL +2 ranges from 0.000 (residual MLP) to 0.733 (MLP 23); no model
-reaches p<0.05 against matched controls; the maximum control is 0.667–0.767 in
+reaches p<0.05 against matched controls; the maximum control is 0.567–0.767 in
 the MLP models; `OLQVL` exceeds RIVL at +2. Runtime is ~20–40 min on CPU.
 
 ---
