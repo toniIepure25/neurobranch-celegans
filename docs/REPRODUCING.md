@@ -403,3 +403,115 @@ accuracy but worse balanced accuracy, log loss and Brier than state-only. See
 - Bootstrap CIs vary slightly across runs; point estimates should match to the
   printed precision. Model fits use fixed seeds where specified; CPU threading
   can still change the last digits.
+
+---
+
+## 14. Phase 3: Baskoylu 2026 and Randi response audit
+
+Phase 3 uses two external data sources:
+
+- Baskoylu & Flavell (2026), Dryad `doi:10.5061/dryad.w9ghx3g4v`, version 2,
+  27 animals, 30 files, 320,032,093 bytes, CC0-1.0;
+- Randi et al. (2023), the OSF `e2syt` archive already used in Phase 2.
+
+### 14.1 Download and verify Baskoylu
+
+```powershell
+python scripts/phase3_download_baskoylu.py
+```
+
+The Dryad API is protected by an Anubis proof-of-work challenge. The script
+solves the SHA-256 challenge, keeps a cookie session, downloads all 30 files,
+and writes `data/raw/baskoylu2026/manifest.json` with per-file SHA256. Expected
+total: 320,032,093 bytes. Raw data stay under `data/raw/` and are not committed.
+
+### 14.2 NeuroPAL labels
+
+The JLD2 label file cannot be decoded by h5py 3.16/HDF5 2.0 (or 3.12/1.14):
+the string data raises `ran off end of input buffer`. The one-time workaround is
+a portable Julia 1.9.2 + JLD2.jl export:
+
+```powershell
+julia scripts/export_neuropal.jl
+```
+
+Expected: `data/raw/baskoylu2026/neuropal_labels.tsv`, 2,595 rows, 170 unique
+labels, 6 ambiguous duplicate-label traces, SHA256
+`7645ad1d112f4a412c84994597a81ad6aae809c275d65befcf68a1d482025d72`.
+The Python pipeline reads only this TSV; Julia is not an analysis dependency.
+`trace_index` is 0-based. See [`PHASE3_DATASET_AUDIT.md`](PHASE3_DATASET_AUDIT.md).
+
+### 14.3 Prospective benchmark
+
+```powershell
+python scripts/phase3_prospective_benchmark.py
+```
+
+Expected runtime: ~5–8 min on CPU. It writes:
+
+- `reports/phase3/dataset_summary.json` and `dataset_coverage.csv`;
+- `reports/phase3/prospective_metrics_{3,6,12}s.csv`;
+- `reports/phase3/prospective_deltas_{3,6,12}s.csv`;
+- `reports/phase3/prospective_summary.json`;
+- `reports/phase3/prospective_within_animal_metrics.csv`;
+- `reports/phase3/prospective_c_sensitivity.csv`;
+- `reports/phase3/prospective_run_manifest.json`.
+
+Expected primary 6 s: behaviour log loss 0.5927, +neural 0.5856, Δ −0.00701,
+95% animal CI [−0.01483, +0.00053], 20/27 improved. The CI includes zero; this
+is the prespecified negative/inconclusive result, not a bug. Calibration slopes
+are 1.005 (behaviour) and 0.963 (+neural).
+
+### 14.4 Randi Phase 3 audit
+
+```powershell
+python scripts/phase3_randi_analysis.py
+```
+
+Expected: 237,639 rows, 3,371 events, reliability median r≈0.090 for peak and
+≈0.092 for mean/integral; repeated-event averaging worse than global mean;
+context MAE 5.9967→5.8900 with overlapping CI. Files are written under
+`reports/phase3/randi_*`.
+
+### 14.5 Cross-animal dynamics probe
+
+```powershell
+python scripts/phase3_cross_animal.py
+```
+
+Expected: persistence next-velocity MAE 0.02722, behaviour ridge 0.02587,
+behaviour+neural 0.02590; next-state log loss 0.11631 vs 0.11655. Neural does not
+improve. This is a one-step probe, not a generative simulator.
+
+### 14.6 Figures and app
+
+```powershell
+python scripts/phase3_make_figures.py
+python -m streamlit run app/streamlit_app.py
+```
+
+Figures go to `reports/phase3/figures/`. The app has eight tabs; the eighth,
+**Prospective Behavior**, reads `reports/phase3/prospective_summary.json` and
+`dataset_summary.json`. All seven Phase 2 tabs are unchanged.
+
+### 14.7 Tests
+
+```powershell
+python -m pytest -q
+python -m ruff check src tests scripts
+```
+
+Expected: 57 passed. The Phase 3 tests cover HDF5 parsing, the 0-based exclusive
+event convention, timestamps, identity ambiguity, causal z-scoring, horizon
+labels, purged chronological splits, calibration diagnostics, the app tabs and
+the Randi target schema.
+
+### 14.8 Nondeterminism
+
+- Logistic regression uses fixed C=0.1, `lbfgs`, `max_iter=1000`, `tol=1e-3`;
+  CPU threading can change the last digits.
+- Bootstrap CIs use 10,000 animal resamples with seed 17 but a slightly different
+  RNG draw when the number of compared modes changes. Point estimates are stable;
+  the C sensitivity table is the authoritative check for the primary.
+- Julia export is deterministic for a fixed JLD2 file. Do not regenerate the TSV
+  with a different JLD2.jl version without recording it.

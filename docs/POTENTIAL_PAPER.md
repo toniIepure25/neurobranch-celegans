@@ -6,7 +6,8 @@
 Branching, Virtual Perturbation, and Optogenetic Prediction in *C. elegans*"**
 
 Alternative: *"What a 3-D Branch Does Not Prove: Negative Benchmarks for Latent
-Dynamics and Virtual Perturbation in Whole-Brain Calcium Imaging."*
+Dynamics, Virtual Perturbation and Prospective Behaviour in Whole-Brain Calcium
+Imaging."*
 
 ---
 
@@ -18,8 +19,12 @@ beat persistence, local outcome diversity is *below* a geometry-preserving null
 (predictability, not branching), and model-ranked virtual perturbations are not
 distinguishable from arbitrary-cell perturbations. On the Randi et al. (2023)
 optogenetic atlas, pre-stimulus state and connectome features do not beat a
-constant mean on held-out animals. We argue that these negatives are the correct
-baseline for causal claims in computational neuroscience.
+constant mean on held-out animals. On an independent 27-animal freely-moving
+dataset, the primary neural increment in prospective reversal prediction has the
+right sign but a 95% animal CI that includes zero, and it does not survive a
+quadratic behavioural control or identity-aligned neurons. We argue that these
+negatives are the correct baseline for causal claims in computational
+neuroscience.
 
 ---
 
@@ -58,9 +63,12 @@ fixed. That is a useful cautionary contribution.
 | C3 | Corrected two-sided branching nulls, block/shift nulls, synthetic power checks, all five worms | 4/5 entropy deficit; no excess |
 | C4 | A paired virtual-perturbation engine with OOD flags and matched non-candidate controls | 26 candidates + 19 controls/model × 6 models; none significant |
 | C5 | Artifact-level verification of BunDLe-Net and NC-MCM, separating leaky upstream artifacts from held-out claims | kNN/silhouette, Markov p port, deviations |
-| C6 | Open, reproducible platform (CLI, app, tests, manifests) | Phase 2 tests, 7-tab app |
+| C6 | Open, reproducible platform (CLI, app, tests, manifests) | 57 tests, 8-tab app |
 | C7 | External Randi 2023 optogenetic benchmark with event/target/animal splits and reliability ceiling | 110 animals, 3,371 events; negative |
 | C8 | Incremental behaviour benchmark on transition frames and proper scoring rules | No calibrated increment |
+| C9 | Independent 27-animal prospective benchmark with causal features, animal-disjoint splits and explicit nulls | Primary neural increment inconclusive; PCA secondary only |
+| C10 | Randi target/shape/repeated-average/context audit | Reliability r≈0.09; averaging worse than global; context scale-only |
+| C11 | Cross-animal one-step dynamics probe | Behaviour beats persistence; neural does not |
 
 ---
 
@@ -86,10 +94,10 @@ full intervention scan, projection-dimension stability.
 
 | Level | Claim | Status in this work |
 |---|---|---|
-| 1 | Observational prediction | Weak; no model beats persistence |
-| 2 | Simulator consistency | Partial; transition marginals can match while rollouts fail |
+| 1 | Observational prediction | Weak on Kato; on independent freely-moving data behavioural history predicts, but the neural increment is small and CI-inclusive |
+| 2 | Simulator consistency | Partial; transition marginals can match while rollouts fail; no cross-animal generative simulator claimed |
 | 3 | Biological plausibility | Not assessed |
-| 4 | Intervention generalization | Assessed and negative: internal nonspecific; external optogenetic benchmark below constant |
+| 4 | Intervention generalization | Assessed and negative: internal nonspecific; external optogenetic benchmark below constant; observed-response prediction only |
 | 5 | Causal identification | Not attempted; explicitly disclaimed |
 
 The paper should stay at levels 1–2 and use the failures at levels 4–5 as the
@@ -121,6 +129,17 @@ to "the brain does".
   substantially worse."
 - "The Python NC-MCM Markov test agrees with distributed p-values within 0.023 at
   K=3."
+- "On 27 independent freely-moving animals, adding population neural activity to
+  behavioural history changes 6 s log loss by −0.0070 with a 95% animal bootstrap
+  CI of [−0.0148, +0.0005]; the prespecified criterion is not met."
+- "The secondary train-only PCA representation reaches a CI excluding zero, but
+  the increment shrinks against a quadratic behavioural baseline, is absent for
+  52 identity-aligned neurons, and reverses within-animal."
+- "Randi repeated-response reliability is r≈0.09 for peak, mean and integral;
+  repeated-event averaging is worse than a global mean; temporal shape is not
+  reliable."
+- "A cross-animal one-step behaviour ridge beats persistence on next-velocity MAE,
+  but adding neural activity does not."
 
 ### Cannot claim
 
@@ -131,6 +150,12 @@ to "the brain does".
   excess diversity).
 - "Whole-brain dynamics" without qualifying the 109–135 trace coverage.
 - "The model predicts a real experiment's effect size."
+- "Neural activity is irrelevant to reversal" (the primary result is inconclusive,
+  not proof of absence).
+- "A frozen identity representation adds robust predictive value" (PCA is
+  secondary; identified neurons and quadratic controls do not support it).
+- "The cross-animal probe is a generative simulator" (it is one-step, linear, and
+  has no rollout validation).
 
 ---
 
@@ -202,16 +227,28 @@ biological experiment is not done.
 > behaviour decoding remained far below label persistence (0.80–0.83 vs 0.971).
 > Under a strict forward split, direct nonlinear and latent models collapsed on
 > two worms. A 3-D branching analysis at 328 held-out reversal frames found lower
-> local outcome entropy than a shuffled null (0.578 vs 0.960 bits; p=1.0), and a
-> paired virtual-perturbation scan found that the top model-ranked cell (RIVL) was
-> exceeded by 4/19 arbitrary non-candidate cells. Official BunDLe-Net embeddings
-> were behaviour-separated in the upstream-fitted artifact, which leaks test
-> frames into the encoder, while a blocked-holdout reimplementation scored
-> substantially lower. We argue that persistence, shuffled branching nulls,
-> and random-neuron controls should be mandatory baselines before latent
-> trajectories or virtual perturbations are described as causal, and we specify a
-> preregistered optogenetic test that could discriminate model artifact from
-> biology.
+> local outcome entropy than a shuffled null (0.578 vs 0.960 bits), and a paired
+> virtual-perturbation scan found that the top model-ranked cell (RIVL) was
+> exceeded by 4/19 arbitrary non-candidate cells.
+>
+> We then tested whether these negatives generalise. On 27 independent
+> freely-moving animals (Baskoylu & Flavell 2026; 1,162 reversals), adding
+> population neural activity to behavioural history changed prospective 6 s log
+> loss by −0.0070, with a 95% animal bootstrap CI of [−0.0148, +0.0005]; the
+> prespecified criterion was not met. A train-only PCA representation reached a CI
+> excluding zero, but the increment shrank against a quadratic behavioural
+> baseline, was absent for 52 identity-aligned neurons, and reversed within-animal.
+> On the Randi et al. (2023) optogenetic atlas, peak, mean and integral responses
+> all had repeated-stimulation reliability r≈0.09; repeated-event averaging was
+> worse than a global mean, and temporal shape was unreliable. A cross-animal
+> one-step behaviour model beat persistence, but adding neural activity did not.
+> Official BunDLe-Net embeddings were behaviour-separated in the upstream-fitted
+> artifact, which leaks test frames into the encoder, while a blocked-holdout
+> reimplementation scored substantially lower. We argue that persistence, shuffled
+> branching nulls, animal-disjoint prospective tests, and random-neuron controls
+> should be mandatory baselines before latent trajectories or virtual
+> perturbations are described as causal, and we specify the cell-specific,
+> controlled experiments that would be required to support a control claim.
 
 ---
 

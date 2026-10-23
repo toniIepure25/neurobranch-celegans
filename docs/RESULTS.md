@@ -10,8 +10,11 @@ Nothing here is a causal claim. The intervention section is explicitly
 > Behaviour decoding is well below label persistence. Apparent 3-D branching is
 > *less* diverse than a shuffled null. The top named-neuron virtual effect is
 > *within the range* of arbitrary non-candidate neurons (4/19 controls match or
-> exceed it, empirical p≈0.21), so it is not specific. These are negative results
-> and they are the main scientific output.
+> exceed it, empirical p≈0.21), so it is not specific. Phase 3 repeats the
+> behavioural test on 27 independent freely-moving animals: the primary neural
+> increment has the right sign but a 95% CI that includes zero, and it does not
+> survive a quadratic behavioural baseline or identity-aligned neurons. These are
+> negative/inconclusive results and they are the main scientific output.
 
 ---
 
@@ -466,6 +469,42 @@ value. Detail: [`BEHAVIORAL_GENERALIZATION.md`](BEHAVIORAL_GENERALIZATION.md).
 | Top RIVL virtual effect is nonspecific | **Confirmed and strengthened**: 0/6 models significant; controls larger; amplitude threshold | specificity audit |
 | Real optogenetic responses are predictable | **Rejected** under this benchmark | Randi external test |
 | A virtual perturbation is causal | **Unresolved and untested**; no biological validation | evidence gate |
+| Neural activity improves prospective behaviour on independent animals | **Not supported**: primary CI includes 0; PCA secondary only | Baskoylu Phase 3 |
+| A frozen identity representation adds robust value | **Not supported**: identified neurons weaker than population; quadratic control removes significance | Phase 3 representations |
+| Randi target/context modelling rescues response prediction | **Targets no; context weak** (1.8% MAE, overlapping CI) | Phase 3 Randi audit |
+| Dynamics generalise across recordings without transductive representations | **Behaviour yes; neural no** | cross-animal one-step probe |
+
+### 8.6 Phase 3: independent freely-moving behaviour and frozen representations
+
+Phase 3 adds Baskoylu & Flavell (2026): 27 animals, 1,162 reversals, 43,200
+frames. The primary test is animal-disjoint prospective prediction of a reversal
+onset in `(t, t+6 s]`, using original traces and causal normalisation.
+
+| Model (H=6 s) | Mean animal log loss | Î” vs behaviour | 95% animal CI | Animals improved |
+|---|---:|---:|---|---:|
+| Behaviour history | 0.5927 | â€” | â€” | â€” |
+| + population neural | 0.5856 | âˆ’0.00701 | [âˆ’0.01483, +0.00053] | 20/27 |
+| + train-only PCA(10) | 0.5842 | âˆ’0.00841 | [âˆ’0.01475, âˆ’0.00220] | 20/27 |
+| + identified 52 neurons | 0.5909 | âˆ’0.00172 | [âˆ’0.01054, +0.00699] | 13/27 |
+| Time-shifted neural null | 0.5940 | +0.00132 | [âˆ’0.00166, +0.00446] | 13/27 |
+
+The prespecified criterion (CI upper < 0, â‰¥70% animals improved) is **not met**
+for the primary model. The direction is consistent at 3/6/12 s, but the increment
+shrinks against a quadratic behavioural baseline (6 s Î” = âˆ’0.00524
+[âˆ’0.01334, +0.00301]), is absent for identity-aligned neurons, and reverses in
+the within-animal forward task (+0.00288, 9/27 improved). This is **inconclusive/
+negative**, not evidence of absence.
+
+Randi target reanalysis: peak/mean/integral reliability all r â‰ˆ 0.09; full
+temporal shape per-neuron median r = 0.048; repeated-event averaging is worse
+than a global mean for every target (signed peak 6.3238 vs 5.9008 MAE). Stimulus
+context lowers MAE by 1.8% but the CI overlaps; the large RMSE/Pearson gain is
+response-scale/outlier driven. A cross-animal one-step dynamics probe finds
+behaviour ridge beats persistence (MAE 0.02587 vs 0.02722) but adding neural
+activity does not (0.02590; next-state log loss 0.11631 â†’ 0.11655).
+
+Phase 3 reproduces the Phase 2 negative **pattern** on independent data. Detail:
+[`PHASE3_RESULTS.md`](PHASE3_RESULTS.md).
 
 ## 9. What would change our mind
 

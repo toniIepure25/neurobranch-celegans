@@ -1,0 +1,50 @@
+{
+  "n_animals": 27,
+  "aggregate": {
+    "next_reversal_state:behavior_logistic": {
+      "mae": NaN,
+      "r2": NaN,
+      "balanced_accuracy": 0.9472238501163175,
+      "log_loss": 0.1163105816203695,
+      "prevalence": 0.31293848914994293
+    },
+    "next_reversal_state:behavior_neural_logistic": {
+      "mae": NaN,
+      "r2": NaN,
+      "balanced_accuracy": 0.9472683832136289,
+      "log_loss": 0.11655056321055472,
+      "prevalence": 0.31293848914994293
+    },
+    "next_velocity:behavior_neural_ridge": {
+      "mae": 0.025902939240466435,
+      "r2": 0.8448078518555783,
+      "balanced_accuracy": NaN,
+      "log_loss": NaN,
+      "prevalence": NaN
+    },
+    "next_velocity:behavior_ridge": {
+      "mae": 0.02587220412984305,
+      "r2": 0.8449516113913491,
+      "balanced_accuracy": NaN,
+      "log_loss": NaN,
+      "prevalence": NaN
+    },
+    "next_velocity:persistence": {
+      "mae": 0.027215409709667723,
+      "r2": 0.8220151876712158,
+      "balanced_accuracy": NaN,
+      "log_loss": NaN,
+      "prevalence": NaN
+    }
+  },
+  "next_velocity_delta_neural": {
+    "mean": 3.0735110623379255e-05,
+    "n_negative": 9,
+    "n": 27
+  },
+  "next_reversal_state_delta_neural": {
+    "mean": 0.00023998159018522397,
+    "n_negative": 17,
+    "n": 27
+  }
+}

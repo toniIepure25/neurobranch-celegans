@@ -3,7 +3,8 @@
 **To:** Denis Kovačević (Neuroinformatics, University of Vienna)
 **From:** NeuroBranch project
 **Date:** 2026-10-23
-**Status:** working prototype on public Kato et al. (2015) data; no new animals, no causal validation
+**Status:** Phase 3 complete on independent freely-moving data; no new animals, no
+causal validation
 
 ---
 
@@ -23,7 +24,14 @@ A reproducible Python platform for *C. elegans* whole-brain calcium imaging:
 **Phase 2 additions (this brief section 2.5):** corrected branching nulls on all
 five worms; intervention specificity audit across 6 models; Randi 2023
 optogenetic atlas (110 animals, 3,371 events) with external benchmark; incremental
-behaviour benchmark; 7-tab app; Phase 2 reports and tests.
+behaviour benchmark; Phase 2 reports and tests.
+
+**Phase 3 additions:** Baskoylu & Flavell 2026 freely-moving adapter (27 animals,
+1,162 reversals, SHA256 manifest, JLD2 identity export); animal-disjoint
+prospective benchmark with causal features and animal bootstrap; frozen
+representation and negative-control comparison; Randi target/shape/context audit;
+cross-animal one-step dynamics probe; intervention-limitations checklist; 8-tab
+app (7 Phase 2 tabs preserved); 57 passing tests.
 
 Code: `D:\ComputaCenter\NeuroBranch\neurobranch-celegans`.
 Primary commands: `neurobranch data audit`, `train dynamics`, `reproduce ncmcm`, `reproduce bundlenet`, `branching analyze`, `simulate intervention`, `report`, `app`.
@@ -103,6 +111,37 @@ at +3, and negative at −1/−2. `OLQVL` (0.667) and `OLQVR` (0.633) exceed RIV
   proper scoring rule (blocked Δlog loss +0.011, forward +0.218), while transition
   accuracy rises. No incremental calibrated value.
 
+### 2.6 Phase 3 independent behaviour
+
+Baskoylu & Flavell 2026: 27 animals, 43,200 frames, 1,162 reversals. Primary test:
+animal-disjoint reversal onset in `(t, t+6 s]`, original traces, causal
+normalisation, L2 logistic C=0.1, animal bootstrap.
+
+| Model | Mean log loss | Δ vs behaviour | 95% CI | Animals improved |
+|---|---:|---:|---|---:|
+| Behaviour history | 0.5927 | — | — | — |
+| + population neural | 0.5856 | −0.00701 | [−0.01483, +0.00053] | 20/27 |
+| + train-only PCA(10) | 0.5842 | −0.00841 | [−0.01475, −0.00220] | 20/27 |
+| + identified 52 neurons | 0.5909 | −0.00172 | [−0.01054, +0.00699] | 13/27 |
+| Time-shifted neural null | 0.5940 | +0.00132 | [−0.00166, +0.00446] | 13/27 |
+
+The primary criterion (CI upper < 0, ≥70% animals) is **not met**. The direction
+is stable at 3/6/12 s, but the increment shrinks against a quadratic behavioural
+state (Δ=−0.00524 [−0.01334, +0.00301]), is absent for identity-aligned neurons,
+and is negative within-animal (+0.00288, 9/27 improved). Calibration is good
+(slope 0.963 for the neural model), so the null is not a probability-scale
+artifact. This is an honest inconclusive/negative result.
+
+Randi Phase 3 target/shape audit: peak, mean and integral all have repeated
+r≈0.09; per-neuron shape r=0.048; repeated-event averaging is worse than a global
+mean (6.3238 vs 5.9008 MAE). Context reduces MAE by 1.8% but the CI overlaps and
+the large RMSE/Pearson gain is response-scale driven. Cross-animal one-step
+dynamics: behaviour ridge beats persistence (0.02587 vs 0.02722 MAE), adding
+neural does not (0.02590; state log loss 0.11631 → 0.11655). No cross-animal
+generative simulator is claimed.
+
+Full report: [`PHASE3_SUPERVISOR_BRIEF.md`](PHASE3_SUPERVISOR_BRIEF.md).
+
 ### 2.4 Reproduction status
 
 - **NC-MCM:** distributed p at K=3: 0.636, 0.157, 0.096, 0.603, 0.979; our Python port (1000 surrogates): 0.659, 0.149, 0.084, 0.626, 0.983. Agreement within 0.023. We verified artifacts and ported the test; we did not retrain the full pipeline.
@@ -166,15 +205,16 @@ attractive 3-D plot.
 
 ## 5. Recommended next step
 
-The Phase 2 priority is an **independent behavioural dataset**, not another
-virtual scan. The current RIVL/RIVR experiment remains worth running only with a
-pre-registered cell set, dose–response range, sham controls, and a new cohort; the
-Phase 2 specificity audit removes the original justification for a single-cell
-test.
+The Phase 3 priority is to **replicate the fragile 6 s neural increment on an
+independent cohort** and test it against a nonlinear behavioural baseline, not to
+run another virtual scan. The current RIVL/RIVR experiment remains worth running
+only with a pre-registered cell set, dose–response range, sham controls, and a new
+cohort; the Phase 2 specificity audit and the Phase 3 negative prospective result
+remove the original justification for a single-cell virtual test.
 
 In parallel, test a time-varying model under the strict-forward split and a
-causal-filter encoder. See [`PHASE2_NEXT_EXPERIMENTS.md`](PHASE2_NEXT_EXPERIMENTS.md)
-for falsifiable stop conditions.
+causal-filter encoder. See [`PHASE3_NEXT_EXPERIMENTS.md`](PHASE3_NEXT_EXPERIMENTS.md)
+for falsifiable stop conditions and the 6-ECTS subset.
 
 Both are designed to fail informatively. Neither requires another attractive 3-D
 visualization.

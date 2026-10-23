@@ -169,6 +169,7 @@ tabs = st.tabs(
         "Optogenetic (Randi)",
         "Reproduction",
         "Audit",
+        "Prospective Behavior",
     ]
 )
 
@@ -416,12 +417,82 @@ with tabs[6]:
     st.markdown(
         "Raw recordings are immutable. `WT_NoStim` is observational; no optogenetic or histamine "
         "intervention data were used for fitting. The Randi optogenetic atlas is used only in the "
-        "external response benchmark, not to train the dynamics. See `docs/DATA_PROVENANCE.md`."
+        "external response benchmark, not to train the dynamics. Phase 3 adds the independent "
+        "Baskoylu & Flavell (2026) freely-moving dataset (27 animals), used only for the prospective "
+        "behaviour tab; its published whole-recording z-score is not used as a predictor. See "
+        "`docs/DATA_PROVENANCE.md` and `docs/PHASE3_DATASET_AUDIT.md`."
     )
     st.code(
         "uv run neurobranch data audit\nuv run neurobranch train dynamics --config configs/experiments/blocked_suite.yaml\nuv run neurobranch report",
         language="bash",
     )
+
+with tabs[7]:
+    st.subheader("Prospective reversal prediction on independently observed behaviour")
+    st.markdown(
+        "Baskoylu & Flavell (2026), 27 freely-moving animals. The target is a reversal "
+        "**onset in the next H seconds**, using only behaviour and neural activity at or "
+        "before the current frame. Evaluation is leave-one-animal-out."
+    )
+    p3 = ROOT / "reports" / "phase3"
+    summary = load_optional_json(p3 / "prospective_summary.json")
+    audit = load_optional_json(p3 / "dataset_summary.json")
+    if audit:
+        c1, c2, c3, c4 = st.columns(4)
+        c1.metric("Animals", audit.get("n_animals_usable", "—"))
+        c2.metric("Frames", f"{audit.get('n_frames_total', 0):,}")
+        c3.metric("Reversals", f"{audit.get('n_reversal_events', 0):,}")
+        c4.metric("Identified traces", f"{audit.get('n_labeled_traces', 0):,}")
+    if not summary:
+        st.info("Run `python scripts/phase3_prospective_benchmark.py` to generate this tab.")
+    else:
+        horizon = st.select_slider("Prediction horizon", options=[3, 6, 12], value=6, format_func=lambda h: f"{h} s")
+        metrics_path = p3 / f"prospective_metrics_{horizon}s.csv"
+        delta_path = p3 / f"prospective_deltas_{horizon}s.csv"
+        if metrics_path.exists():
+            m = pd.read_csv(metrics_path)
+            agg = m.groupby("mode", as_index=False)[["log_loss", "brier", "balanced_accuracy", "auprc"]].mean()
+            agg = agg.sort_values("log_loss")
+            st.markdown(f"**Mean animal-level proper scores, H = {horizon} s**")
+            st.dataframe(agg, use_container_width=True, hide_index=True)
+            fig = go.Figure(
+                go.Bar(
+                    x=agg["mode"],
+                    y=agg["log_loss"],
+                    marker_color=["#2E86AB" if x == "behavior" else "#C1121F" if "neural" in x else "#999" for x in agg["mode"]],
+                )
+            )
+            fig.update_layout(height=320, yaxis_title="log loss (lower is better)", margin=dict(l=10, r=10, t=20, b=80))
+            st.plotly_chart(fig, use_container_width=True)
+        if horizon == 6 and summary.get("6s"):
+            d = summary["6s"]["aggregate"].get("delta_behavior_neural", {})
+            if d:
+                c1, c2, c3 = st.columns(3)
+                c1.metric("Δ log loss (behaviour+neural − behaviour)", f"{d['mean']:+.4f}")
+                c2.metric("95% animal bootstrap CI", f"[{d['ci95'][0]:+.4f}, {d['ci95'][1]:+.4f}]")
+                c3.metric("Animals improved", f"{d['n_negative']}/{d['n']}")
+                if d["ci95"][1] < 0 and d["n_negative"] / d["n"] >= 0.7:
+                    st.success("Prespecified primary neural-increment criterion met at 6 s.")
+                else:
+                    st.warning(
+                        "Prespecified primary criterion **not met**: the animal-level CI includes zero. "
+                        "This is an inconclusive/negative result, not evidence that neural activity is irrelevant."
+                    )
+        if delta_path.exists():
+            de = pd.read_csv(delta_path)
+            cols = [c for c in de.columns if c.startswith("delta_")]
+            if cols:
+                st.markdown("**Per-animal paired log-loss differences** (negative = neural helps)")
+                st.dataframe(de[["animal_id", *cols]], use_container_width=True, hide_index=True)
+        st.error(
+            "Observational prediction only. No neuron was stimulated, no transition was caused, "
+            "and no result here supports neuron-specific control."
+        )
+        st.caption(
+            "Primary model: prespecified L2 logistic regression (C=0.1), causal features, "
+            "train-only scaling/PCA, leave-one-animal-out. Neural population features are "
+            "permutation-invariant ROI summaries; identified-neuron results are separate."
+        )
 
 st.divider()
 st.caption(EPISTEMIC_WARNING)

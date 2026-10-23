@@ -26,12 +26,14 @@
 | Branching analysis | ✅ empirical + model-based; **corrected two-sided null test** (Phase 2) |
 | Virtual perturbation engine | ✅ paired baselines, common random numbers, multi-seed uncertainty, OOD support flags, random-neuron controls |
 | Sparse candidate search | ✅ 13 named cells × 2 amplitudes + 19 non-candidate controls; **Phase 2 specificity audit** |
-| Randi 2023 optogenetic atlas | ✅ 110 animals, 3,371 events parsed; external response benchmark (**negative**) |
-| Independent behaviour | ❌ not acquired; Kato-only incremental behaviour audit is negative |
-| Interactive 3-D app | ✅ Streamlit + Plotly, 7 tabs |
+| Randi 2023 optogenetic atlas | ✅ 110 animals, 3,371 events parsed; Phase 3 target/shape/context audit (**negative**) |
+| Independent freely-moving behaviour | ✅ Baskoylu & Flavell 2026, 27 animals, 1,162 reversals, SHA256-verified |
+| Prospective behaviour benchmark | ✅ animal-disjoint 3/6/12 s; primary neural increment **inconclusive** |
+| Frozen neural representation | ✅ population, PCA, identified-neuron and null controls; **not robust** |
+| Interactive 3-D app | ✅ Streamlit + Plotly, 8 tabs (7 Phase 2 tabs preserved) |
 | CLI | ✅ Typer, documented commands |
-| Tests | ✅ 43 passed (unit, integration, scientific; includes Phase 2) |
-| Figures | ✅ 8 static PNGs + interactive HTML |
+| Tests | ✅ 57 passed (unit, integration, scientific; includes Phase 2 + Phase 3) |
+| Figures | ✅ 8 static PNGs + 6 Phase 3 figures + interactive HTML |
 | Causal validation | ❌ not attempted; evidence gate refuses unsupported claims |
 
 The headline result is deliberately unflattering: on held-out data, **no neural
@@ -107,6 +109,24 @@ python scripts/phase2a_optogenetic_benchmark.py
 python scripts/phase2a_behavior_benchmark.py
 ```
 
+Phase 3 (Baskoylu 2026 freely-moving data and Randi response audit):
+
+```bash
+python scripts/phase3_download_baskoylu.py          # Anubis challenge + SHA256
+python scripts/phase3_prospective_benchmark.py     # 27-animal LOAO benchmark
+python scripts/phase3_randi_analysis.py            # target/context/shape audit
+python scripts/phase3_make_figures.py              # reports/phase3/figures
+python scripts/export_neuropal.jl                  # one-time JLD2 -> TSV (Julia)
+```
+
+The Phase 3 headline is a **negative/inconclusive** primary result: adding
+population neural activity to behavioural history gives Δ log loss -0.0070 at 6 s,
+95% animal CI [-0.0148, +0.0005]. The time-shifted null is flat, a quadratic
+behavioural baseline removes the significance, identified neurons do not help,
+and within-animal forward prediction is worse. Randi repeated responses remain at
+r≈0.09 and repeated-event averaging is worse than a global mean. See
+[`docs/PHASE3_RESULTS.md`](docs/PHASE3_RESULTS.md).
+
 The `simulate intervention` command prints the standing warning and writes a
 JSON summary containing the baseline and virtual distributions, bootstrap CI,
 trajectory displacement, OOD fraction, and the causal-status object.
@@ -120,8 +140,9 @@ neurobranch-celegans/
 ├─ app/streamlit_app.py          interactive explorer
 ├─ configs/                      data, experiment, and intervention configs
 ├─ data/raw/kato2015/            immutable raw archive (not committed)
+├─ data/raw/baskoylu2026/        Phase 3 raw HDF5/JLD2 (not committed)
 ├─ docs/                         methodology, provenance, results, limitations,
-│                                supervisor brief, paper prospectus
+│                                supervisor brief, paper prospectus, Phase 3 reports
 ├─ figures/                      generated PNG/HTML figures
 ├─ reports/                      audit tables and result summaries
 ├─ references/external/          cloned upstream repositories (not committed)
@@ -129,15 +150,15 @@ neurobranch-celegans/
 │  ├─ behavior/                  runs, transitions, entropies
 │  ├─ branching/                 local outcome diversity, corrected null tests, synthetic fixtures
 │  ├─ cli/                       Typer entry point
-│  ├─ data/                      Kato loader, Randi optogenetic adapter, provenance
-│  ├─ dynamics/                  baselines, neural/latent models, training, checkpoints
-│  ├─ evaluation/                metrics, bootstrap, rollouts, Randi and behaviour benchmarks
+│  ├─ data/                      Kato loader, Baskoylu/Randi adapters, provenance
+│  ├─ dynamics/                  baselines, neural/latent models, training, cross-animal probe
+│  ├─ evaluation/                metrics, bootstrap, rollouts, Randi/behaviour benchmarks
 │  ├─ interventions/             specs, paired engine, OOD, evidence gate, specificity audit
 │  ├─ preprocessing/             leakage-safe split/scaling/windowing
 │  ├─ representation/            BunDLe-Net artifact integration + reimplementation
 │  ├─ reproduction/              NC-MCM verification
 │  └─ reporting/                 tables and figures from saved artifacts
-├─ scripts/                      Phase 2 audit and benchmark entry points
+├─ scripts/                      Phase 2/3 audit and benchmark entry points
 └─ tests/                        unit / integration / scientific
 ```
 
@@ -173,6 +194,9 @@ neurobranch-celegans/
 - Dataset: Kato et al. 2015, *Cell* 163:656–669, OSF project
   <https://osf.io/2395t/>. File `WT_NoStim.mat`, SHA256
   `7531811c1718e26a0455f59cb2f8188cf25809278cfea85770dfe03315a0098a`.
+- Phase 3 dataset: Baskoylu & Flavell 2026, Dryad
+  `doi:10.5061/dryad.w9ghx3g4v`, 27 animals, 30 files, 320,032,093 bytes, CC0-1.0.
+  Raw data are untracked; the SHA256 manifest and derived tables are committed.
 - Raw data are immutable; every derived artifact records the SHA256 and the git
   state in its `resolved_config.yaml` / metrics JSON.
 - Seeds 17, 23, 31 are fixed for the primary suite. Every training run writes a
@@ -203,6 +227,15 @@ config, and artifact path.
 | [`docs/PHASE2_METHODOLOGY.md`](docs/PHASE2_METHODOLOGY.md) | Phase 2 protocols, splits, statistics |
 | [`docs/PHASE2_SCIENTIFIC_LIMITATIONS.md`](docs/PHASE2_SCIENTIFIC_LIMITATIONS.md) | Phase 2-specific limitations |
 | [`docs/PHASE2_NEXT_EXPERIMENTS.md`](docs/PHASE2_NEXT_EXPERIMENTS.md) | Falsifiable next experiments |
+| [`docs/PHASE3_RESEARCH_PLAN.md`](docs/PHASE3_RESEARCH_PLAN.md) | Locked Phase 3 preregistration and decision rule |
+| [`docs/PHASE3_DATASET_AUDIT.md`](docs/PHASE3_DATASET_AUDIT.md) | Baskoylu HDF5/JLD2 audit, event convention, leakage finding |
+| [`docs/PHASE3_BEHAVIORAL_VALIDATION.md`](docs/PHASE3_BEHAVIORAL_VALIDATION.md) | Prospective behaviour benchmark and controls |
+| [`docs/PHASE3_NEURAL_REPRESENTATIONS.md`](docs/PHASE3_NEURAL_REPRESENTATIONS.md) | Population/PCA/identified representations and stop decision |
+| [`docs/PHASE3_RANDI_RESPONSE_AUDIT.md`](docs/PHASE3_RANDI_RESPONSE_AUDIT.md) | Randi target, shape, averaging and context audit |
+| [`docs/PHASE3_INTERVENTION_LIMITATIONS.md`](docs/PHASE3_INTERVENTION_LIMITATIONS.md) | Evidence required before a control claim |
+| [`docs/PHASE3_RESULTS.md`](docs/PHASE3_RESULTS.md) | Phase 3 exact results and RQ answers |
+| [`docs/PHASE3_SUPERVISOR_BRIEF.md`](docs/PHASE3_SUPERVISOR_BRIEF.md) | Phase 3 supervisor handoff and 6-ECTS scope |
+| [`docs/PHASE3_NEXT_EXPERIMENTS.md`](docs/PHASE3_NEXT_EXPERIMENTS.md) | Prioritised replication/control experiments |
 | [`docs/REPRODUCING.md`](docs/REPRODUCING.md) | Operator recipe with expected numbers and known nondeterminism |
 | [`docs/DECISIONS.md`](docs/DECISIONS.md) | Design decisions and rejected alternatives |
 | [`docs/METHODOLOGY.md`](docs/METHODOLOGY.md) | Splits, models, metrics, branching and perturbation definitions |
@@ -229,6 +262,12 @@ config, and artifact path.
 - `figures/fig07_ncmcm_verification.png` — distributed vs reimplemented p-values.
 - `figures/fig08_observed_vs_rollout.png` — observed trajectory vs model rollout.
 - `figures/fig09_phase2_summary.png` — corrected branching, RIVL specificity, Randi MAE, behaviour increment.
+- `reports/phase3/figures/prospective_logloss.png` — Phase 3 animal-disjoint log loss by horizon.
+- `reports/phase3/figures/neural_delta_ci.png` — primary neural Δ and control CIs.
+- `reports/phase3/figures/randi_reliability.png` — Randi target/shape reliability.
+- `reports/phase3/figures/randi_repeated_average.png` — repeated averaging vs global mean.
+- `reports/phase3/figures/dataset_coverage.png` — Baskoylu event rate vs reversal occupancy.
+- `reports/phase3/figures/cross_animal_dynamics.png` — one-step cross-animal dynamics.
 
 ---
 

@@ -1,0 +1,4 @@
+target,n_groups,n_pairs,median_pairwise_r,mean_pairwise_r,fraction_positive,q25,q75,interpretation
+response,580,925,0.09004566582266282,0.08474934389485617,0.6324324324324324,-0.1261505936920193,0.29715567970119966,pairwise response-profile correlation across repeated stimulations of the same target in the same animal
+response_mean,580,925,0.09209093295200388,0.08169347332520557,0.625945945945946,-0.11552195851112948,0.2611383744705334,pairwise response-profile correlation across repeated stimulations of the same target in the same animal
+response_integral,580,925,0.09209093295200398,0.08169347332520557,0.625945945945946,-0.11552195851112951,0.26113837447053334,pairwise response-profile correlation across repeated stimulations of the same target in the same animal

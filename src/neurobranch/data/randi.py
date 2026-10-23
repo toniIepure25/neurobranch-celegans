@@ -212,6 +212,14 @@ def extract_trials(
             continue
         if target_idx < 0:
             continue
+        previous = [
+            (j, int(i0 - rec.stim_frames[j]))
+            for j in range(event_index)
+            if rec.stimulated_labels[j] is not None and rec.stim_frames[j] < i0
+        ]
+        prev_interval = float(previous[-1][1] * rec.dt) if previous else float("nan")
+        prev_target = rec.stimulated_labels[previous[-1][0]] if previous else None
+        prev_same_target = bool(prev_target is not None and prev_target == target)
         pre = rec.traces[i0 - cfg.pre_frames : i0]
         post = rec.traces[i0 + cfg.post_start : i0 + cfg.post_start + cfg.post_frames]
         if pre.size == 0 or post.size == 0:
@@ -226,10 +234,14 @@ def extract_trials(
             finite_traces = np.ones(pre.shape[1], dtype=bool)
         baseline = np.full(pre.shape[1], np.nan)
         baseline[finite_traces] = np.median(pre[:, finite_traces], axis=0)
+        pre_sd = np.full(pre.shape[1], np.nan)
+        pre_sd[finite_traces] = np.std(pre[:, finite_traces], axis=0)
         delta = post - baseline
         # Signed value at the maximum absolute excursion.
         peak_idx = np.argmax(np.abs(delta), axis=0)
         peak = delta[peak_idx, np.arange(delta.shape[1])]
+        mean_response = np.mean(delta, axis=0)
+        integral_response = np.sum(delta, axis=0)
         noise = np.full(pre.shape[1], np.nan)
         noise[finite_traces] = (
             1.4826 * np.median(np.abs(pre[:, finite_traces] - baseline[finite_traces]), axis=0)
@@ -255,9 +267,16 @@ def extract_trials(
                     "stim_frame": int(i0),
                     "time_seconds": float(rec.time_seconds[i0]),
                     "response": float(peak[j]),
+                    "response_mean": float(mean_response[j]),
+                    "response_integral": float(integral_response[j]),
+                    "response_peak_time": float(peak_idx[j] * rec.dt),
                     "response_z": float(z[j]),
                     "response_sign": int(np.sign(peak[j])),
                     "pre_activity": float(baseline[j]),
+                    "pre_sd": float(pre_sd[j]),
+                    "prev_stim_interval": prev_interval,
+                    "prev_same_target": prev_same_target,
+                    "event_order": int(event_index),
                     "global_delta": global_delta,
                     "response_residual": float(peak[j] - global_delta),
                 }

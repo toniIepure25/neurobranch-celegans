@@ -75,6 +75,37 @@ report.
 
 ---
 
+## 1A. Phase 3 independent dataset
+
+| Field | Value |
+|---|---|
+| Study | Baskoylu & Flavell (2026), freely-moving whole-brain calcium imaging and reversal behaviour |
+| DOI | <https://doi.org/10.5061/dryad.w9ghx3g4v> |
+| Repository | Dryad, dataset id 183044, version 2 id 436401, published 2026-04-15 |
+| License | CC0-1.0 |
+| Files | 30, total 320,032,093 bytes |
+| Animals | 27 |
+| Local path | `data/raw/baskoylu2026/` (not committed) |
+| Manifest | `data/raw/baskoylu2026/manifest.json` with per-file SHA256 |
+| Identity export | `data/raw/baskoylu2026/neuropal_labels.tsv`, SHA256 `7645ad1d112f4a412c84994597a81ad6aae809c275d65befcf68a1d482025d72` |
+
+Fields used: `gcamp/trace_array_original` (raw, `T × N`),
+`gcamp/trace_array` (published whole-recording z-score; **not** used as a
+predictor), `behavior/velocity`, `reversal_vec`, `reversal_events`,
+`head_angle`, `angular_velocity`, `dist_from_cuCenter`, and
+`timing/timestamp_confocal` / `timestamp_nir`.
+
+Event convention is **0-based start, exclusive end**. Seven recordings begin in a
+partial reversal at frame 0; the adapter permits only that frame-0 initial
+mismatch. The full audit, leakage finding and label coverage are in
+[`PHASE3_DATASET_AUDIT.md`](PHASE3_DATASET_AUDIT.md).
+
+The NeuroPAL JLD2 strings are not readable by h5py 3.16/HDF5 2.0; a one-time
+Julia 1.9.2 + JLD2.jl export produces the TSV. The analysis pipeline reads only
+the TSV and has no Julia dependency.
+
+---
+
 ## 2. Reference code and artifacts
 
 All reference repositories are cloned under `references/external/` and are **not
@@ -109,7 +140,9 @@ local convention and is stated in every output.
 - No `WT_Stim.mat` or `AVA_HisCl.mat` was downloaded or analysed.
 - No new animals were imaged.
 - No optogenetic, chemogenetic, or mechanical perturbation was performed.
-- No external behavioural tracking data were used.
+- No external behavioural tracking data were used in Phase 1/2. Phase 3 uses the
+  independently observed Baskoylu & Flavell (2026) behaviour, but still no
+  perturbation and no causal intervention.
 
 The intervention engine is therefore fitted only to observational data and is
 labelled accordingly. The `EmpiricalEvidence` gate would require a matched,

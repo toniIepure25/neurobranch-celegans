@@ -1,4 +1,4 @@
-﻿from __future__ import annotations
+from __future__ import annotations
 
 from pathlib import Path
 
@@ -12,7 +12,13 @@ from neurobranch.data.randi import (
 )
 
 
-def _write_dataset(root: Path, *, trailing_blank_labels: int = 0) -> Path:
+def _write_dataset(
+    root: Path,
+    *,
+    trailing_blank_labels: int = 0,
+    stim_frames: list[int] | None = None,
+    stim_targets: list[int] | None = None,
+) -> Path:
     ds = root / "0"
     t = np.arange(30) * 0.5
     traces = np.zeros((30, 3))
@@ -22,8 +28,11 @@ def _write_dataset(root: Path, *, trailing_blank_labels: int = 0) -> Path:
     np.savetxt(f"{ds}_t.txt", t)
     labels = ["A", "B", "C"] + [""] * trailing_blank_labels
     Path(f"{ds}_labels.txt").write_text("\n".join(labels) + "\n", encoding="utf-8")
-    Path(f"{ds}_stim_neurons.txt").write_text("0\n", encoding="utf-8")
-    Path(f"{ds}_stim_volume_i.txt").write_text("10\n", encoding="utf-8")
+    frames = stim_frames or [10]
+    targets = stim_targets if stim_targets is not None else [0] * len(frames)
+    assert len(frames) == len(targets)
+    Path(f"{ds}_stim_neurons.txt").write_text("\n".join(str(x) for x in targets) + "\n", encoding="utf-8")
+    Path(f"{ds}_stim_volume_i.txt").write_text("\n".join(str(x) for x in frames) + "\n", encoding="utf-8")
     Path(f"{ds}_ds_name.txt").write_text("synthetic/0", encoding="utf-8")
     return root
 
@@ -61,6 +70,21 @@ def test_extract_trials_excludes_stimulated_trace_and_keeps_sign(tmp_path: Path)
     assert b.response_sign == 1
     assert c.response_sign == -1
     assert b.event_id == "0:0"
+    for col in ("response_mean", "response_integral", "response_peak_time", "pre_sd"):
+        assert col in table.columns
+    assert np.isfinite(b.response_mean)
+    assert np.isfinite(b.response_integral)
+    assert b.prev_stim_interval != b.prev_stim_interval  # NaN for the first event
+
+
+def test_previous_stimulus_interval_uses_immediately_preceding_event(tmp_path: Path) -> None:
+    _write_dataset(tmp_path, stim_frames=[10, 11, 16], stim_targets=[0, 0, 0])
+    rec = load_recording(tmp_path, 0)
+    table = extract_trials(rec)
+    b = table[(table.neuron == "B") & (table.event_order == 2)].iloc[0]
+    # Immediately preceding event is frame 11, not the closest pair (10->11).
+    assert np.isclose(b.prev_stim_interval, (16 - 11) * 0.5)
+    assert bool(b.prev_same_target) is True
 
 
 def test_extract_trials_does_not_impute_nan(tmp_path: Path) -> None:

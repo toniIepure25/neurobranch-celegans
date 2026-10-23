@@ -226,6 +226,33 @@ Phase 2 reports are listed in `README.md` and `docs/PHASE2_METHODOLOGY.md`.
 
 ---
 
+## E-P3. Phase 3 prospective benchmark and external audits
+
+| Field | Value |
+|---|---|
+| Branch | `research/phase3-neural-generalization` |
+| Download command | `python scripts/phase3_download_baskoylu.py` |
+| Raw data | `data/raw/baskoylu2026/files/` (not tracked; 30 files, 320,032,093 bytes) |
+| Dataset manifest | `data/raw/baskoylu2026/manifest.json` (per-file SHA256) |
+| Identity export | `python scripts/export_neuropal.jl` → `data/raw/baskoylu2026/neuropal_labels.tsv` |
+| Prospective command | `python scripts/phase3_prospective_benchmark.py` |
+| Prospective outputs | `reports/phase3/prospective_*`, `dataset_summary.json`, `dataset_coverage.csv`, `neuron_identity_coverage.csv`, `prospective_run_manifest.json` |
+| Primary target | reversal onset in `(t, t+6 s]`, animal-disjoint LOAO |
+| Primary model | L2 logistic, C=0.1, causal features, 10,000 animal bootstrap (seed 17) |
+| Primary result | Δ log loss −0.00701, 95% CI [−0.01483, +0.00053], 20/27 improved; **criterion not met** |
+| Randi command | `python scripts/phase3_randi_analysis.py` |
+| Randi outputs | `reports/phase3/randi_*` |
+| Cross-animal command | `python scripts/phase3_cross_animal.py` |
+| Cross-animal outputs | `reports/phase3/cross_animal_dynamics.csv/.json` |
+| Figures | `python scripts/phase3_make_figures.py` → `reports/phase3/figures/` |
+| Manifest | `python scripts/phase3_write_manifest.py` |
+| Tests | `57 passed`; ruff clean |
+
+Phase 3 does not perform an intervention and does not establish causal control.
+
+
+---
+
 ## Artifact inventory (quick check)
 
 ```text
