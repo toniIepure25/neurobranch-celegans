@@ -264,3 +264,32 @@ new cohort.
 
 These are designed to fail informatively. They do not require another
 attractive 3-D visualization.
+
+
+---
+
+## Phase 5 update (SAAV mechanistic validation)
+
+Phase 5 tested whether the published positive SAAV decoding survives an
+independent reconstruction and a genuinely causal-onset online benchmark. The
+answer is no in this reconstruction: no regime produced a positive, properly
+scored, animal-disjoint SAAV increment. Exact reproduction is blocked because
+the four author-local aligned CSVs and preprocessing script are not public.
+
+- Original-style offline: SAAV AUROC 0.540 vs behaviour 0.534; Δ log loss
+  −0.0006 [−0.0029, +0.0018].
+- Online causal-onset: no SAAV or circuit log-loss increment; population AUROC
+  rises early but proper-score log loss does not.
+- Mechanism: SAAV Δ log loss +0.010 [−0.008, +0.029]; SMDV is a large but
+  six-animal exploratory effect and is not causal.
+- No virtual intervention was run. No causal claim is supported.
+
+The leading explanation for the paper/Phase 4 discrepancy is the evaluation
+unit: section/timestep class-balanced accuracy over overlapping sections vs
+event-level animal-disjoint proper scores, compounded by missing alignment and
+preprocessing. The highest-value next step is to obtain the CSVs and reproduce
+the official section-level run, then pre-register the event-level reanalysis.
+See [`PHASE5_SUPERVISOR_BRIEF.md`](PHASE5_SUPERVISOR_BRIEF.md) and
+[`PHASE5_RESULTS.md`](PHASE5_RESULTS.md).
+
+> **MODEL-DEPENDENT VIRTUAL PERTURBATION — NOT CAUSALLY VALIDATED.**

@@ -160,6 +160,27 @@ including zero and is exploratory only.  See
 optogenetic data exist in the archive; the tdc1 cohort is treated as a
 distribution-shift cohort, not an intervention.
 
+Phase 5 (SAAV mechanistic validation; branch
+`research/phase5-saav-mechanistic-validation`):
+
+```bash
+python scripts/phase5_protocol_compare.py --epochs 35   # four offline regimes
+python scripts/phase5_online.py --epochs 40             # causal-onset online test
+python scripts/phase5_mechanisms.py                     # SAAV/circuit + controls
+python scripts/phase5_interventions.py                  # evidence map only
+python scripts/phase5_figures.py
+```
+
+The Phase 5 headline is **no positive, properly scored, animal-disjoint SAAV
+increment** in any reconstruction. Exact reproduction is blocked because the
+four author-local aligned CSVs and preprocessing script are not public. The
+closest original-style SAAV AUROC is 0.540 (behaviour 0.534), with a log-loss
+increment of -0.0006 and a CI crossing zero. The causal-onset online benchmark
+also finds no SAAV or circuit increment; population AUROC rises early but
+proper-score log loss does not. No virtual intervention was run. See
+[`docs/PHASE5_RESULTS.md`](docs/PHASE5_RESULTS.md) and the
+[`missing-data request`](docs/PHASE5_MISSING_DATA_REQUEST.md).
+
 The `simulate intervention` command prints the standing warning and writes a
 JSON summary containing the baseline and virtual distributions, bootstrap CI,
 trajectory displacement, OOD fraction, and the causal-status object.
@@ -176,7 +197,7 @@ neurobranch-celegans/
 ├─ data/raw/baskoylu2026/        Phase 3 raw HDF5/JLD2 (not committed)
 ├─ data/raw/kramer2026/          Phase 4 Dryad recordings (not committed)
 ├─ docs/                         methodology, provenance, results, limitations,
-│                                supervisor brief, paper prospectus, Phase 3/4 reports
+│                                supervisor brief, paper prospectus, Phase 3/4/5 reports
 ├─ figures/                      generated PNG/HTML figures
 ├─ reports/                      audit tables and result summaries
 ├─ references/external/          cloned upstream repositories (not committed)
@@ -280,6 +301,16 @@ config, and artifact path.
 | [`docs/PHASE4_RESULTS.md`](docs/PHASE4_RESULTS.md) | Phase 4 exact results and hypothesis-by-hypothesis verdict |
 | [`docs/PHASE4_SUPERVISOR_BRIEF.md`](docs/PHASE4_SUPERVISOR_BRIEF.md) | One-page Phase 4 decision brief |
 | [`docs/PHASE4_NEXT_EXPERIMENTS.md`](docs/PHASE4_NEXT_EXPERIMENTS.md) | Prioritised replication, representation and causal experiments |
+| [`docs/PHASE5_RESEARCH_PLAN.md`](docs/PHASE5_RESEARCH_PLAN.md) | Locked Phase 5 questions, statuses, regimes and decision gates |
+| [`docs/PHASE5_KRAMER_REPRODUCTION.md`](docs/PHASE5_KRAMER_REPRODUCTION.md) | Official source contract, hashes and missing-input block |
+| [`docs/PHASE5_MISSING_DATA_REQUEST.md`](docs/PHASE5_MISSING_DATA_REQUEST.md) | Unsent request for the four aligned CSVs and preprocessing |
+| [`docs/PHASE5_PROTOCOL_COMPARISON.md`](docs/PHASE5_PROTOCOL_COMPARISON.md) | Four offline regimes and exact protocol differences |
+| [`docs/PHASE5_ONLINE_DECODING.md`](docs/PHASE5_ONLINE_DECODING.md) | Causal-onset online benchmark, risk sets and baselines |
+| [`docs/PHASE5_NEURAL_MECHANISMS.md`](docs/PHASE5_NEURAL_MECHANISMS.md) | SAAV/circuit incremental tests, stability and controls |
+| [`docs/PHASE5_INTERVENTION_EVIDENCE.md`](docs/PHASE5_INTERVENTION_EVIDENCE.md) | Published vs trial-level vs simulator evidence map |
+| [`docs/PHASE5_RESULTS.md`](docs/PHASE5_RESULTS.md) | Phase 5 exact results and discrepancy assessment |
+| [`docs/PHASE5_SUPERVISOR_BRIEF.md`](docs/PHASE5_SUPERVISOR_BRIEF.md) | Phase 5 decision brief and discussion points |
+| [`docs/PHASE5_NEXT_EXPERIMENTS.md`](docs/PHASE5_NEXT_EXPERIMENTS.md) | Highest-value next test and realistic 6-ECTS package |
 | [`docs/REPRODUCING.md`](docs/REPRODUCING.md) | Operator recipe with expected numbers and known nondeterminism |
 | [`docs/DECISIONS.md`](docs/DECISIONS.md) | Design decisions and rejected alternatives |
 | [`docs/METHODOLOGY.md`](docs/METHODOLOGY.md) | Splits, models, metrics, branching and perturbation definitions |

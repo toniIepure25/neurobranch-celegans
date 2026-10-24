@@ -1,5 +1,20 @@
 # Phase 5 research plan: SAAV mechanistic validation
 
+## Outcome (post-registration)
+
+The plan below was frozen before Phase 5 model evaluation. Results are now in
+[`PHASE5_RESULTS.md`](PHASE5_RESULTS.md), with the protocol comparison in
+[`PHASE5_PROTOCOL_COMPARISON.md`](PHASE5_PROTOCOL_COMPARISON.md), online test in
+[`PHASE5_ONLINE_DECODING.md`](PHASE5_ONLINE_DECODING.md), mechanisms in
+[`PHASE5_NEURAL_MECHANISMS.md`](PHASE5_NEURAL_MECHANISMS.md), intervention map
+in [`PHASE5_INTERVENTION_EVIDENCE.md`](PHASE5_INTERVENTION_EVIDENCE.md), and
+the 6-ECTS follow-up in [`PHASE5_NEXT_EXPERIMENTS.md`](PHASE5_NEXT_EXPERIMENTS.md).
+
+Exact reproduction remains `BLOCKED_MISSING_INPUTS`; the reconstruction is
+`PARTIAL_REPRODUCTION` and `METHOD_RECONSTRUCTION`. No regime produced a
+positive, properly scored, animal-disjoint SAAV increment. No virtual
+intervention was run.
+
 **Branch:** `research/phase5-saav-mechanistic-validation`  
 **Starting HEAD:** `14a43710334393c2dd234e848fb445d4317a734b`  
 **Data:** Kramer et al. (2026) Dryad v5, CC0-1.0, local raw files only (not committed).  

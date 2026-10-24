@@ -1,0 +1,13 @@
+regime,mode,n,prevalence,prior_log_loss,prior_brier,note
+chronological,behavior,52,0.4230769230769231,0.6812657296632041,0.24408284023668636,descriptive held-out prevalence reference; not a trained model
+chronological,both,52,0.4230769230769231,0.6812657296632041,0.24408284023668636,descriptive held-out prevalence reference; not a trained model
+chronological,saav,52,0.4230769230769231,0.6812657296632041,0.24408284023668636,descriptive held-out prevalence reference; not a trained model
+external,behavior,116,0.2672413793103448,0.5804957071346712,0.19582342449464923,descriptive held-out prevalence reference; not a trained model
+external,both,116,0.2672413793103448,0.5804957071346712,0.19582342449464923,descriptive held-out prevalence reference; not a trained model
+external,saav,116,0.2672413793103448,0.5804957071346712,0.19582342449464923,descriptive held-out prevalence reference; not a trained model
+grouped,behavior,250,0.248,0.560127234322942,0.186496,descriptive held-out prevalence reference; not a trained model
+grouped,both,250,0.248,0.560127234322942,0.186496,descriptive held-out prevalence reference; not a trained model
+grouped,saav,250,0.248,0.560127234322942,0.186496,descriptive held-out prevalence reference; not a trained model
+original,behavior,250,0.248,0.560127234322942,0.186496,descriptive held-out prevalence reference; not a trained model
+original,both,250,0.248,0.560127234322942,0.186496,descriptive held-out prevalence reference; not a trained model
+original,saav,250,0.248,0.560127234322942,0.186496,descriptive held-out prevalence reference; not a trained model

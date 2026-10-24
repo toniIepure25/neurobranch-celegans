@@ -1,0 +1,49 @@
+{
+  "status": "PARTIAL_REPRODUCTION",
+  "n_recordings_loaded": 73,
+  "n_events": 250,
+  "n_animals": 26,
+  "n_dorsal": 62,
+  "n_ventral": 188,
+  "cohorts": {
+    "wt_diacetyl": 116,
+    "wt_octanol": 134
+  },
+  "channels": [
+    "hc",
+    "saav",
+    "neuron:SAAV",
+    "neuron:SAAD",
+    "neuron:SMDV",
+    "neuron:SMDD",
+    "neuron:RMDV",
+    "neuron:RMDD",
+    "neuron:RIV",
+    "neuron:SMBV",
+    "neuron:SMBD"
+  ],
+  "frames": 48,
+  "epochs": 35,
+  "seed": 17,
+  "torch_threads": 4,
+  "regimes": [
+    "original",
+    "grouped",
+    "chronological",
+    "external"
+  ],
+  "modes": [
+    "behavior",
+    "saav",
+    "both"
+  ],
+  "reconstruction_exclusions": {
+    "reversal_too_short": 1058,
+    "missing_saav_identity": 488,
+    "": 250,
+    "phase:event crosses an implausible head-swing interval": 132,
+    "phase:not enough phase history before the event": 41,
+    "near_zero_turn": 29,
+    "phase:time is outside the phase track": 5
+  }
+}

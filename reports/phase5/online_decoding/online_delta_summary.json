@@ -1,0 +1,542 @@
+{
+  "0.6:linear:behavior_saav": {
+    "n_events": 422,
+    "n_animals": 27,
+    "log_loss_delta": 0.0017191082224710108,
+    "log_loss_ci": [
+      -0.004832168404819562,
+      0.007696304176385082
+    ],
+    "classification": "no_incremental_evidence"
+  },
+  "0.6:linear:behavior_circuit": {
+    "n_events": 422,
+    "n_animals": 27,
+    "log_loss_delta": 0.01435842832360068,
+    "log_loss_ci": [
+      -0.029704326608216702,
+      0.053843218774032635
+    ],
+    "classification": "no_incremental_evidence"
+  },
+  "0.6:linear:behavior_population": {
+    "n_events": 422,
+    "n_animals": 27,
+    "log_loss_delta": -0.015275931995549441,
+    "log_loss_ci": [
+      -0.05398245633342849,
+      0.03207359669976982
+    ],
+    "classification": "no_incremental_evidence"
+  },
+  "0.6:prior:behavior_saav": {
+    "n_events": 422,
+    "n_animals": 27,
+    "log_loss_delta": 0.0,
+    "log_loss_ci": [
+      0.0,
+      0.0
+    ],
+    "classification": "no_incremental_evidence"
+  },
+  "0.6:prior:behavior_circuit": {
+    "n_events": 422,
+    "n_animals": 27,
+    "log_loss_delta": 0.0,
+    "log_loss_ci": [
+      0.0,
+      0.0
+    ],
+    "classification": "no_incremental_evidence"
+  },
+  "0.6:prior:behavior_population": {
+    "n_events": 422,
+    "n_animals": 27,
+    "log_loss_delta": 0.0,
+    "log_loss_ci": [
+      0.0,
+      0.0
+    ],
+    "classification": "no_incremental_evidence"
+  },
+  "0.6:rnn:behavior_saav": {
+    "n_events": 422,
+    "n_animals": 27,
+    "log_loss_delta": 0.048827572658979856,
+    "log_loss_ci": [
+      0.012956008953665193,
+      0.08653317860802558
+    ],
+    "classification": "negative_increment"
+  },
+  "0.6:rnn:behavior_circuit": {
+    "n_events": 422,
+    "n_animals": 27,
+    "log_loss_delta": 0.017509999485201266,
+    "log_loss_ci": [
+      -0.006107701084097491,
+      0.04635893253597825
+    ],
+    "classification": "no_incremental_evidence"
+  },
+  "0.6:rnn:behavior_population": {
+    "n_events": 422,
+    "n_animals": 27,
+    "log_loss_delta": 0.009250595264363226,
+    "log_loss_ci": [
+      -0.01060627133357613,
+      0.03145532241310354
+    ],
+    "classification": "no_incremental_evidence"
+  },
+  "1.2:linear:behavior_saav": {
+    "n_events": 422,
+    "n_animals": 27,
+    "log_loss_delta": 0.004021517014191622,
+    "log_loss_ci": [
+      -0.0012636687136273804,
+      0.009189824419476154
+    ],
+    "classification": "no_incremental_evidence"
+  },
+  "1.2:linear:behavior_circuit": {
+    "n_events": 422,
+    "n_animals": 27,
+    "log_loss_delta": 0.02800774574843179,
+    "log_loss_ci": [
+      -0.023456332433602872,
+      0.0758254569597429
+    ],
+    "classification": "no_incremental_evidence"
+  },
+  "1.2:linear:behavior_population": {
+    "n_events": 422,
+    "n_animals": 27,
+    "log_loss_delta": -0.0058046866727591295,
+    "log_loss_ci": [
+      -0.043710595747176,
+      0.040348045429618895
+    ],
+    "classification": "no_incremental_evidence"
+  },
+  "1.2:prior:behavior_saav": {
+    "n_events": 422,
+    "n_animals": 27,
+    "log_loss_delta": 0.0,
+    "log_loss_ci": [
+      0.0,
+      0.0
+    ],
+    "classification": "no_incremental_evidence"
+  },
+  "1.2:prior:behavior_circuit": {
+    "n_events": 422,
+    "n_animals": 27,
+    "log_loss_delta": 0.0,
+    "log_loss_ci": [
+      0.0,
+      0.0
+    ],
+    "classification": "no_incremental_evidence"
+  },
+  "1.2:prior:behavior_population": {
+    "n_events": 422,
+    "n_animals": 27,
+    "log_loss_delta": 0.0,
+    "log_loss_ci": [
+      0.0,
+      0.0
+    ],
+    "classification": "no_incremental_evidence"
+  },
+  "1.2:rnn:behavior_saav": {
+    "n_events": 422,
+    "n_animals": 27,
+    "log_loss_delta": 0.035286438507507345,
+    "log_loss_ci": [
+      -0.002166951300361099,
+      0.07050599736647518
+    ],
+    "classification": "no_incremental_evidence"
+  },
+  "1.2:rnn:behavior_circuit": {
+    "n_events": 422,
+    "n_animals": 27,
+    "log_loss_delta": 0.006758864388035968,
+    "log_loss_ci": [
+      -0.020819765951636558,
+      0.04280684053506208
+    ],
+    "classification": "no_incremental_evidence"
+  },
+  "1.2:rnn:behavior_population": {
+    "n_events": 422,
+    "n_animals": 27,
+    "log_loss_delta": 0.0020325628559961784,
+    "log_loss_ci": [
+      -0.01780587069586421,
+      0.02697999687070988
+    ],
+    "classification": "no_incremental_evidence"
+  },
+  "2.4:linear:behavior_saav": {
+    "n_events": 424,
+    "n_animals": 27,
+    "log_loss_delta": 0.029786525589405755,
+    "log_loss_ci": [
+      -0.0010043806041291983,
+      0.07096747646406759
+    ],
+    "classification": "no_incremental_evidence"
+  },
+  "2.4:linear:behavior_circuit": {
+    "n_events": 424,
+    "n_animals": 27,
+    "log_loss_delta": 0.056146404017445306,
+    "log_loss_ci": [
+      0.0023599935516226286,
+      0.1155078860410047
+    ],
+    "classification": "negative_increment"
+  },
+  "2.4:linear:behavior_population": {
+    "n_events": 424,
+    "n_animals": 27,
+    "log_loss_delta": 0.007916788122451668,
+    "log_loss_ci": [
+      -0.027319344085181888,
+      0.05817249284751171
+    ],
+    "classification": "no_incremental_evidence"
+  },
+  "2.4:prior:behavior_saav": {
+    "n_events": 424,
+    "n_animals": 27,
+    "log_loss_delta": 0.0,
+    "log_loss_ci": [
+      0.0,
+      0.0
+    ],
+    "classification": "no_incremental_evidence"
+  },
+  "2.4:prior:behavior_circuit": {
+    "n_events": 424,
+    "n_animals": 27,
+    "log_loss_delta": 0.0,
+    "log_loss_ci": [
+      0.0,
+      0.0
+    ],
+    "classification": "no_incremental_evidence"
+  },
+  "2.4:prior:behavior_population": {
+    "n_events": 424,
+    "n_animals": 27,
+    "log_loss_delta": 0.0,
+    "log_loss_ci": [
+      0.0,
+      0.0
+    ],
+    "classification": "no_incremental_evidence"
+  },
+  "2.4:rnn:behavior_saav": {
+    "n_events": 424,
+    "n_animals": 27,
+    "log_loss_delta": 0.022070537396352563,
+    "log_loss_ci": [
+      -0.00772510358554288,
+      0.06041015883771399
+    ],
+    "classification": "no_incremental_evidence"
+  },
+  "2.4:rnn:behavior_circuit": {
+    "n_events": 424,
+    "n_animals": 27,
+    "log_loss_delta": 0.026549817186173108,
+    "log_loss_ci": [
+      -0.0034610780759837946,
+      0.061133500802522514
+    ],
+    "classification": "no_incremental_evidence"
+  },
+  "2.4:rnn:behavior_population": {
+    "n_events": 424,
+    "n_animals": 27,
+    "log_loss_delta": 0.00983420706925775,
+    "log_loss_ci": [
+      -0.012833076796769236,
+      0.029499074102778244
+    ],
+    "classification": "no_incremental_evidence"
+  },
+  "3.6:linear:behavior_saav": {
+    "n_events": 425,
+    "n_animals": 27,
+    "log_loss_delta": 0.032659996522439894,
+    "log_loss_ci": [
+      -0.0008009462643467966,
+      0.07665045689484903
+    ],
+    "classification": "no_incremental_evidence"
+  },
+  "3.6:linear:behavior_circuit": {
+    "n_events": 425,
+    "n_animals": 27,
+    "log_loss_delta": 0.056461784107141755,
+    "log_loss_ci": [
+      0.01631277287546461,
+      0.10143122587601318
+    ],
+    "classification": "negative_increment"
+  },
+  "3.6:linear:behavior_population": {
+    "n_events": 425,
+    "n_animals": 27,
+    "log_loss_delta": 0.02722047660129734,
+    "log_loss_ci": [
+      -0.010614114215720533,
+      0.08286353392972758
+    ],
+    "classification": "no_incremental_evidence"
+  },
+  "3.6:prior:behavior_saav": {
+    "n_events": 425,
+    "n_animals": 27,
+    "log_loss_delta": 0.0,
+    "log_loss_ci": [
+      0.0,
+      0.0
+    ],
+    "classification": "no_incremental_evidence"
+  },
+  "3.6:prior:behavior_circuit": {
+    "n_events": 425,
+    "n_animals": 27,
+    "log_loss_delta": 0.0,
+    "log_loss_ci": [
+      0.0,
+      0.0
+    ],
+    "classification": "no_incremental_evidence"
+  },
+  "3.6:prior:behavior_population": {
+    "n_events": 425,
+    "n_animals": 27,
+    "log_loss_delta": 0.0,
+    "log_loss_ci": [
+      0.0,
+      0.0
+    ],
+    "classification": "no_incremental_evidence"
+  },
+  "3.6:rnn:behavior_saav": {
+    "n_events": 425,
+    "n_animals": 27,
+    "log_loss_delta": 0.005562461547206632,
+    "log_loss_ci": [
+      -0.02515027948262237,
+      0.04014788509197206
+    ],
+    "classification": "no_incremental_evidence"
+  },
+  "3.6:rnn:behavior_circuit": {
+    "n_events": 425,
+    "n_animals": 27,
+    "log_loss_delta": 0.011782857688022896,
+    "log_loss_ci": [
+      -0.02185246089709299,
+      0.048954292741210055
+    ],
+    "classification": "no_incremental_evidence"
+  },
+  "3.6:rnn:behavior_population": {
+    "n_events": 425,
+    "n_animals": 27,
+    "log_loss_delta": -0.005525126939303293,
+    "log_loss_ci": [
+      -0.03324545905186062,
+      0.024239356093367973
+    ],
+    "classification": "no_incremental_evidence"
+  },
+  "4.8:linear:behavior_saav": {
+    "n_events": 425,
+    "n_animals": 27,
+    "log_loss_delta": 0.027756705623090627,
+    "log_loss_ci": [
+      0.0012892398080165044,
+      0.060895057075686446
+    ],
+    "classification": "negative_increment"
+  },
+  "4.8:linear:behavior_circuit": {
+    "n_events": 425,
+    "n_animals": 27,
+    "log_loss_delta": 0.0606346789297999,
+    "log_loss_ci": [
+      0.0201608443207291,
+      0.10367033016141808
+    ],
+    "classification": "negative_increment"
+  },
+  "4.8:linear:behavior_population": {
+    "n_events": 425,
+    "n_animals": 27,
+    "log_loss_delta": 0.024821717104335228,
+    "log_loss_ci": [
+      -0.016379599173854637,
+      0.08143458603810105
+    ],
+    "classification": "no_incremental_evidence"
+  },
+  "4.8:prior:behavior_saav": {
+    "n_events": 425,
+    "n_animals": 27,
+    "log_loss_delta": 0.0,
+    "log_loss_ci": [
+      0.0,
+      0.0
+    ],
+    "classification": "no_incremental_evidence"
+  },
+  "4.8:prior:behavior_circuit": {
+    "n_events": 425,
+    "n_animals": 27,
+    "log_loss_delta": 0.0,
+    "log_loss_ci": [
+      0.0,
+      0.0
+    ],
+    "classification": "no_incremental_evidence"
+  },
+  "4.8:prior:behavior_population": {
+    "n_events": 425,
+    "n_animals": 27,
+    "log_loss_delta": 0.0,
+    "log_loss_ci": [
+      0.0,
+      0.0
+    ],
+    "classification": "no_incremental_evidence"
+  },
+  "4.8:rnn:behavior_saav": {
+    "n_events": 425,
+    "n_animals": 27,
+    "log_loss_delta": 0.021097240113027715,
+    "log_loss_ci": [
+      -0.010923967806229432,
+      0.05617082907100618
+    ],
+    "classification": "no_incremental_evidence"
+  },
+  "4.8:rnn:behavior_circuit": {
+    "n_events": 425,
+    "n_animals": 27,
+    "log_loss_delta": 0.022615359248259526,
+    "log_loss_ci": [
+      -0.0068056595022216206,
+      0.05328492231933047
+    ],
+    "classification": "no_incremental_evidence"
+  },
+  "4.8:rnn:behavior_population": {
+    "n_events": 425,
+    "n_animals": 27,
+    "log_loss_delta": 0.0018836883139405902,
+    "log_loss_ci": [
+      -0.02644828713870637,
+      0.030547466459560385
+    ],
+    "classification": "no_incremental_evidence"
+  },
+  "7.2:linear:behavior_saav": {
+    "n_events": 392,
+    "n_animals": 27,
+    "log_loss_delta": 0.01906788102180157,
+    "log_loss_ci": [
+      -0.003241836264722547,
+      0.043121742039512925
+    ],
+    "classification": "no_incremental_evidence"
+  },
+  "7.2:linear:behavior_circuit": {
+    "n_events": 392,
+    "n_animals": 27,
+    "log_loss_delta": 0.050072144031202304,
+    "log_loss_ci": [
+      -0.008546229677145283,
+      0.11688803815546024
+    ],
+    "classification": "no_incremental_evidence"
+  },
+  "7.2:linear:behavior_population": {
+    "n_events": 392,
+    "n_animals": 27,
+    "log_loss_delta": -0.005687210940920395,
+    "log_loss_ci": [
+      -0.040518237075670996,
+      0.029057085165284702
+    ],
+    "classification": "no_incremental_evidence"
+  },
+  "7.2:prior:behavior_saav": {
+    "n_events": 392,
+    "n_animals": 27,
+    "log_loss_delta": 0.0,
+    "log_loss_ci": [
+      0.0,
+      0.0
+    ],
+    "classification": "no_incremental_evidence"
+  },
+  "7.2:prior:behavior_circuit": {
+    "n_events": 392,
+    "n_animals": 27,
+    "log_loss_delta": 0.0,
+    "log_loss_ci": [
+      0.0,
+      0.0
+    ],
+    "classification": "no_incremental_evidence"
+  },
+  "7.2:prior:behavior_population": {
+    "n_events": 392,
+    "n_animals": 27,
+    "log_loss_delta": 0.0,
+    "log_loss_ci": [
+      0.0,
+      0.0
+    ],
+    "classification": "no_incremental_evidence"
+  },
+  "7.2:rnn:behavior_saav": {
+    "n_events": 392,
+    "n_animals": 27,
+    "log_loss_delta": 0.005208137360738552,
+    "log_loss_ci": [
+      -0.040604474053222366,
+      0.047812373291502175
+    ],
+    "classification": "no_incremental_evidence"
+  },
+  "7.2:rnn:behavior_circuit": {
+    "n_events": 392,
+    "n_animals": 27,
+    "log_loss_delta": -0.030253514284847127,
+    "log_loss_ci": [
+      -0.06203719052250962,
+      0.0017066260078250502
+    ],
+    "classification": "no_incremental_evidence"
+  },
+  "7.2:rnn:behavior_population": {
+    "n_events": 392,
+    "n_animals": 27,
+    "log_loss_delta": -0.002656758889054478,
+    "log_loss_ci": [
+      -0.020804066606260763,
+      0.016084281534347145
+    ],
+    "classification": "no_incremental_evidence"
+  }
+}

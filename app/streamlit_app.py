@@ -171,6 +171,7 @@ tabs = st.tabs(
         "Audit",
         "Prospective Behavior",
         "Turn Direction & Neural Sequences",
+        "SAAV Mechanistic Validation",
     ]
 )
 
@@ -609,6 +610,184 @@ with tabs[8]:
             "pre-extracted SAAV CSVs. Results are an independent, animal-disjoint benchmark, not an "
             "exact reproduction of the published accuracy."
         )
+
+with tabs[9]:
+    st.subheader("SAAV mechanistic validation (Phase 5)")
+    st.markdown(
+        "This tab separates the published result, our independent reconstruction, the "
+        "animal-disjoint protocol comparison, the causal online-prospective benchmark, and "
+        "the intervention evidence map. None of the decoding results is an intervention."
+    )
+    p5 = ROOT / "reports" / "phase5"
+    st.markdown("**Reproduction status**")
+    st.info(
+        "BLOCKED_MISSING_INPUTS for exact reproduction; PARTIAL_REPRODUCTION for the "
+        "independent raw-Dryad reconstruction. The four pre-extracted CSVs used by the "
+        "official notebook (SAAV_dorsal.csv, SAAV_ventral.csv, HC_dorsal.csv, "
+        "HC_ventral.csv) are absent from Dryad."
+    )
+    prot_metrics = p5 / "protocol_comparison" / "protocol_metrics.csv"
+    prot_deltas = p5 / "protocol_comparison" / "protocol_mode_deltas.csv"
+    if not prot_deltas.exists():
+        prot_deltas = p5 / "protocol_comparison" / "protocol_deltas.csv"
+    prot_summary = p5 / "protocol_comparison" / "protocol_delta_summary.json"
+    if prot_metrics.exists():
+        pm = pd.read_csv(prot_metrics)
+        show = [
+            c
+            for c in [
+                "regime",
+                "mode",
+                "n",
+                "prevalence",
+                "log_loss",
+                "auroc",
+                "balanced_accuracy",
+                "section_accuracy",
+            ]
+            if c in pm.columns
+        ]
+        st.markdown("**Offline protocol comparison** (same reconstructed events, different splits)")
+        st.dataframe(pm[show].sort_values(["regime", "mode"]), use_container_width=True, hide_index=True)
+        if prot_summary.exists():
+            ps = load_optional_json(prot_summary)
+            if ps:
+                st.json({k: v for k, v in ps.items() if isinstance(v, dict)})
+        if prot_deltas.exists():
+            pdlt = pd.read_csv(prot_deltas)
+            st.markdown("**Paired animal-cluster deltas: neural mode − behaviour**")
+            st.dataframe(
+                pdlt[
+                    [
+                        c
+                        for c in ["regime", "comparison", "metric", "delta", "ci_low", "ci_high", "p"]
+                        if c in pdlt.columns
+                    ]
+                ],
+                use_container_width=True,
+                hide_index=True,
+            )
+    else:
+        st.info("Offline protocol reports are not generated in this checkout.")
+
+    online_metrics = p5 / "online_decoding" / "online_metrics.csv"
+    online_deltas = p5 / "online_decoding" / "online_deltas.csv"
+    online_cfg = p5 / "online_decoding" / "online_config.json"
+    risk_sets = p5 / "online_decoding" / "online_risk_sets.csv"
+    if online_metrics.exists():
+        om = pd.read_csv(online_metrics)
+        st.markdown("**Causal online-prospective benchmark** (fixed elapsed landmarks from reversal onset)")
+        if online_cfg.exists():
+            cfg = load_optional_json(online_cfg) or {}
+            c1, c2, c3, c4 = st.columns(4)
+            c1.metric("Primary events", cfg.get("n_primary_events", "n/a"))
+            c2.metric("Animals", cfg.get("n_primary_animals", "n/a"))
+            c3.metric("Landmarks (s)", ", ".join(str(x) for x in cfg.get("landmarks_s", [])))
+            c4.metric("Onset", str(cfg.get("onset_mode", "n/a")).replace("_", " "))
+        if not om.empty:
+            lm = st.selectbox("Landmark (s)", sorted(om["landmark_s"].unique()), key="p5_landmark")
+            model_name = st.selectbox("Model", sorted(om["model"].unique()), key="p5_model")
+            view = om[(om["landmark_s"] == lm) & (om["model"] == model_name)]
+            st.dataframe(
+                view[
+                    [
+                        c
+                        for c in [
+                            "mode",
+                            "n",
+                            "prevalence",
+                            "log_loss",
+                            "auroc",
+                            "brier",
+                            "balanced_accuracy",
+                        ]
+                        if c in view.columns
+                    ]
+                ].sort_values("log_loss"),
+                use_container_width=True,
+                hide_index=True,
+            )
+        if risk_sets.exists():
+            st.markdown("**Risk set by landmark and direction**")
+            st.dataframe(pd.read_csv(risk_sets), use_container_width=True, hide_index=True)
+        if online_deltas.exists():
+            od = pd.read_csv(online_deltas)
+            st.markdown("**Paired animal-cluster deltas**")
+            st.dataframe(
+                od[
+                    [
+                        c
+                        for c in [
+                            "landmark_s",
+                            "model",
+                            "comparison",
+                            "metric",
+                            "delta",
+                            "ci_low",
+                            "ci_high",
+                            "p",
+                        ]
+                        if c in od.columns
+                    ]
+                ],
+                use_container_width=True,
+                hide_index=True,
+            )
+    else:
+        st.info("Online-prospective reports are not generated in this checkout.")
+
+    mech = p5 / "mechanisms" / "mechanism_channel_tests.csv"
+    mech_stability = p5 / "mechanisms" / "mechanism_stability.csv"
+    if mech.exists():
+        mm = pd.read_csv(mech)
+        st.markdown("**Observational mechanism analyses** (encoding/decoding, not causation)")
+        view = mm[mm.get("metric").eq("log_loss")] if "metric" in mm else mm
+        if not view.empty:
+            st.dataframe(
+                view[
+                    [
+                        c
+                        for c in [
+                            "channel",
+                            "analysis",
+                            "behavior_only",
+                            "with_channel",
+                            "delta",
+                            "ci_low",
+                            "ci_high",
+                            "n_events",
+                            "n_animals",
+                            "holm_p",
+                        ]
+                        if c in view.columns
+                    ]
+                ],
+                use_container_width=True,
+                hide_index=True,
+            )
+        if mech_stability.exists():
+            st.markdown("**Cross-animal stability**")
+            st.dataframe(pd.read_csv(mech_stability), use_container_width=True, hide_index=True)
+    else:
+        st.info("Mechanism reports are not generated in this checkout.")
+
+    interventions = p5 / "interventions" / "intervention_evidence.csv"
+    if interventions.exists():
+        st.markdown("**Intervention evidence map**")
+        st.dataframe(pd.read_csv(interventions), use_container_width=True, hide_index=True)
+        st.caption(
+            "Published manipulations are separated from trial-level observations, simulator "
+            "predictions and hypotheses. Group averages are never treated as pseudo-trials, and "
+            "WT versus tdc-1 is not an acute cell-specific stimulation."
+        )
+    st.error(
+        "MODEL-DEPENDENT VIRTUAL PERTURBATION — NOT CAUSALLY VALIDATED. "
+        "No virtual intervention optimisation was run because no model passed the Phase 5 validation gate."
+    )
+    st.caption(
+        "Primary generalisation claim is animal-disjoint. Online landmarks use only causal onset "
+        "and elapsed time; events ending before a landmark are excluded from that landmark's risk set."
+    )
 
 st.divider()
 st.caption(EPISTEMIC_WARNING)

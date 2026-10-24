@@ -1,0 +1,25 @@
+{
+  "status": "CAUSAL_INDEXED_ONLINE_BENCHMARK",
+  "onset_mode": "state_rising_edge",
+  "landmarks_s": [
+    0.6,
+    1.2,
+    2.4,
+    3.6,
+    4.8,
+    7.2
+  ],
+  "history_s": 7.2,
+  "min_history_s": 3.6,
+  "n_raw_samples": 5391,
+  "n_primary_samples": 2510,
+  "n_primary_events": 428,
+  "n_primary_animals": 27,
+  "n_dorsal_samples": 528,
+  "n_ventral_samples": 1982,
+  "epochs": 40,
+  "seed": 17,
+  "bootstrap_resamples": 400,
+  "normalization": "train-fold channel mean/SD; no future frames",
+  "evaluation": "animal-disjoint 5-fold; event-level proper scoring"
+}

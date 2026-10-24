@@ -22,6 +22,7 @@ def test_app_retains_phase2_tabs_and_adds_prospective_tab():
         "Audit",
         "Prospective Behavior",
         "Turn Direction & Neural Sequences",
+        "SAAV Mechanistic Validation",
     ]
 
 

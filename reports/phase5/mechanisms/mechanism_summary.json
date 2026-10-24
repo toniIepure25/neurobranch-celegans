@@ -1,0 +1,31 @@
+{
+  "status": "OBSERVATIONAL_MECHANISM_ANALYSIS",
+  "n_events": 250,
+  "n_animals": 26,
+  "n_dorsal": 62,
+  "n_ventral": 188,
+  "channels": [
+    "saav",
+    "neuron:SAAD",
+    "neuron:SMDV",
+    "neuron:SMDD",
+    "neuron:RMDV",
+    "neuron:RMDD",
+    "neuron:RIV",
+    "neuron:SMBV",
+    "neuron:SMBD"
+  ],
+  "metrics": {
+    "incremental_logloss_rows": 9,
+    "best_channel_by_logloss": "neuron:SMDV",
+    "best_delta_logloss": -0.1306846610945061,
+    "best_ci": [
+      -0.15377125791927104,
+      -0.10749768109801444
+    ],
+    "best_holm_p": 0.0,
+    "any_holm_significant_improvement": true,
+    "temporal_control_rows": 20
+  },
+  "caveat": "Incremental decoding is not causal necessity; absence of incremental decoding is not proof of no function."
+}

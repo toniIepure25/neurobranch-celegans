@@ -1,0 +1,15 @@
+landmark_s,reason,n
+-1.0,near_zero_turn,29
+-1.0,reversal_too_short,1058
+0.6,,904
+0.6,insufficient_recording_history,12
+1.2,,905
+1.2,insufficient_recording_history,11
+2.4,,907
+2.4,insufficient_recording_history,9
+3.6,,910
+3.6,insufficient_recording_history,6
+4.8,,911
+4.8,insufficient_recording_history,5
+7.2,,854
+7.2,reversal_ended_before_landmark,62

@@ -1,0 +1,11 @@
+{
+  "status": "INTERVENTION_EVIDENCE_MAP",
+  "source_paper": "Kramer et al., Nat Neurosci 29:1408-1424 (2026), doi:10.1038/s41593-026-02257-5",
+  "source_data": "Dryad doi:10.5061/dryad.8sf7m0cz2 (version 5, 82 files)",
+  "trial_level_optogenetics_available": false,
+  "pseudo_trials_created": false,
+  "virtual_interventions_run": false,
+  "n_published_findings": 4,
+  "n_hypotheses": 1,
+  "warning": "MODEL-DEPENDENT VIRTUAL PERTURBATION \u2014 NOT CAUSALLY VALIDATED."
+}

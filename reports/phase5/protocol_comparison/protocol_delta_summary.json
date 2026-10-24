@@ -1,0 +1,46 @@
+{
+  "chronological": {
+    "n_events": 52,
+    "n_animals": 24,
+    "classification_log_loss": "no_incremental_evidence",
+    "classification_auroc": "no_incremental_evidence",
+    "log_loss_delta": -0.001850621720989154,
+    "log_loss_ci": [
+      -0.004979496760467878,
+      0.001621158314048488
+    ]
+  },
+  "external": {
+    "n_events": 116,
+    "n_animals": 13,
+    "classification_log_loss": "no_incremental_evidence",
+    "classification_auroc": "negative_increment",
+    "log_loss_delta": 0.0065603066964498025,
+    "log_loss_ci": [
+      -0.004002447600562073,
+      0.015899488348617638
+    ]
+  },
+  "grouped": {
+    "n_events": 250,
+    "n_animals": 26,
+    "classification_log_loss": "no_incremental_evidence",
+    "classification_auroc": "no_incremental_evidence",
+    "log_loss_delta": -0.0003708183047351765,
+    "log_loss_ci": [
+      -0.00505926373854095,
+      0.004892465798713258
+    ]
+  },
+  "original": {
+    "n_events": 250,
+    "n_animals": 26,
+    "classification_log_loss": "no_incremental_evidence",
+    "classification_auroc": "no_incremental_evidence",
+    "log_loss_delta": -0.0008236276220756622,
+    "log_loss_ci": [
+      -0.0035099068358057316,
+      0.002188047005591044
+    ]
+  }
+}

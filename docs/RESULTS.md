@@ -554,6 +554,37 @@ cohort.  The defensible conclusion is an absence of evidence for incremental
 prospective turn-direction decodability, not evidence that the circuit is
 uninvolved.  Detail: [`PHASE4_RESULTS.md`](PHASE4_RESULTS.md).
 
+## 8b. Phase 5: SAAV mechanistic validation
+
+Phase 5 inspected the Kramer et al. paper, the official `SAAV_Decoding` code and
+the Dryad v5 archive, reconstructed the method from raw HDF5, and asked whether
+the published positive SAAV result survives four offline regimes and a
+causal-onset online benchmark.
+
+**Status:** exact reproduction `BLOCKED_MISSING_INPUTS` (four aligned CSVs and the
+preprocessing script are not public); reconstruction `PARTIAL_REPRODUCTION` /
+`METHOD_RECONSTRUCTION`.
+
+| Analysis | Result |
+|---|---|
+| Original-style offline | SAAV AUROC 0.540 vs behaviour 0.534; Δ log loss −0.0006 [−0.0029, +0.0018] |
+| Animal-disjoint offline | no SAAV increment; grouped AUROC 0.37–0.40 |
+| Chronological offline | 52 events; no SAAV increment; poor calibration |
+| External cohort | adverse transfer, AUROC 0.30–0.33 vs 0.56 behaviour |
+| Causal-onset online | no SAAV/circuit log-loss increment at 0.6–7.2 s; SAAV adverse at 4.8 s |
+| Online population | AUROC +0.08 to +0.12 at four landmarks, but no log-loss increment |
+| Mechanism SAAV | Δ log loss +0.010 [−0.008, +0.029]; no stable cross-animal effect |
+| Mechanism SMDV | large exploratory effect, 61 events/6 animals, unstable; not causal |
+
+The discrepancy with the paper is **not fully explained**. The leading candidate
+is evaluation unit and preprocessing: published section/timestep class-balanced
+accuracy versus event-level animal-disjoint proper scores, with the authors'
+alignment/extraction unavailable. No virtual intervention was run.
+
+> **MODEL-DEPENDENT VIRTUAL PERTURBATION — NOT CAUSALLY VALIDATED.**
+
+Detail: [`PHASE5_RESULTS.md`](PHASE5_RESULTS.md).
+
 ## 9. What would change our mind
 
 | Claim | Falsifier | Current status |

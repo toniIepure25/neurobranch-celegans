@@ -74,6 +74,7 @@ fixed. That is a useful cautionary contribution.
 | C11 | Independent Kramer 2026 replication of the Phase 3 6 s protocol | 32 animals; criterion not met; 22/32 improved |
 | C12 | Animal-disjoint turn-direction benchmark with neural population/SAAV/circuit/identified controls | 56 animals, 945 events; primary Δ +0.0123, CI includes 0; no representation or nonlinear rescue |
 | C13 | Turn-direction dynamics, PCA trajectories, peak timing and model-dependent controls | Immediate pre-offset behaviour dominates; no identity-specific neural effect |
+| C14 | Source-audited SAAV reconstruction with four offline regimes and a causal-onset online benchmark | Original-style SAAV AUROC 0.540; no properly scored animal-disjoint increment; exact reproduction blocked |
 | C11 | Cross-animal one-step dynamics probe | Behaviour beats persistence; neural does not |
 
 ---
@@ -165,8 +166,9 @@ to "the brain does".
 - "The model predicts a real experiment's effect size."
 - "Neural activity is irrelevant to reversal or turn direction" (the primary
   results are bounded nulls, not proof of absence).
-- "We reproduced Kramer et al.'s RNN or SAAV decoding" (the derived CSVs and
-  trial-level optogenetic data are unavailable).
+- "We reproduced Kramer et al.'s RNN or SAAV decoding" (the derived CSVs,
+  preprocessing script and trial-level optogenetic data are unavailable; exact
+  reproduction is `BLOCKED_MISSING_INPUTS`).
 - "A diacetyl population effect is a general turn-direction signal" (secondary,
   exploratory, CI includes zero, near-chance behavioural baseline).
 - "A frozen identity representation adds robust predictive value" (PCA is

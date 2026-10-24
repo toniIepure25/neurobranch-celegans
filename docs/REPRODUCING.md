@@ -613,3 +613,87 @@ environment versions, raw-data checksums and the exact commands.
 - Control/ablation permutations are seeded but small; they are not a
   definitive p-value.
 - Figures are deterministic given the CSVs.
+
+
+---
+
+## 16. Phase 5: SAAV mechanistic validation
+
+Phase 5 needs the Kramer raw files under `data/raw/kramer2026/files/`.  The four
+author-local aligned CSVs are **not** available; exact reproduction is therefore
+blocked.  All Phase 5 outputs are under `reports/phase5/`.
+
+### 16.1 Reconstruction and protocol comparison
+
+```powershell
+python scripts/phase5_protocol_compare.py --epochs 35 --regimes original grouped chronological external --modes behavior saav both
+python scripts/phase5_protocol_finalize.py
+python scripts/phase5_protocol_mode_deltas.py
+```
+
+Expected: 250 events, 62 dorsal/188 ventral, 26 animals; original-style SAAV
+AUROC 0.540 vs behaviour 0.534; grouped AUROC 0.37â€“0.40; external adverse
+transfer.  The run writes `protocol_metrics.csv`, event/section predictions,
+fold manifests, `protocol_deltas.csv`, `protocol_mode_deltas.csv`,
+`protocol_per_animal.csv` and `protocol_prior_reference.csv`.  The full run is
+CPU-heavy (about 20â€“30 min on this machine).
+
+### 16.2 Causal-onset online benchmark
+
+```powershell
+python scripts/phase5_online.py --epochs 40 --landmarks 0.6 1.2 2.4 3.6 4.8 7.2 --rnn-modes behavior behavior_saav behavior_circuit behavior_population
+python scripts/phase5_online_finalize.py
+python scripts/phase5_online_baselines.py
+```
+
+Expected: 428 SAAV-cohort events/27 animals; 904 wild-type risk-set events at
+0.6 s; no SAAV/circuit log-loss increment; population AUROC rises early but
+log-loss CIs include zero.  Outputs include `online_metrics.csv`,
+`online_deltas.csv`, `online_baselines.csv`, predictions, risk sets/exclusions
+and `online_config.json`.  If the main script is interrupted after metrics, the
+finalize step recomputes deltas and the behaviour sensitivity.
+
+### 16.3 Mechanisms and interventions
+
+```powershell
+python scripts/phase5_mechanisms.py
+python scripts/phase5_interventions.py
+python scripts/phase5_figures.py
+```
+
+Expected mechanism outputs: SAAV Î” log loss +0.010 [âˆ’0.008, +0.029]; SMDV
+âˆ’0.131 [âˆ’0.154, âˆ’0.107] on 61 events/6 animals (exploratory, unstable); no
+stable cross-animal SAAV effect.  The intervention script writes only an
+evidence map; it does not create pseudo-trials or run virtual perturbations.
+Figures go to `reports/phase5/figures/`.
+
+### 16.4 Dashboard
+
+The app has **ten** tabs.  The tenth, **SAAV Mechanistic Validation**, reads
+`reports/phase5/` and displays reproduction status, protocol/online metrics,
+mechanism tests, risk sets and the exact warning:
+
+> **MODEL-DEPENDENT VIRTUAL PERTURBATION — NOT CAUSALLY VALIDATED.**
+
+### 16.5 Tests and manifest
+
+```powershell
+python -m pytest -q
+python -m ruff check src tests scripts
+```
+
+Phase 5 adds tests for phase alignment, label orientation, animal-split
+integrity, missing identities, train-only balancing, RNN schema, reversal-onset
+detection, online landmarks, future leakage, grouped bootstrap, mechanism
+helpers and dashboard loading.  See the final report for the exact current test
+count.
+
+### 16.6 Nondeterminism and status
+
+- PyTorch CPU GRU results can vary at the last digit across threading settings;
+  seeds are fixed but bitwise reproducibility is not claimed.
+- The reconstruction is `PARTIAL_REPRODUCTION`, not exact.  The four aligned
+  CSVs and the preprocessing script are missing; do not report an exact
+  reproduction.
+- Bootstrap CIs use 400â€“2,000 resamples and are stable to ~1e-3.
+- Do not interpret the SMDV six-animal effect as causal.
