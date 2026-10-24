@@ -38,6 +38,14 @@ def main() -> None:
         for path in sorted(ROOT.glob(pattern)):
             if path.is_file():
                 code.append({"path": str(path.relative_to(ROOT)), "sha256": sha256(path)})
+    documentation = []
+    for path in sorted((ROOT / "docs").glob("PHASE5_*.md")):
+        documentation.append({"path": str(path.relative_to(ROOT)), "sha256": sha256(path)})
+    dirty = "\n".join(
+        line
+        for line in git("status", "--porcelain").splitlines()
+        if "reports/phase5/manifest.json" not in line
+    )
     manifest = {
         "phase": 5,
         "status": {
@@ -49,7 +57,7 @@ def main() -> None:
         "git": {
             "branch": git("branch", "--show-current"),
             "head": git("rev-parse", "HEAD"),
-            "dirty_porcelain": git("status", "--porcelain"),
+            "dirty_porcelain": dirty,
             "starting_head": "14a43710334393c2dd234e848fb445d4317a734b",
         },
         "environment": {
@@ -75,8 +83,11 @@ def main() -> None:
             "python scripts/phase5_mechanisms.py",
             "python scripts/phase5_interventions.py",
             "python scripts/phase5_figures.py",
+            "python scripts/phase5_power.py",
+            "python scripts/phase5_write_manifest.py",
         ],
         "code": code,
+        "documentation": documentation,
         "outputs": outputs,
         "notes": [
             "No JAX/Equinox; the GRU is an independent PyTorch architecture-compatible reimplementation.",
