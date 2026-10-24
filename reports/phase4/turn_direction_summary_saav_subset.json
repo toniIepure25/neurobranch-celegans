@@ -1,0 +1,68 @@
+{
+  "subset": "SAAV_available",
+  "animals": 27,
+  "events": 445,
+  "summary": {
+    "aggregate": {
+      "behavior": {
+        "n": 445,
+        "prevalence": 0.22247191011235956,
+        "log_loss": 0.5645024949592685,
+        "brier": 0.1814673665222924,
+        "balanced_accuracy": 0.5050505050505051,
+        "accuracy": 0.7797752808988764,
+        "auroc": 0.47518537980965725,
+        "auprc": 0.22314420730623385,
+        "calibration_slope": -0.2133876326805494,
+        "calibration_intercept": -1.5352445890583104
+      },
+      "behavior_saav": {
+        "n": 445,
+        "prevalence": 0.22247191011235956,
+        "log_loss": 0.5656190899058,
+        "brier": 0.18166275019929545,
+        "balanced_accuracy": 0.5036054183453027,
+        "accuracy": 0.7775280898876404,
+        "auroc": 0.4793892684066095,
+        "auprc": 0.22776145082575944,
+        "calibration_slope": -0.19545579630159102,
+        "calibration_intercept": -1.511959664447867
+      },
+      "neural_saav": {
+        "n": 445,
+        "prevalence": 0.22247191011235956,
+        "log_loss": 0.5346722216500484,
+        "brier": 0.1744827924934618,
+        "balanced_accuracy": 0.5,
+        "accuracy": 0.7775280898876404,
+        "auroc": 0.48236702282945054,
+        "auprc": 0.2095430220386767,
+        "calibration_slope": -0.7542172360198646,
+        "calibration_intercept": -2.2026797973770185
+      }
+    },
+    "deltas": {
+      "delta_behavior_saav_vs_behavior": {
+        "mean": 0.00448342409759803,
+        "ci95": [
+          -0.01270544143172929,
+          0.021006949698287865
+        ],
+        "n_boot": 2000,
+        "p_delta_le_0": 0.3
+      },
+      "delta_neural_saav_vs_behavior": {
+        "mean": 0.008405581067736768,
+        "ci95": [
+          -0.08965346502399976,
+          0.11063759605207553
+        ],
+        "n_boot": 2000,
+        "p_delta_le_0": 0.43
+      }
+    },
+    "n_designs": 27,
+    "n_labels": 113,
+    "identified_labels_median": 105.0
+  }
+}

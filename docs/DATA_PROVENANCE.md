@@ -104,6 +104,36 @@ The NeuroPAL JLD2 strings are not readable by h5py 3.16/HDF5 2.0; a one-time
 Julia 1.9.2 + JLD2.jl export produces the TSV. The analysis pipeline reads only
 the TSV and has no Julia dependency.
 
+## 1B. Phase 4 directed-turning dataset
+
+| Field | Value |
+|---|---|
+| Study | Kramer et al. (2026), "Neural sequences underlying directed turning in *Caenorhabditis elegans*", *Nature Neuroscience* |
+| DOI | <https://doi.org/10.1038/s41593-026-02257-5> |
+| Repository | Dryad `doi:10.5061/dryad.8sf7m0cz2`, dataset id 135272, version 5 id 433175 |
+| License | CC0-1.0 |
+| Files | 82, total 1,455,335,690 bytes |
+| Downloaded | 80 files, 1,444,081,660 bytes; all SHA256 match |
+| Recordings | 73 HDF5 files (32 WT octanol, 24 WT diacetyl, 17 tdc1 octanol) |
+| Local path | `data/raw/kramer2026/files/` (not committed) |
+| Manifest | `data/raw/kramer2026/manifest.json` with the full 82-file SHA256 list |
+| Checksums | `reports/phase4/data_checksums.csv` |
+
+Fields used: `gcamp/trace_array_original` (raw, `T × N`),
+`gcamp/trace_array` (published whole-recording z-score; **not** used as a
+predictor), `behavior/velocity`, `reversal_vec`, `reversal_events`,
+`head_angle`, `dv`, `worm_angle`, `angular_velocity`, `pumping`, and
+`timing/timestamp_confocal`.  The MATLAB `wbData` structures carry the neuron
+identities and odour indices.
+
+Event convention is 0-based start, exclusive end.  `dv` is the
+orientation-corrected dorsal/ventral head angle; raw `head_angle` has a
+per-recording camera sign and is not used across animals.  The two omitted
+files are MATLAB `.chxTracks.mat` behaviour-tracking files, not used by the
+analysis.  There are no explicit per-event D/V labels and no trial-level
+optogenetic recordings.  Full audit:
+[`PHASE4_DATASET_AUDIT.md`](PHASE4_DATASET_AUDIT.md).
+
 ---
 
 ## 2. Reference code and artifacts
@@ -143,6 +173,9 @@ local convention and is stated in every output.
 - No external behavioural tracking data were used in Phase 1/2. Phase 3 uses the
   independently observed Baskoylu & Flavell (2026) behaviour, but still no
   perturbation and no causal intervention.
+- Phase 4 used the Kramer et al. (2026) observational archive.  It contains no
+  trial-level single-cell optogenetic recordings; tdc1 is a mutant cohort, not a
+  perturbation experiment.  The two `.chxTracks.mat` files were not downloaded.
 
 The intervention engine is therefore fitted only to observational data and is
 labelled accordingly. The `EmpiricalEvidence` gate would require a matched,

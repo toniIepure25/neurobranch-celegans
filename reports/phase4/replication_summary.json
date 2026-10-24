@@ -1,0 +1,594 @@
+{
+  "decision": {
+    "primary_horizon_s": 6.0,
+    "primary_delta": {
+      "mean": -0.0057026043465977835,
+      "ci95": [
+        -0.011332120444721556,
+        0.00046537380859432257
+      ],
+      "n_negative": 22,
+      "n": 32
+    },
+    "primary_criterion": "mean delta < 0, 95% CI upper < 0, >=70% animals improved",
+    "criterion_met": false,
+    "n_negative": 22,
+    "n": 32,
+    "fraction_negative": 0.6875,
+    "phase3_reference": {
+      "horizon_s": 6.0,
+      "mean_behavior_log_loss": 0.5927,
+      "mean_behavior_neural_log_loss": 0.5856,
+      "mean_delta": -0.00701,
+      "ci95": [
+        -0.01483,
+        0.00053
+      ],
+      "n_negative": 20,
+      "n": 27,
+      "pca_delta": -0.00841,
+      "pca_ci95": [
+        -0.01475,
+        -0.0022
+      ],
+      "quadratic_delta": -0.00524,
+      "quadratic_ci95": [
+        -0.01334,
+        0.00301
+      ]
+    },
+    "interpretation": "The direction and magnitude are consistent with Phase 3, but the primary 6 s criterion is not met: the animal-bootstrap CI includes zero and 22/32 animals improve (68.75%, below the prespecified 70%). This is a non-replication of the Phase 3 primary claim, not a positive neural result.",
+    "deviations": [
+      "Different cohort: Kramer WT octanol, 32 animals, not the 27 Phase 3 animals.",
+      "distance_from_center is a centroid-distance proxy because the Baskoylu copper-centre coordinate is absent.",
+      "Angular velocity is read from the HDF5 behavior group rather than derived identically.",
+      "head_angle uses the orientation-corrected dv field; raw head_angle has an arbitrary camera sign.",
+      "The model is the same fixed C=0.1 logistic regression; no hyperparameter tuning on the new cohort."
+    ]
+  },
+  "horizons": {
+    "3.0": {
+      "horizon_s": 3.0,
+      "n_animals": 32,
+      "n_identified_labels": 6,
+      "modes": [
+        "constant",
+        "state",
+        "behavior",
+        "neural",
+        "behavior_neural",
+        "behavior_neural_pca",
+        "behavior_neural_shift",
+        "behavior_quadratic",
+        "behavior_neural_quadratic",
+        "behavior_identified"
+      ],
+      "aggregate": {
+        "behavior": {
+          "mean_log_loss": 0.36337490621289414,
+          "mean_brier": 0.1074065602044835,
+          "mean_balanced_accuracy": 0.5948055947049886,
+          "mean_auprc": 0.46659970592198496,
+          "mean_prevalence": 0.15415675036422682,
+          "mean_calibration_slope": 1.0005165938713219,
+          "mean_calibration_intercept": -0.03819240727509285
+        },
+        "behavior_identified": {
+          "mean_log_loss": 0.35613457631582945,
+          "mean_brier": 0.10462492322476177,
+          "mean_balanced_accuracy": 0.6064998463165969,
+          "mean_auprc": 0.49057895090926174,
+          "mean_prevalence": 0.15415675036422682,
+          "mean_calibration_slope": 1.0073281458639565,
+          "mean_calibration_intercept": -0.0423133774543739
+        },
+        "behavior_neural": {
+          "mean_log_loss": 0.35965635329443946,
+          "mean_brier": 0.10628895053842333,
+          "mean_balanced_accuracy": 0.6001109589126653,
+          "mean_auprc": 0.46485599175426406,
+          "mean_prevalence": 0.15415675036422682,
+          "mean_calibration_slope": 0.9444672051483249,
+          "mean_calibration_intercept": -0.12494408861132998
+        },
+        "behavior_neural_pca": {
+          "mean_log_loss": 0.36119394504321434,
+          "mean_brier": 0.1067981404694645,
+          "mean_balanced_accuracy": 0.5969755438677786,
+          "mean_auprc": 0.4662848520443733,
+          "mean_prevalence": 0.15415675036422682,
+          "mean_calibration_slope": 0.9803790379690356,
+          "mean_calibration_intercept": -0.06244794784902012
+        },
+        "behavior_neural_quadratic": {
+          "mean_log_loss": 0.3513754543481922,
+          "mean_brier": 0.10413073804711426,
+          "mean_balanced_accuracy": 0.6226363168015797,
+          "mean_auprc": 0.4954514616621373,
+          "mean_prevalence": 0.15415675036422682,
+          "mean_calibration_slope": 0.906279159686924,
+          "mean_calibration_intercept": -0.2035170804707066
+        },
+        "behavior_neural_shift": {
+          "mean_log_loss": 0.36011719487067334,
+          "mean_brier": 0.10671537424414562,
+          "mean_balanced_accuracy": 0.6043059175350896,
+          "mean_auprc": 0.4799933384639069,
+          "mean_prevalence": 0.15415675036422682,
+          "mean_calibration_slope": 0.9779053764444061,
+          "mean_calibration_intercept": -0.07242551079888257
+        },
+        "behavior_quadratic": {
+          "mean_log_loss": 0.3526037731743522,
+          "mean_brier": 0.10403795876119465,
+          "mean_balanced_accuracy": 0.6185575249544207,
+          "mean_auprc": 0.49939185127275115,
+          "mean_prevalence": 0.15415675036422682,
+          "mean_calibration_slope": 0.9599763771154772,
+          "mean_calibration_intercept": -0.11705633523823254
+        },
+        "constant": {
+          "mean_log_loss": 0.43079699269733945,
+          "mean_brier": 0.13063106407971886,
+          "mean_balanced_accuracy": 0.5,
+          "mean_auprc": 0.15415675036422682,
+          "mean_prevalence": 0.15415675036422682,
+          "mean_calibration_slope": 0.7632133982225502,
+          "mean_calibration_intercept": -0.43857853275838127
+        },
+        "neural": {
+          "mean_log_loss": 0.4256778974922686,
+          "mean_brier": 0.12920287445012443,
+          "mean_balanced_accuracy": 0.499983774662513,
+          "mean_auprc": 0.2021982015451207,
+          "mean_prevalence": 0.15415675036422682,
+          "mean_calibration_slope": 0.6902904716233114,
+          "mean_calibration_intercept": -0.5916808579344082
+        },
+        "state": {
+          "mean_log_loss": 0.3972075652235708,
+          "mean_brier": 0.11882338756016081,
+          "mean_balanced_accuracy": 0.5251899248365681,
+          "mean_auprc": 0.38835488374938276,
+          "mean_prevalence": 0.15415675036422682,
+          "mean_calibration_slope": 1.0989619056441708,
+          "mean_calibration_intercept": 0.12902217437122532
+        },
+        "delta_state": {
+          "mean": 0.03383265901067667,
+          "ci95": [
+            0.021374888245886205,
+            0.0448159250127756
+          ],
+          "n_negative": 2,
+          "n": 32
+        },
+        "delta_neural": {
+          "mean": 0.0623029912793745,
+          "ci95": [
+            0.0448840827785714,
+            0.07759314199182753
+          ],
+          "n_negative": 1,
+          "n": 32
+        },
+        "delta_behavior_neural": {
+          "mean": -0.0037185529184547116,
+          "ci95": [
+            -0.007461742128171589,
+            0.00017956470533487571
+          ],
+          "n_negative": 22,
+          "n": 32
+        },
+        "delta_behavior_neural_pca": {
+          "mean": -0.00218096116967976,
+          "ci95": [
+            -0.004438304995348265,
+            6.495952532551421e-05
+          ],
+          "n_negative": 20,
+          "n": 32
+        },
+        "delta_behavior_neural_shift": {
+          "mean": -0.0032577113422207612,
+          "ci95": [
+            -0.006160322995763409,
+            -0.00029535152616842037
+          ],
+          "n_negative": 23,
+          "n": 32
+        },
+        "delta_behavior_neural_quadratic": {
+          "mean": -0.01199945186470194,
+          "ci95": [
+            -0.02022846726370299,
+            -0.0016991335377303104
+          ],
+          "n_negative": 27,
+          "n": 32
+        },
+        "delta_behavior_identified": {
+          "mean": -0.007240329897064644,
+          "ci95": [
+            -0.011879036638950225,
+            -0.0022243937653632067
+          ],
+          "n_negative": 25,
+          "n": 32
+        },
+        "delta_neural_within_quadratic": {
+          "mean": -0.0012283188261600292,
+          "ci95": [
+            -0.0060103483703574,
+            0.0050438699255253416
+          ],
+          "n_negative": 19,
+          "n": 32
+        }
+      }
+    },
+    "6.0": {
+      "horizon_s": 6.0,
+      "n_animals": 32,
+      "n_identified_labels": 6,
+      "modes": [
+        "constant",
+        "state",
+        "behavior",
+        "neural",
+        "behavior_neural",
+        "behavior_neural_pca",
+        "behavior_neural_shift",
+        "behavior_quadratic",
+        "behavior_neural_quadratic",
+        "behavior_identified"
+      ],
+      "aggregate": {
+        "behavior": {
+          "mean_log_loss": 0.5451797487201101,
+          "mean_brier": 0.18151716410038254,
+          "mean_balanced_accuracy": 0.5863782503527326,
+          "mean_auprc": 0.5115386253806238,
+          "mean_prevalence": 0.2883656042212677,
+          "mean_calibration_slope": 0.9567290298791453,
+          "mean_calibration_intercept": -0.052448062724073416
+        },
+        "behavior_identified": {
+          "mean_log_loss": 0.5330577665613458,
+          "mean_brier": 0.1761588123686489,
+          "mean_balanced_accuracy": 0.6090927099116004,
+          "mean_auprc": 0.5429857703629603,
+          "mean_prevalence": 0.2883656042212677,
+          "mean_calibration_slope": 0.9725175472216603,
+          "mean_calibration_intercept": -0.037449027512888096
+        },
+        "behavior_neural": {
+          "mean_log_loss": 0.5394771443735124,
+          "mean_brier": 0.17882931199954255,
+          "mean_balanced_accuracy": 0.5984383967919172,
+          "mean_auprc": 0.5162206091173314,
+          "mean_prevalence": 0.2883656042212677,
+          "mean_calibration_slope": 0.9094355780306589,
+          "mean_calibration_intercept": -0.10296696172561413
+        },
+        "behavior_neural_pca": {
+          "mean_log_loss": 0.5416433970949702,
+          "mean_brier": 0.18004443050207686,
+          "mean_balanced_accuracy": 0.5922036120886653,
+          "mean_auprc": 0.5148108274314226,
+          "mean_prevalence": 0.2883656042212677,
+          "mean_calibration_slope": 0.9353499215797394,
+          "mean_calibration_intercept": -0.06586392285833115
+        },
+        "behavior_neural_quadratic": {
+          "mean_log_loss": 0.540807050934504,
+          "mean_brier": 0.17881867931937373,
+          "mean_balanced_accuracy": 0.6099949174229916,
+          "mean_auprc": 0.5262608984022156,
+          "mean_prevalence": 0.2883656042212677,
+          "mean_calibration_slope": 0.832580725279161,
+          "mean_calibration_intercept": -0.18823598111511727
+        },
+        "behavior_neural_shift": {
+          "mean_log_loss": 0.5371921968337481,
+          "mean_brier": 0.17831817014900994,
+          "mean_balanced_accuracy": 0.6095300806749394,
+          "mean_auprc": 0.5442420460656279,
+          "mean_prevalence": 0.2883656042212677,
+          "mean_calibration_slope": 0.9618580396103411,
+          "mean_calibration_intercept": -0.036805038972431675
+        },
+        "behavior_quadratic": {
+          "mean_log_loss": 0.5435711222232118,
+          "mean_brier": 0.1800529838136505,
+          "mean_balanced_accuracy": 0.6052795108792748,
+          "mean_auprc": 0.5296344093690791,
+          "mean_prevalence": 0.2883656042212677,
+          "mean_calibration_slope": 0.8935422045439059,
+          "mean_calibration_intercept": -0.1377088354102356
+        },
+        "constant": {
+          "mean_log_loss": 0.6026817015666894,
+          "mean_brier": 0.20601179405803977,
+          "mean_balanced_accuracy": 0.5,
+          "mean_auprc": 0.2883656042212677,
+          "mean_prevalence": 0.2883656042212677,
+          "mean_calibration_slope": 0.47559730929076793,
+          "mean_calibration_intercept": -0.5027508942773938
+        },
+        "neural": {
+          "mean_log_loss": 0.5969011258774163,
+          "mean_brier": 0.20330264943872128,
+          "mean_balanced_accuracy": 0.5008146807680957,
+          "mean_auprc": 0.3537010401921115,
+          "mean_prevalence": 0.2883656042212677,
+          "mean_calibration_slope": 0.748011492098902,
+          "mean_calibration_intercept": -0.2519692253355608
+        },
+        "state": {
+          "mean_log_loss": 0.5883640173198048,
+          "mean_brier": 0.1990691593180155,
+          "mean_balanced_accuracy": 0.5134346939365345,
+          "mean_auprc": 0.43058551389582067,
+          "mean_prevalence": 0.2883656042212677,
+          "mean_calibration_slope": 1.0505201432962052,
+          "mean_calibration_intercept": 0.04476434097032823
+        },
+        "delta_state": {
+          "mean": 0.04318426859969475,
+          "ci95": [
+            0.030774366304746673,
+            0.05662563824449384
+          ],
+          "n_negative": 2,
+          "n": 32
+        },
+        "delta_neural": {
+          "mean": 0.05172137715730618,
+          "ci95": [
+            0.038219826376461756,
+            0.06535733661324607
+          ],
+          "n_negative": 2,
+          "n": 32
+        },
+        "delta_behavior_neural": {
+          "mean": -0.0057026043465977835,
+          "ci95": [
+            -0.011332120444721556,
+            0.00046537380859432257
+          ],
+          "n_negative": 22,
+          "n": 32
+        },
+        "delta_behavior_neural_pca": {
+          "mean": -0.0035363516251399017,
+          "ci95": [
+            -0.0073799773297672485,
+            0.00021979713498217651
+          ],
+          "n_negative": 20,
+          "n": 32
+        },
+        "delta_behavior_neural_shift": {
+          "mean": -0.007987551886362066,
+          "ci95": [
+            -0.014115096430057584,
+            -0.001340555561320408
+          ],
+          "n_negative": 24,
+          "n": 32
+        },
+        "delta_behavior_neural_quadratic": {
+          "mean": -0.004372697785606129,
+          "ci95": [
+            -0.013828218070855465,
+            0.009559668658763003
+          ],
+          "n_negative": 24,
+          "n": 32
+        },
+        "delta_behavior_identified": {
+          "mean": -0.012121982158764267,
+          "ci95": [
+            -0.02143812566432624,
+            -0.0015290595081658412
+          ],
+          "n_negative": 24,
+          "n": 32
+        },
+        "delta_neural_within_quadratic": {
+          "mean": -0.002764071288707771,
+          "ci95": [
+            -0.009784474972280686,
+            0.006390677314752209
+          ],
+          "n_negative": 20,
+          "n": 32
+        }
+      }
+    },
+    "12.0": {
+      "horizon_s": 12.0,
+      "n_animals": 32,
+      "n_identified_labels": 6,
+      "modes": [
+        "constant",
+        "state",
+        "behavior",
+        "neural",
+        "behavior_neural",
+        "behavior_neural_pca",
+        "behavior_neural_shift",
+        "behavior_quadratic",
+        "behavior_neural_quadratic",
+        "behavior_identified"
+      ],
+      "aggregate": {
+        "behavior": {
+          "mean_log_loss": 0.636811296534914,
+          "mean_brier": 0.22293939771302732,
+          "mean_balanced_accuracy": 0.6284974153497624,
+          "mean_auprc": 0.6784244913339066,
+          "mean_prevalence": 0.5089489111115477,
+          "mean_calibration_slope": 0.9558110686547596,
+          "mean_calibration_intercept": 0.07842843706125249
+        },
+        "behavior_identified": {
+          "mean_log_loss": 0.619214718936681,
+          "mean_brier": 0.21462064702826195,
+          "mean_balanced_accuracy": 0.654151536335202,
+          "mean_auprc": 0.7078420497305311,
+          "mean_prevalence": 0.5089489111115477,
+          "mean_calibration_slope": 0.9891014699887187,
+          "mean_calibration_intercept": 0.1068731698075362
+        },
+        "behavior_neural": {
+          "mean_log_loss": 0.6322604932946488,
+          "mean_brier": 0.22092250526256385,
+          "mean_balanced_accuracy": 0.6307870533433391,
+          "mean_auprc": 0.6813765137471077,
+          "mean_prevalence": 0.5089489111115477,
+          "mean_calibration_slope": 0.8977397319747396,
+          "mean_calibration_intercept": 0.04256128759841232
+        },
+        "behavior_neural_pca": {
+          "mean_log_loss": 0.6343990306858381,
+          "mean_brier": 0.2217721232632145,
+          "mean_balanced_accuracy": 0.6320674665468085,
+          "mean_auprc": 0.6816269280001395,
+          "mean_prevalence": 0.5089489111115477,
+          "mean_calibration_slope": 0.9419085640913395,
+          "mean_calibration_intercept": 0.07192106421407238
+        },
+        "behavior_neural_quadratic": {
+          "mean_log_loss": 0.634966220957709,
+          "mean_brier": 0.22164055434266763,
+          "mean_balanced_accuracy": 0.6304637631444774,
+          "mean_auprc": 0.6779108872818723,
+          "mean_prevalence": 0.5089489111115477,
+          "mean_calibration_slope": 0.7830130567828846,
+          "mean_calibration_intercept": 0.035846696331512135
+        },
+        "behavior_neural_shift": {
+          "mean_log_loss": 0.6237796970367859,
+          "mean_brier": 0.21681144784370993,
+          "mean_balanced_accuracy": 0.6604161222840035,
+          "mean_auprc": 0.7229455391753989,
+          "mean_prevalence": 0.5089489111115477,
+          "mean_calibration_slope": 1.0078384846079518,
+          "mean_calibration_intercept": 0.08210526757163585
+        },
+        "behavior_quadratic": {
+          "mean_log_loss": 0.6381747943092086,
+          "mean_brier": 0.2233351454595989,
+          "mean_balanced_accuracy": 0.6313486499705631,
+          "mean_auprc": 0.6799179941535372,
+          "mean_prevalence": 0.5089489111115477,
+          "mean_calibration_slope": 0.8514829495117657,
+          "mean_calibration_intercept": 0.06340889377855555
+        },
+        "constant": {
+          "mean_log_loss": 0.696265692909852,
+          "mean_brier": 0.2515588740493193,
+          "mean_balanced_accuracy": 0.5,
+          "mean_auprc": 0.5089489111115477,
+          "mean_prevalence": 0.5089489111115477,
+          "mean_calibration_slope": -0.014233127815100496,
+          "mean_calibration_intercept": 0.06774232645540618
+        },
+        "neural": {
+          "mean_log_loss": 0.693723684545555,
+          "mean_brier": 0.25006565883143717,
+          "mean_balanced_accuracy": 0.5474848809877441,
+          "mean_auprc": 0.5741709401791949,
+          "mean_prevalence": 0.5089489111115477,
+          "mean_calibration_slope": 0.7918765879181128,
+          "mean_calibration_intercept": 0.09054458013681047
+        },
+        "state": {
+          "mean_log_loss": 0.6942139519720044,
+          "mean_brier": 0.25033364857271445,
+          "mean_balanced_accuracy": 0.5308366103664878,
+          "mean_auprc": 0.5666259745965245,
+          "mean_prevalence": 0.5089489111115477,
+          "mean_calibration_slope": 0.6116081787800676,
+          "mean_calibration_intercept": 0.05789323362054988
+        },
+        "delta_state": {
+          "mean": 0.05740265543709039,
+          "ci95": [
+            0.03883318465875413,
+            0.07669649204937658
+          ],
+          "n_negative": 4,
+          "n": 32
+        },
+        "delta_neural": {
+          "mean": 0.05691238801064094,
+          "ci95": [
+            0.03520684515713439,
+            0.08096531564234206
+          ],
+          "n_negative": 6,
+          "n": 32
+        },
+        "delta_behavior_neural": {
+          "mean": -0.00455080324026523,
+          "ci95": [
+            -0.013040819836117084,
+            0.004963152284603411
+          ],
+          "n_negative": 23,
+          "n": 32
+        },
+        "delta_behavior_neural_pca": {
+          "mean": -0.0024122658490760077,
+          "ci95": [
+            -0.007151915316450346,
+            0.0024838818928084945
+          ],
+          "n_negative": 20,
+          "n": 32
+        },
+        "delta_behavior_neural_shift": {
+          "mean": -0.013031599498128129,
+          "ci95": [
+            -0.022749565469156886,
+            -0.0024876983495711715
+          ],
+          "n_negative": 22,
+          "n": 32
+        },
+        "delta_behavior_neural_quadratic": {
+          "mean": -0.0018450755772049469,
+          "ci95": [
+            -0.016998376437985248,
+            0.018724026844042434
+          ],
+          "n_negative": 19,
+          "n": 32
+        },
+        "delta_behavior_identified": {
+          "mean": -0.017596577598233135,
+          "ci95": [
+            -0.03342052007160756,
+            -0.00023820653028715932
+          ],
+          "n_negative": 23,
+          "n": 32
+        },
+        "delta_neural_within_quadratic": {
+          "mean": -0.003208573351499466,
+          "ci95": [
+            -0.013757002201959979,
+            0.010472396511231817
+          ],
+          "n_negative": 20,
+          "n": 32
+        }
+      }
+    }
+  }
+}

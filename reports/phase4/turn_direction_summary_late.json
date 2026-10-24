@@ -1,0 +1,87 @@
+{
+  "window": "late",
+  "summary": {
+    "aggregate": {
+      "behavior": {
+        "n": 945,
+        "prevalence": 0.19682539682539682,
+        "log_loss": 0.49822063060768795,
+        "brier": 0.15781651844371164,
+        "balanced_accuracy": 0.49944749033108077,
+        "accuracy": 0.7957671957671958,
+        "auroc": 0.6183574879227054,
+        "auprc": 0.2447142403002244,
+        "calibration_slope": 0.4493669758074492,
+        "calibration_intercept": -0.7544613497465802
+      },
+      "behavior_circuit": {
+        "n": 945,
+        "prevalence": 0.19682539682539682,
+        "log_loss": 0.5112903189451415,
+        "brier": 0.16118074440276212,
+        "balanced_accuracy": 0.49544179523141657,
+        "accuracy": 0.7925925925925926,
+        "auroc": 0.5934733024494595,
+        "auprc": 0.23646425531280557,
+        "calibration_slope": 0.2711534427084195,
+        "calibration_intercept": -1.006892696345961
+      },
+      "behavior_population": {
+        "n": 945,
+        "prevalence": 0.19682539682539682,
+        "log_loss": 0.5005509479456928,
+        "brier": 0.15816261413678978,
+        "balanced_accuracy": 0.5075651323898168,
+        "accuracy": 0.7957671957671958,
+        "auroc": 0.619235836627141,
+        "auprc": 0.2648572161768269,
+        "calibration_slope": 0.43515234815683806,
+        "calibration_intercept": -0.7647613205096813
+      },
+      "behavior_saav": {
+        "n": 945,
+        "prevalence": 0.19682539682539682,
+        "log_loss": 0.5002571043756198,
+        "brier": 0.1585602518852289,
+        "balanced_accuracy": 0.49944749033108077,
+        "accuracy": 0.7957671957671958,
+        "auroc": 0.6124144672531769,
+        "auprc": 0.2399985295759993,
+        "calibration_slope": 0.41581708398518546,
+        "calibration_intercept": -0.8015354044885599
+      }
+    },
+    "deltas": {
+      "delta_behavior_circuit_vs_behavior": {
+        "mean": -0.024881803507840472,
+        "ci95": [
+          -0.06084960379508546,
+          0.004871526394090855
+        ],
+        "n_boot": 2000,
+        "p_delta_le_0": 0.9405
+      },
+      "delta_behavior_population_vs_behavior": {
+        "mean": 0.0012993024639346754,
+        "ci95": [
+          -0.03222057786529021,
+          0.034787317623511095
+        ],
+        "n_boot": 2000,
+        "p_delta_le_0": 0.471
+      },
+      "delta_behavior_saav_vs_behavior": {
+        "mean": -0.006057192993863946,
+        "ci95": [
+          -0.010858921184356255,
+          -0.001567077160364352
+        ],
+        "n_boot": 2000,
+        "p_delta_le_0": 0.9975
+      }
+    },
+    "n_designs": 56,
+    "n_labels": 113,
+    "identified_labels_median": 104.0
+  }
+}

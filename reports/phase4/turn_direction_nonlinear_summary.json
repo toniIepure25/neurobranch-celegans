@@ -1,0 +1,39 @@
+{
+  "aggregate": {
+    "behavior": {
+      "n": 945,
+      "prevalence": 0.19682539682539682,
+      "log_loss": 0.5248721776425862,
+      "brier": 0.1656091441707738,
+      "balanced_accuracy": 0.5078838879680394,
+      "accuracy": 0.7767195767195767,
+      "auroc": 0.6050901724113505,
+      "auprc": 0.26129705452285334,
+      "calibration_slope": 0.32800939886899755,
+      "calibration_intercept": -0.8278646657496057
+    },
+    "behavior_population": {
+      "n": 945,
+      "prevalence": 0.19682539682539682,
+      "log_loss": 0.5239049043772496,
+      "brier": 0.165681625242905,
+      "balanced_accuracy": 0.5078307620383357,
+      "accuracy": 0.7798941798941799,
+      "auroc": 0.6171674670973408,
+      "auprc": 0.25830803679116865,
+      "calibration_slope": 0.3514644701947154,
+      "calibration_intercept": -0.7620252167280465
+    }
+  },
+  "deltas": {
+    "delta_behavior_population_vs_behavior": {
+      "mean": 0.011563522963754949,
+      "ci95": [
+        -0.02752202004827569,
+        0.048050821888407036
+      ],
+      "n_boot": 2000,
+      "p_delta_le_0": 0.264
+    }
+  }
+}

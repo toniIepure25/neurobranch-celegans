@@ -246,9 +246,34 @@ Phase 2 reports are listed in `README.md` and `docs/PHASE2_METHODOLOGY.md`.
 | Cross-animal outputs | `reports/phase3/cross_animal_dynamics.csv/.json` |
 | Figures | `python scripts/phase3_make_figures.py` → `reports/phase3/figures/` |
 | Manifest | `python scripts/phase3_write_manifest.py` |
-| Tests | `58 passed`; ruff clean |
+| Tests | `58 passed` at the Phase 3 checkpoint; current suite `62 passed`; ruff clean |
 
 Phase 3 does not perform an intervention and does not establish causal control.
+
+### Phase 4: Kramer 2026 turn direction
+
+| Field | Value |
+|---|---|
+| Branch | `research/phase4-turn-direction-generalization` |
+| Base | Phase 3 commit `66cf7bbd2aa21887ad5716e6bae1e0768eaa1c86` |
+| Download command | `python scripts/phase4_download_kramer.py` |
+| Raw data | `data/raw/kramer2026/files/` (not tracked; 80 files, 1,444,081,660 bytes) |
+| Dataset manifest | `data/raw/kramer2026/manifest.json` (82-file Dryad manifest) |
+| Audit command | `python scripts/phase4_audit_data.py` |
+| Audit outputs | `dataset_inventory.csv`, `cohort_inventory.csv`, `neuron_coverage.csv`, `behavior_event_inventory.csv`, `marker_sanity.csv`, `data_checksums.csv` |
+| Replication command | `python scripts/phase4_independent_replication.py` |
+| Replication result | 6 s Δ −0.00570, 95% CI [−0.01133, +0.00047], 22/32 improved; **criterion not met** |
+| Primary command | `python scripts/phase4_turn_direction.py` |
+| Primary target | post-reversal D/V direction from a four-frame mid-reversal segment, animal-disjoint LOAO |
+| Primary model | StandardScaler + L2 logistic, C=0.1, 2,000 animal bootstrap (seed 17) |
+| Primary result | Δ AUROC +0.0123, 95% CI [−0.0166, +0.0425]; **no incremental evidence** |
+| Dynamics/controls | `phase4_dynamics.py`, `phase4_controls.py`, `phase4_ablation.py`, `phase4_nonlinear.py` |
+| Figures | `python scripts/phase4_make_figures.py` → `reports/phase4/figures/` |
+| Manifest | `python scripts/phase4_write_manifest.py` → `reports/phase4/phase4_manifest.json` |
+| Tests | Current suite `62 passed`; ruff clean |
+
+Phase 4 does not perform an intervention; tdc1 is a distribution-shift cohort.
+The archive lacks trial-level optogenetic data.
 
 
 ---

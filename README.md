@@ -30,10 +30,14 @@
 | Independent freely-moving behaviour | ✅ Baskoylu & Flavell 2026, 27 animals, 1,162 reversals, SHA256-verified |
 | Prospective behaviour benchmark | ✅ animal-disjoint 3/6/12 s; primary neural increment **inconclusive** |
 | Frozen neural representation | ✅ population, PCA, identified-neuron, quadratic and causal-delay controls; **not robust** |
-| Interactive 3-D app | ✅ Streamlit + Plotly, 8 tabs (7 Phase 2 tabs preserved) |
+| Kramer 2026 directed-turning archive | ✅ 73 recordings, 107,131 frames, 2,670 reversals, SHA256-verified |
+| Independent 6 s replication | ✅ 32 WT octanol animals; criterion **not met** (22/32 improved) |
+| Turn-direction benchmark | ✅ 56 WT animals, 945 events; primary neural increment **null** |
+| Turn-direction dynamics/controls | ✅ time-resolved, PCA, peak times, shifts/permutations/ablation; **no specific effect** |
+| Interactive 3-D app | ✅ Streamlit + Plotly, 9 tabs (7 Phase 2 + Phase 3 + Phase 4) |
 | CLI | ✅ Typer, documented commands |
-| Tests | ✅ 58 passed (unit, integration, scientific; includes Phase 2 + Phase 3) |
-| Figures | ✅ 8 static PNGs + 6 Phase 3 figures + interactive HTML |
+| Tests | ✅ 62 passed (unit, integration, scientific; includes Phase 2–4) |
+| Figures | ✅ 8 static PNGs + 6 Phase 3 + 11 Phase 4 figures + interactive HTML |
 | Causal validation | ❌ not attempted; evidence gate refuses unsupported claims |
 
 The headline result is deliberately unflattering: on held-out data, **no neural
@@ -128,6 +132,34 @@ and within-animal forward prediction is worse. Randi repeated responses remain a
 r≈0.09 and repeated-event averaging is worse than a global mean. See
 [`docs/PHASE3_RESULTS.md`](docs/PHASE3_RESULTS.md).
 
+Phase 4 (Kramer 2026 directed turning; independent replication and
+turn-direction generalization):
+
+```bash
+python scripts/phase4_download_kramer.py             # Dryad Anubis + SHA256
+python scripts/phase4_audit_data.py                  # inventory, D/V sanity, checksums
+python scripts/phase4_independent_replication.py     # Phase 3 protocol, WT octanol
+python scripts/phase4_turn_direction.py              # primary 56-animal benchmark
+python scripts/phase4_dynamics.py                    # time-resolved/PCA/peak times
+python scripts/phase4_controls.py                    # shifts, permutations, ablation
+python scripts/phase4_ablation.py                    # matched random-neuron ablation
+python scripts/phase4_nonlinear.py                   # gradient-boosting sensitivity
+python scripts/phase4_make_figures.py                # reports/phase4/figures
+python scripts/phase4_write_manifest.py              # artifact/code hashes
+```
+
+The Phase 4 headline is also **negative**: the independent 6 s replication
+fails its prespecified criterion (Δ log loss -0.0057, 95% CI
+[-0.0113, +0.0005], 22/32 animals), and the animal-disjoint turn-direction
+benchmark shows no bounded neural increment over behaviour (Δ AUROC +0.0123,
+95% CI [-0.0166, +0.0425]).  SAAV, circuit and identified-neuron
+representations are null or worse, and nonlinear boosting does not rescue the
+effect.  A diacetyl-cohort population point estimate (+0.0624) has a CI
+including zero and is exploratory only.  See
+[`docs/PHASE4_RESULTS.md`](docs/PHASE4_RESULTS.md).  No trial-level
+optogenetic data exist in the archive; the tdc1 cohort is treated as a
+distribution-shift cohort, not an intervention.
+
 The `simulate intervention` command prints the standing warning and writes a
 JSON summary containing the baseline and virtual distributions, bootstrap CI,
 trajectory displacement, OOD fraction, and the causal-status object.
@@ -142,8 +174,9 @@ neurobranch-celegans/
 ├─ configs/                      data, experiment, and intervention configs
 ├─ data/raw/kato2015/            immutable raw archive (not committed)
 ├─ data/raw/baskoylu2026/        Phase 3 raw HDF5/JLD2 (not committed)
+├─ data/raw/kramer2026/          Phase 4 Dryad recordings (not committed)
 ├─ docs/                         methodology, provenance, results, limitations,
-│                                supervisor brief, paper prospectus, Phase 3 reports
+│                                supervisor brief, paper prospectus, Phase 3/4 reports
 ├─ figures/                      generated PNG/HTML figures
 ├─ reports/                      audit tables and result summaries
 ├─ references/external/          cloned upstream repositories (not committed)
@@ -151,7 +184,7 @@ neurobranch-celegans/
 │  ├─ behavior/                  runs, transitions, entropies
 │  ├─ branching/                 local outcome diversity, corrected null tests, synthetic fixtures
 │  ├─ cli/                       Typer entry point
-│  ├─ data/                      Kato loader, Baskoylu/Randi adapters, provenance
+│  ├─ data/                      Kato loader, Baskoylu/Randi/Kramer adapters, provenance
 │  ├─ dynamics/                  baselines, neural/latent models, training, cross-animal probe
 │  ├─ evaluation/                metrics, bootstrap, rollouts, Randi/behaviour benchmarks
 │  ├─ interventions/             specs, paired engine, OOD, evidence gate, specificity audit
@@ -237,6 +270,16 @@ config, and artifact path.
 | [`docs/PHASE3_RESULTS.md`](docs/PHASE3_RESULTS.md) | Phase 3 exact results and RQ answers |
 | [`docs/PHASE3_SUPERVISOR_BRIEF.md`](docs/PHASE3_SUPERVISOR_BRIEF.md) | Phase 3 supervisor handoff and 6-ECTS scope |
 | [`docs/PHASE3_NEXT_EXPERIMENTS.md`](docs/PHASE3_NEXT_EXPERIMENTS.md) | Prioritised replication/control experiments |
+| [`docs/PHASE4_RESEARCH_PLAN.md`](docs/PHASE4_RESEARCH_PLAN.md) | Phase 4 hypotheses, prespecified design and decision rules |
+| [`docs/PHASE4_DATASET_AUDIT.md`](docs/PHASE4_DATASET_AUDIT.md) | Kramer archive inventory, checksums, D/V convention, coverage |
+| [`docs/PHASE4_INDEPENDENT_REPLICATION.md`](docs/PHASE4_INDEPENDENT_REPLICATION.md) | Phase 3 protocol rerun on WT octanol; non-replication |
+| [`docs/PHASE4_TURN_DIRECTION_BENCHMARK.md`](docs/PHASE4_TURN_DIRECTION_BENCHMARK.md) | Primary turn-direction results, cohorts, calibration, controls |
+| [`docs/PHASE4_NEURAL_BRANCH_DYNAMICS.md`](docs/PHASE4_NEURAL_BRANCH_DYNAMICS.md) | Time-resolved decoding, PCA trajectories, peak timing |
+| [`docs/PHASE4_NEURON_SPECIFIC_ANALYSIS.md`](docs/PHASE4_NEURON_SPECIFIC_ANALYSIS.md) | SAAV/circuit/identified coverage, ablation and limits |
+| [`docs/PHASE4_INTERVENTION_EVIDENCE.md`](docs/PHASE4_INTERVENTION_EVIDENCE.md) | Why no causal intervention claim is possible |
+| [`docs/PHASE4_RESULTS.md`](docs/PHASE4_RESULTS.md) | Phase 4 exact results and hypothesis-by-hypothesis verdict |
+| [`docs/PHASE4_SUPERVISOR_BRIEF.md`](docs/PHASE4_SUPERVISOR_BRIEF.md) | One-page Phase 4 decision brief |
+| [`docs/PHASE4_NEXT_EXPERIMENTS.md`](docs/PHASE4_NEXT_EXPERIMENTS.md) | Prioritised replication, representation and causal experiments |
 | [`docs/REPRODUCING.md`](docs/REPRODUCING.md) | Operator recipe with expected numbers and known nondeterminism |
 | [`docs/DECISIONS.md`](docs/DECISIONS.md) | Design decisions and rejected alternatives |
 | [`docs/METHODOLOGY.md`](docs/METHODOLOGY.md) | Splits, models, metrics, branching and perturbation definitions |
@@ -269,6 +312,17 @@ config, and artifact path.
 - `reports/phase3/figures/randi_repeated_average.png` — repeated averaging vs global mean.
 - `reports/phase3/figures/dataset_coverage.png` — Baskoylu event rate vs reversal occupancy.
 - `reports/phase3/figures/cross_animal_dynamics.png` — one-step cross-animal dynamics.
+- `reports/phase4/figures/phase4_turn_direction_auroc.png` — held-out turn-direction AUROC by representation.
+- `reports/phase4/figures/phase4_turn_direction_delta_forest.png` — neural increments and CIs.
+- `reports/phase4/figures/phase4_turn_direction_calibration.png` — calibration curves.
+- `reports/phase4/figures/phase4_turn_dynamics_timeresolved.png` — behaviour vs neural AUC by relative frame.
+- `reports/phase4/figures/phase4_replication_delta.png` — independent Phase 3 replication at 3/6/12 s.
+- `reports/phase4/figures/phase4_turn_pca_trajectories.png` — population-state trajectory.
+- `reports/phase4/figures/phase4_turn_neuron_peak_times.png` — descriptive circuit peak times.
+- `reports/phase4/figures/phase4_turn_direction_external.png` — cross-cohort transfer.
+- `reports/phase4/figures/phase4_event_inventory.png` — class imbalance and animal heterogeneity.
+- `reports/phase4/figures/phase4_turn_neuron_ablation.png` — matched feature ablation.
+- `reports/phase4/figures/phase4_turn_direction_nonlinear.png` — nonlinear sensitivity.
 
 ---
 

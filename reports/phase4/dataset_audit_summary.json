@@ -1,0 +1,42 @@
+{
+  "dataset": {
+    "doi": "doi:10.5061/dryad.8sf7m0cz2",
+    "id": 135272,
+    "version_id": 433175,
+    "version_number": 5,
+    "license": "https://spdx.org/licenses/CC0-1.0.html",
+    "files": 82,
+    "bytes": 1455335690
+  },
+  "recordings": 73,
+  "frames": 107131,
+  "cohorts": {
+    "wt_octanol": 32,
+    "wt_diacetyl": 24,
+    "tdc1_octanol": 17
+  },
+  "events_total": 2670,
+  "events_long_12_valid": 1227,
+  "directions_long_12_valid": {
+    "ventral": 958,
+    "dorsal": 269
+  },
+  "near_zero_long_12": 42,
+  "unique_identified_labels": 115,
+  "markers_present": {
+    "SAAV": 27,
+    "RMDV": 12,
+    "RMDD": 16,
+    "SMDV": 9,
+    "SMDD": 31,
+    "RIV": 12,
+    "SMBV": 34,
+    "SMBD": 35
+  },
+  "audit_reason_counts": {
+    "": 73
+  },
+  "source_note": "HDF5 gcamp/trace_array_original is used; MAT gcamp_trace is the whole-recording z-score and is not used as raw.",
+  "direction_note": "dv is the orientation-corrected D/V head angle; positive dv = dorsal. Raw head_angle has an arbitrary per-recording camera sign and is not used for labels.",
+  "event_note": "Event intervals are 0-based, end-exclusive. Long events require >=12 frames and a valid post-turn mean over 2 frames."
+}

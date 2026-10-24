@@ -1,0 +1,33 @@
+{
+  "dataset_doi": "doi:10.5061/dryad.8sf7m0cz2",
+  "recordings_total": 56,
+  "audit_rows": 56,
+  "primary_animals": 56,
+  "primary_events": 945,
+  "primary_dorsal": 186,
+  "primary_ventral": 759,
+  "min_reversal_frames": 12,
+  "segment_frames": 4,
+  "post_frames": 2,
+  "primary_window": "mid",
+  "modes": [
+    "behavior",
+    "behavior_population",
+    "behavior_saav",
+    "behavior_circuit",
+    "behavior_identified",
+    "neural_population",
+    "neural_saav",
+    "neural_circuit"
+  ],
+  "notes": [
+    "The primary model is linear logistic regression with fixed C=0.1, not the paper's RNN.",
+    "Reversal duration and time-to-offset are excluded from the behaviour features because they are future information.",
+    "Circuit labels are prespecified; missing labels are zero after causal z-scoring.",
+    "Identified-label vocabulary is fixed before scoring, but fold-level coverage is training-only.",
+    "Ablations and permutation controls are in phase4_controls.py."
+  ],
+  "guard_frames_before_offset": 2,
+  "no_post_segment_frames_in_features": true,
+  "segment_selection": "event-aligned offline benchmark; segment location is defined relative to the completed reversal, as in the paper, but every feature frame precedes the two-frame guard."
+}

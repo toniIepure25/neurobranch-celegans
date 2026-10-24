@@ -1,0 +1,28 @@
+{
+  "cohort": "wt_octanol",
+  "recordings": 32,
+  "frames": 48877,
+  "reversals": 990,
+  "horizons_s": [
+    3.0,
+    6.0,
+    12.0
+  ],
+  "modes": [
+    "constant",
+    "state",
+    "behavior",
+    "neural",
+    "behavior_neural",
+    "behavior_neural_pca",
+    "behavior_neural_shift",
+    "behavior_quadratic",
+    "behavior_neural_quadratic",
+    "behavior_identified"
+  ],
+  "model": "StandardScaler + LogisticRegression(C=0.1, lbfgs, max_iter=2000)",
+  "split": "leave-one-animal-out",
+  "bootstrap": "10,000 animal-level resamples of per-animal mean log-loss deltas",
+  "target": "reversal active at t+h; eligible frames exclude the reversal window",
+  "audit_rows": 32
+}

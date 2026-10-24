@@ -473,6 +473,10 @@ value. Detail: [`BEHAVIORAL_GENERALIZATION.md`](BEHAVIORAL_GENERALIZATION.md).
 | A frozen identity representation adds robust value | **Not supported**: identified neurons weaker than population; quadratic control removes significance | Phase 3 representations |
 | Randi target/context modelling rescues response prediction | **Targets no; context weak** (1.8% MAE, overlapping CI) | Phase 3 Randi audit |
 | Dynamics generalise across recordings without transductive representations | **Behaviour yes; neural no** | cross-animal one-step probe |
+| Phase 3 6 s neural increment replicates on an independent cohort | **No**: criterion not met; 22/32 improved, CI includes 0 | Phase 4 WT octanol |
+| Turn direction is decodable from pre-offset neural activity beyond behaviour | **Not supported**: primary Δ AUROC +0.0123, CI includes 0 | Phase 4 56 WT animals |
+| SAAV/circuit identity adds a robust turn-direction signal | **Not supported**: null/worse; identity permutation and ablation within random null | Phase 4 controls |
+| A diacetyl population increment is a general neural effect | **Unresolved/exploratory**: +0.0624, CI includes 0; secondary, 349 events, near-chance baseline | Phase 4 cohort sensitivity |
 
 ### 8.6 Phase 3: independent freely-moving behaviour and frozen representations
 
@@ -508,6 +512,48 @@ activity does not (0.02590; next-state log loss 0.11631 â†’ 0.11655).
 Phase 3 reproduces the Phase 2 negative **pattern** on independent data. Detail:
 [`PHASE3_RESULTS.md`](PHASE3_RESULTS.md).
 
+### 8.7 Phase 4: turn-direction generalization and independent replication
+
+Phase 4 adds the Kramer et al. (2026) directed-turning archive: 73 recordings,
+107,131 frames, 2,670 reversals.  The primary WT turn-direction set is 56
+animals and 945 events (186 dorsal / 759 ventral).
+
+The Phase 3 6 s protocol, rerun on the independent WT octanol cohort, gives
+behaviour 0.5452 and behaviour+neural 0.5395 log loss; Δ = −0.00570
+([−0.01133, +0.00047]), 22/32 animals improved.  The prespecified criterion
+(CI upper < 0 and ≥70% improved) is **not met**.  The 3 s and 12 s horizons are
+also null.  This reproduces the small negative point estimate but not a
+positive result.
+
+The turn-direction benchmark uses a four-frame mid-reversal neural segment
+ending at least two frames before the offset (two-frame guard band), a strong
+behaviour/context baseline, leave-one-animal-out fitting, and animal-cluster
+bootstrap.  Behaviour features exclude completed-reversal duration and
+time-to-offset because those are future information.
+
+| Mode | AUROC | Δ vs behaviour | 95% CI |
+|---|---:|---:|---|
+| Behaviour | 0.5955 | — | — |
+| + population | 0.6079 | +0.0123 | [−0.0166, +0.0425] |
+| + SAAV | 0.5910 | −0.0042 | [−0.0117, +0.0029] |
+| + circuit | 0.5857 | −0.0097 | [−0.0380, +0.0191] |
+| + identified | 0.5775 | −0.0176 | [−0.0991, +0.0574] |
+| Neural population only | 0.5561 | — | — |
+
+The primary neural increment is **not established**.  The per-animal effect is
+broad (25/50 improve, 20/50 worsen, 5/50 tie; median Δ +0.017), calibration is
+poor, nonlinear boosting also gives a null-compatible increment (Δ +0.0121,
+[−0.0275, +0.0481]), and shifted-neural/permutation/ablation controls do not
+support a specific identity-resolved code.  A WT diacetyl population point
+estimate (+0.0624, [−0.0040, +0.1241]) is secondary, exploratory and includes
+zero.
+
+The archive has no trial-level optogenetic recordings, so Phase 4 makes no
+causal intervention claim.  The tdc1 cohort is treated as a distribution-shift
+cohort.  The defensible conclusion is an absence of evidence for incremental
+prospective turn-direction decodability, not evidence that the circuit is
+uninvolved.  Detail: [`PHASE4_RESULTS.md`](PHASE4_RESULTS.md).
+
 ## 9. What would change our mind
 
 | Claim | Falsifier | Current status |
@@ -517,6 +563,7 @@ Phase 3 reproduces the Phase 2 negative **pattern** on independent data. Detail:
 | 3-D branching reflects real multi-stability | Excess entropy > 0 vs shuffled null, replicated across worms and projections | Not supported (negative excess) |
 | A named cell has a specific virtual effect | Effect exceeds matched random-neuron null and survives OOD stratification | Not supported |
 | NC-MCM states are Markovian | p > 0.05 across worms with adequate power | Mixed; two worms reject |
+| Turn direction is prospectively decodable from neural activity | Animal-disjoint Δ AUROC > 0 with CI excluding 0, replicated | Not supported in Phase 4 |
 | A perturbation is causal in the animal | Matched real intervention with controls | Not attempted |
 
 See [`VALIDATION_PROTOCOL.md`](VALIDATION_PROTOCOL.md) for the pre-specified

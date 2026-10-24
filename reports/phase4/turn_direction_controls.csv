@@ -1,0 +1,5 @@
+control,mode,n_common_events,auroc_original,auroc_control,delta_control_minus_original
+neural_shift_-50_frames,behavior_population,913,0.607531020740875,0.5911753162455091,-0.01635570449536583
+neural_shift_-50_frames,behavior_saav,913,0.5914772212661896,0.5975681550584186,0.006090933792229025
+neural_shift_-50_frames,behavior_circuit,913,0.5893186003683242,0.5882090994173234,-0.0011095009510008191
+circuit_identity_permutation,behavior_circuit,945,0.5856531655970646,0.5823806083273124,-0.0032725572697521743

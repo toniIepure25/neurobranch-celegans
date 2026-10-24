@@ -1,0 +1,8 @@
+{
+  "n_permutations": 6,
+  "observed_delta": 0.012473968294445026,
+  "null_mean": -0.0005430650591940848,
+  "null_sd": 0.02257292290646167,
+  "empirical_p_one_sided": 0.3333333333333333,
+  "note": "One-sided p for the observed positive increment under within-animal label permutation."
+}

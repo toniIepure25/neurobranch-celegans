@@ -2,9 +2,9 @@
 
 **To:** Denis Kovačević (Neuroinformatics, University of Vienna)
 **From:** NeuroBranch project
-**Date:** 2026-10-23
-**Status:** Phase 3 complete on independent freely-moving data; no new animals, no
-causal validation
+**Date:** 2026-10-24
+**Status:** Phase 4 complete: independent replication and turn-direction
+generalization both negative; no causal validation
 
 ---
 
@@ -31,7 +31,14 @@ behaviour benchmark; Phase 2 reports and tests.
 prospective benchmark with causal features and animal bootstrap; frozen
 representation and negative-control comparison; Randi target/shape/context audit;
 cross-animal one-step dynamics probe; intervention-limitations checklist; 8-tab
-app (7 Phase 2 tabs preserved); 57 passing tests.
+app (7 Phase 2 tabs preserved); 58 passing tests at the Phase 3 checkpoint.
+
+**Phase 4 additions:** Kramer et al. (2026) directed-turning adapter (73
+recordings, 107,131 frames, 2,670 reversals, SHA256-verified); independent 6 s
+replication on 32 WT octanol animals; animal-disjoint dorsal/ventral benchmark
+(56 animals, 945 events); dynamics/PCA/peak-time analysis; shifted-neural,
+identity, label-permutation and matched-ablation controls; nonlinear
+sensitivity; 9-tab app; Phase 4 manifest and figures.
 
 Code: `D:\ComputaCenter\NeuroBranch\neurobranch-celegans`.
 Primary commands: `neurobranch data audit`, `train dynamics`, `reproduce ncmcm`, `reproduce bundlenet`, `branching analyze`, `simulate intervention`, `report`, `app`.
@@ -144,6 +151,39 @@ generative simulator is claimed.
 
 Full report: [`PHASE3_SUPERVISOR_BRIEF.md`](PHASE3_SUPERVISOR_BRIEF.md).
 
+### 2.7 Phase 4 turn-direction generalization
+
+The independent Phase 3 replication on 32 WT octanol animals gives 6 s
+behaviour 0.5452 and behaviour+neural 0.5395 log loss: Δ **−0.00570**
+([−0.01133, +0.00047]), **22/32** animals improved. The prespecified criterion
+is **not met**. The 3 s and 12 s horizons are also null. This is a
+non-replication of a small, uncertain effect.
+
+The turn-direction benchmark uses a four-frame mid-reversal segment ending
+≥2 frames before the offset, a behaviour/context baseline, leave-one-animal-out
+fitting, and animal-cluster bootstrap:
+
+| Mode | AUROC | Δ vs behaviour | 95% CI |
+|---|---:|---:|---|
+| Behaviour | 0.595 | — | — |
+| + population | 0.608 | +0.0123 | [−0.0166, +0.0425] |
+| + SAAV | 0.591 | −0.0042 | [−0.0117, +0.0029] |
+| + circuit | 0.586 | −0.0097 | [−0.0380, +0.0191] |
+| + identified | 0.577 | −0.0176 | [−0.0991, +0.0574] |
+
+No bounded neural increment. Per-animal change is broad (25/50 improve, 20/50
+worsen, 5/50 tie), calibration is poor, nonlinear boosting also gives a
+null-compatible increment, and controls do not support an identity-resolved
+code. A WT diacetyl population point estimate (+0.0624, [−0.0040, +0.1241]) is
+exploratory, secondary, includes zero, and has a near-chance behaviour
+baseline.
+
+No trial-level optogenetic recordings exist in the archive. tdc1 is treated as
+a distribution-shift cohort, not an intervention. The defensible conclusion is
+an absence of evidence for incremental prospective turn-direction
+decodability, not evidence that the circuit is uninvolved. Full report:
+[`PHASE4_SUPERVISOR_BRIEF.md`](PHASE4_SUPERVISOR_BRIEF.md).
+
 ### 2.4 Reproduction status
 
 - **NC-MCM:** distributed p at K=3: 0.636, 0.157, 0.096, 0.603, 0.979; our Python port (1000 surrogates): 0.659, 0.149, 0.084, 0.626, 0.983. Agreement within 0.023. We verified artifacts and ported the test; we did not retrain the full pipeline.
@@ -207,16 +247,20 @@ attractive 3-D plot.
 
 ## 5. Recommended next step
 
-The Phase 3 priority is to **replicate the fragile 6 s neural increment on an
-independent cohort** and test it against a nonlinear behavioural baseline, not to
-run another virtual scan. The current RIVL/RIVR experiment remains worth running
+The Phase 4 replication is the independent test that Phase 3 called for. It
+does **not** meet the criterion, and the turn-direction target does not rescue
+the signal. The priority is now an exact reproduction of the published RNN on
+its intended inputs (if the derived CSVs can be obtained), a balanced
+animal-disjoint replication, and trial-level perturbation data — not another
+virtual scan or a larger 6-ECTS causal program. The current RIVL/RIVR experiment remains worth running
 only with a pre-registered cell set, dose–response range, sham controls, and a new
 cohort; the Phase 2 specificity audit and the Phase 3 negative prospective result
 remove the original justification for a single-cell virtual test.
 
-In parallel, test a time-varying model under the strict-forward split and a
-causal-filter encoder. See [`PHASE3_NEXT_EXPERIMENTS.md`](PHASE3_NEXT_EXPERIMENTS.md)
-for falsifiable stop conditions and the 6-ECTS subset.
+See [`PHASE4_NEXT_EXPERIMENTS.md`](PHASE4_NEXT_EXPERIMENTS.md) for falsifiable
+next steps and the 6-ECTS scope.  The RIVL/RIVR experiment remains worth running
+only with a pre-registered cell set, dose-response range, sham controls and a
+new cohort.
 
-Both are designed to fail informatively. Neither requires another attractive 3-D
-visualization.
+These are designed to fail informatively. They do not require another
+attractive 3-D visualization.

@@ -1,0 +1,12 @@
+{
+  "primary_model": "StandardScaler + LogisticRegression",
+  "solver": "lbfgs",
+  "C": 0.1,
+  "max_iter": 1000,
+  "class_weight": null,
+  "evaluation": "leave-one-animal-out",
+  "primary_window": "mid four-frame reversal segment, >=2 frames before offset",
+  "primary_metric": "pooled out-of-fold AUROC",
+  "uncertainty": "2000 animal-cluster bootstrap resamples, seed 17",
+  "note": "No persisted weights: one model is fit per held-out animal."
+}

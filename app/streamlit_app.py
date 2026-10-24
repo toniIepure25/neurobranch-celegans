@@ -170,6 +170,7 @@ tabs = st.tabs(
         "Reproduction",
         "Audit",
         "Prospective Behavior",
+        "Turn Direction & Neural Sequences",
     ]
 )
 
@@ -492,6 +493,121 @@ with tabs[7]:
             "Primary model: prespecified L2 logistic regression (C=0.1), causal features, "
             "train-only scaling/PCA, leave-one-animal-out. Neural population features are "
             "permutation-invariant ROI summaries; identified-neuron results are separate."
+        )
+
+with tabs[8]:
+    st.subheader("Turn direction & neural sequences")
+    st.markdown(
+        "Animal-disjoint, prospective prediction of the post-reversal dorsal/ventral turn "
+        "from the middle four frames of a reversal. Features end at least two frames before "
+        "the reversal offset; direction is read from the first two post-offset frames. "
+        "Positive `dv` is dorsal (the archive's orientation-corrected field)."
+    )
+    td_metrics_path = ROOT / "reports" / "phase4" / "turn_direction_metrics.csv"
+    td_pred_path = ROOT / "reports" / "phase4" / "turn_direction_predictions.parquet"
+    td_summary_path = ROOT / "reports" / "phase4" / "turn_direction_summary.json"
+    td_cal_path = ROOT / "reports" / "phase4" / "turn_direction_calibration.csv"
+    td_dyn_path = ROOT / "reports" / "phase4" / "turn_dynamics_timeresolved.csv"
+    td_ext_path = ROOT / "reports" / "phase4" / "turn_direction_external.csv"
+    td_abl_path = ROOT / "reports" / "phase4" / "turn_direction_neuron_ablation.csv"
+    if not td_metrics_path.exists():
+        st.info("Phase 4 turn-direction reports are not generated in this checkout.")
+    else:
+        tm = pd.read_csv(td_metrics_path)
+        st.dataframe(
+            tm[
+                [
+                    "mode",
+                    "n",
+                    "prevalence",
+                    "auroc",
+                    "log_loss",
+                    "brier",
+                    "balanced_accuracy",
+                    "calibration_slope",
+                ]
+            ].sort_values("auroc", ascending=False),
+            use_container_width=True,
+            hide_index=True,
+        )
+        if td_summary_path.exists():
+            ts = load_optional_json(td_summary_path)
+            if ts:
+                dec = ts.get("decision", {})
+                d = dec.get("delta_population", {})
+                if d:
+                    c1, c2, c3 = st.columns(3)
+                    c1.metric("Δ AUROC (behaviour+population − behaviour)", f"{d.get('mean', np.nan):+.4f}")
+                    ci = d.get("ci95", [np.nan, np.nan])
+                    c2.metric("95% animal-cluster CI", f"[{ci[0]:+.4f}, {ci[1]:+.4f}]")
+                    c3.metric("Primary classification", str(dec.get("classification", "n/a")).replace("_", " "))
+                st.caption(dec.get("reason", ""))
+                st.caption(
+                    "This is an observational, model-dependent result. A null increment does not "
+                    "show that the circuit is uninvolved; it bounds what this representation and "
+                    "split can decode prospectively."
+                )
+        if td_pred_path.exists():
+            tp = pd.read_parquet(td_pred_path)
+            mode = st.selectbox(
+                "Per-animal held-out AUROC (both classes only)",
+                sorted(tp["mode"].unique()),
+                index=0,
+            )
+            from sklearn.metrics import roc_auc_score
+
+            rows = []
+            for animal, g in tp[tp["mode"] == mode].groupby("animal_id"):
+                if g["y"].nunique() == 2:
+                    rows.append({"animal_id": animal, "auroc": roc_auc_score(g["y"], g["p"]), "n": len(g)})
+            if rows:
+                pa = pd.DataFrame(rows).sort_values("auroc")
+                fig = go.Figure(
+                    go.Bar(
+                        x=pa["auroc"],
+                        y=pa["animal_id"],
+                        orientation="h",
+                        marker_color=np.where(pa["auroc"] >= 0.5, "#2E86AB", "#C1121F"),
+                    )
+                )
+                fig.add_vline(x=0.5, line_dash="dash", line_color="#555")
+                fig.update_layout(height=max(300, 14 * len(pa)), xaxis_title="held-out AUROC", margin=dict(l=10, r=10, t=20, b=30))
+                st.plotly_chart(fig, use_container_width=True)
+        if td_cal_path.exists():
+            cal = pd.read_csv(td_cal_path)
+            if not cal.empty:
+                fig = go.Figure()
+                for mode, g in cal.groupby("mode"):
+                    fig.add_trace(go.Scatter(x=g["mean_predicted"], y=g["fraction_positive"], mode="lines+markers", name=mode))
+                fig.add_trace(go.Scatter(x=[0, 1], y=[0, 1], mode="lines", line_dash="dash", name="ideal"))
+                fig.update_layout(height=320, xaxis_title="predicted probability", yaxis_title="observed fraction", margin=dict(l=10, r=10, t=20, b=30))
+                st.plotly_chart(fig, use_container_width=True)
+        if td_dyn_path.exists():
+            dyn = pd.read_csv(td_dyn_path)
+            fig = go.Figure()
+            for mode, g in dyn.groupby("mode"):
+                fig.add_trace(go.Scatter(x=g["relative_frame"], y=g["auroc"], mode="lines+markers", name=mode))
+            fig.add_vline(x=0, line_dash="dash", line_color="#555")
+            fig.update_layout(height=340, xaxis_title="frame relative to reversal offset (negative = prospective)", yaxis_title="held-out AUROC", margin=dict(l=10, r=10, t=20, b=30))
+            st.plotly_chart(fig, use_container_width=True)
+            st.caption("Frames at or after 0 are retrospective positive controls, not prospective predictions.")
+        if td_ext_path.exists():
+            ext = pd.read_csv(td_ext_path)
+            st.markdown("**External cohort shift** (fit on wild type, score tdc1 or the other odour cohort)")
+            st.dataframe(ext[["train", "test", "mode", "n", "prevalence", "auroc", "log_loss", "balanced_accuracy"]], use_container_width=True, hide_index=True)
+        if td_abl_path.exists():
+            abl = pd.read_csv(td_abl_path)
+            st.markdown("**Model-dependent circuit-feature ablation** (not an experimental ablation)")
+            st.dataframe(abl, use_container_width=True, hide_index=True)
+        st.error(
+            "MODEL-DEPENDENT VIRTUAL PERTURBATION — NOT CAUSALLY VALIDATED. "
+            "No trial-level optogenetic or mutant intervention is present in this archive, "
+            "so this tab does not report an intervention effect."
+        )
+        st.caption(
+            "The linear logistic benchmark is not the paper's RNN; the dataset does not include the "
+            "pre-extracted SAAV CSVs. Results are an independent, animal-disjoint benchmark, not an "
+            "exact reproduction of the published accuracy."
         )
 
 st.divider()

@@ -22,9 +22,12 @@ optogenetic atlas, pre-stimulus state and connectome features do not beat a
 constant mean on held-out animals. On an independent 27-animal freely-moving
 dataset, the primary neural increment in prospective reversal prediction has the
 right sign but a 95% animal CI that includes zero, and it does not survive a
-quadratic behavioural control or identity-aligned neurons. We argue that these
-negatives are the correct baseline for causal claims in computational
-neuroscience.
+quadratic behavioural control or identity-aligned neurons. On the independent
+Kramer et al. (2026) directed-turning archive, the Phase 3 6 s result does not
+replicate (22/32 animals, CI includes zero), and an animal-disjoint
+dorsal/ventral benchmark finds no bounded neural increment beyond behaviour
+(Δ AUROC +0.012, CI [−0.017, +0.042]). We argue that these negatives are the
+correct baseline for causal claims in computational neuroscience.
 
 ---
 
@@ -63,11 +66,14 @@ fixed. That is a useful cautionary contribution.
 | C3 | Corrected two-sided branching nulls, block/shift nulls, synthetic power checks, all five worms | 4/5 entropy deficit; no excess |
 | C4 | A paired virtual-perturbation engine with OOD flags and matched non-candidate controls | 26 candidates + 19 controls/model × 6 models; none significant |
 | C5 | Artifact-level verification of BunDLe-Net and NC-MCM, separating leaky upstream artifacts from held-out claims | kNN/silhouette, Markov p port, deviations |
-| C6 | Open, reproducible platform (CLI, app, tests, manifests) | 57 tests, 8-tab app |
+| C6 | Open, reproducible platform (CLI, app, tests, manifests) | 62 tests, 9-tab app |
 | C7 | External Randi 2023 optogenetic benchmark with event/target/animal splits and reliability ceiling | 110 animals, 3,371 events; negative |
 | C8 | Incremental behaviour benchmark on transition frames and proper scoring rules | No calibrated increment |
 | C9 | Independent 27-animal prospective benchmark with causal features, animal-disjoint splits and explicit nulls | Primary neural increment inconclusive; PCA secondary only |
 | C10 | Randi target/shape/repeated-average/context audit | Reliability r≈0.09; averaging worse than global; context scale-only |
+| C11 | Independent Kramer 2026 replication of the Phase 3 6 s protocol | 32 animals; criterion not met; 22/32 improved |
+| C12 | Animal-disjoint turn-direction benchmark with neural population/SAAV/circuit/identified controls | 56 animals, 945 events; primary Δ +0.0123, CI includes 0; no representation or nonlinear rescue |
+| C13 | Turn-direction dynamics, PCA trajectories, peak timing and model-dependent controls | Immediate pre-offset behaviour dominates; no identity-specific neural effect |
 | C11 | Cross-animal one-step dynamics probe | Behaviour beats persistence; neural does not |
 
 ---
@@ -140,6 +146,13 @@ to "the brain does".
   reliable."
 - "A cross-animal one-step behaviour ridge beats persistence on next-velocity MAE,
   but adding neural activity does not."
+- "The Phase 3 6 s result does not replicate on 32 independent WT octanol animals:
+  Δ −0.0057, 95% CI [−0.0113, +0.0005], 22/32 improved; criterion not met."
+- "On an animal-disjoint turn-direction benchmark (56 animals, 945 events), the
+  population increment is +0.0123 AUROC with a 95% CI of [−0.0166, +0.0425];
+  SAAV, circuit and identified representations are null or worse."
+- "The apparent turn-direction predictability is concentrated in behaviour at
+  frames −1/0; the primary window excludes those frames."
 
 ### Cannot claim
 
@@ -150,8 +163,12 @@ to "the brain does".
   excess diversity).
 - "Whole-brain dynamics" without qualifying the 109–135 trace coverage.
 - "The model predicts a real experiment's effect size."
-- "Neural activity is irrelevant to reversal" (the primary result is inconclusive,
-  not proof of absence).
+- "Neural activity is irrelevant to reversal or turn direction" (the primary
+  results are bounded nulls, not proof of absence).
+- "We reproduced Kramer et al.'s RNN or SAAV decoding" (the derived CSVs and
+  trial-level optogenetic data are unavailable).
+- "A diacetyl population effect is a general turn-direction signal" (secondary,
+  exploratory, CI includes zero, near-chance behavioural baseline).
 - "A frozen identity representation adds robust predictive value" (PCA is
   secondary; identified neurons and quadratic controls do not support it).
 - "The cross-animal probe is a generative simulator" (it is one-step, linear, and
@@ -242,6 +259,15 @@ biological experiment is not done.
 > all had repeated-stimulation reliability r≈0.09; repeated-event averaging was
 > worse than a global mean, and temporal shape was unreliable. A cross-animal
 > one-step behaviour model beat persistence, but adding neural activity did not.
+> We then repeated the prospective protocol on an independent directed-turning
+> archive (Kramer et al. 2026; 73 recordings, 2,670 reversals). The 6 s neural
+> increment did not replicate (Δ −0.0057, 95% CI [−0.0113, +0.0005], 22/32
+> animals). An animal-disjoint dorsal/ventral benchmark with 56 animals and 945
+> events found a population increment of +0.012 AUROC (95% CI [−0.017, +0.042]);
+> SAAV, circuit and identified-neuron representations were null or worse, and a
+> nonlinear model did not rescue the effect. The largest cohort-specific point
+> estimate was exploratory and its CI included zero. No trial-level optogenetic
+> recordings were available, so no causal intervention claim is made.
 > Official BunDLe-Net embeddings were behaviour-separated in the upstream-fitted
 > artifact, which leaks test frames into the encoder, while a blocked-holdout
 > reimplementation scored substantially lower. We argue that persistence, shuffled

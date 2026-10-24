@@ -490,9 +490,10 @@ python scripts/phase3_make_figures.py
 python -m streamlit run app/streamlit_app.py
 ```
 
-Figures go to `reports/phase3/figures/`. The app has eight tabs; the eighth,
-**Prospective Behavior**, reads `reports/phase3/prospective_summary.json` and
-`dataset_summary.json`. All seven Phase 2 tabs are unchanged.
+Figures go to `reports/phase3/figures/`. At the Phase 3 checkpoint the app had
+eight tabs; the current app has nine. The eighth, **Prospective Behavior**,
+reads `reports/phase3/prospective_summary.json` and `dataset_summary.json`.
+All seven Phase 2 tabs are unchanged.
 
 ### 14.7 Tests
 
@@ -501,7 +502,7 @@ python -m pytest -q
 python -m ruff check src tests scripts
 ```
 
-Expected: 58 passed. The Phase 3 tests cover HDF5 parsing, the 0-based exclusive
+Expected: 62 passed. The Phase 3 tests cover HDF5 parsing, the 0-based exclusive
 event convention, timestamps, identity ambiguity, causal z-scoring, horizon
 labels, purged chronological splits, calibration diagnostics, causal delayed
 controls, the app tabs and the Randi target schema.
@@ -515,3 +516,100 @@ controls, the app tabs and the Randi target schema.
   the C sensitivity table is the authoritative check for the primary.
 - Julia export is deterministic for a fixed JLD2 file. Do not regenerate the TSV
   with a different JLD2.jl version without recording it.
+
+---
+
+## 15. Phase 4: Kramer 2026 replication and turn direction
+
+### 15.1 Data
+
+Phase 4 uses the Dryad archive `doi:10.5061/dryad.8sf7m0cz2` (version 5,
+82 files, 1,455,335,690 bytes, CC0-1.0).  The downloader solves the Dryad
+Anubis proof-of-work and verifies SHA-256 against the manifest.
+
+```powershell
+python scripts/phase4_download_kramer.py
+python scripts/phase4_audit_data.py
+```
+
+Expected: 80 downloaded files (1,444,081,660 bytes), all checksums matching.
+The two omitted files are MATLAB `.chxTracks.mat` behaviour-tracking files.
+Raw data live in `data/raw/kramer2026/` and are **not committed**.
+
+### 15.2 Independent replication
+
+```powershell
+python scripts/phase4_independent_replication.py
+```
+
+Expected: 32 WT octanol animals; 6 s behaviour log loss 0.5452,
+behaviour+neural 0.5395, Δ −0.00570, 95% CI [−0.01133, +0.00047], 22/32
+animals improved; criterion **not met**.  The 3 s and 12 s horizons are also
+null.  Outputs: `reports/phase4/replication_*`.
+
+### 15.3 Primary turn-direction benchmark
+
+```powershell
+python scripts/phase4_turn_direction.py
+```
+
+Expected: 56 animals, 945 events (186 dorsal / 759 ventral).  Behaviour AUROC
+0.5955; +population 0.6079; Δ +0.0123, 95% CI [−0.0166, +0.0425], primary
+classification `no_incremental_evidence`.  SAAV/circuit/identified contrasts
+are null or worse.  Behaviour features exclude completed-reversal duration and
+time-to-offset.  The run also writes cohort, window, SAAV-subset, within-animal
+and external-cohort outputs.  It is the longest Phase 4 job.
+
+### 15.4 Dynamics, controls and sensitivity
+
+```powershell
+python scripts/phase4_dynamics.py
+python scripts/phase4_controls.py
+python scripts/phase4_ablation.py
+python scripts/phase4_nonlinear.py
+```
+
+Expected: time-resolved behaviour AUROC 0.978 at frame 0 and 0.737 at −1;
+neural around 0.54–0.56 at prospective frames; PCA variance
+[0.607, 0.327, 0.041].  Controls: shifted-population Δ −0.0164; identity
+permutation 0.5824 vs 0.5857; label-permutation empirical p 0.333 (6 draws);
+matched ablation random mean +0.0012 (SD 0.0033), all prespecified p ≥ 0.12.
+Nonlinear Δ +0.0121, CI [−0.0275, +0.0481].
+
+The control/ablation counts were reduced for runtime and are diagnostics, not
+definitive randomisation tests.
+
+### 15.5 Figures and app
+
+```powershell
+python scripts/phase4_make_figures.py
+python -m streamlit run app/streamlit_app.py
+```
+
+Figures go to `reports/phase4/figures/`.  The app has **nine** tabs; the ninth,
+**Turn Direction & Neural Sequences**, reads `reports/phase4/` and displays the
+null primary result, calibration, cohort heterogeneity, dynamics and the
+intervention warning.  All eight earlier tabs are preserved.
+
+### 15.6 Manifest and tests
+
+```powershell
+python scripts/phase4_write_manifest.py
+python -m pytest -q
+python -m ruff check src tests scripts
+```
+
+Expected: 62 passed (58 Phase 1–3 + 4 Phase 4 adapter tests).  The Phase 4
+tests cover event conventions, orientation, segment guards, prospective
+windows, and the 9-tab app.  The manifest records code and report hashes,
+environment versions, raw-data checksums and the exact commands.
+
+### 15.7 Nondeterminism
+
+- The primary benchmark uses fixed `C=0.1`, `lbfgs`, `max_iter=1000`; CPU
+  threading can change the last digits.
+- Animal bootstrap uses 2,000 resamples with seed 17.  The paired increments
+  are stable to ~1e-4; do not expect bitwise-identical JSON.
+- Control/ablation permutations are seeded but small; they are not a
+  definitive p-value.
+- Figures are deterministic given the CSVs.
