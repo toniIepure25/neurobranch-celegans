@@ -644,12 +644,14 @@ CPU-heavy (about 20â€“30 min on this machine).
 python scripts/phase5_online.py --epochs 40 --landmarks 0.6 1.2 2.4 3.6 4.8 7.2 --rnn-modes behavior behavior_saav behavior_circuit behavior_population
 python scripts/phase5_online_finalize.py
 python scripts/phase5_online_baselines.py
+python scripts/phase5_per_animal_summary.py
 ```
 
 Expected: 428 SAAV-cohort events/27 animals; 904 wild-type risk-set events at
 0.6 s; no SAAV/circuit log-loss increment; population AUROC rises early but
 log-loss CIs include zero.  Outputs include `online_metrics.csv`,
-`online_deltas.csv`, `online_baselines.csv`, predictions, risk sets/exclusions
+`online_deltas.csv`, `online_baselines.csv`, `online_per_animal_deltas.csv`,
+predictions, risk sets/exclusions
 and `online_config.json`.  If the main script is interrupted after metrics, the
 finalize step recomputes deltas and the behaviour sensitivity.
 
