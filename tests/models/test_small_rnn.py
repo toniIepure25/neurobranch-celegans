@@ -48,3 +48,27 @@ def test_rnn_training_and_event_aggregation() -> None:
     p, out_groups = predict_rnn(model, x, groups)
     assert p.shape == (n_events,)
     assert np.array_equal(out_groups, groups)
+
+
+def test_rnn_class_balancing_uses_training_labels_only() -> None:
+    rng = np.random.default_rng(3)
+    x_train = rng.normal(size=(8, 4, 2)).astype(np.float32)
+    y_train = np.zeros(8, dtype=int)
+    groups_train = np.arange(8)
+    x_valid = rng.normal(size=(4, 4, 2)).astype(np.float32)
+    y_valid = np.array([0, 1, 0, 1])
+    groups_valid = np.arange(4)
+    try:
+        train_rnn(
+            x_train,
+            y_train,
+            groups_train,
+            x_valid,
+            y_valid,
+            groups_valid,
+            config=RNNConfig(epochs=2, batch_size=4, patience=1, seed=3),
+        )
+    except ValueError as error:
+        assert "class-balanced" in str(error)
+        return
+    raise AssertionError("training accepted a single-class training set")
