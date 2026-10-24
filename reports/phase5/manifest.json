@@ -5,10 +5,10 @@
     "reconstruction": "PARTIAL_REPRODUCTION",
     "evaluation": "METHOD_RECONSTRUCTION"
   },
-  "created_utc": "2026-10-24T10:45:29.449341+00:00",
+  "created_utc": "2026-10-24T10:47:18.886334+00:00",
   "git": {
     "branch": "research/phase5-saav-mechanistic-validation",
-    "head": "43d24143555e87bc570c1f0772b9f9e4ff9f3378",
+    "head": "6d944c58c936d609362eb8c98db9719303158a01",
     "dirty_porcelain": "",
     "starting_head": "14a43710334393c2dd234e848fb445d4317a734b"
   },
