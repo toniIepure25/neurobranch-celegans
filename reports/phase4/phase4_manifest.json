@@ -1,0 +1,384 @@
+{
+  "schema_version": 1,
+  "phase": 4,
+  "generated_utc": "2026-10-24T08:57:08.162033+00:00",
+  "git": {
+    "branch": "research/phase4-turn-direction-generalization",
+    "commit": "eab48eb9a3dc447c1f1070853348ea3db37000b0",
+    "dirty": false
+  },
+  "environment": {
+    "python": "3.13.5",
+    "platform": "Windows-10-10.0.19045-SP0",
+    "numpy": "2.3.1",
+    "scipy": "1.16.0",
+    "scikit_learn": "1.9.1",
+    "pandas": "2.3.3",
+    "torch": "2.7.1+cpu"
+  },
+  "raw_data": {
+    "dataset_doi": "doi:10.5061/dryad.8sf7m0cz2",
+    "version": 5,
+    "manifest": "data/raw/kramer2026/manifest.json",
+    "checksums": "reports/phase4/data_checksums.csv",
+    "files_verified": 80,
+    "bytes_verified": 1444081660,
+    "all_match": true,
+    "note": "Two MATLAB .chxTracks.mat files were not downloaded; they are not used."
+  },
+  "commands": [
+    "python scripts/phase4_download_kramer.py",
+    "python scripts/phase4_audit_data.py",
+    "python scripts/phase4_independent_replication.py",
+    "python scripts/phase4_turn_direction.py",
+    "python scripts/phase4_dynamics.py",
+    "python scripts/phase4_controls.py",
+    "python scripts/phase4_ablation.py",
+    "python scripts/phase4_nonlinear.py",
+    "python scripts/phase4_make_figures.py",
+    "python -m pytest -q",
+    "python -m ruff check src tests scripts",
+    "python scripts/phase4_write_manifest.py"
+  ],
+  "code": {
+    "src/neurobranch/data/kramer.py": {
+      "sha256": "07f8abd2d4a9f168f1bc9b80e7241c4c84025a279dd06c2e48752a391feb64c9",
+      "bytes": 16277
+    },
+    "src/neurobranch/behavior/turn_direction.py": {
+      "sha256": "de9e4ac8c32f27a929344f42ac8e3176a7080a0114dcf30fee8ed9efeec35542",
+      "bytes": 26984
+    },
+    "scripts/phase4_download_kramer.py": {
+      "sha256": "122a0c05e810d0470f99a4c6adad461265241e5e393d38ec9456dccd6b195350",
+      "bytes": 6107
+    },
+    "scripts/phase4_audit_data.py": {
+      "sha256": "1aebf3c1de23cc8d761bb0d17b1687b54fa674fefafd3b223129f5ebc4e63e5c",
+      "bytes": 11710
+    },
+    "scripts/phase4_independent_replication.py": {
+      "sha256": "d2e97c30cd108492efdaea2c8a9edaa1af80a40d398e5b8a010bea6cb181872b",
+      "bytes": 5173
+    },
+    "scripts/phase4_turn_direction.py": {
+      "sha256": "b4de0a09d2130cfab56b4d6633ea6efc3ecea78538930cf4e6433c17a37c88d1",
+      "bytes": 10396
+    },
+    "scripts/phase4_dynamics.py": {
+      "sha256": "d4226cec9af5b908a951b0e020dfddff2221ecf6daf08033413a8c82207f67c4",
+      "bytes": 7008
+    },
+    "scripts/phase4_controls.py": {
+      "sha256": "596b249dca619ac97db54733b418bf901616a7102f676321c25669263d2adead",
+      "bytes": 6358
+    },
+    "scripts/phase4_ablation.py": {
+      "sha256": "f9a84192adb400de9591fd1a4d86587222b6c560fd0c0ca96c3df746d13ef05a",
+      "bytes": 804
+    },
+    "scripts/phase4_nonlinear.py": {
+      "sha256": "193a0527e213d4d1519f3726cf56743b8263ad91e32674244c29a36f790609a2",
+      "bytes": 2896
+    },
+    "scripts/phase4_make_figures.py": {
+      "sha256": "fcdc4d87df84e83338a6eec933ec74ff35a553399a14d79e0ee57177f5606abf",
+      "bytes": 10140
+    },
+    "scripts/phase4_write_manifest.py": {
+      "sha256": "e670d9c8063be0df97c057ee75e9d248377750f3a3992b85c2861e282eb15c95",
+      "bytes": 6527
+    },
+    "tests/data/test_kramer.py": {
+      "sha256": "4bba5e8f11606ea5ef3b094e57368725a92e8152dff5afa6285a94ad67bd25d2",
+      "bytes": 2482
+    }
+  },
+  "docs": {
+    "docs/PHASE4_RESEARCH_PLAN.md": {
+      "sha256": "9289a3ca925413a936228824dfd73bba010ac1130780e1b88f0eef3ec4e4d220",
+      "bytes": 7218
+    },
+    "docs/PHASE4_DATASET_AUDIT.md": {
+      "sha256": "b47818c7b88f7e1ae70076e2e50c57bf9432bf7d2c2cb175b824c9b17aaae04b",
+      "bytes": 4757
+    },
+    "docs/PHASE4_INDEPENDENT_REPLICATION.md": {
+      "sha256": "51bd57485d5232d2c9fcdf521f3b36c758ad9770204a9c480ad9ca0a6f13f170",
+      "bytes": 3933
+    },
+    "docs/PHASE4_TURN_DIRECTION_BENCHMARK.md": {
+      "sha256": "937cfa4dae1e7e6e9fb921bf3bb787e5d5ec3e804d41ce72a60a4ffc0bf4dd46",
+      "bytes": 8879
+    },
+    "docs/PHASE4_NEURAL_BRANCH_DYNAMICS.md": {
+      "sha256": "1b77d29ba143fe61195d05db987d036d698fda06e8710a284d8c6141a4450192",
+      "bytes": 5094
+    },
+    "docs/PHASE4_NEURON_SPECIFIC_ANALYSIS.md": {
+      "sha256": "085a81c4a72fe5781a188be0f65960a3d234f575e4c5fc97b92e30bd2290eded",
+      "bytes": 3631
+    },
+    "docs/PHASE4_INTERVENTION_EVIDENCE.md": {
+      "sha256": "2b3d0bbc94d1de7787ed80297474978a5b371f932325ab77a7368b7b6ed508f1",
+      "bytes": 2717
+    },
+    "docs/PHASE4_RESULTS.md": {
+      "sha256": "e6371214cd5b01e6dd04929f4ba1084e41226a8cab3213d0d7b20b9083887b58",
+      "bytes": 13090
+    },
+    "docs/PHASE4_SUPERVISOR_BRIEF.md": {
+      "sha256": "23163323f67c0e14544bfdba4f323695fdb0f0899e07b46fa3326309bed55454",
+      "bytes": 2642
+    },
+    "docs/PHASE4_NEXT_EXPERIMENTS.md": {
+      "sha256": "5608f72372a984db11c038e45ba7a21acbcd7770125bb4e07d8b3f0d8173f4cd",
+      "bytes": 2884
+    }
+  },
+  "artifacts": {
+    "reports/phase4/behavior_event_inventory.csv": {
+      "sha256": "334f91cd4d9c0af8a1435e6b8dad839ad4f3389c9520cff5070ecfe9866a8ba5",
+      "bytes": 9323
+    },
+    "reports/phase4/checkpoints/MODEL_SPEC.json": {
+      "sha256": "458a40549fc006b60215e59657b42c022fa1323b00f1a79076e04e1144c50f79",
+      "bytes": 459
+    },
+    "reports/phase4/checkpoints/README.md": {
+      "sha256": "79aa08e6427c9711e89e9c419a59fc4481c30a0ae6a2ca95a99394979f38641d",
+      "bytes": 426
+    },
+    "reports/phase4/cohort_inventory.csv": {
+      "sha256": "fabc239ccd7028360fcedfd89d33b82e43049fe0a5c03f12c567089639b805b1",
+      "bytes": 309
+    },
+    "reports/phase4/data_checksums.csv": {
+      "sha256": "dee606ff6ec69be350d6ac38b8f7797e4f130cb5f5614168d127172427083ffe",
+      "bytes": 13349
+    },
+    "reports/phase4/dataset_audit_summary.json": {
+      "sha256": "50e51f6b019699d7b44ac7005e584974c712e5dd780c14506998a8fa1adfd8bf",
+      "bytes": 1237
+    },
+    "reports/phase4/dataset_inventory.csv": {
+      "sha256": "81656ba605efb6dcfef4816ed44fa95466f4b35fac62c80fc538894f1bd1702c",
+      "bytes": 9160
+    },
+    "reports/phase4/figures/phase4_event_inventory.png": {
+      "sha256": "d8fa370833e2146afdbf05f02b874c3639848c549c2ad56eaaa85f3642122e2b",
+      "bytes": 104498
+    },
+    "reports/phase4/figures/phase4_replication_delta.png": {
+      "sha256": "6215c19ac0295c85f8ebacedb73f6723c1413b197089e5755e2525049e37886b",
+      "bytes": 72684
+    },
+    "reports/phase4/figures/phase4_turn_direction_auroc.png": {
+      "sha256": "6aa6bd6016f52cd3b8fcc1e6a1cae52d60999b9e197ce4e7055810c845627700",
+      "bytes": 111475
+    },
+    "reports/phase4/figures/phase4_turn_direction_calibration.png": {
+      "sha256": "8891df76b771d92c2256dd1298715b315fe7a7e3a7623270e0293c7c38835356",
+      "bytes": 137977
+    },
+    "reports/phase4/figures/phase4_turn_direction_delta_forest.png": {
+      "sha256": "fea2469f36d5eadd2cdc9589ffb06680dd649f23ec086110ebd0d142a744bf54",
+      "bytes": 109009
+    },
+    "reports/phase4/figures/phase4_turn_direction_external.png": {
+      "sha256": "42b8d6bf6f7e6b0da741ee2862b00a8e64744344d642f4579d9fadab7881ce62",
+      "bytes": 62542
+    },
+    "reports/phase4/figures/phase4_turn_direction_nonlinear.png": {
+      "sha256": "c5f5eacac80a3adce75bcdfcb4a1c8903ddd829bbaf68554034c87b5198aa853",
+      "bytes": 61538
+    },
+    "reports/phase4/figures/phase4_turn_dynamics_timeresolved.png": {
+      "sha256": "ab2107d1c84b61719ad96079515da978be24dd396146f03d13eedc48d0941a2d",
+      "bytes": 168256
+    },
+    "reports/phase4/figures/phase4_turn_neuron_ablation.png": {
+      "sha256": "a4169c7894ce9577c9bcd5c9b951bd7071c86c2b410a445a38a9d1eafd8bfc25",
+      "bytes": 77808
+    },
+    "reports/phase4/figures/phase4_turn_neuron_peak_times.png": {
+      "sha256": "81d121bb05cd160f2f3d6aeda4cd159afe3a8d096a81caeafa9428942de26e0f",
+      "bytes": 90048
+    },
+    "reports/phase4/figures/phase4_turn_pca_trajectories.png": {
+      "sha256": "c614448ea43fa969de0e5cb67574e68082c2107c5ac5c9651c384224b694893e",
+      "bytes": 145278
+    },
+    "reports/phase4/marker_sanity.csv": {
+      "sha256": "a50c4228a03cf08d42b24cba47992ca99bb88733b30d3e7fd4cf1f2d2cf9e9ac",
+      "bytes": 3592
+    },
+    "reports/phase4/neuron_coverage.csv": {
+      "sha256": "b0dd3c9b574adcfbfa751fb69de84397e199a5e3a5fcbab7ce35fa2d5fe7120a",
+      "bytes": 6173
+    },
+    "reports/phase4/replication_deltas.csv": {
+      "sha256": "d38b1c3843d2bdea4c8e48a44238176b4f3514c59737b947d5f481439f365025",
+      "bytes": 18408
+    },
+    "reports/phase4/replication_metrics.csv": {
+      "sha256": "30e5da7e700448cc9d94e7ba5d1de34dc75007d09f3a9ca1bec4ce0f8f5263a9",
+      "bytes": 226817
+    },
+    "reports/phase4/replication_protocol.json": {
+      "sha256": "aa8f88dcf06bb317fb6991990b826ee2ff0fbec568002ab954cdf97fb1ae0485",
+      "bytes": 705
+    },
+    "reports/phase4/replication_summary.json": {
+      "sha256": "d7c75b3bf025f4a1ff889b50d89f9a91b727db6c968d29e55a8eaad0778556b8",
+      "bytes": 21119
+    },
+    "reports/phase4/turn_direction_calibration.csv": {
+      "sha256": "45ded10ae49bb4cd24022b7df1523c88f13211b4175486f17e570e629dd00eac",
+      "bytes": 2351
+    },
+    "reports/phase4/turn_direction_cohorts.csv": {
+      "sha256": "870aaa9eb24525cc6fdcd05701d5830aa214c698a64d13c410d3d700c8aba90d",
+      "bytes": 1729
+    },
+    "reports/phase4/turn_direction_controls.csv": {
+      "sha256": "5f07e8bee3c699e14917ffb8e9d0071a2c0d7f412277a523e97c9803931a6ac6",
+      "bytes": 516
+    },
+    "reports/phase4/turn_direction_external.csv": {
+      "sha256": "3295ad0e4b72d055b71dbb6f5baebe13ac687b4b3035985429758fa37ae1cdac",
+      "bytes": 2573
+    },
+    "reports/phase4/turn_direction_external_tdc1_octanol_from_wt_all.parquet": {
+      "sha256": "14548d00cd55f15b25552328de17404b3b9cd2701b103852b6ec7fbb388c33ca",
+      "bytes": 17526
+    },
+    "reports/phase4/turn_direction_external_tdc1_octanol_from_wt_octanol.parquet": {
+      "sha256": "7ff7149b74d6f986cff5463bc39a5d9738c890ee7a244a0bc33ab4ef1b704a8c",
+      "bytes": 17526
+    },
+    "reports/phase4/turn_direction_external_wt_diacetyl_from_wt_octanol.parquet": {
+      "sha256": "708e5ce16a339841d581a3c4d7800f4d37899550dd6df851ee9cd20c206e3456",
+      "bytes": 20699
+    },
+    "reports/phase4/turn_direction_label_permutation.csv": {
+      "sha256": "a5ca8d705753be59b636b0310a5c5e1256d14f631124c9ed388d6853390ac69b",
+      "bytes": 187
+    },
+    "reports/phase4/turn_direction_label_permutation_summary.json": {
+      "sha256": "6e482946376a6dccc0b46b1ee34203754fa2081047b5d1e58d1e21e9377fea0d",
+      "bytes": 294
+    },
+    "reports/phase4/turn_direction_metrics.csv": {
+      "sha256": "dbfb402a6ba33438825d41e6d950200e49f2bfb47d5bba3e73885c37be874fd1",
+      "bytes": 1627
+    },
+    "reports/phase4/turn_direction_neuron_ablation.csv": {
+      "sha256": "659db8e8376e225a0319c6a3c5a874687cae70ee3da5e91abd3008271d70f803",
+      "bytes": 1133
+    },
+    "reports/phase4/turn_direction_neuron_ablation_raw.csv": {
+      "sha256": "ce8464bb07a89f5fff57c02312387c59d2ee8e11e5b0f4ea8bd795f742adb602",
+      "bytes": 1800
+    },
+    "reports/phase4/turn_direction_nonlinear.csv": {
+      "sha256": "afba12b457af587006cead30da9d202372935b33ecdb2f300ad67601ee43b736",
+      "bytes": 500
+    },
+    "reports/phase4/turn_direction_nonlinear_predictions.parquet": {
+      "sha256": "9316c377f88dff5ada11386230b8a887774933cd819fdf6c74b30c7712c2e03b",
+      "bytes": 28969
+    },
+    "reports/phase4/turn_direction_nonlinear_summary.json": {
+      "sha256": "6aee6ef3c50f878de9ec36466be78bc85abcb0810ad4fe1c98be37114c572298",
+      "bytes": 1132
+    },
+    "reports/phase4/turn_direction_overlap.json": {
+      "sha256": "79ddf3fb6efe4fa6e588bda5376417f60e266157188aa8880497491e8f0559fc",
+      "bytes": 58
+    },
+    "reports/phase4/turn_direction_per_animal.csv": {
+      "sha256": "383c6a4dbee733e60c70472abc5942322d254dfd0907d266c11877813deb5dea",
+      "bytes": 75611
+    },
+    "reports/phase4/turn_direction_predictions.parquet": {
+      "sha256": "0130259eea55414eef3031f1187ec86238d6fb5b19351095f38c35d7cafe1bf5",
+      "bytes": 128640
+    },
+    "reports/phase4/turn_direction_protocol.json": {
+      "sha256": "0bd0e313fd672346a65f45b3f415da92e254722d1452769eaac26d0dafa64434",
+      "bytes": 1293
+    },
+    "reports/phase4/turn_direction_saav_subset.csv": {
+      "sha256": "94360dc8e8ee48e5065aab11cec39090229ff95a6f2a3cce6f65a873bdcb5a58",
+      "bytes": 724
+    },
+    "reports/phase4/turn_direction_summary.json": {
+      "sha256": "ffd254797afb4a8db0584344f124d25af1edb64ea7d10a5eeb6e5caa0b10afa3",
+      "bytes": 7434
+    },
+    "reports/phase4/turn_direction_summary_early.json": {
+      "sha256": "cb38666c20373b70e45fb99e77cc4afa17549870847eaac92f5528bf41144957",
+      "bytes": 2733
+    },
+    "reports/phase4/turn_direction_summary_late.json": {
+      "sha256": "470d9bc9029afb7cd61f15605c424bb589053b429eb09f2308ceb0a2f058bb09",
+      "bytes": 2739
+    },
+    "reports/phase4/turn_direction_summary_saav_subset.json": {
+      "sha256": "e785031c9f8f176fb282fc920a5f12b666e1c5c3628f4d293cc6eabd2b71ef99",
+      "bytes": 2039
+    },
+    "reports/phase4/turn_direction_summary_wt_diacetyl.json": {
+      "sha256": "8f674c7a0dbbcc98e4283a7f57a1a918c08c21b4e8d8be13b823b1d963b76b7b",
+      "bytes": 2733
+    },
+    "reports/phase4/turn_direction_summary_wt_octanol.json": {
+      "sha256": "61035ebf2fc4e5c51d679dc6d490a242d18cf2c387587846f4ae8db9d3791684",
+      "bytes": 2698
+    },
+    "reports/phase4/turn_direction_window_sensitivity.csv": {
+      "sha256": "14839883c8d3d94b1a1b527b447bcf0b40fd8667c4c96c074b6b18e5c73d90a4",
+      "bytes": 1718
+    },
+    "reports/phase4/turn_direction_within_animal_cv.csv": {
+      "sha256": "2ed6b50ee40b423d05bb55f4fa8f0a09f3cab9528e09c4e355ad0cc2baa9076d",
+      "bytes": 696
+    },
+    "reports/phase4/turn_direction_within_animal_predictions.parquet": {
+      "sha256": "bc3d813aea7554cd0533401aa95412048e6956d235673b57ea7f3797c28449d1",
+      "bytes": 41869
+    },
+    "reports/phase4/turn_dynamics_timeresolved.csv": {
+      "sha256": "3b93114884fb0f1f67c44cc62535df5a9436454732692a2eb210e95e36a49c7e",
+      "bytes": 4031
+    },
+    "reports/phase4/turn_neuron_peak_events.csv": {
+      "sha256": "1b5fb3ff5308701cade0158a701a1458496979e7cfc8deb88122074cbcf92bec",
+      "bytes": 190719
+    },
+    "reports/phase4/turn_neuron_peak_times.csv": {
+      "sha256": "cb54696540c5a635e8765b727ee34ba7f1fb42122eebef58cf0e6ee4f26f6185",
+      "bytes": 967
+    },
+    "reports/phase4/turn_pca_trajectories.csv": {
+      "sha256": "ae72cf27272f833df2c043a502839353cf79f852cc2ab63eacf50235879b01a9",
+      "bytes": 6823
+    },
+    "reports/phase4/turn_pca_variance.json": {
+      "sha256": "2f1deb8496e850d7b5537b2f1c03e6f0ebcb401ff87bd7062161f5eebe5a393b",
+      "bytes": 140
+    }
+  },
+  "model_checkpoint": {
+    "status": "not_applicable",
+    "reason": "The primary benchmark is refit leave-one-animal-out; no single deployed model or checkpoint exists.",
+    "model_card": "reports/phase4/checkpoints/MODEL_SPEC.json"
+  },
+  "caveats": [
+    "Not an exact reproduction of the paper: derived SAAV/HC CSVs and RNN were unavailable.",
+    "No trial-level optogenetic recordings; no causal intervention claim.",
+    "D/V labels inferred from orientation-corrected dv.",
+    "Control/ablation permutation counts were reduced for runtime."
+  ]
+}
