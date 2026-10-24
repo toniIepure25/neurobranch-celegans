@@ -105,6 +105,14 @@ accuracy is wrong. The official code reports section accuracy after 5×4 rotatio
 with a different calibration/threshold regime; our reconstruction cannot be
 compared on that metric.
 
+The event-level animal-cluster bootstrap intervals above are primary. For
+transparency, equal-weight per-animal log-loss differences (SAAV − behaviour)
+are: original mean −0.0006, median +0.0015, 11/26 animals improved; grouped
++0.0018, −0.0002, 14/26; chronological +0.0003, −0.0024, 14/24; external
++0.0068, +0.0040, 4/13. The grouped principal regime is a coin flip at the
+animal level, which reinforces the null. The table is in
+`reports/phase5/protocol_comparison/protocol_per_animal_deltas.csv`.
+
 ## Why the protocols differ
 
 1. **Missing aligned inputs.** The four CSVs encode the authors' event

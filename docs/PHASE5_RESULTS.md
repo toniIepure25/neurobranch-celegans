@@ -133,6 +133,12 @@ Animal-disjoint five-fold; train-only scaling; 428 SAAV-cohort events/27 animals
   reaches AUROC 0.610 at 0.6 s and 0.559 at 7.2 s, while behaviour on the
   27-animal SAAV cohort is near chance. This cohort difference must be resolved
   before generalising either way.
+- Per-animal equal-weight log-loss differences are heterogeneous: grouped SAAV
+  +0.0018 (14/26 animals improved; median −0.0002), online population −0.030
+  (16/24 improved) at 0.6 s but near zero or positive at 3.6–4.8 s. The pooled
+  animal-cluster interval, not the equal-weight mean, is primary; tables are in
+  `reports/phase5/protocol_comparison/protocol_per_animal_deltas.csv` and
+  `reports/phase5/online_decoding/online_per_animal_deltas.csv`.
 
 ## 5. Mechanisms
 

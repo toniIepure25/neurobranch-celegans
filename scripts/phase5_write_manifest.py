@@ -80,6 +80,7 @@ def main() -> None:
             "python scripts/phase5_online.py --epochs 40 --landmarks 0.6 1.2 2.4 3.6 4.8 7.2 --rnn-modes behavior behavior_saav behavior_circuit behavior_population",
             "python scripts/phase5_online_finalize.py",
             "python scripts/phase5_online_baselines.py",
+            "python scripts/phase5_per_animal_summary.py",
             "python scripts/phase5_mechanisms.py",
             "python scripts/phase5_interventions.py",
             "python scripts/phase5_figures.py",

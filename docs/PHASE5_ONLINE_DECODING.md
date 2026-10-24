@@ -102,6 +102,13 @@ AUROC increments (0.6 s +0.116, 1.2 s +0.099), so the early signal is not solely
 label-neuron or SAAV contamination. SAAV, the compact circuit and the RNN show
 no incremental evidence. The population signal is therefore a secondary,
 calibration-weak association, not a validated direction code.
+Per-animal log-loss differences (population − behaviour, equal animal weights)
+are mean −0.030 and 16/24 improved at 0.6 s, −0.017 and 16/24 at 1.2 s, and
+−0.009 and 17/24 at 7.2 s; at 3.6–4.8 s the mean changes sign. This
+between-animal heterogeneity is why the pooled event-level interval crosses
+zero despite a negative mean early. The full table is
+`reports/phase5/online_decoding/online_per_animal_deltas.csv`.
+
 The sensory-context model has the best log loss at 0.6–1.2 s; its AUROC gain over
 behaviour is +0.135 to +0.139 with CIs above zero, while its log-loss interval
 still crosses zero.
