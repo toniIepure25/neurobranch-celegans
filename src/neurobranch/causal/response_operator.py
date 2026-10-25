@@ -38,6 +38,7 @@ class CROConfig:
     device: str = "cpu"
     use_pair_features: bool = True
     use_context: bool = True
+    use_state: bool = False
 
 
 class CROModule(nn.Module):
@@ -359,3 +360,138 @@ def train_cro(
         "test_mu": test_mu,
         "test_sigma": test_sigma,
     }
+
+
+@dataclass
+class CROFit:
+    """A trained CRO plus the train-only preprocessing needed for inference."""
+
+    module: CROModule
+    scalers: dict[str, Any]
+    config: CROConfig
+    held_out_targets: frozenset[str]
+    held_out_animals: frozenset[str]
+
+    @classmethod
+    def from_result(
+        cls,
+        result: dict[str, Any],
+        *,
+        held_out_targets: set[str],
+        held_out_animals: set[str],
+    ) -> CROFit:
+        cfg = CROConfig(**result["config"])
+        scalers = result["scalers"]
+        module = CROModule(
+            n_targets=len(scalers.get("target_names", [])) or int(result.get("n_targets", 0)),
+            n_responders=len(scalers.get("responder_names", [])) or int(result.get("n_responders", 0)),
+            n_animals=len(scalers.get("animal_names", [])) or int(result.get("n_animals", 0)),
+            d_target=int(scalers["target_scaler"].n_features_in_),
+            d_responder=int(scalers["responder_scaler"].n_features_in_),
+            d_pair=int(scalers["pair_scaler"].n_features_in_),
+            d_context=int(scalers["context_scaler"].n_features_in_),
+            rank=cfg.rank,
+            hidden=cfg.hidden,
+            dropout=cfg.dropout,
+            use_pair_features=cfg.use_pair_features,
+            use_context=cfg.use_context,
+        )
+        module.load_state_dict(result["model_state"])
+        module.eval()
+        return cls(
+            module=module,
+            scalers=scalers,
+            config=cfg,
+            held_out_targets=frozenset(held_out_targets),
+            held_out_animals=frozenset(held_out_animals),
+        )
+
+    def predict(self, bundle: FeatureBundle, idx: np.ndarray) -> tuple[np.ndarray, np.ndarray]:
+        idx = np.asarray(idx, dtype=np.int64)
+        if idx.size == 0:
+            return np.empty(0, dtype=float), np.empty(0, dtype=float)
+        tf, rf, pf, ctx, _ = _transform(bundle, idx, self.scalers)
+        t = torch.as_tensor(bundle.target_idx[idx], dtype=torch.long)
+        r = torch.as_tensor(bundle.responder_idx[idx], dtype=torch.long)
+        a = torch.as_tensor(bundle.animal_idx[idx], dtype=torch.long)
+        tf_all = torch.as_tensor(tf, dtype=torch.float32)
+        rf_all = torch.as_tensor(rf, dtype=torch.float32)
+        target_seen = torch.as_tensor(
+            np.array([bundle.target_names[i] not in self.held_out_targets for i in bundle.target_idx]),
+            dtype=torch.bool,
+        )
+        animal_seen = torch.as_tensor(
+            np.array([bundle.animal_names[i] not in self.held_out_animals for i in bundle.animal_idx]),
+            dtype=torch.bool,
+        )
+        with torch.no_grad():
+            mu, sigma = self.module(
+                t,
+                r,
+                a,
+                tf_all[t],
+                rf_all[r],
+                torch.as_tensor(pf, dtype=torch.float32),
+                torch.as_tensor(ctx, dtype=torch.float32),
+                target_seen[idx],
+                animal_seen[idx],
+            )
+        mu_np = mu.cpu().numpy() * self.scalers["y_std"] + self.scalers["y_mean"]
+        sigma_np = sigma.cpu().numpy() * self.scalers["y_std"]
+        return mu_np, sigma_np
+
+
+def fit_cro(
+    bundle: FeatureBundle,
+    *,
+    train_idx: np.ndarray,
+    val_idx: np.ndarray,
+    test_idx: np.ndarray,
+    held_out_targets: set[str],
+    held_out_animals: set[str],
+    config: CROConfig | None = None,
+) -> CROFit:
+    """Fit a CRO and retain the module for candidate-grid inference."""
+    result = train_cro(
+        bundle,
+        train_idx=train_idx,
+        val_idx=val_idx,
+        test_idx=test_idx,
+        held_out_targets=held_out_targets,
+        held_out_animals=held_out_animals,
+        config=config,
+    )
+    # The module dimensions are inferable from the bundle; attach names so the
+    # reconstruction is explicit rather than relying on a magic count.
+    result["scalers"]["target_names"] = tuple(bundle.target_names)
+    result["scalers"]["responder_names"] = tuple(bundle.responder_names)
+    result["scalers"]["animal_names"] = tuple(bundle.animal_names)
+    return CROFit.from_result(
+        result,
+        held_out_targets=held_out_targets,
+        held_out_animals=held_out_animals,
+    )
+
+
+@dataclass
+class CROEnsemble:
+    """A small deep ensemble used for epistemic acquisition scores."""
+
+    fits: list[CROFit]
+
+    def predict(self, bundle: FeatureBundle, idx: np.ndarray) -> tuple[np.ndarray, np.ndarray, np.ndarray]:
+        mus = []
+        sigmas = []
+        for fit in self.fits:
+            mu, sigma = fit.predict(bundle, idx)
+            mus.append(mu)
+            sigmas.append(sigma)
+        mu_stack = np.stack(mus, axis=0)
+        sigma_stack = np.stack(sigmas, axis=0)
+        mu = mu_stack.mean(axis=0)
+        # Total predictive scale: average aleatoric variance plus ensemble
+        # disagreement.  The epistemic component is returned separately for
+        # acquisition; it must never be interpreted as a posterior guarantee.
+        sigma = np.sqrt(np.mean(sigma_stack**2 + (mu_stack - mu) ** 2, axis=0))
+        epistemic = mu_stack.std(axis=0)
+        return mu, sigma, epistemic

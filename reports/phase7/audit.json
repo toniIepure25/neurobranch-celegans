@@ -1,0 +1,67 @@
+{
+  "config": {
+    "trials_path": "reports/phase3/randi_trial_table_phase3.csv.gz",
+    "connectome_path": "references/external/aconnectome_witvliet_2020_8_utf8.csv",
+    "output_dir": "reports/phase7",
+    "outer_split": "unseen_targets",
+    "n_folds": 5,
+    "initial_fraction": 0.2,
+    "budgets": [
+      0.2,
+      0.3,
+      0.4,
+      0.5
+    ],
+    "reference_budget": 0.6,
+    "primary_budget": 0.4,
+    "batch_targets": 8,
+    "strategies": [
+      "random",
+      "uncertainty",
+      "effect",
+      "diversity",
+      "discrepancy",
+      "hybrid"
+    ],
+    "acquisition_seeds": [
+      101,
+      202
+    ],
+    "model_seeds": [
+      17,
+      23
+    ],
+    "final_model_seeds": [
+      17,
+      23,
+      31,
+      41,
+      53
+    ],
+    "rank": 16,
+    "hidden": 64,
+    "epochs": 12,
+    "batch_size": 8192,
+    "learning_rate": 0.002,
+    "weight_decay": 0.001,
+    "patience": 8,
+    "response_column": "response_mean",
+    "n_boot": 300,
+    "use_state": false,
+    "state_path": null,
+    "smoke": false
+  },
+  "n_targets": 259,
+  "n_folds": 5,
+  "n_selection_rows": 720,
+  "n_selected_unique": 258,
+  "fold_leaks": [],
+  "no_test_target_selected": true,
+  "trials_sha256": "8186c96bcb33cdce15dc9ae88691e09fc596e42c5513310b6d6a636e4d5dd515",
+  "connectome_sha256": "04877a54cefa992c94e12a4ec305af382789d6a93c027295d171da8da060fbfe",
+  "git": {
+    "commit": "7532ea1511c04ce5a57c992653d3158ea60b6287",
+    "dirty": true,
+    "branch": "research/phase7-active-probing"
+  }
+}

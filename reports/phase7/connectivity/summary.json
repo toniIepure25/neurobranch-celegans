@@ -1,0 +1,60 @@
+{
+  "edge_metrics": [
+    {
+      "strategy": "diversity",
+      "score": "predicted_magnitude",
+      "auroc_direct_edge": 0.58002378409889,
+      "auroc_anatomy_unexplained": 0.6122869266176794,
+      "n_pairs": 40341,
+      "n_direct": 1447,
+      "n_unexplained": 3878
+    },
+    {
+      "strategy": "discrepancy",
+      "score": "predicted_magnitude",
+      "auroc_direct_edge": 0.5732761014831338,
+      "auroc_anatomy_unexplained": 0.6022085632185916,
+      "n_pairs": 40341,
+      "n_direct": 1447,
+      "n_unexplained": 3878
+    },
+    {
+      "strategy": "effect",
+      "score": "predicted_magnitude",
+      "auroc_direct_edge": 0.5706322580227889,
+      "auroc_anatomy_unexplained": 0.6099058259612982,
+      "n_pairs": 40341,
+      "n_direct": 1447,
+      "n_unexplained": 3878
+    },
+    {
+      "strategy": "uncertainty",
+      "score": "predicted_magnitude",
+      "auroc_direct_edge": 0.5662702525806056,
+      "auroc_anatomy_unexplained": 0.6043738559425051,
+      "n_pairs": 40341,
+      "n_direct": 1447,
+      "n_unexplained": 3878
+    },
+    {
+      "strategy": "random",
+      "score": "predicted_magnitude",
+      "auroc_direct_edge": 0.5641509151679033,
+      "auroc_anatomy_unexplained": 0.5926280339822388,
+      "n_pairs": 40341,
+      "n_direct": 1447,
+      "n_unexplained": 3878
+    },
+    {
+      "strategy": "hybrid",
+      "score": "predicted_magnitude",
+      "auroc_direct_edge": 0.5443067595092774,
+      "auroc_anatomy_unexplained": 0.6063910299994384,
+      "n_pairs": 40341,
+      "n_direct": 1447,
+      "n_unexplained": 3878
+    }
+  ],
+  "warning": "Anatomical association only; not causal discovery.",
+  "discrepancy_definition": "No direct chemical/electrical edge and observed |response| in the top decile of evaluated test pairs. Labelled anatomy-unexplained coupling candidate, not extrasynaptic mechanism."
+}

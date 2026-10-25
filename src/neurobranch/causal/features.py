@@ -52,6 +52,7 @@ class FeatureBundle:
     event_ids: np.ndarray
     target_seen_possible: np.ndarray
     connectome_coverage: dict[str, int]
+    state_features: np.ndarray | None = None
 
     def __len__(self) -> int:
         return int(len(self.y))

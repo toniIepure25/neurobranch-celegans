@@ -231,6 +231,27 @@ def coverage(frame: pd.DataFrame, *, lower: str = "lower", upper: str = "upper")
     return float(np.mean((y[ok] >= lo[ok]) & (y[ok] <= hi[ok])))
 
 
+def interval_score(
+    frame: pd.DataFrame,
+    *,
+    lower: str = "lower",
+    upper: str = "upper",
+    alpha: float = 0.10,
+) -> float:
+    """Winkler interval score (lower is better) for central ``1-alpha`` intervals."""
+    y = np.asarray(frame["y_true"], dtype=float)
+    lo = np.asarray(frame[lower], dtype=float)
+    hi = np.asarray(frame[upper], dtype=float)
+    ok = np.isfinite(y) & np.isfinite(lo) & np.isfinite(hi)
+    if not ok.any():
+        return float("nan")
+    y, lo, hi = y[ok], lo[ok], hi[ok]
+    width = hi - lo
+    penalty_low = (2.0 / alpha) * np.maximum(lo - y, 0.0)
+    penalty_high = (2.0 / alpha) * np.maximum(y - hi, 0.0)
+    return float(np.mean(width + penalty_low + penalty_high))
+
+
 def bootstrap_cluster(
     frame: pd.DataFrame,
     metric: Callable[[pd.DataFrame], float],

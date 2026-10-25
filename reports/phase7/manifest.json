@@ -1,0 +1,244 @@
+{
+  "phase": 7,
+  "created_by": "scripts/phase7_manifest.py",
+  "python": "3.13.5 (tags/v3.13.5:6cb20a2, Jun 11 2025, 16:15:46) [MSC v.1943 64 bit (AMD64)]",
+  "platform": "Windows-10-10.0.19045-SP0",
+  "git": {
+    "commit": "7532ea1511c04ce5a57c992653d3158ea60b6287",
+    "dirty": true,
+    "branch": "research/phase7-active-probing"
+  },
+  "n_files": 45,
+  "files": [
+    {
+      "path": "reports/phase7/audit.json",
+      "sha256": "7cdb23a6e2925c4bb1dc6ab6d02e9e4e5471b3d32f3950be1a9e682fc50aa95f",
+      "bytes": 1566
+    },
+    {
+      "path": "reports/phase7/connectivity/summary.json",
+      "sha256": "f05510e2c0500a7e9e065a2b01e340aa584c4aaf4ed2e576ac9cc44edc5f38aa",
+      "bytes": 1916
+    },
+    {
+      "path": "reports/phase7/design/design.json",
+      "sha256": "2ab69da330445e02a6b4556aa267b6e1fedd0c5df92643b068ef40d3bec773e7",
+      "bytes": 3967
+    },
+    {
+      "path": "reports/phase7/state/state_summary.json",
+      "sha256": "2b012218ab4c3dcf1e825cd4790af154d2eaaef82ac6b34197fbe77c41e3b1f2",
+      "bytes": 307
+    },
+    {
+      "path": "reports/phase7/state_ablation/summary.json",
+      "sha256": "10a9ba98854651ea0d1e98912ad981b75c08da63ad3b6e060ea8bc6a02c89f4f",
+      "bytes": 4148
+    },
+    {
+      "path": "reports/phase7/summary.json",
+      "sha256": "40ea692f7d3d947d3250c6203a02b3de0e53b6a644b857ebf18ba349476b0dda",
+      "bytes": 3631
+    },
+    {
+      "path": "reports/phase7/budget_curves.csv",
+      "sha256": "5dbfe70e5c95a8cd0cd742cafe91f38d26aaa5e5c1c3e11dd4dc5a5777ea34b8",
+      "bytes": 1513
+    },
+    {
+      "path": "reports/phase7/connectivity/edge_metrics.csv",
+      "sha256": "35f5664290801b907084980c2c054bc4261d1eab87e8232599bab358e522d607",
+      "bytes": 594
+    },
+    {
+      "path": "reports/phase7/deltas.csv",
+      "sha256": "77cdbe183d368fb995007dd0ce5904f1cf2730e6b60a391971a0225335c853a5",
+      "bytes": 1923
+    },
+    {
+      "path": "reports/phase7/design/pair_candidates.csv",
+      "sha256": "b58e6a72f4baf633649c44f2baf1d9be1fa06226291fff4f49b5f4ce2402bdfc",
+      "bytes": 15007
+    },
+    {
+      "path": "reports/phase7/design/target_candidates.csv",
+      "sha256": "1ff0cd3eb1976ba2ef8ac4dc6b765224248e9c4a3244ffdfd8c476c923e7efc6",
+      "bytes": 4657
+    },
+    {
+      "path": "reports/phase7/discrepancy_pairs.csv",
+      "sha256": "c5050628931137b4a3939258e4dc3dfb4f28ae8964c2d952195c020d9927a9a3",
+      "bytes": 3726
+    },
+    {
+      "path": "reports/phase7/metrics.csv",
+      "sha256": "c006325c7f795d224fde902e400d20ac4bf8230f871510ee3887857eaa24001d",
+      "bytes": 59097
+    },
+    {
+      "path": "reports/phase7/state_ablation/metrics.csv",
+      "sha256": "6b70bee004eb58b00784303a40f7014405f6d63fbb47904cf3f1a900a60284c8",
+      "bytes": 1574
+    },
+    {
+      "path": "reports/phase7/targets_to_threshold.csv",
+      "sha256": "aec2b2772094df884fe7464d01aef1cfb2e1057f13be2687fcd1750914eae1b1",
+      "bytes": 1313
+    },
+    {
+      "path": "reports/phase7/predictions.parquet",
+      "sha256": "f24bf8a17013162d8e5d08a5e8ae79104e5bc3d9669d67a4a4efb0ea7405dec2",
+      "bytes": 71073375
+    },
+    {
+      "path": "reports/phase7/state/event_state.npz",
+      "sha256": "f215f6d6ff02eac8f80efa8079018d193997edc342ffd288d39c87f90add3640",
+      "bytes": 1156291
+    },
+    {
+      "path": "reports/phase7/README.md",
+      "sha256": "51d1b1c3d6ed921e1ebe339107f12f2d469ca2620f70ffb43acf51f736f08781",
+      "bytes": 1438
+    },
+    {
+      "path": "docs/PHASE7_DEVIATIONS.md",
+      "sha256": "344a170c839ae6d7155bdc78afe54e3d534f0c45d93304165064839398ec5a64",
+      "bytes": 2965
+    },
+    {
+      "path": "docs/PHASE7_EVALUATION_CARD.md",
+      "sha256": "f7cd7513c45471ab286f9e837c6d9a66dd595ec99076104fe470c6ea3a7519bb",
+      "bytes": 3176
+    },
+    {
+      "path": "docs/PHASE7_PREREGISTRATION.md",
+      "sha256": "13678cfb3c82fcc232005e58c9d2e7549731338a32ff7d1eb53379131c8127fa",
+      "bytes": 5415
+    },
+    {
+      "path": "docs/PHASE7_RESEARCH_SYNTHESIS.md",
+      "sha256": "3cfaf23adf89738794a1538dee2bc93de25a76d142c3ebe53b2d00138a9e642c",
+      "bytes": 5912
+    },
+    {
+      "path": "docs/PHASE7_RESULTS.md",
+      "sha256": "b6776c37b35797594d3a9da9af5ce778e5cbb6e05e1b4316333a0a1b113feecf",
+      "bytes": 6065
+    },
+    {
+      "path": "docs/PHASE7_SUPERVISOR_BRIEF.md",
+      "sha256": "b7fc7ea94e28ddd2e994f95404489516ea4174f3eb062d87c4a69321ce76b304",
+      "bytes": 3128
+    },
+    {
+      "path": "configs/phase7/active.yaml",
+      "sha256": "3c0ef82e5a30985e6a505b59ce0236c0f3638c714d3e54d6a529e793f448cc1a",
+      "bytes": 675
+    },
+    {
+      "path": "scripts/phase7_active_probing.py",
+      "sha256": "47cd18cffbaae63b543dd7b48f2cebc3b4c702537cf2647c55ef3068a6b702be",
+      "bytes": 3713
+    },
+    {
+      "path": "scripts/phase7_analysis.py",
+      "sha256": "67586fc24b2753fd517c34e07be7cfb2a4b21d58521c709826271601be419e69",
+      "bytes": 6837
+    },
+    {
+      "path": "scripts/phase7_design.py",
+      "sha256": "099d5e85a44c5a72722e6b86f63a3ff49b9ecf18e1dd58d4607947c70bc4d8bd",
+      "bytes": 4801
+    },
+    {
+      "path": "scripts/phase7_manifest.py",
+      "sha256": "b4ed4257a43253dedf92e9c307151153e7e625bfd2db059108026e661dcbc31a",
+      "bytes": 2552
+    },
+    {
+      "path": "scripts/phase7_readout.py",
+      "sha256": "0d79f6ba9eb8da98702e435cf703271d621b5fa3b92a33b72294a20d8f975218",
+      "bytes": 4894
+    },
+    {
+      "path": "scripts/phase7_report.py",
+      "sha256": "3a7e5685c0dcf031a2c53b8ae22152dace81a68c0bda93693a1d0f9c4bbceb70",
+      "bytes": 9157
+    },
+    {
+      "path": "scripts/phase7_state_ablation.py",
+      "sha256": "892e5662eb2b9a496fddd7d8f64d662c6824e2d68e1cc68fd8eb434153ce48ea",
+      "bytes": 4151
+    },
+    {
+      "path": "scripts/phase7_state_features.py",
+      "sha256": "52e2481f3eeb3ce898e4e9ebb6a14607266401b38f3602c97bba561e6e3371b7",
+      "bytes": 1819
+    },
+    {
+      "path": "src/neurobranch/active/__init__.py",
+      "sha256": "1e7ea0cbed6213b0415f6d22379643872c8b928fcf5aae00cef79595e24ffc71",
+      "bytes": 240
+    },
+    {
+      "path": "src/neurobranch/active/acquisition.py",
+      "sha256": "4e07646a1e2f79c5c459509ca6e9710506ab4623962e1dc4660f7438e657ef98",
+      "bytes": 4617
+    },
+    {
+      "path": "src/neurobranch/active/simulate.py",
+      "sha256": "16984641453a5a7fdfd9591c48f6393d495cf122534809dfc448c885aa48a63c",
+      "bytes": 23708
+    },
+    {
+      "path": "src/neurobranch/active/state_features.py",
+      "sha256": "56b37634faac674fd6d5f4dc53ddc5db4b674938ff4589399ce58f753432cde7",
+      "bytes": 5765
+    },
+    {
+      "path": "src/neurobranch/benchmark/conformal.py",
+      "sha256": "e214b4f29ca127c78d20df7dc58dc8b173b7823807db151254f532efae88690d",
+      "bytes": 1254
+    },
+    {
+      "path": "src/neurobranch/benchmark/metrics.py",
+      "sha256": "3f84c4b63522aa16a1f78def55edad6afdc65806be1d87f734fa68c1d6ae8be7",
+      "bytes": 12313
+    },
+    {
+      "path": "src/neurobranch/causal/features.py",
+      "sha256": "6689a4c36de69dd541aeab3e61164718487121c87bc4455cb70c2bfa7356b797",
+      "bytes": 9250
+    },
+    {
+      "path": "src/neurobranch/causal/response_operator.py",
+      "sha256": "4cab253a313c2b1b4f74ee268f1cc9da34bb794e58e5341020d480953b95de0c",
+      "bytes": 18812
+    },
+    {
+      "path": "app/streamlit_app.py",
+      "sha256": "7eb515bbe3e690fab77d1e18b81dd75c4d89d9d70680677db118c46f054307b0",
+      "bytes": 46682
+    },
+    {
+      "path": "tests/unit/test_phase7_active.py",
+      "sha256": "22b35885846b6f9bad8293eed108fefbb19b7f4890ebb26554f9ec291d9dcab6",
+      "bytes": 5292
+    },
+    {
+      "path": "tests/integration/test_app_phase7.py",
+      "sha256": "6e4ffc87770f1d01cca79b5983799903b3f2974658090b3479e1377676bc1915",
+      "bytes": 1276
+    },
+    {
+      "path": "tests/integration/test_app_phase3.py",
+      "sha256": "7c069d780d008a320e2c76ded83d8708202cdfe0eefb0402b3a158f0befd5602",
+      "bytes": 1054
+    }
+  ],
+  "notes": [
+    "Raw calcium recordings and row-level Randi data are not redistributed.",
+    "reports/phase7/audit.json contains the split and leakage checks.",
+    "The active benchmark is pseudo-prospective, not a wet-lab closed loop."
+  ]
+}

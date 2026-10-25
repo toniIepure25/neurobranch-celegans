@@ -1,0 +1,8 @@
+{
+  "n_events": 3371,
+  "n_nodes": 305,
+  "n_masked_finite": 243749,
+  "fraction_finite": 0.23707417655898186,
+  "output": "D:\\ComputaCenter\\NeuroBranch\\neurobranch-celegans\\reports\\phase7\\state\\event_state.npz",
+  "sha256": "f215f6d6ff02eac8f80efa8079018d193997edc342ffd288d39c87f90add3640"
+}

@@ -24,6 +24,7 @@ def test_app_retains_phase2_tabs_and_adds_prospective_tab():
         "Turn Direction & Neural Sequences",
         "SAAV Mechanistic Validation",
         "Causal Response Operator",
+        "Active Probing",
     ]
 
 

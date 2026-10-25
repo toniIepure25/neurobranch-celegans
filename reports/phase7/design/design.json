@@ -1,0 +1,134 @@
+{
+  "warning": "MODEL-DEPENDENT VIRTUAL PERTURBATION - NOT CAUSALLY VALIDATED",
+  "strategy": "hybrid",
+  "n_targets_ranked": 15,
+  "n_pair_candidates": 120,
+  "score_definition": "mean |predicted effect| * sqrt(mean interval width) / sqrt(n animals) * (1 + 0.5 * normalised anatomy-unexplained candidate count)",
+  "limitations": [
+    "Predictions are observational associations, not causal effects.",
+    "The discrepancy term is an acquisition and prioritisation heuristic.",
+    "The designer cannot know the true sign of an untested optogenetic effect."
+  ],
+  "top_targets": [
+    {
+      "target": "SIAD",
+      "priority_score": 4.262529492023021,
+      "mean_abs_effect": 1.2024590969085693,
+      "mean_width": 10.707053104696872,
+      "n_animals": 1,
+      "discrepancy_pairs": 1
+    },
+    {
+      "target": "CEPL",
+      "priority_score": 3.8341425125191133,
+      "mean_abs_effect": 1.1608729362487793,
+      "mean_width": 10.908552587049941,
+      "n_animals": 1,
+      "discrepancy_pairs": 0
+    },
+    {
+      "target": "OLQV",
+      "priority_score": 3.8079688319575276,
+      "mean_abs_effect": 1.863937258720398,
+      "mean_width": 10.668939023728903,
+      "n_animals": 3,
+      "discrepancy_pairs": 1
+    },
+    {
+      "target": "ASG",
+      "priority_score": 3.8020181016437418,
+      "mean_abs_effect": 1.0667150020599365,
+      "mean_width": 10.824487469592544,
+      "n_animals": 1,
+      "discrepancy_pairs": 1
+    },
+    {
+      "target": "M",
+      "priority_score": 3.243166977664881,
+      "mean_abs_effect": 0.9169188141822815,
+      "mean_width": 10.659887908479943,
+      "n_animals": 1,
+      "discrepancy_pairs": 1
+    },
+    {
+      "target": "AJVR",
+      "priority_score": 2.6676397048931686,
+      "mean_abs_effect": 0.809041440486908,
+      "mean_width": 10.872084285876772,
+      "n_animals": 1,
+      "discrepancy_pairs": 0
+    },
+    {
+      "target": "SIBVR",
+      "priority_score": 2.5926956636354617,
+      "mean_abs_effect": 0.7934154272079468,
+      "mean_width": 10.678292215027463,
+      "n_animals": 1,
+      "discrepancy_pairs": 0
+    },
+    {
+      "target": "AMso",
+      "priority_score": 2.1559657576834743,
+      "mean_abs_effect": 1.3516587018966675,
+      "mean_width": 10.839154833711566,
+      "n_animals": 5,
+      "discrepancy_pairs": 1
+    },
+    {
+      "target": "RMEVR",
+      "priority_score": 2.033653856716105,
+      "mean_abs_effect": 0.6149313449859619,
+      "mean_width": 10.937065358361924,
+      "n_animals": 1,
+      "discrepancy_pairs": 0
+    },
+    {
+      "target": "DB01",
+      "priority_score": 1.9769025837211485,
+      "mean_abs_effect": 0.7892603278160095,
+      "mean_width": 10.691429440165946,
+      "n_animals": 2,
+      "discrepancy_pairs": 1
+    },
+    {
+      "target": "ROGR",
+      "priority_score": 1.8310534062444963,
+      "mean_abs_effect": 0.552972674369812,
+      "mean_width": 10.964647683771075,
+      "n_animals": 1,
+      "discrepancy_pairs": 0
+    },
+    {
+      "target": "RIFL",
+      "priority_score": 1.8033305454173145,
+      "mean_abs_effect": 0.5099226832389832,
+      "mean_width": 10.656578847208468,
+      "n_animals": 1,
+      "discrepancy_pairs": 1
+    },
+    {
+      "target": "SIBDR",
+      "priority_score": 1.8010296605964402,
+      "mean_abs_effect": 0.5510019063949585,
+      "mean_width": 10.684040542594285,
+      "n_animals": 1,
+      "discrepancy_pairs": 0
+    },
+    {
+      "target": "BAG",
+      "priority_score": 1.7559358499569127,
+      "mean_abs_effect": 0.530624508857727,
+      "mean_width": 10.950720139657928,
+      "n_animals": 1,
+      "discrepancy_pairs": 0
+    },
+    {
+      "target": "OLQD",
+      "priority_score": 1.6922216128759908,
+      "mean_abs_effect": 0.8203297257423401,
+      "mean_width": 10.877638434927636,
+      "n_animals": 3,
+      "discrepancy_pairs": 1
+    }
+  ]
+}

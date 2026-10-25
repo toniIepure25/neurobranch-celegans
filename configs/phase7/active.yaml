@@ -1,0 +1,26 @@
+trials_path: reports/phase3/randi_trial_table_phase3.csv.gz
+connectome_path: references/external/aconnectome_witvliet_2020_8_utf8.csv
+output_dir: reports/phase7
+outer_split: unseen_targets
+n_folds: 5
+initial_fraction: 0.20
+budgets: [0.20, 0.30, 0.40, 0.50]
+reference_budget: 0.60
+primary_budget: 0.40
+batch_targets: 8
+strategies: [random, uncertainty, effect, diversity, discrepancy, hybrid]
+acquisition_seeds: [101, 202]
+model_seeds: [17, 23]
+final_model_seeds: [17, 23, 31, 41, 53]
+rank: 16
+hidden: 64
+epochs: 12
+batch_size: 8192
+learning_rate: 0.002
+weight_decay: 0.001
+patience: 8
+response_column: response_mean
+n_boot: 300
+use_state: false
+state_path: null
+smoke: false

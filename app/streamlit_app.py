@@ -181,6 +181,7 @@ tabs = st.tabs(
         "Turn Direction & Neural Sequences",
         "SAAV Mechanistic Validation",
         "Causal Response Operator",
+        "Active Probing",
     ]
 )
 
@@ -981,6 +982,86 @@ with tabs[10]:
         )
     else:
         st.caption("Run `python scripts/phase6_design.py` to generate candidates.")
+
+with tabs[11]:
+    p7 = ROOT / "reports" / "phase7"
+    st.subheader("Pseudo-prospective active target acquisition")
+    st.error(
+        "MODEL-DEPENDENT VIRTUAL PERTURBATION — NOT CAUSALLY VALIDATED. "
+        "Active acquisition selects targets inside a computational simulation. "
+        "It is not a wet-lab closed loop and does not estimate causal effects."
+    )
+    metrics_path = p7 / "metrics.csv"
+    summary_path = p7 / "summary.json"
+    if summary_path.exists():
+        s7 = json.loads(summary_path.read_text(encoding="utf-8"))
+        h1 = s7.get("primary_hybrid_vs_random", [{}])[0]
+        if s7.get("h1_supported"):
+            st.success("H1 supported at the preregistered 40% gate.")
+        else:
+            st.warning(
+                "H1 NOT SUPPORTED: hybrid minus random = "
+                f"{h1.get('delta', float('nan')):.4f} "
+                f"(95% CI {h1.get('ci_low', float('nan')):.4f} to "
+                f"{h1.get('ci_high', float('nan')):.4f}); the +0.02 gate was not met."
+            )
+    if metrics_path.exists():
+        m = pd.read_csv(metrics_path)
+        primary = m[m["budget"].round(2).eq(0.40)]
+        if not primary.empty:
+            pivot = (
+                primary.groupby("strategy")[["pair_spearman", "profile_normalized", "coverage_calibrated"]]
+                .mean()
+                .reset_index()
+                .sort_values("pair_spearman", ascending=False)
+            )
+            st.markdown("**Primary budget: 40% of all targets**")
+            st.dataframe(pivot, use_container_width=True, hide_index=True)
+        curve = (
+            m.groupby(["strategy", "budget"])["pair_spearman"]
+            .mean()
+            .reset_index()
+            .pivot(index="budget", columns="strategy", values="pair_spearman")
+        )
+        st.markdown("**Budget curves (mean pair Spearman)**")
+        st.line_chart(curve)
+        st.dataframe(
+            m[
+                [
+                    c
+                    for c in [
+                        "strategy",
+                        "budget",
+                        "n_targets",
+                        "pair_spearman",
+                        "profile_normalized",
+                        "coverage_calibrated",
+                        "interval_score",
+                    ]
+                    if c in m.columns
+                ]
+            ].tail(40),
+            use_container_width=True,
+            hide_index=True,
+        )
+        st.caption(
+            "The outer test targets are frozen before acquisition. The primary gate is "
+            "hybrid versus random at the 40% budget; negative results are reported. "
+            "Profile/ceiling values above 1 indicate an underestimated reliability ceiling; "
+            "use pair Spearman for decisions."
+        )
+    else:
+        st.info("Phase 7 active metrics are not generated in this checkout.")
+    design_path = p7 / "design" / "target_candidates.csv"
+    if design_path.exists():
+        st.markdown("**Next experiment candidates**")
+        st.dataframe(pd.read_csv(design_path), use_container_width=True, hide_index=True)
+        st.warning(
+            "Candidates are hypotheses for a future experiment, ranked by predicted effect, "
+            "uncertainty and anatomy-unexplained discrepancy. They are not validated interventions."
+        )
+    else:
+        st.caption("Run `python scripts/phase7_design.py` to generate candidates.")
 
 st.divider()
 st.caption(EPISTEMIC_WARNING)
