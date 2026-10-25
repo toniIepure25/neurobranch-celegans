@@ -1,0 +1,50 @@
+datasets:
+  - key: kato2015
+    citation: "Kato et al. (2015), Cell 163:656-669, doi:10.1016/j.cell.2015.09.034"
+    license: null
+    raw_glob: "data/raw/kato2015/WT_NoStim.mat"
+    loader: "neurobranch.data.kato.load_kato"
+    timebase_s: 0.34
+    modalities: ["calcium", "behaviour_state"]
+    allowed_uses: ["train", "eval"]
+    notes: "Five wild-type immobilised worms; behaviour labels are not independent of AVA/SMD/RIB."
+
+  - key: randi2023
+    citation: "Randi et al. (2023), Nature, doi:10.1038/s41586-023-06683-4"
+    license: null
+    raw_glob: "data/raw/randi2023/exported_data/*_labels.txt"
+    loader: "neurobranch.data.randi.load_recording"
+    timebase_s: 0.5
+    modalities: ["calcium", "optogenetic_stimulation"]
+    allowed_uses: ["train", "eval"]
+    notes: "110 usable animals in the local candidate table; OSF project e2syt declares no licence."
+
+  - key: kramer2026
+    citation: "Kramer et al. (2026), Nature Neuroscience, doi:10.1038/s41593-026-02257-5"
+    license: "CC0-1.0"
+    raw_glob: "data/raw/kramer2026/files/*.h5"
+    loader: "neurobranch.data.kramer.load_recording"
+    timebase_s: 0.6
+    modalities: ["calcium", "behaviour", "olfaction", "turning"]
+    allowed_uses: ["train", "eval"]
+    notes: "Behavioural/turning cohort; no trial-level single-cell optogenetic perturbation."
+
+  - key: baskoylu2026
+    citation: "Baskoylu & Flavell (2026), Dryad doi:10.5061/dryad.w9ghx3g4v"
+    license: "CC0-1.0"
+    raw_glob: "data/raw/baskoylu2026/files/*.h5"
+    loader: "neurobranch.data.baskoylu.load_recording"
+    timebase_s: 0.5
+    modalities: ["calcium", "behaviour", "reversal"]
+    allowed_uses: ["eval", "external_only"]
+    notes: "Independent behaviour cohort; no controlled perturbation."
+
+  - key: simeon2024
+    citation: "Simeon et al. (2024), arXiv:2411.12091; HuggingFace qsimeon/celegans_neural_data (MIT)"
+    license: "MIT"
+    raw_glob: "data/raw/simeon2024/worm_data_short.parquet"
+    loader: "neurobranch.benchmark.external.load_simeon"
+    timebase_s: 0.333
+    modalities: ["calcium", "connectome"]
+    allowed_uses: ["external_only"]
+    notes: "Optional external cohort; upstream licences and non-causal standardisation must be audited before use."

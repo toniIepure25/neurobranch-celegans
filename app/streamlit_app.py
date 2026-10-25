@@ -137,16 +137,24 @@ def points3d(Z, labels, name, size=3, opacity=0.75, symbol="circle"):
 
 cfg, datasets = get_data()
 models_dir = ROOT / "artifacts" / "runs" / "blocked_suite"
-available_models = sorted({p.name.split("__")[0] for p in models_dir.glob("*__worm*__seed*")}) if models_dir.exists() else []
+available_models = (
+    sorted({p.name.split("__")[0] for p in models_dir.glob("*__worm*__seed*")}) if models_dir.exists() else []
+)
 
 with st.sidebar:
     st.header("Controls")
-    worm_id = st.selectbox("Worm", list(range(len(datasets))), format_func=lambda i: f"worm {i} · {datasets[i].n_neurons} predictors")
+    worm_id = st.selectbox(
+        "Worm",
+        list(range(len(datasets))),
+        format_func=lambda i: f"worm {i} · {datasets[i].n_neurons} predictors",
+    )
     model_name = st.selectbox("Dynamics model", available_models or ["mlp"], index=0)
     seed = st.selectbox("Training seed", [17, 23, 31], index=0)
     st.divider()
     st.caption("Blocked contiguous holdout; windows never cross split boundaries. Not forward forecasting.")
-    st.caption("Official BunDLe-Net embeddings were fitted on all frames and are shown as in-sample artifact geometry only.")
+    st.caption(
+        "Official BunDLe-Net embeddings were fitted on all frames and are shown as in-sample artifact geometry only."
+    )
 
 data = datasets[worm_id]
 model_path = models_dir / f"{model_name}__worm{worm_id}__seed{seed}" / "model.pt"
@@ -172,6 +180,7 @@ tabs = st.tabs(
         "Prospective Behavior",
         "Turn Direction & Neural Sequences",
         "SAAV Mechanistic Validation",
+        "Causal Response Operator",
     ]
 )
 
@@ -193,7 +202,9 @@ with tabs[0]:
         """
     )
     counts = pd.Series([MACRO_ORDER[i] for i in data.y_macro[test_frames]]).value_counts()
-    fig = go.Figure(go.Bar(x=counts.index, y=counts.values, marker_color=[COLORS.get(i, "#999") for i in counts.index]))
+    fig = go.Figure(
+        go.Bar(x=counts.index, y=counts.values, marker_color=[COLORS.get(i, "#999") for i in counts.index])
+    )
     fig.update_layout(height=260, title="Held-out behaviour composition", margin=dict(l=10, r=10, t=40, b=10))
     st.plotly_chart(fig, use_container_width=True)
 
@@ -227,8 +238,12 @@ with tabs[1]:
     fig.add_trace(path3d(Z_pca[obs_segment], "observed path", "#222222", width=2, opacity=0.35))
     fig.add_trace(
         go.Scatter3d(
-            x=[Z_pca[start, 0]], y=[Z_pca[start, 1]], z=[Z_pca[start, 2]],
-            mode="markers", marker=dict(size=8, color="black"), name="initial state",
+            x=[Z_pca[start, 0]],
+            y=[Z_pca[start, 1]],
+            z=[Z_pca[start, 2]],
+            mode="markers",
+            marker=dict(size=8, color="black"),
+            name="initial state",
         )
     )
     if run and model is not None:
@@ -246,11 +261,15 @@ with tabs[1]:
         margin=dict(l=0, r=0, t=10, b=0),
     )
     st.plotly_chart(fig, use_container_width=True)
-    st.caption("Observation colours: blue FWD, red REV, orange TURN, grey NOSTATE. Grey 3-D projections can create apparent branches that are not bifurcations.")
+    st.caption(
+        "Observation colours: blue FWD, red REV, orange TURN, grey NOSTATE. Grey 3-D projections can create apparent branches that are not bifurcations."
+    )
 
     off = load_optional_json(ROOT / "artifacts" / "reproduction_bundlenet_official.json")
     if source.startswith("Official") and off:
-        st.warning("The official artifact was fitted on all frames, including those shown here. Geometry is descriptive and in-sample; do not read accuracy as generalization.")
+        st.warning(
+            "The official artifact was fitted on all frames, including those shown here. Geometry is descriptive and in-sample; do not read accuracy as generalization."
+        )
         row = find_by_worm(off, worm_id)
         if row:
             st.json(row, expanded=False)
@@ -282,23 +301,47 @@ with tabs[2]:
                 marker_color=[COLORS.get(k, "#999") for k in top["probabilities"]],
             )
         )
-        fig.update_layout(height=280, title=f"Top-entropy frame {top['frame']} (entropy {top['entropy']:.2f} bits)", yaxis_title="neighbour fraction")
+        fig.update_layout(
+            height=280,
+            title=f"Top-entropy frame {top['frame']} (entropy {top['entropy']:.2f} bits)",
+            yaxis_title="neighbour fraction",
+        )
         st.plotly_chart(fig, use_container_width=True)
         t = top["frame"]
         Zt = Z_pca[t]
         dist = np.linalg.norm(Z_pca[cand] - Zt, axis=1)
         near = cand[np.argsort(dist)[:80]]
-        fig2 = go.Figure(points3d(Z_pca[near], [MACRO_ORDER[int(i)] for i in data.y_macro[near]], "local neighbourhood", size=5))
-        fig2.add_trace(go.Scatter3d(x=[Zt[0]], y=[Zt[1]], z=[Zt[2]], mode="markers", marker=dict(size=10, color="black"), name="query"))
+        fig2 = go.Figure(
+            points3d(
+                Z_pca[near], [MACRO_ORDER[int(i)] for i in data.y_macro[near]], "local neighbourhood", size=5
+            )
+        )
+        fig2.add_trace(
+            go.Scatter3d(
+                x=[Zt[0]],
+                y=[Zt[1]],
+                z=[Zt[2]],
+                mode="markers",
+                marker=dict(size=10, color="black"),
+                name="query",
+            )
+        )
         fig2.update_layout(height=500, scene=dict(xaxis_title="PC1", yaxis_title="PC2", zaxis_title="PC3"))
         st.plotly_chart(fig2, use_container_width=True)
-        st.dataframe(pd.DataFrame(summ["top_frames"])[["frame", "entropy", "majority_probability"]], use_container_width=True)
+        st.dataframe(
+            pd.DataFrame(summ["top_frames"])[["frame", "entropy", "majority_probability"]],
+            use_container_width=True,
+        )
 
 with tabs[3]:
     st.subheader("Virtual perturbation (model-dependent)")
-    st.error("MODEL-DEPENDENT VIRTUAL PERTURBATION — NOT CAUSALLY VALIDATED. This edits model state, not a neuron in an animal.")
+    st.error(
+        "MODEL-DEPENDENT VIRTUAL PERTURBATION — NOT CAUSALLY VALIDATED. This edits model state, not a neuron in an animal."
+    )
     cands = available_candidates(data)
-    targets = st.multiselect("Target neuron(s) present in this worm's predictor set", cands, default=cands[:1])
+    targets = st.multiselect(
+        "Target neuron(s) present in this worm's predictor set", cands, default=cands[:1]
+    )
     c1, c2, c3 = st.columns(3)
     mode = c1.selectbox("Mode", ["additive", "clamp", "zero", "scale"])
     amp = c2.slider("Amplitude (training SD)", -3.0, 3.0, 2.0, 0.25)
@@ -329,19 +372,37 @@ with tabs[3]:
             int_seq = model.rollout(x0, 12, seed=3, noise_std=0.04, perturb=perturb)
         c1, c2, c3, c4 = st.columns(4)
         c1.metric("Baseline P(TURN)", f"{res.baseline_distribution['TURN']:.2f}")
-        c2.metric("Virtual P(TURN)", f"{res.intervention_distribution['TURN']:.2f}", f"{res.delta_target:+.2f}")
+        c2.metric(
+            "Virtual P(TURN)", f"{res.intervention_distribution['TURN']:.2f}", f"{res.delta_target:+.2f}"
+        )
         c3.metric("Bootstrap 95% CI", f"[{res.delta_ci[0]:+.2f}, {res.delta_ci[1]:+.2f}]")
         c4.metric("OOD states", "n/a" if res.ood_fraction is None else f"{res.ood_fraction:.0%}")
         fig = go.Figure()
         fig.add_trace(path3d(pca.transform(base_seq), "BASELINE model rollout", "#222222", width=5))
-        fig.add_trace(path3d(pca.transform(int_seq), f"VIRTUAL: {','.join(targets)}", "#C1121F", width=6, dash="dash"))
-        fig.update_layout(height=480, scene=dict(xaxis_title="PC1", yaxis_title="PC2", zaxis_title="PC3"), legend=dict(orientation="h"))
+        fig.add_trace(
+            path3d(pca.transform(int_seq), f"VIRTUAL: {','.join(targets)}", "#C1121F", width=6, dash="dash")
+        )
+        fig.update_layout(
+            height=480,
+            scene=dict(xaxis_title="PC1", yaxis_title="PC2", zaxis_title="PC3"),
+            legend=dict(orientation="h"),
+        )
         st.plotly_chart(fig, use_container_width=True)
         st.plotly_chart(
             go.Figure(
                 [
-                    go.Bar(name="baseline", x=list(res.baseline_distribution), y=list(res.baseline_distribution.values()), marker_color="#777"),
-                    go.Bar(name="virtual", x=list(res.intervention_distribution), y=list(res.intervention_distribution.values()), marker_color="#C1121F"),
+                    go.Bar(
+                        name="baseline",
+                        x=list(res.baseline_distribution),
+                        y=list(res.baseline_distribution.values()),
+                        marker_color="#777",
+                    ),
+                    go.Bar(
+                        name="virtual",
+                        x=list(res.intervention_distribution),
+                        y=list(res.intervention_distribution.values()),
+                        marker_color="#C1121F",
+                    ),
                 ]
             ).update_layout(barmode="group", height=300, yaxis_title="outcome probability"),
             use_container_width=True,
@@ -373,7 +434,9 @@ with tabs[4]:
         c4.metric("Recorded cells", cov["n_recorded_neurons"])
     if rel:
         r = rel.get("response", {})
-        st.metric("Repeated-stimulation response r (median)", f"{r.get('median_pairwise_r', float('nan')):.3f}")
+        st.metric(
+            "Repeated-stimulation response r (median)", f"{r.get('median_pairwise_r', float('nan')):.3f}"
+        )
         st.caption(
             f"{r.get('n_pairs', 0)} repeated event pairs; low repeatability bounds single-trial predictability."
         )
@@ -392,11 +455,15 @@ with tabs[4]:
 
 with tabs[5]:
     st.subheader("Reproduction artifacts")
-    st.markdown("**NC-MCM** — Python port of the lag-2 surrogate Markov test applied to the distributed cluster labels.")
+    st.markdown(
+        "**NC-MCM** — Python port of the lag-2 surrogate Markov test applied to the distributed cluster labels."
+    )
     ncm = ROOT / "artifacts" / "reproduction_ncmcm.csv"
     if ncm.exists():
         st.dataframe(pd.read_csv(ncm), use_container_width=True)
-        st.caption("K=3. p-values reproduce the distributed values closely; decoder accuracy is blocked 5-fold and much lower than in-sample numbers.")
+        st.caption(
+            "K=3. p-values reproduce the distributed values closely; decoder accuracy is blocked 5-fold and much lower than in-sample numbers."
+        )
     st.markdown("**BunDLe-Net** — official 3-D artifact vs our PyTorch reimplementation.")
     bl = load_optional_json(ROOT / "artifacts" / "reproduction_bundlenet_lite.json")
     bo = load_optional_json(ROOT / "artifacts" / "reproduction_bundlenet_official.json")
@@ -448,12 +515,16 @@ with tabs[7]:
     if not summary:
         st.info("Run `python scripts/phase3_prospective_benchmark.py` to generate this tab.")
     else:
-        horizon = st.select_slider("Prediction horizon", options=[3, 6, 12], value=6, format_func=lambda h: f"{h} s")
+        horizon = st.select_slider(
+            "Prediction horizon", options=[3, 6, 12], value=6, format_func=lambda h: f"{h} s"
+        )
         metrics_path = p3 / f"prospective_metrics_{horizon}s.csv"
         delta_path = p3 / f"prospective_deltas_{horizon}s.csv"
         if metrics_path.exists():
             m = pd.read_csv(metrics_path)
-            agg = m.groupby("mode", as_index=False)[["log_loss", "brier", "balanced_accuracy", "auprc"]].mean()
+            agg = m.groupby("mode", as_index=False)[
+                ["log_loss", "brier", "balanced_accuracy", "auprc"]
+            ].mean()
             agg = agg.sort_values("log_loss")
             st.markdown(f"**Mean animal-level proper scores, H = {horizon} s**")
             st.dataframe(agg, use_container_width=True, hide_index=True)
@@ -461,10 +532,15 @@ with tabs[7]:
                 go.Bar(
                     x=agg["mode"],
                     y=agg["log_loss"],
-                    marker_color=["#2E86AB" if x == "behavior" else "#C1121F" if "neural" in x else "#999" for x in agg["mode"]],
+                    marker_color=[
+                        "#2E86AB" if x == "behavior" else "#C1121F" if "neural" in x else "#999"
+                        for x in agg["mode"]
+                    ],
                 )
             )
-            fig.update_layout(height=320, yaxis_title="log loss (lower is better)", margin=dict(l=10, r=10, t=20, b=80))
+            fig.update_layout(
+                height=320, yaxis_title="log loss (lower is better)", margin=dict(l=10, r=10, t=20, b=80)
+            )
             st.plotly_chart(fig, use_container_width=True)
         if horizon == 6 and summary.get("6s"):
             d = summary["6s"]["aggregate"].get("delta_behavior_neural", {})
@@ -541,7 +617,9 @@ with tabs[8]:
                     c1.metric("Δ AUROC (behaviour+population − behaviour)", f"{d.get('mean', np.nan):+.4f}")
                     ci = d.get("ci95", [np.nan, np.nan])
                     c2.metric("95% animal-cluster CI", f"[{ci[0]:+.4f}, {ci[1]:+.4f}]")
-                    c3.metric("Primary classification", str(dec.get("classification", "n/a")).replace("_", " "))
+                    c3.metric(
+                        "Primary classification", str(dec.get("classification", "n/a")).replace("_", " ")
+                    )
                 st.caption(dec.get("reason", ""))
                 st.caption(
                     "This is an observational, model-dependent result. A null increment does not "
@@ -572,30 +650,56 @@ with tabs[8]:
                     )
                 )
                 fig.add_vline(x=0.5, line_dash="dash", line_color="#555")
-                fig.update_layout(height=max(300, 14 * len(pa)), xaxis_title="held-out AUROC", margin=dict(l=10, r=10, t=20, b=30))
+                fig.update_layout(
+                    height=max(300, 14 * len(pa)),
+                    xaxis_title="held-out AUROC",
+                    margin=dict(l=10, r=10, t=20, b=30),
+                )
                 st.plotly_chart(fig, use_container_width=True)
         if td_cal_path.exists():
             cal = pd.read_csv(td_cal_path)
             if not cal.empty:
                 fig = go.Figure()
                 for mode, g in cal.groupby("mode"):
-                    fig.add_trace(go.Scatter(x=g["mean_predicted"], y=g["fraction_positive"], mode="lines+markers", name=mode))
+                    fig.add_trace(
+                        go.Scatter(
+                            x=g["mean_predicted"], y=g["fraction_positive"], mode="lines+markers", name=mode
+                        )
+                    )
                 fig.add_trace(go.Scatter(x=[0, 1], y=[0, 1], mode="lines", line_dash="dash", name="ideal"))
-                fig.update_layout(height=320, xaxis_title="predicted probability", yaxis_title="observed fraction", margin=dict(l=10, r=10, t=20, b=30))
+                fig.update_layout(
+                    height=320,
+                    xaxis_title="predicted probability",
+                    yaxis_title="observed fraction",
+                    margin=dict(l=10, r=10, t=20, b=30),
+                )
                 st.plotly_chart(fig, use_container_width=True)
         if td_dyn_path.exists():
             dyn = pd.read_csv(td_dyn_path)
             fig = go.Figure()
             for mode, g in dyn.groupby("mode"):
-                fig.add_trace(go.Scatter(x=g["relative_frame"], y=g["auroc"], mode="lines+markers", name=mode))
+                fig.add_trace(
+                    go.Scatter(x=g["relative_frame"], y=g["auroc"], mode="lines+markers", name=mode)
+                )
             fig.add_vline(x=0, line_dash="dash", line_color="#555")
-            fig.update_layout(height=340, xaxis_title="frame relative to reversal offset (negative = prospective)", yaxis_title="held-out AUROC", margin=dict(l=10, r=10, t=20, b=30))
+            fig.update_layout(
+                height=340,
+                xaxis_title="frame relative to reversal offset (negative = prospective)",
+                yaxis_title="held-out AUROC",
+                margin=dict(l=10, r=10, t=20, b=30),
+            )
             st.plotly_chart(fig, use_container_width=True)
-            st.caption("Frames at or after 0 are retrospective positive controls, not prospective predictions.")
+            st.caption(
+                "Frames at or after 0 are retrospective positive controls, not prospective predictions."
+            )
         if td_ext_path.exists():
             ext = pd.read_csv(td_ext_path)
             st.markdown("**External cohort shift** (fit on wild type, score tdc1 or the other odour cohort)")
-            st.dataframe(ext[["train", "test", "mode", "n", "prevalence", "auroc", "log_loss", "balanced_accuracy"]], use_container_width=True, hide_index=True)
+            st.dataframe(
+                ext[["train", "test", "mode", "n", "prevalence", "auroc", "log_loss", "balanced_accuracy"]],
+                use_container_width=True,
+                hide_index=True,
+            )
         if td_abl_path.exists():
             abl = pd.read_csv(td_abl_path)
             st.markdown("**Model-dependent circuit-feature ablation** (not an experimental ablation)")
@@ -788,6 +892,95 @@ with tabs[9]:
         "Primary generalisation claim is animal-disjoint. Online landmarks use only causal onset "
         "and elapsed time; events ending before a landmark are excluded from that landmark's risk set."
     )
+
+with tabs[10]:
+    p6 = ROOT / "reports" / "phase6"
+    cro_root = p6 / "cro_target5"
+    if not cro_root.exists():
+        cro_root = p6 / "cro_target"
+    st.subheader("Held-out-target response operator")
+    st.error(
+        "MODEL-DEPENDENT VIRTUAL PERTURBATION — NOT CAUSALLY VALIDATED. "
+        "The operator predicts responses to optogenetic stimulation from observational "
+        "Randi data. It is not an interventional effect estimate and must not be used "
+        "to claim that a neuron causes a response."
+    )
+    pooled_path = cro_root / "metrics_pooled.csv"
+    if pooled_path.exists():
+        pooled = pd.read_csv(pooled_path)
+        best = pooled.sort_values("pair_spearman", ascending=False).head(1)
+        c1, c2, c3 = st.columns(3)
+        c1.metric("Best pair Spearman", f"{float(best['pair_spearman'].iloc[0]):.3f}")
+        c2.metric(
+            "95% animal-cluster CI",
+            f"{float(best['pair_spearman_ci_low'].iloc[0]):.3f} – {float(best['pair_spearman_ci_high'].iloc[0]):.3f}",
+        )
+        c3.metric("Evaluated pairs", f"{int(best['n_pairs'].iloc[0]):,}")
+        st.dataframe(
+            pooled[
+                [
+                    c
+                    for c in [
+                        "model",
+                        "n_events",
+                        "n_pairs",
+                        "pair_spearman",
+                        "pair_spearman_ci_low",
+                        "pair_spearman_ci_high",
+                        "pair_mae",
+                        "interval_90_coverage",
+                    ]
+                    if c in pooled.columns
+                ]
+            ].sort_values("pair_spearman", ascending=False),
+            use_container_width=True,
+            hide_index=True,
+        )
+        st.caption(
+            "Primary endpoint: response_mean, unseen targets, pair-level Spearman. "
+            "The CRO is compared against target/responder means, additive, context-only, "
+            "connectome ridge, SVD matrix factorisation and an oracle pair mean."
+        )
+    else:
+        st.info("Phase 6 CRO metrics are not generated in this checkout.")
+
+    delta_path = cro_root / "paired_deltas.csv"
+    if delta_path.exists():
+        st.markdown("**Paired animal-cluster deltas versus baselines**")
+        st.dataframe(pd.read_csv(delta_path), use_container_width=True, hide_index=True)
+
+    profile_path = cro_root / "profile_summary.csv"
+    if profile_path.exists():
+        st.markdown("**Within-target profile recovery and measurement ceiling**")
+        st.dataframe(pd.read_csv(profile_path), use_container_width=True, hide_index=True)
+        st.caption(
+            "Reliability is estimated by split-half profiles; the attenuation ceiling "
+            "is the maximum correlation expected from an error-free model. Normalised "
+            "values near 1 mean the model is close to the noise ceiling, not perfect."
+        )
+
+    edge_path = cro_root / "connectivity" / "edge_metrics.csv"
+    if edge_path.exists():
+        st.markdown("**Anatomical association (not causal discovery)**")
+        edge = pd.read_csv(edge_path)
+        view = edge[edge.get("score").eq("predicted_magnitude")] if "score" in edge else edge
+        st.dataframe(view, use_container_width=True, hide_index=True)
+        st.caption(
+            "AUROC ranks directly connected pairs above unconnected pairs using the "
+            "predicted response magnitude. This is an association benchmark with "
+            "selection and connectome-coverage caveats."
+        )
+
+    design_path = p6 / "design" / "target_candidates.csv"
+    if design_path.exists():
+        st.markdown("**Model-based experiment candidates**")
+        st.dataframe(pd.read_csv(design_path), use_container_width=True, hide_index=True)
+        st.warning(
+            "Candidates are hypotheses for a new experiment, not validated interventions. "
+            "They are ranked by predicted effect, interval width and animal coverage."
+        )
+    else:
+        st.caption("Run `python scripts/phase6_design.py` to generate candidates.")
 
 st.divider()
 st.caption(EPISTEMIC_WARNING)

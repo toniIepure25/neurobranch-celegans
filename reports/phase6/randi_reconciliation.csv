@@ -1,0 +1,9 @@
+quantity,local,paper_reported,status
+source_datasets,110,110.0,local table covers 110 usable datasets; paper cohort differs
+events,3371,,event count not directly comparable to paper pair table
+long_form_rows,237639,,one row per event x responder
+stimulated_targets,259,,candidate superset
+recorded_responders,305,,candidate superset
+target_responder_pairs,40341,23433.0,"local is a candidate superset, NOT an exact reproduction"
+pairs_ge2_events,28000,,primary evaluation set
+pairs_ge5_events,15269,,secondary sensitivity set

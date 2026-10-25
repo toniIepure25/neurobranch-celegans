@@ -1,0 +1,58 @@
+{
+  "n_rows": 237639,
+  "n_events": 3371,
+  "n_animals": 110,
+  "n_targets": 259,
+  "n_responders": 305,
+  "n_pairs": 40341,
+  "n_pairs_ge2": 28000,
+  "response_column": "response_mean",
+  "connectome_coverage": {
+    "n_targets": 259,
+    "n_responders": 305,
+    "n_animals": 110,
+    "targets_in_connectome": 259,
+    "responders_in_connectome": 305,
+    "rows_with_pair_connectome": 237639
+  },
+  "reliability": {
+    "n_targets": 169.0,
+    "n_splits": 20.0,
+    "mean_half_reliability": 0.06264967441050044,
+    "median_half_reliability": 0.05730307716434404,
+    "mean_full_reliability": 0.1515462150936097,
+    "median_full_reliability": 0.10839479115981135,
+    "mean_attenuation_ceiling": 0.2994805128994947
+  },
+  "operator": {
+    "n_targets": 259,
+    "n_responders": 305,
+    "n_measured_pairs": 40341
+  },
+  "trials_sha256": "8186c96bcb33cdce15dc9ae88691e09fc596e42c5513310b6d6a636e4d5dd515",
+  "preregistration_sha256": "ba6ed54c3f1d44c775d21bb74c5d33e7e83cc02203d85ad567255122fb9e1546",
+  "git": {
+    "commit": "cd5b6f4e496c1014e5941df40638a47c9171a7e2",
+    "dirty": true,
+    "branch": "research/phase6-causal-atlas"
+  },
+  "config": {
+    "splits": [
+      "unseen_targets"
+    ],
+    "n_folds": 5,
+    "seeds": [
+      17,
+      23,
+      31,
+      41,
+      53
+    ],
+    "epochs": 12,
+    "batch_size": 8192,
+    "rank": 16,
+    "hidden": 64,
+    "response_column": "response_mean",
+    "n_boot": 300
+  }
+}

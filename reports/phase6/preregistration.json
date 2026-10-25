@@ -1,0 +1,20 @@
+{
+  "phase": 6,
+  "document": "docs/PHASE6_PREREGISTRATION.md",
+  "sha256": "ba6ed54c3f1d44c775d21bb74c5d33e7e83cc02203d85ad567255122fb9e1546",
+  "frozen_at": "2026-10-25",
+  "branch": "research/phase6-causal-atlas",
+  "primary_split": "unseen_targets",
+  "primary_endpoint": "response_mean",
+  "primary_metric": "pair_level_spearman_min2_events",
+  "minimum_delta": 0.05,
+  "ci": "95% animal-cluster bootstrap, strictly above zero",
+  "n_folds": 5,
+  "n_seeds": 5,
+  "git": {
+    "commit": "cd5b6f4e496c1014e5941df40638a47c9171a7e2",
+    "dirty": true,
+    "branch": "research/phase6-causal-atlas"
+  },
+  "deviations": "docs/PHASE6_DEVIATIONS.md"
+}

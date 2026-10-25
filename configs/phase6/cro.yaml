@@ -1,0 +1,16 @@
+trials_path: reports/phase3/randi_trial_table_phase3.csv.gz
+connectome_path: references/external/aconnectome_witvliet_2020_8_utf8.csv
+output_dir: reports/phase6/cro
+splits: [unseen_targets]
+n_folds: 5
+seeds: [17, 23, 31, 41, 53]
+n_boot: 500
+response_column: response_mean
+rank: 16
+hidden: 64
+epochs: 12
+batch_size: 8192
+learning_rate: 0.002
+weight_decay: 0.001
+patience: 8
+min_pair_events: 2
