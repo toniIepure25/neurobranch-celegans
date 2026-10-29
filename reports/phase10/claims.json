@@ -166,7 +166,7 @@
       "margin": null,
       "mde": null,
       "n_eval_animals": null,
-      "notes": "Superseded: the split-half ceiling of 0.152 is biased downward. Against the Phase 10 fold ceiling (0.833) the CRO of 0.098 is about 12%; against the coverage-aware ceiling (0.560) it is about 18%; against the single-animal ceiling (0.403) it is about 24%. Neither 64% nor the Phase 10 share is the current bound.",
+      "notes": "Superseded: the split-half ceiling of 0.152 is biased downward. Against the Phase 10 fold ceiling (0.833) the CRO of 0.098 is about 11.8%; against the coverage-aware ceiling (0.560) it is about 17.6%; against the single-animal ceiling (0.403) it is about 24.4%. Neither 64% nor the Phase 10 share is the current bound.",
       "p_holm": null,
       "p_value": null,
       "statement": "CRO reaches 64% of the split-half reliability ceiling.",

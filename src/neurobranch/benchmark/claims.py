@@ -275,10 +275,10 @@ def build_claims(reliability_summary: dict[str, Any]) -> list[Claim]:
             notes=(
                 "Superseded: the split-half ceiling of 0.152 is biased downward. Against "
                 f"the Phase 10 fold ceiling ({fold_ceiling:.3f}) the CRO of 0.098 is about "
-                f"{100 * 0.0984 / fold_ceiling:.0f}%; against the coverage-aware ceiling "
+                f"{100 * 0.0984 / fold_ceiling:.1f}%; against the coverage-aware ceiling "
                 f"({coverage_ceiling:.3f}) it is about "
-                f"{100 * 0.0984 / coverage_ceiling:.0f}%; against the single-animal ceiling "
-                f"({single_ceiling:.3f}) it is about {100 * 0.0984 / single_ceiling:.0f}%. "
+                f"{100 * 0.0984 / coverage_ceiling:.1f}%; against the single-animal ceiling "
+                f"({single_ceiling:.3f}) it is about {100 * 0.0984 / single_ceiling:.1f}%. "
                 f"Neither 64% nor the Phase 10 share is the current bound."
             ),
         ),
