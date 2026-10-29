@@ -1,0 +1,12 @@
+{
+  "split": "unseen_animals",
+  "split_seed": 41,
+  "n_folds": 5,
+  "animal_overlaps": [],
+  "support_test_target_overlaps": [],
+  "support_test_event_overlaps": [],
+  "test_event_in_train_or_val": [],
+  "fold_leaks": [],
+  "prediction_sha256": "fba59e2eeb4c7dfb84e1c9d3a19ce7651f9acde394f4be751b049609047a2461",
+  "audit_clean": true
+}

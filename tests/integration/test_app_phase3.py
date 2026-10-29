@@ -25,6 +25,7 @@ def test_app_retains_phase2_tabs_and_adds_prospective_tab():
         "SAAV Mechanistic Validation",
         "Causal Response Operator",
         "Active Probing",
+        "Adaptive Twin",
     ]
 
 

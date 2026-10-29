@@ -32,6 +32,11 @@ reports/*.pdf
 reports/phase2b_optogenetic_atlas/randi_trial_table.csv.gz
 reports/phase2b_optogenetic_atlas/benchmark_oof_*.csv.gz
 reports/phase3/randi_trial_table_phase3.csv.gz
+# Phase 8 row-level/raw-derived artifacts stay local; aggregate results are committed.
+reports/phase8/cache/
+reports/phase8/predictions.parquet
+reports/phase8/selection_log.jsonl
+reports/phase8/models/
 
 # OS/editor
 .DS_Store

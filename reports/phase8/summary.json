@@ -1,0 +1,168 @@
+{
+  "phase": 8,
+  "name": "adaptive_perturbation_twin",
+  "split": "unseen_animals",
+  "split_seed": 41,
+  "n_folds": 5,
+  "n_predictions": 930846,
+  "warning": "MODEL-DEPENDENT VIRTUAL PERTURBATION \u2014 NOT CAUSALLY VALIDATED.",
+  "fold_extras": [
+    {
+      "fold": 0,
+      "calibration_scale": 0.2866513612753641,
+      "trajectory_pearson": 0.04227853549637593,
+      "n_events": 24605.0,
+      "sequence": {
+        "trajectory_twin": 0.021598622851756788,
+        "trajectory_persistence": 0.019443031208176937,
+        "trajectory_delta": 0.0021555916435798536,
+        "coverage": 0.9047914562604665,
+        "n_events": 16.047619047619047
+      }
+    },
+    {
+      "fold": 1,
+      "calibration_scale": 0.30861589062850675,
+      "trajectory_pearson": 0.037335945101131376,
+      "n_events": 22001.0,
+      "sequence": {
+        "trajectory_twin": 0.04436172212021029,
+        "trajectory_persistence": 0.016054201573154202,
+        "trajectory_delta": 0.028307520547056098,
+        "coverage": 0.9030067291504938,
+        "n_events": 16.4
+      }
+    },
+    {
+      "fold": 2,
+      "calibration_scale": 0.29781490469175415,
+      "trajectory_pearson": 0.027726819948503057,
+      "n_events": 21707.0,
+      "sequence": {
+        "trajectory_twin": 0.03015979445562838,
+        "trajectory_persistence": 0.013988440586397732,
+        "trajectory_delta": 0.016171353869230645,
+        "coverage": 0.9216991919673087,
+        "n_events": 16.35
+      }
+    },
+    {
+      "fold": 3,
+      "calibration_scale": 0.22003295242325335,
+      "trajectory_pearson": 0.037393914045134674,
+      "n_events": 24828.0,
+      "sequence": {
+        "trajectory_twin": 0.0443253567446255,
+        "trajectory_persistence": 0.013237142764004442,
+        "trajectory_delta": 0.031088213980621063,
+        "coverage": 0.8650467769593714,
+        "n_events": 16.238095238095237
+      }
+    },
+    {
+      "fold": 4,
+      "calibration_scale": 0.19997369260144357,
+      "trajectory_pearson": 0.022775495563370492,
+      "n_events": 25296.0,
+      "sequence": {
+        "trajectory_twin": 0.041524493816510674,
+        "trajectory_persistence": 0.0044281817591319515,
+        "trajectory_delta": 0.03709631205737873,
+        "coverage": 0.9238158086998238,
+        "n_events": 15.952380952380953
+      }
+    }
+  ],
+  "calibration_scale": 0.26261776032406436,
+  "git": {
+    "commit": "1c060c7824ed9be80f28fcd69ee72d3d0e12ffdb",
+    "dirty": true,
+    "branch": "research/phase8-adaptive-twin"
+  },
+  "h1_twin_vs_cro": {
+    "label": "twin_k0_vs_cro",
+    "delta": 0.044157912132003804,
+    "ci_low": 0.00798512226245953,
+    "ci_high": 0.09008221489964939,
+    "p_one_sided": 0.02,
+    "n_boot": 100.0,
+    "wins": 5,
+    "n_blocks": 5,
+    "trajectory_twin": 0.0334955499006808,
+    "trajectory_template": 0.033502142030903105,
+    "trajectory_delta": -6.5921302223048706e-06,
+    "pair_gate": true,
+    "trajectory_gate": false,
+    "supported": false
+  },
+  "h1_twin_vs_global": {
+    "label": "twin_k0_vs_global",
+    "delta": 0.1388580419169548,
+    "ci_low": 0.10244003254823511,
+    "ci_high": 0.14810599384285483,
+    "p_one_sided": 0.0,
+    "n_boot": 100.0,
+    "wins": 0,
+    "n_blocks": 5
+  },
+  "h2_k8_vs_k0": {
+    "label": "random_k8_vs_k0",
+    "delta": 0.0022059447757057093,
+    "ci_low": -0.004620276509925202,
+    "ci_high": 0.011826380030310557,
+    "p_one_sided": 0.24,
+    "n_boot": 100.0,
+    "wins": 3,
+    "n_blocks": 5,
+    "supported": false
+  },
+  "h3_eig_vs_random": {
+    "label": "eig_vs_random_k8",
+    "delta": -0.0038279515709690737,
+    "ci_low": -0.007048304378803355,
+    "ci_high": 0.0025700075483369882,
+    "p_one_sided": 0.79,
+    "n_boot": 100.0,
+    "wins": 3,
+    "n_blocks": 5,
+    "supported": false,
+    "confirmatory": false
+  },
+  "h4_sequence_rollout": {
+    "trajectory_twin": 0.03639399799774633,
+    "trajectory_persistence": 0.013430199578173055,
+    "trajectory_delta": 0.02296379841957328,
+    "coverage": 0.9036719926074929,
+    "n_events": 16.197619047619046,
+    "supported": false
+  },
+  "strategy_summary_primary": [
+    {
+      "strategy": "eig",
+      "pair_spearman": 0.12484161699252458,
+      "profile_spearman": 0.08662309640243347,
+      "coverage": 0.8987901268806767,
+      "interval_score": 29.895450035206782,
+      "n_events": 230768.0,
+      "n_pairs": 30454.0
+    },
+    {
+      "strategy": "hybrid",
+      "pair_spearman": 0.12450469328835607,
+      "profile_spearman": 0.08675549370014342,
+      "coverage": 0.8986427927615614,
+      "interval_score": 29.968964288521118,
+      "n_events": 230768.0,
+      "n_pairs": 30454.0
+    },
+    {
+      "strategy": "random",
+      "pair_spearman": 0.12619812821112536,
+      "profile_spearman": 0.08471116492355657,
+      "coverage": 0.8988421271580115,
+      "interval_score": 29.96704675245667,
+      "n_events": 230768.0,
+      "n_pairs": 30454.0
+    }
+  ]
+}

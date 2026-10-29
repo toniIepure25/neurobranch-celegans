@@ -182,6 +182,7 @@ tabs = st.tabs(
         "SAAV Mechanistic Validation",
         "Causal Response Operator",
         "Active Probing",
+        "Adaptive Twin",
     ]
 )
 
@@ -1062,6 +1063,58 @@ with tabs[11]:
         )
     else:
         st.caption("Run `python scripts/phase7_design.py` to generate candidates.")
+
+with tabs[12]:
+    p8 = ROOT / "reports" / "phase8"
+    st.subheader("Phase 8 — Adaptive Perturbation Twin")
+    st.error(
+        "MODEL-DEPENDENT VIRTUAL PERTURBATION — NOT CAUSALLY VALIDATED. "
+        "Support-set personalisation and sequence rollouts are computational probes, "
+        "not wet-lab closed-loop interventions or causal estimates."
+    )
+    readout_path = p8 / "readout.json"
+    metrics_path = p8 / "metrics.csv"
+    if readout_path.exists():
+        r8 = json.loads(readout_path.read_text(encoding="utf-8"))
+        d = r8.get("decisions", {})
+        h1 = d.get("H1_primary", {})
+        h2 = d.get("H2_personalisation", {})
+        h3 = d.get("H3_active_eig", {})
+        h4 = d.get("H4_sequence", {})
+        c1, c2, c3, c4 = st.columns(4)
+        c1.metric("H1 APT vs CRO", "supported" if h1.get("supported") else "not supported")
+        c2.metric("H2 k=8 vs k=0", "supported" if h2.get("supported") else "not supported")
+        c3.metric("H3 EIG vs random", "supported" if h3.get("supported") else "not supported")
+        c4.metric("H4 sequence", "supported" if h4.get("supported") else "not supported")
+        st.markdown(
+            f"**H1 pair Δ** {h1.get('pair_delta')} "
+            f"(CI {h1.get('pair_ci')}); trajectory Δ {h1.get('trajectory_delta')}.  \n"
+            f"**H2 Δ** {h2.get('delta')} (CI {h2.get('ci')}).  \n"
+            f"**H3 Δ** {h3.get('delta')} (CI {h3.get('ci')}).  \n"
+            f"**H4 trajectory Δ** {h4.get('trajectory_delta')}, "
+            f"coverage {h4.get('coverage')}."
+        )
+        if not r8.get("audit_clean", False):
+            st.error("Leakage audit did not pass; treat these results as invalid.")
+        else:
+            st.caption("Leakage audit passed: no animal overlap, support/test overlap, or test-event leakage.")
+        table = r8.get("deployment_readout", {}).get("strategy_table_k8", [])
+        if table:
+            st.markdown("**Support strategy at the primary budget (k=8)**")
+            st.dataframe(pd.DataFrame(table), use_container_width=True, hide_index=True)
+        budget = r8.get("deployment_readout", {}).get("random_budget_curve", [])
+        if budget:
+            st.markdown("**Random-support budget curve**")
+            st.dataframe(pd.DataFrame(budget), use_container_width=True, hide_index=True)
+        st.warning(
+            "A null H2/H3 is an informative negative result about animal-level "
+            "calibration in this atlas; it is not evidence that no effect exists."
+        )
+    elif metrics_path.exists():
+        st.info("Run `python scripts/phase8_readout.py` to generate the dashboard readout.")
+    else:
+        st.info("Phase 8 outputs are not generated in this checkout.")
+        st.caption("Run `python scripts/phase8_run.py --config configs/phase8/apt.yaml`.")
 
 st.divider()
 st.caption(EPISTEMIC_WARNING)

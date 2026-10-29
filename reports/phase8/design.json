@@ -1,0 +1,47 @@
+{
+  "split_seed": 41,
+  "n_train_events": 3344,
+  "n_train_rows": 236718,
+  "n_animals": 103,
+  "n_targets": 259,
+  "n_pairs": 40334,
+  "eta2_animal": 0.00048023975400627867,
+  "eta2_target": 0.0009256124144573937,
+  "eta2_pair": 0.08136428043200687,
+  "history_probe": [
+    {
+      "feature": "log_prev_interval",
+      "spearman_with_event_mean": 0.011744640018611016
+    },
+    {
+      "feature": "prev_same_target",
+      "spearman_with_event_mean": -0.033034504807160574
+    },
+    {
+      "feature": "event_order_scaled",
+      "spearman_with_event_mean": -0.038144006956972155
+    },
+    {
+      "feature": "pre_activity_median",
+      "spearman_with_event_mean": 0.03429337742868509
+    },
+    {
+      "feature": "pre_sd_median",
+      "spearman_with_event_mean": 0.05019232198388572
+    },
+    {
+      "feature": "inverse_interval",
+      "spearman_with_event_mean": -0.011744640018611016
+    },
+    {
+      "feature": "interval_missing",
+      "spearman_with_event_mean": 0.049971983532762936
+    },
+    {
+      "feature": "event_order_missing",
+      "spearman_with_event_mean": null
+    }
+  ],
+  "power_note": "Animal eta2 is computed on training rows only. A small value bounds the expected gain from animal-level support calibration; H2/H3 are reported with intervals even when the gate is not met.",
+  "warning": "MODEL-DEPENDENT VIRTUAL PERTURBATION \u2014 NOT CAUSALLY VALIDATED."
+}

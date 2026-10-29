@@ -1,0 +1,108 @@
+{
+  "phase": 8,
+  "name": "Adaptive Perturbation Twin",
+  "warning": "MODEL-DEPENDENT VIRTUAL PERTURBATION \u2014 NOT CAUSALLY VALIDATED.",
+  "git": {
+    "commit": "1c060c7824ed9be80f28fcd69ee72d3d0e12ffdb",
+    "dirty": true,
+    "branch": "research/phase8-adaptive-twin"
+  },
+  "artifacts": {
+    "summary.json": {
+      "bytes": 5039,
+      "sha256": "2a847ac44f4d1955755cbdf1bf092c855eb44780a63f7de537b767c1e1c2ad06"
+    },
+    "readout.json": {
+      "bytes": 3780,
+      "sha256": "761e6df6ed6d9e104b9618951bb715ebdb0b38f07fbb2a07fe6bf76b985d4b67"
+    },
+    "design.json": {
+      "bytes": 1446,
+      "sha256": "2d0ccee3ee679dcf35fac3655c5b83f4b5dfe8beb2ab624822c026ad128db9c6"
+    },
+    "metrics.csv": {
+      "bytes": 211842,
+      "sha256": "1124cd49a26698ef49fa1eae8f0b0cf85477a2f9b34515d38072c19cbaa5914b"
+    },
+    "predictions.parquet": {
+      "bytes": 30297429,
+      "sha256": "fba59e2eeb4c7dfb84e1c9d3a19ce7651f9acde394f4be751b049609047a2461"
+    },
+    "audit.json": {
+      "bytes": 348,
+      "sha256": "369f33972827518c98cc1948a5ffc880481e7e82337c5d9dfd5a3eb73f54347b"
+    },
+    "selection_log.jsonl": {
+      "bytes": 302976,
+      "sha256": "8953dbe30bf3e4630e3824e0f2e255228ea3fd576eba152e324e3c5b7d0c7c3f"
+    },
+    "README.md": {
+      "bytes": 1822,
+      "sha256": "129d01da1e2c36e17466c3a47f79ef5d75103e72882bb38372692196487f146e"
+    }
+  },
+  "models": {
+    "fold0_seed17.pt": {
+      "bytes": 217207,
+      "sha256": "0cee531b288f8138d95abc9d51baea8eff56546f250525e5e24c5f2fd138066b"
+    },
+    "fold0_seed23.pt": {
+      "bytes": 217207,
+      "sha256": "88c43438a3bb383ac1c980d52f875b3bf0ea87e2b388328a5d37297032d9a6c8"
+    },
+    "fold0_seed31.pt": {
+      "bytes": 217207,
+      "sha256": "f01bdf45a1c4c84c39561348cdc41a6e3a4156ebd790e28889598e030da4c9ae"
+    },
+    "fold1_seed17.pt": {
+      "bytes": 216823,
+      "sha256": "659f4007f35ba496999da53083140bed9d17efad0d94f8b86ab8b031b84ece79"
+    },
+    "fold1_seed23.pt": {
+      "bytes": 216823,
+      "sha256": "adaded8b0a41636d5be8f40c90b8b085a00d2b778ccdfd935b2107cdb6145a04"
+    },
+    "fold1_seed31.pt": {
+      "bytes": 216823,
+      "sha256": "9885b0d137877c27d309be9f84e75c33cd87557e844a364fc2bc886b2530025c"
+    },
+    "fold2_seed17.pt": {
+      "bytes": 216567,
+      "sha256": "c957c3c99c43c50b42bb2953a9dbe1036b93701ed9f98f22be9159f4515e4c5c"
+    },
+    "fold2_seed23.pt": {
+      "bytes": 216567,
+      "sha256": "397d9386c1f2c0c2fcc1b84f18d1bb2aa346d3649faa9b0d23f9b5a7c2db605e"
+    },
+    "fold2_seed31.pt": {
+      "bytes": 216567,
+      "sha256": "d3a9ca8c3e61dc396d1088d645df4d81bbb034a6991cd4590a7cf8f29d6d05d6"
+    },
+    "fold3_seed17.pt": {
+      "bytes": 216759,
+      "sha256": "0edaf025dabef7449d35a3e834cd6541d27d8b3fdf3741307fe8afc1103ddfe5"
+    },
+    "fold3_seed23.pt": {
+      "bytes": 216759,
+      "sha256": "f2bde8ab1972beca2aef9e159404e5001dabf145da8d08d2f2eccbf103d28b60"
+    },
+    "fold3_seed31.pt": {
+      "bytes": 216759,
+      "sha256": "c9320e24357884b1acb43ccbcacf73ed9dd33160151140f24068d218dba85fbc"
+    },
+    "fold4_seed17.pt": {
+      "bytes": 216439,
+      "sha256": "e17c218e1c5f4e8f56855e0de84401efa9937a43933a6549e508dd1403eae9eb"
+    },
+    "fold4_seed23.pt": {
+      "bytes": 216439,
+      "sha256": "15ff3c73e5e44c8d6b7e43e3f0f47ba32dcf35adccf6605aa62422abea8345f0"
+    },
+    "fold4_seed31.pt": {
+      "bytes": 216439,
+      "sha256": "43b7e01c14ccd02a4b5390e09b6c839ffa646130142718e3a2889d75729bfdf4"
+    }
+  },
+  "preregistration": "docs/PHASE8_PREREGISTRATION.md",
+  "config": "configs/phase8/apt.yaml"
+}

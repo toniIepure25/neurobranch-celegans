@@ -1,0 +1,141 @@
+{
+  "phase": 8,
+  "name": "Adaptive Perturbation Twin",
+  "warning": "MODEL-DEPENDENT VIRTUAL PERTURBATION \u2014 NOT CAUSALLY VALIDATED.",
+  "audit_clean": true,
+  "audit": {
+    "split": "unseen_animals",
+    "split_seed": 41,
+    "n_folds": 5,
+    "animal_overlaps": [],
+    "support_test_target_overlaps": [],
+    "support_test_event_overlaps": [],
+    "test_event_in_train_or_val": [],
+    "fold_leaks": [],
+    "prediction_sha256": "fba59e2eeb4c7dfb84e1c9d3a19ce7651f9acde394f4be751b049609047a2461",
+    "audit_clean": true
+  },
+  "decisions": {
+    "H1_primary": {
+      "supported": false,
+      "pair_delta": 0.044157912132003804,
+      "pair_ci": [
+        0.00798512226245953,
+        0.09008221489964939
+      ],
+      "trajectory_delta": -6.5921302223048706e-06,
+      "gate": "pair \u0394 \u2265 +0.010 & CI low > 0 & trajectory \u0394 \u2265 +0.050"
+    },
+    "H2_personalisation": {
+      "supported": false,
+      "delta": 0.0022059447757057093,
+      "ci": [
+        -0.004620276509925202,
+        0.011826380030310557
+      ],
+      "gate": "\u0394 \u2265 +0.010 & CI low > 0"
+    },
+    "H3_active_eig": {
+      "supported": false,
+      "confirmatory": false,
+      "delta": -0.0038279515709690737,
+      "ci": [
+        -0.007048304378803355,
+        0.0025700075483369882
+      ],
+      "gate": "\u0394 \u2265 +0.010 & CI low > 0; confirmatory only if H2 supported"
+    },
+    "H4_sequence": {
+      "supported": false,
+      "trajectory_delta": 0.02296379841957328,
+      "coverage": 0.9036719926074929,
+      "gate": "trajectory \u0394 \u2265 +0.050 and coverage 0.80\u20130.95"
+    }
+  },
+  "deployment_readout": {
+    "strategy_table_k8": [
+      {
+        "strategy": "diversity",
+        "mean": 0.10309092573212784,
+        "std": 0.059262043148182786,
+        "count": 186
+      },
+      {
+        "strategy": "hybrid",
+        "mean": 0.10298547723152887,
+        "std": 0.059413240908986927,
+        "count": 186
+      },
+      {
+        "strategy": "eig",
+        "mean": 0.10294904317915195,
+        "std": 0.06007363809421808,
+        "count": 186
+      },
+      {
+        "strategy": "uncertainty",
+        "mean": 0.10275565503758505,
+        "std": 0.0589628951700558,
+        "count": 186
+      },
+      {
+        "strategy": "random",
+        "mean": 0.10220649266861759,
+        "std": 0.059567470923781826,
+        "count": 186
+      }
+    ],
+    "random_budget_curve": [
+      {
+        "k": 2,
+        "mean": 0.09820355089559958,
+        "std": 0.06909311617686308,
+        "count": 206
+      },
+      {
+        "k": 4,
+        "mean": 0.09834420458638155,
+        "std": 0.06918496993212343,
+        "count": 204
+      },
+      {
+        "k": 8,
+        "mean": 0.10220649266861759,
+        "std": 0.059567470923781826,
+        "count": 186
+      },
+      {
+        "k": 16,
+        "mean": 0.10533480885126886,
+        "std": 0.05896301648433585,
+        "count": 128
+      }
+    ]
+  },
+  "calibration_scale_by_fold": [
+    0.2866513612753641,
+    0.30861589062850675,
+    0.29781490469175415,
+    0.22003295242325335,
+    0.19997369260144357
+  ],
+  "n_predictions": 930846,
+  "n_metrics": null,
+  "git": {
+    "commit": "1c060c7824ed9be80f28fcd69ee72d3d0e12ffdb",
+    "dirty": true,
+    "branch": "research/phase8-adaptive-twin"
+  },
+  "config": {},
+  "artifacts": {
+    "summary": {
+      "sha256": "0ea8ba2dc6ec79145704ff07a364adf0d07aa12199bf142bca31fd4caff69328"
+    },
+    "audit": {
+      "sha256": "369f33972827518c98cc1948a5ffc880481e7e82337c5d9dfd5a3eb73f54347b"
+    },
+    "metrics": {
+      "sha256": "1124cd49a26698ef49fa1eae8f0b0cf85477a2f9b34515d38072c19cbaa5914b"
+    }
+  }
+}

@@ -1,0 +1,50 @@
+phase: 8
+name: adaptive_perturbation_twin
+version: 1.0.0
+status: frozen_before_full_test
+
+# Evaluation design ---------------------------------------------------------
+split: unseen_animals
+split_seed: 41          # untouched final seed; 17/29/37/43 were development/aborted seeds
+n_folds: 5
+model_seeds: [17, 23, 31]
+acquisition_seeds: [101, 202]
+support_sizes: [0, 2, 4, 8, 16]
+primary_k: 8
+strategies: [random, uncertainty, diversity, eig, hybrid]
+n_boot: 1000
+
+# Twin ---------------------------------------------------------------------
+rank: 16
+hidden: 64
+temporal_basis: 8
+support_dim: 16
+dropout: 0.10
+epochs: 30
+batch_size: 4096
+learning_rate: 0.001
+weight_decay: 0.001
+patience: 6
+traj_loss_weight: 1.0
+df: 5.0
+
+# Baseline ----------------------------------------------------------------
+cro_epochs: 12
+
+# Data --------------------------------------------------------------------
+trials_path: reports/phase3/randi_trial_table_phase3.csv.gz
+raw_dir: data/raw/randi2023/exported_data
+connectome_path: references/external/aconnectome_witvliet_2020_8_utf8.csv
+cache_path: reports/phase8/cache/windows.npz
+output_dir: reports/phase8
+
+# Frozen decision gates ---------------------------------------------------
+h1_pair_delta: 0.010
+h1_trajectory_delta: 0.050
+h2_delta: 0.010
+h3_delta: 0.010
+h4_trajectory_delta: 0.050
+h4_coverage_low: 0.80
+h4_coverage_high: 0.95
+
+warning: "MODEL-DEPENDENT VIRTUAL PERTURBATION — NOT CAUSALLY VALIDATED."
