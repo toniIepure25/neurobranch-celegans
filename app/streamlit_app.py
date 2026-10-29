@@ -183,6 +183,7 @@ tabs = st.tabs(
         "Causal Response Operator",
         "Active Probing",
         "Adaptive Twin",
+        "BoundedBench",
     ]
 )
 
@@ -1115,6 +1116,60 @@ with tabs[12]:
     else:
         st.info("Phase 8 outputs are not generated in this checkout.")
         st.caption("Run `python scripts/phase8_run.py --config configs/phase8/apt.yaml`.")
+
+with tabs[13]:
+    st.subheader("BoundedBench: measurement ceiling and claim status")
+    phase9 = ROOT / "reports" / "phase9"
+    summary_path = phase9 / "reliability_summary.json"
+    claims_path = phase9 / "claims.json"
+    table_path = phase9 / "reliability_by_target.csv"
+    if summary_path.exists():
+        summary = json.loads(summary_path.read_text(encoding="utf-8"))
+        c1, c2, c3 = st.columns(3)
+        c1.metric("Repeat reliability", f"{summary['mean_repeat_reliability']:.3f}")
+        c2.metric("Single-animal reliability", f"{summary['mean_animal_reliability']:.3f}")
+        c3.metric("Single-animal ceiling", f"{summary['mean_animal_ceiling']:.3f}")
+        st.caption(
+            "Intervals are target-level normal approximations and ignore animal "
+            "sharing; treat them as descriptive."
+        )
+        if table_path.exists():
+            df = pd.read_csv(table_path)
+            fig = go.Figure()
+            fig.add_trace(
+                go.Histogram(
+                    x=df["single_animal_reliability"].dropna(),
+                    nbinsx=25,
+                    marker_color="#c05621",
+                    name="single animal",
+                )
+            )
+            fig.add_vline(x=0.5, line_dash="dash", annotation_text="adequate = 0.5")
+            fig.update_layout(
+                height=320,
+                margin=dict(l=10, r=10, t=30, b=10),
+                xaxis_title="Reliability",
+                yaxis_title="Targets",
+                showlegend=False,
+            )
+            st.plotly_chart(fig, use_container_width=True)
+            st.dataframe(
+                df.sort_values("single_animal_reliability", ascending=False).head(15),
+                use_container_width=True,
+                hide_index=True,
+            )
+        if claims_path.exists():
+            claims = json.loads(claims_path.read_text(encoding="utf-8"))["claims"]
+            st.markdown("**Claims ledger**")
+            st.dataframe(pd.DataFrame(claims), use_container_width=True, hide_index=True)
+        st.warning(
+            "A reliability ceiling is a measurement property, not a causal effect. "
+            "A difference below the design MDE is not interpreted, even if its "
+            "interval excludes zero."
+        )
+    else:
+        st.info("Phase 9 outputs are not generated in this checkout.")
+        st.caption("Run `python scripts/phase9_reliability.py` and `python scripts/phase9_claims.py`.")
 
 st.divider()
 st.caption(EPISTEMIC_WARNING)

@@ -1,6 +1,6 @@
 {
-  "created_utc": "2026-10-29T12:05:30+00:00",
-  "git_revision": "f8b3da6f2bb5857780ff4eb654789361b27057d5",
+  "created_utc": "2026-10-29T12:07:07+00:00",
+  "git_revision": "957faf6089ee4e391f7133e9de4b40d238b9f4af",
   "input": {
     "animals": 110,
     "path": "reports\\phase3\\randi_trial_table_phase3.csv.gz",

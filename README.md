@@ -1,364 +1,153 @@
 # NeuroBranch
 
-**A research-grade, end-to-end pipeline for *C. elegans* whole-brain population dynamics, latent trajectory branching, and model-dependent virtual perturbation — built on real Kato et al. (2015) calcium imaging.**
+An end-to-end, leakage-safe research platform for *C. elegans* whole-brain
+population dynamics, latent branching, and **model-dependent virtual
+perturbation** on real calcium imaging and optogenetic atlases.
 
-> **EPISTEMIC STATUS.** Everything produced by the intervention engine is a
-> **MODEL-DEPENDENT VIRTUAL PERTURBATION — NOT CAUSALLY VALIDATED.** The models
-> are fitted to observational recordings only. No perturbation of a living animal
-> was performed for this project. A visually attractive 3-D branch is not a
-> bifurcation, and good observational prediction is not causal identification.
-> The independent empirical evidence gate in `interventions/safety.py` refuses to
-> label any output as empirically validated without a matched, provenance-checked
-> intervention dataset.
+> **Epistemic status.** Every intervention output is a model-dependent virtual
+> perturbation, not a causally validated effect. The models are fitted to
+> observational recordings; no animal was perturbed for this project. A
+> visually attractive branch is not a bifurcation, and good observational
+> prediction is not causal identification. The evidence gate in
+> `interventions/safety.py` refuses to label any output as empirically
+> validated without a matched, provenance-checked intervention dataset.
 
----
+## What version 0.2.0 adds: bounded evaluation
 
-## What is in this repository
+Version 0.2.0 replaces the unstable split-half reliability ceiling with a
+variance-corrected estimator, separates **within-animal repeat reliability**
+from **across-animal single-profile reliability**, and attaches an explicit
+status to every quantitative claim.
 
-| Layer | Status |
-|---|---|
-| Real-data audit (Kato 2015, 5 worms, WT_NoStim) | ✅ completed on the downloaded archive |
-| Leakage-safe blocked and strict-forward splits | ✅ implemented, tested |
-| Baselines: persistence, VAR, MLP, residual MLP, GRU | ✅ 105 runs (5 worms × 3 seeds × 7 models) |
-| Latent models: PCA+MLP, PCA+kNN | ✅ same 105-run suite |
-| BunDLe-Net | ✅ official 3-D artifacts evaluated; PyTorch reimplementation trained (partial reproduction) |
-| NC-MCM | ✅ distributed artifacts verified; lag-2 Markov test ported to Python; behaviour decoder cross-validated |
-| Branching analysis | ✅ empirical + model-based; **corrected two-sided null test** (Phase 2) |
-| Virtual perturbation engine | ✅ paired baselines, common random numbers, multi-seed uncertainty, OOD support flags, random-neuron controls |
-| Sparse candidate search | ✅ 13 named cells × 2 amplitudes + 19 non-candidate controls; **Phase 2 specificity audit** |
-| Randi 2023 optogenetic atlas | ✅ 110 animals, 3,371 events parsed; Phase 3 target/shape/context audit (**negative**) |
-| Independent freely-moving behaviour | ✅ Baskoylu & Flavell 2026, 27 animals, 1,162 reversals, SHA256-verified |
-| Prospective behaviour benchmark | ✅ animal-disjoint 3/6/12 s; primary neural increment **inconclusive** |
-| Frozen neural representation | ✅ population, PCA, identified-neuron, quadratic and causal-delay controls; **not robust** |
-| Kramer 2026 directed-turning archive | ✅ 73 recordings, 107,131 frames, 2,670 reversals, SHA256-verified |
-| Independent 6 s replication | ✅ 32 WT octanol animals; criterion **not met** (22/32 improved) |
-| Turn-direction benchmark | ✅ 56 WT animals, 945 events; primary neural increment **null** |
-| Turn-direction dynamics/controls | ✅ time-resolved, PCA, peak times, shifts/permutations/ablation; **no specific effect** |
-| Interactive 3-D app | ✅ Streamlit + Plotly, 9 tabs (7 Phase 2 + Phase 3 + Phase 4) |
-| CLI | ✅ Typer, documented commands |
-| Tests | ✅ 62 passed (unit, integration, scientific; includes Phase 2–4) |
-| Figures | ✅ 8 static PNGs + 6 Phase 3 + 11 Phase 4 figures + interactive HTML |
-| Causal validation | ❌ not attempted; evidence gate refuses unsupported claims |
+The result changes how the project's own models should be read:
 
-The headline result is deliberately unflattering: on held-out data, **no neural
-dynamics model clearly beats a persistence baseline**, behaviour decoding is far
-below label persistence and adds no incremental calibration value, apparent
-branching is actually *lower* local entropy than a geometry-preserving null in
-4/5 worms (predictability, not branching), and the top named-neuron virtual effect
-is **within the range of arbitrary non-candidate cells** (4/19 controls match or
-exceed it, empirical p≈0.21), so it is not specific. The external Randi 2023
-optogenetic benchmark also fails to beat a constant-mean baseline on held-out
-animals. These are findings, not bugs; they are preserved in
-[`docs/RESULTS.md`](docs/RESULTS.md), [`docs/PHASE2_SCIENTIFIC_LIMITATIONS.md`](docs/PHASE2_SCIENTIFIC_LIMITATIONS.md)
-and [`docs/LIMITATIONS.md`](docs/LIMITATIONS.md).
+| Quantity | Estimate | 95% interval |
+| --- | ---: | --- |
+| Repeat reliability (within animal) | 0.243 | [0.206, 0.279] |
+| Single-animal reliability (held out) | 0.223 | [0.196, 0.251] |
+| Repeat attenuation ceiling | 0.493 | - |
+| Single-animal attenuation ceiling | 0.473 | - |
 
----
+Both ceilings are near 0.5. The Phase 8 pair-level advantage (+0.0442,
+CI [+0.0080, +0.0901]) has a reconstructed design MDE of 0.0587 against a
+declared smallest effect of interest of 0.020, so it is classified
+**underpowered**, not supported. The Phase 7 claim that CRO reaches 64% of the
+ceiling is withdrawn; against the corrected ceiling it reaches about 21%.
+
+Read the full audit in [`docs/PHASE9_RESULTS.md`](docs/PHASE9_RESULTS.md), the
+limits in [`docs/MEASUREMENT_LIMITS.md`](docs/MEASUREMENT_LIMITS.md), and the
+corrections in [`docs/CORRECTIONS.md`](docs/CORRECTIONS.md).
+
+## Install
+
+Python 3.10-3.13.
+
+```bash
+python -m pip install -e ".[dev]"
+```
+
+Optional GPU extra: `pip install -e ".[dev,gpu]"`.
 
 ## Quick start
 
-The project targets Python ≥3.10,<3.14. This checkout was validated with Python
-3.13.5, PyTorch 2.7.1, NumPy 2.3.1, SciPy 1.16 and scikit-learn 1.9.1.
+```bash
+# Reproduce the measurement ceilings and the claims ledger
+python scripts/phase9_reliability.py
+python scripts/phase9_claims.py --check
+python scripts/validate_reports.py --strict
+
+# Or through the CLI
+neurobranch benchmark reliability
+neurobranch benchmark claims
+neurobranch version
+
+# Interactive app (14 tabs)
+streamlit run app/streamlit_app.py
+```
+
+## Reproduce the phases
+
+| Phase | Command | What it produces |
+| --- | --- | --- |
+| Data audit | `neurobranch data audit` | Kato archive verification |
+| Phase 2-4 | `neurobranch train`, `simulate`, `branching` | Baselines, branching, intervention audits |
+| Phase 6-8 | `python scripts/phase8_run.py` | CRO and adaptive-twin evaluation |
+| Phase 9 | `python scripts/phase9_reliability.py` | Reliability ceilings, variance components, manifest |
+| Phase 9 claims | `python scripts/phase9_claims.py` | `reports/phase9/claims.json` |
+
+Every artifact directory carries a manifest with the input hash, git revision,
+parameters and library versions.
+
+## Evaluation contract
+
+1. **Animal-disjoint splits.** Events from one animal never appear in both
+   training and test.
+2. **Ceiling before score.** Report reliability and the attenuation ceiling next
+   to every held-out correlation.
+3. **MDE before difference.** Report the minimum detectable effect next to every
+   claimed difference.
+4. **Fixed claim statuses.** `supported`, `not_supported`, `bounded_null`,
+   `underpowered` - assigned by code, not by hand.
+5. **No causal language.** Virtual perturbation is model-dependent; the word
+   "validated" is reserved for matched interventional evidence.
+
+These rules are implemented in `src/neurobranch/benchmark/` and documented in
+[`docs/BENCHMARK_CARD.md`](docs/BENCHMARK_CARD.md) and
+[`docs/CLAIMS.md`](docs/CLAIMS.md).
+
+## Repository map
+
+```
+src/neurobranch/
+  benchmark/        reliability, power/MDE, claims ledger, report builders
+  dynamics/         latent models, training, splits
+  branching/        empirical and model-based branching analysis
+  interventions/    virtual perturbation engine and safety gate
+  twin/             adaptive twin and active probing
+  cli/              Typer CLI
+app/                Streamlit + Plotly interface (14 tabs)
+scripts/            phase9_reliability, phase9_claims, phase9_figure, validate_reports, phase8_run
+reports/            generated artifacts, including phase9/
+docs/               phase reports, benchmark card, claims policy, corrections
+schemas/            JSON schemas for generated reports
+tests/              unit, integration, scientific and benchmark tests
+```
+
+## Datasets and primary sources
+
+- Kato et al., *Cell* 2015, whole-brain calcium imaging:
+  [`10.1016/j.cell.2015.09.034`](https://doi.org/10.1016/j.cell.2015.09.034)
+- Randi et al., *Nature* 2023, optogenetic atlas:
+  [`10.1038/s41586-023-06683-4`](https://doi.org/10.1038/s41586-023-06683-4)
+- Baskoylu & Flavell, Dryad 2026:
+  [`10.5061/dryad.w9ghx3g4v`](https://doi.org/10.5061/dryad.w9ghx3g4v)
+- Kramer et al., *Nature Neuroscience* 2026:
+  [`10.1038/s41593-026-02257-5`](https://doi.org/10.1038/s41593-026-02257-5)
+
+Provenance and hashes are recorded in [`docs/DATA_PROVENANCE.md`](docs/DATA_PROVENANCE.md).
+The atlas is used under its source terms; check each archive before
+redistribution.
+
+## Testing and CI
 
 ```bash
-# If uv is on PATH:
-uv sync
-uv run neurobranch version
-uv run neurobranch data audit
-uv run neurobranch app
-
-# If uv is installed as a Python module but not on PATH:
-python -m uv sync
-python -m uv run neurobranch version
+pytest -q            # 147 tests
+ruff check src tests scripts
 ```
 
-A plain editable install also works:
+GitHub Actions runs the suite on Python 3.10 and 3.13, lints, and validates the
+Phase 9 reports against their JSON schemas.
 
-```bash
-python -m pip install -e .
-neurobranch version          # may need the user Scripts directory on PATH
-python -m neurobranch.cli.main version
-```
+## Limitations
 
-The raw dataset is **not committed** (see `.gitignore` and
-[`docs/DATA_PROVENANCE.md`](docs/DATA_PROVENANCE.md)). Place
-`WT_NoStim.mat` at `data/raw/kato2015/WT_NoStim.mat`, or re-download from OSF
-project `2395t` and verify the SHA256.
+- The atlas is measurement-limited: single-animal reliability is about 0.22.
+- Reliability is estimated on the same atlas used for evaluation.
+- No causal claim is made anywhere in this repository.
+- The design engine (EIG portfolios, simulation-based calibration) is not
+  implemented; the measurement audit had to come first.
+- Phase 6-8 intervals use animal-level folds but the MDE reconstruction assumes
+  independent units, so design resolution is approximate.
 
----
+## License
 
-## Commands
-
-```bash
-neurobranch data audit
-neurobranch data list
-neurobranch train dynamics --config configs/experiments/blocked_suite.yaml
-neurobranch train dynamics --config configs/experiments/forward_stress.yaml --seeds 17
-neurobranch evaluate --run-dir artifacts/runs/blocked_suite
-neurobranch branching analyze --worm 0
-neurobranch reproduce ncmcm --k 3
-neurobranch reproduce bundlenet --worm 0 --epochs 120
-neurobranch simulate baseline --worm 0 --model mlp --seed 17
-neurobranch simulate intervention --worm 0 --model mlp --seed 17 \
-  --spec-file configs/interventions/rivl_plus2.yaml
-neurobranch report
-neurobranch app
-```
-
-Phase 2 audits (require local raw data; outputs are committed under `reports/`):
-
-```bash
-python scripts/phase2a_branching_audit.py
-python scripts/phase2a_intervention_audit.py
-python scripts/phase2a_optogenetic_benchmark.py
-python scripts/phase2a_behavior_benchmark.py
-```
-
-Phase 3 (Baskoylu 2026 freely-moving data and Randi response audit):
-
-```bash
-python scripts/phase3_download_baskoylu.py          # Anubis challenge + SHA256
-python scripts/phase3_prospective_benchmark.py     # 27-animal LOAO benchmark
-python scripts/phase3_randi_analysis.py            # target/context/shape audit
-python scripts/phase3_make_figures.py              # reports/phase3/figures
-python scripts/export_neuropal.jl                  # one-time JLD2 -> TSV (Julia)
-```
-
-The Phase 3 headline is a **negative/inconclusive** primary result: adding
-population neural activity to behavioural history gives Δ log loss -0.0070 at 6 s,
-95% animal CI [-0.0148, +0.0005]. A causal delayed-feature control also improves
-slightly (Δ -0.0035), so it is not a clean null; a quadratic
-behavioural baseline removes the significance, identified neurons do not help,
-and within-animal forward prediction is worse. Randi repeated responses remain at
-r≈0.09 and repeated-event averaging is worse than a global mean. See
-[`docs/PHASE3_RESULTS.md`](docs/PHASE3_RESULTS.md).
-
-Phase 4 (Kramer 2026 directed turning; independent replication and
-turn-direction generalization):
-
-```bash
-python scripts/phase4_download_kramer.py             # Dryad Anubis + SHA256
-python scripts/phase4_audit_data.py                  # inventory, D/V sanity, checksums
-python scripts/phase4_independent_replication.py     # Phase 3 protocol, WT octanol
-python scripts/phase4_turn_direction.py              # primary 56-animal benchmark
-python scripts/phase4_dynamics.py                    # time-resolved/PCA/peak times
-python scripts/phase4_controls.py                    # shifts, permutations, ablation
-python scripts/phase4_ablation.py                    # matched random-neuron ablation
-python scripts/phase4_nonlinear.py                   # gradient-boosting sensitivity
-python scripts/phase4_make_figures.py                # reports/phase4/figures
-python scripts/phase4_write_manifest.py              # artifact/code hashes
-```
-
-The Phase 4 headline is also **negative**: the independent 6 s replication
-fails its prespecified criterion (Δ log loss -0.0057, 95% CI
-[-0.0113, +0.0005], 22/32 animals), and the animal-disjoint turn-direction
-benchmark shows no bounded neural increment over behaviour (Δ AUROC +0.0123,
-95% CI [-0.0166, +0.0425]).  SAAV, circuit and identified-neuron
-representations are null or worse, and nonlinear boosting does not rescue the
-effect.  A diacetyl-cohort population point estimate (+0.0624) has a CI
-including zero and is exploratory only.  See
-[`docs/PHASE4_RESULTS.md`](docs/PHASE4_RESULTS.md).  No trial-level
-optogenetic data exist in the archive; the tdc1 cohort is treated as a
-distribution-shift cohort, not an intervention.
-
-Phase 5 (SAAV mechanistic validation; branch
-`research/phase5-saav-mechanistic-validation`):
-
-```bash
-python scripts/phase5_protocol_compare.py --epochs 35   # four offline regimes
-python scripts/phase5_online.py --epochs 40             # causal-onset online test
-python scripts/phase5_mechanisms.py                     # SAAV/circuit + controls
-python scripts/phase5_interventions.py                  # evidence map only
-python scripts/phase5_figures.py
-```
-
-The Phase 5 headline is **no positive, properly scored, animal-disjoint SAAV
-increment** in any reconstruction. Exact reproduction is blocked because the
-four author-local aligned CSVs and preprocessing script are not public. The
-closest original-style SAAV AUROC is 0.540 (behaviour 0.534), with a log-loss
-increment of -0.0006 and a CI crossing zero. The causal-onset online benchmark
-also finds no SAAV or circuit increment; population AUROC rises early but
-proper-score log loss does not. No virtual intervention was run. See
-[`docs/PHASE5_RESULTS.md`](docs/PHASE5_RESULTS.md) and the
-[`missing-data request`](docs/PHASE5_MISSING_DATA_REQUEST.md).
-
-The `simulate intervention` command prints the standing warning and writes a
-JSON summary containing the baseline and virtual distributions, bootstrap CI,
-trajectory displacement, OOD fraction, and the causal-status object.
-
----
-
-## Repository layout
-
-```text
-neurobranch-celegans/
-├─ app/streamlit_app.py          interactive explorer
-├─ configs/                      data, experiment, and intervention configs
-├─ data/raw/kato2015/            immutable raw archive (not committed)
-├─ data/raw/baskoylu2026/        Phase 3 raw HDF5/JLD2 (not committed)
-├─ data/raw/kramer2026/          Phase 4 Dryad recordings (not committed)
-├─ docs/                         methodology, provenance, results, limitations,
-│                                supervisor brief, paper prospectus, Phase 3/4/5 reports
-├─ figures/                      generated PNG/HTML figures
-├─ reports/                      audit tables and result summaries
-├─ references/external/          cloned upstream repositories (not committed)
-├─ src/neurobranch/
-│  ├─ behavior/                  runs, transitions, entropies
-│  ├─ branching/                 local outcome diversity, corrected null tests, synthetic fixtures
-│  ├─ cli/                       Typer entry point
-│  ├─ data/                      Kato loader, Baskoylu/Randi/Kramer adapters, provenance
-│  ├─ dynamics/                  baselines, neural/latent models, training, cross-animal probe
-│  ├─ evaluation/                metrics, bootstrap, rollouts, Randi/behaviour benchmarks
-│  ├─ interventions/             specs, paired engine, OOD, evidence gate, specificity audit
-│  ├─ preprocessing/             leakage-safe split/scaling/windowing
-│  ├─ representation/            BunDLe-Net artifact integration + reimplementation
-│  ├─ reproduction/              NC-MCM verification
-│  └─ reporting/                 tables and figures from saved artifacts
-├─ scripts/                      Phase 2/3 audit and benchmark entry points
-└─ tests/                        unit / integration / scientific
-```
-
----
-
-## Core scientific choices
-
-1. **Behaviour labels are not independent ground truth.** Kato's eight states are
-   inferred from calcium signals in AVA, SMD and RIB. Those eight neurons are
-   excluded from predictors (`BEHAVIOR_LABEL_NEURONS`), but residual circularity
-   remains because the labels and the predictors share the same recording.
-2. **Two evaluation regimes are reported.** The primary *blocked interpolation*
-   benchmark holds out a contiguous middle block and trains on earlier **and
-   later** blocks, with no window crossing a boundary. The *strict forward* test
-   trains on the first 70% and tests on the final 15%, exposing severe
-   non-stationarity and late-recording behavioural degeneracy.
-3. **Persistence is a first-class model.** It is not a straw man; it wins.
-4. **Interventions are edits of model state, not `do()` on the animal.** The
-   engine implements additive/clamp/zero/scale edits, paired baseline rollouts,
-   common random numbers, seed and initial-state uncertainty, an out-of-support
-   flag, and random-neuron controls. It returns an explicit non-causal status.
-5. **Reference artifacts are not our results.** The official BunDLe-Net
-   embeddings were fitted upstream on all windows, so even a kNN classifier
-   trained on train labels is scored on test embeddings that the encoder already
-   saw. This is **embedding-level leakage**, not held-out generalization. Our own
-   reimplementation is evaluated on a blocked holdout and performs substantially
-   worse. Both facts are reported.
-
----
-
-## Data and reproducibility
-
-- Dataset: Kato et al. 2015, *Cell* 163:656–669, OSF project
-  <https://osf.io/2395t/>. File `WT_NoStim.mat`, SHA256
-  `7531811c1718e26a0455f59cb2f8188cf25809278cfea85770dfe03315a0098a`.
-- Phase 3 dataset: Baskoylu & Flavell 2026, Dryad
-  `doi:10.5061/dryad.w9ghx3g4v`, 27 animals, 30 files, 320,032,093 bytes, CC0-1.0.
-  Raw data are untracked; the SHA256 manifest and derived tables are committed.
-- Raw data are immutable; every derived artifact records the SHA256 and the git
-  state in its `resolved_config.yaml` / metrics JSON.
-- Seeds 17, 23, 31 are fixed for the primary suite. Every training run writes a
-  checkpoint, train history, test predictions, and metrics.
-- Environment manifest: `reports/environment.json` (assembly environment, written
-  after the runs; it is not a training-time snapshot).
-
-See [`docs/EXPERIMENT_REGISTRY.md`](docs/EXPERIMENT_REGISTRY.md) for every run,
-config, and artifact path.
-
----
-
-## Documentation
-
-| Document | Purpose |
-|---|---|
-| [`docs/SUPERVISOR_BRIEF.md`](docs/SUPERVISOR_BRIEF.md) | Two-page status and discussion points for Denis Kovačević |
-| [`docs/POTENTIAL_PAPER.md`](docs/POTENTIAL_PAPER.md) | Paper framing, claims, figures, and what is still missing |
-| [`docs/RESULTS.md`](docs/RESULTS.md) | Exact quantitative results and negative findings |
-| [`docs/PHASE2_BASELINE_AUDIT.md`](docs/PHASE2_BASELINE_AUDIT.md) | Pre-Phase-2 baseline, inherited state, gates |
-| [`docs/BRANCHING_STATISTICAL_AUDIT.md`](docs/BRANCHING_STATISTICAL_AUDIT.md) | Corrected branching nulls and synthetic power checks |
-| [`docs/BUNDLENET_REPRODUCTION_AUDIT.md`](docs/BUNDLENET_REPRODUCTION_AUDIT.md) | Transductive artifact vs causal partial reimplementation |
-| [`docs/NEURON_IDENTITY_MAPPING.md`](docs/NEURON_IDENTITY_MAPPING.md) | Kato↔Randi canonical names and ambiguity |
-| [`docs/INTERVENTION_DATASET_AUDIT.md`](docs/INTERVENTION_DATASET_AUDIT.md) | Randi 2023 provenance, schema, coverage |
-| [`docs/INTERVENTION_GENERALIZATION_RESULTS.md`](docs/INTERVENTION_GENERALIZATION_RESULTS.md) | Specificity audit + external optogenetic benchmark |
-| [`docs/BEHAVIORAL_GENERALIZATION.md`](docs/BEHAVIORAL_GENERALIZATION.md) | Incremental behaviour prediction (negative) |
-| [`docs/RELATED_WORK_NEBULA.md`](docs/RELATED_WORK_NEBULA.md) | NEBULA positioning and evaluation gates |
-| [`docs/PHASE2_METHODOLOGY.md`](docs/PHASE2_METHODOLOGY.md) | Phase 2 protocols, splits, statistics |
-| [`docs/PHASE2_SCIENTIFIC_LIMITATIONS.md`](docs/PHASE2_SCIENTIFIC_LIMITATIONS.md) | Phase 2-specific limitations |
-| [`docs/PHASE2_NEXT_EXPERIMENTS.md`](docs/PHASE2_NEXT_EXPERIMENTS.md) | Falsifiable next experiments |
-| [`docs/PHASE3_RESEARCH_PLAN.md`](docs/PHASE3_RESEARCH_PLAN.md) | Locked Phase 3 preregistration and decision rule |
-| [`docs/PHASE3_DATASET_AUDIT.md`](docs/PHASE3_DATASET_AUDIT.md) | Baskoylu HDF5/JLD2 audit, event convention, leakage finding |
-| [`docs/PHASE3_BEHAVIORAL_VALIDATION.md`](docs/PHASE3_BEHAVIORAL_VALIDATION.md) | Prospective behaviour benchmark and controls |
-| [`docs/PHASE3_NEURAL_REPRESENTATIONS.md`](docs/PHASE3_NEURAL_REPRESENTATIONS.md) | Population/PCA/identified representations and stop decision |
-| [`docs/PHASE3_RANDI_RESPONSE_AUDIT.md`](docs/PHASE3_RANDI_RESPONSE_AUDIT.md) | Randi target, shape, averaging and context audit |
-| [`docs/PHASE3_INTERVENTION_LIMITATIONS.md`](docs/PHASE3_INTERVENTION_LIMITATIONS.md) | Evidence required before a control claim |
-| [`docs/PHASE3_RESULTS.md`](docs/PHASE3_RESULTS.md) | Phase 3 exact results and RQ answers |
-| [`docs/PHASE3_SUPERVISOR_BRIEF.md`](docs/PHASE3_SUPERVISOR_BRIEF.md) | Phase 3 supervisor handoff and 6-ECTS scope |
-| [`docs/PHASE3_NEXT_EXPERIMENTS.md`](docs/PHASE3_NEXT_EXPERIMENTS.md) | Prioritised replication/control experiments |
-| [`docs/PHASE4_RESEARCH_PLAN.md`](docs/PHASE4_RESEARCH_PLAN.md) | Phase 4 hypotheses, prespecified design and decision rules |
-| [`docs/PHASE4_DATASET_AUDIT.md`](docs/PHASE4_DATASET_AUDIT.md) | Kramer archive inventory, checksums, D/V convention, coverage |
-| [`docs/PHASE4_INDEPENDENT_REPLICATION.md`](docs/PHASE4_INDEPENDENT_REPLICATION.md) | Phase 3 protocol rerun on WT octanol; non-replication |
-| [`docs/PHASE4_TURN_DIRECTION_BENCHMARK.md`](docs/PHASE4_TURN_DIRECTION_BENCHMARK.md) | Primary turn-direction results, cohorts, calibration, controls |
-| [`docs/PHASE4_NEURAL_BRANCH_DYNAMICS.md`](docs/PHASE4_NEURAL_BRANCH_DYNAMICS.md) | Time-resolved decoding, PCA trajectories, peak timing |
-| [`docs/PHASE4_NEURON_SPECIFIC_ANALYSIS.md`](docs/PHASE4_NEURON_SPECIFIC_ANALYSIS.md) | SAAV/circuit/identified coverage, ablation and limits |
-| [`docs/PHASE4_INTERVENTION_EVIDENCE.md`](docs/PHASE4_INTERVENTION_EVIDENCE.md) | Why no causal intervention claim is possible |
-| [`docs/PHASE4_RESULTS.md`](docs/PHASE4_RESULTS.md) | Phase 4 exact results and hypothesis-by-hypothesis verdict |
-| [`docs/PHASE4_SUPERVISOR_BRIEF.md`](docs/PHASE4_SUPERVISOR_BRIEF.md) | One-page Phase 4 decision brief |
-| [`docs/PHASE4_NEXT_EXPERIMENTS.md`](docs/PHASE4_NEXT_EXPERIMENTS.md) | Prioritised replication, representation and causal experiments |
-| [`docs/PHASE5_RESEARCH_PLAN.md`](docs/PHASE5_RESEARCH_PLAN.md) | Locked Phase 5 questions, statuses, regimes and decision gates |
-| [`docs/PHASE5_KRAMER_REPRODUCTION.md`](docs/PHASE5_KRAMER_REPRODUCTION.md) | Official source contract, hashes and missing-input block |
-| [`docs/PHASE5_MISSING_DATA_REQUEST.md`](docs/PHASE5_MISSING_DATA_REQUEST.md) | Unsent request for the four aligned CSVs and preprocessing |
-| [`docs/PHASE5_PROTOCOL_COMPARISON.md`](docs/PHASE5_PROTOCOL_COMPARISON.md) | Four offline regimes and exact protocol differences |
-| [`docs/PHASE5_ONLINE_DECODING.md`](docs/PHASE5_ONLINE_DECODING.md) | Causal-onset online benchmark, risk sets and baselines |
-| [`docs/PHASE5_NEURAL_MECHANISMS.md`](docs/PHASE5_NEURAL_MECHANISMS.md) | SAAV/circuit incremental tests, stability and controls |
-| [`docs/PHASE5_INTERVENTION_EVIDENCE.md`](docs/PHASE5_INTERVENTION_EVIDENCE.md) | Published vs trial-level vs simulator evidence map |
-| [`docs/PHASE5_RESULTS.md`](docs/PHASE5_RESULTS.md) | Phase 5 exact results and discrepancy assessment |
-| [`docs/PHASE5_SUPERVISOR_BRIEF.md`](docs/PHASE5_SUPERVISOR_BRIEF.md) | Phase 5 decision brief and discussion points |
-| [`docs/PHASE5_NEXT_EXPERIMENTS.md`](docs/PHASE5_NEXT_EXPERIMENTS.md) | Highest-value next test and realistic 6-ECTS package |
-| [`docs/REPRODUCING.md`](docs/REPRODUCING.md) | Operator recipe with expected numbers and known nondeterminism |
-| [`docs/DECISIONS.md`](docs/DECISIONS.md) | Design decisions and rejected alternatives |
-| [`docs/METHODOLOGY.md`](docs/METHODOLOGY.md) | Splits, models, metrics, branching and perturbation definitions |
-| [`docs/DATA_PROVENANCE.md`](docs/DATA_PROVENANCE.md) | Source, checksum, licensing, label caveats |
-| [`docs/EXPERIMENT_REGISTRY.md`](docs/EXPERIMENT_REGISTRY.md) | Run matrix and artifact locations |
-| [`docs/INTERVENTION_ASSUMPTIONS.md`](docs/INTERVENTION_ASSUMPTIONS.md) | What the virtual perturbation does and does not assume |
-| [`docs/VALIDATION_PROTOCOL.md`](docs/VALIDATION_PROTOCOL.md) | Pre-specified tests, gates, and pass/fail outcomes |
-| [`docs/LIMITATIONS.md`](docs/LIMITATIONS.md) | Structural, statistical, and biological limitations |
-| [`docs/NEXT_EXPERIMENTS.md`](docs/NEXT_EXPERIMENTS.md) | Highest-priority biological validation experiment |
-| [`docs/LITERATURE_REVIEW.md`](docs/LITERATURE_REVIEW.md) | 20-source targeted review |
-| [`docs/RESEARCH_FOUNDATIONS.md`](docs/RESEARCH_FOUNDATIONS.md) | Formal assumptions, claims ladder, RQ1–RQ7 |
-
----
-
-## Figure gallery
-
-- `figures/fig01_dataset_coverage.png` — behaviour composition and partial neuron coverage.
-- `figures/fig02_model_comparison.png` — one-step R², decoding, transition TV; persistence line.
-- `figures/fig03_forward_stress.png` — strict-forward degradation.
-- `figures/fig04_bundlenet_official_3d.png` — official 3-D artifact, upstream-fitted (leaky).
-- `figures/bundlenet_latent_3d.html` — interactive official artifact.
-- `figures/fig05_branching_worm0.png` — local entropy, outcome mixtures, shuffled null.
-- `figures/fig06_intervention_forest.png` — named vs random-neuron effects.
-- `figures/fig07_ncmcm_verification.png` — distributed vs reimplemented p-values.
-- `figures/fig08_observed_vs_rollout.png` — observed trajectory vs model rollout.
-- `figures/fig09_phase2_summary.png` — corrected branching, RIVL specificity, Randi MAE, behaviour increment.
-- `reports/phase3/figures/prospective_logloss.png` — Phase 3 animal-disjoint log loss by horizon.
-- `reports/phase3/figures/neural_delta_ci.png` — primary neural Δ and control CIs.
-- `reports/phase3/figures/randi_reliability.png` — Randi target/shape reliability.
-- `reports/phase3/figures/randi_repeated_average.png` — repeated averaging vs global mean.
-- `reports/phase3/figures/dataset_coverage.png` — Baskoylu event rate vs reversal occupancy.
-- `reports/phase3/figures/cross_animal_dynamics.png` — one-step cross-animal dynamics.
-- `reports/phase4/figures/phase4_turn_direction_auroc.png` — held-out turn-direction AUROC by representation.
-- `reports/phase4/figures/phase4_turn_direction_delta_forest.png` — neural increments and CIs.
-- `reports/phase4/figures/phase4_turn_direction_calibration.png` — calibration curves.
-- `reports/phase4/figures/phase4_turn_dynamics_timeresolved.png` — behaviour vs neural AUC by relative frame.
-- `reports/phase4/figures/phase4_replication_delta.png` — independent Phase 3 replication at 3/6/12 s.
-- `reports/phase4/figures/phase4_turn_pca_trajectories.png` — population-state trajectory.
-- `reports/phase4/figures/phase4_turn_neuron_peak_times.png` — descriptive circuit peak times.
-- `reports/phase4/figures/phase4_turn_direction_external.png` — cross-cohort transfer.
-- `reports/phase4/figures/phase4_event_inventory.png` — class imbalance and animal heterogeneity.
-- `reports/phase4/figures/phase4_turn_neuron_ablation.png` — matched feature ablation.
-- `reports/phase4/figures/phase4_turn_direction_nonlinear.png` — nonlinear sensitivity.
-
----
-
-## Licence and attribution
-
-Source code is provided for research use. The Kato dataset retains its original
-licence and attribution; upstream BunDLe-Net and NC-MCM code retain their
-licences. See [`docs/DATA_PROVENANCE.md`](docs/DATA_PROVENANCE.md).
+MIT for the code. Datasets retain their original licenses.

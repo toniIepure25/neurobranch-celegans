@@ -1,0 +1,127 @@
+{
+  "claims": [
+    {
+      "ci_high": 0.25060469570856303,
+      "ci_low": 0.19633597095810368,
+      "equivalence_p": null,
+      "estimate": 0.22347033333333335,
+      "evidence": [
+        "reports/phase9/reliability_summary.json",
+        "reports/phase9/reliability_by_target.csv"
+      ],
+      "id": "phase9-single-animal-ceiling-below-half",
+      "margin": 0.5,
+      "mde": null,
+      "notes": "Bound claim; no equivalence test is implied.",
+      "statement": "Across-animal single-profile reliability is below 0.5.",
+      "status": "supported",
+      "test": "upper_bound"
+    },
+    {
+      "ci_high": 0.2790430355784858,
+      "ci_low": 0.20620589863204053,
+      "equivalence_p": null,
+      "estimate": 0.24262446710526317,
+      "evidence": [
+        "reports/phase9/reliability_summary.json",
+        "reports/phase9/reliability_by_target.csv"
+      ],
+      "id": "phase9-repeat-ceiling-below-half",
+      "margin": 0.5,
+      "mde": null,
+      "notes": "Repeat facet uses at least two stimulations per animal.",
+      "statement": "Within-animal repeat-stimulation reliability is below 0.5.",
+      "status": "supported",
+      "test": "upper_bound"
+    },
+    {
+      "ci_high": 0.0901,
+      "ci_low": 0.008,
+      "equivalence_p": 0.8760464326727616,
+      "estimate": 0.0442,
+      "evidence": [
+        "docs/PHASE8_RESULTS.md",
+        "reports/phase8/"
+      ],
+      "id": "phase8-pair-advantage",
+      "margin": 0.02,
+      "mde": 0.05867713596304969,
+      "notes": "Preregistered H1 pair gate passed, but the design MDE exceeds the 0.02 smallest effect of interest.",
+      "statement": "APT(k=0) improves pair-level Spearman over the static CRO baseline.",
+      "status": "underpowered",
+      "test": "superiority"
+    },
+    {
+      "ci_high": null,
+      "ci_low": null,
+      "equivalence_p": null,
+      "estimate": -6.6e-06,
+      "evidence": [
+        "docs/PHASE8_RESULTS.md"
+      ],
+      "id": "phase8-trajectory-advantage",
+      "margin": null,
+      "mde": null,
+      "notes": "Effect is numerically zero; no interval reported, so no MDE audit is possible.",
+      "statement": "APT(k=0) improves trajectory correlation over a per-responder template.",
+      "status": "not_supported",
+      "test": "superiority"
+    },
+    {
+      "ci_high": null,
+      "ci_low": null,
+      "equivalence_p": null,
+      "estimate": 0.023,
+      "evidence": [
+        "docs/PHASE8_RESULTS.md"
+      ],
+      "id": "phase8-sequential-rollout",
+      "margin": 0.95,
+      "mde": null,
+      "notes": "Empirical coverage 0.9037 is below the 0.95 nominal level.",
+      "statement": "Three-event sequential rollout beats persistence on trajectory correlation.",
+      "status": "not_supported",
+      "test": "coverage_gate"
+    },
+    {
+      "ci_high": 0.0026,
+      "ci_low": -0.007,
+      "equivalence_p": null,
+      "estimate": -0.0038,
+      "evidence": [
+        "docs/PHASE8_RESULTS.md"
+      ],
+      "id": "phase8-eig-selection",
+      "margin": 0.01,
+      "mde": 0.0068611510992116565,
+      "notes": "Interval includes zero; point estimate is negative.",
+      "statement": "EIG-based active selection beats random selection at k=8.",
+      "status": "bounded_null",
+      "test": "superiority"
+    },
+    {
+      "ci_high": null,
+      "ci_low": null,
+      "equivalence_p": null,
+      "estimate": null,
+      "evidence": [
+        "docs/PHASE7_RESULTS.md",
+        "reports/phase9/reliability_summary.json"
+      ],
+      "id": "phase7-cro-share-of-ceiling",
+      "margin": null,
+      "mde": null,
+      "notes": "Superseded: the split-half ceiling of 0.152 is biased downward. The variance-corrected single-animal ceiling is 0.473, so 0.098 is about 21% of the ceiling, not 64%.",
+      "statement": "CRO reaches 64% of the split-half reliability ceiling.",
+      "status": "not_supported",
+      "test": "superseded"
+    }
+  ],
+  "schema_version": 1,
+  "statuses": [
+    "supported",
+    "not_supported",
+    "bounded_null",
+    "underpowered"
+  ]
+}

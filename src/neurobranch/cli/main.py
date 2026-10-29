@@ -23,11 +23,13 @@ reproduce_app = typer.Typer(no_args_is_help=True, help="Reference artifact verif
 train_app = typer.Typer(no_args_is_help=True, help="Model training.")
 simulate_app = typer.Typer(no_args_is_help=True, help="Baseline and virtual-perturbation simulation.")
 branching_app = typer.Typer(no_args_is_help=True, help="Branching analysis.")
+benchmark_app = typer.Typer(no_args_is_help=True, help="Reliability ceilings, design resolution and claims.")
 app.add_typer(data_app, name="data")
 app.add_typer(reproduce_app, name="reproduce")
 app.add_typer(train_app, name="train")
 app.add_typer(simulate_app, name="simulate")
 app.add_typer(branching_app, name="branching")
+app.add_typer(benchmark_app, name="benchmark")
 
 
 def _load_data(config: Path):
@@ -39,6 +41,65 @@ def _load_data(config: Path):
 
 def _model_path(worm: int, model: str, seed: int, run_dir: Path) -> Path:
     return run_dir / f"{model}__worm{worm}__seed{seed}" / "model.pt"
+
+
+@benchmark_app.command("reliability")
+def benchmark_reliability(
+    trials: Annotated[Path, typer.Option(help="Trial table with dataset_id/target/neuron/response_mean")] = PROJECT_ROOT
+    / "reports"
+    / "phase3"
+    / "randi_trial_table_phase3.csv.gz",
+    out: Annotated[Path, typer.Option(help="Output directory")] = PROJECT_ROOT / "reports" / "phase9",
+) -> None:
+    """Estimate repeat and across-animal reliability ceilings."""
+    import pandas as pd
+
+    from neurobranch.benchmark.reporting import write_reliability_report
+
+    if not trials.exists():
+        raise typer.BadParameter(f"trial table not found: {trials}")
+    summary = write_reliability_report(pd.read_csv(trials), out, input_path=trials)
+    t = Table(title="Reliability ceilings")
+    t.add_column("facet")
+    t.add_column("mean", justify="right")
+    t.add_column("95% CI", justify="right")
+    t.add_row(
+        "repeat (within animal)",
+        f"{summary['mean_repeat_reliability']:.3f}",
+        f"[{summary['repeat_ci_low']:.3f}, {summary['repeat_ci_high']:.3f}]",
+    )
+    t.add_row(
+        "single animal (held out)",
+        f"{summary['mean_animal_reliability']:.3f}",
+        f"[{summary['animal_ci_low']:.3f}, {summary['animal_ci_high']:.3f}]",
+    )
+    console.print(t)
+    console.print(f"wrote {out}")
+
+
+@benchmark_app.command("claims")
+def benchmark_claims(
+    summary: Annotated[Path, typer.Option(help="reliability_summary.json")] = PROJECT_ROOT
+    / "reports"
+    / "phase9"
+    / "reliability_summary.json",
+    out: Annotated[Path, typer.Option(help="Output claims ledger")] = PROJECT_ROOT / "reports" / "phase9" / "claims.json",
+) -> None:
+    """Build the machine-readable claims ledger."""
+    from neurobranch.benchmark.claims import build_claims, write_claims
+
+    if not summary.exists():
+        raise typer.BadParameter(f"summary not found: {summary}")
+    payload = json.loads(summary.read_text(encoding="utf-8"))
+    claims = build_claims(payload)
+    write_claims(out, claims)
+    t = Table(title="Claims ledger")
+    t.add_column("claim")
+    t.add_column("status")
+    for claim in claims:
+        t.add_row(claim.id, claim.status)
+    console.print(t)
+    console.print(f"wrote {out}")
 
 
 @app.command()

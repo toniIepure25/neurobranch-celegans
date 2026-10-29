@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "neurobranch"
-version = "0.1.0"
+version = "0.2.0"
 description = "Reproducible C. elegans neural-population dynamics, branching, and virtual-perturbation research platform"
 readme = "README.md"
 requires-python = ">=3.10,<3.14"
@@ -37,6 +37,7 @@ dev = [
   "pytest-timeout>=2.3",
   "ruff>=0.5",
   "mypy>=1.10",
+  "jsonschema>=4.20",
 ]
 gpu = ["torch>=2.2"]
 

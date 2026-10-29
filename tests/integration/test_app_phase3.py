@@ -26,6 +26,7 @@ def test_app_retains_phase2_tabs_and_adds_prospective_tab():
         "Causal Response Operator",
         "Active Probing",
         "Adaptive Twin",
+        "BoundedBench",
     ]
 
 

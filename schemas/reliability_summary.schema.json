@@ -1,0 +1,43 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://neurobranch.local/schemas/reliability_summary.schema.json",
+  "title": "NeuroBranch reliability summary",
+  "type": "object",
+  "required": [
+    "n_targets",
+    "n_repeat_targets",
+    "n_animal_targets",
+    "mean_repeat_reliability",
+    "median_repeat_reliability",
+    "mean_animal_reliability",
+    "median_animal_reliability",
+    "mean_repeat_ceiling",
+    "mean_animal_ceiling",
+    "fraction_repeat_above_half",
+    "fraction_animal_above_half",
+    "repeat_ci_low",
+    "repeat_ci_high",
+    "animal_ci_low",
+    "animal_ci_high",
+    "p90_animal_reliability"
+  ],
+  "properties": {
+    "n_targets": { "type": "number", "minimum": 0 },
+    "n_repeat_targets": { "type": "number", "minimum": 0 },
+    "n_animal_targets": { "type": "number", "minimum": 0 },
+    "mean_repeat_reliability": { "type": ["number", "null"], "minimum": 0, "maximum": 1 },
+    "median_repeat_reliability": { "type": ["number", "null"], "minimum": 0, "maximum": 1 },
+    "mean_animal_reliability": { "type": ["number", "null"], "minimum": 0, "maximum": 1 },
+    "median_animal_reliability": { "type": ["number", "null"], "minimum": 0, "maximum": 1 },
+    "mean_repeat_ceiling": { "type": ["number", "null"], "minimum": 0, "maximum": 1 },
+    "mean_animal_ceiling": { "type": ["number", "null"], "minimum": 0, "maximum": 1 },
+    "fraction_repeat_above_half": { "type": ["number", "null"], "minimum": 0, "maximum": 1 },
+    "fraction_animal_above_half": { "type": ["number", "null"], "minimum": 0, "maximum": 1 },
+    "repeat_ci_low": { "type": ["number", "null"], "minimum": 0, "maximum": 1 },
+    "repeat_ci_high": { "type": ["number", "null"], "minimum": 0, "maximum": 1 },
+    "animal_ci_low": { "type": ["number", "null"], "minimum": 0, "maximum": 1 },
+    "animal_ci_high": { "type": ["number", "null"], "minimum": 0, "maximum": 1 },
+    "p90_animal_reliability": { "type": ["number", "null"], "minimum": 0, "maximum": 1 }
+  },
+  "additionalProperties": false
+}
