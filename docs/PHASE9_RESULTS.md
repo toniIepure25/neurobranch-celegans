@@ -3,7 +3,8 @@
 > pooled Phase 6-8 metrics are corrected in
 > [`PHASE10_RESULTS.md`](PHASE10_RESULTS.md) and
 > [`CORRECTIONS.md`](CORRECTIONS.md) C6-C7. The corrected single-animal values
-> are 0.162 / 0.403; the metric-aligned fold ceiling is 0.833. This file is kept
+> are 0.162 / 0.403; the Phase 10 fold ceiling is 0.833, but Phase 11 shows it is
+> coverage-sensitive: the coverage-aware value is 0.560 (C8). This file is kept
 > for provenance.
 
 # Phase 9 results: the atlas is measurement-limited
