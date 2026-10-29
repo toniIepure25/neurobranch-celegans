@@ -273,8 +273,9 @@ generalization claim.
 
 - The pooled ceiling is sensitive to responder coverage: 0.833 with all
   responders, 0.560 when each responder must be observed in at least 80% of a
-  target's animals. The latter is the card default; it is a descriptive bound,
-  not a population parameter.
+  target's animals. The filter changes the responder population as well as the
+  sampling correction, so 0.560 is not a bias-corrected 0.833. It is a
+  descriptive bound for broadly observed responders, not a population parameter.
 - The extrapolation gate failed (median absolute error 0.210, bias +0.016), so
   the curve beyond the observed animal count is not validated.
 - The two-way percentile bootstrap is biased upward on the real atlas: the

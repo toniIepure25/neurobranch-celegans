@@ -24,6 +24,13 @@ At coverage 0.8 the pooled ceiling is **0.560**, not 0.833. The difference
 manufacturing apparent shared signal: a responder measured once contributes to
 the pooled profile but has no between-animal sampling variance to subtract.
 
+The filter also changes the responder population, not only the variance
+correction. Broadly observed responders are not a random subset of sparse ones;
+they tend to have weaker, more stable modulation. The 0.560 value is therefore
+the ceiling for the broadly observed responder population, not a bias-corrected
+version of 0.833 on the same population, and the two should not be compared as
+if only the denominator changed.
+
 Phase 10's `phase10-fold-ceiling` is therefore a **coverage-sensitive historical
 estimate**, not a headline. This is recorded as correction C8.
 
