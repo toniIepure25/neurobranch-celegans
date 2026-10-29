@@ -39,18 +39,21 @@ measurement limitation.
 
 ## Current estimates
 
-From `reports/phase10/reliability_summary.json`:
+From `reports/phase10/reliability_summary.json` (historical) and the Phase 11
+coverage sensitivity:
 
 | Facet | Reliability | Ceiling $\sqrt{\rho}$ | Targets |
 | --- | ---: | ---: | ---: |
 | Repeat (within animal) | 0.243 | 0.493 | 152 |
-| Single animal ($n=1$) | 0.162 | 0.403 | 126 |
-| Pooled over 22 animals | 0.693 | 0.833 | 126 |
+| Single animal ($n=1$, sparse coverage) | 0.162 | 0.403 | 126 |
+| Pooled over 22 animals, sparse coverage | 0.693 | 0.833 | 126 |
+| Pooled over 22 animals, coverage >= 0.8 | **0.314** | **0.560** | 126 |
 | Pooled over all 110 animals | 0.873 | 0.934 | 126 |
 
-The single-animal ceiling is near 0.4; the fold-level pooled ceiling is above
-0.8. A model reaching a correlation of 0.10 with the observed pooled profile is
-at about **11.8%** of the fold ceiling, not 64% and not 21%.
+The single-animal ceiling is near 0.4. The coverage-aware fold-level ceiling is
+0.560, not 0.833. A model reaching a correlation of 0.10 with the observed
+pooled profile is at about **17.6%** of the coverage-aware ceiling (about 11.8%
+of the Phase 10 sparse-coverage value), not 64% and not 21%.
 
 ## Why the old split-half ceiling was wrong
 
