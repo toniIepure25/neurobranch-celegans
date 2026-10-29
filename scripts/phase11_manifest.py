@@ -13,6 +13,7 @@ import json
 import platform
 import subprocess
 import sys
+from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
 
@@ -60,6 +61,8 @@ def main(argv: list[str] | None = None) -> int:
         if path.is_file() and path.name not in {"manifest.json", "manifest.sha256"}
     }
     lockfile = ROOT / "uv.lock"
+    status_lines = _git("status", "--porcelain").splitlines()
+    dirty = any("reports/phase11/manifest" not in line for line in status_lines)
     payload: dict[str, Any] = {
         "phase": "phase11",
         "artifacts": artifacts,
@@ -71,9 +74,10 @@ def main(argv: list[str] | None = None) -> int:
             "uv_lock_sha256": _sha256(lockfile) if lockfile.exists() else None,
         },
         "git_revision": _git("rev-parse", "HEAD"),
-        "git_dirty": bool(_git("status", "--porcelain")),
+        "git_dirty": dirty,
+        "created_utc": datetime.now(timezone.utc).isoformat(timespec="seconds"),
         "notes": [
-            "git_dirty is true when the worktree contained uncommitted changes at generation time.",
+            "git_dirty ignores the manifest files being written and reflects all other worktree changes.",
             "Artifact hashes cover every file in this directory except manifest.json and manifest.sha256.",
         ],
     }
