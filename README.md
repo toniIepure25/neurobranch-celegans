@@ -49,11 +49,11 @@ defects (sparse-responder denominators and a double-counted interaction term).
 | Pooled over all 110 animals | 0.873 | [0.837, 0.909] | 0.934 |
 
 The consequence is narrow and important. Claims about one animal are severely
-bounded. Claims about a pooled population mean are not, and the Phase 6-8 models
-sit far below that ceiling rather than against a measurement wall. The CRO of
-0.0984 is about **11.8%** of its metric-aligned ceiling, so the old Phase 7
-"64% of ceiling" claim remains withdrawn and the Phase 9 replacement (21%) is
-withdrawn too.
+bounded. Pooled claims have more headroom, but the coverage-aware ceiling
+(0.560) is lower than the Phase 10 value. Against the Phase 10 sparse-coverage
+ceiling the CRO of 0.0984 is about **11.8%**; against the coverage-aware ceiling
+it is about **17.6%**. The old Phase 7 "64% of ceiling" claim remains withdrawn,
+and so is the Phase 9 replacement (21%).
 
 The Phase 8 pair advantage (+0.0442, CI [+0.0080, +0.0901]) still has a design
 MDE of 0.0587 against a declared smallest effect of interest of 0.020, so it
@@ -64,7 +64,7 @@ nominal coverage in simulation. Neither is used as an inferential interval. The
 delete-one-animal aggregate spans [0.165, 1.000], so the fold-level mean is
 fragile to a single animal; that is reported rather than hidden.
 
-![Metric-aligned reliability ceilings](reports/phase10/ceiling_curve.png)
+![Historical Phase 10 reliability ceiling curve](reports/phase10/ceiling_curve.png)
 
 Read the audit in [`docs/PHASE10_RESULTS.md`](docs/PHASE10_RESULTS.md), the
 estimator corrections in [`docs/CORRECTIONS.md`](docs/CORRECTIONS.md), the
