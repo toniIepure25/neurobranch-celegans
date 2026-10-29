@@ -1,0 +1,14 @@
+{
+  "animal": 2.456278101056967,
+  "n_animals": 107,
+  "n_pairs": 37648,
+  "n_targets": 152,
+  "notes": {
+    "estimator": "additive two-way moments",
+    "sampling_variance": 138.16182900512902
+  },
+  "pair": 37.00577371583762,
+  "target": 0.5312296773326425,
+  "total_pair_mean": 176.49149487471723,
+  "within_event": 310.9766506670045
+}

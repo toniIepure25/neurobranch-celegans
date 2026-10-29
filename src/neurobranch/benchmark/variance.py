@@ -15,8 +15,15 @@ distinguishes two ceilings that answer two different questions:
 ``single_animal_reliability``
     How much of one animal's profile variance is reproducible signal rather
     than sampling noise (shared target signal against sampling noise plus
-    animal x responder interaction)?  This is the ceiling that matters for
-    animal-held-out claims (Phases 6-8) and it is usually much lower.
+    animal x responder interaction)?  This is the ceiling for claims about an
+    individual animal and it is usually much lower.
+
+``pooled_reliability``
+    How reliable is a profile averaged over ``n_eval`` animals?  Phases 6-8
+    score pair means pooled over the animals in a test fold, so the relevant
+    ceiling is the pooled one, not ``single_animal_reliability``.  The module
+    exposes the full curve so that every metric can be paired with the ceiling
+    that matches its estimand.
 
 Both are estimated on the observed scale.  Aggregate means carry a
 target-level 95% interval; per-target estimates are reported with animal
@@ -196,29 +203,64 @@ def _nan_column_var(values: np.ndarray, ddof: int = 1) -> np.ndarray:
     return out
 
 
-def _animal_from_cells(
+@dataclass(frozen=True)
+class ProfileComponents:
+    """Variance components behind one target's reliability curve.
+
+    ``signal`` is the error-free variance of the target profile across
+    responders, ``noise`` is the mean sampling variance of one animal's
+    responder means, and ``interaction`` is the animal x responder variance
+    (idiosyncratic animal profiles).  The reliability of a profile averaged
+    over ``n_eval`` animals is::
+
+        signal / (signal + (noise + interaction) / n_eval)
+
+    The formula is a moment approximation, not a REML estimate.  It is exact
+    for the additive model it assumes and descriptive otherwise.
+    """
+
+    signal: float
+    noise: float
+    interaction: float
+    n_animals: int
+    n_responders: int
+
+    def reliability_at(self, n_eval: int) -> float:
+        if n_eval < 1:
+            raise ValueError("n_eval must be >= 1")
+        denominator = self.signal + (self.noise + self.interaction) / float(n_eval)
+        if not np.isfinite(denominator) or denominator <= 0:
+            return 0.0
+        return float(np.clip(self.signal / denominator, 0.0, 1.0))
+
+    @property
+    def pooled_reliability(self) -> float:
+        """Reliability of the profile averaged over the observed animals."""
+        return self.reliability_at(self.n_animals)
+
+    @property
+    def single_animal_reliability(self) -> float:
+        """Reliability of one animal's profile (``n_eval = 1``)."""
+        return self.reliability_at(1)
+
+    @property
+    def ceiling(self) -> float:
+        """Attenuation ceiling ``sqrt(reliability)`` at the observed animal count."""
+        return float(np.sqrt(self.pooled_reliability))
+
+
+def _profile_from_cells(
     cells: pd.DataFrame,
     *,
     min_events: int,
     min_animals: int,
-) -> dict[str, float] | None:
-    """Variance-corrected across-animal reliability for one target.
+) -> ProfileComponents | None:
+    """Estimate the signal/noise/interaction components for one target.
 
-    Two quantities are returned because they answer different questions:
-
-    ``animal_mean_reliability``
-        How reliable is the *pooled* profile (mean over animals) as a measure
-        of the latent target profile?  This is the ceiling for the pooled
-        pair-level metrics used in Phases 6-7.
-
-    ``single_animal_reliability``
-        How much of one animal's profile variance is reproducible signal
-        rather than sampling noise?  This is the ceiling for animal-held-out
-        event-level metrics in Phase 8, and it is almost always lower.
-
-    Split-half correlation is deliberately not used here: resampling animals
-    that appear in both halves inflates the split-half correlation.  The
-    variance correction below is stable and has no such artefact.
+    The pooled profile variance is ``V = Var_r(mean_a m_ar)`` and its sampling
+    variance is ``S = mean_r(sum_a var_ar / n_ar) / A**2``.  The error-free
+    profile variance is ``V - S``.  The interaction term is the observed
+    between-animal variance minus the mean sampling variance, floored at zero.
     """
     subset = cells[cells["n"] >= min_events]
     if subset.empty:
@@ -233,37 +275,34 @@ def _animal_from_cells(
 
     values = means.to_numpy(dtype=float)
     noise = sampling.to_numpy(dtype=float)
-    n_animals = values.shape[0]
+    n_animals = int(values.shape[0])
 
-    # Pooled profile: variance of the animal-mean profile and its sampling error.
     pooled = _nan_column_mean(values)
-    pooled_sampling = np.nansum(noise, axis=0) / (n_animals**2)
+    counts = np.isfinite(values).sum(axis=0)
+    pooled_sampling = np.nansum(noise, axis=0) / np.maximum(counts, 1) ** 2
     observed_var = _safe_var(pooled)
     sampling_var = _nanmean(pooled_sampling)
     if not np.isfinite(observed_var) or observed_var <= 0 or not np.isfinite(sampling_var):
         return None
-    mean_reliability = float(np.clip((observed_var - sampling_var) / observed_var, 0.0, 1.0))
-
-    # Single animal: shared signal relative to sampling noise plus
-    # animal x responder interaction (idiosyncratic animal profiles).
     total_r = _nan_column_var(values, ddof=1)
     noise_r = np.nanmean(noise, axis=0)
     interaction_r = np.maximum(total_r - noise_r, 0.0)
-    signal = max(observed_var - sampling_var, 0.0)
-    denominator = signal + _nanmean(noise_r) + _nanmean(interaction_r)
-    if not np.isfinite(denominator) or denominator <= 0:
-        single = 0.0
-    else:
-        single = float(np.clip(signal / denominator, 0.0, 1.0))
+    noise_mean = _nanmean(noise_r)
+    interaction_mean = _nanmean(interaction_r)
+    if not np.isfinite(noise_mean) or not np.isfinite(interaction_mean):
+        return None
+    # E[V] = signal + (noise + interaction)/A and S = noise/A, so V - S still
+    # contains interaction/A.  Subtract it to avoid counting the animal x
+    # responder variance twice.
+    signal = max(observed_var - sampling_var - interaction_mean / n_animals, 0.0)
 
-    return {
-        "n_animals": float(n_animals),
-        "n_responders": float(means.shape[1]),
-        "animal_mean_reliability": mean_reliability,
-        "animal_mean_ceiling": float(np.sqrt(mean_reliability)),
-        "single_animal_reliability": single,
-        "animal_ceiling": float(np.sqrt(single)),
-    }
+    return ProfileComponents(
+        signal=float(signal),
+        noise=float(noise_mean),
+        interaction=float(interaction_mean),
+        n_animals=n_animals,
+        n_responders=int(means.shape[1]),
+    )
 
 
 def animal_reliability_by_target(
@@ -284,13 +323,222 @@ def animal_reliability_by_target(
     is deterministic.
     """
     del seed  # deterministic estimator; parameter kept for compatibility
+    components = profile_components_by_target(
+        frame,
+        response=response,
+        animal=animal,
+        min_events=min_events,
+        min_animals=min_animals,
+    )
+    if components.empty:
+        return components
+    pooled = components["pooled_reliability"].to_numpy(dtype=float)
+    single = components["single_animal_reliability"].to_numpy(dtype=float)
+    return pd.DataFrame(
+        {
+            "target": components["target"].to_numpy(),
+            "n_animals": components["n_animals"].to_numpy(),
+            "n_responders": components["n_responders"].to_numpy(),
+            "animal_mean_reliability": pooled,
+            "animal_mean_ceiling": np.sqrt(pooled),
+            "single_animal_reliability": single,
+            "animal_ceiling": np.sqrt(single),
+        }
+    )
+
+
+def profile_components_by_target(
+    frame: pd.DataFrame,
+    *,
+    response: str = "response_mean",
+    animal: str = DEFAULT_ANIMAL_COLUMN,
+    min_events: int = 1,
+    min_animals: int = 6,
+) -> pd.DataFrame:
+    """Signal, noise and interaction components for every eligible target.
+
+    Returns one row per target with ``n_animals``, ``n_responders``, ``signal``,
+    ``noise``, ``interaction``, ``pooled_reliability`` (at the observed animal
+    count) and ``single_animal_reliability``.  Targets with fewer than
+    ``min_animals`` animals or fewer than three responders are omitted.
+    """
     cells = cell_summaries(frame, response=response, animal=animal)
     rows: list[dict[str, Any]] = []
     for target, tgroup in cells.groupby("_target", sort=False):
-        result = _animal_from_cells(tgroup, min_events=min_events, min_animals=min_animals)
-        if result is None:
+        components = _profile_from_cells(tgroup, min_events=min_events, min_animals=min_animals)
+        if components is None:
             continue
-        rows.append({"target": target, **result})
+        rows.append(
+            {
+                "target": target,
+                "n_animals": components.n_animals,
+                "n_responders": components.n_responders,
+                "signal": components.signal,
+                "noise": components.noise,
+                "interaction": components.interaction,
+                "pooled_reliability": components.pooled_reliability,
+                "single_animal_reliability": components.single_animal_reliability,
+            }
+        )
+    return pd.DataFrame(rows)
+
+
+def pooled_reliability_by_target(
+    frame: pd.DataFrame,
+    *,
+    n_eval: int | None = None,
+    response: str = "response_mean",
+    animal: str = DEFAULT_ANIMAL_COLUMN,
+    min_events: int = 1,
+    min_animals: int = 6,
+) -> pd.DataFrame:
+    """Reliability of a profile averaged over ``n_eval`` animals.
+
+    ``n_eval=None`` uses each target's observed animal count.  A requested
+    ``n_eval`` larger than the observed count is flagged ``extrapolated`` and
+    must not be used in a confirmatory claim.
+    """
+    components = profile_components_by_target(
+        frame,
+        response=response,
+        animal=animal,
+        min_events=min_events,
+        min_animals=min_animals,
+    )
+    columns = ["target", "n_eval", "reliability", "ceiling", "extrapolated", "n_animals"]
+    if components.empty:
+        return pd.DataFrame(columns=columns)
+    requested = components["n_animals"].to_numpy(dtype=int) if n_eval is None else np.full(len(components), int(n_eval))
+    if np.any(requested < 1):
+        raise ValueError("n_eval must be >= 1")
+    signal = components["signal"].to_numpy(dtype=float)
+    error = (components["noise"] + components["interaction"]).to_numpy(dtype=float)
+    reliability = signal / (signal + error / requested)
+    reliability = np.clip(reliability, 0.0, 1.0)
+    return pd.DataFrame(
+        {
+            "target": components["target"].to_numpy(),
+            "n_eval": requested,
+            "reliability": reliability,
+            "ceiling": np.sqrt(reliability),
+            "extrapolated": requested > components["n_animals"].to_numpy(dtype=int),
+            "n_animals": components["n_animals"].to_numpy(),
+        }
+    )
+
+
+def reliability_curve(
+    frame: pd.DataFrame,
+    *,
+    n_grid: tuple[int, ...] = (1, 2, 5, 10, 22, 55, 110),
+    response: str = "response_mean",
+    animal: str = DEFAULT_ANIMAL_COLUMN,
+    min_events: int = 1,
+    min_animals: int = 6,
+) -> pd.DataFrame:
+    """Long-form reliability curve: one row per target and ``n_eval``."""
+    components = profile_components_by_target(
+        frame,
+        response=response,
+        animal=animal,
+        min_events=min_events,
+        min_animals=min_animals,
+    )
+    columns = ["target", "n_eval", "reliability", "ceiling", "extrapolated", "n_animals"]
+    if components.empty:
+        return pd.DataFrame(columns=columns)
+    signal = components["signal"].to_numpy(dtype=float)
+    error = (components["noise"] + components["interaction"]).to_numpy(dtype=float)
+    observed = components["n_animals"].to_numpy(dtype=int)
+    frames = []
+    for n_eval in n_grid:
+        if int(n_eval) < 1:
+            raise ValueError("n_eval must be >= 1")
+        reliability = np.clip(signal / (signal + error / float(n_eval)), 0.0, 1.0)
+        frames.append(
+            pd.DataFrame(
+                {
+                    "target": components["target"].to_numpy(),
+                    "n_eval": np.full(len(components), int(n_eval)),
+                    "reliability": reliability,
+                    "ceiling": np.sqrt(reliability),
+                    "extrapolated": int(n_eval) > observed,
+                    "n_animals": observed,
+                }
+            )
+        )
+    return pd.concat(frames, ignore_index=True)
+
+
+def summarise_components(components: pd.DataFrame, *, fold_size: int = 22) -> dict[str, float]:
+    """Aggregate the per-target components at a chosen evaluation-animal count.
+
+    ``fold_size`` is the number of animals whose responses are pooled into a
+    pair mean in a Phase 6-8 test fold.  The function reports both the mean of
+    per-target ceilings and the ceiling of the mean reliability because they are
+    different quantities and must not be used interchangeably.
+    """
+    if components.empty:
+        return {
+            "n_pooled_targets": 0.0,
+            "fold_size": float(fold_size),
+            "pooled_reliability_at_fold": float("nan"),
+            "pooled_ceiling_at_fold": float("nan"),
+            "pooled_reliability_observed": float("nan"),
+            "mean_target_ceiling": float("nan"),
+            "ceiling_of_mean_reliability": float("nan"),
+        }
+    signal = components["signal"].to_numpy(dtype=float)
+    error = (components["noise"] + components["interaction"]).to_numpy(dtype=float)
+    at_fold = np.clip(signal / (signal + error / float(fold_size)), 0.0, 1.0)
+    at_observed = np.clip(
+        signal / (signal + error / components["n_animals"].to_numpy(dtype=float)),
+        0.0,
+        1.0,
+    )
+    mean_fold, _, _ = _mean_ci(at_fold)
+    return {
+        "n_pooled_targets": float(np.isfinite(at_fold).sum()),
+        "fold_size": float(fold_size),
+        "pooled_reliability_at_fold": float(mean_fold),
+        "pooled_ceiling_at_fold": float(np.sqrt(mean_fold)) if np.isfinite(mean_fold) else float("nan"),
+        "pooled_reliability_observed": float(np.nanmean(at_observed)),
+        "mean_target_ceiling": float(np.nanmean(np.sqrt(at_fold))),
+        "ceiling_of_mean_reliability": float(np.sqrt(np.nanmean(at_fold))),
+    }
+
+
+def summarise_curve(curve: pd.DataFrame) -> pd.DataFrame:
+    """Aggregate a reliability curve by ``n_eval``.
+
+    The interval is a target-level normal approximation and therefore
+    descriptive: targets share animals.  Use the animal jackknife in
+    ``benchmark.robustness`` for a cluster-robust interval.
+    """
+    columns = ["n_eval", "n_targets", "n_extrapolated", "mean_reliability", "ci_low", "ci_high", "median_reliability", "ceiling"]
+    if curve.empty:
+        return pd.DataFrame(columns=columns)
+    rows: list[dict[str, float]] = []
+    for n_eval, group in curve.groupby("n_eval", sort=True):
+        values = group["reliability"].to_numpy(dtype=float)
+        finite = values[np.isfinite(values)]
+        mean = float(finite.mean()) if finite.size else float("nan")
+        if finite.size >= 3:
+            _, low, high = _mean_ci(finite)
+        else:
+            low = high = float("nan")
+        rows.append(
+            {
+                "n_eval": float(n_eval),
+                "n_targets": float(finite.size),
+                "n_extrapolated": float(group["extrapolated"].sum()),
+                "mean_reliability": mean,
+                "ci_low": low,
+                "ci_high": high,
+                "median_reliability": float(np.nanmedian(values)),
+                "ceiling": float(np.sqrt(mean)) if np.isfinite(mean) else float("nan"),
+            }
+        )
     return pd.DataFrame(rows)
 
 
@@ -365,7 +613,7 @@ def decompose_variance(
     cells = cell_summaries(frame, response=response, animal=animal)
     cells = cells[cells["n"] >= min_events]
     if cells.empty:
-        return VarianceComponents(*(float("nan"),) * 5, 0, 0, 0)  # type: ignore[arg-type]
+        return VarianceComponents(*(float("nan"),) * 5, 0, 0, 0)
     means = cells["mean"].to_numpy(dtype=float)
     grand = float(np.nanmean(means))
     animal_means = cells.groupby("_animal")["mean"].mean()
@@ -441,7 +689,7 @@ class ReliabilitySummary:
 def summarise_reliability(table: pd.DataFrame) -> ReliabilitySummary:
     """Summarise a reliability table, ignoring missing ceilings."""
     if table.empty:
-        return ReliabilitySummary(0, *(float("nan"),) * 8)  # type: ignore[arg-type]
+        return ReliabilitySummary(0, *(float("nan"),) * 8)
     rep = table["repeat_reliability"].to_numpy(dtype=float) if "repeat_reliability" in table else np.array([])
     ani = (
         table["single_animal_reliability"].to_numpy(dtype=float)

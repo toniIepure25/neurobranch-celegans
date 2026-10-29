@@ -41,6 +41,18 @@ def test_ledger_round_trip(tmp_path: Path) -> None:
     path = tmp_path / "claims.json"
     write_claims(path, build_claims(SUMMARY))
     payload = json.loads(path.read_text(encoding="utf-8"))
-    assert payload["schema_version"] == 1
-    assert len(payload["claims"]) == 7
+    assert payload["schema_version"] == 2
+    assert len(payload["claims"]) == 8
     assert all("evidence" in claim for claim in payload["claims"])
+    assert all("estimand" in claim for claim in payload["claims"])
+
+
+def test_phase8_family_has_holm_adjusted_p_values() -> None:
+    claims = {claim.id: claim for claim in build_claims(SUMMARY)}
+    pair = claims["phase8-pair-advantage"]
+    eig = claims["phase8-eig-selection"]
+    assert pair.family == eig.family == "phase8-inferential"
+    assert pair.p_value is not None and eig.p_value is not None
+    assert pair.p_holm is not None and eig.p_holm is not None
+    assert pair.p_holm >= pair.p_value
+    assert eig.p_holm >= eig.p_value

@@ -1,0 +1,48 @@
+{
+  "artifacts": {
+    "ceiling_curve.csv": "4310da58ff8c0e0634b355594333080975f4e3f2f019239763b3a211af332c52",
+    "ceiling_curve_by_target.csv": "266e96844f4ef688f0b5f3596885b7c15365e74c2454fc9e341616095b3f1bca",
+    "profile_components.csv": "405273c0fefa3dd2abb38e80f7f50bd66a5261aaffa50eb375ce0c78cbd94486",
+    "reliability_by_target.csv": "f8175208e5679c8a9a25ec54f07bf0be9d674193ccfaf72f1d8a9025bab18a37",
+    "reliability_summary.json": "cb253e812d934488e1aad26b9ba9c752c9aaf897d6039525f546af0140645ff8",
+    "variance_components.json": "7bb294b0e9d5bcc86741a47a93ee2c6a9eda8e3c7a8c60f837f8818f82e9327f"
+  },
+  "created_utc": "2026-10-29T13:28:17+00:00",
+  "git_revision": "154a141b05d35d7d4f3fe95bb7d2a85783d8341f",
+  "input": {
+    "animals": 110,
+    "path": "reports\\phase3\\randi_trial_table_phase3.csv.gz",
+    "rows": 237639,
+    "sha256": "8186c96bcb33cdce15dc9ae88691e09fc596e42c5513310b6d6a636e4d5dd515",
+    "targets": 259
+  },
+  "notes": [
+    "The pooled ceiling applies to pair means pooled over evaluation animals.",
+    "The single-animal ceiling applies only to per-animal claims.",
+    "Reliability is a measurement ceiling, not a causal effect."
+  ],
+  "parameters": {
+    "animal_min_animals": 6,
+    "animal_min_events": 1,
+    "ci": "target-level normal approximation (descriptive)",
+    "fold_size": 22,
+    "n_grid": [
+      1,
+      2,
+      5,
+      10,
+      22,
+      55,
+      110
+    ],
+    "repeat_min_events": 2,
+    "repeat_min_responders": 3
+  },
+  "phase": "phase10",
+  "phase9_manifest_sha256": "04543fd3a5051c7bca14e28bcc18704af864180052c9df873a04c5e834a2c350",
+  "software": {
+    "numpy": "2.3.1",
+    "pandas": "2.3.3",
+    "python": "3.13.5"
+  }
+}

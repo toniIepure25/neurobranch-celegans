@@ -16,7 +16,11 @@ import pandas as pd
 from neurobranch.benchmark.variance import (
     animal_reliability_by_target,
     decompose_variance,
+    profile_components_by_target,
+    reliability_curve,
     repeat_reliability_by_target,
+    summarise_components,
+    summarise_curve,
     summarise_reliability,
 )
 
@@ -77,6 +81,7 @@ def build_reliability_table(trials: pd.DataFrame) -> pd.DataFrame:
         how="outer",
     )
     table["n_animals"] = table["n_animals"].fillna(table["n_animals_animal"])
+    table["pooled_reliability"] = table["animal_mean_reliability"]
     table["n_responders"] = table["n_responders"].fillna(table["n_responders_animal"])
     table = table.drop(columns=["n_animals_animal", "n_responders_animal"])
     columns = [
@@ -87,6 +92,7 @@ def build_reliability_table(trials: pd.DataFrame) -> pd.DataFrame:
         "repeat_reliability",
         "repeat_ceiling",
         "single_animal_reliability",
+        "pooled_reliability",
         "animal_mean_reliability",
         "animal_ceiling",
     ]
@@ -145,11 +151,101 @@ def write_reliability_report(trials: pd.DataFrame, out: Path, *, input_path: Pat
     return summary.as_dict()
 
 
+def write_phase10_report(
+    trials: pd.DataFrame,
+    out: Path,
+    *,
+    input_path: Path | None = None,
+    fold_size: int = 22,
+    n_grid: tuple[int, ...] = (1, 2, 5, 10, 22, 55, 110),
+) -> dict[str, Any]:
+    """Write metric-aligned ceiling artefacts and return the summary.
+
+    Phase 10 separates the pooled ceiling at a Phase 6-8 fold size from the
+    single-animal ceiling.  Both are written to ``reliability_summary.json``
+    together with an explicit ``ceiling_definition`` so that downstream claims
+    cannot silently mix the two estimands.
+    """
+    out.mkdir(parents=True, exist_ok=True)
+    table = build_reliability_table(trials)
+    components = profile_components_by_target(trials)
+    curve = reliability_curve(trials, n_grid=n_grid)
+    curve_summary = summarise_curve(curve)
+    summary: dict[str, Any] = summarise_reliability(table).as_dict()
+    summary.update(summarise_components(components, fold_size=fold_size))
+    summary["schema_version"] = 2
+    summary["ceiling_definition"] = (
+        "pooled ceiling is sqrt(signal/(signal+(noise+interaction)/n_eval)); "
+        "single_animal_reliability is the n_eval=1 case"
+    )
+
+    table.to_csv(out / "reliability_by_target.csv", index=False)
+    components.to_csv(out / "profile_components.csv", index=False)
+    curve.to_csv(out / "ceiling_curve_by_target.csv", index=False)
+    curve_summary.to_csv(out / "ceiling_curve.csv", index=False)
+    write_json(out / "reliability_summary.json", summary)
+    write_json(out / "variance_components.json", decompose_variance(trials).as_dict())
+    artifacts = {
+        name: sha256_file(out / name)
+        for name in (
+            "reliability_by_target.csv",
+            "profile_components.csv",
+            "ceiling_curve_by_target.csv",
+            "ceiling_curve.csv",
+            "reliability_summary.json",
+            "variance_components.json",
+        )
+    }
+    phase9_manifest = ROOT / "reports" / "phase9" / "manifest.json"
+    write_json(
+        out / "manifest.json",
+        {
+            "phase": "phase10",
+            "created_utc": datetime.now(timezone.utc).isoformat(timespec="seconds"),
+            "git_revision": git_revision(),
+            "phase9_manifest_sha256": sha256_file(phase9_manifest) if phase9_manifest.exists() else None,
+            "input": {
+                "path": (
+                    str(input_path.relative_to(ROOT))
+                    if input_path is not None and input_path.is_relative_to(ROOT)
+                    else (str(input_path) if input_path is not None else None)
+                ),
+                "sha256": sha256_file(input_path) if input_path is not None and input_path.exists() else None,
+                "rows": int(len(trials)),
+                "animals": int(trials["dataset_id"].nunique()),
+                "targets": int(trials["target"].nunique()),
+            },
+            "artifacts": artifacts,
+            "parameters": {
+                "repeat_min_events": 2,
+                "repeat_min_responders": 3,
+                "animal_min_events": 1,
+                "animal_min_animals": 6,
+                "fold_size": fold_size,
+                "n_grid": list(n_grid),
+                "ci": "target-level normal approximation (descriptive)",
+            },
+            "software": {
+                "python": platform.python_version(),
+                "numpy": np.__version__,
+                "pandas": pd.__version__,
+            },
+            "notes": [
+                "The pooled ceiling applies to pair means pooled over evaluation animals.",
+                "The single-animal ceiling applies only to per-animal claims.",
+                "Reliability is a measurement ceiling, not a causal effect.",
+            ],
+        },
+    )
+    return summary
+
+
 __all__ = [
     "build_reliability_table",
     "clean_json",
     "git_revision",
     "sha256_file",
     "write_json",
+    "write_phase10_report",
     "write_reliability_report",
 ]

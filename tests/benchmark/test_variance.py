@@ -7,9 +7,14 @@ import pandas as pd
 import pytest
 
 from neurobranch.benchmark.variance import (
+    ProfileComponents,
     animal_reliability_by_target,
     decompose_variance,
+    pooled_reliability_by_target,
+    profile_components_by_target,
+    reliability_curve,
     repeat_reliability_by_target,
+    summarise_curve,
     summarise_reliability,
 )
 
@@ -105,3 +110,52 @@ def test_missing_columns_raise() -> None:
         repeat_reliability_by_target(pd.DataFrame({"target": ["A"]}))
 
 
+
+
+def test_pooled_formula_matches_single_animal_at_one_eval() -> None:
+    components = ProfileComponents(signal=1.0, noise=1.0, interaction=0.0, n_animals=10, n_responders=8)
+    assert components.reliability_at(1) == pytest.approx(0.5)
+    assert components.single_animal_reliability == pytest.approx(0.5)
+
+
+def test_pooled_formula_approaches_one_with_many_animals() -> None:
+    components = ProfileComponents(signal=1.0, noise=1.0, interaction=0.0, n_animals=10, n_responders=8)
+    assert components.reliability_at(4) == pytest.approx(0.8)
+    assert components.reliability_at(1000) > 0.999
+    assert components.reliability_at(1000) > components.reliability_at(4)
+
+
+def test_profile_components_recover_known_components() -> None:
+    frame = _simulate(n_animals=40, n_responders=200, n_events=4, pair_sd=2.0, noise_sd=1.0, animal_pair_sd=0.0)
+    table = profile_components_by_target(frame, min_animals=6)
+    row = table.iloc[0]
+    assert float(row["signal"]) == pytest.approx(4.0, rel=0.3)
+    assert float(row["noise"]) == pytest.approx(0.25, rel=0.35)
+    assert float(row["interaction"]) < 0.1
+    assert float(row["pooled_reliability"]) > float(row["single_animal_reliability"])
+
+
+def test_interaction_lowers_pooled_reliability() -> None:
+    shared = profile_components_by_target(_simulate(n_animals=30, animal_pair_sd=0.0), min_animals=6).iloc[0]
+    idiosyncratic = profile_components_by_target(_simulate(n_animals=30, animal_pair_sd=3.0), min_animals=6).iloc[0]
+    assert float(idiosyncratic["interaction"]) > float(shared["interaction"])
+    assert float(idiosyncratic["pooled_reliability"]) < float(shared["pooled_reliability"])
+
+
+def test_pooled_reliability_by_target_flags_extrapolation() -> None:
+    frame = _simulate(n_animals=8)
+    observed = pooled_reliability_by_target(frame, min_animals=6)
+    assert not bool(observed["extrapolated"].iloc[0])
+    extrapolated = pooled_reliability_by_target(frame, n_eval=50, min_animals=6)
+    assert bool(extrapolated["extrapolated"].iloc[0])
+    assert int(extrapolated["n_eval"].iloc[0]) == 50
+
+
+def test_reliability_curve_is_monotone_and_summarisable() -> None:
+    frame = _simulate(n_animals=10, n_events=3)
+    curve = reliability_curve(frame, n_grid=(1, 2, 5, 20), min_animals=6)
+    summary = summarise_curve(curve)
+    assert list(summary["n_eval"]) == [1.0, 2.0, 5.0, 20.0]
+    assert summary["mean_reliability"].is_monotonic_increasing
+    assert summary["n_extrapolated"].iloc[-1] == 1.0
+    assert np.allclose(summary["ceiling"], np.sqrt(summary["mean_reliability"]))

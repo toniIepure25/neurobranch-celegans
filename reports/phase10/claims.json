@@ -1,0 +1,184 @@
+{
+  "claims": [
+    {
+      "ci_high": 0.1905911581246084,
+      "ci_low": 0.1342021275896774,
+      "equivalence_p": null,
+      "estimand": "single_animal",
+      "estimate": 0.1623966428571429,
+      "evidence": [
+        "reports/phase10/reliability_summary.json",
+        "reports/phase10/profile_components.csv"
+      ],
+      "family": null,
+      "id": "phase9-single-animal-ceiling-below-half",
+      "margin": 0.5,
+      "mde": null,
+      "n_eval_animals": 1,
+      "notes": "Bound claim; no equivalence test is implied.",
+      "p_holm": null,
+      "p_value": null,
+      "statement": "Across-animal single-profile reliability is below 0.5.",
+      "status": "supported",
+      "test": "upper_bound"
+    },
+    {
+      "ci_high": 0.2790430355784858,
+      "ci_low": 0.20620589863204053,
+      "equivalence_p": null,
+      "estimand": "repeat",
+      "estimate": 0.24262446710526317,
+      "evidence": [
+        "reports/phase10/reliability_summary.json",
+        "reports/phase10/reliability_by_target.csv"
+      ],
+      "family": null,
+      "id": "phase9-repeat-ceiling-below-half",
+      "margin": 0.5,
+      "mde": null,
+      "n_eval_animals": null,
+      "notes": "Repeat facet uses at least two stimulations per animal.",
+      "p_holm": null,
+      "p_value": null,
+      "statement": "Within-animal repeat-stimulation reliability is below 0.5.",
+      "status": "supported",
+      "test": "upper_bound"
+    },
+    {
+      "ci_high": null,
+      "ci_low": null,
+      "equivalence_p": null,
+      "estimand": "pooled_fold",
+      "estimate": 0.8327336863740054,
+      "evidence": [
+        "reports/phase10/reliability_summary.json",
+        "reports/phase10/ceiling_curve.csv"
+      ],
+      "family": null,
+      "id": "phase10-fold-ceiling",
+      "margin": null,
+      "mde": null,
+      "n_eval_animals": 22,
+      "notes": "Descriptive: the value is computed from the fitted components at a fixed animal count, not estimated from an independent sample. It is not a sampling claim and carries no p-value.",
+      "p_holm": null,
+      "p_value": null,
+      "statement": "The pooled reliability ceiling at the Phase 6-8 fold size is about 0.88 (descriptive arithmetic from the variance components).",
+      "status": "supported",
+      "test": "descriptive"
+    },
+    {
+      "ci_high": 0.0901,
+      "ci_low": 0.008,
+      "equivalence_p": 0.8760464326727616,
+      "estimand": null,
+      "estimate": 0.0442,
+      "evidence": [
+        "docs/PHASE8_RESULTS.md",
+        "reports/phase8/"
+      ],
+      "family": "phase8-inferential",
+      "id": "phase8-pair-advantage",
+      "margin": 0.02,
+      "mde": 0.05867713596304969,
+      "n_eval_animals": null,
+      "notes": "Preregistered H1 pair gate passed, but the design MDE exceeds the 0.02 smallest effect of interest and the Holm-adjusted p-value across the Phase 8 family is 0.070. Estimand is the pooled fold profile.",
+      "p_holm": 0.06965417258959539,
+      "p_value": 0.03482708629479769,
+      "statement": "APT(k=0) improves pair-level Spearman over the static CRO baseline.",
+      "status": "underpowered",
+      "test": "superiority"
+    },
+    {
+      "ci_high": null,
+      "ci_low": null,
+      "equivalence_p": null,
+      "estimand": "superiority",
+      "estimate": -6.6e-06,
+      "evidence": [
+        "docs/PHASE8_RESULTS.md"
+      ],
+      "family": null,
+      "id": "phase8-trajectory-advantage",
+      "margin": null,
+      "mde": null,
+      "n_eval_animals": null,
+      "notes": "Effect is numerically zero; no interval reported, so no MDE audit is possible.",
+      "p_holm": null,
+      "p_value": null,
+      "statement": "APT(k=0) improves trajectory correlation over a per-responder template.",
+      "status": "not_supported",
+      "test": "superiority"
+    },
+    {
+      "ci_high": null,
+      "ci_low": null,
+      "equivalence_p": null,
+      "estimand": "superiority",
+      "estimate": 0.023,
+      "evidence": [
+        "docs/PHASE8_RESULTS.md"
+      ],
+      "family": null,
+      "id": "phase8-sequential-rollout",
+      "margin": 0.95,
+      "mde": null,
+      "n_eval_animals": null,
+      "notes": "Empirical coverage 0.9037 is below the 0.95 nominal level.",
+      "p_holm": null,
+      "p_value": null,
+      "statement": "Three-event sequential rollout beats persistence on trajectory correlation.",
+      "status": "not_supported",
+      "test": "coverage_gate"
+    },
+    {
+      "ci_high": 0.0026,
+      "ci_low": -0.007,
+      "equivalence_p": null,
+      "estimand": "superiority",
+      "estimate": -0.0038,
+      "evidence": [
+        "docs/PHASE8_RESULTS.md"
+      ],
+      "family": "phase8-inferential",
+      "id": "phase8-eig-selection",
+      "margin": 0.01,
+      "mde": 0.0068611510992116565,
+      "n_eval_animals": null,
+      "notes": "Interval includes zero; point estimate is negative.",
+      "p_holm": 0.12074882838346501,
+      "p_value": 0.12074882838346501,
+      "statement": "EIG-based active selection beats random selection at k=8.",
+      "status": "bounded_null",
+      "test": "superiority"
+    },
+    {
+      "ci_high": null,
+      "ci_low": null,
+      "equivalence_p": null,
+      "estimand": "descriptive",
+      "estimate": null,
+      "evidence": [
+        "docs/PHASE7_RESULTS.md",
+        "reports/phase10/reliability_summary.json"
+      ],
+      "family": null,
+      "id": "phase7-cro-share-of-ceiling",
+      "margin": null,
+      "mde": null,
+      "n_eval_animals": null,
+      "notes": "Superseded: the split-half ceiling of 0.152 is biased downward. Against the metric-aligned fold ceiling (0.882) the CRO of 0.098 is about 11%; against the single-animal ceiling (0.450) it is about 22%. Neither is 64%.",
+      "p_holm": null,
+      "p_value": null,
+      "statement": "CRO reaches 64% of the split-half reliability ceiling.",
+      "status": "not_supported",
+      "test": "superseded"
+    }
+  ],
+  "schema_version": 2,
+  "statuses": [
+    "supported",
+    "not_supported",
+    "bounded_null",
+    "underpowered"
+  ]
+}

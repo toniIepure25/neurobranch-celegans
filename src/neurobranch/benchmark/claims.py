@@ -25,6 +25,9 @@ from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Any
 
+import numpy as np
+from scipy import stats
+
 from neurobranch.benchmark.power import (
     classify_bound,
     classify_superiority,
@@ -33,7 +36,7 @@ from neurobranch.benchmark.power import (
 )
 
 
-@dataclass(frozen=True)
+@dataclass
 class Claim:
     """One auditable claim."""
 
@@ -47,6 +50,11 @@ class Claim:
     margin: float | None = None
     mde: float | None = None
     equivalence_p: float | None = None
+    estimand: str | None = None
+    n_eval_animals: int | None = None
+    family: str | None = None
+    p_value: float | None = None
+    p_holm: float | None = None
     evidence: tuple[str, ...] = field(default_factory=tuple)
     notes: str = ""
 
@@ -62,9 +70,40 @@ class Claim:
             "margin": self.margin,
             "mde": self.mde,
             "equivalence_p": self.equivalence_p,
+            "estimand": self.estimand,
+            "n_eval_animals": self.n_eval_animals,
+            "family": self.family,
+            "p_value": self.p_value,
+            "p_holm": self.p_holm,
             "evidence": list(self.evidence),
             "notes": self.notes,
         }
+
+
+def _normal_p_value(estimate: float, ci_low: float, ci_high: float) -> float | None:
+    if not (ci_low < ci_high):
+        return None
+    standard_error = (ci_high - ci_low) / (2.0 * 1.959963984540054)
+    if standard_error <= 0:
+        return None
+    z = abs(estimate) / standard_error
+    return float(2.0 * (1.0 - stats.norm.cdf(z)))
+
+
+def _holm(p_values: list[float | None]) -> list[float | None]:
+    """Holm step-down adjustment; ``None`` entries pass through."""
+    indexed = [(index, value) for index, value in enumerate(p_values) if value is not None]
+    if not indexed:
+        return list(p_values)
+    ordered = sorted(indexed, key=lambda item: item[1])
+    adjusted: list[float | None] = list(p_values)
+    running = 0.0
+    total = len(ordered)
+    for rank, (index, value) in enumerate(ordered):
+        candidate = min(1.0, (total - rank) * value)
+        running = max(running, candidate)
+        adjusted[index] = running
+    return adjusted
 
 
 def _superiority_claim(
@@ -98,13 +137,19 @@ def _superiority_claim(
 
 
 def build_claims(reliability_summary: dict[str, Any]) -> list[Claim]:
-    """Build the Phase 9 ledger from the reliability summary and Phase 8 table."""
+    """Build the schema-v2 ledger from a Phase 9 or Phase 10 summary.
+
+    Phase 9 summaries are accepted for backward compatibility; Phase 10 adds
+    the fold-level pooled ceiling and the estimand labels.
+    """
     animal_mean = float(reliability_summary["mean_animal_reliability"])
     animal_low = float(reliability_summary["animal_ci_low"])
     animal_high = float(reliability_summary["animal_ci_high"])
     repeat_mean = float(reliability_summary["mean_repeat_reliability"])
     repeat_low = float(reliability_summary["repeat_ci_low"])
     repeat_high = float(reliability_summary["repeat_ci_high"])
+    pooled_ceiling = float(reliability_summary.get("pooled_ceiling_at_fold", float("nan")))
+    fold_size = int(reliability_summary.get("fold_size", 22))
 
     claims = [
         Claim(
@@ -116,9 +161,11 @@ def build_claims(reliability_summary: dict[str, Any]) -> list[Claim]:
             ci_low=animal_low,
             ci_high=animal_high,
             margin=0.5,
+            estimand="single_animal",
+            n_eval_animals=1,
             evidence=(
-                "reports/phase9/reliability_summary.json",
-                "reports/phase9/reliability_by_target.csv",
+                "reports/phase10/reliability_summary.json",
+                "reports/phase10/profile_components.csv",
             ),
             notes="Bound claim; no equivalence test is implied.",
         ),
@@ -131,11 +178,35 @@ def build_claims(reliability_summary: dict[str, Any]) -> list[Claim]:
             ci_low=repeat_low,
             ci_high=repeat_high,
             margin=0.5,
+            estimand="repeat",
+            n_eval_animals=None,
             evidence=(
-                "reports/phase9/reliability_summary.json",
-                "reports/phase9/reliability_by_target.csv",
+                "reports/phase10/reliability_summary.json",
+                "reports/phase10/reliability_by_target.csv",
             ),
             notes="Repeat facet uses at least two stimulations per animal.",
+        ),
+        Claim(
+            id="phase10-fold-ceiling",
+            statement=(
+                "The pooled reliability ceiling at the Phase 6-8 fold size is about 0.88 "
+                "(descriptive arithmetic from the variance components)."
+            ),
+            status="supported",
+            test="descriptive",
+            estimate=pooled_ceiling if np.isfinite(pooled_ceiling) else None,
+            margin=None,
+            estimand="pooled_fold",
+            n_eval_animals=fold_size,
+            evidence=(
+                "reports/phase10/reliability_summary.json",
+                "reports/phase10/ceiling_curve.csv",
+            ),
+            notes=(
+                "Descriptive: the value is computed from the fitted components at a fixed "
+                "animal count, not estimated from an independent sample. It is not a "
+                "sampling claim and carries no p-value."
+            ),
         ),
         _superiority_claim(
             claim_id="phase8-pair-advantage",
@@ -150,7 +221,8 @@ def build_claims(reliability_summary: dict[str, Any]) -> list[Claim]:
             ),
             notes=(
                 "Preregistered H1 pair gate passed, but the design MDE exceeds the "
-                "0.02 smallest effect of interest."
+                "0.02 smallest effect of interest and the Holm-adjusted p-value across "
+                "the Phase 8 family is 0.070. Estimand is the pooled fold profile."
             ),
         ),
         Claim(
@@ -159,6 +231,7 @@ def build_claims(reliability_summary: dict[str, Any]) -> list[Claim]:
             status="not_supported",
             test="superiority",
             estimate=-0.0000066,
+            estimand="superiority",
             evidence=("docs/PHASE8_RESULTS.md",),
             notes="Effect is numerically zero; no interval reported, so no MDE audit is possible.",
         ),
@@ -169,6 +242,7 @@ def build_claims(reliability_summary: dict[str, Any]) -> list[Claim]:
             test="coverage_gate",
             estimate=0.0230,
             margin=0.95,
+            estimand="superiority",
             evidence=("docs/PHASE8_RESULTS.md",),
             notes="Empirical coverage 0.9037 is below the 0.95 nominal level.",
         ),
@@ -182,6 +256,7 @@ def build_claims(reliability_summary: dict[str, Any]) -> list[Claim]:
             ci_high=0.0026,
             margin=0.01,
             mde=mde_from_ci(-0.0070, 0.0026),
+            estimand="superiority",
             evidence=("docs/PHASE8_RESULTS.md",),
             notes="Interval includes zero; point estimate is negative.",
         ),
@@ -190,20 +265,31 @@ def build_claims(reliability_summary: dict[str, Any]) -> list[Claim]:
             statement="CRO reaches 64% of the split-half reliability ceiling.",
             status="not_supported",
             test="superseded",
-            evidence=("docs/PHASE7_RESULTS.md", "reports/phase9/reliability_summary.json"),
+            estimand="descriptive",
+            evidence=("docs/PHASE7_RESULTS.md", "reports/phase10/reliability_summary.json"),
             notes=(
-                "Superseded: the split-half ceiling of 0.152 is biased downward. The "
-                "variance-corrected single-animal ceiling is 0.473, so 0.098 is about "
-                "21% of the ceiling, not 64%."
+                "Superseded: the split-half ceiling of 0.152 is biased downward. Against "
+                "the metric-aligned fold ceiling (0.882) the CRO of 0.098 is about 11%; "
+                "against the single-animal ceiling (0.450) it is about 22%. Neither is 64%."
             ),
         ),
     ]
+
+    for claim in claims:
+        if claim.test == "superiority" and claim.p_value is None and claim.ci_low is not None and claim.ci_high is not None:
+            claim.p_value = _normal_p_value(claim.estimate or 0.0, claim.ci_low, claim.ci_high)
+    family = [claim for claim in claims if claim.family is None and claim.test == "superiority" and claim.p_value is not None]
+    for claim in family:
+        claim.family = "phase8-inferential"
+    adjusted = _holm([claim.p_value for claim in family])
+    for claim, p_holm in zip(family, adjusted):
+        claim.p_holm = p_holm
     return claims
 
 
 def write_claims(path: Path, claims: list[Claim]) -> None:
     payload = {
-        "schema_version": 1,
+        "schema_version": 2,
         "statuses": ["supported", "not_supported", "bounded_null", "underpowered"],
         "claims": [claim.as_dict() for claim in claims],
     }
