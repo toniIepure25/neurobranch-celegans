@@ -1,3 +1,10 @@
+> **Superseded ceiling (Phase 9).** The split-half reliability ceiling used in
+> this document (about 0.152) is biased downward. The variance-corrected
+> single-animal ceiling is 0.473 and the repeat ceiling is 0.493. Percentages
+> of the ceiling quoted below are therefore too high. See
+> [`CORRECTIONS.md`](CORRECTIONS.md) and [`PHASE9_RESULTS.md`](PHASE9_RESULTS.md).
+> The historical numbers are retained for audit.
+
 # Phase 8 results — Adaptive Perturbation Twin
 
 > **MODEL-DEPENDENT VIRTUAL PERTURBATION — NOT CAUSALLY VALIDATED.**

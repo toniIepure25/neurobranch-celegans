@@ -172,7 +172,44 @@ control distribution across models is worth a biological test.
 
 ---
 
-## 7. What not to do next
+## 7. Phase 9 priorities: measure better before modelling more
+
+**Question.** Is the low single-animal reliability a property of the response
+summary or of the atlas?
+
+**Design.** For the 20 best-sampled targets, recompute reliability using
+(a) response integral, (b) peak latency, (c) baseline-corrected z-score and
+(d) a wider post-stimulus window. Report all four against the same animal
+filter. Then run a stimulation-budget pilot: five targets with at least five
+repeated stimulations per animal in a new recording, and test whether
+reliability approaches the predicted value from the design formula in
+`docs/MEASUREMENT_LIMITS.md`.
+
+**Decision rule.** If no summary raises single-animal reliability above 0.4,
+the atlas is the limit and individual-level modelling should stop. If one
+summary does, adopt it and re-run Phases 6-8 under the new ceiling.
+
+**Cost.** Low for the re-analysis; high for new recordings.
+
+---
+
+## 8. Design engine, only after the ceiling is stable
+
+**Question.** Which targets should be stimulated next to maximise information
+about a candidate mechanism?
+
+**Design.** Implement the EIG portfolio with simulation-based calibration
+(SBC) on synthetic atlases where the true profile is known. Compare EIG,
+uncertainty sampling and random selection at matched budget. Report coverage of
+the posterior intervals, not only point accuracy.
+
+**Decision rule.** The design engine ships only if SBC shows nominal coverage
+and EIG beats random by more than the design MDE at the same budget. A design
+optimiser built on an unverified ceiling would optimise noise.
+
+---
+
+## 9. What not to do next
 
 - Do not run more seeds on the same blocked split and call the residual +0.011
   significant. It is within seed noise.
