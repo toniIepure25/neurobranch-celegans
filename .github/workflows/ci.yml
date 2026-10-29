@@ -30,11 +30,23 @@ jobs:
           pip install -e ".[dev]"
 
       - name: Lint
-        run: ruff check src tests scripts
+        run: ruff check .
+
+      - name: Type check (scoped)
+        if: matrix.python-version == '3.13'
+        run: mypy src/neurobranch/benchmark src/neurobranch/design
 
       - name: Test
         run: pytest -q
 
-      - name: Validate Phase 9 reports
+      - name: Validate Phase 10 reports
         if: matrix.python-version == '3.13'
         run: python scripts/validate_reports.py --strict
+
+      - name: Validate historical Phase 9 reports
+        if: matrix.python-version == '3.13'
+        run: python scripts/validate_reports.py --reports reports/phase9 --strict
+
+      - name: Reproducibility hashes
+        if: matrix.python-version == '3.13'
+        run: python scripts/check_reproducibility.py --allow-missing-input

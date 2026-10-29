@@ -1330,7 +1330,7 @@ wheels = [
 
 [[package]]
 name = "neurobranch"
-version = "0.1.0"
+version = "1.0.0"
 source = { editable = "." }
 dependencies = [
     { name = "h5py" },
@@ -1357,6 +1357,7 @@ dependencies = [
 
 [package.optional-dependencies]
 dev = [
+    { name = "jsonschema" },
     { name = "mypy" },
     { name = "pytest" },
     { name = "pytest-timeout" },
@@ -1369,6 +1370,7 @@ gpu = [
 [package.metadata]
 requires-dist = [
     { name = "h5py", specifier = ">=3.10" },
+    { name = "jsonschema", marker = "extra == 'dev'", specifier = ">=4.20" },
     { name = "matplotlib", specifier = ">=3.8" },
     { name = "mypy", marker = "extra == 'dev'", specifier = ">=1.10" },
     { name = "numpy", specifier = ">=1.26" },

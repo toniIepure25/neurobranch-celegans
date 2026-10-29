@@ -4,13 +4,13 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "neurobranch"
-version = "0.2.0"
+version = "1.0.0"
 description = "Reproducible C. elegans neural-population dynamics, branching, and virtual-perturbation research platform"
 readme = "README.md"
 requires-python = ">=3.10,<3.14"
 license = { text = "MIT" }
 authors = [{ name = "NeuroBranch contributors" }]
-keywords = ["computational neuroscience", "C. elegans", "latent dynamics", "causal inference", "connectomics"]
+keywords = ["computational neuroscience", "C. elegans", "latent dynamics", "virtual perturbation", "connectomics", "reproducibility"]
 classifiers = [
   "Programming Language :: Python :: 3",
   "Topic :: Scientific/Engineering :: Artificial Intelligence",

@@ -1,42 +1,66 @@
 # Changelog
 
-## 0.2.0 - Phase 9 bounded evaluation
+## 1.0.0 - 2026-10-29
+
+Metric-aligned measurement ceilings and research-release hardening.
 
 ### Added
 
-- `neurobranch.benchmark.variance`: variance-corrected repeat and
-  single-animal reliability, attenuation ceilings, variance components.
-- `neurobranch.benchmark.power`: MDE, power, sample size, TOST equivalence and
-  the fixed claim-status decision rules.
-- `neurobranch.benchmark.claims`: generated claims ledger with evidence paths.
-- `neurobranch.benchmark.reporting`: report builders and manifests.
-- `neurobranch benchmark reliability|claims` CLI commands.
-- JSON schemas for the reliability summary and claims ledger, plus
-  `scripts/validate_reports.py`.
-- GitHub Actions CI, pre-commit configuration, Phase 9 test suite.
-- BoundedBench tab in the Streamlit app (14 tabs).
-- `docs/PHASE9_ANALYSIS_PLAN.md`, `docs/PHASE9_RESULTS.md`,
-  `docs/MEASUREMENT_LIMITS.md`, `docs/BENCHMARK_CARD.md`, `docs/CLAIMS.md`,
-  `docs/CORRECTIONS.md`.
+- `neurobranch.design`: ceiling-targeted animal budget calculator
+  (`animals_for_reliability`, `design_table`) and a simulation coverage study.
+- `neurobranch.benchmark.robustness`: animal jackknife, summary sensitivity and
+  animal-half replication.
+- Pooled reliability curve over evaluation-animal counts, with an explicit
+  `extrapolated` flag.
+- Claims schema v2: `estimand`, `n_eval_animals`, `family`, `p_value`,
+  `p_holm`, and the `phase10-fold-ceiling` claim.
+- JSON schemas v2 plus versioned v1 copies for historical reports.
+- CSV report contracts in `scripts/validate_reports.py`.
+- `scripts/check_reproducibility.py` and artifact hashes in the Phase 10
+  manifest.
+- `Makefile` targets for lint, type check, reports, validation and
+  reproducibility.
+- `docs/PHASE10_ANALYSIS_PLAN.md`, `docs/PHASE10_RESULTS.md`,
+  `docs/DESIGN_ENGINE.md`.
+- BoundedBench ceiling-curve chart in the Streamlit app.
 
 ### Changed
 
-- Version bumped to 0.2.0.
-- README rewritten around the measurement ceiling, design resolution and claim
-  statuses.
-- Reliability and claims are now generated artifacts with input hashes, not
-  hand-written numbers.
+- **Breaking:** `reports/phase10/reliability_summary.json` is schema v2 and
+  reports both single-animal and pooled ceilings.
+- Reliability is now computed per facet, and the pooled ceiling is reported at
+  the Phase 6-8 fold size (22 animals).
+- `Claim` is mutable so the ledger can attach Holm-adjusted p-values after
+  building the family.
+- Version bumped to 1.0.0.
+
+### Fixed
+
+- Sparse-responder sampling variance divided by `n_animals**2` instead of the
+  per-responder count squared.
+- The signal component counted `interaction / A` twice.
+- Jackknife return dictionaries were inconsistent after the interval change.
+- Streamlit `use_container_width` deprecation in the app.
 
 ### Corrected
 
-- Phase 7 normalised scores above 1 are withdrawn.
-- "CRO reaches 64% of the ceiling" is withdrawn; the corrected share is about
+- Phase 9 applied the single-animal ceiling (0.473) to pooled Phase 6-8
+  metrics. The metric-aligned pooled ceiling at 22 animals is 0.833 (C6).
+- Phase 9 single-animal reliability 0.223/0.473 is superseded by
+  0.162/0.403 after the sparse-responder and interaction fixes (C7).
+- CRO's share of its metric-aligned ceiling is about 11.8%, not 64% and not
   21%.
-- Phase 8 pair-level advantage is reclassified as `underpowered` under the
-  declared SESOI of 0.02.
 
-### Not included
+### Known limitations
 
-- The EIG design portfolio, simulation-based calibration and replay engine.
-- Cross-cohort transfer (H9.5), deferred until a harmonised second cohort is
-  available.
+- Target-level reliability rankings do not replicate across animal halves
+  (median Spearman 0.05).
+- The animal jackknife interval does not reach nominal coverage in simulation;
+  it is a diagnostic, not a calibrated confidence interval.
+- The design calculator is a planning approximation, not a validated
+  prospective tool.
+- No causal, digital-twin or foundation-model claim is made.
+
+## 0.2.0
+
+- Variance-corrected reliability, bounded claim statuses, Phase 9 reports.

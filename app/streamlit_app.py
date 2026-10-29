@@ -209,7 +209,7 @@ with tabs[0]:
         go.Bar(x=counts.index, y=counts.values, marker_color=[COLORS.get(i, "#999") for i in counts.index])
     )
     fig.update_layout(height=260, title="Held-out behaviour composition", margin=dict(l=10, r=10, t=40, b=10))
-    st.plotly_chart(fig, use_container_width=True)
+    st.plotly_chart(fig, width="stretch")
 
 with tabs[1]:
     st.subheader("Observed trajectory and model rollout")
@@ -263,7 +263,7 @@ with tabs[1]:
         legend=dict(orientation="h"),
         margin=dict(l=0, r=0, t=10, b=0),
     )
-    st.plotly_chart(fig, use_container_width=True)
+    st.plotly_chart(fig, width="stretch")
     st.caption(
         "Observation colours: blue FWD, red REV, orange TURN, grey NOSTATE. Grey 3-D projections can create apparent branches that are not bifurcations."
     )
@@ -309,7 +309,7 @@ with tabs[2]:
             title=f"Top-entropy frame {top['frame']} (entropy {top['entropy']:.2f} bits)",
             yaxis_title="neighbour fraction",
         )
-        st.plotly_chart(fig, use_container_width=True)
+        st.plotly_chart(fig, width="stretch")
         t = top["frame"]
         Zt = Z_pca[t]
         dist = np.linalg.norm(Z_pca[cand] - Zt, axis=1)
@@ -330,10 +330,10 @@ with tabs[2]:
             )
         )
         fig2.update_layout(height=500, scene=dict(xaxis_title="PC1", yaxis_title="PC2", zaxis_title="PC3"))
-        st.plotly_chart(fig2, use_container_width=True)
+        st.plotly_chart(fig2, width="stretch")
         st.dataframe(
             pd.DataFrame(summ["top_frames"])[["frame", "entropy", "majority_probability"]],
-            use_container_width=True,
+            width="stretch",
         )
 
 with tabs[3]:
@@ -390,7 +390,7 @@ with tabs[3]:
             scene=dict(xaxis_title="PC1", yaxis_title="PC2", zaxis_title="PC3"),
             legend=dict(orientation="h"),
         )
-        st.plotly_chart(fig, use_container_width=True)
+        st.plotly_chart(fig, width="stretch")
         st.plotly_chart(
             go.Figure(
                 [
@@ -408,7 +408,7 @@ with tabs[3]:
                     ),
                 ]
             ).update_layout(barmode="group", height=300, yaxis_title="outcome probability"),
-            use_container_width=True,
+            width="stretch",
         )
         if res.notes:
             for n in res.notes:
@@ -447,7 +447,7 @@ with tabs[4]:
         agg = pd.read_csv(agg_path)
         st.dataframe(
             agg[["task", "model", "mae_mean", "pearson_mean", "sign_accuracy_mean"]],
-            use_container_width=True,
+            width="stretch",
         )
         st.caption(
             "Every learned model was worse than a constant training-mean baseline on held-out events, "
@@ -463,7 +463,7 @@ with tabs[5]:
     )
     ncm = ROOT / "artifacts" / "reproduction_ncmcm.csv"
     if ncm.exists():
-        st.dataframe(pd.read_csv(ncm), use_container_width=True)
+        st.dataframe(pd.read_csv(ncm), width="stretch")
         st.caption(
             "K=3. p-values reproduce the distributed values closely; decoder accuracy is blocked 5-fold and much lower than in-sample numbers."
         )
@@ -485,7 +485,7 @@ with tabs[6]:
     st.subheader("Dataset audit")
     path = ROOT / "reports" / "recording_summary.csv"
     if path.exists():
-        st.dataframe(pd.read_csv(path), use_container_width=True)
+        st.dataframe(pd.read_csv(path), width="stretch")
     st.markdown(
         "Raw recordings are immutable. `WT_NoStim` is observational; no optogenetic or histamine "
         "intervention data were used for fitting. The Randi optogenetic atlas is used only in the "
@@ -530,7 +530,7 @@ with tabs[7]:
             ].mean()
             agg = agg.sort_values("log_loss")
             st.markdown(f"**Mean animal-level proper scores, H = {horizon} s**")
-            st.dataframe(agg, use_container_width=True, hide_index=True)
+            st.dataframe(agg, width="stretch", hide_index=True)
             fig = go.Figure(
                 go.Bar(
                     x=agg["mode"],
@@ -544,7 +544,7 @@ with tabs[7]:
             fig.update_layout(
                 height=320, yaxis_title="log loss (lower is better)", margin=dict(l=10, r=10, t=20, b=80)
             )
-            st.plotly_chart(fig, use_container_width=True)
+            st.plotly_chart(fig, width="stretch")
         if horizon == 6 and summary.get("6s"):
             d = summary["6s"]["aggregate"].get("delta_behavior_neural", {})
             if d:
@@ -564,7 +564,7 @@ with tabs[7]:
             cols = [c for c in de.columns if c.startswith("delta_")]
             if cols:
                 st.markdown("**Per-animal paired log-loss differences** (negative = neural helps)")
-                st.dataframe(de[["animal_id", *cols]], use_container_width=True, hide_index=True)
+                st.dataframe(de[["animal_id", *cols]], width="stretch", hide_index=True)
         st.error(
             "Observational prediction only. No neuron was stimulated, no transition was caused, "
             "and no result here supports neuron-specific control."
@@ -607,7 +607,7 @@ with tabs[8]:
                     "calibration_slope",
                 ]
             ].sort_values("auroc", ascending=False),
-            use_container_width=True,
+            width="stretch",
             hide_index=True,
         )
         if td_summary_path.exists():
@@ -658,7 +658,7 @@ with tabs[8]:
                     xaxis_title="held-out AUROC",
                     margin=dict(l=10, r=10, t=20, b=30),
                 )
-                st.plotly_chart(fig, use_container_width=True)
+                st.plotly_chart(fig, width="stretch")
         if td_cal_path.exists():
             cal = pd.read_csv(td_cal_path)
             if not cal.empty:
@@ -676,7 +676,7 @@ with tabs[8]:
                     yaxis_title="observed fraction",
                     margin=dict(l=10, r=10, t=20, b=30),
                 )
-                st.plotly_chart(fig, use_container_width=True)
+                st.plotly_chart(fig, width="stretch")
         if td_dyn_path.exists():
             dyn = pd.read_csv(td_dyn_path)
             fig = go.Figure()
@@ -691,7 +691,7 @@ with tabs[8]:
                 yaxis_title="held-out AUROC",
                 margin=dict(l=10, r=10, t=20, b=30),
             )
-            st.plotly_chart(fig, use_container_width=True)
+            st.plotly_chart(fig, width="stretch")
             st.caption(
                 "Frames at or after 0 are retrospective positive controls, not prospective predictions."
             )
@@ -700,13 +700,13 @@ with tabs[8]:
             st.markdown("**External cohort shift** (fit on wild type, score tdc1 or the other odour cohort)")
             st.dataframe(
                 ext[["train", "test", "mode", "n", "prevalence", "auroc", "log_loss", "balanced_accuracy"]],
-                use_container_width=True,
+                width="stretch",
                 hide_index=True,
             )
         if td_abl_path.exists():
             abl = pd.read_csv(td_abl_path)
             st.markdown("**Model-dependent circuit-feature ablation** (not an experimental ablation)")
-            st.dataframe(abl, use_container_width=True, hide_index=True)
+            st.dataframe(abl, width="stretch", hide_index=True)
         st.error(
             "MODEL-DEPENDENT VIRTUAL PERTURBATION — NOT CAUSALLY VALIDATED. "
             "No trial-level optogenetic or mutant intervention is present in this archive, "
@@ -755,7 +755,7 @@ with tabs[9]:
             if c in pm.columns
         ]
         st.markdown("**Offline protocol comparison** (same reconstructed events, different splits)")
-        st.dataframe(pm[show].sort_values(["regime", "mode"]), use_container_width=True, hide_index=True)
+        st.dataframe(pm[show].sort_values(["regime", "mode"]), width="stretch", hide_index=True)
         if prot_summary.exists():
             ps = load_optional_json(prot_summary)
             if ps:
@@ -771,7 +771,7 @@ with tabs[9]:
                         if c in pdlt.columns
                     ]
                 ],
-                use_container_width=True,
+                width="stretch",
                 hide_index=True,
             )
     else:
@@ -811,12 +811,12 @@ with tabs[9]:
                         if c in view.columns
                     ]
                 ].sort_values("log_loss"),
-                use_container_width=True,
+                width="stretch",
                 hide_index=True,
             )
         if risk_sets.exists():
             st.markdown("**Risk set by landmark and direction**")
-            st.dataframe(pd.read_csv(risk_sets), use_container_width=True, hide_index=True)
+            st.dataframe(pd.read_csv(risk_sets), width="stretch", hide_index=True)
         if online_deltas.exists():
             od = pd.read_csv(online_deltas)
             st.markdown("**Paired animal-cluster deltas**")
@@ -837,7 +837,7 @@ with tabs[9]:
                         if c in od.columns
                     ]
                 ],
-                use_container_width=True,
+                width="stretch",
                 hide_index=True,
             )
     else:
@@ -869,19 +869,19 @@ with tabs[9]:
                         if c in view.columns
                     ]
                 ],
-                use_container_width=True,
+                width="stretch",
                 hide_index=True,
             )
         if mech_stability.exists():
             st.markdown("**Cross-animal stability**")
-            st.dataframe(pd.read_csv(mech_stability), use_container_width=True, hide_index=True)
+            st.dataframe(pd.read_csv(mech_stability), width="stretch", hide_index=True)
     else:
         st.info("Mechanism reports are not generated in this checkout.")
 
     interventions = p5 / "interventions" / "intervention_evidence.csv"
     if interventions.exists():
         st.markdown("**Intervention evidence map**")
-        st.dataframe(pd.read_csv(interventions), use_container_width=True, hide_index=True)
+        st.dataframe(pd.read_csv(interventions), width="stretch", hide_index=True)
         st.caption(
             "Published manipulations are separated from trial-level observations, simulator "
             "predictions and hypotheses. Group averages are never treated as pseudo-trials, and "
@@ -936,7 +936,7 @@ with tabs[10]:
                     if c in pooled.columns
                 ]
             ].sort_values("pair_spearman", ascending=False),
-            use_container_width=True,
+            width="stretch",
             hide_index=True,
         )
         st.caption(
@@ -950,12 +950,12 @@ with tabs[10]:
     delta_path = cro_root / "paired_deltas.csv"
     if delta_path.exists():
         st.markdown("**Paired animal-cluster deltas versus baselines**")
-        st.dataframe(pd.read_csv(delta_path), use_container_width=True, hide_index=True)
+        st.dataframe(pd.read_csv(delta_path), width="stretch", hide_index=True)
 
     profile_path = cro_root / "profile_summary.csv"
     if profile_path.exists():
         st.markdown("**Within-target profile recovery and measurement ceiling**")
-        st.dataframe(pd.read_csv(profile_path), use_container_width=True, hide_index=True)
+        st.dataframe(pd.read_csv(profile_path), width="stretch", hide_index=True)
         st.caption(
             "Reliability is estimated by split-half profiles; the attenuation ceiling "
             "is the maximum correlation expected from an error-free model. Normalised "
@@ -967,7 +967,7 @@ with tabs[10]:
         st.markdown("**Anatomical association (not causal discovery)**")
         edge = pd.read_csv(edge_path)
         view = edge[edge.get("score").eq("predicted_magnitude")] if "score" in edge else edge
-        st.dataframe(view, use_container_width=True, hide_index=True)
+        st.dataframe(view, width="stretch", hide_index=True)
         st.caption(
             "AUROC ranks directly connected pairs above unconnected pairs using the "
             "predicted response magnitude. This is an association benchmark with "
@@ -977,7 +977,7 @@ with tabs[10]:
     design_path = p6 / "design" / "target_candidates.csv"
     if design_path.exists():
         st.markdown("**Model-based experiment candidates**")
-        st.dataframe(pd.read_csv(design_path), use_container_width=True, hide_index=True)
+        st.dataframe(pd.read_csv(design_path), width="stretch", hide_index=True)
         st.warning(
             "Candidates are hypotheses for a new experiment, not validated interventions. "
             "They are ranked by predicted effect, interval width and animal coverage."
@@ -1018,7 +1018,7 @@ with tabs[11]:
                 .sort_values("pair_spearman", ascending=False)
             )
             st.markdown("**Primary budget: 40% of all targets**")
-            st.dataframe(pivot, use_container_width=True, hide_index=True)
+            st.dataframe(pivot, width="stretch", hide_index=True)
         curve = (
             m.groupby(["strategy", "budget"])["pair_spearman"]
             .mean()
@@ -1043,7 +1043,7 @@ with tabs[11]:
                     if c in m.columns
                 ]
             ].tail(40),
-            use_container_width=True,
+            width="stretch",
             hide_index=True,
         )
         st.caption(
@@ -1057,7 +1057,7 @@ with tabs[11]:
     design_path = p7 / "design" / "target_candidates.csv"
     if design_path.exists():
         st.markdown("**Next experiment candidates**")
-        st.dataframe(pd.read_csv(design_path), use_container_width=True, hide_index=True)
+        st.dataframe(pd.read_csv(design_path), width="stretch", hide_index=True)
         st.warning(
             "Candidates are hypotheses for a future experiment, ranked by predicted effect, "
             "uncertainty and anatomy-unexplained discrepancy. They are not validated interventions."
@@ -1102,11 +1102,11 @@ with tabs[12]:
         table = r8.get("deployment_readout", {}).get("strategy_table_k8", [])
         if table:
             st.markdown("**Support strategy at the primary budget (k=8)**")
-            st.dataframe(pd.DataFrame(table), use_container_width=True, hide_index=True)
+            st.dataframe(pd.DataFrame(table), width="stretch", hide_index=True)
         budget = r8.get("deployment_readout", {}).get("random_budget_curve", [])
         if budget:
             st.markdown("**Random-support budget curve**")
-            st.dataframe(pd.DataFrame(budget), use_container_width=True, hide_index=True)
+            st.dataframe(pd.DataFrame(budget), width="stretch", hide_index=True)
         st.warning(
             "A null H2/H3 is an informative negative result about animal-level "
             "calibration in this atlas; it is not evidence that no effect exists."
@@ -1118,58 +1118,110 @@ with tabs[12]:
         st.caption("Run `python scripts/phase8_run.py --config configs/phase8/apt.yaml`.")
 
 with tabs[13]:
-    st.subheader("BoundedBench: measurement ceiling and claim status")
+    st.subheader("BoundedBench: metric-aligned ceiling and claim status")
+    phase10 = ROOT / "reports" / "phase10"
     phase9 = ROOT / "reports" / "phase9"
-    summary_path = phase9 / "reliability_summary.json"
-    claims_path = phase9 / "claims.json"
-    table_path = phase9 / "reliability_by_target.csv"
+    report_dir = phase10 if (phase10 / "reliability_summary.json").exists() else phase9
+    summary_path = report_dir / "reliability_summary.json"
+    claims_path = report_dir / "claims.json"
+    table_path = report_dir / "reliability_by_target.csv"
+    curve_path = report_dir / "ceiling_curve.csv"
     if summary_path.exists():
         summary = json.loads(summary_path.read_text(encoding="utf-8"))
-        c1, c2, c3 = st.columns(3)
+        is_v2 = summary.get("schema_version") == 2
+        c1, c2, c3, c4 = st.columns(4)
         c1.metric("Repeat reliability", f"{summary['mean_repeat_reliability']:.3f}")
         c2.metric("Single-animal reliability", f"{summary['mean_animal_reliability']:.3f}")
         c3.metric("Single-animal ceiling", f"{summary['mean_animal_ceiling']:.3f}")
-        st.caption(
-            "Intervals are target-level normal approximations and ignore animal "
-            "sharing; treat them as descriptive."
-        )
-        if table_path.exists():
-            df = pd.read_csv(table_path)
+        if is_v2:
+            c4.metric(
+                f"Pooled ceiling (n={int(summary['fold_size'])})",
+                f"{summary['pooled_ceiling_at_fold']:.3f}",
+            )
+            st.caption(
+                "The pooled ceiling applies to profiles averaged over evaluation animals. "
+                "The single-animal ceiling applies only to per-animal claims."
+            )
+        else:
+            c4.metric("Fold size", "-")
+            st.caption(
+                "Phase 9 report: the single-animal ceiling is shown without the pooled "
+                "estimand. Regenerate with the Phase 10 scripts for the metric-aligned view."
+            )
+        if curve_path.exists():
+            curve = pd.read_csv(curve_path)
             fig = go.Figure()
             fig.add_trace(
-                go.Histogram(
-                    x=df["single_animal_reliability"].dropna(),
-                    nbinsx=25,
-                    marker_color="#c05621",
-                    name="single animal",
+                go.Scatter(
+                    x=curve["n_eval"],
+                    y=curve["mean_reliability"],
+                    mode="lines+markers",
+                    name="mean reliability",
+                    line=dict(color="#2b6cb0"),
                 )
             )
-            fig.add_vline(x=0.5, line_dash="dash", annotation_text="adequate = 0.5")
-            fig.update_layout(
-                height=320,
-                margin=dict(l=10, r=10, t=30, b=10),
-                xaxis_title="Reliability",
-                yaxis_title="Targets",
-                showlegend=False,
+            fig.add_trace(
+                go.Scatter(
+                    x=curve["n_eval"],
+                    y=curve["ceiling"],
+                    mode="lines+markers",
+                    name="attenuation ceiling",
+                    line=dict(color="#c05621", dash="dash"),
+                )
             )
-            st.plotly_chart(fig, use_container_width=True)
+            fig.update_layout(
+                height=340,
+                margin=dict(l=10, r=10, t=30, b=10),
+                xaxis_title="Animals pooled",
+                yaxis_title="Reliability",
+                legend=dict(orientation="h", y=1.1),
+            )
+            st.plotly_chart(fig, width="stretch")
+            if "n_extrapolated" in curve.columns and curve["n_extrapolated"].max() > 0:
+                st.caption(
+                    "Points beyond a target's observed animal count are model extrapolations "
+                    "and are descriptive only."
+                )
+        if table_path.exists():
+            df = pd.read_csv(table_path)
+            column = "single_animal_reliability"
+            if column in df.columns:
+                hist = go.Figure()
+                hist.add_trace(
+                    go.Histogram(
+                        x=df[column].dropna(),
+                        nbinsx=25,
+                        marker_color="#c05621",
+                        name="single animal",
+                    )
+                )
+                hist.add_vline(x=0.5, line_dash="dash", annotation_text="adequate = 0.5")
+                hist.update_layout(
+                    height=300,
+                    margin=dict(l=10, r=10, t=30, b=10),
+                    xaxis_title="Reliability",
+                    yaxis_title="Targets",
+                    showlegend=False,
+                )
+                st.plotly_chart(hist, width="stretch")
             st.dataframe(
-                df.sort_values("single_animal_reliability", ascending=False).head(15),
-                use_container_width=True,
+                df.sort_values(column, ascending=False).head(15),
+                width="stretch",
                 hide_index=True,
             )
         if claims_path.exists():
             claims = json.loads(claims_path.read_text(encoding="utf-8"))["claims"]
             st.markdown("**Claims ledger**")
-            st.dataframe(pd.DataFrame(claims), use_container_width=True, hide_index=True)
+            st.dataframe(pd.DataFrame(claims), width="stretch", hide_index=True)
         st.warning(
             "A reliability ceiling is a measurement property, not a causal effect. "
             "A difference below the design MDE is not interpreted, even if its "
-            "interval excludes zero."
+            "interval excludes zero. Target-level reliability rankings do not "
+            "replicate across animal halves."
         )
     else:
-        st.info("Phase 9 outputs are not generated in this checkout.")
-        st.caption("Run `python scripts/phase9_reliability.py` and `python scripts/phase9_claims.py`.")
+        st.info("No reliability reports are generated in this checkout.")
+        st.caption("Run `python scripts/phase10_reliability.py` and `python scripts/phase10_claims.py`.")
 
 st.divider()
 st.caption(EPISTEMIC_WARNING)
