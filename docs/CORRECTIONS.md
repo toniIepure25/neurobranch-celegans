@@ -168,7 +168,9 @@ animals:
 | 1.0 | 0.207 | 0.455 | 79 |
 
 **Correct:** the defensible descriptive ceiling is **0.560** at 80% coverage;
-the Phase 10 value 0.833 is a sparse-coverage historical estimate. The CRO of
+the Phase 10 value 0.833 is a sparse-coverage historical estimate. The coverage
+filter also changes which responders are included, so 0.560 is the ceiling for
+the broadly observed responder population, not a bias-corrected 0.833. The CRO of
 0.098 is about **17.6%** of 0.560. The Phase 11 extrapolation gate also failed
 (MAE 0.210, bias +0.016), so the curve beyond the observed animal count is not
 validated.
