@@ -12,15 +12,16 @@
     "uncertainty_by_target.csv": "3b4657d607429ea7ca9dc46a97dd7327e6425a552f1a376796fdc8f23c7afd19",
     "uncertainty_summary.json": "b9ec3b21b13af4e4fddb41350cdabcd84e06a181c27e90e1b8c214c3eec8dded"
   },
-  "git_dirty": true,
-  "git_revision": "2dc75e330abdafde3431c0e8346411c3d5dbd214",
+  "created_utc": "2026-10-29T14:09:20+00:00",
+  "git_dirty": false,
+  "git_revision": "46b9b312b7715734d792dbb95e8dddec3b921916",
   "input": {
     "n_rows": 237639,
     "path": "reports\\phase3\\randi_trial_table_phase3.csv.gz",
     "sha256": "8186c96bcb33cdce15dc9ae88691e09fc596e42c5513310b6d6a636e4d5dd515"
   },
   "notes": [
-    "git_dirty is true when the worktree contained uncommitted changes at generation time.",
+    "git_dirty ignores the manifest files being written and reflects all other worktree changes.",
     "Artifact hashes cover every file in this directory except manifest.json and manifest.sha256."
   ],
   "parameters": {
