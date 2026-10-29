@@ -64,6 +64,9 @@ and 0.223 for single-animal generalisation, with ceilings 0.493 and 0.473.
 **Evidence:** `src/neurobranch/benchmark/variance.py`,
 `tests/benchmark/test_variance.py`, `reports/phase9/`.
 
+**Superseded by C7:** the 0.223 and 0.473 values used a denominator that
+ignored per-responder animal counts and double-counted the interaction term.
+
 **Impact:** the ceiling roughly triples. This correction is favourable to the
 project's models in absolute terms but, combined with C2, still leaves them far
 from the limit.
@@ -85,3 +88,56 @@ target-level normal approximations and are labelled descriptive.
 `docs/PHASE9_ANALYSIS_PLAN.md` (deviation 1).
 
 **Impact:** no published number depends on the discarded intervals.
+
+
+## C6. Phase 9 applied the single-animal ceiling to pooled metrics
+
+**Was claimed:** the Phase 6-8 pair-level metrics are bounded by the
+single-animal ceiling of 0.473, so the CRO of 0.098 reaches about 21% of its
+limit.
+
+**What happened:** Phase 6-8 pair Spearman is computed on pair means pooled
+over the roughly 22 animals in a test fold, not on individual animals. A pooled
+mean has a different attenuation ceiling, and that ceiling depends on the
+number of animals pooled. The single-animal ceiling applies only to per-animal
+claims.
+
+**Correct:** the metric-aligned pooled ceiling at 22 animals is 0.833. The CRO
+of 0.098 is therefore about **11.8%** of its ceiling, not 21% and not 64%. The
+single-animal ceiling is 0.403 and applies to individual-level claims only.
+
+**Evidence:** `docs/PHASE10_RESULTS.md`, `reports/phase10/ceiling_curve.csv`,
+`reports/phase10/reliability_summary.json`.
+
+**Impact:** the old 64% claim remains withdrawn. The Phase 9 replacement (21%)
+is also withdrawn because it used the wrong estimand. This correction is
+unfavourable to the project: against its actual metric, the model is farther
+from the measurement limit than Phase 9 stated. Phase 8 H1 remains
+`underpowered`; the correction does not upgrade it.
+
+## C7. Sparse-responder sampling variance and double-counted interaction
+
+**Was claimed:** single-animal reliability is 0.223 with ceiling 0.473.
+
+**What happened:** two defects in the animal facet:
+
+1. the pooled sampling variance divided by the total animal count squared
+   instead of the per-responder count squared, so responders measured in fewer
+   animals were under-corrected and the signal component was inflated;
+2. the signal component `V - S` still contained `interaction/A`, and the
+   reliability denominator added `interaction/A` again, counting the
+   animal x responder variance twice.
+
+**Correct:** with per-responder counts and the interaction correction,
+single-animal reliability is **0.162** (95% target-level interval
+[0.134, 0.191]) with ceiling **0.403**. The repeat facet is unchanged at 0.243
+(ceiling 0.493) because it does not pool across animals.
+
+**Evidence:** `docs/PHASE10_RESULTS.md`,
+`reports/phase10/profile_components.csv`,
+`tests/benchmark/test_variance.py`.
+
+**Impact:** the individual-level measurement limit is lower than Phase 9
+reported. The conclusion that the atlas is measurement-limited for
+single-animal claims is strengthened; the pooled-metric conclusion is not
+affected in direction, only in magnitude.

@@ -484,30 +484,30 @@ Phase 3 adds Baskoylu & Flavell (2026): 27 animals, 1,162 reversals, 43,200
 frames. The primary test is animal-disjoint prospective prediction of a reversal
 onset in `(t, t+6 s]`, using original traces and causal normalisation.
 
-| Model (H=6 s) | Mean animal log loss | Î” vs behaviour | 95% animal CI | Animals improved |
+| Model (H=6 s) | Mean animal log loss | Δ vs behaviour | 95% animal CI | Animals improved |
 |---|---:|---:|---|---:|
-| Behaviour history | 0.5927 | â€” | â€” | â€” |
-| + population neural | 0.5856 | âˆ’0.00701 | [âˆ’0.01483, +0.00053] | 20/27 |
-| + train-only PCA(10) | 0.5842 | âˆ’0.00841 | [âˆ’0.01475, âˆ’0.00220] | 20/27 |
-| + identified 52 neurons | 0.5909 | âˆ’0.00172 | [âˆ’0.01054, +0.00699] | 13/27 |
+| Behaviour history | 0.5927 | — | — | — |
+| + population neural | 0.5856 | −0.00701 | [−0.01483, +0.00053] | 20/27 |
+| + train-only PCA(10) | 0.5842 | −0.00841 | [−0.01475, −0.00220] | 20/27 |
+| + identified 52 neurons | 0.5909 | −0.00172 | [−0.01054, +0.00699] | 13/27 |
 | Causal delayed neural (211 frames) | 0.5892 | -0.00345 | [-0.00851, +0.00175] | 18/27 |
 
-The prespecified criterion (CI upper < 0, â‰¥70% animals improved) is **not met**
+The prespecified criterion (CI upper < 0, ≥70% animals improved) is **not met**
 for the primary model. The direction is consistent at 3/6/12 s, but the increment
-shrinks against a quadratic behavioural baseline (6 s Î” = âˆ’0.00524
-[âˆ’0.01334, +0.00301]), is absent for identity-aligned neurons, and reverses in
+shrinks against a quadratic behavioural baseline (6 s Δ = −0.00524
+[−0.01334, +0.00301]), is absent for identity-aligned neurons, and reverses in
 the within-animal forward task (+0.00288, 9/27 improved). The causal delayed
-control also improves slightly (âˆ’0.00345), so it is not a clean null and the
+control also improves slightly (−0.00345), so it is not a clean null and the
 small increment may reflect slow behavioural/arousal state. This is
 **inconclusive/negative**, not evidence of absence.
 
-Randi target reanalysis: peak/mean/integral reliability all r â‰ˆ 0.09; full
+Randi target reanalysis: peak/mean/integral reliability all r ≈ 0.09; full
 temporal shape per-neuron median r = 0.048; repeated-event averaging is worse
 than a global mean for every target (signed peak 6.3238 vs 5.9008 MAE). Stimulus
 context lowers MAE by 1.8% but the CI overlaps; the large RMSE/Pearson gain is
 response-scale/outlier driven. A cross-animal one-step dynamics probe finds
 behaviour ridge beats persistence (MAE 0.02587 vs 0.02722) but adding neural
-activity does not (0.02590; next-state log loss 0.11631 â†’ 0.11655).
+activity does not (0.02590; next-state log loss 0.11631 → 0.11655).
 
 Phase 3 reproduces the Phase 2 negative **pattern** on independent data. Detail:
 [`PHASE3_RESULTS.md`](PHASE3_RESULTS.md).

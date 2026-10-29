@@ -247,3 +247,23 @@ generalization claim.
 - An honest separation of leaky official artifacts from the held-out
   reimplementation.
 - A concrete, falsifiable next experiment.
+
+
+---
+
+## 10. Measurement-limit limitations (Phase 10)
+
+- The reliability model is a moment approximation, not a likelihood or REML
+  fit. It assumes additive, exchangeable noise.
+- The pooled ceiling curve is model extrapolation beyond each target's observed
+  animal count; those points are flagged `extrapolated`.
+- Target-level reliability rankings do not replicate across animal halves. They
+  cannot be used to prioritise targets.
+- The animal jackknife interval does not reach nominal coverage in simulation.
+  It is a diagnostic, not a calibrated confidence interval.
+- The animal-budget calculator is a plug-in planning approximation. It has not
+  been validated prospectively on a new cohort.
+- The atlas has 110 animals; pooled estimates above that count are arithmetic,
+  not observations.
+- None of these results identifies a mechanism, a causal effect, or a digital
+  twin.

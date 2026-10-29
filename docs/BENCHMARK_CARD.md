@@ -1,7 +1,7 @@
-# Benchmark card: BoundedBench (NeuroBranch 0.2.0)
+# Benchmark card: BoundedBench (NeuroBranch 1.0.0)
 
 A benchmark card states what a benchmark measures, what it does not measure,
-and how a reader can reproduce it. This card covers the Phase 6-9 evaluation
+and how a reader can reproduce it. This card covers the Phase 6-10 evaluation
 layer.
 
 ## Dataset
@@ -43,7 +43,7 @@ in `docs/DATA_PROVENANCE.md`.
 - The reliability ceiling is estimated on the full atlas, which is itself a
   leakage risk for a strict benchmark: the ceiling should ideally be estimated
   on training animals only. This is a known limitation, documented in
-  `docs/PHASE9_RESULTS.md`.
+  `docs/PHASE10_RESULTS.md`.
 
 ## Baselines
 
@@ -67,15 +67,20 @@ against the measurement ceiling.
 ## Uncertainty
 
 - Phase 8 used animal-level folds and reported 95% intervals.
-- Phase 9 reports target-level intervals for aggregate reliability; these
+- Phase 10 reports target-level intervals for aggregate reliability; these
   ignore animal sharing and are labelled descriptive.
+- The animal jackknife interval is a design diagnostic. Its synthetic coverage
+  study failed nominal coverage, so it is **not** a calibrated confidence
+  interval.
 - No per-target reliability interval is reported because the estimator is a
   variance ratio with few animals per target.
 
 ## Known failure modes
 
-1. **Low ceiling.** Single-animal reliability is 0.223; a held-out correlation
-   above ~0.47 is not attainable with this atlas.
+1. **Facet-dependent ceiling.** Single-animal reliability is 0.162 (ceiling
+   0.403); a per-animal correlation above ~0.40 is not attainable with this
+   atlas. Pooled over 22 animals, reliability is 0.693 and the ceiling is 0.833.
+   Comparing a pooled metric to the single-animal ceiling is an error.
 2. **Few events per target.** Targets with few stimulations have unstable
    profiles; the reliability table reports counts so readers can filter.
 3. **Target selection.** Exclusion of low-coverage targets changes the target
@@ -85,6 +90,12 @@ against the measurement ceiling.
 5. **Stimulation artefact.** Optogenetic stimulation can produce direct
    artefacts; the pipeline excludes the stimulation frame but not all
    artefactual dynamics.
+6. **Unstable aggregate.** The delete-one-animal jackknife spans [0.165, 1.000]
+   for the fold-level mean; a single animal can move the aggregate enough that
+   the interval is uninformative. Report it, do not lean on it.
+7. **Unstable target ranking.** Per-target reliability rankings do not
+   replicate across animal halves (median Spearman about 0.00). Do not
+   prioritise targets by estimated reliability.
 
 ## Intended use
 
@@ -103,9 +114,12 @@ against the measurement ceiling.
 ## Reproduce
 
 ```bash
-python scripts/phase9_reliability.py
-python scripts/phase9_claims.py --check
+python scripts/phase10_reliability.py
+python scripts/phase10_robustness.py
+python scripts/phase10_design.py
+python scripts/phase10_claims.py --check
 python scripts/validate_reports.py --strict
+python scripts/check_reproducibility.py
 ```
 
 The Phase 8 evaluation is reproduced by `scripts/phase8_run.py`; see

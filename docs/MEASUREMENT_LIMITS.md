@@ -1,8 +1,9 @@
 # Measurement limits of the C. elegans perturbation atlas
 
-This note explains what a reliability ceiling is, why the corrected numbers
-differ from the Phase 6-8 numbers, and how to use the ceiling when comparing
-models.
+This note explains what a reliability ceiling is, which facet each metric
+belongs to, and how to use the ceiling when comparing models. All numbers come
+from `reports/phase10/` and supersede the Phase 9 values (see
+`docs/CORRECTIONS.md`, C6 and C7).
 
 ## The attenuation ceiling in one paragraph
 
@@ -13,24 +14,42 @@ model that predicts $\theta$ perfectly still correlates only $\sqrt{\rho}$ with
 the observed data. Comparing a model's correlation to 1 therefore understates
 how well it is doing; comparing it to $\sqrt{\rho}$ is the fair test.
 
-This is why the benchmark reports a ceiling next to every predictive score. It
-is also why the ceiling must be estimated on the same facet as the claim:
-within-animal repetition and across-animal generalisation are different
-measurements with different ceilings.
+The ceiling must be estimated on the same facet as the claim. There are three
+facets in this project, and they answer different questions.
 
-## Two facets, two questions
+## Three facets, three questions
 
 **Repeat reliability** asks whether stimulating the same animal twice produces
-the same profile. It bounds claims about a single animal's response.
+the same profile. It bounds claims about a single animal's repeatability.
 
 **Single-animal reliability** asks whether one animal's profile reproduces the
-shared target profile. It bounds animal-held-out claims, because the held-out
-animal contributes both sampling noise and its own idiosyncratic profile
-variance. This is the relevant ceiling for Phases 6-8.
+shared target profile. It bounds per-animal claims, because the animal
+contributes both sampling noise and its own idiosyncratic profile variance.
 
-The second ceiling is lower because the denominator includes animal × responder
-interaction: if animals have different response profiles, a held-out animal is
-genuinely harder to predict even with infinite data per animal.
+**Pooled reliability** asks how well a profile averaged over $n$ animals
+estimates the shared target profile. It bounds the Phase 6-8 pair metrics,
+because those metrics are computed on pair means pooled over the roughly 22
+animals of a test fold.
+
+The single-animal ceiling is lower than the pooled ceiling because pooling
+averages away both sampling noise and part of the animal x responder
+interaction. Using the single-animal ceiling for a pooled metric overstates the
+measurement limitation.
+
+## Current estimates
+
+From `reports/phase10/reliability_summary.json`:
+
+| Facet | Reliability | Ceiling $\sqrt{\rho}$ | Targets |
+| --- | ---: | ---: | ---: |
+| Repeat (within animal) | 0.243 | 0.493 | 152 |
+| Single animal ($n=1$) | 0.162 | 0.403 | 126 |
+| Pooled over 22 animals | 0.693 | 0.833 | 126 |
+| Pooled over all 110 animals | 0.873 | 0.934 | 126 |
+
+The single-animal ceiling is near 0.4; the fold-level pooled ceiling is above
+0.8. A model reaching a correlation of 0.10 with the observed pooled profile is
+at about **11.8%** of the fold ceiling, not 64% and not 21%.
 
 ## Why the old split-half ceiling was wrong
 
@@ -48,20 +67,22 @@ and truncated negative values to zero. Three problems:
    denominator was not a valid ceiling.
 
 The variance-corrected estimator removes the truncation, uses all events, and
-separates the two facets. It is still a moment estimator: it assumes additive
-noise and does not model response dynamics.
+separates the facets. It is still a moment estimator: it assumes additive noise
+and does not model response dynamics.
 
-## Current estimates
+## Why the Phase 9 single-animal number changed
 
-From `reports/phase9/reliability_summary.json`:
+Phase 9 reported 0.223 (ceiling 0.473). Two defects were found:
 
-| Facet | Reliability | Ceiling $\sqrt{\rho}$ | Targets |
-| --- | ---: | ---: | ---: |
-| Repeat (within animal) | 0.243 | 0.493 | 152 |
-| Single animal (held out) | 0.223 | 0.473 | 126 |
+1. The pooled sampling variance divided by the total animal count squared
+   instead of the per-responder count squared. Responders measured in fewer
+   animals were under-corrected, inflating the signal.
+2. The signal $V-S$ still contained `interaction / A`, and the reliability
+   denominator then added `interaction / A` again.
 
-The ceilings are close to 0.5. A model reaching a correlation of 0.10 with the
-observed profile is at about 21% of the single-animal ceiling, not 64%.
+With per-responder counts and the interaction correction, the single-animal
+reliability is 0.162 (ceiling 0.403). The repeat facet is unaffected because it
+does not pool across animals.
 
 ## What the ceiling does not mean
 
@@ -71,6 +92,8 @@ observed profile is at about 21% of the single-animal ceiling, not 64%.
 - It is **not** a property of the worm alone; it is a property of this atlas,
   this response window and this summary statistic.
 - A low ceiling does not excuse a weak model; it changes what counts as strong.
+- A high pooled ceiling does not validate a model; it raises the bar for calling
+  the model good.
 
 ## Design implications
 
@@ -83,9 +106,19 @@ n^\* \approx n_0 \frac{\rho^\*}{1-\rho^\*} \frac{1-\rho_0}{\rho_0},
 $$
 
 where $\rho_0$ is the reliability observed at $n_0$ stimulations. With
-$\rho_0 = 0.243$ at $n_0 = 2$, reaching 0.8 requires roughly 25 stimulations per
-animal per target — an order of magnitude beyond the current atlas for most
-targets. This is a measurement-design conclusion, not a modelling one.
+$\rho_0 = 0.243$ at $n_0 = 2$, reaching 0.8 requires roughly 16 further
+stimulations per animal per target.
+
+For the animal facet, the analogous formula is
+
+$$
+n^\* = \frac{(\text{noise} + \text{interaction})\,\rho^\*}{(1-\rho^\*)\,\text{signal}}.
+$$
+
+`neurobranch.design.animals_for_reliability` implements it. On this atlas the
+median budget for a target reliability of 0.8 is 25 animals, with a 90th
+percentile of 104. The Phase 8 fold of 22 animals is near the median but far
+below the p90.
 
 For a two-arm animal-randomised comparison, the minimum detectable effect is
 
@@ -99,10 +132,12 @@ provides these calculations and is tested against the normal approximation.
 
 ## Practical rules
 
-1. Report the ceiling next to every held-out score.
+1. Report the ceiling next to every held-out score, on the matching facet.
 2. Report the MDE next to every claimed difference.
-3. Never compare a model to 1.0; compare it to the ceiling.
+3. Never compare a model to 1.0; compare it to the ceiling for its metric.
 4. Do not interpret a difference smaller than the MDE, even if its interval
    excludes zero.
 5. Treat a low ceiling as a prompt to redesign the measurement, not to lower
    the bar for models.
+6. Do not treat the animal jackknife interval as a calibrated confidence
+   interval; its coverage study failed.

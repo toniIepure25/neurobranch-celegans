@@ -302,3 +302,19 @@ figures/
 ├─ fig01…fig08 .png
 └─ bundlenet_latent_3d.html
 ```
+
+
+## Phase 10 (2026-10-29)
+
+| Artifact | Command | Purpose |
+| --- | --- | --- |
+| `reports/phase10/reliability_summary.json` | `python scripts/phase10_reliability.py` | Schema v2 single-animal and pooled ceilings |
+| `reports/phase10/ceiling_curve.csv` | same | Reliability vs animals pooled |
+| `reports/phase10/profile_components.csv` | same | Per-target signal, noise, interaction |
+| `reports/phase10/summary_sensitivity.csv` | `python scripts/phase10_robustness.py` | Response-summary sensitivity |
+| `reports/phase10/half_replication.json` | same | Animal-half rank stability |
+| `reports/phase10/cluster_ci.json` | same | Animal jackknife diagnostic |
+| `reports/phase10/design_budget.csv` | `python scripts/phase10_design.py` | Animals needed per reliability goal |
+| `reports/phase10/coverage_study.json` | same | Synthetic interval coverage (negative result) |
+| `reports/phase10/claims.json` | `python scripts/phase10_claims.py` | Schema v2 claims ledger |
+| `reports/phase10/manifest.json` | reliability script | Input hash, artifact hashes, versions |

@@ -1,3 +1,9 @@
+> **Ceiling numbers in this report are superseded.** Phase 9 and Phase 10
+> corrected the reliability estimator and aligned the ceiling to the metric
+> (see `docs/CORRECTIONS.md` C6-C7 and `docs/PHASE10_RESULTS.md`). The model
+> results themselves are unchanged; only the measurement ceiling they are
+> compared against has changed.
+
 > **Superseded ceiling (Phase 9).** The split-half reliability ceiling used in
 > this document (about 0.152) is biased downward. The variance-corrected
 > single-animal ceiling is 0.473 and the repeat ceiling is 0.493. Percentages

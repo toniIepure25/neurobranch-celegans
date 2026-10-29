@@ -632,11 +632,11 @@ python scripts/phase5_protocol_mode_deltas.py
 ```
 
 Expected: 250 events, 62 dorsal/188 ventral, 26 animals; original-style SAAV
-AUROC 0.540 vs behaviour 0.534; grouped AUROC 0.37â€“0.40; external adverse
+AUROC 0.540 vs behaviour 0.534; grouped AUROC 0.37–0.40; external adverse
 transfer.  The run writes `protocol_metrics.csv`, event/section predictions,
 fold manifests, `protocol_deltas.csv`, `protocol_mode_deltas.csv`,
 `protocol_per_animal.csv` and `protocol_prior_reference.csv`.  The full run is
-CPU-heavy (about 20â€“30 min on this machine).
+CPU-heavy (about 20–30 min on this machine).
 
 ### 16.2 Causal-onset online benchmark
 
@@ -663,8 +663,8 @@ python scripts/phase5_interventions.py
 python scripts/phase5_figures.py
 ```
 
-Expected mechanism outputs: SAAV Î” log loss +0.010 [âˆ’0.008, +0.029]; SMDV
-âˆ’0.131 [âˆ’0.154, âˆ’0.107] on 61 events/6 animals (exploratory, unstable); no
+Expected mechanism outputs: SAAV Δ log loss +0.010 [−0.008, +0.029]; SMDV
+−0.131 [−0.154, −0.107] on 61 events/6 animals (exploratory, unstable); no
 stable cross-animal SAAV effect.  The intervention script writes only an
 evidence map; it does not create pseudo-trials or run virtual perturbations.
 Figures go to `reports/phase5/figures/`.
@@ -697,5 +697,43 @@ count.
 - The reconstruction is `PARTIAL_REPRODUCTION`, not exact.  The four aligned
   CSVs and the preprocessing script are missing; do not report an exact
   reproduction.
-- Bootstrap CIs use 400â€“2,000 resamples and are stable to ~1e-3.
+- Bootstrap CIs use 400–2,000 resamples and are stable to ~1e-3.
 - Do not interpret the SMDV six-animal effect as causal.
+
+
+---
+
+## 17. Phase 10: metric-aligned ceilings
+
+Requires the Phase 3 Randi table at
+`reports/phase3/randi_trial_table_phase3.csv.gz` (237,639 rows, 110 animals).
+
+```powershell
+python scripts/phase10_reliability.py
+python scripts/phase10_figure.py
+python scripts/phase10_robustness.py
+python scripts/phase10_design.py
+python scripts/phase10_claims.py
+python scripts/validate_reports.py --strict
+python scripts/check_reproducibility.py
+```
+
+Expected on this machine:
+
+- Reliability script: about 90 s; writes six artifacts plus `manifest.json`.
+- Robustness script: about 95 s.
+- Design script: under 10 s.
+- Single-animal mean reliability 0.162, ceiling 0.403.
+- Repeat mean 0.243, ceiling 0.493.
+- Pooled at 22 animals: mean 0.693, ceiling 0.833.
+- Half-replication median Spearman about 0.00 (interval includes zero).
+- Jackknife standard error about 0.27; interval [0.165, 1.000] - fragile.
+- Coverage study about 0.60 at nominal 0.95 - a negative result, not a bug to
+  hide.
+
+`check_reproducibility.py` verifies the input hash, every artifact hash in the
+manifest, the schema versions and the Phase 9 manifest link. It does **not**
+rerun the analysis; rerun the scripts for that.
+
+The app tab **BoundedBench** reads `reports/phase10/` when present and falls
+back to `reports/phase9/`.

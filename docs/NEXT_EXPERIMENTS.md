@@ -220,3 +220,22 @@ optimiser built on an unverified ceiling would optimise noise.
 - Do not add a 3-D animation and call it a bifurcation.
 - Do not tune the intervention target on the test worm and then report a
   confirmatory p-value.
+
+
+## Phase 10 follow-ups
+
+1. **Two-way resampling.** Implement an animal x responder cluster bootstrap or
+   jackknife and test nominal coverage on synthetic atlases. The current animal
+   jackknife covers about 60% at nominal 95%.
+2. **Prospective design validation.** Use the animal-budget calculator to choose
+   a target count for a new cohort, then compare predicted and achieved
+   reliability. Until then the calculator is a planning approximation.
+3. **Target ranking stability.** The current ranking does not replicate across
+   animal halves. Test whether a shrinkage or hierarchical reliability model
+   stabilises it before using rankings for prioritisation.
+4. **Summary choice.** `response_residual` ranks targets similarly to
+   `response_mean` (Spearman 0.934) but not identically; decide a primary
+   summary prospectively rather than selecting the best-looking one.
+5. **Extrapolation audit.** For the 87 targets with fewer than 22 animals, test
+   whether the fitted curve predicts held-out reliability at the observed
+   maximum; this is the only honest check of the extrapolated region.

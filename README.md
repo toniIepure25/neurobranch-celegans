@@ -12,31 +12,43 @@ perturbation** on real calcium imaging and optogenetic atlases.
 > `interventions/safety.py` refuses to label any output as empirically
 > validated without a matched, provenance-checked intervention dataset.
 
-## What version 0.2.0 adds: bounded evaluation
+## What version 1.0.0 adds: metric-aligned evaluation
 
-Version 0.2.0 replaces the unstable split-half reliability ceiling with a
-variance-corrected estimator, separates **within-animal repeat reliability**
-from **across-animal single-profile reliability**, and attaches an explicit
-status to every quantitative claim.
+Version 1.0.0 attaches every number to the estimand it actually describes. The
+Phase 9 audit correctly found that the atlas is measurement-limited for
+individual animals; it then applied that single-animal ceiling to pooled
+metrics, which was wrong. Phase 10 separates the two and fixes two estimator
+defects (sparse-responder denominators and a double-counted interaction term).
 
-The result changes how the project's own models should be read:
+| Quantity | Estimate | 95% interval | Ceiling |
+| --- | ---: | --- | ---: |
+| Repeat reliability (within animal) | 0.243 | [0.206, 0.279] | 0.493 |
+| Single-animal reliability | 0.162 | [0.134, 0.191] | 0.403 |
+| Pooled over 22 animals (Phase 6-8 fold) | 0.693 | [0.653, 0.734] | 0.833 |
+| Pooled over all 110 animals | 0.873 | [0.837, 0.909] | 0.934 |
 
-| Quantity | Estimate | 95% interval |
-| --- | ---: | --- |
-| Repeat reliability (within animal) | 0.243 | [0.206, 0.279] |
-| Single-animal reliability (held out) | 0.223 | [0.196, 0.251] |
-| Repeat attenuation ceiling | 0.493 | - |
-| Single-animal attenuation ceiling | 0.473 | - |
+The consequence is narrow and important. Claims about one animal are severely
+bounded. Claims about a pooled population mean are not, and the Phase 6-8 models
+sit far below that ceiling rather than against a measurement wall. The CRO of
+0.0984 is about **11.8%** of its metric-aligned ceiling, so the old Phase 7
+"64% of ceiling" claim remains withdrawn and the Phase 9 replacement (21%) is
+withdrawn too.
 
-Both ceilings are near 0.5. The Phase 8 pair-level advantage (+0.0442,
-CI [+0.0080, +0.0901]) has a reconstructed design MDE of 0.0587 against a
-declared smallest effect of interest of 0.020, so it is classified
-**underpowered**, not supported. The Phase 7 claim that CRO reaches 64% of the
-ceiling is withdrawn; against the corrected ceiling it reaches about 21%.
+The Phase 8 pair advantage (+0.0442, CI [+0.0080, +0.0901]) still has a design
+MDE of 0.0587 against a declared smallest effect of interest of 0.020, so it
+remains **underpowered**. Two Phase 10 robustness results are deliberately
+negative: target-level reliability rankings do not replicate across animal
+halves (median Spearman about 0.00), and the animal jackknife interval does not reach
+nominal coverage in simulation. Neither is used as an inferential interval. The
+delete-one-animal aggregate spans [0.165, 1.000], so the fold-level mean is
+fragile to a single animal; that is reported rather than hidden.
 
-Read the full audit in [`docs/PHASE9_RESULTS.md`](docs/PHASE9_RESULTS.md), the
+![Metric-aligned reliability ceilings](reports/phase10/ceiling_curve.png)
+
+Read the audit in [`docs/PHASE10_RESULTS.md`](docs/PHASE10_RESULTS.md), the
+estimator corrections in [`docs/CORRECTIONS.md`](docs/CORRECTIONS.md), the
 limits in [`docs/MEASUREMENT_LIMITS.md`](docs/MEASUREMENT_LIMITS.md), and the
-corrections in [`docs/CORRECTIONS.md`](docs/CORRECTIONS.md).
+design calculator in [`docs/DESIGN_ENGINE.md`](docs/DESIGN_ENGINE.md).
 
 ## Install
 
@@ -51,15 +63,18 @@ Optional GPU extra: `pip install -e ".[dev,gpu]"`.
 ## Quick start
 
 ```bash
-# Reproduce the measurement ceilings and the claims ledger
-python scripts/phase9_reliability.py
-python scripts/phase9_claims.py --check
+# Reproduce the metric-aligned ceilings, robustness checks and claims
+python scripts/phase10_reliability.py
+python scripts/phase10_figure.py
+python scripts/phase10_robustness.py
+python scripts/phase10_design.py
+python scripts/phase10_claims.py --check
 python scripts/validate_reports.py --strict
 
 # Or through the CLI
-neurobranch benchmark reliability
-neurobranch benchmark claims
-neurobranch version
+python -m neurobranch.cli.main benchmark reliability
+python -m neurobranch.cli.main benchmark claims
+python -m neurobranch.cli.main version
 
 # Interactive app (14 tabs)
 streamlit run app/streamlit_app.py
@@ -72,8 +87,10 @@ streamlit run app/streamlit_app.py
 | Data audit | `neurobranch data audit` | Kato archive verification |
 | Phase 2-4 | `neurobranch train`, `simulate`, `branching` | Baselines, branching, intervention audits |
 | Phase 6-8 | `python scripts/phase8_run.py` | CRO and adaptive-twin evaluation |
-| Phase 9 | `python scripts/phase9_reliability.py` | Reliability ceilings, variance components, manifest |
-| Phase 9 claims | `python scripts/phase9_claims.py` | `reports/phase9/claims.json` |
+| Phase 9 | `python scripts/phase9_reliability.py` | Historical single-animal audit |
+| Phase 10 | `python scripts/phase10_reliability.py` | Metric-aligned ceilings, curve, components, manifest |
+| Phase 10 robustness | `python scripts/phase10_robustness.py` | Summary sensitivity, half-split, jackknife |
+| Phase 10 claims | `python scripts/phase10_claims.py` | `reports/phase10/claims.json` |
 
 Every artifact directory carries a manifest with the input hash, git revision,
 parameters and library versions.
@@ -99,15 +116,16 @@ These rules are implemented in `src/neurobranch/benchmark/` and documented in
 
 ```
 src/neurobranch/
-  benchmark/        reliability, power/MDE, claims ledger, report builders
+  benchmark/        reliability, robustness, power/MDE, claims ledger, reporting
+  design/           ceiling-targeted animal budgets and coverage study
   dynamics/         latent models, training, splits
   branching/        empirical and model-based branching analysis
   interventions/    virtual perturbation engine and safety gate
   twin/             adaptive twin and active probing
   cli/              Typer CLI
 app/                Streamlit + Plotly interface (14 tabs)
-scripts/            phase9_reliability, phase9_claims, phase9_figure, validate_reports, phase8_run
-reports/            generated artifacts, including phase9/
+scripts/            phase10_* (reliability, figure, robustness, design, claims), validate_reports
+reports/            generated artifacts, including phase9/ and phase10/
 docs/               phase reports, benchmark card, claims policy, corrections
 schemas/            JSON schemas for generated reports
 tests/              unit, integration, scientific and benchmark tests

@@ -66,7 +66,7 @@ fixed. That is a useful cautionary contribution.
 | C3 | Corrected two-sided branching nulls, block/shift nulls, synthetic power checks, all five worms | 4/5 entropy deficit; no excess |
 | C4 | A paired virtual-perturbation engine with OOD flags and matched non-candidate controls | 26 candidates + 19 controls/model × 6 models; none significant |
 | C5 | Artifact-level verification of BunDLe-Net and NC-MCM, separating leaky upstream artifacts from held-out claims | kNN/silhouette, Markov p port, deviations |
-| C6 | Open, reproducible platform (CLI, app, tests, manifests) | 62 tests, 9-tab app |
+| C6 | Open, reproducible platform (CLI, app, tests, manifests) | Automated tests, 14-tab app |
 | C7 | External Randi 2023 optogenetic benchmark with event/target/animal splits and reliability ceiling | 110 animals, 3,371 events; negative |
 | C8 | Incremental behaviour benchmark on transition frames and proper scoring rules | No calibrated increment |
 | C9 | Independent 27-animal prospective benchmark with causal features, animal-disjoint splits and explicit nulls | Primary neural increment inconclusive; PCA secondary only |
@@ -76,6 +76,7 @@ fixed. That is a useful cautionary contribution.
 | C13 | Turn-direction dynamics, PCA trajectories, peak timing and model-dependent controls | Immediate pre-offset behaviour dominates; no identity-specific neural effect |
 | C14 | Source-audited SAAV reconstruction with four offline regimes and a causal-onset online benchmark | Original-style SAAV AUROC 0.540; no properly scored animal-disjoint increment; exact reproduction blocked |
 | C11 | Cross-animal one-step dynamics probe | Behaviour beats persistence; neural does not |
+| C15 | Metric-aligned reliability ceilings and design budget; explicit correction of a facet mismatch | Single animal 0.162/0.403; pooled 22 animals 0.693/0.833; target rankings unstable; jackknife not calibrated |
 
 ---
 
