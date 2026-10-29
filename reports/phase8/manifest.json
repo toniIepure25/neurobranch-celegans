@@ -3,8 +3,8 @@
   "name": "Adaptive Perturbation Twin",
   "warning": "MODEL-DEPENDENT VIRTUAL PERTURBATION \u2014 NOT CAUSALLY VALIDATED.",
   "git": {
-    "commit": "1c060c7824ed9be80f28fcd69ee72d3d0e12ffdb",
-    "dirty": true,
+    "commit": "7080e88e84e06f6729ebf57b9c141e1af0d9a675",
+    "dirty": false,
     "branch": "research/phase8-adaptive-twin"
   },
   "artifacts": {
