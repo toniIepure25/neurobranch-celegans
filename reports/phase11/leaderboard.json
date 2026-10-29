@@ -1,0 +1,11 @@
+{
+  "best_ceiling_ratio": 0.1880955547144519,
+  "best_k": 16,
+  "best_model": "twin",
+  "best_pair_spearman": 0.10533480885126888,
+  "best_strategy": "random",
+  "caveat": "Folds share animals; deltas are descriptive, not animal-level intervals.",
+  "n_configurations": 11,
+  "twin_max_pair_spearman": 0.10533480885126888,
+  "unit": "fold"
+}

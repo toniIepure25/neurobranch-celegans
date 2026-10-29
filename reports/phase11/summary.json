@@ -1,0 +1,43 @@
+{
+  "coverage_study": {
+    "bias": -0.009251251770834634,
+    "coverage": 1.0,
+    "mean_width": 0.18462852242520322,
+    "method": "two-way percentile bootstrap",
+    "n_boot": 100.0,
+    "n_reps": 100.0,
+    "truth": 0.9174240139635553
+  },
+  "headline": {
+    "coverage_0_8_pooled_reliability": 0.3136077301426884,
+    "extrapolation_gate_passed": false,
+    "phase10_pooled_reliability": 0.6934453924220403,
+    "shrinkage_gate_passed": false
+  },
+  "input": {
+    "n_rows": 237639,
+    "path": "reports\\phase3\\randi_trial_table_phase3.csv.gz",
+    "sha256": "8186c96bcb33cdce15dc9ae88691e09fc596e42c5513310b6d6a636e4d5dd515"
+  },
+  "parameters": {
+    "coverages": [
+      0.0,
+      0.3,
+      0.5,
+      0.8,
+      1.0
+    ],
+    "fold_size": 22,
+    "n_boot": 300,
+    "n_splits": 15,
+    "seed": 11
+  },
+  "phase": "phase11",
+  "purpose": "coverage-aware sensitivity of the reliability ceiling",
+  "runtime_seconds": 199.1,
+  "software": {
+    "numpy": "2.3.1",
+    "pandas": "2.3.3",
+    "python": "3.13.5"
+  }
+}

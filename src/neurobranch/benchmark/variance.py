@@ -249,11 +249,68 @@ class ProfileComponents:
         return float(np.sqrt(self.pooled_reliability))
 
 
+def _components_from_arrays(
+    values: np.ndarray,
+    noise: np.ndarray,
+    *,
+    min_animals: int,
+    min_responder_coverage: float = 0.0,
+) -> ProfileComponents | None:
+    """Components from an animal x responder matrix, allowing duplicate rows.
+
+    This is the single source of truth for the moment estimator; the bootstrap
+    calls it with resampled rows and columns.
+    """
+    if values.ndim != 2 or values.shape[1] < 3:
+        return None
+    if min_responder_coverage > 0:
+        total_animals = values.shape[0]
+        coverage = np.isfinite(values).sum(axis=0) / max(total_animals, 1)
+        keep = coverage >= min_responder_coverage
+        if keep.sum() < 3:
+            return None
+        values = values[:, keep]
+        noise = noise[:, keep]
+    finite_rows = np.isfinite(values).any(axis=1)
+    values = values[finite_rows]
+    noise = noise[finite_rows]
+    if values.shape[0] < min_animals:
+        return None
+
+    pooled = _nan_column_mean(values)
+    counts = np.isfinite(values).sum(axis=0)
+    pooled_sampling = np.nansum(noise, axis=0) / np.maximum(counts, 1) ** 2
+    observed_var = _safe_var(pooled)
+    sampling_var = _nanmean(pooled_sampling)
+    if not np.isfinite(observed_var) or observed_var <= 0 or not np.isfinite(sampling_var):
+        return None
+    total_r = _nan_column_var(values, ddof=1)
+    noise_r = _nan_column_mean(noise)
+    interaction_r = np.maximum(total_r - noise_r, 0.0)
+    noise_mean = _nanmean(noise_r)
+    interaction_mean = _nanmean(interaction_r)
+    if not np.isfinite(noise_mean) or not np.isfinite(interaction_mean):
+        return None
+    n_animals = int(values.shape[0])
+    # E[V] = signal + (noise + interaction)/A and S = noise/A, so V - S still
+    # contains interaction/A.  Subtract it to avoid counting the animal x
+    # responder variance twice.
+    signal = max(observed_var - sampling_var - interaction_mean / n_animals, 0.0)
+    return ProfileComponents(
+        signal=float(signal),
+        noise=float(noise_mean),
+        interaction=float(interaction_mean),
+        n_animals=n_animals,
+        n_responders=int(values.shape[1]),
+    )
+
+
 def _profile_from_cells(
     cells: pd.DataFrame,
     *,
     min_events: int,
     min_animals: int,
+    min_responder_coverage: float = 0.0,
 ) -> ProfileComponents | None:
     """Estimate the signal/noise/interaction components for one target.
 
@@ -272,36 +329,11 @@ def _profile_from_cells(
     sampling = sampling.reindex(columns=means.columns)
     if means.shape[0] < min_animals or means.shape[1] < 3:
         return None
-
-    values = means.to_numpy(dtype=float)
-    noise = sampling.to_numpy(dtype=float)
-    n_animals = int(values.shape[0])
-
-    pooled = _nan_column_mean(values)
-    counts = np.isfinite(values).sum(axis=0)
-    pooled_sampling = np.nansum(noise, axis=0) / np.maximum(counts, 1) ** 2
-    observed_var = _safe_var(pooled)
-    sampling_var = _nanmean(pooled_sampling)
-    if not np.isfinite(observed_var) or observed_var <= 0 or not np.isfinite(sampling_var):
-        return None
-    total_r = _nan_column_var(values, ddof=1)
-    noise_r = np.nanmean(noise, axis=0)
-    interaction_r = np.maximum(total_r - noise_r, 0.0)
-    noise_mean = _nanmean(noise_r)
-    interaction_mean = _nanmean(interaction_r)
-    if not np.isfinite(noise_mean) or not np.isfinite(interaction_mean):
-        return None
-    # E[V] = signal + (noise + interaction)/A and S = noise/A, so V - S still
-    # contains interaction/A.  Subtract it to avoid counting the animal x
-    # responder variance twice.
-    signal = max(observed_var - sampling_var - interaction_mean / n_animals, 0.0)
-
-    return ProfileComponents(
-        signal=float(signal),
-        noise=float(noise_mean),
-        interaction=float(interaction_mean),
-        n_animals=n_animals,
-        n_responders=int(means.shape[1]),
+    return _components_from_arrays(
+        means.to_numpy(dtype=float),
+        sampling.to_numpy(dtype=float),
+        min_animals=min_animals,
+        min_responder_coverage=min_responder_coverage,
     )
 
 
@@ -313,6 +345,7 @@ def animal_reliability_by_target(
     min_events: int = 1,
     min_animals: int = 6,
     seed: int = 17,
+    min_responder_coverage: float = 0.0,
 ) -> pd.DataFrame:
     """Across-animal reliability of each target's response profile.
 
@@ -329,6 +362,7 @@ def animal_reliability_by_target(
         animal=animal,
         min_events=min_events,
         min_animals=min_animals,
+        min_responder_coverage=min_responder_coverage,
     )
     if components.empty:
         return components
@@ -354,6 +388,7 @@ def profile_components_by_target(
     animal: str = DEFAULT_ANIMAL_COLUMN,
     min_events: int = 1,
     min_animals: int = 6,
+    min_responder_coverage: float = 0.0,
 ) -> pd.DataFrame:
     """Signal, noise and interaction components for every eligible target.
 
@@ -365,7 +400,12 @@ def profile_components_by_target(
     cells = cell_summaries(frame, response=response, animal=animal)
     rows: list[dict[str, Any]] = []
     for target, tgroup in cells.groupby("_target", sort=False):
-        components = _profile_from_cells(tgroup, min_events=min_events, min_animals=min_animals)
+        components = _profile_from_cells(
+            tgroup,
+            min_events=min_events,
+            min_animals=min_animals,
+            min_responder_coverage=min_responder_coverage,
+        )
         if components is None:
             continue
         rows.append(
@@ -391,6 +431,7 @@ def pooled_reliability_by_target(
     animal: str = DEFAULT_ANIMAL_COLUMN,
     min_events: int = 1,
     min_animals: int = 6,
+    min_responder_coverage: float = 0.0,
 ) -> pd.DataFrame:
     """Reliability of a profile averaged over ``n_eval`` animals.
 

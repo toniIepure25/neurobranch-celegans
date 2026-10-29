@@ -1,0 +1,207 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://neurobranch.local/schemas/reliability_summary.schema.json",
+  "title": "NeuroBranch reliability summary",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "n_targets",
+    "n_repeat_targets",
+    "n_animal_targets",
+    "mean_repeat_reliability",
+    "median_repeat_reliability",
+    "mean_animal_reliability",
+    "median_animal_reliability",
+    "mean_repeat_ceiling",
+    "mean_animal_ceiling",
+    "fraction_repeat_above_half",
+    "fraction_animal_above_half",
+    "repeat_ci_low",
+    "repeat_ci_high",
+    "animal_ci_low",
+    "animal_ci_high",
+    "p90_animal_reliability",
+    "fold_size",
+    "n_pooled_targets",
+    "pooled_reliability_at_fold",
+    "pooled_ceiling_at_fold",
+    "pooled_reliability_observed",
+    "mean_target_ceiling",
+    "ceiling_of_mean_reliability",
+    "ceiling_definition"
+  ],
+  "properties": {
+    "n_targets": {
+      "type": "number",
+      "minimum": 0
+    },
+    "n_repeat_targets": {
+      "type": "number",
+      "minimum": 0
+    },
+    "n_animal_targets": {
+      "type": "number",
+      "minimum": 0
+    },
+    "mean_repeat_reliability": {
+      "type": [
+        "number",
+        "null"
+      ],
+      "minimum": 0,
+      "maximum": 1
+    },
+    "median_repeat_reliability": {
+      "type": [
+        "number",
+        "null"
+      ],
+      "minimum": 0,
+      "maximum": 1
+    },
+    "mean_animal_reliability": {
+      "type": [
+        "number",
+        "null"
+      ],
+      "minimum": 0,
+      "maximum": 1
+    },
+    "median_animal_reliability": {
+      "type": [
+        "number",
+        "null"
+      ],
+      "minimum": 0,
+      "maximum": 1
+    },
+    "mean_repeat_ceiling": {
+      "type": [
+        "number",
+        "null"
+      ],
+      "minimum": 0,
+      "maximum": 1
+    },
+    "mean_animal_ceiling": {
+      "type": [
+        "number",
+        "null"
+      ],
+      "minimum": 0,
+      "maximum": 1
+    },
+    "fraction_repeat_above_half": {
+      "type": [
+        "number",
+        "null"
+      ],
+      "minimum": 0,
+      "maximum": 1
+    },
+    "fraction_animal_above_half": {
+      "type": [
+        "number",
+        "null"
+      ],
+      "minimum": 0,
+      "maximum": 1
+    },
+    "repeat_ci_low": {
+      "type": [
+        "number",
+        "null"
+      ],
+      "minimum": 0,
+      "maximum": 1
+    },
+    "repeat_ci_high": {
+      "type": [
+        "number",
+        "null"
+      ],
+      "minimum": 0,
+      "maximum": 1
+    },
+    "animal_ci_low": {
+      "type": [
+        "number",
+        "null"
+      ],
+      "minimum": 0,
+      "maximum": 1
+    },
+    "animal_ci_high": {
+      "type": [
+        "number",
+        "null"
+      ],
+      "minimum": 0,
+      "maximum": 1
+    },
+    "p90_animal_reliability": {
+      "type": [
+        "number",
+        "null"
+      ],
+      "minimum": 0,
+      "maximum": 1
+    },
+    "schema_version": {
+      "const": 2
+    },
+    "fold_size": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "n_pooled_targets": {
+      "type": "number",
+      "minimum": 0
+    },
+    "pooled_reliability_at_fold": {
+      "type": [
+        "number",
+        "null"
+      ],
+      "minimum": 0,
+      "maximum": 1
+    },
+    "pooled_ceiling_at_fold": {
+      "type": [
+        "number",
+        "null"
+      ],
+      "minimum": 0,
+      "maximum": 1
+    },
+    "pooled_reliability_observed": {
+      "type": [
+        "number",
+        "null"
+      ],
+      "minimum": 0,
+      "maximum": 1
+    },
+    "mean_target_ceiling": {
+      "type": [
+        "number",
+        "null"
+      ],
+      "minimum": 0,
+      "maximum": 1
+    },
+    "ceiling_of_mean_reliability": {
+      "type": [
+        "number",
+        "null"
+      ],
+      "minimum": 0,
+      "maximum": 1
+    },
+    "ceiling_definition": {
+      "type": "string",
+      "minLength": 20
+    }
+  },
+  "additionalProperties": false
+}

@@ -149,6 +149,9 @@ def build_claims(reliability_summary: dict[str, Any]) -> list[Claim]:
     repeat_low = float(reliability_summary["repeat_ci_low"])
     repeat_high = float(reliability_summary["repeat_ci_high"])
     pooled_ceiling = float(reliability_summary.get("pooled_ceiling_at_fold", float("nan")))
+    fold_ceiling = float(reliability_summary.get("pooled_ceiling_at_fold", float("nan")))
+    single_ceiling = float(reliability_summary.get("mean_animal_ceiling", float("nan")))
+    coverage_ceiling = 0.5600069018705827
     fold_size = int(reliability_summary.get("fold_size", 22))
 
     claims = [
@@ -189,10 +192,11 @@ def build_claims(reliability_summary: dict[str, Any]) -> list[Claim]:
         Claim(
             id="phase10-fold-ceiling",
             statement=(
-                "The pooled reliability ceiling at the Phase 6-8 fold size is about 0.88 "
-                "(descriptive arithmetic from the variance components)."
+                f"Under the Phase 10 sparse-coverage estimator the pooled reliability ceiling "
+                f"at the Phase 6-8 fold size is about {pooled_ceiling:.2f}; the coverage-aware "
+                f"Phase 11 value is 0.56."
             ),
-            status="supported",
+            status="not_supported",
             test="descriptive",
             estimate=pooled_ceiling if np.isfinite(pooled_ceiling) else None,
             margin=None,
@@ -203,9 +207,10 @@ def build_claims(reliability_summary: dict[str, Any]) -> list[Claim]:
                 "reports/phase10/ceiling_curve.csv",
             ),
             notes=(
-                "Descriptive: the value is computed from the fitted components at a fixed "
-                "animal count, not estimated from an independent sample. It is not a "
-                "sampling claim and carries no p-value."
+                "Coverage-sensitive: the Phase 10 estimator includes responders seen in one "
+                "animal. Requiring 80% responder coverage lowers the pooled ceiling from "
+                "0.833 to 0.560 (correction C8). The value is descriptive arithmetic, not a "
+                "sampling claim, and is retained only as a historical artifact."
             ),
         ),
         _superiority_claim(
@@ -269,8 +274,12 @@ def build_claims(reliability_summary: dict[str, Any]) -> list[Claim]:
             evidence=("docs/PHASE7_RESULTS.md", "reports/phase10/reliability_summary.json"),
             notes=(
                 "Superseded: the split-half ceiling of 0.152 is biased downward. Against "
-                "the metric-aligned fold ceiling (0.882) the CRO of 0.098 is about 11%; "
-                "against the single-animal ceiling (0.450) it is about 22%. Neither is 64%."
+                f"the Phase 10 fold ceiling ({fold_ceiling:.3f}) the CRO of 0.098 is about "
+                f"{100 * 0.0984 / fold_ceiling:.0f}%; against the coverage-aware ceiling "
+                f"({coverage_ceiling:.3f}) it is about "
+                f"{100 * 0.0984 / coverage_ceiling:.0f}%; against the single-animal ceiling "
+                f"({single_ceiling:.3f}) it is about {100 * 0.0984 / single_ceiling:.0f}%. "
+                f"Neither 64% nor the Phase 10 share is the current bound."
             ),
         ),
     ]

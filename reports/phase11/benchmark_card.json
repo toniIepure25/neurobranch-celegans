@@ -1,0 +1,77 @@
+{
+  "benchmark": "BoundedBench",
+  "ceiling": {
+    "estimand": "pooled_fold_profile",
+    "note": "Phase 10 sparse-coverage estimate (0.833) is not used as the card default; coverage sensitivity is reported in coverage_sensitivity.csv.",
+    "source": "sqrt(coverage-aware pooled reliability at n_eval=22, coverage 0.8)",
+    "value": 0.5600069018705827
+  },
+  "claim_statuses": {
+    "phase10-fold-ceiling": "not_supported",
+    "phase7-cro-share-of-ceiling": "not_supported",
+    "phase8-eig-selection": "bounded_null",
+    "phase8-pair-advantage": "underpowered",
+    "phase8-sequential-rollout": "not_supported",
+    "phase8-trajectory-advantage": "not_supported",
+    "phase9-repeat-ceiling-below-half": "supported",
+    "phase9-single-animal-ceiling-below-half": "supported"
+  },
+  "datasets": [
+    {
+      "license_status": "unresolved; see docs/LICENSE_AUDIT.md",
+      "name": "Randi et al. 2023 optogenetic atlas (derived trial table)",
+      "path": "reports/phase3/randi_trial_table_phase3.csv.gz",
+      "redistributed": false
+    },
+    {
+      "name": "Kato et al. 2015 whole-brain calcium imaging",
+      "path": "data/raw/kato2015/WT_NoStim.mat",
+      "redistributed": false,
+      "sha256": "7531811c1718e26a0455f59cb2f8188cf25809278cfea85770dfe03315a0098a"
+    }
+  ],
+  "description": "Measurement-bounded evaluation of C. elegans neural-response predictions. Scores are descriptive and must be read against the reliability ceiling.",
+  "evaluation": {
+    "fold_size": 22,
+    "n_folds": 5,
+    "primary_metric": "pair_spearman",
+    "secondary_metrics": [
+      "profile_spearman",
+      "coverage",
+      "interval_score"
+    ],
+    "split_manifest": {
+      "folds": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "n_animals": 103,
+      "n_folds": 5,
+      "path": "reports/phase11/splits.csv",
+      "sha256": "f8ea1d2123bacde4734324f5903bc76437dd02b02fe4e476893ed0664f199a80"
+    },
+    "split_seed": 41,
+    "split_unit": "animal"
+  },
+  "leaderboard": {
+    "best_ceiling_ratio": 0.1880955547144519,
+    "best_k": 16,
+    "best_model": "twin",
+    "best_pair_spearman": 0.10533480885126888,
+    "best_strategy": "random",
+    "caveat": "Folds share animals; deltas are descriptive, not animal-level intervals.",
+    "n_configurations": 11,
+    "twin_max_pair_spearman": 0.10533480885126888,
+    "unit": "fold"
+  },
+  "limitations": [
+    "Fold-level scores share animals and are not animal-generalisation estimates.",
+    "Virtual perturbation outputs are model-dependent and not causally validated.",
+    "The derived Randi trial table is not redistributed until its licence is confirmed."
+  ],
+  "schema_version": 1,
+  "version": "2.0"
+}

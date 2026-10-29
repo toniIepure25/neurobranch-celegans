@@ -287,12 +287,16 @@ def animal_half_replication(
     min_events: int = 1,
     min_animals: int = 6,
     seed: int = 17,
+    shrink: bool = False,
+    min_responder_coverage: float = 0.0,
 ) -> dict[str, float]:
     """Split animals in half and correlate per-target single-animal reliability.
 
     Both halves are scored with the ``n_eval = 1`` formula, so the comparison
     is not confounded by the different number of animals per half.  Targets
-    must be eligible in both halves.
+    must be eligible in both halves.  With ``shrink=True`` each half is
+    empirical-Bayes shrunk before correlation, which tests whether shrinkage
+    stabilises the ranking rather than merely improving the point estimates.
     """
     if n_splits < 2:
         raise ValueError("n_splits must be >= 2")
@@ -313,18 +317,48 @@ def animal_half_replication(
     for _ in range(n_splits):
         shuffled = rng.permutation(animals)
         halves = (set(shuffled[: shuffled.size // 2]), set(shuffled[shuffled.size // 2 :]))
-        per_half: list[dict[str, float]] = [{}, {}]
-        for target, group in groups.items():
-            for index, half in enumerate(halves):
+        per_half: list[pd.DataFrame] = []
+        for half in halves:
+            rows: list[dict[str, float | str]] = []
+            for target, group in groups.items():
                 subset = group[group["_animal"].isin(half)]
-                components = _profile_from_cells(subset, min_events=min_events, min_animals=min_animals)
+                components = _profile_from_cells(
+                    subset,
+                    min_events=min_events,
+                    min_animals=min_animals,
+                    min_responder_coverage=min_responder_coverage,
+                )
                 if components is not None:
-                    per_half[index][target] = components.single_animal_reliability
-        first = pd.Series(per_half[0])
-        second = pd.Series(per_half[1])
-        joined = pd.concat([first, second], axis=1, join="inner").dropna()
+                    rows.append(
+                        {
+                            "target": target,
+                            "single_animal_reliability": components.single_animal_reliability,
+                            "n_animals": float(components.n_animals),
+                        }
+                    )
+            per_half.append(pd.DataFrame(rows))
+        first, second = per_half
+        if first.empty or second.empty:
+            continue
+        if shrink:
+            from neurobranch.benchmark.reliability import shrink_reliability
+
+            first = shrink_reliability(first)
+            second = shrink_reliability(second)
+            column = "single_animal_reliability_shrunk"
+        else:
+            column = "single_animal_reliability"
+        joined = first[["target", column]].merge(
+            second[["target", column]], on="target", suffixes=("_first", "_second")
+        ).dropna()
         if len(joined) >= 3:
-            correlations.append(float(stats.spearmanr(joined.iloc[:, 0], joined.iloc[:, 1]).statistic))
+            correlations.append(
+                float(
+                    stats.spearmanr(
+                        joined[f"{column}_first"], joined[f"{column}_second"]
+                    ).statistic
+                )
+            )
             target_counts.append(len(joined))
     if not correlations:
         return {
@@ -345,9 +379,125 @@ def animal_half_replication(
     }
 
 
+def extrapolation_check(
+    frame: pd.DataFrame,
+    *,
+    n_splits: int = 25,
+    response: str = "response_mean",
+    animal: str = DEFAULT_ANIMAL_COLUMN,
+    min_events: int = 1,
+    min_animals: int = 6,
+    seed: int = 17,
+    min_responder_coverage: float = 0.8,
+) -> dict[str, float]:
+    """Test whether components fitted on one animal half predict held-out profiles.
+
+    Animals are split into A and B.  Components fitted on A predict the
+    reliability of both half-profiles at their own animal counts.  Under
+    independent errors, ``corr(profile_A, profile_B) = sqrt(rel_A * rel_B)``;
+    the observed Pearson correlation between the two half-mean profiles is
+    therefore an observable check on the extrapolation, not a self-comparison.
+    Responders are restricted to those observed in at least
+    ``min_responder_coverage`` of the target's animals before both halves are
+    scored; otherwise sparse coverage manufactures apparent shared signal.
+    """
+    if n_splits < 2:
+        raise ValueError("n_splits must be >= 2")
+    cells = cell_summaries(frame, response=response, animal=animal)
+    animals = np.array(sorted(cells["_animal"].dropna().unique()))
+    if animals.size < 2 * min_animals:
+        return {
+            "median_abs_error": float("nan"),
+            "bias": float("nan"),
+            "n_splits": 0.0,
+            "median_targets": float("nan"),
+            "median_observed_r": float("nan"),
+            "median_predicted_r": float("nan"),
+            "gate_passed": 0.0,
+        }
+    groups = {target: group for target, group in cells.groupby("_target", sort=False)}
+    rng = np.random.default_rng(seed)
+    split_errors: list[float] = []
+    split_bias: list[float] = []
+    observed_values: list[float] = []
+    predicted_values: list[float] = []
+    target_counts: list[int] = []
+    for _ in range(n_splits):
+        shuffled = rng.permutation(animals)
+        half_a = set(shuffled[: shuffled.size // 2])
+        half_b = set(shuffled[shuffled.size // 2 :])
+        errors: list[float] = []
+        for _target, group in groups.items():
+            pivot = group.pivot_table(index="_animal", columns="_neuron", values="mean", aggfunc="mean")
+            coverage = pivot.notna().sum(axis=0) / max(pivot.shape[0], 1)
+            keep = coverage >= min_responder_coverage
+            if int(keep.sum()) < 3:
+                continue
+            matched = group[group["_neuron"].isin(pivot.columns[keep])]
+            subset_a = matched[matched["_animal"].isin(half_a)]
+            subset_b = matched[matched["_animal"].isin(half_b)]
+            components_a = _profile_from_cells(
+                subset_a,
+                min_events=min_events,
+                min_animals=min_animals,
+                min_responder_coverage=min_responder_coverage,
+            )
+            components_b = _profile_from_cells(
+                subset_b,
+                min_events=min_events,
+                min_animals=min_animals,
+                min_responder_coverage=min_responder_coverage,
+            )
+            if components_a is None or components_b is None:
+                continue
+            profile_a = subset_a.groupby("_neuron")["mean"].mean()
+            profile_b = subset_b.groupby("_neuron")["mean"].mean()
+            joined = pd.concat([profile_a, profile_b], axis=1, join="inner").dropna()
+            if len(joined) < 3:
+                continue
+            if joined.iloc[:, 0].nunique() < 2 or joined.iloc[:, 1].nunique() < 2:
+                continue
+            correlation = float(stats.pearsonr(joined.iloc[:, 0], joined.iloc[:, 1]).statistic)
+            rel_a = components_a.reliability_at(components_a.n_animals)
+            rel_b = components_b.reliability_at(components_b.n_animals)
+            predicted = float(np.sqrt(max(rel_a * rel_b, 0.0)))
+            if not np.isfinite(correlation) or not np.isfinite(predicted):
+                continue
+            errors.append(correlation - predicted)
+            observed_values.append(correlation)
+            predicted_values.append(predicted)
+        if errors:
+            split_errors.append(float(np.mean(np.abs(errors))))
+            split_bias.append(float(np.mean(errors)))
+            target_counts.append(len(errors))
+    if not split_errors:
+        return {
+            "median_abs_error": float("nan"),
+            "bias": float("nan"),
+            "n_splits": 0.0,
+            "median_targets": float("nan"),
+            "median_observed_r": float("nan"),
+            "median_predicted_r": float("nan"),
+            "gate_passed": 0.0,
+        }
+    mae = float(np.median(split_errors))
+    bias = float(np.median(split_bias))
+    passed = float(mae <= 0.10 and abs(bias) <= 0.05)
+    return {
+        "median_abs_error": mae,
+        "bias": bias,
+        "n_splits": float(len(split_errors)),
+        "median_targets": float(np.median(target_counts)),
+        "median_observed_r": float(np.median(observed_values)),
+        "median_predicted_r": float(np.median(predicted_values)),
+        "gate_passed": passed,
+    }
+
+
 __all__ = [
     "SUMMARY_COLUMNS",
     "animal_half_replication",
     "animal_jackknife",
+    "extrapolation_check",
     "summary_sensitivity",
 ]

@@ -144,3 +144,61 @@ def attenuation_corrected_profile(
         out.loc[valid, "profile_spearman"] / out.loc[valid, "attenuation_ceiling"]
     )
     return out
+
+
+def _logit(values: np.ndarray) -> np.ndarray:
+    clipped = np.clip(values, 1e-6, 1.0 - 1e-6)
+    return np.log(clipped / (1.0 - clipped))
+
+
+def _expit(values: np.ndarray) -> np.ndarray:
+    return 1.0 / (1.0 + np.exp(-values))
+
+
+def shrink_reliability(
+    table: pd.DataFrame,
+    *,
+    value: str = "single_animal_reliability",
+    n_animals: str = "n_animals",
+) -> pd.DataFrame:
+    """Empirical-Bayes logit shrinkage of per-target reliability.
+
+    The sampling variance is approximated on the logit scale by
+    ``1 / (n * p * (1 - p))``.  Between-target variance is estimated by method
+    of moments and floored at zero; when it is zero every target is shrunk to
+    the population mean.  The raw column is preserved and the weight is
+    reported so a reader can see how much borrowing occurred.
+
+    This is a stabiliser, not a validated ranking method: the half-split
+    comparison in ``animal_half_replication(..., shrink=True)`` decides whether
+    it may be used.
+    """
+    for column in (value, n_animals):
+        if column not in table.columns:
+            raise KeyError(f"missing column: {column}")
+    out = table.copy()
+    out[f"{value}_shrunk"] = np.nan
+    out["shrink_weight"] = np.nan
+    rel = out[value].to_numpy(dtype=float)
+    n = out[n_animals].to_numpy(dtype=float)
+    ok = np.isfinite(rel) & np.isfinite(n) & (n > 0) & (rel > 0) & (rel < 1)
+    if not ok.any():
+        return out
+    y = _logit(rel[ok])
+    sampling_var = 1.0 / (n[ok] * rel[ok] * (1.0 - rel[ok]))
+    between = float(np.var(y, ddof=1) - np.mean(sampling_var)) if y.size > 1 else 0.0
+    tau2 = max(between, 0.0)
+    weight = np.zeros_like(y) if tau2 <= 0 else tau2 / (tau2 + sampling_var)
+    mean = float(np.mean(y))
+    shrunk = _expit(mean + weight * (y - mean))
+    out.loc[ok, f"{value}_shrunk"] = shrunk
+    out.loc[ok, "shrink_weight"] = weight
+    return out
+
+
+__all__ = [
+    "ReliabilitySummary",
+    "model_profile_correlation",
+    "shrink_reliability",
+    "split_half_target_profiles",
+]

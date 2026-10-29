@@ -16,6 +16,7 @@ import numpy as np
 import pandas as pd
 
 from neurobranch.benchmark.robustness import animal_jackknife
+from neurobranch.uncertainty import two_way_bootstrap
 
 
 def simulate_atlas(
@@ -28,10 +29,18 @@ def simulate_atlas(
     noise_sd: float = 1.0,
     interaction_sd: float = 0.5,
     seed: int = 17,
+    profile_seed: int | None = None,
 ) -> pd.DataFrame:
-    """Generate a synthetic atlas with known additive components."""
+    """Generate a synthetic atlas with known additive components.
+
+    ``profile_seed`` fixes the target profiles across replicates, so a coverage
+    study can condition on one target population instead of adding target
+    sampling variance to every replicate.
+    """
+    profiles = np.random.default_rng(seed if profile_seed is None else profile_seed).normal(
+        0.0, signal_sd, size=(n_targets, n_responders)
+    )
     rng = np.random.default_rng(seed)
-    profiles = rng.normal(0.0, signal_sd, size=(n_targets, n_responders))
     rows: list[dict[str, float | str]] = []
     for target_index in range(n_targets):
         for animal in range(n_animals):
@@ -135,4 +144,104 @@ def coverage_study(
     }
 
 
-__all__ = ["coverage_study", "simulate_atlas", "true_reliability"]
+def true_mean_reliability(
+    profiles: np.ndarray,
+    *,
+    noise_sd: float = 1.0,
+    interaction_sd: float = 0.5,
+    fold_size: int = 12,
+    n_events: int = 3,
+) -> float:
+    """Mean reliability for fixed target profiles."""
+    signal = np.var(profiles, axis=1, ddof=1)
+    error = float(noise_sd) ** 2 / float(n_events) + float(interaction_sd) ** 2
+    reliability = signal / (signal + error / float(fold_size))
+    return float(np.mean(reliability))
+
+
+def two_way_coverage_study(
+    *,
+    n_reps: int = 100,
+    n_boot: int = 100,
+    fold_size: int = 12,
+    n_animals: int = 12,
+    n_targets: int = 6,
+    n_responders: int = 8,
+    n_events: int = 3,
+    signal_sd: float = 1.0,
+    noise_sd: float = 1.0,
+    interaction_sd: float = 0.5,
+    seed: int = 23,
+) -> dict[str, float | str]:
+    """Coverage of the two-way bootstrap for a fixed synthetic target set."""
+    if n_reps < 10:
+        raise ValueError("n_reps must be >= 10")
+    profiles = np.random.default_rng(seed).normal(0.0, signal_sd, size=(n_targets, n_responders))
+    truth = true_mean_reliability(
+        profiles,
+        noise_sd=noise_sd,
+        interaction_sd=interaction_sd,
+        fold_size=fold_size,
+        n_events=n_events,
+    )
+    covered = 0
+    widths: list[float] = []
+    estimates: list[float] = []
+    for rep in range(n_reps):
+        frame = simulate_atlas(
+            n_animals=n_animals,
+            n_targets=n_targets,
+            n_responders=n_responders,
+            n_events=n_events,
+            signal_sd=signal_sd,
+            noise_sd=noise_sd,
+            interaction_sd=interaction_sd,
+            seed=seed + 1000 + rep,
+            profile_seed=seed,
+        )
+        result = two_way_bootstrap(
+            frame,
+            fold_size=fold_size,
+            n_boot=n_boot,
+            seed=seed + rep,
+            min_animals=6,
+        )
+        summary = result.summary
+        estimate = float(summary.get("mean_pooled_reliability", np.nan))
+        low = float(summary.get("pooled_ci_low", np.nan))
+        high = float(summary.get("pooled_ci_high", np.nan))
+        if not np.isfinite(estimate) or not np.isfinite(low) or not np.isfinite(high):
+            continue
+        estimates.append(estimate)
+        widths.append(high - low)
+        if low <= truth <= high:
+            covered += 1
+    if not estimates:
+        return {
+            "truth": truth,
+            "coverage": float("nan"),
+            "mean_width": float("nan"),
+            "bias": float("nan"),
+            "n_reps": 0.0,
+            "n_boot": float(n_boot),
+            "method": "two-way percentile bootstrap",
+        }
+    values = np.asarray(estimates, dtype=float)
+    return {
+        "truth": truth,
+        "coverage": covered / values.size,
+        "mean_width": float(np.mean(widths)),
+        "bias": float(values.mean() - truth),
+        "n_reps": float(values.size),
+        "n_boot": float(n_boot),
+        "method": "two-way percentile bootstrap",
+    }
+
+
+__all__ = [
+    "coverage_study",
+    "simulate_atlas",
+    "true_mean_reliability",
+    "true_reliability",
+    "two_way_coverage_study",
+]

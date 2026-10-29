@@ -1,0 +1,10 @@
+{
+  "bias": 0.01571572202522336,
+  "coverage": 0.8,
+  "gate_passed": 0.0,
+  "median_abs_error": 0.20980745205763876,
+  "median_observed_r": 0.18397446950495683,
+  "median_predicted_r": 0.057986327316036104,
+  "median_targets": 74.0,
+  "n_splits": 15.0
+}

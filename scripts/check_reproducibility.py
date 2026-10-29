@@ -40,6 +40,13 @@ def main(argv: list[str] | None = None) -> int:
         return 2
     manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
     failures: list[str] = []
+    checksum_path = args.reports / "manifest.sha256"
+    if checksum_path.exists():
+        expected_manifest = checksum_path.read_text(encoding="utf-8").split()[0]
+        if sha256(manifest_path) != expected_manifest:
+            failures.append("manifest.sha256 does not match manifest.json")
+        else:
+            print("ok: manifest.sha256")
 
     input_info = manifest.get("input") or {}
     input_path = input_info.get("path")

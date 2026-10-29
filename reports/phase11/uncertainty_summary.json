@@ -1,0 +1,21 @@
+{
+  "bias_vs_point": 0.22647712468594672,
+  "bootstrap_mean": 0.5400848548286351,
+  "fold_size": 22,
+  "interval_status": "failed_point_outside_interval",
+  "level": 0.95,
+  "mean_bootstrap_se_pooled": 0.24402646753487653,
+  "mean_pooled_reliability": 0.3136077301426884,
+  "mean_single_animal_reliability": 0.0340443190218451,
+  "method": "two-way percentile bootstrap (animals x responders)",
+  "min_responder_coverage": 0.8,
+  "n_boot": 300,
+  "n_bootstrap_failures": 0,
+  "n_targets": 126,
+  "point_estimate_in_interval": false,
+  "pooled_ci_high": 0.5826875194933205,
+  "pooled_ci_low": 0.49686692377144315,
+  "seed": 11,
+  "single_ci_high": 0.10674337820608548,
+  "single_ci_low": 0.08076902984096467
+}

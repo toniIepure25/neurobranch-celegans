@@ -1,0 +1,9 @@
+{
+  "bias": -0.009251251770834634,
+  "coverage": 1.0,
+  "mean_width": 0.18462852242520322,
+  "method": "two-way percentile bootstrap",
+  "n_boot": 100.0,
+  "n_reps": 100.0,
+  "truth": 0.9174240139635553
+}

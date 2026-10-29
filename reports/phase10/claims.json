@@ -59,11 +59,11 @@
       "margin": null,
       "mde": null,
       "n_eval_animals": 22,
-      "notes": "Descriptive: the value is computed from the fitted components at a fixed animal count, not estimated from an independent sample. It is not a sampling claim and carries no p-value.",
+      "notes": "Coverage-sensitive: the Phase 10 estimator includes responders seen in one animal. Requiring 80% responder coverage lowers the pooled ceiling from 0.833 to 0.560 (correction C8). The value is descriptive arithmetic, not a sampling claim, and is retained only as a historical artifact.",
       "p_holm": null,
       "p_value": null,
-      "statement": "The pooled reliability ceiling at the Phase 6-8 fold size is about 0.88 (descriptive arithmetic from the variance components).",
-      "status": "supported",
+      "statement": "Under the Phase 10 sparse-coverage estimator the pooled reliability ceiling at the Phase 6-8 fold size is about 0.83; the coverage-aware Phase 11 value is 0.56.",
+      "status": "not_supported",
       "test": "descriptive"
     },
     {
@@ -166,7 +166,7 @@
       "margin": null,
       "mde": null,
       "n_eval_animals": null,
-      "notes": "Superseded: the split-half ceiling of 0.152 is biased downward. Against the metric-aligned fold ceiling (0.882) the CRO of 0.098 is about 11%; against the single-animal ceiling (0.450) it is about 22%. Neither is 64%.",
+      "notes": "Superseded: the split-half ceiling of 0.152 is biased downward. Against the Phase 10 fold ceiling (0.833) the CRO of 0.098 is about 12%; against the coverage-aware ceiling (0.560) it is about 18%; against the single-animal ceiling (0.403) it is about 24%. Neither 64% nor the Phase 10 share is the current bound.",
       "p_holm": null,
       "p_value": null,
       "statement": "CRO reaches 64% of the split-half reliability ceiling.",

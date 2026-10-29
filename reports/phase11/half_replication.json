@@ -1,0 +1,18 @@
+{
+  "coverage": 0.8,
+  "raw": {
+    "ci_high": 0.36648538708149003,
+    "ci_low": 0.1100327076332096,
+    "median_spearman": 0.20917986687066675,
+    "median_targets": 74.0,
+    "n_splits": 15.0
+  },
+  "shrinkage_gate_passed": false,
+  "shrunk": {
+    "ci_high": NaN,
+    "ci_low": NaN,
+    "median_spearman": NaN,
+    "median_targets": 41.0,
+    "n_splits": 0.0
+  }
+}

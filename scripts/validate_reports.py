@@ -11,6 +11,7 @@ from __future__ import annotations
 import argparse
 import json
 import sys
+from importlib.resources import files
 from pathlib import Path
 
 import pandas as pd
@@ -42,10 +43,19 @@ def _schema_path(name: str, choices: tuple[str, ...], schema_version: int) -> Pa
     return SCHEMA_DIR / choices[0]
 
 
+def _schema_text(name: str, choices: tuple[str, ...], schema_version: int) -> str:
+    """Prefer the packaged copy so an installed wheel validates itself."""
+    filename = choices[1] if schema_version == 1 and len(choices) > 1 else choices[0]
+    try:
+        return files("neurobranch.schemas").joinpath(filename).read_text(encoding="utf-8")
+    except (ModuleNotFoundError, FileNotFoundError):
+        return _schema_path(name, choices, schema_version).read_text(encoding="utf-8")
+
+
 def _validate_json(report: Path, choices: tuple[str, ...], failures: list[str]) -> None:
     payload = json.loads(report.read_text(encoding="utf-8"))
     version = int(payload.get("schema_version", 1))
-    schema = json.loads(_schema_path(report.name, choices, version).read_text(encoding="utf-8"))
+    schema = json.loads(_schema_text(report.name, choices, version))
     validator = Draft202012Validator(schema)
     errors = sorted(validator.iter_errors(payload), key=lambda error: list(error.path))
     if errors:
