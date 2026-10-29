@@ -101,7 +101,9 @@ synthetic result is not used to certify the real-data interval.
 ## 6. Decision
 
 The benchmark card defaults to the coverage-aware ceiling (0.560), not 0.833.
-Phase 10 artifacts remain frozen and are labelled superseded for headline use.
+Phase 10 numeric artifacts remain frozen; only the generated claims ledger was
+regenerated to mark the ceiling coverage-sensitive. They are labelled
+superseded for headline use.
 The next analysis must use a hierarchical model with explicit responder
 coverage, or a prospective design with balanced coverage, before any interval is
 called calibrated.
