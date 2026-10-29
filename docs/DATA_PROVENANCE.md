@@ -201,3 +201,17 @@ The committed `reports/results_*.csv` and `figures/*` are generated from the
 artifacts by `neurobranch report`. They are **not** hand-edited. The
 `reports/epistemic_manifest.json` lists the standing caveats in machine-readable
 form.
+
+
+## Phase 11 input
+
+The Phase 11 sensitivity reads the derived Randi table at
+`reports/phase3/randi_trial_table_phase3.csv.gz`:
+
+- rows: 237,639
+- animals: 110
+- SHA-256: `8186c96bcb33cdce15dc9ae88691e09fc596e42c5513310b6d6a636e4d5dd515`
+
+The table is not tracked in Git and is not redistributed until its upstream
+licence is confirmed (see [`LICENSE_AUDIT.md`](LICENSE_AUDIT.md)). The hash is
+also recorded in `reports/phase11/summary.json` and `manifest.json`.

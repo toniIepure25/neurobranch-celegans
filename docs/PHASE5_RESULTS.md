@@ -94,7 +94,7 @@ held-out prevalence, not a trained model.
 
 ## 4. Online-prospective results
 
-![Online AUROC](../reports/phase5/figures/online_auroc.png)
+![Online AUROC](assets/online_auroc.png)
 
 The online test uses a causal reversal onset and fixed elapsed landmarks
 (0.6–7.2 s). A sample is admitted only when the reversal has not ended by the

@@ -65,7 +65,7 @@ resamples are used for paired deltas.
 
 ## Results
 
-![Online AUROC by landmark](../reports/phase5/figures/online_auroc.png)
+![Online AUROC by landmark](assets/online_auroc.png)
 
 Held-out event log loss is the prespecified primary metric. Negative Δ means the
 neural model is better than behaviour; positive means worse. AUROC is secondary.

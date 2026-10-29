@@ -6,7 +6,7 @@
 **Version:** Dryad dataset 183044, version 2 (id 436401), published 2026-04-15
 **Licence:** CC0-1.0
 **Raw archive:** 30 files, 320,032,093 bytes, SHA256 recorded per file in
-[`dataset_manifest.json`](../reports/phase3/dataset_manifest.json)
+`reports/phase3/dataset_manifest.json`
 
 The raw files are downloaded into `data/raw/baskoylu2026/files/` and remain
 untracked. The manifest and all derived audit tables are tracked under
@@ -102,7 +102,7 @@ All 27 animals passed structural QC:
 Exclusion rules were structural only: unreadable file, non-monotonic time,
 missing behaviour, or fewer than 5 events. No animal was excluded for model
 performance. Per-animal values are in
-[`dataset_coverage.csv`](../reports/phase3/dataset_coverage.csv).
+`reports/phase3/dataset_coverage.csv`.
 
 The 31.3% reversal occupancy explains why a 6 s horizon has ~35% positive
 prevalence among non-reversing frames: reversals are clustered, not rare point
@@ -116,7 +116,7 @@ variable-length compound, and both h5py 3.16/HDF5 2.0 and h5py 3.12/HDF5 1.14
 raise `OSError: Can't synchronously read data (ran off end of input buffer while
 decoding)`. Installing an older h5py did not fix it. The JLD2 dictionary was
 therefore converted once with Julia 1.9.2 + JLD2.jl by
-[`scripts/export_neuropal.jl`](../scripts/export_neuropal.jl).
+`scripts/export_neuropal.jl`.
 
 The export was checked against the Julia example structure:
 

@@ -1,0 +1,8 @@
+evidence_id,doi,pmid,title,type,status,verified_on,supports,notes
+E01,10.1037/0033-2909.86.2.420,,Shrout & Fleiss 1979 intraclass correlations,peer-reviewed methods,verified,2026-10-23,reliability as variance decomposition,no PMID indexed in Europe PMC
+E02,10.1038/nrn3475,23571845,Button et al. 2013 power failure in neuroscience,peer-reviewed review,verified-with-erratum,2026-10-23,design resolution and unstable estimates,Erratum 2013;14(6):451; no retraction
+E03,10.1073/pnas.1708274114,29531091,Nosek et al. 2018 preregistration,peer-reviewed perspective,verified,2026-10-23,confirmatory vs exploratory claims,no notice checked
+E04,10.1111/j.2517-6161.1995.tb02031.x,,Benjamini & Hochberg 1995 FDR,peer-reviewed methods,verified,2026-10-23,multiplicity control,DOI verified
+E05,10.1038/s41586-023-06683-4,37914938,Randi et al. 2023 optogenetic atlas,peer-reviewed dataset,verified,2026-10-23,source atlas,no recorded notice
+E06,10.1016/j.cell.2015.09.034,26478179,Kato et al. 2015 whole-brain dynamics,peer-reviewed dataset,verified,2026-10-23,calcium imaging source,verified
+E07,10.1214/23-ba1404,41049725,Modrak et al. 2025 simulation-based calibration,peer-reviewed methods,verified,2026-10-23,calibration study design,no recorded notice

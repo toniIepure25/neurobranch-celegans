@@ -1,0 +1,23 @@
+{
+  "captions": {
+    "figure_coverage_sensitivity.png": "Pooled reliability and its attenuation ceiling at 22 animals as responders with incomplete animal coverage are excluded."
+  },
+  "generated_from": {
+    "claims": "reports\\phase10\\claims.json",
+    "coverage_sensitivity": "reports\\phase11\\coverage_sensitivity.csv",
+    "leaderboard": "reports\\phase11\\leaderboard.csv"
+  },
+  "hashes": {
+    "README.md": "543c1cdc0bc2ab25be08b36e92870941926e563d9863652d0678734a26a8663a",
+    "figure_ceiling_curve_phase10.png": "ed35c1d38741b33a750fe2fea990a3ca7581394aca471e249a00bede4915de8a",
+    "figure_coverage_sensitivity.png": "6ee3ff0349c94c1c123143b1e0995df9b169de16cf86701911e7dfc94df3f162",
+    "table_claims.csv": "86a542601a71b9a7dff0bcc81906ac4e6388c13c61ceac8e5803d6216f5f813b",
+    "table_claims.md": "af50fb1a70f39fc31c48d3086a1d5d59229d8c37f35f7ff8194421c1dc653dad",
+    "table_coverage_sensitivity.csv": "82abfeb04e2abb45343f1c3bcd1a4b517f1755334f8017a1210c0d54d4b9b8f6",
+    "table_coverage_sensitivity.md": "150d377087e89819699efd3a0f3b59d46b99ccf78fe1ef9fae11e5810057bad6",
+    "table_design_budget.csv": "c6705e2a2e37164d0c350347255d036e6e8e22c5096190654c11e3bea60a64e3",
+    "table_design_budget.md": "b57a93bf3a6f082c49cc512c30b858d5439aae869f9f4ce105ec4f90cbb127d9",
+    "table_leaderboard.csv": "64c1c24ea23184e270f4388abcb8b97a33c948e32044a610791bf26eba860dd2",
+    "table_leaderboard.md": "9c64648d1d33eb6ff85efaba0240ab42a0ce7922b54d085d237feb74dda78c35"
+  }
+}

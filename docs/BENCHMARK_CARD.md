@@ -1,4 +1,8 @@
-# Benchmark card: BoundedBench (NeuroBranch 1.0.0)
+# Benchmark card: BoundedBench (NeuroBranch 1.1.0)
+
+> **Phase 11 update.** The machine-readable card at
+> `reports/phase11/benchmark_card.json` uses the coverage-aware ceiling
+> **0.560**, not the Phase 10 0.833. The values below are the Phase 10 record.
 
 A benchmark card states what a benchmark measures, what it does not measure,
 and how a reader can reproduce it. This card covers the Phase 6-10 evaluation
@@ -74,13 +78,19 @@ against the measurement ceiling.
   interval.
 - No per-target reliability interval is reported because the estimator is a
   variance ratio with few animals per target.
+- The Phase 11 two-way percentile bootstrap failed its own diagnostic: the
+  point estimate (0.314) fell outside the interval ([0.497, 0.583]) because
+  resampling sparse responder rows inflates reliability. It is **not** a
+  calibrated interval.
 
 ## Known failure modes
 
 1. **Facet-dependent ceiling.** Single-animal reliability is 0.162 (ceiling
    0.403); a per-animal correlation above ~0.40 is not attainable with this
-   atlas. Pooled over 22 animals, reliability is 0.693 and the ceiling is 0.833.
-   Comparing a pooled metric to the single-animal ceiling is an error.
+   atlas. Pooled over 22 animals at 80% responder coverage, reliability is
+   0.314 and the ceiling is 0.560 (the Phase 10 sparse-coverage values were
+   0.693 and 0.833). Comparing a pooled metric to the single-animal ceiling is
+   an error.
 2. **Few events per target.** Targets with few stimulations have unstable
    profiles; the reliability table reports counts so readers can filter.
 3. **Target selection.** Exclusion of low-coverage targets changes the target

@@ -1,3 +1,8 @@
+> **Superseded for headline use (C8).** The pooled ceiling 0.833 below depends on
+> sparse responder coverage. The coverage-aware Phase 11 ceiling is **0.560**;
+> see [`PHASE11_RESULTS.md`](PHASE11_RESULTS.md). This page is retained as the
+> historical Phase 10 record.
+
 # Phase 10 results: metric-aligned measurement ceilings
 
 **Status:** complete for the ceiling correction and robustness audit; the

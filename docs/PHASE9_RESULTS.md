@@ -34,7 +34,7 @@ Only 13.2% of targets reach repeat reliability 0.5; only 4.0% reach
 single-animal reliability 0.5. Intervals are target-level normal approximations
 and ignore animal sharing, so they are optimistic about precision.
 
-![Reliability distribution](../reports/phase9/reliability_distribution.png)
+![Reliability distribution](assets/reliability_distribution.png)
 
 *If the figure is absent, run `python scripts/phase9_figure.py`; the numbers
 above come from `reports/phase9/reliability_by_target.csv` and do not depend on

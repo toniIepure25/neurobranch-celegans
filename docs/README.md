@@ -4,8 +4,13 @@ Start here if you are reading the project for the first time.
 
 ## Current results
 
+- [PHASE11_RESULTS.md](PHASE11_RESULTS.md) - coverage-aware ceiling (0.560),
+  failed extrapolation/shrinkage/bootstrap gates. **Current numbers.**
+- [PHASE11_ANALYSIS_PLAN.md](PHASE11_ANALYSIS_PLAN.md) - gates fixed before the
+  sensitivity run.
 - [PHASE10_RESULTS.md](PHASE10_RESULTS.md) - metric-aligned ceilings, robustness,
-  design budget and the calibration failure. **Current numbers.**
+  design budget and the calibration failure. Historical; pooled ceiling
+  superseded by C8.
 - [PHASE10_ANALYSIS_PLAN.md](PHASE10_ANALYSIS_PLAN.md) - estimands and decision
   rules fixed before the Phase 10 recomputation.
 - [DESIGN_ENGINE.md](DESIGN_ENGINE.md) - animal-budget calculator and why the

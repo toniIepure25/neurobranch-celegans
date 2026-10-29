@@ -725,7 +725,8 @@ Expected on this machine:
 - Design script: under 10 s.
 - Single-animal mean reliability 0.162, ceiling 0.403.
 - Repeat mean 0.243, ceiling 0.493.
-- Pooled at 22 animals: mean 0.693, ceiling 0.833.
+- Pooled at 22 animals: mean 0.693, ceiling 0.833 (sparse-coverage; superseded
+  by Phase 11's 0.560 at 80% coverage).
 - Half-replication median Spearman about 0.00 (interval includes zero).
 - Jackknife standard error about 0.27; interval [0.165, 1.000] - fragile.
 - Coverage study about 0.60 at nominal 0.95 - a negative result, not a bug to
@@ -735,5 +736,36 @@ Expected on this machine:
 manifest, the schema versions and the Phase 9 manifest link. It does **not**
 rerun the analysis; rerun the scripts for that.
 
-The app tab **BoundedBench** reads `reports/phase10/` when present and falls
-back to `reports/phase9/`.
+The app tab **BoundedBench** prefers `reports/phase11/`, then falls back to
+`reports/phase10/` and `reports/phase9/`, and shows the manifest revision and
+dirty state.
+
+## 18. Phase 11: coverage sensitivity
+
+Same input table as Phase 10. The script writes coverage sensitivity, the
+half-replication and extrapolation audits, the two-way bootstrap, the synthetic
+coverage study and a summary:
+
+```powershell
+python scripts/phase11_sensitivity.py
+python scripts/phase11_benchmark.py
+python scripts/phase11_manifest.py
+python scripts/audit_claims.py
+python scripts/check_reproducibility.py --reports reports/phase11 --allow-missing-input
+```
+
+Expected on this machine (about 200 s for the sensitivity script):
+
+- Coverage 0.0: pooled reliability 0.693, ceiling 0.833.
+- Coverage 0.8: pooled reliability 0.314, ceiling 0.560.
+- Coverage 1.0: 79 targets, reliability 0.207, ceiling 0.455.
+- Extrapolation gate fails: median absolute error 0.210, bias +0.016.
+- Shrinkage gate fails; no target ranking is published.
+- Two-way bootstrap interval [0.497, 0.583] excludes the point estimate 0.314;
+  the interval is labelled failed and is not calibrated.
+- Synthetic coverage 1.000, width 0.185, bias -0.009 (conservative).
+- Benchmark card uses 0.560, not 0.833.
+
+Artifacts are in `reports/phase11/`; the manifest and `manifest.sha256` are
+regenerated last. `--allow-missing-input` is required in CI because the derived
+Randi table is not redistributed.

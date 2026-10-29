@@ -58,12 +58,12 @@ carry no p-value and are not in a family.
 | --- | --- | --- | ---: | --- | --- |
 | `phase9-single-animal-ceiling-below-half` | Single-animal reliability < 0.5 | single_animal | 0.162 | [0.134, 0.191] | supported |
 | `phase9-repeat-ceiling-below-half` | Repeat reliability < 0.5 | repeat | 0.243 | [0.206, 0.279] | supported |
-| `phase10-fold-ceiling` | Pooled ceiling at 22 animals is about 0.83 | pooled_fold | 0.833 | descriptive | supported |
+| `phase10-fold-ceiling` | Phase 10 sparse-coverage ceiling is about 0.83; coverage-aware value is 0.56 | pooled_fold | 0.833 | descriptive | not supported (coverage-sensitive; C8) |
 | `phase8-pair-advantage` | APT(k=0) beats static CRO at pair level | superiority | +0.0442 | [+0.0080, +0.0901] | underpowered (MDE 0.0587 > SESOI 0.020; Holm p = 0.070) |
 | `phase8-trajectory-advantage` | APT(k=0) beats per-responder template | superiority | −0.0000066 | — | not supported |
 | `phase8-sequential-rollout` | 3-event rollout beats persistence | superiority | +0.0230 | — | not supported (coverage 0.904 < 0.95) |
 | `phase8-eig-selection` | EIG selection beats random at k=8 | superiority | −0.0038 | [−0.0070, +0.0026] | bounded null (±0.01) |
-| `phase7-cro-share-of-ceiling` | CRO reaches 64% of the ceiling | descriptive | 0.0984 | — | not supported (superseded; true share 11.8%) |
+| `phase7-cro-share-of-ceiling` | CRO reaches 64% of the ceiling | descriptive | 0.0984 | — | not supported (superseded; coverage-aware share 17.6%) |
 
 ## What is never claimed
 

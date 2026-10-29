@@ -63,7 +63,7 @@ implementation is not numerically identical.
 
 ## Results
 
-![Offline protocol AUROC](../reports/phase5/figures/protocol_auroc.png)
+![Offline protocol AUROC](assets/protocol_auroc.png)
 
 Held-out event metrics; log loss is primary. Prior reference is the descriptive
 entropy of the held-out prevalence, not a trained model.

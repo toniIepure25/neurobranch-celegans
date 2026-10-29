@@ -1,9 +1,10 @@
 # Measurement limits of the C. elegans perturbation atlas
 
 This note explains what a reliability ceiling is, which facet each metric
-belongs to, and how to use the ceiling when comparing models. All numbers come
-from `reports/phase10/` and supersede the Phase 9 values (see
-`docs/CORRECTIONS.md`, C6 and C7).
+belongs to, and how to use the ceiling when comparing models. The Phase 10
+numbers below are retained for derivation, but the headline pooled ceiling is
+superseded by the coverage-aware Phase 11 value **0.560** (see
+[`PHASE11_RESULTS.md`](PHASE11_RESULTS.md) and C8).
 
 ## The attenuation ceiling in one paragraph
 

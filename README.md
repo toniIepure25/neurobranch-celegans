@@ -12,7 +12,28 @@ perturbation** on real calcium imaging and optogenetic atlases.
 > `interventions/safety.py` refuses to label any output as empirically
 > validated without a matched, provenance-checked intervention dataset.
 
-## What version 1.0.0 adds: metric-aligned evaluation
+## What version 1.1.0 adds: coverage sensitivity (read before the Phase 10 table)
+
+The Phase 10 pooled ceiling is **not robust to sparse responder coverage**. A
+responder observed in one animal contributes to the pooled profile but has no
+between-animal variance to subtract, inflating apparent signal. Requiring each
+responder to be present in at least 80% of a target's animals lowers the pooled
+ceiling from 0.833 to **0.560** at 22 animals:
+
+| Minimum responder coverage | Pooled reliability | Ceiling |
+| --- | ---: | ---: |
+| 0.0 (Phase 10) | 0.693 | 0.833 |
+| 0.5 | 0.414 | 0.643 |
+| 0.8 | 0.314 | **0.560** |
+| 1.0 | 0.207 | 0.455 |
+
+The Phase 11 extrapolation gate also failed (median absolute error 0.210), and
+the two-way bootstrap interval excluded its own point estimate (0.314 vs
+[0.497, 0.583]). Neither is used as a calibrated interval. See
+[`docs/PHASE11_RESULTS.md`](docs/PHASE11_RESULTS.md) and correction C8. Phase 10
+numbers below are retained as a historical record, not as the headline.
+
+## What version 1.0.0 added: metric-aligned evaluation (historical)
 
 Version 1.0.0 attaches every number to the estimand it actually describes. The
 Phase 9 audit correctly found that the atlas is measurement-limited for
@@ -24,7 +45,7 @@ defects (sparse-responder denominators and a double-counted interaction term).
 | --- | ---: | --- | ---: |
 | Repeat reliability (within animal) | 0.243 | [0.206, 0.279] | 0.493 |
 | Single-animal reliability | 0.162 | [0.134, 0.191] | 0.403 |
-| Pooled over 22 animals (Phase 6-8 fold) | 0.693 | [0.653, 0.734] | 0.833 |
+| Pooled over 22 animals (Phase 6-8 fold, sparse coverage) | 0.693 | [0.653, 0.734] | 0.833 |
 | Pooled over all 110 animals | 0.873 | [0.837, 0.909] | 0.934 |
 
 The consequence is narrow and important. Claims about one animal are severely

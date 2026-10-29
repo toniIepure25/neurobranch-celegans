@@ -267,3 +267,21 @@ generalization claim.
   not observations.
 - None of these results identifies a mechanism, a causal effect, or a digital
   twin.
+
+
+## 11. Coverage and uncertainty limitations (Phase 11)
+
+- The pooled ceiling is sensitive to responder coverage: 0.833 with all
+  responders, 0.560 when each responder must be observed in at least 80% of a
+  target's animals. The latter is the card default; it is a descriptive bound,
+  not a population parameter.
+- The extrapolation gate failed (median absolute error 0.210, bias +0.016), so
+  the curve beyond the observed animal count is not validated.
+- The two-way percentile bootstrap is biased upward on the real atlas: the
+  point estimate 0.314 falls outside [0.497, 0.583]. It is not a calibrated
+  interval and is not used for claims.
+- The synthetic coverage study (coverage 1.000, width 0.185) is conservative
+  under an additive model with balanced coverage; it does not validate the
+  real-data interval.
+- Empirical-Bayes shrinkage does not recover target rankings at coverage 0.8;
+  no ranking is published.

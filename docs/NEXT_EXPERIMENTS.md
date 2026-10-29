@@ -239,3 +239,29 @@ optimiser built on an unverified ceiling would optimise noise.
 5. **Extrapolation audit.** For the 87 targets with fewer than 22 animals, test
    whether the fitted curve predicts held-out reliability at the observed
    maximum; this is the only honest check of the extrapolated region.
+
+
+## 10. Coverage-balanced reanalysis (Phase 11 follow-up)
+
+**Question.** Is the pooled reliability ceiling a property of the atlas, or of
+the responder-coverage pattern?
+
+**Design.** Fit a hierarchical model with an explicit responder-observation
+indicator and animal random effects, then compare its implied ceiling at 80%
+coverage with the moment estimate (0.560). Evaluate with a prospective split:
+hold out animals, not responders, and check posterior predictive coverage on the
+held-out animal profiles. Report the full coverage-sensitivity curve, not one
+point.
+
+**Decision rule.** Adopt the hierarchical ceiling only if (a) its synthetic
+coverage is in [0.93, 0.97], (b) it reproduces the 0.560 point estimate within
+0.05, and (c) the animal-holdout predictive interval contains the observed
+profile correlation. If it fails, keep 0.560 as a descriptive bound and do not
+rank targets.
+
+**Cost.** Medium: one modelling pass plus a calibration simulation. No new
+animals required.
+
+**Kill criterion.** If the model cannot reproduce the coverage sensitivity
+without target-specific tuning, stop; the moment estimate remains the
+transparent bound.

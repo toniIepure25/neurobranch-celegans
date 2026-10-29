@@ -76,7 +76,7 @@ fixed. That is a useful cautionary contribution.
 | C13 | Turn-direction dynamics, PCA trajectories, peak timing and model-dependent controls | Immediate pre-offset behaviour dominates; no identity-specific neural effect |
 | C14 | Source-audited SAAV reconstruction with four offline regimes and a causal-onset online benchmark | Original-style SAAV AUROC 0.540; no properly scored animal-disjoint increment; exact reproduction blocked |
 | C11 | Cross-animal one-step dynamics probe | Behaviour beats persistence; neural does not |
-| C15 | Metric-aligned reliability ceilings and design budget; explicit correction of a facet mismatch | Single animal 0.162/0.403; pooled 22 animals 0.693/0.833; target rankings unstable; jackknife not calibrated |
+| C15 | Metric-aligned reliability ceilings and design budget; explicit correction of a facet mismatch | Single animal 0.162/0.403; pooled 22 animals 0.314/0.560 at 80% coverage (Phase 10 sparse value 0.693/0.833); target rankings unstable; jackknife and two-way bootstrap not calibrated |
 
 ---
 

@@ -102,9 +102,14 @@ mean has a different attenuation ceiling, and that ceiling depends on the
 number of animals pooled. The single-animal ceiling applies only to per-animal
 claims.
 
-**Correct:** the metric-aligned pooled ceiling at 22 animals is 0.833. The CRO
-of 0.098 is therefore about **11.8%** of its ceiling, not 21% and not 64%. The
-single-animal ceiling is 0.403 and applies to individual-level claims only.
+**Correct (Phase 10):** the metric-aligned pooled ceiling at 22 animals is
+0.833. The CRO of 0.098 is therefore about **11.8%** of its ceiling, not 21% and
+not 64%. The single-animal ceiling is 0.403 and applies to individual-level
+claims only.
+
+**Superseded by C8:** the 0.833 value is itself coverage-sensitive. Requiring
+responders to be observed in at least 80% of animals lowers the pooled ceiling
+to 0.560, so the CRO is about 17.6% of the coverage-aware ceiling.
 
 **Evidence:** `docs/PHASE10_RESULTS.md`, `reports/phase10/ceiling_curve.csv`,
 `reports/phase10/reliability_summary.json`.
@@ -141,3 +146,39 @@ single-animal reliability is **0.162** (95% target-level interval
 reported. The conclusion that the atlas is measurement-limited for
 single-animal claims is strengthened; the pooled-metric conclusion is not
 affected in direction, only in magnitude.
+
+
+## C8. The Phase 10 pooled ceiling depends on sparse responder coverage
+
+**Was claimed:** the pooled reliability ceiling at 22 animals is 0.833, and the
+CRO reaches about 11.8% of it.
+
+**What happened:** the Phase 10 estimator included every responder, including
+neurons observed in a single animal. A responder measured once contributes to
+the pooled profile but has no between-animal sampling variance to subtract, so
+apparent shared signal is inflated. Phase 11 repeated the estimate while
+requiring each responder to be observed in a minimum fraction of the target's
+animals:
+
+| Minimum coverage | Pooled reliability | Ceiling | Targets |
+|---:|---:|---:|---:|
+| 0.0 (Phase 10) | 0.693 | 0.833 | 126 |
+| 0.5 | 0.414 | 0.643 | 126 |
+| 0.8 | 0.314 | **0.560** | 126 |
+| 1.0 | 0.207 | 0.455 | 79 |
+
+**Correct:** the defensible descriptive ceiling is **0.560** at 80% coverage;
+the Phase 10 value 0.833 is a sparse-coverage historical estimate. The CRO of
+0.098 is about **17.6%** of 0.560. The Phase 11 extrapolation gate also failed
+(MAE 0.210, bias +0.016), so the curve beyond the observed animal count is not
+validated.
+
+**Evidence:** `docs/PHASE11_RESULTS.md`,
+`reports/phase11/coverage_sensitivity.csv`,
+`reports/phase11/extrapolation.json`,
+`reports/phase11/summary.json`.
+
+**Impact:** the headline pooled ceiling is withdrawn as a general estimate.
+This is unfavourable to the project: the coverage-aware measurement limit is
+lower, and the model is closer to it than Phase 10 reported. No claim is
+upgraded; Phase 8 statuses are unchanged.
