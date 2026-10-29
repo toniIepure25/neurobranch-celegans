@@ -70,7 +70,11 @@
   "limitations": [
     "Fold-level scores share animals and are not animal-generalisation estimates.",
     "Virtual perturbation outputs are model-dependent and not causally validated.",
-    "The derived Randi trial table is not redistributed until its licence is confirmed."
+    "The derived Randi trial table is not redistributed until its licence is confirmed.",
+    "Coverage filtering changes the responder population; 0.560 is not a bias-corrected 0.833.",
+    "The two-way bootstrap is biased on sparse real data and is not a calibrated interval.",
+    "The extrapolation gate failed; the curve beyond observed animals is not validated.",
+    "Target rankings do not replicate and are not published."
   ],
   "schema_version": 1,
   "version": "2.0"

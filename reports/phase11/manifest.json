@@ -1,6 +1,6 @@
 {
   "artifacts": {
-    "benchmark_card.json": "8e218f39947ba7f02ede8ff5c36d536eea8e9e64765696ef39b654d66551489b",
+    "benchmark_card.json": "6162bbb4e770d8cce25b6b38888d7a16f24ebe2b5fe22c8ccc337fec041e546c",
     "coverage_sensitivity.csv": "70aa4c5884afdd870c285c32ec7d00e0bb0f2b51fe331bb400ec388e0b3719b0",
     "coverage_study.json": "171cb61d31d77b4bb81af3e26e96e7484d05688368539c997fcd6e248fa5860f",
     "extrapolation.json": "2f724d18077c7d2be7c6803f8a8f9e4f04dba190095ed2d1697781d8c65f9f27",
@@ -12,9 +12,9 @@
     "uncertainty_by_target.csv": "3b4657d607429ea7ca9dc46a97dd7327e6425a552f1a376796fdc8f23c7afd19",
     "uncertainty_summary.json": "b9ec3b21b13af4e4fddb41350cdabcd84e06a181c27e90e1b8c214c3eec8dded"
   },
-  "created_utc": "2026-10-29T14:09:20+00:00",
-  "git_dirty": false,
-  "git_revision": "46b9b312b7715734d792dbb95e8dddec3b921916",
+  "created_utc": "2026-10-29T14:12:26+00:00",
+  "git_dirty": true,
+  "git_revision": "9f79536ff860a7c6745d6e7f3d0509305c5019a3",
   "input": {
     "n_rows": 237639,
     "path": "reports\\phase3\\randi_trial_table_phase3.csv.gz",
