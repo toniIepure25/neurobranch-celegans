@@ -1118,36 +1118,82 @@ with tabs[12]:
         st.caption("Run `python scripts/phase8_run.py --config configs/phase8/apt.yaml`.")
 
 with tabs[13]:
-    st.subheader("BoundedBench: metric-aligned ceiling and claim status")
+    st.subheader("BoundedBench: measurement ceiling and claim status")
+    phase11 = ROOT / "reports" / "phase11"
     phase10 = ROOT / "reports" / "phase10"
     phase9 = ROOT / "reports" / "phase9"
-    report_dir = phase10 if (phase10 / "reliability_summary.json").exists() else phase9
-    summary_path = report_dir / "reliability_summary.json"
-    claims_path = report_dir / "claims.json"
-    table_path = report_dir / "reliability_by_target.csv"
-    curve_path = report_dir / "ceiling_curve.csv"
-    if summary_path.exists():
-        summary = json.loads(summary_path.read_text(encoding="utf-8"))
-        is_v2 = summary.get("schema_version") == 2
+    card_path = phase11 / "benchmark_card.json"
+    sensitivity_path = phase11 / "coverage_sensitivity.csv"
+    manifest_path = phase11 / "manifest.json"
+    if card_path.exists() and sensitivity_path.exists():
+        card = json.loads(card_path.read_text(encoding="utf-8"))
+        sensitivity = pd.read_csv(sensitivity_path)
+        row = sensitivity[sensitivity["min_responder_coverage"] == 0.8].iloc[0]
         c1, c2, c3, c4 = st.columns(4)
-        c1.metric("Repeat reliability", f"{summary['mean_repeat_reliability']:.3f}")
-        c2.metric("Single-animal reliability", f"{summary['mean_animal_reliability']:.3f}")
-        c3.metric("Single-animal ceiling", f"{summary['mean_animal_ceiling']:.3f}")
-        if is_v2:
-            c4.metric(
-                f"Pooled ceiling (n={int(summary['fold_size'])})",
-                f"{summary['pooled_ceiling_at_fold']:.3f}",
+        c1.metric("Pooled reliability (80% coverage)", f"{row['pooled_reliability_at_fold']:.3f}")
+        c2.metric("Pooled ceiling", f"{row['pooled_ceiling_at_fold']:.3f}")
+        c3.metric("Targets", f"{int(row['n_targets'])}")
+        c4.metric("Best pair Spearman", f"{card['leaderboard']['best_pair_spearman']:.3f}")
+        st.caption(
+            "Coverage-aware Phase 11 values. The Phase 10 sparse-coverage ceiling (0.833) "
+            "is shown below only as a historical comparison; the extrapolation gate failed."
+        )
+        provenance = {
+            "benchmark": card["benchmark"],
+            "version": card["version"],
+            "ceiling": card["ceiling"]["value"],
+            "git_revision": "unknown",
+            "git_dirty": "unknown",
+            "manifest_sha256": "missing",
+        }
+        if manifest_path.exists():
+            manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+            provenance["git_revision"] = str(manifest.get("git_revision", "unknown"))[:12]
+            provenance["git_dirty"] = str(manifest.get("git_dirty", "unknown"))
+            checksum_path = phase11 / "manifest.sha256"
+            if checksum_path.exists():
+                provenance["manifest_sha256"] = checksum_path.read_text(encoding="utf-8").split()[0][:12]
+        st.caption(
+            "Card {version} | ceiling {ceiling:.3f} | git {git_revision} | dirty {git_dirty} | "
+            "manifest {manifest_sha256}".format(**provenance)
+        )
+        if provenance["git_dirty"] == "True":
+            st.warning("Artifacts were generated from a dirty worktree; treat the provenance as provisional.")
+        summary = None
+        curve_path = phase10 / "ceiling_curve.csv"
+        table_path = phase10 / "reliability_by_target.csv"
+        claims_path = phase10 / "claims.json"
+    else:
+        report_dir = phase10 if (phase10 / "reliability_summary.json").exists() else phase9
+        summary_path = report_dir / "reliability_summary.json"
+        claims_path = report_dir / "claims.json"
+        table_path = report_dir / "reliability_by_target.csv"
+        curve_path = report_dir / "ceiling_curve.csv"
+        summary = None
+        if summary_path.exists():
+            summary = json.loads(summary_path.read_text(encoding="utf-8"))
+            st.warning(
+                "Phase 11 artifacts are absent; showing the historical Phase 10/9 report. "
+                "Its pooled ceiling is coverage-sensitive."
             )
-            st.caption(
-                "The pooled ceiling applies to profiles averaged over evaluation animals. "
-                "The single-animal ceiling applies only to per-animal claims."
-            )
-        else:
-            c4.metric("Fold size", "-")
-            st.caption(
-                "Phase 9 report: the single-animal ceiling is shown without the pooled "
-                "estimand. Regenerate with the Phase 10 scripts for the metric-aligned view."
-            )
+    if (card_path.exists() and sensitivity_path.exists()) or summary is not None:
+        if summary is not None:
+            is_v2 = summary.get("schema_version") == 2
+            c1, c2, c3, c4 = st.columns(4)
+            c1.metric("Repeat reliability", f"{summary['mean_repeat_reliability']:.3f}")
+            c2.metric("Single-animal reliability", f"{summary['mean_animal_reliability']:.3f}")
+            c3.metric("Single-animal ceiling", f"{summary['mean_animal_ceiling']:.3f}")
+            if is_v2:
+                c4.metric(
+                    f"Pooled ceiling (n={int(summary['fold_size'])})",
+                    f"{summary['pooled_ceiling_at_fold']:.3f}",
+                )
+                st.caption(
+                    "The pooled ceiling applies to profiles averaged over evaluation animals. "
+                    "The single-animal ceiling applies only to per-animal claims."
+                )
+            else:
+                c4.metric("Fold size", "-")
         if curve_path.exists():
             curve = pd.read_csv(curve_path)
             fig = go.Figure()
