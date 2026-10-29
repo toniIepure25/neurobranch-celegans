@@ -1,0 +1,18 @@
+{
+  "animal_ci_high": 0.25060469570856303,
+  "animal_ci_low": 0.19633597095810368,
+  "fraction_animal_above_half": 0.03968253968253968,
+  "fraction_repeat_above_half": 0.13157894736842105,
+  "mean_animal_ceiling": 0.4727264889270892,
+  "mean_animal_reliability": 0.22347033333333335,
+  "mean_repeat_ceiling": 0.492569251075687,
+  "mean_repeat_reliability": 0.24262446710526317,
+  "median_animal_reliability": 0.1958685,
+  "median_repeat_reliability": 0.1916275,
+  "n_animal_targets": 126.0,
+  "n_repeat_targets": 152.0,
+  "n_targets": 169.0,
+  "p90_animal_reliability": 0.3674465,
+  "repeat_ci_high": 0.2790430355784858,
+  "repeat_ci_low": 0.20620589863204053
+}
