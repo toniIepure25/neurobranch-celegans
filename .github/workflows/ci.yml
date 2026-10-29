@@ -11,10 +11,11 @@ concurrency:
 
 jobs:
   test:
-    runs-on: ubuntu-latest
+    runs-on: ${{ matrix.os }}
     strategy:
       fail-fast: false
       matrix:
+        os: [ubuntu-latest, windows-latest]
         python-version: ["3.10", "3.13"]
     steps:
       - uses: actions/checkout@v4
@@ -34,9 +35,20 @@ jobs:
 
       - name: Type check (scoped)
         if: matrix.python-version == '3.13'
-        run: mypy src/neurobranch/benchmark src/neurobranch/design
+        run: mypy src/neurobranch/benchmark src/neurobranch/design src/neurobranch/uncertainty.py
 
-      - name: Test
+      - name: Test with coverage
+        if: matrix.python-version == '3.13'
+        run: >
+          pytest -q
+          --cov=neurobranch.benchmark
+          --cov=neurobranch.design
+          --cov=neurobranch.uncertainty
+          --cov-report=term-missing
+          --cov-fail-under=60
+
+      - name: Test without coverage
+        if: matrix.python-version != '3.13'
         run: pytest -q
 
       - name: Validate Phase 10 reports
@@ -47,6 +59,47 @@ jobs:
         if: matrix.python-version == '3.13'
         run: python scripts/validate_reports.py --reports reports/phase9 --strict
 
-      - name: Reproducibility hashes
+      - name: Audit claims against artifacts
+        if: matrix.python-version == '3.13'
+        run: python scripts/audit_claims.py
+
+      - name: Check packaged schemas are in sync
+        if: matrix.python-version == '3.13'
+        run: python scripts/sync_schemas.py --check
+
+      - name: Reproducibility hashes (Phase 10)
         if: matrix.python-version == '3.13'
         run: python scripts/check_reproducibility.py --allow-missing-input
+
+      - name: Reproducibility hashes (Phase 11)
+        if: matrix.python-version == '3.13'
+        run: python scripts/check_reproducibility.py --reports reports/phase11 --allow-missing-input
+
+      - name: App smoke test
+        if: matrix.python-version == '3.13'
+        run: python -m pytest tests/app -q
+
+      - name: Build documentation
+        if: matrix.python-version == '3.13' && matrix.os == 'ubuntu-latest'
+        env:
+          NO_MKDOCS_2_WARNING: "1"
+        run: mkdocs build --strict
+
+  wheel:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+      - name: Build
+        run: |
+          python -m pip install --upgrade pip build
+          python -m build --wheel
+      - name: Install wheel outside the checkout
+        run: |
+          python -m venv /tmp/wheel-venv
+          /tmp/wheel-venv/bin/pip install dist/*.whl
+          cd /tmp
+          /tmp/wheel-venv/bin/neurobranch version
+          /tmp/wheel-venv/bin/python -c "from importlib.resources import files; assert files('neurobranch.schemas').joinpath('claims.schema.json').is_file()"

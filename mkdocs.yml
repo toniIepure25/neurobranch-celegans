@@ -1,0 +1,48 @@
+site_name: NeuroBranch
+site_description: Measurement-bounded C. elegans neural-response research platform
+repo_url: https://github.com/neurobranch/neurobranch
+docs_dir: docs
+site_dir: .pytest_tmp/site
+strict: true
+
+validation:
+  nav:
+    omitted_files: ignore
+
+theme:
+  name: material
+  features:
+    - navigation.sections
+    - content.code.copy
+
+plugins:
+  - search
+  - mkdocstrings:
+      handlers:
+        python:
+          options:
+            show_source: false
+            docstring_style: google
+
+nav:
+  - Home: README.md
+  - Phase 11:
+      - Results: PHASE11_RESULTS.md
+      - Analysis plan: PHASE11_ANALYSIS_PLAN.md
+      - Deviations: PHASE11_DEVIATIONS.md
+  - Phase 10:
+      - Results: PHASE10_RESULTS.md
+      - Research synthesis: PHASE10_RESEARCH_SYNTHESIS.md
+  - Measurement:
+      - Limits: MEASUREMENT_LIMITS.md
+      - Design engine: DESIGN_ENGINE.md
+      - Benchmark card: BENCHMARK_CARD.md
+  - Claims:
+      - Ledger: CLAIMS.md
+      - Corrections: CORRECTIONS.md
+      - Limitations: LIMITATIONS.md
+  - Reproduce:
+      - Guide: REPRODUCING.md
+      - Data provenance: DATA_PROVENANCE.md
+      - Licence audit: LICENSE_AUDIT.md
+  - API reference: api.md

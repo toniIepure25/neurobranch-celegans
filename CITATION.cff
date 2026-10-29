@@ -4,12 +4,14 @@ title: "NeuroBranch: leakage-safe C. elegans dynamics and bounded virtual-pertur
 abstract: >-
   NeuroBranch is a research platform for C. elegans whole-brain population
   dynamics, latent branching and model-dependent virtual perturbation. Version
-  0.2.0 adds variance-corrected reliability ceilings, minimum detectable effect
-  calculations and a machine-readable claims ledger. Intervention outputs are
-  model-dependent and are not causally validated.
+  1.1.0 adds coverage-aware variance components, a two-way uncertainty audit,
+  benchmark-card provenance and a machine-readable claims ledger. The Phase 11
+  analysis shows that the pooled reliability ceiling is sensitive to sparse
+  responder coverage (0.560 at 80% coverage, not the Phase 10 value of 0.833).
+  Intervention outputs are model-dependent and are not causally validated.
 authors:
   - name: "NeuroBranch contributors"
-version: "1.0.0"
+version: "1.1.0"
 date-released: "2026-10-29"
 license: MIT
 keywords:

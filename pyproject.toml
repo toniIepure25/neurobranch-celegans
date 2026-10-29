@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "neurobranch"
-version = "1.0.0"
+version = "1.1.0"
 description = "Reproducible C. elegans neural-population dynamics, branching, and virtual-perturbation research platform"
 readme = "README.md"
 requires-python = ">=3.10,<3.14"
@@ -38,6 +38,10 @@ dev = [
   "ruff>=0.5",
   "mypy>=1.10",
   "jsonschema>=4.20",
+  "pytest-cov>=5",
+  "build>=1.2",
+  "mkdocs-material>=9.5",
+  "mkdocstrings[python]>=0.25",
 ]
 gpu = ["torch>=2.2"]
 
@@ -49,6 +53,10 @@ package-dir = { "" = "src" }
 
 [tool.setuptools.packages.find]
 where = ["src"]
+
+[tool.setuptools.package-data]
+neurobranch = ["py.typed"]
+"neurobranch.schemas" = ["*.json"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
