@@ -609,6 +609,123 @@ def summarise_components(components: pd.DataFrame, *, fold_size: int = 22) -> di
     }
 
 
+def _reliability_at_n(signal: np.ndarray, error: np.ndarray, n_eval: np.ndarray | float) -> np.ndarray:
+    """Reliability for a fixed evaluation-animal count, clipped to [0, 1]."""
+    denominator = signal + error / np.asarray(n_eval, dtype=float)
+    values = np.zeros_like(signal, dtype=float)
+    np.divide(signal, denominator, out=values, where=denominator > 0)
+    return np.clip(values, 0.0, 1.0)
+
+
+def estimand_table(components: pd.DataFrame, *, fold_size: int = 22) -> pd.DataFrame:
+    """Per-target values for the three Phase 15 estimands.
+
+    ``R_obs`` uses each target's observed animal count; ``R_22`` fixes the count
+    at ``fold_size`` and is therefore a counterfactual for targets with fewer
+    animals; ``R_id`` is the observed-count value only for the identified subset
+    with at least ``fold_size`` animals.  The boolean columns make the
+    extrapolation and population membership explicit.
+    """
+    columns = [
+        "target",
+        "n_animals",
+        "n_responders",
+        "signal",
+        "noise",
+        "interaction",
+        "reliability_obs",
+        "ceiling_obs",
+        "reliability_22",
+        "ceiling_22",
+        "reliability_id",
+        "ceiling_id",
+        "in_identified_subset",
+        "extrapolated_22",
+    ]
+    if components.empty:
+        return pd.DataFrame(columns=columns)
+    if fold_size < 1:
+        raise ValueError("fold_size must be >= 1")
+    signal = components["signal"].to_numpy(dtype=float)
+    error = (components["noise"] + components["interaction"]).to_numpy(dtype=float)
+    n_animals = components["n_animals"].to_numpy(dtype=int)
+    observed = _reliability_at_n(signal, error, n_animals)
+    at_fold = _reliability_at_n(signal, error, float(fold_size))
+    in_subset = n_animals >= int(fold_size)
+    identified = np.where(in_subset, observed, np.nan)
+    return pd.DataFrame(
+        {
+            "target": components["target"].to_numpy(),
+            "n_animals": n_animals,
+            "n_responders": components["n_responders"].to_numpy(dtype=int),
+            "signal": signal,
+            "noise": components["noise"].to_numpy(dtype=float),
+            "interaction": components["interaction"].to_numpy(dtype=float),
+            "reliability_obs": observed,
+            "ceiling_obs": np.sqrt(observed),
+            "reliability_22": at_fold,
+            "ceiling_22": np.sqrt(at_fold),
+            "reliability_id": identified,
+            "ceiling_id": np.sqrt(identified),
+            "in_identified_subset": in_subset,
+            "extrapolated_22": ~in_subset,
+        }
+    )
+
+
+def _estimand_block(values: np.ndarray, *, n_extrapolated: int = 0) -> dict[str, float]:
+    finite = values[np.isfinite(values)]
+    if finite.size == 0:
+        return {
+            "estimate": float("nan"),
+            "ceiling": float("nan"),
+            "n_targets": 0.0,
+            "n_extrapolated": float(n_extrapolated),
+            "median": float("nan"),
+            "q25": float("nan"),
+            "q75": float("nan"),
+        }
+    mean = float(finite.mean())
+    return {
+        "estimate": mean,
+        "ceiling": float(np.sqrt(max(mean, 0.0))),
+        "n_targets": float(finite.size),
+        "n_extrapolated": float(n_extrapolated),
+        "median": float(np.median(finite)),
+        "q25": float(np.quantile(finite, 0.25)),
+        "q75": float(np.quantile(finite, 0.75)),
+    }
+
+
+def summarise_reliability_estimands(components: pd.DataFrame, *, fold_size: int = 22) -> dict[str, Any]:
+    """Aggregate the three pre-specified Phase 15 estimands.
+
+    The returned dictionary always contains all three blocks.  ``R_22`` records
+    how many targets are extrapolated so that a consumer cannot mistake it for
+    an observed-data quantity.  ``R_id`` has a different target population and
+    is not a replacement for ``R_obs``.
+    """
+    table = estimand_table(components, fold_size=fold_size)
+    if table.empty:
+        return {
+            "fold_size": float(fold_size),
+            "R_obs": _estimand_block(np.array([], dtype=float)),
+            "R_22": _estimand_block(np.array([], dtype=float)),
+            "R_id": _estimand_block(np.array([], dtype=float)),
+            "n_animals_total": 0.0,
+        }
+    return {
+        "fold_size": float(fold_size),
+        "R_obs": _estimand_block(table["reliability_obs"].to_numpy(dtype=float)),
+        "R_22": _estimand_block(
+            table["reliability_22"].to_numpy(dtype=float),
+            n_extrapolated=int(table["extrapolated_22"].sum()),
+        ),
+        "R_id": _estimand_block(table["reliability_id"].to_numpy(dtype=float)),
+        "n_animals_total": float(table["n_animals"].sum()),
+    }
+
+
 def summarise_curve(curve: pd.DataFrame) -> pd.DataFrame:
     """Aggregate a reliability curve by ``n_eval``.
 
@@ -827,13 +944,11 @@ __all__ = [
     "animal_reliability_by_target",
     "cell_summaries",
     "decompose_variance",
+    "estimand_table",
     "profile_components_by_target",
     "profile_components_from_cells",
     "repeat_reliability_by_target",
     "summarise_components",
     "summarise_reliability",
+    "summarise_reliability_estimands",
 ]
-
-
-
-

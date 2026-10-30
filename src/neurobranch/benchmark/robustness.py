@@ -19,6 +19,7 @@ stability and estimator uncertainty only.
 
 from __future__ import annotations
 
+from dataclasses import dataclass
 from typing import Any
 
 import numpy as np
@@ -27,11 +28,13 @@ from scipy import stats
 
 from neurobranch.benchmark.variance import (
     DEFAULT_ANIMAL_COLUMN,
+    _components_from_arrays,
     _nanmean,
     _profile_from_cells,
     _safe_var,
     cell_summaries,
     profile_components_by_target,
+    profile_components_from_cells,
 )
 
 SUMMARY_COLUMNS = ("response_mean", "response_integral", "response_residual", "response_peak_time")
@@ -103,69 +106,68 @@ def _leave_one_out_components(values: np.ndarray, noise: np.ndarray) -> tuple[np
     return signal, noise_mean, interaction_mean
 
 
-def animal_jackknife(
+@dataclass(frozen=True)
+class _TargetMatrix:
+    target: str
+    animal_labels: tuple[Any, ...]
+    values: np.ndarray
+    noise: np.ndarray
+    signal: float
+    noise_mean: float
+    interaction_mean: float
+    n_animals: int
+    n_responders: int
+    in_identified_subset: bool
+
+
+def _estimand_reliability(
+    signal: np.ndarray | float,
+    noise: np.ndarray | float,
+    interaction: np.ndarray | float,
+    n_eval: np.ndarray | float,
+) -> np.ndarray:
+    """Reliability at a fixed count with the shared clipping convention."""
+    signal_array = np.asarray(signal, dtype=float)
+    denominator = signal_array + (np.asarray(noise, dtype=float) + np.asarray(interaction, dtype=float)) / np.asarray(
+        n_eval, dtype=float
+    )
+    values = np.zeros_like(signal_array)
+    np.divide(signal_array, denominator, out=values, where=denominator > 0)
+    return np.clip(values, 0.0, 1.0)
+
+
+def _build_target_matrices(
     frame: pd.DataFrame,
     *,
-    fold_size: int = 22,
-    response: str = "response_mean",
-    animal: str = DEFAULT_ANIMAL_COLUMN,
-    min_events: int = 1,
-    min_animals: int = 6,
-    level: float = 0.95,
-) -> dict[str, float]:
-    """Delete-one-animal jackknife for the mean pooled reliability.
-
-    The estimand is the mean over targets of the reliability of a profile
-    pooled over ``fold_size`` animals.  Targets that do not contain the deleted
-    animal contribute their full-sample value, which is the correct
-    delete-one-cluster estimand.
-    """
-    if fold_size < 1:
-        raise ValueError("fold_size must be >= 1")
-    components = profile_components_by_target(
+    response: str,
+    animal: str,
+    min_events: int,
+    min_animals: int,
+    min_responder_coverage: float,
+    fold_size: int,
+    one_event_variance: float | None = None,
+    event_variance: float | None = None,
+) -> tuple[list[_TargetMatrix], pd.DataFrame]:
+    """Build the filtered animal-by-responder matrices used by all resampling."""
+    cells = cell_summaries(
         frame,
         response=response,
         animal=animal,
+        one_event_variance=one_event_variance,
+        event_variance=event_variance,
+    )
+    components = profile_components_from_cells(
+        cells,
         min_events=min_events,
         min_animals=min_animals,
+        min_responder_coverage=min_responder_coverage,
     )
-    cells = cell_summaries(frame, response=response, animal=animal)
-
-    targets = list(components["target"]) if not components.empty else []
-    animals = sorted(cells["_animal"].dropna().unique())
-    animal_index = {name: index for index, name in enumerate(animals)}
-    n_targets = len(targets)
-    n_animals = len(animals)
-    if n_targets == 0 or n_animals < 3:
-        return {
-            "estimate": float("nan"),
-            "jackknife_mean": float("nan"),
-            "se": float("nan"),
-            "ci_low": float("nan"),
-            "ci_high": float("nan"),
-            "n_targets": float(n_targets),
-            "n_animals": float(n_animals),
-        }
-
-    reliability = np.full((n_targets, n_animals), np.nan)
-    target_position = {target: index for index, target in enumerate(targets)}
-    for target in targets:
-        group = components[components["target"] == target]
-        if group.empty:
-            continue
-        row = group.iloc[0]
-        full = float(
-            np.clip(
-                row["signal"] / (row["signal"] + (row["noise"] + row["interaction"]) / float(fold_size)),
-                0.0,
-                1.0,
-            )
-        )
-        reliability[target_position[target], :] = full
-    full_estimate = float(np.nanmean(reliability))
-
+    if components.empty:
+        return [], cells
+    targets = set(components["target"])
+    matrices: list[_TargetMatrix] = []
     for target, tgroup in cells.groupby("_target", sort=False):
-        if target not in target_position:
+        if target not in targets:
             continue
         subset = tgroup[tgroup["n"] >= min_events]
         if subset.empty:
@@ -177,20 +179,95 @@ def animal_jackknife(
         noise = noise.reindex(index=means.index, columns=means.columns)
         if means.shape[0] < max(min_animals, 3) or means.shape[1] < 3:
             continue
-        values = means.to_numpy(dtype=float)
-        noise_values = noise.to_numpy(dtype=float)
-        signal, noise_mean, interaction_mean = _leave_one_out_components(values, noise_values)
-        for local_index, animal_name in enumerate(means.index):
-            if animal_name not in animal_index:
+        if min_responder_coverage > 0:
+            coverage = means.notna().sum(axis=0) / max(means.shape[0], 1)
+            keep = coverage >= min_responder_coverage
+            means = means.loc[:, keep]
+            noise = noise.loc[:, keep]
+        if means.shape[1] < 3:
+            continue
+        finite_rows = means.notna().any(axis=1).to_numpy()
+        animal_labels = tuple(means.index[finite_rows])
+        values = means.to_numpy(dtype=float)[finite_rows]
+        noise_values = noise.to_numpy(dtype=float)[finite_rows]
+        if values.shape[0] < min_animals:
+            continue
+        component = _components_from_arrays(values, noise_values, min_animals=min_animals)
+        if component is None:
+            continue
+        matrices.append(
+            _TargetMatrix(
+                target=str(target),
+                animal_labels=animal_labels,
+                values=values,
+                noise=noise_values,
+                signal=component.signal,
+                noise_mean=component.noise,
+                interaction_mean=component.interaction,
+                n_animals=int(values.shape[0]),
+                n_responders=int(values.shape[1]),
+                in_identified_subset=bool(values.shape[0] >= fold_size),
+            )
+        )
+    return matrices, cells
+
+
+def _jackknife_from_matrices(
+    matrices: list[_TargetMatrix],
+    *,
+    estimand: str,
+    fold_size: int,
+    level: float,
+) -> dict[str, Any]:
+    """Delete-one-animal jackknife over precomputed target matrices."""
+    if estimand not in {"obs", "fold", "id"}:
+        raise ValueError("estimand must be one of 'obs', 'fold', 'id'")
+    selected = [m for m in matrices if estimand != "id" or m.in_identified_subset]
+    animals = sorted({animal for matrix in selected for animal in matrix.animal_labels})
+    animal_index = {name: index for index, name in enumerate(animals)}
+    n_targets = len(selected)
+    if n_targets == 0 or len(animals) < 3:
+        return {
+            "estimate": float("nan"),
+            "jackknife_mean": float("nan"),
+            "se": float("nan"),
+            "ci_low": float("nan"),
+            "ci_high": float("nan"),
+            "n_targets": float(n_targets),
+            "n_animals": float(len(animals)),
+            "valid_replicates": 0,
+            "valid_fraction": 0.0,
+            "status": "insufficient_animals",
+            "estimand": estimand,
+            "loo_animals": [],
+            "loo_values": [],
+        }
+
+    reliability = np.full((n_targets, len(animals)), np.nan)
+    full_values = np.full(n_targets, np.nan)
+    for target_position, matrix in enumerate(selected):
+        n_full = matrix.n_animals if estimand in {"obs", "id"} else fold_size
+        full_values[target_position] = float(
+            _estimand_reliability(
+                matrix.signal,
+                matrix.noise_mean,
+                matrix.interaction_mean,
+                n_full,
+            )
+        )
+        reliability[target_position, :] = full_values[target_position]
+        signal, noise, interaction = _leave_one_out_components(matrix.values, matrix.noise)
+        for local_index, animal_name in enumerate(matrix.animal_labels):
+            n_eval = matrix.n_animals - 1 if estimand in {"obs", "id"} else fold_size
+            if n_eval < 1:
                 continue
-            denominator = signal[local_index] + (noise_mean[local_index] + interaction_mean[local_index]) / float(fold_size)
-            if np.isfinite(denominator) and denominator > 0:
-                reliability[target_position[target], animal_index[animal_name]] = float(
-                    np.clip(signal[local_index] / denominator, 0.0, 1.0)
-                )
+            reliability[target_position, animal_index[animal_name]] = float(
+                _estimand_reliability(signal[local_index], noise[local_index], interaction[local_index], n_eval)
+            )
 
     column_means = np.nanmean(reliability, axis=0)
     finite = column_means[np.isfinite(column_means)]
+    valid_fraction = float(finite.size / max(len(animals), 1))
     if finite.size < 3:
         return {
             "estimate": float("nan"),
@@ -200,23 +277,74 @@ def animal_jackknife(
             "ci_high": float("nan"),
             "n_targets": float(n_targets),
             "n_animals": float(finite.size),
+            "valid_replicates": int(finite.size),
+            "valid_fraction": valid_fraction,
+            "status": "insufficient_animals",
+            "estimand": estimand,
+            "loo_animals": [str(value) for value in animals],
+            "loo_values": [float(value) if np.isfinite(value) else None for value in column_means],
         }
-    estimate = full_estimate
+    estimate = float(np.nanmean(full_values))
     jackknife_mean = float(finite.mean())
     se = float(np.sqrt((finite.size - 1) / finite.size * np.sum((finite - jackknife_mean) ** 2)))
     z = float(stats.norm.ppf(0.5 + level / 2.0))
-
-    ci_low = float(max(0.0, estimate - z * se))
-    ci_high = float(min(1.0, estimate + z * se))
     return {
         "estimate": estimate,
         "jackknife_mean": jackknife_mean,
         "se": se,
-        "ci_low": ci_low,
-        "ci_high": ci_high,
+        "ci_low": float(max(0.0, estimate - z * se)),
+        "ci_high": float(min(1.0, estimate + z * se)),
         "n_targets": float(n_targets),
         "n_animals": float(finite.size),
+        "valid_replicates": int(finite.size),
+        "valid_fraction": valid_fraction,
+        "status": "ok" if valid_fraction >= 0.95 else "invalid_replicates",
+        "estimand": estimand,
+        "loo_animals": [str(value) for value in animals],
+        "loo_values": [float(value) if np.isfinite(value) else None for value in column_means],
     }
+
+
+def animal_jackknife(
+    frame: pd.DataFrame,
+    *,
+    fold_size: int = 22,
+    response: str = "response_mean",
+    animal: str = DEFAULT_ANIMAL_COLUMN,
+    min_events: int = 1,
+    min_animals: int = 6,
+    min_responder_coverage: float = 0.0,
+    estimand: str = "fold",
+    level: float = 0.95,
+    one_event_variance: float | None = None,
+    event_variance: float | None = None,
+) -> dict[str, Any]:
+    """Delete-one-animal jackknife for a Phase 15 reliability estimand.
+
+    ``estimand='obs'`` uses each target's observed animal count;
+    ``estimand='fold'`` fixes the evaluation count at ``fold_size``;
+    ``estimand='id'`` restricts to targets with at least ``fold_size`` animals
+    and uses their observed counts.  The coverage filter is applied to both the
+    point estimate and every leave-one-animal-out replicate, so the resampling
+    unit matches the reported target population.
+
+    Targets that do not contain the deleted animal contribute their full-sample
+    value, which is the correct delete-one-cluster estimand.
+    """
+    if fold_size < 1:
+        raise ValueError("fold_size must be >= 1")
+    matrices, _ = _build_target_matrices(
+        frame,
+        response=response,
+        animal=animal,
+        min_events=min_events,
+        min_animals=min_animals,
+        min_responder_coverage=min_responder_coverage,
+        fold_size=fold_size,
+        one_event_variance=one_event_variance,
+        event_variance=event_variance,
+    )
+    return _jackknife_from_matrices(matrices, estimand=estimand, fold_size=fold_size, level=level)
 
 
 def summary_sensitivity(
@@ -289,6 +417,8 @@ def animal_half_replication(
     seed: int = 17,
     shrink: bool = False,
     min_responder_coverage: float = 0.0,
+    one_event_variance: float | None = None,
+    event_variance: float | None = None,
 ) -> dict[str, float]:
     """Split animals in half and correlate per-target single-animal reliability.
 
@@ -300,7 +430,13 @@ def animal_half_replication(
     """
     if n_splits < 2:
         raise ValueError("n_splits must be >= 2")
-    cells = cell_summaries(frame, response=response, animal=animal)
+    cells = cell_summaries(
+        frame,
+        response=response,
+        animal=animal,
+        one_event_variance=one_event_variance,
+        event_variance=event_variance,
+    )
     animals = np.array(sorted(cells["_animal"].dropna().unique()))
     if animals.size < 2 * min_animals:
         return {
@@ -389,6 +525,8 @@ def extrapolation_check(
     min_animals: int = 6,
     seed: int = 17,
     min_responder_coverage: float = 0.8,
+    one_event_variance: float | None = None,
+    event_variance: float | None = None,
 ) -> dict[str, float]:
     """Test whether components fitted on one animal half predict held-out profiles.
 
@@ -403,7 +541,13 @@ def extrapolation_check(
     """
     if n_splits < 2:
         raise ValueError("n_splits must be >= 2")
-    cells = cell_summaries(frame, response=response, animal=animal)
+    cells = cell_summaries(
+        frame,
+        response=response,
+        animal=animal,
+        one_event_variance=one_event_variance,
+        event_variance=event_variance,
+    )
     animals = np.array(sorted(cells["_animal"].dropna().unique()))
     if animals.size < 2 * min_animals:
         return {

@@ -1,0 +1,150 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://neurobranch.local/schemas/phase15_summary.schema.json",
+  "title": "NeuroBranch Phase 15 reliability estimand audit",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "phase",
+    "input",
+    "parameters",
+    "estimands",
+    "variance_sensitivity",
+    "extrapolation",
+    "ranking",
+    "calibration",
+    "gates",
+    "decision"
+  ],
+  "properties": {
+    "schema_version": {"const": 1},
+    "phase": {"const": "phase15"},
+    "input": {
+      "type": "object",
+      "required": ["path", "sha256", "n_rows"],
+      "properties": {
+        "path": {"type": "string"},
+        "sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+        "n_rows": {"type": "integer", "minimum": 1}
+      }
+    },
+    "parameters": {"type": "object"},
+    "event_variance": {
+      "type": "object",
+      "required": ["omega2", "n_cells"],
+      "properties": {
+        "omega2": {"type": "number", "minimum": 0.0},
+        "n_cells": {"type": "integer", "minimum": 1}
+      }
+    },
+    "estimands": {
+      "type": "object",
+      "required": ["R_obs", "R_22", "R_id"],
+      "additionalProperties": {
+        "type": "object",
+        "required": [
+          "estimate",
+          "ceiling",
+          "n_targets",
+          "n_extrapolated",
+          "median",
+          "jackknife",
+          "bootstrap",
+          "null"
+        ],
+        "properties": {
+          "estimate": {"type": "number", "minimum": 0.0, "maximum": 1.0},
+          "ceiling": {"type": "number", "minimum": 0.0, "maximum": 1.0},
+          "n_targets": {"type": "number", "minimum": 0},
+          "n_extrapolated": {"type": "number", "minimum": 0},
+          "median": {"type": "number", "minimum": 0.0, "maximum": 1.0},
+          "jackknife": {
+            "type": "object",
+            "required": ["estimate", "se", "ci_low", "ci_high", "n_animals", "status"],
+            "properties": {
+              "estimate": {"type": "number", "minimum": 0.0, "maximum": 1.0},
+              "se": {"type": "number", "minimum": 0.0},
+              "ci_low": {"type": "number", "minimum": 0.0, "maximum": 1.0},
+              "ci_high": {"type": "number", "minimum": 0.0, "maximum": 1.0},
+              "n_animals": {"type": "number", "minimum": 0},
+              "valid_fraction": {"type": "number", "minimum": 0.0, "maximum": 1.0},
+              "status": {"type": "string"}
+            }
+          },
+          "bootstrap": {
+            "type": "object",
+            "required": ["median", "ci_low", "ci_high", "n_draws"],
+            "properties": {
+              "median": {"type": "number", "minimum": 0.0, "maximum": 1.0},
+              "ci_low": {"type": "number", "minimum": 0.0, "maximum": 1.0},
+              "ci_high": {"type": "number", "minimum": 0.0, "maximum": 1.0},
+              "n_draws": {"type": "integer", "minimum": 1}
+            }
+          },
+          "null": {"type": "object"}
+        }
+      }
+    },
+    "variance_sensitivity": {"type": "object"},
+    "extrapolation": {
+      "type": "object",
+      "required": ["median_abs_error", "bias", "gate_passed"],
+      "properties": {
+        "median_abs_error": {"type": "number"},
+        "bias": {"type": "number"},
+        "gate_passed": {"type": "number"}
+      }
+    },
+    "ranking": {
+      "type": "object",
+      "required": ["status"],
+      "properties": {
+        "status": {"type": "string"}
+      }
+    },
+    "calibration": {"type": "object"},
+    "gates": {
+      "type": "object",
+      "minProperties": 1,
+      "additionalProperties": {
+        "type": "object",
+        "required": ["status", "requirement"],
+        "properties": {
+          "status": {"enum": ["pass", "fail", "pending"]},
+          "requirement": {"type": "string"},
+          "observed": {}
+        }
+      }
+    },
+    "decision": {
+      "type": "object",
+      "required": [
+        "label",
+        "calibrated_interval",
+        "ceiling_claim",
+        "ranking_claim",
+        "extrapolation_status",
+        "r22_extrapolated_targets",
+        "reasons"
+      ],
+      "properties": {
+        "label": {
+          "enum": [
+            "calibrated_descriptive",
+            "calibrated_descriptive_no_ranking",
+            "counterfactual_only",
+            "not_calibrated",
+            "not_evaluable"
+          ]
+        },
+        "calibrated_interval": {"type": "boolean"},
+        "ceiling_claim": {"type": "boolean"},
+        "ranking_claim": {"type": "boolean"},
+        "extrapolation_status": {"enum": ["supported", "counterfactual_only", "not_evaluable"]},
+        "r22_extrapolated_targets": {"type": "number", "minimum": 0},
+        "reasons": {"type": "array", "items": {"type": "string"}}
+      }
+    },
+    "provenance": {"type": "object"}
+  }
+}
