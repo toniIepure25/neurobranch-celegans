@@ -326,7 +326,20 @@ figures/
 | --- | --- | --- |
 | `reports/phase11/summary.json` | `python scripts/phase11_sensitivity.py` | Coverage-aware pooled ceiling (0.560) and gate failures |
 | `reports/phase11/coverage_sensitivity.csv` | same | Reliability and ceiling across 0.0--1.0 responder coverage |
-| `reports/phase11/benchmark_card.json` | `python scripts/phase11_benchmark.py` | Headline ceiling and claim statuses |
+| `reports/phase11/benchmark_card.json` | `python scripts/phase11_benchmark.py` | Historical headline ceiling and claim statuses |
+
+## Phase 15 (2026-11-01): three-estimand reliability audit
+
+| Artifact | Command | Purpose |
+| --- | --- | --- |
+| `research/phase15_protocol.md` | frozen before run | Three estimands, uncertainty, 1,000-rep calibration and gates |
+| `reports/phase15/summary.json` | `python scripts/phase15_reliability.py` | Full audit, gates and fail-closed decision |
+| `reports/phase15/estimands.csv` | same | Per-target `R_obs`, `R_22` and identification flags |
+| `reports/phase15/jackknife.csv` | same | Delete-one-animal replicate values |
+| `reports/phase15/bayesian_bootstrap.csv` | same | 2,000-draw animal Dirichlet cross-check |
+| `reports/phase15/calibration.json` | same | Primary 1,000-rep coverage study |
+| `reports/phase15/calibration_heavy.json` | `python scripts/phase15_calibrate.py --heavy --reps 500` | Heavy-tailed misspecification check |
+| `reports/phase15/manifest.json` | `python scripts/phase15_manifest.py` | Artifact hashes, input/protocol hashes, git state |
 
 ## Phase 12 (2026-10-30, historical calibration evidence)
 

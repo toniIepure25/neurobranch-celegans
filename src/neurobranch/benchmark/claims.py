@@ -136,7 +136,95 @@ def _superiority_claim(
     )
 
 
-def build_claims(reliability_summary: dict[str, Any]) -> list[Claim]:
+def _phase15_claims(payload: dict[str, Any]) -> list[Claim]:
+    """Claims for the Phase 15 three-estimand audit.
+
+    These are descriptive estimates, not inferential successes.  They are
+    ``not_supported`` unless a calibrated interval and a passing null control
+    exist; the ledger must not promote a number because it is convenient.
+    """
+    estimands = payload.get("estimands", {})
+    decision = payload.get("decision", {})
+    gates = payload.get("gates", {})
+    evidence = (
+        "reports/phase15/summary.json",
+        "reports/phase15/estimands.csv",
+        "reports/phase15/jackknife.csv",
+        "reports/phase15/calibration.json",
+        "reports/phase15/nulls.json",
+        "reports/phase15/ranking.json",
+    )
+    claims: list[Claim] = []
+    for claim_id, key, statement in (
+        (
+            "phase15-observed-reliability",
+            "R_obs",
+            "Observed-count reliability R_obs is descriptive, not a calibrated bound.",
+        ),
+        (
+            "phase15-fold-counterfactual",
+            "R_22",
+            "R(22) is a counterfactual extrapolation for most targets, not an identified quantity.",
+        ),
+        (
+            "phase15-identified-subset",
+            "R_id",
+            "R_id is the observed-count reliability on the identified subset and is a different population.",
+        ),
+    ):
+        if key not in estimands:
+            continue
+        block = estimands[key]
+        jack = block.get("jackknife", {})
+        claims.append(
+            Claim(
+                id=claim_id,
+                statement=statement,
+                status="not_supported",
+                test="descriptive",
+                estimate=float(block["estimate"]),
+                ci_low=float(jack["ci_low"]),
+                ci_high=float(jack["ci_high"]),
+                estimand=key,
+                n_eval_animals=int(block.get("n_targets", 0)),
+                evidence=evidence,
+                notes=(
+                    f"Estimate {block['estimate']:.6f}; ceiling {block['ceiling']:.6f}; "
+                    f"{int(block.get('n_extrapolated', 0))} of {int(block.get('n_targets', 0))} "
+                    f"targets are counterfactual at the fold size. Audit label: "
+                    f"{decision.get('label', 'unknown')}; calibrated_interval="
+                    f"{decision.get('calibrated_interval')}; G3={gates.get('G3_calibration', {}).get('status')}; "
+                    f"G4={gates.get('G4_null_control', {}).get('status')}; "
+                    f"G5={gates.get('G5_extrapolation', {}).get('status')}."
+                ),
+            )
+        )
+    ranking = payload.get("ranking", {})
+    if ranking:
+        claims.append(
+            Claim(
+                id="phase15-ranking-stability",
+                statement="Target rankings replicate across animal halves.",
+                status="not_supported",
+                test="descriptive",
+                estimate=float(ranking.get("median_spearman", float("nan"))),
+                ci_low=float(ranking.get("ci_low", float("nan"))),
+                ci_high=float(ranking.get("ci_high", float("nan"))),
+                estimand="ranking",
+                evidence=evidence,
+                notes=(
+                    f"Median Spearman {ranking.get('median_spearman')}; top-k Jaccard "
+                    f"{ranking.get('median_jaccard')}; status {ranking.get('status')}. "
+                    "No target ranking is published."
+                ),
+            )
+        )
+    return claims
+
+
+def build_claims(
+    reliability_summary: dict[str, Any], *, phase15_summary: dict[str, Any] | None = None
+) -> list[Claim]:
     """Build the schema-v2 ledger from a Phase 9 or Phase 10 summary.
 
     Phase 9 summaries are accepted for backward compatibility; Phase 10 adds
@@ -193,8 +281,8 @@ def build_claims(reliability_summary: dict[str, Any]) -> list[Claim]:
             id="phase10-fold-ceiling",
             statement=(
                 f"Under the Phase 10 sparse-coverage estimator the pooled reliability ceiling "
-                f"at the Phase 6-8 fold size is about {pooled_ceiling:.2f}; the coverage-aware "
-                f"Phase 11 value is 0.56."
+                f"at the Phase 6-8 fold size is about {pooled_ceiling:.2f}; the Phase 11 value "
+                f"of 0.56 is a historical extrapolated point estimate, not a bound."
             ),
             status="not_supported",
             test="descriptive",
@@ -209,8 +297,9 @@ def build_claims(reliability_summary: dict[str, Any]) -> list[Claim]:
             notes=(
                 "Coverage-sensitive: the Phase 10 estimator includes responders seen in one "
                 "animal. Requiring 80% responder coverage lowers the pooled ceiling from "
-                "0.833 to 0.560 (correction C8). The value is descriptive arithmetic, not a "
-                "sampling claim, and is retained only as a historical artifact."
+                "0.833 to 0.560 (correction C8). Phase 15 shows that 0.560 is extrapolated for "
+                "87 of 126 targets; it is retained only as a historical extrapolated point "
+                "estimate, not a bound (correction C15)."
             ),
         ),
         Claim(
@@ -234,8 +323,9 @@ def build_claims(reliability_summary: dict[str, Any]) -> list[Claim]:
                 "SBC rank uniformity failed (KS p=1.4e-06), held-out coverage was 0.896 "
                 "with median absolute error 0.191, and the profile-permutation negative "
                 "control gave median R(22)=0.176. The point estimate 0.304 is within 0.05 "
-                "of the Phase 11 0.314 but the interval is not calibrated; 0.560 remains "
-                "the only descriptive ceiling."
+                "of the Phase 11 0.314 but the interval is not calibrated. Phase 15 replaces "
+                "the 0.560 headline with three estimands; 0.560 was an extrapolated point "
+                "estimate, not a bound."
             ),
         ),
         Claim(
@@ -261,8 +351,9 @@ def build_claims(reliability_summary: dict[str, Any]) -> list[Claim]:
                 "(q95=0.4680), sign-flip median 0.1341 (q95=0.5796), and the estimate is "
                 "0.1137 below the Phase 11 0.314 reference. Replacing the 1e-8 variance "
                 "floor with an event-level variance model lowers the point estimate from "
-                "0.3035 to 0.2003 but does not repair the null bias. 0.560 remains the "
-                "only descriptive ceiling; no calibrated interval or ranking is published."
+                "0.3035 to 0.2003 but does not repair the null bias. No calibrated interval "
+                "or ranking is published; Phase 15 supersedes the 0.560 headline with three "
+                "separate estimands."
             ),
         ),
         Claim(
@@ -290,9 +381,9 @@ def build_claims(reliability_summary: dict[str, Any]) -> list[Claim]:
                 "mass 0.0810, held-out PPC coverage 0.7697 with MAE 0.3998, negative-control "
                 "q95=0.3535, sign-flip q95=0.4509, prior range 0.1220, reference gap 0.2463, "
                 "and median P(z=0 | true z=0)=0.3561. The real-data median R(22) is 0.0543, "
-                "not a calibrated estimate. The Phase 14A audit found the 0.560 reference "
-                "robust to a robust one-event variance imputation (V1 0.3006, delta 0.0131), "
-                "but that does not rescue the model. No calibrated interval, ranking, animal "
+                "not a calibrated estimate. The Phase 14A audit found the V1 point estimate "
+                "0.3006 (delta 0.0131 from V0), but Phase 15 shows that all R(22) values are "
+                "counterfactual for 87 of 126 targets. No calibrated interval, ranking, animal "
                 "budget, or causal claim is published."
             ),
         ),
@@ -384,7 +475,9 @@ def build_claims(reliability_summary: dict[str, Any]) -> list[Claim]:
                 f"({coverage_ceiling:.3f}) it is about "
                 f"{100 * 0.0984 / coverage_ceiling:.1f}%; against the single-animal ceiling "
                 f"({single_ceiling:.3f}) it is about {100 * 0.0984 / single_ceiling:.1f}%. "
-                f"Neither 64% nor the Phase 10 share is the current bound."
+                f"Phase 15 supersedes the 0.560 value: it is extrapolated for 87 of 126 "
+                f"targets and is not a bound. None of these percentages is a current "
+                f"measurement bound."
             ),
         ),
     ]
@@ -398,6 +491,8 @@ def build_claims(reliability_summary: dict[str, Any]) -> list[Claim]:
     adjusted = _holm([claim.p_value for claim in family])
     for claim, p_holm in zip(family, adjusted):
         claim.p_holm = p_holm
+    if phase15_summary is not None:
+        claims.extend(_phase15_claims(phase15_summary))
     return claims
 
 

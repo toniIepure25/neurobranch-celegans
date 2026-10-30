@@ -280,16 +280,40 @@ def _truth_aggregate(matrices: list[_TargetMatrix], estimand: str, fold_size: in
     return float(np.mean([_truth_value(matrix, estimand, fold_size) for matrix in selected])) if selected else float("nan")
 
 
-def _simulate_matrix(matrix: _TargetMatrix, rng: np.random.Generator) -> _TargetMatrix:
-    """Draw one additive animal x responder data set with fixed missingness."""
+def _simulate_matrix(
+    matrix: _TargetMatrix, rng: np.random.Generator, *, heavy_tailed: bool = False
+) -> _TargetMatrix:
+    """Draw one additive animal x responder data set with fixed missingness.
+
+    ``heavy_tailed`` is the protocol's misspecification check: Student-t
+    innovations with unit variance and log-normal cell-scale heterogeneity.  It
+    is not used for the primary coverage decision.
+    """
     shape = matrix.values.shape
     signal_sd = float(np.sqrt(max(matrix.signal, 0.0)))
     interaction_sd = float(np.sqrt(max(matrix.interaction_mean, 0.0)))
-    means = np.asarray(rng.normal(0.0, signal_sd, size=shape[1]), dtype=float)
-    interaction = np.asarray(rng.normal(0.0, interaction_sd, size=shape), dtype=float)
-    sampling = np.asarray(
-        rng.normal(0.0, np.sqrt(np.maximum(matrix.noise, 0.0)), size=shape), dtype=float
-    )
+    if heavy_tailed:
+        df = 6.0
+        scale = float(np.sqrt((df - 2.0) / df))
+        means = np.asarray(rng.standard_t(df, size=shape[1]) * signal_sd * scale, dtype=float)
+        interaction = np.asarray(
+            rng.standard_t(df, size=shape) * interaction_sd * scale, dtype=float
+        )
+        heterogeneity = np.exp(0.5 * rng.normal(0.0, 1.0, size=shape))
+        heterogeneity = np.clip(heterogeneity, 0.25, 4.0)
+        sampling = np.asarray(
+            rng.standard_t(df, size=shape)
+            * np.sqrt(np.maximum(matrix.noise, 0.0))
+            * scale
+            * heterogeneity,
+            dtype=float,
+        )
+    else:
+        means = np.asarray(rng.normal(0.0, signal_sd, size=shape[1]), dtype=float)
+        interaction = np.asarray(rng.normal(0.0, interaction_sd, size=shape), dtype=float)
+        sampling = np.asarray(
+            rng.normal(0.0, np.sqrt(np.maximum(matrix.noise, 0.0)), size=shape), dtype=float
+        )
     values = means[None, :] + interaction + sampling
     values = np.where(np.isfinite(matrix.values), values, np.nan)
     component = _components_from_arrays(values, matrix.noise, min_animals=3)
@@ -326,6 +350,7 @@ def calibration_study(
     fold_size: int = 22,
     n_reps: int = 1_000,
     seed: int = 15,
+    heavy_tailed: bool = False,
 ) -> dict[str, Any]:
     """Parametric coverage study for the jackknife intervals.
 
@@ -340,7 +365,9 @@ def calibration_study(
     truth = {estimand: _truth_aggregate(matrices, estimand, fold_size) for estimand in ESTIMANDS}
     records: dict[str, list[dict[str, Any]]] = {estimand: [] for estimand in ESTIMANDS}
     for _ in range(n_reps):
-        simulated = [_simulate_matrix(matrix, rng) for matrix in matrices]
+        simulated = [
+            _simulate_matrix(matrix, rng, heavy_tailed=heavy_tailed) for matrix in matrices
+        ]
         for estimand in ESTIMANDS:
             result = _jackknife_from_matrices(simulated, estimand=estimand, fold_size=fold_size, level=0.95)
             records[estimand].append(
@@ -351,7 +378,13 @@ def calibration_study(
                     "status": result["status"],
                 }
             )
-    summary: dict[str, Any] = {"n_reps": float(n_reps), "fold_size": float(fold_size), "truth": truth, "estimands": {}}
+    summary: dict[str, Any] = {
+        "n_reps": float(n_reps),
+        "fold_size": float(fold_size),
+        "simulation": "heavy_tailed_heteroskedastic" if heavy_tailed else "gaussian_additive",
+        "truth": truth,
+        "estimands": {},
+    }
     for estimand in ESTIMANDS:
         frame = pd.DataFrame(records[estimand])
         valid = frame[frame["status"] == "ok"].dropna()

@@ -1,5 +1,11 @@
 # Phase 14 results: reference audit and zero-inflated reliability
 
+> **Superseded headline (Phase 15, C15).** Phase 14A established that the V1
+> point estimate `0.3006` is robust to the one-event variance treatment, but it
+> did not establish that `R(22)` is identified. Phase 15 shows that 87 of 126
+> targets never reach 22 animals, so 0.560 is counterfactual. See
+> [`PHASE15_RESULTS.md`](PHASE15_RESULTS.md).
+
 **Status:** negative result. Phase 14 did **not** adopt a calibrated reliability
 model. The Phase 14A reference audit supports the historical `0.560` descriptive
 ceiling under a robust one-event variance treatment, but the Phase 14B

@@ -29,4 +29,5 @@ def test_boundedbench_shows_provenance() -> None:
     assert "manifest" in captions.lower()
     warnings = " ".join(item.value for item in app.warning)
     assert "hierarchical interval is not calibrated" in warnings.lower()
-    assert "0.560" in warnings
+    assert "R_22" in warnings
+    assert "counterfactual" in warnings.lower()

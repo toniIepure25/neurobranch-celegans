@@ -11,7 +11,7 @@ from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Any
 
-PHASES = ("phase14", "phase13", "phase12r", "phase12")
+PHASES = ("phase15", "phase14", "phase13", "phase12r", "phase12")
 
 
 @dataclass(frozen=True)
@@ -27,6 +27,8 @@ class MeasurementStatus:
     manifest: dict[str, Any] = field(default_factory=dict)
     checksum: str = "missing"
     historical: bool = False
+    summary: dict[str, Any] = field(default_factory=dict)
+    estimands: dict[str, dict[str, Any]] = field(default_factory=dict)
 
     @property
     def adopted(self) -> bool:
@@ -60,6 +62,44 @@ def _normalise_phase14(payload: dict[str, Any]) -> tuple[str, str, float, float 
     )
 
 
+def _normalise_phase15(
+    payload: dict[str, Any],
+) -> tuple[str, str, float, float | None, dict[str, dict[str, Any]], dict[str, dict[str, Any]]]:
+    decision_block = payload.get("decision", {})
+    decision = str(decision_block.get("label", "unknown"))
+    estimands = payload.get("estimands", {})
+    primary = float(estimands.get("R_obs", {}).get("estimate", float("nan")))
+    reference = estimands.get("R_22", {}).get("estimate")
+    gates: dict[str, dict[str, Any]] = {}
+    for name, gate in payload.get("gates", {}).items():
+        status = str(gate.get("status", "fail"))
+        gates[name] = {
+            "passed": status == "pass",
+            "status": status,
+            "value": gate.get("observed"),
+            "requirement": gate.get("requirement", ""),
+        }
+    compact = {
+        key: {
+            "estimate": block.get("estimate"),
+            "ceiling": block.get("ceiling"),
+            "ci_low": block.get("jackknife", {}).get("ci_low"),
+            "ci_high": block.get("jackknife", {}).get("ci_high"),
+            "n_targets": block.get("n_targets"),
+            "n_extrapolated": block.get("n_extrapolated"),
+        }
+        for key, block in estimands.items()
+    }
+    return (
+        decision,
+        "three_estimand_audit",
+        primary,
+        float(reference) if reference is not None else None,
+        gates,
+        compact,
+    )
+
+
 def _normalise_phase13(payload: dict[str, Any]) -> tuple[str, str, float, float | None, dict[str, dict[str, Any]]]:
     decision = str(payload.get("decision", "unknown"))
     model = str(payload.get("model", "m2_event_variance"))
@@ -86,7 +126,10 @@ def load_measurement_status(reports_root: Path) -> MeasurementStatus | None:
         summary = _read_json(directory / "summary.json")
         if summary is None:
             continue
-        if phase == "phase14":
+        estimands: dict[str, dict[str, Any]] = {}
+        if phase == "phase15":
+            decision, model, primary, reference, gates, estimands = _normalise_phase15(summary)
+        elif phase == "phase14":
             decision, model, primary, reference, gates = _normalise_phase14(summary)
         elif phase == "phase13":
             decision, model, primary, reference, gates = _normalise_phase13(summary)
@@ -102,7 +145,11 @@ def load_measurement_status(reports_root: Path) -> MeasurementStatus | None:
                 for name, value in raw_gates.items()
                 if isinstance(value, bool)
             }
-        failed = [name for name, gate in gates.items() if not bool(gate.get("passed", False))]
+        failed = [
+            name
+            for name, gate in gates.items()
+            if gate.get("status") == "fail" or (gate.get("status") is None and not bool(gate.get("passed", False)))
+        ]
         manifest = _read_json(directory / "manifest.json") or {}
         checksum = "missing"
         checksum_path = directory / "manifest.sha256"
@@ -120,5 +167,7 @@ def load_measurement_status(reports_root: Path) -> MeasurementStatus | None:
             manifest=manifest,
             checksum=checksum,
             historical=index >= 2,
+            summary=summary,
+            estimands=estimands,
         )
     return None

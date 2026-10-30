@@ -2,9 +2,11 @@
 
 This note explains what a reliability ceiling is, which facet each metric
 belongs to, and how to use the ceiling when comparing models. The Phase 10
-numbers below are retained for derivation, but the headline pooled ceiling is
-superseded by the coverage-aware Phase 11 value **0.560** (see
-[`PHASE11_RESULTS.md`](PHASE11_RESULTS.md) and C8).
+numbers below are retained for derivation. The Phase 11 value **0.560** is
+**superseded**: Phase 15 shows it is an extrapolated point estimate for 87 of
+126 targets, not a bound. The observed-count value is `R_obs = 0.2606`
+(ceiling 0.5104); `R_22 = 0.3006` is counterfactual, and `R_id = 0.3501` is the
+identified subset. See [`PHASE15_RESULTS.md`](PHASE15_RESULTS.md) and C15.
 
 ## The attenuation ceiling in one paragraph
 

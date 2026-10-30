@@ -1,29 +1,62 @@
 # Current status
 
-**As of the Phase 14 measurement-model result (2026-10-31).** This page is the
-concise entry point; detailed records are linked at the bottom.
+**As of the Phase 15 reliability audit (2026-11-01).** This page is the concise
+entry point; detailed records are linked at the bottom.
 
 ## Headline
 
-The only defensible coverage-aware reliability ceiling remains **0.560** for the
-126-target, 80%-coverage population. Phase 14 audited the reference and tested an
-exact zero/spike-and-slab model. The audit supports the reference under a robust
-one-event variance treatment; the model is **rejected**.
+The Phase 11 **0.560** headline is withdrawn as a bound. It was
+`sqrt(R(22))` with `R(22) = 0.3136`; only **39 of 126** targets have at least 22
+animals, so 87 values were extrapolated. Phase 15 reports three estimands:
 
-- Reference audit: V1 `R(22) = 0.3006` versus V0 `0.3136`, a difference of
-  0.0131. The `0.560` ceiling is robust to the one-event zero under the robust
-  estimator. V1h gives `0.3139 / 0.5603`; the `min_events=2` filter gives
-  `0.1754 / 0.4188` on a different 36-target population.
-- Model M4: real-data median `R(22) = 0.0543`, median `P(z=0) = 0.3235`.
-- **Eight of twelve frozen gates failed**: SBC rank, grid edge, held-out PPC,
-  both null q95 tails, prior sensitivity, reference agreement, and spike
-  calibration.
-- Decision: **`not_adopted_gate_failures`**. No calibrated interval, target
-  ranking, animal-budget guarantee, causal effect, or digital-twin claim is
-  supported.
+| Estimand | Estimate | 95% delete-one-animal CI | Targets | Extrapolated |
+| --- | ---: | --- | ---: | ---: |
+| `R_obs` (observed counts) | **0.2606** | [0.1782, 0.3430] | 126 | 0 |
+| `R_22` (counterfactual) | **0.3006** | [0.2087, 0.3924] | 126 | 87 |
+| `R_id` (`n >= 22`) | **0.3501** | [0.2020, 0.4982] | 39 | 0 |
 
-The model is a measurement/reliability model, not a causal or generative model of
-the animal.
+`R_obs` is the descriptive observed-data quantity; `R_22` is a design
+counterfactual; `R_id` is a different population.
+
+- Variance robustness passes: V0 `0.2709 / 0.3136 / 0.3579`, V1
+  `0.2606 / 0.3006 / 0.3501`, V1h `0.2725 / 0.3139 / 0.3635`; all V1-V0 deltas
+  are below 0.05. The V2 filter changes the population to 36 targets.
+- **Extrapolation fails**: median absolute error 0.204 and bias +0.038 against
+  thresholds 0.10 / 0.05.
+- **Ranking fails**: median Spearman 0.126 (95% interval -0.021 to 0.247),
+  top-10 Jaccard 0.176. No ranking is published.
+- The audit decision and calibration/null gate statuses are in
+  `reports/phase15/summary.json`; this page does not promote a descriptive
+  estimate to a calibrated interval.
+- Phase 14 remains rejected: M4 median 0.0543, 8/12 gates failed, and 0.0543 is
+  prior-dominated. No calibrated interval, target ranking, animal-budget
+  guarantee, causal effect, or digital-twin claim is supported.
+
+This is a measurement/reliability audit, not a causal or generative model of the
+animal.
+
+## Phase 15 gate result
+
+The final statuses are produced by `scripts/phase15_reliability.py` and checked
+by `scripts/phase15_validate.py`. The decision is fail-closed: `G3` calibration
+and `G4` null control must both pass before any interval is called calibrated,
+and `G5` extrapolation must pass before `R_22` is called supported.
+
+| Gate | Observed | Status |
+| --- | --- | --- |
+| G1 estimand completeness | 126 targets; 87 extrapolated at 22 | pass |
+| G2 jackknife integrity | valid fraction 1.0 | pass |
+| G3 calibration | coverage 0.990 / 0.976 / 0.999 | **fail** |
+| G4 null control | null medians 0.096--0.137; fold sign-flip q95 0.1641 | **fail** |
+| G5 extrapolation | MAE 0.204; bias +0.038 | **fail** |
+| G6 ranking | Spearman 0.126; Jaccard 0.176 | **fail** |
+| G7 variance robustness | deltas 0.0103 / 0.0131 / 0.0078 | pass |
+| G8 reproducibility | manifest/validator | checked at release |
+
+Decision: **`not_calibrated`** (`G3`, `G4`, `G5`, `G6`). The intervals
+over-cover in simulation and are too wide, but the null controls still produce
+0.10--0.14 apparent reliability. No calibrated interval, ceiling, ranking,
+animal budget or causal claim is published.
 
 ## Phase 14 gate result
 
@@ -77,14 +110,17 @@ is available.
 
 - Single-animal reliability is below 0.5 (bounded descriptive claim).
 - Within-animal repeat-stimulation reliability is below 0.5 (bounded claim).
-- The coverage-aware pooled ceiling is 0.560 under the Phase 11 estimator for the
-  126-target population; Phase 14A supports its robustness to the one-event
-  variance treatment.
+- The observed-count reliability is 0.2606 (interval 0.1782--0.3430) for the
+  126-target population; this is descriptive and its calibration status is
+  reported separately. The historical 0.560 value is extrapolated for 87 targets
+  and is not a bound.
 - Phase 8 model comparisons retain their original statuses; none is a
   generalisation claim.
 
 ## Evidence
 
+- [Phase 15 results](PHASE15_RESULTS.md)
+- [Phase 15 methods](METHODS_PHASE15.md)
 - [Phase 14 results](PHASE14_RESULTS.md)
 - [Phase 14 methods](METHODS_PHASE14.md)
 - [Reference audit](REFERENCE_AUDIT.md)
@@ -95,6 +131,8 @@ is available.
 - [Corrections](CORRECTIONS.md)
 - [Claims](CLAIMS.md)
 - [Limitations](LIMITATIONS.md)
+- `reports/phase15/summary.json`, `estimands.csv`, `calibration.json`,
+  `manifest.json`, and `validation.json`
 - `reports/phase14/summary.json`, `sbc.json`, `heldout_ppc.json`, and the manifest
 
 ## Not done

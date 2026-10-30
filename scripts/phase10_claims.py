@@ -17,6 +17,7 @@ from neurobranch.benchmark.reporting import ROOT
 
 DEFAULT_SUMMARY = ROOT / "reports" / "phase10" / "reliability_summary.json"
 DEFAULT_OUT = ROOT / "reports" / "phase10"
+PHASE15_SUMMARY = ROOT / "reports" / "phase15" / "summary.json"
 
 
 def main(argv: list[str] | None = None) -> int:
@@ -30,7 +31,8 @@ def main(argv: list[str] | None = None) -> int:
         print(f"summary not found: {args.summary}", file=sys.stderr)
         return 2
     summary = json.loads(args.summary.read_text(encoding="utf-8"))
-    claims = build_claims(summary)
+    phase15 = json.loads(PHASE15_SUMMARY.read_text(encoding="utf-8")) if PHASE15_SUMMARY.is_file() else None
+    claims = build_claims(summary, phase15_summary=phase15)
 
     missing: list[str] = []
     for claim in claims:

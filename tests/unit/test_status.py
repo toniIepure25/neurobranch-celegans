@@ -32,6 +32,31 @@ def test_prefers_phase14_and_reports_missing_gate_as_failed(tmp_path: Path) -> N
     assert status.primary_estimate == 0.01
 
 
+def test_phase15_reports_three_estimands_and_pending_gate(tmp_path: Path) -> None:
+    _write(
+        tmp_path / "phase15" / "summary.json",
+        {
+            "decision": {"label": "not_calibrated"},
+            "estimands": {
+                "R_obs": {"estimate": 0.26, "jackknife": {"ci_low": 0.17, "ci_high": 0.34}, "n_targets": 126},
+                "R_22": {"estimate": 0.30, "jackknife": {"ci_low": 0.20, "ci_high": 0.39}, "n_targets": 126},
+                "R_id": {"estimate": 0.35, "jackknife": {"ci_low": 0.20, "ci_high": 0.49}, "n_targets": 39},
+            },
+            "gates": {
+                "G1": {"status": "pass", "observed": 126, "requirement": "three estimands"},
+                "G8": {"status": "pending", "observed": "manifest", "requirement": "hashes"},
+            },
+        },
+    )
+    status = load_measurement_status(tmp_path)
+    assert status is not None
+    assert status.phase == "phase15"
+    assert status.decision == "not_calibrated"
+    assert status.primary_estimate == 0.26
+    assert status.estimands["R_id"]["n_targets"] == 39
+    assert status.failed_gates == []
+
+
 def test_falls_back_to_phase13_then_labels_phase12_historical(tmp_path: Path) -> None:
     _write(
         tmp_path / "phase13" / "summary.json",

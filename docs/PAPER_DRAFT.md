@@ -1,5 +1,11 @@
 # Measurement-bounded reliability in a whole-brain *C. elegans* perturbation atlas
 
+> **Superseded.** This Phase 14 draft is retained as a historical record. The
+> current Phase 15 manuscript is `manuscript/phase15_reliability.md`; it
+> replaces the 0.560 headline with `R_obs = 0.2606`, `R_22 = 0.3006`
+> (counterfactual for 87/126 targets), and `R_id = 0.3501`. See
+> [`PHASE15_RESULTS.md`](PHASE15_RESULTS.md) and C15.
+
 **Draft status:** internal manuscript draft. Not submitted, not peer reviewed.
 Numbers are generated from `reports/phase14/`; the claims ledger is authoritative.
 

@@ -1,5 +1,9 @@
 # Phase 12R results: aligned calibration rerun and withdrawn benchmark claim
 
+> **Superseded headline (Phase 15, C15).** The 0.560 reference is an
+> extrapolated point estimate, not a bound; only 39 of 126 targets have at least
+> 22 animals. See [`PHASE15_RESULTS.md`](PHASE15_RESULTS.md).
+
 Phase 12R was a preregistered correction of the Phase 12 calibration harness.
 It asked whether the hierarchical measurement model passes its calibration
 gates after the simulation, fit and truth use the same animal centering and

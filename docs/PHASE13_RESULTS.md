@@ -1,5 +1,10 @@
 # Phase 13 results: projection-consistent reliability and event-level variance
 
+> **Superseded headline (Phase 15, C15).** The 0.560 reference used for the
+> agreement gate is an extrapolated point estimate, not a bound. The negative
+> decision stands independently through SBC and null failures. See
+> [`PHASE15_RESULTS.md`](PHASE15_RESULTS.md).
+
 **Status:** completed, **not adopted**. The decision is
 `not_adopted_gate_failures`. This is a negative measurement-model result, not a
 biological discovery.

@@ -1,18 +1,20 @@
-# Benchmark card: BoundedBench (NeuroBranch 1.3.2)
+# Benchmark card: BoundedBench (NeuroBranch 1.4.0)
 
-> **Phase 14 update.** The Phase 14A reference audit supports the coverage-aware
-> ceiling **0.560** under a robust one-event variance treatment (V1 0.3006 versus
-> V0 0.3136; delta 0.0131). The Phase 14B exact zero/spike-and-slab model is
-> **rejected**: 8/12 frozen gates failed, including SBC rank, held-out PPC, both
-> null q95 tails, prior sensitivity, reference agreement, and spike calibration.
-> The machine-readable Phase 11 card at `reports/phase11/benchmark_card.json`
-> remains authoritative for the descriptive ceiling. The aligned Phase 12R fit
-> gives 0.304 / 0.551, but its interval is **not calibrated**. The Phase 12
-> animal-cluster benchmark comparison is withdrawn because baseline/model truth
-> was not paired on events (C11). See `docs/PHASE14_RESULTS.md`.
+> **Phase 15 update.** The Phase 11 headline `sqrt(R(22)) = 0.5600` is **not a
+> bound**. Only 39 of 126 targets have at least 22 animals; for 87 targets the
+> value is a counterfactual. The observed-count estimate is `R_obs = 0.2606`
+> (delete-one-animal 95% interval 0.1782--0.3430; ceiling 0.5104). The
+> counterfactual is `R_22 = 0.3006` (interval 0.2087--0.3924; ceiling 0.5482),
+> and the identified subset gives `R_id = 0.3501` on 39 targets.
+> The animal-half extrapolation gate fails (MAE 0.204, bias +0.038), and target
+> rankings do not replicate (median Spearman 0.126). No ranking is published.
+> The machine-readable card is `reports/phase15/benchmark_card.json`; the
+> Phase 11 card is historical.
 >
-> **Phase 12R note.** The Phase 12R fit is retained as a historical negative
-> result; it is not a replacement ceiling.
+> **Phase 14 remains negative.** The exact zero/spike-and-slab model is
+> **rejected** (8/12 gates failed); its median 0.0543 is prior-dominated. The
+> Phase 12 animal-cluster comparison is withdrawn because baseline/model truth
+> was not paired on events (C11).
 
 A benchmark card states what a benchmark measures, what it does not measure,
 and how a reader can reproduce it. This card covers the Phase 6-10 evaluation
@@ -105,12 +107,13 @@ against the measurement ceiling.
 
 ## Known failure modes
 
-1. **Facet-dependent ceiling.** Single-animal reliability is 0.162 (ceiling
-   0.403); a per-animal correlation above ~0.40 is not attainable with this
-   atlas. Pooled over 22 animals at 80% responder coverage, reliability is
-   0.314 and the ceiling is 0.560 (the Phase 10 sparse-coverage values were
-   0.693 and 0.833). Comparing a pooled metric to the single-animal ceiling is
-   an error.
+1. **Facet-dependent and extrapolated ceiling.** Single-animal reliability is
+   0.162 (ceiling 0.403); a per-animal correlation above ~0.40 is not attainable
+   with this atlas. At 80% responder coverage the observed-count reliability is
+   `R_obs = 0.2606` (ceiling 0.5104); `R_22 = 0.3006` (ceiling 0.5482) is
+   counterfactual for 87 of 126 targets. The historical 0.560 value and the
+   Phase 10 sparse-coverage values (0.693 / 0.833) are not interchangeable
+   bounds. Comparing a pooled metric to the single-animal ceiling is an error.
 2. **Few events per target.** Targets with few stimulations have unstable
    profiles; the reliability table reports counts so readers can filter.
 3. **Target selection.** Exclusion of low-coverage targets changes the target

@@ -316,6 +316,11 @@ def main(argv: list[str] | None = None) -> int:
             )
     else:
         nulls = {estimand: {"status": "not_run"} for estimand in ESTIMANDS}
+    (args.out / "nulls.json").write_text(
+        json.dumps(nulls, indent=2, sort_keys=True, default=_json_default) + "\n",
+        encoding="utf-8",
+        newline="\n",
+    )
 
     extrapolation = extrapolation_check(
         trials,

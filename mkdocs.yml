@@ -27,6 +27,11 @@ plugins:
 nav:
   - Home: README.md
   - Current status: CURRENT_STATUS.md
+  - Phase 15:
+      - Results: PHASE15_RESULTS.md
+      - Methods: METHODS_PHASE15.md
+      - Protocol: phase15_protocol.md
+      - Deviations: phase15_deviations.md
   - Phase 14:
       - Results: PHASE14_RESULTS.md
       - Methods: METHODS_PHASE14.md

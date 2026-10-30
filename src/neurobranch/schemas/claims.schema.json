@@ -120,6 +120,10 @@
               "superiority",
               "equivalence",
               "descriptive",
+              "R_obs",
+              "R_22",
+              "R_id",
+              "ranking",
               null
             ]
           },

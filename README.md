@@ -12,31 +12,40 @@ perturbation** on real calcium imaging and optogenetic atlases.
 > `interventions/safety.py` refuses to label any output as empirically
 > validated without a matched, provenance-checked intervention dataset.
 
-## What version 1.3.2 adds: reference audit and a rejected zero-inflated model
+## What version 1.4.0 adds: the 0.560 headline was extrapolation
 
-Version 1.3.2 audits the Phase 11 reference and tests whether an exact zero
-(spike-and-slab) model repairs the Phase 13 null bias. The audit supports the
-reference; the model is **rejected**.
+Version 1.4.0 replaces the single "coverage-aware ceiling" with a frozen,
+three-estimand audit. The Phase 11 headline `sqrt(R(22)) = 0.5600` is retained
+only as a historical extrapolated point estimate; it is **not a bound**.
 
-- Phase 14A replaces the one-event zero variance with a robust global event
-  variance. V1 gives **R(22) = 0.3006** (ceiling 0.5482), only 0.0131 from the
-  historical 0.3136 / 0.5600. V1h gives 0.3139 / 0.5603. The `0.560` ceiling is
-  robust to this assumption for the 126-target, 80%-coverage population.
-- Phase 14B adds an exact point mass at `sigma = 0`. The real-data median is
-  **R(22) = 0.0543**, but **8 of 12 frozen gates fail**: SBC rank KS
-  p = 3.35e-192, grid edge 0.0810, held-out PPC coverage 0.7697 / MAE 0.3998,
-  negative-control q95 0.3535, sign-flip q95 0.4509, prior range 0.1220,
-  reference gap 0.2463, and spike calibration 0.3561. The decision is
-  `not_adopted_gate_failures`.
-- A zero median is not a valid null model: the upper tails remain too heavy. No
-  calibrated interval, target ranking, animal-budget guarantee, causal effect,
-  digital-twin claim, or transport claim is published.
+- Only **39 of 126** targets have at least 22 animals. For the other 87,
+  `R(22)` is a design counterfactual, not an identified observed-data quantity.
+- V1 observed-count reliability is **`R_obs = 0.2606`** (delete-one-animal 95%
+  interval 0.1782--0.3430; `sqrt(R_obs) = 0.5104`). This is the descriptive
+  observed-data quantity.
+- The counterfactual is **`R_22 = 0.3006`** (interval 0.2087--0.3924;
+  `sqrt(R_22) = 0.5482`), with 87 extrapolated targets.
+- The identified subset (`n >= 22`) gives **`R_id = 0.3501`** (interval
+  0.2020--0.4982) on 39 targets. It is a different population, not a replacement
+  for `R_obs`.
+- The animal-half extrapolation check fails (median absolute error **0.204**,
+  bias **+0.038** against thresholds 0.10 / 0.05). Target rankings do not
+  replicate (median Spearman **0.126**, 95% interval -0.021--0.247; top-10
+  Jaccard **0.176**). No target ranking is published.
+- The audit decision is **`not_calibrated`** unless the frozen calibration and
+  null gates pass. Read `reports/phase15/summary.json`; do not select the
+  convenient estimand.
 
-The `min_events=2` filter gives 0.1754 on 36 targets; it is a different
-population, not a corrected `0.560`. See
+Phase 14 remains a negative result: the exact zero/spike-and-slab model is
+**rejected** with 8 of 12 frozen gates failed, and its real-data median 0.0543 is
+prior-dominated, not a reliability estimate. The `min_events=2` filter gives
+0.1754 on 36 targets; it is a different population.
+
+See [`docs/PHASE15_RESULTS.md`](docs/PHASE15_RESULTS.md),
+[`docs/METHODS_PHASE15.md`](docs/METHODS_PHASE15.md),
+[`research/phase15_protocol.md`](research/phase15_protocol.md),
 [`docs/PHASE14_RESULTS.md`](docs/PHASE14_RESULTS.md),
-[`docs/REFERENCE_AUDIT.md`](docs/REFERENCE_AUDIT.md),
-[`docs/CORRECTIONS.md`](docs/CORRECTIONS.md) C13/C14 and
+[`docs/CORRECTIONS.md`](docs/CORRECTIONS.md) C13--C15 and
 [`docs/CURRENT_STATUS.md`](docs/CURRENT_STATUS.md).
 
 The Phase 12 animal-cluster benchmark comparison remains **withdrawn**: baseline
@@ -47,26 +56,27 @@ positive result. A synthetic check also found the remaining procedure undercover
 [`docs/PHASE12R_RESULTS.md`](docs/PHASE12R_RESULTS.md) and
 [`docs/CORRECTIONS.md`](docs/CORRECTIONS.md) C10/C11.
 
-## What version 1.1.0 adds: coverage sensitivity (read before the Phase 10 table)
+## What version 1.1.0 adds: coverage sensitivity (historical)
 
 The Phase 10 pooled ceiling is **not robust to sparse responder coverage**. A
 responder observed in one animal contributes to the pooled profile but has no
-between-animal variance to subtract, inflating apparent signal. Requiring each
-responder to be present in at least 80% of a target's animals lowers the pooled
-ceiling from 0.833 to **0.560** at 22 animals:
+between-animal variance to subtract, inflating apparent signal. The historical
+Phase 11 table lowered the apparent ceiling from 0.833 to 0.560 at 22 animals:
 
 | Minimum responder coverage | Pooled reliability | Ceiling |
 | --- | ---: | ---: |
 | 0.0 (Phase 10) | 0.693 | 0.833 |
 | 0.5 | 0.414 | 0.643 |
-| 0.8 | 0.314 | **0.560** |
+| 0.8 | 0.314 | 0.560 (historical) |
 | 1.0 | 0.207 | 0.455 |
 
-The Phase 11 extrapolation gate also failed (median absolute error 0.210), and
-the two-way bootstrap interval excluded its own point estimate (0.314 vs
-[0.497, 0.583]). Neither is used as a calibrated interval. See
-[`docs/PHASE11_RESULTS.md`](docs/PHASE11_RESULTS.md) and correction C8. Phase 10
-numbers below are retained as a historical record, not as the headline.
+Phase 15 changes the interpretation, not the arithmetic: 0.560 is an
+extrapolated point estimate for the 80% population, not a bound. The Phase 11
+extrapolation gate failed (median absolute error 0.210), and the two-way
+bootstrap interval excluded its own point estimate (0.314 vs [0.497, 0.583]).
+Neither is used as a calibrated interval. See
+[`docs/PHASE11_RESULTS.md`](docs/PHASE11_RESULTS.md), correction C8, and the
+Phase 15 correction C15.
 
 ## What version 1.0.0 added: metric-aligned evaluation (historical)
 
@@ -84,11 +94,11 @@ defects (sparse-responder denominators and a double-counted interaction term).
 | Pooled over all 110 animals | 0.873 | [0.837, 0.909] | 0.934 |
 
 The consequence is narrow and important. Claims about one animal are severely
-bounded. Pooled claims have more headroom, but the coverage-aware ceiling
-(0.560) is lower than the Phase 10 value. Against the Phase 10 sparse-coverage
-ceiling the CRO of 0.0984 is about **11.8%**; against the coverage-aware ceiling
-it is about **17.6%**. The old Phase 7 "64% of ceiling" claim remains withdrawn,
-and so is the Phase 9 replacement (21%).
+bounded. Pooled claims have more headroom. Against the Phase 10 sparse-coverage
+ceiling the CRO of 0.0984 is about **11.8%**; against the Phase 15 observed-data
+ceiling (`sqrt(R_obs) = 0.5104`) it is about **19.3%**. The old Phase 7 "64% of
+ceiling" claim remains withdrawn, and so is the Phase 9 replacement (21%).
+Phase 15's 0.560 value is not used as a denominator because it is extrapolated.
 
 The Phase 8 pair advantage (+0.0442, CI [+0.0080, +0.0901]) still has a design
 MDE of 0.0587 against a declared smallest effect of interest of 0.020, so it

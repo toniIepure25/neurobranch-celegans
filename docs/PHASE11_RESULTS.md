@@ -1,5 +1,14 @@
 # Phase 11 results: coverage sensitivity and failed uncertainty gates
 
+> **Superseded headline (Phase 15, correction C15).** Phase 11 described
+> `sqrt(R(22)) = 0.5600` as a descriptive ceiling. Phase 15 shows that `R(22)`
+> is identified for only 39 of 126 targets, so 0.560 is an extrapolated point
+> estimate, not a bound. Use `R_obs = 0.2606` (95% interval 0.1782--0.3430;
+> ceiling 0.5104), `R_22 = 0.3006` (counterfactual), or `R_id = 0.3501`
+> (identified subset) with the audit label in
+> [`PHASE15_RESULTS.md`](PHASE15_RESULTS.md). The Phase 11 numbers below are
+> retained as a historical record.
+
 Phase 11 audits the Phase 10 ceiling rather than adding a new biological claim.
 The headline is negative: **the Phase 10 pooled ceiling is not robust to
 responder coverage**, and none of the three interval/shrinkage procedures passed

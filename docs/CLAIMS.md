@@ -60,7 +60,7 @@ carry no p-value and are not in a family.
 | --- | --- | --- | ---: | --- | --- |
 | `phase9-single-animal-ceiling-below-half` | Single-animal reliability < 0.5 | single_animal | 0.162 | [0.134, 0.191] | supported |
 | `phase9-repeat-ceiling-below-half` | Repeat reliability < 0.5 | repeat | 0.243 | [0.206, 0.279] | supported |
-| `phase10-fold-ceiling` | Phase 10 sparse-coverage ceiling is about 0.83; coverage-aware value is 0.56 | pooled_fold | 0.833 | descriptive | not supported (coverage-sensitive; C8) |
+| `phase10-fold-ceiling` | Phase 10 sparse-coverage ceiling is about 0.83; the 0.56 value is historical and extrapolated | pooled_fold | 0.833 | descriptive | not supported (coverage-sensitive; C8/C15) |
 | `phase8-pair-advantage` | APT(k=0) beats static CRO at pair level | superiority | +0.0442 | [+0.0080, +0.0901] | underpowered (MDE 0.0587 > SESOI 0.020; Holm p = 0.070) |
 | `phase8-trajectory-advantage` | APT(k=0) beats per-responder template | superiority | −0.0000066 | — | not supported |
 | `phase8-sequential-rollout` | 3-event rollout beats persistence | superiority | +0.0230 | — | not supported (coverage 0.904 < 0.95) |
@@ -69,6 +69,10 @@ carry no p-value and are not in a family.
 | `phase12-hierarchical-interval` | Hierarchical posterior interval is calibrated for pooled reliability | pooled_fold | 0.3035 | — | not supported (SBC rank KS p = 1.43e-06; PPC MAE 0.207; negative-control median R(22) = 0.120, q95 0.594; C10) |
 | `phase13-event-variance-model` | Projection-consistent event-variance model is calibrated for pooled reliability | pooled_fold | 0.2003 | — | not supported (SBC coverage 0.9244; rank KS p = 0.00306; negative-control median 0.1485, q95 0.4680; sign-flip median 0.1341; PPC not run; 0.1137 below reference) |
 | `phase14-zero-inflated-model` | Exact zero/spike-and-slab model is calibrated for pooled reliability | pooled_fold | 0.0543 | — | not supported (8/12 gates failed: SBC rank p = 3.35e-192; edge 0.0810; PPC coverage 0.7697, MAE 0.3998; null q95 0.3535/0.4509; prior range 0.1220; reference gap 0.2463; spike calibration 0.3561) |
+| `phase15-observed-reliability` | Observed-count reliability is descriptive, not a calibrated bound | R_obs | 0.2606 | [0.1782, 0.3430] | not supported (jackknife coverage 0.990; null median 0.096, q95 0.114; C15) |
+| `phase15-fold-counterfactual` | R(22) is counterfactual for most targets, not identified | R_22 | 0.3006 | [0.2087, 0.3924] | not supported (87/126 extrapolated; extrapolation MAE 0.204; null median 0.122; C15) |
+| `phase15-identified-subset` | R_id is observed-count reliability on the identified subset | R_id | 0.3501 | [0.2020, 0.4982] | not supported (39 targets; different population; null median 0.107; C15) |
+| `phase15-ranking-stability` | Target rankings replicate across animal halves | ranking | 0.126 | [−0.021, 0.247] | not supported (top-10 Jaccard 0.176; no ranking published; C15) |
 | `phase12-benchmark-cluster` | A benchmark configuration beats static CRO by >0.05 in the animal-cluster analysis | animal_cluster | — | — | not supported (withdrawn: baseline/model `y_true` mismatch in 1,334/1,334 paired rows; C11) |
 
 ## What is never claimed
@@ -80,9 +84,12 @@ carry no p-value and are not in a family.
 - That a rapid literature scan is a systematic review.
 - That the animal jackknife interval is a calibrated confidence interval.
 - That the Phase 12 hierarchical posterior interval is calibrated, or that
-  0.3035 replaces the 0.560 descriptive ceiling.
+  0.3035 replaces a 0.560 bound (0.560 was extrapolated; C15).
 - That the Phase 13 event-variance model is calibrated, or that 0.2003 is a
-  measurement limit. It failed its gates and the 0.560 ceiling remains.
+  measurement limit. It failed its gates.
+- That 0.560 is a bound, or that `R_22 = 0.3006` is identified for all targets.
+  It is counterfactual for 87 of 126; use `R_obs = 0.2606` for observed counts
+  and `R_id = 0.3501` for the identified subset (C15).
 - That the event-variance model's lower estimate proves the true reliability is
   near 0.20; the negative-control median 0.1485 shows positive null bias.
 - That any Phase 12 benchmark configuration is superior; the animal-cluster

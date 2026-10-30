@@ -1,5 +1,10 @@
 # Phase 12 results: hierarchical model, failed calibration, retained 0.560
 
+> **Superseded headline (Phase 15, C15).** The retained 0.560 is an
+> extrapolated point estimate, not a bound. Phase 15 reports `R_obs = 0.2606`,
+> `R_22 = 0.3006` (counterfactual for 87/126 targets), and `R_id = 0.3501`.
+> See [`PHASE15_RESULTS.md`](PHASE15_RESULTS.md).
+
 > **Correction (C10/C11):** this page is the original Phase 12 report. The
 > calibration harness had an alignment defect, and the animal-cluster benchmark
 > comparison was invalid because baseline and model `y_true` were not paired on

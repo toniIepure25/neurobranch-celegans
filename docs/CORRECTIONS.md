@@ -389,3 +389,43 @@ published as a negative result; `v1.3.2` is the appropriate release.
 **Impact:** a zero median is not sufficient evidence of a valid null model. The
 false-positive tail and spike calibration must be reported alongside it. This is
 unfavourable to the proposed repair and is reported anyway.
+
+## C15. The 0.560 reliability headline was extrapolated, not identified
+
+**Was claimed in Phase 11/12/13/14:** the coverage-aware pooled ceiling is
+`sqrt(R(22)) = 0.560` for the 126-target, 80%-coverage population, and later
+texts treated it as a bound that survived the Phase 14A variance audit.
+
+**What happened:** `R_t(22)` was evaluated for every target, including the 87
+targets with fewer than 22 animals. Only **39 of 126** targets have
+`n_t >= 22`. For the other 87 the value is a design counterfactual, not an
+observed-data quantity. Phase 15 froze three estimands: `R_obs` at observed
+counts (0.2606; delete-one-animal 95% interval 0.1782--0.3430; ceiling 0.5104),
+`R_22` at 22 animals (0.3006; 0.2087--0.3924; 87 extrapolated), and `R_id` on
+the identified subset (0.3501; 0.2020--0.4982; 39 targets). The V1-V0
+differences are <=0.0131, so Phase 14A's variance-robustness conclusion stands,
+but robustness to a variance assumption does not establish identification.
+
+The audit's calibration and null gates fail. Coverage is 0.990 / 0.976 / 0.999
+against a frozen 0.93--0.97 band (over-coverage; intervals too wide), and the
+permutation/sign-flip null medians are 0.096--0.137 against a 0.05 threshold,
+with the `R_22` sign-flip q95 at 0.1641. Animal-half extrapolation fails
+(MAE 0.204, bias +0.038) and ranking stability fails (median Spearman 0.126;
+top-10 Jaccard 0.176). The decision is `not_calibrated`; `R_22` is
+`counterfactual_only`. No 0.560 bound, calibrated interval, target ranking,
+animal budget or causal claim is supported.
+
+**Correct:** 0.560 is a historical extrapolated Phase 11 point estimate. The
+current descriptive headline is `R_obs = 0.2606`, with its own uncalibrated
+jackknife interval. `R_id = 0.3501` is a different population and is not a
+replacement for `R_obs`. The Phase 14A V1 value 0.3006 is numerically correct
+but is the same counterfactual estimand; it does not repair identification.
+
+**Evidence:** `research/phase15_protocol.md`,
+`reports/phase15/summary.json`, `reports/phase15/calibration.json`,
+`reports/phase15/nulls.json`, `reports/phase15/extrapolation.json`,
+`reports/phase15/ranking.json`, `docs/PHASE15_RESULTS.md`.
+
+**Impact:** every downstream document that used 0.560 as a denominator or bound
+must use the appropriate Phase 15 estimand and carry the `not_calibrated` label.
+This correction is unfavourable to the project and is reported anyway.

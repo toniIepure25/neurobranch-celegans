@@ -1,5 +1,60 @@
 # Changelog
 
+## 1.4.0 - 2026-11-01
+
+Three-estimand reliability audit. The Phase 11 0.560 headline is **withdrawn as
+a bound**: it is a historical extrapolated point estimate for 87 of 126 targets.
+The audit is a fail-closed negative result: calibration and null gates fail, no
+target ranking replicates, and no calibrated interval is published.
+
+### Added
+
+- `src/neurobranch/benchmark/variance.py`: `_reliability_at_n`,
+  `estimand_table`, `_estimand_block`, `summarise_reliability_estimands`.
+- `src/neurobranch/benchmark/robustness.py`: target-matrix delete-one-animal
+  jackknife, `estimand` (`obs`/`fold`/`id`), coverage-aware animal jackknife and
+  extrapolation checks.
+- `src/neurobranch/benchmark/reliability_audit.py`: 2,000-draw animal Dirichlet
+  bootstrap, 1,000-draw permutation/sign-flip nulls, parametric calibration,
+  ranking stability and heavy-tailed stress test.
+- `scripts/phase15_reliability.py`, `phase15_validate.py`, `phase15_manifest.py`,
+  `phase15_card.py`, `phase15_calibrate.py`, `phase15_nulls.py`,
+  `phase15_manuscript.py`.
+- `schemas/phase15_summary.schema.json` plus packaged copy.
+- `reports/phase15/`, `docs/PHASE15_RESULTS.md`, `docs/METHODS_PHASE15.md`,
+  `research/phase15_protocol.md`, `research/phase15_deviations.md`, correction
+  C15, manuscript and figures.
+
+### Changed
+
+- The status dashboard and app show `R_obs`, `R_22`, `R_id`, the decision and
+  the audit gates instead of a single 0.560 ceiling.
+- The claims ledger adds four Phase 15 claims as `not_supported`; 0.560 is no
+  longer described as a bound anywhere current.
+- Version bump to 1.4.0; CITATION and package metadata updated.
+- Release workflow now runs tests and Phase 15 validation before building.
+
+### Results
+
+- `R_obs = 0.2606` [0.1782, 0.3430], ceiling 0.5104, 126 targets.
+- `R_22 = 0.3006` [0.2087, 0.3924], ceiling 0.5482, 87/126 extrapolated.
+- `R_id = 0.3501` [0.2020, 0.4982], ceiling 0.5917, 39 targets.
+- V1-V0 deltas 0.0103 / 0.0131 / 0.0078 (pass).
+- Calibration coverage 0.990 / 0.976 / 0.999 (fail; over-coverage).
+- Null medians 0.096--0.137, `R_22` sign-flip q95 0.1641 (fail).
+- Extrapolation MAE 0.204, bias +0.038 (fail); ranking Spearman 0.126,
+  Jaccard 0.176 (fail).
+- Decision `not_calibrated`; `R_22` is `counterfactual_only`.
+
+### Fixed
+
+- The Phase 11/12/13/14 texts that treated 0.560 as a bound now carry an
+  explicit superseded-headline notice.
+- The delete-one-animal interval is no longer described as calibrated; its
+  over-coverage and the null bias are reported.
+- A prototype BCa-on-LOO diagnostic was removed because LOO values are not a
+  bootstrap distribution; the failed diagnostic is recorded in D1.
+
 ## 1.3.2 - 2026-10-31
 
 Reference audit and a rejected exact zero/spike-and-slab model. The Phase 14A

@@ -1125,32 +1125,57 @@ with tabs[13]:
     status = load_measurement_status(ROOT / "reports")
     if status is not None:
         label = {
+            "phase15": "Phase 15 reliability estimand audit",
             "phase14": "Phase 14 zero-inflated measurement audit",
             "phase13": "Phase 13 measurement audit",
             "phase12r": "Phase 12R historical hierarchical audit",
             "phase12": "Phase 12 historical hierarchical audit",
         }.get(status.phase, status.phase)
         st.markdown(f"**{label}**")
-        p1, p2, p3, p4 = st.columns(4)
-        p1.metric("Current R(22)", f"{status.primary_estimate:.3f}")
-        p2.metric(
-            "Reference R(22)",
-            f"{status.reference_estimate:.3f}" if status.reference_estimate is not None else "not reported",
-        )
-        p3.metric("Failed gates", len(status.failed_gates))
-        p4.metric("Decision", status.decision)
-        if not status.adopted:
-            st.warning(
-                "The hierarchical interval is not calibrated. The current measurement gate "
-                f"failures are: {', '.join(status.failed_gates) or 'not reported'}. The 0.560 "
-                "coverage-aware ceiling remains the only descriptive bound; no calibrated "
-                "interval, target ranking, animal-budget guarantee, or causal effect is claimed."
+        if status.phase == "phase15":
+            e = status.estimands
+            p1, p2, p3, p4 = st.columns(4)
+            p1.metric("R_obs (observed n)", f"{e.get('R_obs', {}).get('estimate', float('nan')):.3f}")
+            p2.metric(
+                "R_22 (counterfactual)",
+                f"{e.get('R_22', {}).get('estimate', float('nan')):.3f}",
+                help="Not identified for 87 of 126 targets; this is an extrapolation.",
             )
+            p3.metric("R_id (n >= 22)", f"{e.get('R_id', {}).get('estimate', float('nan')):.3f}")
+            p4.metric("Decision", status.decision)
+            decision = status.summary.get("decision", {})
+            st.warning(
+                "Phase 15 separates three estimands. The observed-coverage estimate is "
+                f"R_obs = {e.get('R_obs', {}).get('estimate', float('nan')):.3f} "
+                f"(jackknife interval {e.get('R_obs', {}).get('ci_low', float('nan')):.3f}--"
+                f"{e.get('R_obs', {}).get('ci_high', float('nan')):.3f}); R_22 is a "
+                "counterfactual extrapolation, not an identified bound. The historical "
+                "hierarchical interval is not calibrated. The audit label is "
+                f"`{status.decision}`; calibrated interval = {decision.get('calibrated_interval')}, "
+                f"ranking = {decision.get('ranking_claim')}. No causal, transport, animal-budget "
+                "or target-ranking claim follows."
+            )
+            st.dataframe(pd.DataFrame(e).T, width="stretch")
+        else:
+            p1, p2, p3, p4 = st.columns(4)
+            p1.metric("Current R(22)", f"{status.primary_estimate:.3f}")
+            p2.metric(
+                "Reference R(22)",
+                f"{status.reference_estimate:.3f}" if status.reference_estimate is not None else "not reported",
+            )
+            p3.metric("Failed gates", len(status.failed_gates))
+            p4.metric("Decision", status.decision)
+            if not status.adopted:
+                st.warning(
+                    "The hierarchical interval is not calibrated. The current measurement gate "
+                    f"failures are: {', '.join(status.failed_gates) or 'not reported'}. No calibrated "
+                    "interval, target ranking, animal-budget guarantee, or causal effect is claimed."
+                )
         if status.gates:
             gate_rows = [
                 {
                     "gate": name,
-                    "passed": bool(gate.get("passed", False)),
+                    "status": gate.get("status", "pass" if gate.get("passed") else "fail"),
                     "value": str(gate.get("value", "")),
                     "requirement": str(gate.get("requirement", "")),
                 }

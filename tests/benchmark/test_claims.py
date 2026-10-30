@@ -47,6 +47,56 @@ def test_ledger_round_trip(tmp_path: Path) -> None:
     assert all("estimand" in claim for claim in payload["claims"])
 
 
+def test_phase15_claims_are_descriptive_and_fail_closed() -> None:
+    phase15 = {
+        "estimands": {
+            "R_obs": {
+                "estimate": 0.26,
+                "ceiling": 0.51,
+                "n_targets": 126,
+                "n_extrapolated": 0,
+                "jackknife": {"ci_low": 0.18, "ci_high": 0.34},
+            },
+            "R_22": {
+                "estimate": 0.30,
+                "ceiling": 0.55,
+                "n_targets": 126,
+                "n_extrapolated": 87,
+                "jackknife": {"ci_low": 0.21, "ci_high": 0.39},
+            },
+            "R_id": {
+                "estimate": 0.35,
+                "ceiling": 0.59,
+                "n_targets": 39,
+                "n_extrapolated": 0,
+                "jackknife": {"ci_low": 0.20, "ci_high": 0.50},
+            },
+        },
+        "decision": {"label": "not_calibrated", "calibrated_interval": False},
+        "gates": {
+            "G3_calibration": {"status": "fail"},
+            "G4_null_control": {"status": "fail"},
+            "G5_extrapolation": {"status": "fail"},
+        },
+        "ranking": {
+            "median_spearman": 0.13,
+            "ci_low": -0.02,
+            "ci_high": 0.25,
+            "median_jaccard": 0.18,
+            "status": "no_ranking",
+        },
+    }
+    claims = {claim.id: claim for claim in build_claims(SUMMARY, phase15_summary=phase15)}
+    for key in (
+        "phase15-observed-reliability",
+        "phase15-fold-counterfactual",
+        "phase15-identified-subset",
+        "phase15-ranking-stability",
+    ):
+        assert claims[key].status == "not_supported"
+    assert "87 of 126" in claims["phase15-fold-counterfactual"].notes
+
+
 def test_phase8_family_has_holm_adjusted_p_values() -> None:
     claims = {claim.id: claim for claim in build_claims(SUMMARY)}
     pair = claims["phase8-pair-advantage"]

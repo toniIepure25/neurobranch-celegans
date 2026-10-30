@@ -1,5 +1,11 @@
 # Limitations
 
+> **Phase 15 correction.** The historical 0.560 value is an extrapolated point
+> estimate, not a bound. The observed-count estimate is `R_obs = 0.2606` on 126
+> targets; `R_22 = 0.3006` is counterfactual for 87 of them; the identified
+> subset gives `R_id = 0.3501` on 39 targets. The extrapolation and ranking gates
+> fail. See `docs/PHASE15_RESULTS.md` and correction C15.
+
 Limitations are grouped by whether they are structural (cannot be fixed with this
 dataset), statistical (fixable with more data/compute), or interpretive (fixable
 only with a different experiment). None is hidden in an appendix.
