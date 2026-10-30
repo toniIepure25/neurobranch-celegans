@@ -1,0 +1,24 @@
+{
+  "decision": {
+    "calibrated_interval": false,
+    "ceiling_claim": false,
+    "extrapolation_status": "counterfactual_only",
+    "label": "not_calibrated",
+    "note": "A calibrated descriptive interval is not a causal, transport, ranking or animal-budget claim.",
+    "r22_estimate": 0.30055028936407424,
+    "r22_extrapolated_targets": 87.0,
+    "ranking_claim": false,
+    "reasons": [
+      "G3_calibration",
+      "G4_null_control",
+      "G5_extrapolation",
+      "G6_ranking_stability"
+    ]
+  },
+  "issues": [],
+  "manifest_g8": "pass",
+  "n_gates_failed": 4,
+  "n_issues": 0,
+  "primary_estimate": 0.2605558163404418,
+  "status": "pass"
+}

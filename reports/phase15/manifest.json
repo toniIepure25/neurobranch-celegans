@@ -1,0 +1,78 @@
+{
+  "artifacts": {
+    "bayesian_bootstrap.csv": "952cf99babbedd075287570600f18c9514654fb9a7d95ca55ac33620367ac540",
+    "benchmark_card.json": "1d815a257b462535b901535dcbe8e7f5ef3ec3e8700737f5e99eb9ab3c9d1287",
+    "calibration.json": "10f1c574a39488c306f85ad630a92737e9177544a8ac0128ded14e3fe660da9b",
+    "calibration_heavy.json": "cd28cd88d8b21127e64b03044f3bb66b72296fdd0ca42113864a484cd94e34f7",
+    "estimands.csv": "6e31720fea2612ea92ba2d3048cc0442982029daee5b3cfa549b4a48cdebd333",
+    "extrapolation.json": "c653c1c192ebcd11a4efbc1c1d54c0bd6f17923d6d0c39f7948bbc3b4422454d",
+    "jackknife.csv": "7315bded0dcc49f6f2ccd2af2f94cd7f433d636740d0374419e36b181bd9090b",
+    "nulls.json": "1ebb1fa1f4d76c4f3a59576fb6b4e160cd3f229b3c5ae80702d5f0c0963fb775",
+    "ranking.json": "b430e826e03a2ea62d50e3042e2a85d2ff5eb8141fb4733fe09c0ef55aa6f3b2",
+    "summary.json": "9d9290b9b6e7c5efbf291e789d79373f6dd3328759a3a90738e0a2a89d157a32"
+  },
+  "created_utc": "2026-10-30T23:58:29+00:00",
+  "decision": {
+    "calibrated_interval": false,
+    "ceiling_claim": false,
+    "extrapolation_status": "counterfactual_only",
+    "label": "not_calibrated",
+    "note": "A calibrated descriptive interval is not a causal, transport, ranking or animal-budget claim.",
+    "r22_estimate": 0.30055028936407424,
+    "r22_extrapolated_targets": 87.0,
+    "ranking_claim": false,
+    "reasons": [
+      "G3_calibration",
+      "G4_null_control",
+      "G5_extrapolation",
+      "G6_ranking_stability"
+    ]
+  },
+  "deviations": {
+    "path": "research/phase15_deviations.md",
+    "sha256": "c94bd402206b67626938f2c6856836af70a7a4cc497884805222dae3895e6308"
+  },
+  "git_dirty": false,
+  "git_revision": "329bda08ae7e66a85d27fc44a16c4e70f87715a2",
+  "input": {
+    "path": "reports/phase3/randi_trial_table_phase3.csv.gz",
+    "redistributed": false,
+    "sha256": "8186c96bcb33cdce15dc9ae88691e09fc596e42c5513310b6d6a636e4d5dd515"
+  },
+  "notes": [
+    "git_dirty reflects code/worktree changes outside reports/.",
+    "Artifact hashes cover every file except manifest.json, manifest.sha256 and validation.json.",
+    "Hashes of text artifacts are LF-normalized for portability."
+  ],
+  "parameters": {
+    "config": {
+      "fold_size": 22,
+      "min_animals": 6,
+      "min_events": 1,
+      "min_responder_coverage": 0.8,
+      "n_bootstrap": 2000,
+      "n_calibration": 1000,
+      "n_null": 1000,
+      "n_splits": 15,
+      "seed": 15,
+      "variance_treatment": "v1_one_event"
+    },
+    "seed": 15
+  },
+  "phase": "phase15",
+  "protocol": {
+    "path": "research/phase15_protocol.md",
+    "sha256": "f973e37bb903c8ce66596a5e727ff9ce92c25e0b3633983e57c3549673b01964"
+  },
+  "schema": {
+    "path": "schemas/phase15_summary.schema.json",
+    "sha256": "cd69a86475f33bd4da885cc4160841939198fa17f089c96d4e67b7252eb9d475"
+  },
+  "software": {
+    "numpy": "2.3.1",
+    "pandas": "2.3.3",
+    "platform": "Windows-10-10.0.19045-SP0",
+    "python": "3.13.5",
+    "uv_lock_sha256": "a660dbdc8cf4f03c31bffe6949645da709ff1fa15a4697f083bf27f37ee5f78f"
+  }
+}

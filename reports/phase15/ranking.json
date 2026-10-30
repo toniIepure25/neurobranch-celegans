@@ -1,0 +1,10 @@
+{
+  "ci_high": 0.2469377302303058,
+  "ci_low": -0.021074922626159807,
+  "median_jaccard": 0.17647058823529413,
+  "median_spearman": 0.12644768567927586,
+  "median_targets": 116.0,
+  "n_splits": 15.0,
+  "status": "no_ranking",
+  "top_k": 10.0
+}

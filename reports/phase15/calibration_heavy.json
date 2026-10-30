@@ -1,0 +1,38 @@
+{
+  "created_utc": "2026-10-30T23:45:20.331488+00:00",
+  "estimands": {
+    "fold": {
+      "bias": 0.023797993412802535,
+      "coverage": 1.0,
+      "mean_width": 0.151369433010732,
+      "n_total": 500.0,
+      "n_valid": 500.0,
+      "status": "not_calibrated"
+    },
+    "id": {
+      "bias": -0.0036965858235878976,
+      "coverage": 1.0,
+      "mean_width": 0.23214414059289346,
+      "n_total": 500.0,
+      "n_valid": 500.0,
+      "status": "not_calibrated"
+    },
+    "obs": {
+      "bias": 0.01985923236829133,
+      "coverage": 1.0,
+      "mean_width": 0.1420757428542768,
+      "n_total": 500.0,
+      "n_valid": 500.0,
+      "status": "not_calibrated"
+    }
+  },
+  "fold_size": 22.0,
+  "n_reps": 500.0,
+  "omega2": 1.7629127112560417,
+  "simulation": "heavy_tailed_heteroskedastic",
+  "truth": {
+    "fold": 0.30055028936407424,
+    "id": 0.3501170058041956,
+    "obs": 0.2605558163404418
+  }
+}

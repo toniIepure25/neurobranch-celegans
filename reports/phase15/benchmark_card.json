@@ -1,0 +1,75 @@
+{
+  "benchmark": "BoundedBench",
+  "ceiling": {
+    "historical_phase11_value": 0.5600069018705827,
+    "note": "Phase 11 called sqrt(R(22)) the coverage-aware ceiling. Phase 15 shows that R(22) is identified for only 39 of 126 targets; 0.560 is therefore an extrapolated point estimate, not a bound. Use R_obs or R_id with their jackknife intervals and the audit label.",
+    "status": "superseded_not_a_bound"
+  },
+  "decision": {
+    "calibrated_interval": false,
+    "ceiling_claim": false,
+    "extrapolation_status": "counterfactual_only",
+    "label": "not_calibrated",
+    "note": "A calibrated descriptive interval is not a causal, transport, ranking or animal-budget claim.",
+    "r22_estimate": 0.30055028936407424,
+    "r22_extrapolated_targets": 87.0,
+    "ranking_claim": false,
+    "reasons": [
+      "G3_calibration",
+      "G4_null_control",
+      "G5_extrapolation",
+      "G6_ranking_stability"
+    ]
+  },
+  "description": "Measurement-bounded evaluation of C. elegans neural-response predictions. Reliability is reported as three separate estimands; R_22 is a counterfactual extrapolation, not an identified bound.",
+  "estimands": {
+    "R_22": {
+      "ceiling": 0.5482246705175482,
+      "ci_high": 0.39242084164658586,
+      "ci_low": 0.20867973708156262,
+      "estimand": "counterfactual at 22 animals",
+      "estimate": 0.30055028936407424,
+      "n_extrapolated": 87,
+      "n_targets": 126
+    },
+    "R_id": {
+      "ceiling": 0.5917068579999691,
+      "ci_high": 0.4981974642005747,
+      "ci_low": 0.20203654740781646,
+      "estimand": "identified subset with n >= 22",
+      "estimate": 0.3501170058041956,
+      "n_extrapolated": 0,
+      "n_targets": 39
+    },
+    "R_obs": {
+      "ceiling": 0.5104466831515725,
+      "ci_high": 0.3429535994277412,
+      "ci_low": 0.1781580332531424,
+      "estimand": "observed animal counts",
+      "estimate": 0.2605558163404418,
+      "n_extrapolated": 0,
+      "n_targets": 126
+    }
+  },
+  "evaluation": {
+    "coverage": 0.8,
+    "fold_size": 22,
+    "n_folds": 5,
+    "primary_metric": "pair_spearman",
+    "split_unit": "animal"
+  },
+  "limitations": [
+    "R_22 is extrapolated for 87 of 126 targets and the half-split extrapolation gate failed.",
+    "Delete-one-animal intervals are reported only with the calibration status in the audit.",
+    "Null controls were run; read their medians and q95 values, not only the point estimate.",
+    "Target rankings did not replicate and are not published.",
+    "No causal, transport, digital-twin, foundation-model, or animal-budget claim is supported.",
+    "The derived Randi trial table is not redistributed until its licence is confirmed."
+  ],
+  "provenance": {
+    "manifest": "reports/phase15/manifest.json",
+    "summary": "reports/phase15/summary.json"
+  },
+  "schema_version": 1,
+  "version": "2.1"
+}
