@@ -30,7 +30,8 @@ is calibrated; this module only fits and reports diagnostics.
 
 from __future__ import annotations
 
-from dataclasses import dataclass
+from dataclasses import dataclass, replace
+from typing import Any
 
 import numpy as np
 import pandas as pd
@@ -38,10 +39,24 @@ import pandas as pd
 from neurobranch.benchmark.variance import DEFAULT_ANIMAL_COLUMN, cell_summaries
 
 MIN_RESPONDERS = 3
+MIN_TARGET_ANIMALS = 2
+VARIANCE_FLOOR = 1e-8
 
 
 @dataclass(frozen=True)
-class _TargetData:
+class TargetData:
+    """One target's masked, transformed animal x responder matrix.
+
+    ``y`` and ``v`` are already on the scale used by the likelihood.  A caller
+    that constructs this object directly is responsible for applying the same
+    centering and standardization as the fit; the calibration harness does that
+    through :func:`normalize_target`.
+
+    ``v`` must be strictly positive for every observed cell.  Zero variances are
+    floored explicitly and counted in ``n_variance_floored``; missing or negative
+    variances are an error rather than a silent substitution.
+    """
+
     target: str
     y: np.ndarray
     v: np.ndarray
@@ -51,6 +66,11 @@ class _TargetData:
     coverage: float
     nu: float
     responders: tuple[str, ...]
+    n_variance_floored: int = 0
+
+
+# Backwards-compatible private alias for code that imported the old name.
+_TargetData = TargetData
 
 
 @dataclass(frozen=True)
@@ -61,11 +81,97 @@ class _SampleOutput:
     n_eff: float
 
 
+@dataclass(frozen=True)
+class TargetFit:
+    """Fit output for one target."""
+
+    target: str
+    status: str
+    row: dict[str, Any]
+    draws: np.ndarray | None
+
+
 def posterior_ceiling(reliability: float) -> float:
     """Attenuation ceiling ``sqrt(reliability)``, clipped to [0, 1]."""
     if not np.isfinite(reliability):
         return float("nan")
     return float(np.sqrt(np.clip(reliability, 0.0, 1.0)))
+
+
+def _normalize_target_with_reason(
+    cells: pd.DataFrame,
+    *,
+    coverage: float,
+    min_events: int,
+    min_animals: int,
+    standardize: bool,
+    center_animals: bool = True,
+) -> tuple[TargetData | None, str]:
+    """Build a target matrix and return a machine-readable exclusion reason."""
+    subset = cells[cells["n"] >= min_events]
+    if subset.empty:
+        return None, "no_events"
+    means = subset.pivot_table(index="_animal", columns="_neuron", values="mean", aggfunc="mean")
+    variances = subset.assign(v=subset["var"] / np.maximum(subset["n"], 1.0)).pivot_table(
+        index="_animal", columns="_neuron", values="v", aggfunc="mean"
+    )
+    variances = variances.reindex(index=means.index, columns=means.columns)
+    if means.shape[1] < MIN_RESPONDERS:
+        return None, "too_few_responders"
+    coverage_by_responder = means.notna().sum(axis=0) / max(means.shape[0], 1)
+    keep = coverage_by_responder >= float(coverage)
+    if int(keep.sum()) < MIN_RESPONDERS:
+        return None, "too_few_responders_after_coverage"
+    means = means.loc[:, keep]
+    variances = variances.loc[:, keep]
+    keep_animals = means.notna().any(axis=1)
+    means = means.loc[keep_animals]
+    variances = variances.loc[keep_animals]
+    if means.shape[0] < max(min_animals, MIN_RESPONDERS):
+        return None, "too_few_animals"
+
+    y = means.to_numpy(dtype=float)
+    v = variances.to_numpy(dtype=float)
+    mask = np.isfinite(y)
+    if mask.sum() < MIN_RESPONDERS * MIN_RESPONDERS:
+        return None, "insufficient_cells"
+
+    # Missing or negative sampling variances are not silently replaced.  A
+    # genuine zero variance (for example one event) is floored explicitly and
+    # counted so the artifact records the approximation.
+    invalid_variance = mask & (~np.isfinite(v) | (v < 0.0))
+    if bool(invalid_variance.any()):
+        return None, "invalid_sampling_variance"
+    zero_variance = mask & (v == 0.0)
+    n_variance_floored = int(zero_variance.sum())
+    v = np.where(mask, np.maximum(v, VARIANCE_FLOOR), 1.0)
+
+    if center_animals:
+        row_means = np.nanmean(np.where(mask, y, np.nan), axis=1, keepdims=True)
+        y = y - row_means
+    if standardize:
+        finite_y = y[mask]
+        center = float(np.mean(finite_y))
+        scale = float(np.std(finite_y, ddof=1))
+        if not np.isfinite(scale) or scale <= 0:
+            return None, "nonfinite_scale"
+        y = (y - center) / scale
+        v = v / (scale**2)
+    return (
+        TargetData(
+            target=str(subset["_target"].iloc[0]),
+            y=y,
+            v=v,
+            mask=mask,
+            n_animals=int(y.shape[0]),
+            n_responders=int(y.shape[1]),
+            coverage=float(coverage),
+            nu=float(np.mean(v[mask])),
+            responders=tuple(str(column) for column in means.columns),
+            n_variance_floored=n_variance_floored,
+        ),
+        "",
+    )
 
 
 def _normalize_target(
@@ -76,39 +182,53 @@ def _normalize_target(
     min_animals: int,
     standardize: bool,
     center_animals: bool = True,
-) -> _TargetData | None:
-    """Build the masked, standardized animal x responder matrix for one target."""
-    subset = cells[cells["n"] >= min_events]
-    if subset.empty:
-        return None
-    means = subset.pivot_table(index="_animal", columns="_neuron", values="mean", aggfunc="mean")
-    variances = subset.assign(v=subset["var"] / np.maximum(subset["n"], 1.0)).pivot_table(
-        index="_animal", columns="_neuron", values="v", aggfunc="mean"
+) -> TargetData | None:
+    """Backwards-compatible wrapper used by the calibration templates."""
+    data, _ = _normalize_target_with_reason(
+        cells,
+        coverage=coverage,
+        min_events=min_events,
+        min_animals=min_animals,
+        standardize=standardize,
+        center_animals=center_animals,
     )
-    variances = variances.reindex(index=means.index, columns=means.columns)
-    if means.shape[1] < MIN_RESPONDERS:
-        return None
-    coverage_by_responder = means.notna().sum(axis=0) / max(means.shape[0], 1)
-    keep = coverage_by_responder >= float(coverage)
-    if int(keep.sum()) < MIN_RESPONDERS:
-        return None
-    means = means.loc[:, keep]
-    variances = variances.loc[:, keep]
-    keep_animals = means.notna().any(axis=1)
-    means = means.loc[keep_animals]
-    variances = variances.loc[keep_animals]
-    if means.shape[0] < max(min_animals, MIN_RESPONDERS):
-        return None
+    return data
 
-    y = means.to_numpy(dtype=float)
-    v = variances.to_numpy(dtype=float)
-    mask = np.isfinite(y)
-    if mask.sum() < MIN_RESPONDERS * MIN_RESPONDERS:
-        return None
-    # A cell without a finite variance contributes only its mean; floor the
-    # sampling variance so the likelihood remains finite.
-    v = np.where(mask & np.isfinite(v), v, 1.0)
-    v = np.maximum(v, 1e-8)
+
+def normalize_target(
+    cells: pd.DataFrame,
+    *,
+    coverage: float = 0.0,
+    min_events: int = 1,
+    min_animals: int = 6,
+    standardize: bool = True,
+    center_animals: bool = True,
+) -> TargetData | None:
+    """Public target builder with the same transformation as the fitter."""
+    return _normalize_target(
+        cells,
+        coverage=coverage,
+        min_events=min_events,
+        min_animals=min_animals,
+        standardize=standardize,
+        center_animals=center_animals,
+    )
+
+
+def transform_target(
+    data: TargetData,
+    *,
+    center_animals: bool = True,
+    standardize: bool = False,
+) -> TargetData:
+    """Apply the fitter's centering/standardization to an existing target.
+
+    Calibration simulations use this so the generated data and the fitted data
+    go through exactly one common transformation.
+    """
+    y = np.asarray(data.y, dtype=float).copy()
+    v = np.asarray(data.v, dtype=float).copy()
+    mask = np.asarray(data.mask, dtype=bool)
     if center_animals:
         row_means = np.nanmean(np.where(mask, y, np.nan), axis=1, keepdims=True)
         y = y - row_means
@@ -117,20 +237,39 @@ def _normalize_target(
         center = float(np.mean(finite_y))
         scale = float(np.std(finite_y, ddof=1))
         if not np.isfinite(scale) or scale <= 0:
-            return None
+            raise ValueError("cannot standardize a target with zero or non-finite scale")
         y = (y - center) / scale
         v = v / (scale**2)
-    return _TargetData(
-        target=str(subset["_target"].iloc[0]),
+    return replace(
+        data,
         y=y,
         v=v,
-        mask=mask,
-        n_animals=int(y.shape[0]),
-        n_responders=int(y.shape[1]),
-        coverage=float(coverage),
         nu=float(np.mean(v[mask])),
-        responders=tuple(str(column) for column in means.columns),
     )
+
+
+def _validate_target(data: TargetData) -> None:
+    """Fail closed on malformed target arrays before evaluating a likelihood."""
+    y = np.asarray(data.y, dtype=float)
+    v = np.asarray(data.v, dtype=float)
+    mask = np.asarray(data.mask, dtype=bool)
+    if y.ndim != 2 or y.shape != v.shape or y.shape != mask.shape:
+        raise ValueError("target y, v and mask must be the same 2-D shape")
+    if data.n_responders < MIN_RESPONDERS:
+        raise ValueError("target has fewer than three responders")
+    if data.n_animals < MIN_TARGET_ANIMALS:
+        raise ValueError("target has fewer than two animals")
+    if data.n_responders != y.shape[1] or data.n_animals != y.shape[0]:
+        raise ValueError("target dimensions do not match its arrays")
+    observed = mask
+    if not np.isfinite(y[observed]).all():
+        raise ValueError("observed target means contain non-finite values")
+    if not np.isfinite(v[observed]).all() or bool((v[observed] < 0.0).any()):
+        raise ValueError("observed sampling variances must be finite and non-negative")
+    if data.responders and len(data.responders) != data.n_responders:
+        raise ValueError("responder labels do not match the target matrix")
+    if not np.isfinite(data.nu) or data.nu <= 0.0:
+        raise ValueError("target mean sampling variance is not positive and finite")
 
 
 def _log_posterior(
@@ -243,6 +382,85 @@ def _reliability_draws(
     return out
 
 
+def fit_hierarchical_target(
+    data: TargetData,
+    *,
+    n_eval: tuple[int, ...] = (1, 22),
+    draws: int = 4000,
+    grid_resolution: int = 100,
+    seed: int = 12,
+    prior_scale: float = 1.0,
+) -> TargetFit:
+    """Fit the hierarchical likelihood for one already-transformed target.
+
+    This is the shared entry point for real targets and for calibration
+    simulations.  Passing a :class:`TargetData` directly avoids a round trip
+    through event-level aggregation, which previously dropped a known sampling
+    variance when a synthetic cell contained one event.
+    """
+    _validate_target(data)
+    if draws < 100:
+        raise ValueError("draws >= 100 is required")
+    if grid_resolution < 20:
+        raise ValueError("grid_resolution >= 20 is required")
+    zero_variance = data.mask & (data.v == 0.0)
+    if bool(zero_variance.any()):
+        v = np.array(data.v, dtype=float, copy=True)
+        v[zero_variance] = VARIANCE_FLOOR
+        data = replace(
+            data,
+            v=v,
+            nu=float(np.mean(v[data.mask])),
+            n_variance_floored=data.n_variance_floored + int(zero_variance.sum()),
+        )
+    fit = _grid_posterior(
+        data,
+        resolution=grid_resolution,
+        draws=draws,
+        seed=seed,
+        prior_scale=prior_scale,
+    )
+    row: dict[str, Any] = {
+        "target": data.target,
+        "status": "ok",
+        "reason": "",
+        "coverage": float(data.coverage),
+        "n_animals": data.n_animals,
+        "n_responders": data.n_responders,
+        "n_variance_floored": int(data.n_variance_floored),
+        "n_observed_cells": int(data.mask.sum()),
+        "mean_sampling_var": data.nu,
+        "grid_edge_mass": float(fit.edge_mass),
+        "grid_n_eff": float(fit.n_eff),
+        "n_draws": int(fit.sigma2.size),
+    }
+    if fit.sigma2.size == 0 or not np.isfinite(fit.sigma2).any() or not np.isfinite(fit.tau2).any():
+        row.update({"status": "fit_failed", "reason": "no_finite_posterior"})
+        return TargetFit(target=data.target, status="fit_failed", row=row, draws=None)
+    sigma2 = fit.sigma2
+    tau2 = fit.tau2
+    reliability = _reliability_draws(sigma2, tau2, data.nu, n_eval)
+    row.update(
+        {
+            "sigma2_median": float(np.median(sigma2)),
+            "tau2_median": float(np.median(tau2)),
+        }
+    )
+    for n in n_eval:
+        values = reliability[n]
+        median_value = float(np.nanmedian(values))
+        row[f"reliability_n{n}"] = median_value
+        row[f"reliability_ci_low_n{n}"] = float(np.nanquantile(values, 0.025))
+        row[f"reliability_ci_high_n{n}"] = float(np.nanquantile(values, 0.975))
+        row[f"ceiling_n{n}"] = posterior_ceiling(median_value)
+    return TargetFit(
+        target=data.target,
+        status="ok",
+        row=row,
+        draws=np.column_stack([sigma2, tau2]),
+    )
+
+
 def fit_hierarchical_cells(
     cells: pd.DataFrame,
     *,
@@ -259,19 +477,20 @@ def fit_hierarchical_cells(
     center_animals: bool = True,
     prior_scale: float = 1.0,
 ) -> HierarchicalResult:
-    """Fit the hierarchical model independently for every eligible target.
+    """Fit the hierarchical model independently for every target.
+
+    ``chains`` and ``warmup`` are accepted only for backwards compatibility;
+    the deterministic grid has no chains.  New code should call
+    :func:`fit_hierarchical_target` directly.
 
     Args:
-        frame: event-level trial table.
-        response: response column.
-        animal: animal identifier column.
+        cells: per animal/target/responder summaries with ``n``, ``mean`` and
+            ``var``.
         coverage: minimum fraction of animals in which a responder must be
             observed.  The model is conditional on this observed pattern.
         n_eval: animal counts at which to report reliability.
-        chains: number of independent Metropolis chains.
-        warmup: warm-up iterations per chain.
-        draws: retained iterations per chain.
-        seed: seed for chain initialization and proposals.
+        draws: retained posterior draws.
+        seed: base seed; each target gets a deterministic offset.
         min_events: minimum events per animal/target/responder cell.
         min_animals: minimum animals with any observation for a target.
     """
@@ -282,10 +501,10 @@ def fit_hierarchical_cells(
         raise ValueError("draws >= 100 is required")
     if grid_resolution < 20:
         raise ValueError("grid_resolution >= 20 is required")
-    rows: list[dict[str, object]] = []
+    rows: list[dict[str, Any]] = []
     draws_by_target: dict[str, np.ndarray] = {}
     for target, tgroup in cells.groupby("_target", sort=False):
-        data = _normalize_target(
+        data, reason = _normalize_target_with_reason(
             tgroup,
             coverage=coverage,
             min_events=min_events,
@@ -298,44 +517,28 @@ def fit_hierarchical_cells(
                 {
                     "target": str(target),
                     "status": "ineligible",
+                    "reason": reason,
                     "coverage": float(coverage),
                     "n_animals": 0,
                     "n_responders": 0,
+                    "n_variance_floored": 0,
                 }
             )
             continue
-        fit = _grid_posterior(
+        target_seed = seed + int(
+            pd.util.hash_pandas_object(pd.Series([str(target)])).iloc[0] % 10_000
+        )
+        fit = fit_hierarchical_target(
             data,
-            resolution=grid_resolution,
+            n_eval=n_eval,
             draws=draws,
-            seed=seed + int(pd.util.hash_pandas_object(pd.Series([target])).iloc[0] % 10_000),
+            grid_resolution=grid_resolution,
+            seed=target_seed,
             prior_scale=prior_scale,
         )
-        sigma2 = fit.sigma2
-        tau2 = fit.tau2
-        reliability = _reliability_draws(sigma2, tau2, data.nu, n_eval)
-        row: dict[str, object] = {
-            "target": str(target),
-            "status": "ok",
-            "coverage": float(coverage),
-            "n_animals": data.n_animals,
-            "n_responders": data.n_responders,
-            "mean_sampling_var": data.nu,
-            "sigma2_median": float(np.median(sigma2)),
-            "tau2_median": float(np.median(tau2)),
-            "grid_edge_mass": fit.edge_mass,
-            "grid_n_eff": fit.n_eff,
-            "n_draws": int(sigma2.size),
-        }
-        for n in n_eval:
-            values = reliability[n]
-            median_value = float(np.nanmedian(values))
-            row[f"reliability_n{n}"] = median_value
-            row[f"reliability_ci_low_n{n}"] = float(np.nanquantile(values, 0.025))
-            row[f"reliability_ci_high_n{n}"] = float(np.nanquantile(values, 0.975))
-            row[f"ceiling_n{n}"] = posterior_ceiling(median_value)
-        rows.append(row)
-        draws_by_target[str(target)] = np.column_stack([sigma2, tau2])
+        rows.append(fit.row)
+        if fit.draws is not None and fit.status == "ok":
+            draws_by_target[str(target)] = fit.draws
 
     by_target = pd.DataFrame(rows)
     eligible = by_target[by_target["status"] == "ok"] if not by_target.empty else by_target
@@ -363,6 +566,8 @@ def fit_hierarchical_cells(
     pooled = float(eligible[pooled_col].median())
     single = float(eligible[single_col].median())
     status = "ok" if len(eligible) == len(by_target) else "ok_with_failures"
+    total_cells = float(eligible["n_observed_cells"].sum())
+    total_floored = float(eligible["n_variance_floored"].sum())
     summary = {
         "status": status,
         "coverage": float(coverage),
@@ -377,6 +582,9 @@ def fit_hierarchical_cells(
         "min_grid_n_eff": float(eligible["grid_n_eff"].min()),
         "grid_resolution": int(grid_resolution),
         "prior_scale": float(prior_scale),
+        "n_variance_floored": int(total_floored),
+        "n_observed_cells": int(total_cells),
+        "variance_floor_fraction": (total_floored / total_cells) if total_cells else 0.0,
     }
     return HierarchicalResult(
         by_target=by_target,
@@ -449,7 +657,11 @@ class HierarchicalResult:
 
 __all__ = [
     "HierarchicalResult",
+    "TargetData",
+    "TargetFit",
     "fit_hierarchical_cells",
     "fit_hierarchical_reliability",
+    "fit_hierarchical_target",
+    "normalize_target",
     "posterior_ceiling",
 ]

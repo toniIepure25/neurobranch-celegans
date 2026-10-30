@@ -2,7 +2,10 @@
 
 from __future__ import annotations
 
+import numpy as np
+
 from neurobranch.benchmark.hierarchical_calibration import (
+    _aligned_truth,
     heldout_predictive_check,
     negative_control,
     prepare_templates,
@@ -48,3 +51,21 @@ def test_heldout_ppc_returns_records() -> None:
     assert out["status"] == "ok"
     assert out["n"] > 0
     assert 0.0 <= out["coverage"] <= 1.0
+
+
+def test_aligned_truth_matches_direct_centered_simulation() -> None:
+    rng = np.random.default_rng(11)
+    sigma, tau, nu, n_responders, n = 1.0, 0.5, 0.25, 8, 22
+    mu = rng.normal(0.0, sigma, size=(4000, n_responders))
+    mu_centered = mu - mu.mean(axis=1, keepdims=True)
+    observed = (
+        mu
+        + rng.normal(0.0, tau, size=(4000, n, n_responders)).mean(axis=1)
+        + rng.normal(0.0, np.sqrt(nu), size=(4000, n, n_responders)).mean(axis=1)
+    )
+    observed = observed - observed.mean(axis=1, keepdims=True)
+    numerator = np.sum(mu_centered * observed, axis=1)
+    denominator = np.sqrt(np.sum(mu_centered**2, axis=1) * np.sum(observed**2, axis=1))
+    empirical = float(np.mean((numerator / denominator) ** 2))
+    analytic = _aligned_truth(sigma, tau, nu, n_responders, n)
+    assert abs(empirical - analytic) < 0.03

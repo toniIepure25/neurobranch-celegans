@@ -15,3 +15,13 @@ The protocol hash was updated in the same commit as this note.
 
 This deviation is recorded before inspecting any Phase 12R SBC, PPC, negative
 control, or gate result.
+
+## D2. Deterministic centered truth instead of per-replicate Monte Carlo (2026-10-30)
+
+The protocol described a Monte Carlo truth for the SBC rank. The implementation
+uses the equivalent deterministic Gaussian expression with the centering factor
+`1 - 1/R` for both variance components. This avoids a second nested simulation
+at every replicate while keeping the same estimand and centering as the fit.
+The approximation is checked separately against a small direct simulation in
+the test suite. No gate or decision rule changed, and this note was written
+before inspecting a Phase 12R gate result.

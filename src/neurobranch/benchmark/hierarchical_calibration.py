@@ -17,10 +17,12 @@ import pandas as pd
 from scipy import stats
 
 from neurobranch.benchmark.hierarchical import (
+    TargetData,
     _normalize_target,
     _reliability_draws,
-    _TargetData,
     fit_hierarchical_cells,
+    fit_hierarchical_target,
+    transform_target,
 )
 from neurobranch.benchmark.variance import DEFAULT_ANIMAL_COLUMN, cell_summaries
 
@@ -33,10 +35,10 @@ def prepare_templates(
     animal: str = DEFAULT_ANIMAL_COLUMN,
     min_events: int = 1,
     min_animals: int = 6,
-) -> list[_TargetData]:
+) -> list[TargetData]:
     """Eligible real-target templates used to preserve missingness patterns."""
     cells = cell_summaries(frame, response=response, animal=animal)
-    templates: list[_TargetData] = []
+    templates: list[TargetData] = []
     for _target, group in cells.groupby("_target", sort=False):
         data = _normalize_target(
             group,
@@ -44,52 +46,70 @@ def prepare_templates(
             min_events=min_events,
             min_animals=min_animals,
             standardize=True,
+            center_animals=False,
         )
         if data is not None:
             templates.append(data)
     return templates
 
 
-def _cells_from_template(
-    data: _TargetData,
-    y: np.ndarray,
-    *,
-    target_id: str,
-) -> pd.DataFrame:
-    rows: list[dict[str, Any]] = []
-    for animal_index in range(data.n_animals):
-        for responder_index in range(data.n_responders):
-            if not bool(data.mask[animal_index, responder_index]):
-                continue
-            rows.append(
-                {
-                    "_animal": f"a{animal_index}",
-                    "_target": target_id,
-                    "_neuron": f"n{responder_index}",
-                    "n": 1,
-                    "mean": float(y[animal_index, responder_index]),
-                    "var": float(data.v[animal_index, responder_index]),
-                }
-            )
-    return pd.DataFrame(rows)
-
-
 def _simulate_template(
-    data: _TargetData,
+    data: TargetData,
     *,
     rng: np.random.Generator,
     sigma: float,
     tau: float,
-) -> np.ndarray:
+    target_id: str,
+) -> TargetData:
+    """Simulate one uncentered target on the template's standardized scale."""
     mu = rng.normal(0.0, sigma, size=data.n_responders)
     interaction = rng.normal(0.0, tau, size=(data.n_animals, data.n_responders))
     noise = rng.normal(0.0, np.sqrt(data.v))
-    y = mu[None, :] + interaction + noise
-    return np.where(data.mask, y, np.nan)
+    y = np.where(data.mask, mu[None, :] + interaction + noise, np.nan)
+    return TargetData(
+        target=target_id,
+        y=y,
+        v=data.v.copy(),
+        mask=data.mask.copy(),
+        n_animals=data.n_animals,
+        n_responders=data.n_responders,
+        coverage=data.coverage,
+        nu=data.nu,
+        responders=data.responders,
+    )
+
+
+def _aligned_truth(sigma: float, tau: float, nu: float, n_responders: int, n: int) -> float:
+    """Reliability truth after the fitter's animal centering.
+
+    Row centering removes the responder mean of each animal.  For a Gaussian
+    profile of ``R`` responders, the centering factor is ``1 - 1/R`` for the
+    between-target and interaction variances.  This is the deterministic
+    counterpart of simulating the same centered process; using the uncentered
+    formula would compare the posterior to a different estimand.
+    """
+    if n_responders < 2:
+        raise ValueError("aligned truth requires at least two responders")
+    factor = max(1.0 - 1.0 / float(n_responders), 0.0)
+    sigma_centered = float(sigma) ** 2 * factor
+    tau_centered = float(tau) ** 2 * factor
+    denominator = sigma_centered + (tau_centered + float(nu)) / float(n)
+    return float(np.clip(sigma_centered / denominator, 0.0, 1.0)) if denominator > 0 else 0.0
+
+
+def _wilson_interval(successes: int, total: int, z: float = 1.959963984540054) -> tuple[float, float]:
+    """Wilson score interval for a binomial proportion."""
+    if total <= 0:
+        return (float("nan"), float("nan"))
+    p = successes / float(total)
+    denominator = 1.0 + z * z / total
+    center = (p + z * z / (2.0 * total)) / denominator
+    half = z * np.sqrt(p * (1.0 - p) / total + z * z / (4.0 * total * total)) / denominator
+    return (float(max(0.0, center - half)), float(min(1.0, center + half)))
 
 
 def simulation_based_calibration(
-    templates: list[_TargetData],
+    templates: list[TargetData],
     *,
     n_reps: int = 200,
     targets_per_rep: int = 3,
@@ -102,8 +122,9 @@ def simulation_based_calibration(
 
     Parameters are drawn from the fitting prior (``sigma, tau ~ HalfNormal(1)``
     on the standardized scale).  Each replicate uses a real target's coverage
-    mask and sampling variances.  Ranks should be uniform if the posterior is
-    calibrated; finite-replicate noise is reported through the KS test.
+    mask, sampling variances and standardized scale.  The simulated target is
+    passed through the same centering as the fit, and the truth uses the
+    centered effective variance rather than the uncentered closed form.
     """
     if not templates:
         raise ValueError("no templates")
@@ -114,36 +135,48 @@ def simulation_based_calibration(
     covered: dict[int, list[bool]] = {n: [] for n in n_eval}
     widths: dict[int, list[float]] = {n: [] for n in n_eval}
     failures = 0
+    edge_failures = 0
+    edge_masses: list[float] = []
     for rep in range(n_reps):
         for target_index in range(targets_per_rep):
             template = templates[int(rng.integers(0, len(templates)))]
             sigma = float(abs(rng.normal(0.0, 1.0)))
             tau = float(abs(rng.normal(0.0, 1.0)))
-            y = _simulate_template(template, rng=rng, sigma=sigma, tau=tau)
             target_id = f"sbc-{rep}-{target_index}"
-            cells = _cells_from_template(template, y, target_id=target_id)
-            result = fit_hierarchical_cells(
-                cells,
-                coverage=0.0,
+            simulated = _simulate_template(
+                template,
+                rng=rng,
+                sigma=sigma,
+                tau=tau,
+                target_id=target_id,
+            )
+            simulated = transform_target(simulated, center_animals=True, standardize=False)
+            fit = fit_hierarchical_target(
+                simulated,
                 n_eval=n_eval,
                 draws=draws,
                 grid_resolution=grid_resolution,
                 seed=int(rng.integers(0, 2**31 - 1)),
-                standardize=False,
-                center_animals=True,
             )
-            draws_matrix = result.draws_by_target.get(target_id)
-            if draws_matrix is None or not result.by_target["status"].eq("ok").any():
+            if fit.draws is None or fit.status != "ok":
                 failures += 1
                 continue
-            reliability = _reliability_draws(draws_matrix[:, 0], draws_matrix[:, 1], template.nu, n_eval)
+            edge_mass = float(fit.row["grid_edge_mass"])
+            edge_masses.append(edge_mass)
+            if edge_mass >= 0.05:
+                edge_failures += 1
+            reliability = _reliability_draws(
+                fit.draws[:, 0], fit.draws[:, 1], simulated.nu, n_eval
+            )
             for n in n_eval:
-                truth = sigma**2 / (sigma**2 + (tau**2 + template.nu) / float(n))
+                truth = _aligned_truth(sigma, tau, simulated.nu, simulated.n_responders, n)
                 values = reliability[n][np.isfinite(reliability[n])]
                 if values.size < 50:
                     failures += 1
                     continue
-                ranks[n].append(float(np.mean(values < truth)))
+                below = float(np.sum(values < truth))
+                equal = float(np.sum(values == truth))
+                ranks[n].append((below + 0.5 * equal) / float(values.size))
                 low, high = np.quantile(values, [0.025, 0.975])
                 covered[n].append(bool(low <= truth <= high))
                 widths[n].append(float(high - low))
@@ -152,6 +185,10 @@ def simulation_based_calibration(
         "targets_per_rep": int(targets_per_rep),
         "n_fits": int(n_reps * targets_per_rep),
         "n_failures": int(failures),
+        "n_edge_failures": int(edge_failures),
+        "max_edge_mass": float(max(edge_masses)) if edge_masses else None,
+        "mean_edge_mass": float(np.mean(edge_masses)) if edge_masses else None,
+        "truth_method": "centered effective variance; same centering as fit",
         "prior": "sigma, tau ~ HalfNormal(1) on the standardized scale",
         "parameters": {},
     }
@@ -164,10 +201,14 @@ def simulation_based_calibration(
             }
             continue
         ks = stats.kstest(values, "uniform")
+        successes = int(np.sum(covered[n]))
+        low, high = _wilson_interval(successes, len(covered[n]))
         output["parameters"][f"n{n}"] = {
             "status": "ok",
             "n": int(values.size),
             "coverage": float(np.mean(covered[n])),
+            "coverage_ci_low": low,
+            "coverage_ci_high": high,
             "mean_width": float(np.mean(widths[n])),
             "mean_rank": float(values.mean()),
             "ks_statistic": float(ks.statistic),
@@ -175,6 +216,16 @@ def simulation_based_calibration(
             "ranks": values.tolist(),
         }
     return output
+
+
+def _center_profile(values: np.ndarray, mask: np.ndarray) -> np.ndarray:
+    """Center a profile over observed responders, preserving the mask."""
+    out = np.asarray(values, dtype=float).copy()
+    keep = mask & np.isfinite(out)
+    if int(keep.sum()) == 0:
+        return out
+    out[keep] = out[keep] - float(np.mean(out[keep]))
+    return out
 
 
 def _pearson_rows(left: np.ndarray, right: np.ndarray, mask: np.ndarray) -> float:
@@ -261,6 +312,8 @@ def heldout_predictive_check(
                 continue
             test_values = test_mean.to_numpy(dtype=float)
             finite_test = np.isfinite(test_values)
+            row_means = np.nanmean(np.where(finite_test, test_values, np.nan), axis=1, keepdims=True)
+            test_values = test_values - row_means
             counts = finite_test.sum(axis=0)
             observed = np.divide(
                 np.where(finite_test, test_values, 0.0).sum(axis=0),
@@ -284,18 +337,22 @@ def heldout_predictive_check(
                 mu_sd = np.sqrt(1.0 / precision)
                 mu = rng.normal(mu_mean, mu_sd)
                 mu_draws.append(mu)
+                mu_centered = _center_profile(mu, mask_obs)
                 simulated = []
                 for animal_index in range(test_mean.shape[0]):
                     u = rng.normal(0.0, np.sqrt(tau2), size=data.n_responders)
                     e = rng.normal(0.0, np.sqrt(v_test[animal_index]), size=data.n_responders)
                     simulated.append(mu + u + e)
                 simulated_mean = np.nanmean(np.asarray(simulated), axis=0)
-                predictive.append(_pearson_rows(mu, simulated_mean, mask_obs))
+                simulated_centered = _center_profile(simulated_mean, mask_obs)
+                predictive.append(_pearson_rows(mu_centered, simulated_centered, mask_obs))
             finite = np.asarray(predictive, dtype=float)
             finite = finite[np.isfinite(finite)]
             if finite.size < 50:
                 continue
             mu_mean = np.nanmean(np.asarray(mu_draws, dtype=float), axis=0)
+            mu_mean = _center_profile(mu_mean, mask_obs)
+            observed = _center_profile(observed, mask_obs)
             observed_corr = _pearson_rows(mu_mean, observed, mask_obs)
             if not np.isfinite(observed_corr):
                 continue
@@ -387,10 +444,17 @@ def negative_control(
     values = result.by_target.loc[result.by_target["status"] == "ok", "reliability_n22"]
     values = values[np.isfinite(values)]
     if values.empty:
-        return {"status": "no_eligible_targets", "n": 0}
+        return {
+            "status": "no_eligible_targets",
+            "n_requested": int(len(selected)),
+            "n_targets": 0,
+            "n_excluded": int(len(selected)),
+        }
     return {
         "status": "ok",
+        "n_requested": int(len(selected)),
         "n_targets": int(len(values)),
+        "n_excluded": int(len(selected) - len(values)),
         "median_reliability_n22": float(values.median()),
         "q95_reliability_n22": float(np.quantile(values, 0.95)),
         "max_reliability_n22": float(values.max()),

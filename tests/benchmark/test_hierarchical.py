@@ -15,7 +15,9 @@ import pandas as pd
 import pytest
 
 from neurobranch.benchmark.hierarchical import (
+    TargetData,
     fit_hierarchical_reliability,
+    fit_hierarchical_target,
     posterior_ceiling,
 )
 from neurobranch.design.calibration import simulate_atlas
@@ -120,3 +122,69 @@ def test_ceiling_is_sqrt_of_reliability() -> None:
     assert posterior_ceiling(0.49) == pytest.approx(0.7)
     row = result.by_target.iloc[0]
     assert row["ceiling_n22"] == pytest.approx(np.sqrt(row["reliability_n22"]))
+
+
+def _target_data(v: np.ndarray | None = None) -> TargetData:
+    rng = np.random.default_rng(101)
+    y = rng.normal(size=(10, 8))
+    if v is None:
+        v = np.full_like(y, 0.25)
+    mask = np.ones_like(y, dtype=bool)
+    return TargetData(
+        target="synthetic",
+        y=y,
+        v=v,
+        mask=mask,
+        n_animals=10,
+        n_responders=8,
+        coverage=1.0,
+        nu=float(np.mean(v[mask])),
+        responders=tuple(f"n{i}" for i in range(8)),
+    )
+
+
+def test_known_sampling_variance_is_used_by_the_fit() -> None:
+    data = _target_data()
+    fit = fit_hierarchical_target(data, draws=300, grid_resolution=30, seed=3)
+    assert fit.status == "ok"
+    assert fit.row["mean_sampling_var"] == pytest.approx(0.25)
+    assert fit.row["n_variance_floored"] == 0
+
+
+def test_zero_sampling_variance_is_floored_and_reported() -> None:
+    data = _target_data()
+    v = data.v.copy()
+    v[0, 0] = 0.0
+    data = TargetData(
+        target=data.target,
+        y=data.y,
+        v=v,
+        mask=data.mask,
+        n_animals=data.n_animals,
+        n_responders=data.n_responders,
+        coverage=data.coverage,
+        nu=float(np.mean(v[data.mask])),
+        responders=data.responders,
+    )
+    fit = fit_hierarchical_target(data, draws=300, grid_resolution=30, seed=3)
+    assert fit.row["n_variance_floored"] == 1
+    assert fit.row["mean_sampling_var"] > 0.0
+
+
+def test_invalid_sampling_variance_fails_closed() -> None:
+    data = _target_data()
+    v = data.v.copy()
+    v[0, 0] = np.nan
+    bad = TargetData(
+        target=data.target,
+        y=data.y,
+        v=v,
+        mask=data.mask,
+        n_animals=data.n_animals,
+        n_responders=data.n_responders,
+        coverage=data.coverage,
+        nu=float(np.nanmean(v[data.mask])),
+        responders=data.responders,
+    )
+    with pytest.raises(ValueError, match="sampling variances"):
+        fit_hierarchical_target(bad, draws=300, grid_resolution=30, seed=3)
