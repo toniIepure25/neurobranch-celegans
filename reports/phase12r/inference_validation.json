@@ -1,0 +1,71 @@
+{
+  "alignment_audit": {
+    "status": "ok",
+    "n_rows": 930846,
+    "n_event_groups": 118437,
+    "n_event_groups_with_multiple_truths": 1668,
+    "event_truth_mismatch_fraction": 0.014083436763849135,
+    "n_rows_sharing_event_keys": 930846,
+    "n_paired_rows_compared": 1334,
+    "n_paired_y_true_mismatches": 1334,
+    "paired_y_true_mismatch_fraction": 1.0,
+    "max_folds_per_animal": 1,
+    "caveat": "Diagnostic only; paired inference is not repaired by this audit."
+  },
+  "simulation": {
+    "status": "ok",
+    "method": "synthetic paired event data; animal-cluster bootstrap",
+    "n_reps": 120,
+    "n_boot": 200,
+    "null_type_i_p": 0.075,
+    "null_type_i_ci": 0.08333333333333333,
+    "null_mean_delta": 0.0012811429481356374,
+    "curve": [
+      {
+        "signal": 0.0,
+        "population_delta": 7.022173559275563e-05,
+        "n_reps": 120,
+        "mean_estimate": -0.0020484568402837564,
+        "bias": -0.002118678575876512,
+        "coverage": 0.9083333333333333,
+        "power_ci": 0.09166666666666666,
+        "power_p": 0.075,
+        "mean_mde": 0.10159414137317894
+      },
+      {
+        "signal": 0.1,
+        "population_delta": 0.13257532696454338,
+        "n_reps": 120,
+        "mean_estimate": 0.130535161699002,
+        "bias": -0.002040165265541377,
+        "coverage": 0.9083333333333333,
+        "power_ci": 0.925,
+        "power_p": 0.9166666666666666,
+        "mean_mde": 0.10100437818539917
+      },
+      {
+        "signal": 0.2,
+        "population_delta": 0.25836569714301916,
+        "n_reps": 120,
+        "mean_estimate": 0.25631027818193286,
+        "bias": -0.002055418961086297,
+        "coverage": 0.9,
+        "power_ci": 1.0,
+        "power_p": 1.0,
+        "mean_mde": 0.09913265940851547
+      },
+      {
+        "signal": 0.4,
+        "population_delta": 0.47116356774872065,
+        "n_reps": 120,
+        "mean_estimate": 0.46893780437887084,
+        "bias": -0.002225763369849809,
+        "coverage": 0.9166666666666666,
+        "power_ci": 1.0,
+        "power_p": 1.0,
+        "mean_mde": 0.09302263150125968
+      }
+    ],
+    "caveat": "Synthetic procedure check, not a biological validation; MDE is a normal-approximation diagnostic."
+  }
+}

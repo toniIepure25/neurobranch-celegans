@@ -8,13 +8,18 @@ only with a different experiment). None is hidden in an appendix.
 
 ## 1. Structural limitations of the dataset
 
-### 1.1 Five worms, one laboratory, one preparation
+### 1.1 Small, single-laboratory cohorts
 
-All results come from five wild-type, unstimulated, immobilised worms from a
-single study. There is no independent replicate cohort, no second lab, and no
-freely moving preparation. The unit of generalization is the worm, and n=5 is
-small. Per-worm heterogeneity is large (persistence one-step R² ranges from 0.135
-to 0.593), so a mean over five worms is not a population estimate.
+The dynamics and intervention work uses five wild-type, unstimulated, immobilised
+worms from a single study. There is no independent replicate cohort, no second
+lab, and no freely moving preparation. The unit of generalization is the worm,
+and n=5 is small. Per-worm heterogeneity is large (persistence one-step R² ranges
+from 0.135 to 0.593), so a mean over five worms is not a population estimate.
+
+The Randi reliability benchmark is a different dataset: 103 animals from one
+laboratory, used for the coverage-aware ceiling. It is larger but still
+single-laboratory and observational. Results from the five-worm dynamics cohort
+must not be presented as estimates from the 103-animal benchmark.
 
 ### 1.2 Partial coverage of the nervous system
 
@@ -62,6 +67,12 @@ reflect slow internal state rather than a controlled experimental variable.
 - Unnamed traces may include non-neuronal sources or duplicate segmentations.
 - The eight behaviour states are not a linear scale; macro-collapsing to four
   states loses information and mixes distinct motor programs.
+- Most benchmark cells contain one event, so their within-animal sampling
+  variance is exactly zero. The Phase 12R hierarchical fit floors 79% of observed
+  cell variances at `1e-8`; this is an approximation, not a measured variance.
+  The `min_events=2` sensitivity changes the pooled estimate from 0.304 to 0.199,
+  so the 0.304 value is filter-sensitive and must not be treated as a stable
+  measurement limit.
 
 ---
 
@@ -112,6 +123,14 @@ best-effort readout.
 The intervention engine edits model state; it does not identify a causal graph.
 No invariance, instrumental-variable, or interventional-data constraint is used.
 
+### 3.8 Reliability interval is not calibrated
+
+The Phase 12R hierarchical measurement model reproduces the Phase 11 point
+estimate but fails SBC rank uniformity (KS p 1.43e-06), predictive median
+absolute error (0.207), and the negative control (median R(22) 0.120, q95 0.594).
+No calibrated interval, target ranking, or animal-budget guarantee is published.
+The 0.560 coverage-aware descriptive ceiling remains the headline.
+
 ---
 
 ## 4. Evaluation limitations
@@ -151,6 +170,14 @@ secondary, not primary, metric.
 There is no held-out worm, lab, or dataset. The five worms are used for both model
 comparison and interpretation. Leave-one-worm-out is not reported as a
 generalization claim.
+
+### 4.7 Animal-cluster procedure is not calibrated
+
+The Phase 12 benchmark comparison is withdrawn: baseline and model `y_true` were
+not paired on the same events (1,334/1,334 mismatches). A synthetic check of the
+remaining procedure found 0.900--0.917 coverage at nominal 0.95 and null
+rejection 0.075--0.083, so even a repaired pairing would need a procedure-level
+calibration study before a positive claim. Leaderboard values are descriptive.
 
 ---
 

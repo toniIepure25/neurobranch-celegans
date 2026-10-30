@@ -42,8 +42,11 @@ posterior, and the rank-one marginal likelihood, are in
 
 - Primary coverage: a responder must be observed in at least 80% of the
   target's animals.
-- A target is eligible if it has at least two animals, two responders, and two
-  events per responder after filtering.
+- A target is eligible if it has at least six animals, at least three responders,
+  and at least one event per responder after filtering. The analysis-plan text
+  that said two animals/two responders/`min_events=2` was wrong; the executed
+  Phase 12 primary used 6/3/1, and Phase 12R fixes the record. `min_events=2` is
+  a preregistered sensitivity in Phase 12R, not the primary.
 - Missing cells are not imputed and do not contribute a sampling variance.
 - The coverage curve is reported at 0.5, 0.8, and 1.0; no point is selected as a
   headline after seeing the result.
@@ -60,11 +63,14 @@ threshold is relaxed after inspection.
 | G1a SBC coverage | 22-animal coverage in [0.93, 0.97] | nominal 95% posterior interval |
 | G1b SBC rank | KS test of rank uniformity p > 0.01 | detects biased posterior draws |
 | G1c grid edge | maximum edge posterior mass < 0.05 | excludes boundary-dominated fits |
+| G1d fit integrity | failed or edge-dominated SBC fits <= 5% of attempted fits | fails closed when calibration fits do not run |
 | G2 held-out PPC | animal-holdout interval coverage >= 0.90 and median absolute error <= 0.10 | predictive, not just internal |
 | G3 negative control | animal-wise cell-profile permutation median R(22) <= 0.05 and q95 <= 0.15 | no reliability without true pairing |
 | G4 prior sensitivity | range of pooled R(22) across HalfNormal scales <= 0.05 | conclusions not prior-driven |
 
-G1a--G1c operationalise the synthetic-coverage requirement in
+Phase 12R supersedes the calibration evidence with the frozen protocol in
+`research/phase12r_protocol.md`; G1d is added there. G1a--G1c operationalise the
+synthetic-coverage requirement in
 [`NEXT_EXPERIMENTS.md`](NEXT_EXPERIMENTS.md) section 10. G2 operationalises the
 animal-holdout requirement. G3 and G4 are adversarial audits added before the
 full run because the pilot showed posterior boundary and null-calibration
@@ -97,7 +103,8 @@ descriptive.
 
 ## 7. Reporting
 
-The generated artifacts are under `reports/phase12/`:
+The Phase 12 artifacts are under `reports/phase12/`; the corrected rerun writes
+`reports/phase12r/`. The generated artifacts are:
 
 - `summary.json` -- gates, estimates, decision;
 - `hierarchical_by_target.csv` -- per-target posterior summaries;

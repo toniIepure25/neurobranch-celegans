@@ -1,0 +1,12 @@
+{
+  "status": "ok",
+  "n_requested": 100,
+  "n_targets": 48,
+  "n_excluded": 52,
+  "exclusion_reasons": {
+    "too_few_animals": 52
+  },
+  "median_reliability_n22": 0.120390575116816,
+  "q95_reliability_n22": 0.5936696539636546,
+  "max_reliability_n22": 0.7612672406317285
+}

@@ -1,0 +1,13 @@
+{
+  "status": "ok",
+  "n_rows": 930846,
+  "n_event_groups": 118437,
+  "n_event_groups_with_multiple_truths": 1668,
+  "event_truth_mismatch_fraction": 0.014083436763849135,
+  "n_rows_sharing_event_keys": 930846,
+  "n_paired_rows_compared": 1334,
+  "n_paired_y_true_mismatches": 1334,
+  "paired_y_true_mismatch_fraction": 1.0,
+  "max_folds_per_animal": 1,
+  "caveat": "Diagnostic only; paired inference is not repaired by this audit."
+}

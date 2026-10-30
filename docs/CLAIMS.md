@@ -66,8 +66,8 @@ carry no p-value and are not in a family.
 | `phase8-sequential-rollout` | 3-event rollout beats persistence | superiority | +0.0230 | — | not supported (coverage 0.904 < 0.95) |
 | `phase8-eig-selection` | EIG selection beats random at k=8 | superiority | −0.0038 | [−0.0070, +0.0026] | bounded null (±0.01) |
 | `phase7-cro-share-of-ceiling` | CRO reaches 64% of the ceiling | descriptive | 0.0984 | — | not supported (superseded; coverage-aware share 17.6%) |
-| `phase12-hierarchical-interval` | Hierarchical posterior interval is calibrated for pooled reliability | pooled_fold | 0.3035 | — | not supported (SBC rank KS p = 1.4e-06; held-out coverage 0.896; negative-control median R(22) = 0.176) |
-| `phase12-benchmark-cluster` | A benchmark configuration beats static CRO by >0.05 in the animal-cluster analysis | animal_cluster | +0.1889 | — | underpowered (MDE 0.238; Holm p = 0.185; no supported configuration) |
+| `phase12-hierarchical-interval` | Hierarchical posterior interval is calibrated for pooled reliability | pooled_fold | 0.3035 | — | not supported (SBC rank KS p = 1.43e-06; PPC MAE 0.207; negative-control median R(22) = 0.120, q95 0.594; C10) |
+| `phase12-benchmark-cluster` | A benchmark configuration beats static CRO by >0.05 in the animal-cluster analysis | animal_cluster | — | — | not supported (withdrawn: baseline/model `y_true` mismatch in 1,334/1,334 paired rows; C11) |
 
 ## What is never claimed
 
@@ -79,8 +79,9 @@ carry no p-value and are not in a family.
 - That the animal jackknife interval is a calibrated confidence interval.
 - That the Phase 12 hierarchical posterior interval is calibrated, or that
   0.3035 replaces the 0.560 descriptive ceiling.
-- That any Phase 12 benchmark configuration is superior; all animal-cluster
-  comparisons are underpowered at the 0.05 SESOI.
+- That any Phase 12 benchmark configuration is superior; the animal-cluster
+  comparison is **withdrawn** because baseline and model truth were not paired
+  on the same events (C11).
 
 ## Regenerating the ledger
 

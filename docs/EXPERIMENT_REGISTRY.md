@@ -318,3 +318,34 @@ figures/
 | `reports/phase10/coverage_study.json` | same | Synthetic interval coverage (negative result) |
 | `reports/phase10/claims.json` | `python scripts/phase10_claims.py` | Schema v2 claims ledger |
 | `reports/phase10/manifest.json` | reliability script | Input hash, artifact hashes, versions |
+
+
+## Phase 11 (2026-10-29)
+
+| Artifact | Command | Purpose |
+| --- | --- | --- |
+| `reports/phase11/summary.json` | `python scripts/phase11_sensitivity.py` | Coverage-aware pooled ceiling (0.560) and gate failures |
+| `reports/phase11/coverage_sensitivity.csv` | same | Reliability and ceiling across 0.0--1.0 responder coverage |
+| `reports/phase11/benchmark_card.json` | `python scripts/phase11_benchmark.py` | Headline ceiling and claim statuses |
+
+## Phase 12 (2026-10-30, historical calibration evidence)
+
+| Artifact | Command | Purpose |
+| --- | --- | --- |
+| `reports/phase12/summary.json` | `python scripts/phase12_hierarchy.py` | Original hierarchical fit and gate decision |
+| `reports/phase12/sbc.json` | same | Original SBC (unaligned truth; superseded) |
+| `reports/phase12/benchmark_cluster.json` | `python scripts/phase12_benchmark.py` | Withdrawn cluster comparison (C11) |
+
+## Phase 12R (2026-10-30, correction)
+
+| Artifact | Command | Purpose |
+| --- | --- | --- |
+| `research/phase12r_protocol.md` | frozen before run | Preregistered alignment correction and gates |
+| `research/phase12r_deviations.md` | recorded before run | False variance-bug diagnosis and deterministic truth deviation |
+| `reports/phase12r/summary.json` | `python scripts/phase12r_hierarchy.py` | Aligned rerun; not adopted |
+| `reports/phase12r/sbc.json` | same | 3,000-fit SBC; coverage 0.933, rank p 1.43e-06 |
+| `reports/phase12r/heldout_ppc.json` | same | 20-split animal-holdout check |
+| `reports/phase12r/negative_control.json` | same | 100 requested permuted-profile targets |
+| `reports/phase12r/min_events_sensitivity.csv` | same | Primary `min_events=1` vs sensitivity `min_events=2` |
+| `reports/phase12r/inference_alignment_audit.json` | `python scripts/phase12r_inference_audit.py` | Baseline/model `y_true` mismatch audit |
+| `reports/phase12r/manifest.json` | `python scripts/phase12r_manifest.py` | Artifact hashes, input/protocol hashes, git state |

@@ -1,0 +1,104 @@
+{
+  "phase": "12R",
+  "mode": "full",
+  "status": "not_adopted_gate_failures",
+  "primary_coverage": 0.8,
+  "n_eval": [
+    1,
+    22
+  ],
+  "config": {
+    "primary_draws": 2500,
+    "primary_grid": 80,
+    "sbc_reps": 1000,
+    "sbc_targets": 3,
+    "sbc_draws": 2000,
+    "sbc_grid": 80,
+    "ppc_splits": 20,
+    "ppc_targets": 40,
+    "ppc_draws": 1200,
+    "ppc_grid": 60,
+    "negative_targets": 100,
+    "negative_draws": 1200,
+    "negative_grid": 50,
+    "prior_draws": 1200,
+    "prior_grid": 50
+  },
+  "model": "hierarchical additive model with animal centering and known cell sampling variance",
+  "prior": "sigma, tau ~ HalfNormal(1) on the standardized scale",
+  "input": {
+    "path": "reports\\phase3\\randi_trial_table_phase3.csv.gz",
+    "sha256": "8186c96bcb33cdce15dc9ae88691e09fc596e42c5513310b6d6a636e4d5dd515",
+    "n_rows": 237639
+  },
+  "hierarchical": {
+    "pooled_reliability_median": 0.3035306473018537,
+    "pooled_ceiling_median": 0.5509361553772394,
+    "single_animal_reliability_median": 0.019430984446549504,
+    "n_ok": 126,
+    "n_ineligible": 133,
+    "n_variance_floored": 32427,
+    "variance_floor_fraction": 0.7892469454315338,
+    "exclusion_reasons": {
+      "too_few_animals": 133
+    }
+  },
+  "phase11_reference": {
+    "pooled_reliability": 0.3136077301426884,
+    "pooled_ceiling": 0.5600069018705827
+  },
+  "difference_vs_phase11": -0.010077082840834695,
+  "estimate_within_0.05": true,
+  "design": {
+    "status": "ok",
+    "n_targets": 126,
+    "n_reached": 31,
+    "median_required_animals": 29.0,
+    "max_required_animals": 59,
+    "caveat": "Planning approximation conditional on the hierarchical model; not prospectively validated."
+  },
+  "gates": {
+    "g1a_sbc_coverage": true,
+    "g1b_sbc_rank": false,
+    "g1c_grid_edge": true,
+    "g1d_fit_integrity": true,
+    "g1_sbc_all": false,
+    "g2_heldout_ppc": false,
+    "g3_negative_control": false,
+    "g4_prior_sensitivity": true,
+    "all_gates": false,
+    "sbc_coverage_n22": 0.933,
+    "sbc_coverage_ci_low": 0.9234880922657263,
+    "sbc_coverage_ci_high": 0.9414044247381417,
+    "sbc_rank_ks_pvalue": 1.4282664466802602e-06,
+    "sbc_n_fits": 3000,
+    "sbc_n_failed_fits": 0,
+    "sbc_n_edge_failures": 0,
+    "sbc_fit_integrity_failure_fraction": 0.0,
+    "max_grid_edge_mass": 0.039162097538784094,
+    "ppc_coverage": 0.9044368600682594,
+    "ppc_median_abs_error": 0.20726542191557004,
+    "ppc_n": 293,
+    "negative_median_n22": 0.120390575116816,
+    "negative_q95_n22": 0.5936696539636546,
+    "negative_n_requested": 100,
+    "negative_n_eligible": 48,
+    "negative_n_excluded": 52,
+    "negative_exclusion_reasons": {
+      "too_few_animals": 52
+    },
+    "prior_range": 0.0031233113547247116
+  },
+  "decision": "Gates or estimate agreement failed; retain Phase 11 0.560 and do not call a hierarchical interval calibrated.",
+  "runtime_seconds": 280.61490082740784,
+  "software": {
+    "python": "3.13.5",
+    "numpy": "2.3.1",
+    "pandas": "2.3.3"
+  },
+  "commands": [
+    "python scripts/phase12r_hierarchy.py",
+    "python scripts/phase12r_manifest.py",
+    "python scripts/audit_claims.py"
+  ]
+}

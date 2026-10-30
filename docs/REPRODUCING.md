@@ -16,7 +16,7 @@ This is the operator recipe. It is written for a fresh checkout on Windows
 cd D:\ComputaCenter\NeuroBranch\neurobranch-celegans
 
 # If uv is on PATH
-uv sync --extra dev
+uv sync --locked --extra dev
 
 # If uv is only available as a module
 python -m uv sync --extra dev
@@ -793,10 +793,42 @@ Expected (about 7--12 min for the hierarchy script on this machine):
 - Held-out coverage 0.896, median absolute error 0.191: gate fails.
 - Negative control median R(22) = 0.176, q95 = 0.525: gate fails.
 - Prior-sensitivity range 0.003: gate passes, but does not rescue the interval.
-- Benchmark: no configuration supported; largest delta +0.189, MDE 0.238,
-  Holm p 0.185.
+- Benchmark: **withdrawn** (C11); the old +0.189 delta was computed on unaligned
+  baseline/model truth. Do not cite it as an underpowered positive result.
 - Status `not_adopted_gate_failures`; 0.560 remains the descriptive ceiling.
 
-The app tab **BoundedBench** shows the Phase 12 gate count and warns that the
+The app tab **BoundedBench** shows the Phase 12R gate count and warns that the
 hierarchical interval is not calibrated. Artifacts are in `reports/phase12/`;
 the manifest is regenerated last and includes the input SHA-256.
+
+## 20. Phase 12R: aligned calibration correction
+
+Same input table. Phase 12R aligns simulated templates, the fit transform and
+the SBC truth, then reruns the frozen gates. The script also runs coverage and
+`min_events=2` sensitivities:
+
+```powershell
+python scripts/phase12r_hierarchy.py
+python scripts/phase12r_inference_audit.py
+python scripts/phase12r_inference_validation.py
+python scripts/phase12r_manifest.py
+python scripts/validate_reports.py --reports reports/phase12r
+python scripts/audit_claims.py
+```
+
+Expected (about 4--5 min for the hierarchy script on this machine):
+
+- Pooled reliability 0.3035, ceiling 0.5509, 126 eligible targets.
+- SBC coverage 0.933 (pass), rank KS p = 1.43e-06 (fail), edge 0.039 (pass),
+  fit integrity 0.000 (pass).
+- Held-out PPC coverage 0.904 (pass), MAE 0.207 (fail).
+- Negative control median 0.120 (fail), q95 0.594 (fail); 48 eligible of 100.
+- Prior-sensitivity range 0.0031 (pass).
+- 79% of observed cell variances use the `1e-8` floor; `min_events=2` gives
+  36 targets and reliability 0.199.
+- Status `not_adopted_gate_failures`; 0.560 remains the only descriptive ceiling.
+- The inference alignment audit reports 1,334/1,334 paired `y_true` mismatches;
+  the Phase 12 benchmark claim is withdrawn.
+
+Artifacts are in `reports/phase12r/`; `reports/phase12r_first_pass/` is retained
+only as run history. The manifest is regenerated last.

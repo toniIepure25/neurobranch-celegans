@@ -217,3 +217,92 @@ no posterior animal-budget guarantee are published.
 better uncertainty statement. The Phase 8/9/10/11 claim statuses are unchanged.
 The Phase 12 benchmark cluster analysis also found no configuration supported
 at the 0.05 SESOI (largest delta +0.189, MDE 0.238, Holm p 0.185).
+
+## C10. The Phase 12 calibration failure stands, but not because of a variance-loss bug
+
+**Was claimed in the Phase 12R plan:** a post-report audit had found that
+`_cells_from_template` discarded the known cell sampling variance, so the Phase
+12 SBC and negative control fit a model with `v=0`.
+
+**What happened:** that diagnosis was tested directly before any Phase 12R
+result was produced and was **not reproduced**. `fit_hierarchical_cells()` takes
+per-cell summaries directly and preserves `var / n`; the hypothetical `v=0`
+path was created by testing `cell_summaries()` on a one-event frame, not by the
+SBC path. The real defects were:
+
+1. simulated templates were already animal-centered and standardized, then
+   centered again by the fit, while the SBC truth used the uncentered formula;
+2. the prose said `min_events=2`, `min_animals=2`, and two responders, while the
+   executed primary used `min_events=1`, `min_animals=6`, and three responders;
+3. 79% of observed cell variances are exactly zero because most cells contain
+   one event, so the fit's `1e-8` floor carries most of the likelihood.
+
+Phase 12R aligned the simulation, fit, and truth and repeated the frozen gates.
+
+| Quantity | Phase 12 | Phase 12R |
+|---|---:|---:|
+| Pooled R(22) | 0.3035 | 0.3035 |
+| Ceiling | 0.5509 | 0.5509 |
+| SBC coverage at 22 animals | 0.923 | **0.933** (pass) |
+| SBC rank KS p | 1.38e-06 | **1.43e-06** (fail) |
+| SBC fit-integrity failure fraction | not reported | 0.000 (pass) |
+| Maximum grid edge mass | 0.0069 | 0.0392 (pass) |
+| Held-out PPC coverage | 0.896 | **0.904** (pass) |
+| Held-out PPC median absolute error | 0.191 | **0.207** (fail) |
+| Negative-control median R(22) | 0.176 | **0.120** (fail) |
+| Negative-control q95 R(22) | 0.525 | **0.594** (fail) |
+| Prior-sensitivity range | 0.0031 | 0.0031 (pass) |
+
+The aligned rerun improves nominal coverage but does not make the interval
+calibrated: rank uniformity still fails decisively, predictive error is over
+twice the gate, and the negative control still returns substantial apparent
+reliability. The point estimate is unchanged and remains within 0.05 of Phase
+11. The `min_events=2` sensitivity gives **0.199** with 36 eligible targets, so
+the 0.304 estimate is sensitive to the event filter.
+
+**Correct:** the Phase 12 conclusion is unchanged: **the hierarchical interval
+is not calibrated and 0.560 remains the only descriptive ceiling**. The reason
+is model/coverage misspecification and measurement-variance floor behavior, not
+a variance-loss coding bug. No target ranking, animal-budget guarantee, or
+calibrated interval is published. The variance floor is an explicit
+approximation, not a measured variance.
+
+**Evidence:** `research/phase12r_protocol.md`,
+`research/phase12r_deviations.md`, `reports/phase12r/summary.json`,
+`reports/phase12r/sbc.json`, `reports/phase12r/heldout_ppc.json`,
+`reports/phase12r/negative_control.json`,
+`reports/phase12r/min_events_sensitivity.csv`.
+
+**Impact:** unfavourable and corrective. It removes a false bug narrative,
+documents that the earlier calibration evidence was misaligned, and shows that
+the negative conclusion survives the correction for different reasons. Phase
+8/9/10/11 claim statuses are unchanged.
+
+## C11. The Phase 12 animal-cluster benchmark comparison is invalid, not merely underpowered
+
+**Was claimed:** the largest animal-cluster benchmark delta was +0.189 for
+`global_mean`, with a 95% interval [+0.017, +0.345], Holm p 0.185, MDE 0.238;
+all configurations were labelled `underpowered`.
+
+**What happened:** the old merge paired baseline and model rows by
+`dataset_id, target, neuron` aggregates rather than by the same events. In the
+saved Phase 8 predictions, baseline and model `y_true` differ for **1334 of
+1334** paired rows (the baseline table also has a different event coverage).
+An animal-cluster interval computed on mismatched truths cannot support a
+paired delta, even a negative or underpowered one.
+
+**Correct:** withdraw the benchmark cluster claim entirely. The Phase 12
+benchmark table is a historical diagnostic, not evidence of an underpowered
+comparison. A valid comparison must pair on `event_id` before resampling
+animals. `paired_cluster_inference` now fails closed on unaligned truth by
+default; the old behavior is available only through the explicit
+`require_aligned_truth=False` reproduction flag.
+
+**Evidence:** `reports/phase12r/inference_alignment_audit.json`,
+`reports/phase12/benchmark_cluster.json`,
+`src/neurobranch/benchmark/inference.py`,
+`tests/benchmark/test_inference.py`.
+
+**Impact:** no benchmark superiority claim, and no “underpowered but positive”
+framing, is permitted. Leaderboard values remain descriptive only. This is
+unfavourable to the project but prevents an invalid statistical claim.

@@ -11,9 +11,11 @@ a cell mean is `var / n`.
 
 For each target:
 
-1. keep cells with at least two events (`min_events=2` in the primary fit);
+1. keep cells with at least one event (`min_events=1` in the primary fit;
+   `min_events=2` is a preregistered sensitivity);
 2. pivot to an animal x responder matrix of means and sampling variances;
-3. require at least three responders and at least `max(min_animals, 3)` animals;
+3. require at least three responders and at least `max(min_animals, 3)` animals
+   (primary `min_animals=6`);
 4. keep responders observed in at least the requested fraction of animals
    (primary: 0.8);
 5. drop animals with no remaining observation;
@@ -27,9 +29,14 @@ absorbed into the between-target term and inflate `R(22)`. The uncentered fit
 gave 0.275 pooled reliability and 0.525 ceiling; the centered primary fit gave
 0.304 and 0.551. Neither is adopted because the gates fail.
 
-Cells with a missing or non-finite variance receive a variance floor of `1e-8`
-after standardization and contribute their mean only. Missing cells are never
-imputed, and the mask is preserved in the likelihood.
+Cells with a genuine zero variance receive the explicit floor `1e-8` after
+standardization and are counted in `n_variance_floored`. Missing or negative
+sampling variances are not silently replaced: the target is excluded with
+`invalid_sampling_variance`. Missing cells are never imputed, and the mask is
+preserved in the likelihood. The floor matters descriptively: with one event per
+cell most within-cell variances are exactly zero, so a large fraction of cells
+use the floor. Phase 12R reports that fraction and the `min_events=2` sensitivity
+rather than treating the known-variance assumption as automatically satisfied.
 
 ## 2. Likelihood
 
@@ -100,35 +107,49 @@ table and is not prospectively validated.
 
 ## 5. Calibration and adversarial checks
 
-- **SBC** (`simulation_based_calibration`): 200 replicates, three targets each,
+- **SBC** (`simulation_based_calibration`): 1,000 replicates, three targets each,
   real coverage masks and sampling variances, $\sigma,\tau$ drawn from the
-  fitting prior, 1,200 posterior draws on a 50 x 50 grid. Ranks and 95%
-  coverage are computed at $n=1$ and $n=22$; a KS test checks rank uniformity.
-- **Held-out PPC** (`heldout_predictive_check`): five animal-level splits, up to
-  40 targets, intervals from the training fit compared with held-out animal
-  profile correlations.
+  fitting prior, 2,000 posterior draws on an 80 x 80 grid. Simulated data and the
+  fit use the same animal centering; the truth uses the centered effective
+  variance. Ranks and 95% coverage are computed at $n=1$ and $n=22$; a KS test
+  checks rank uniformity and a Wilson interval is reported.
+- **Held-out PPC** (`heldout_predictive_check`): twenty animal-level splits, up to
+  40 targets, 1,200 draws on a 60 x 60 grid; intervals from the training fit are
+  compared with held-out animal profile correlations after the same centering.
 - **Negative control** (`negative_control`): each animal's responder labels are
   permuted exactly within that animal, destroying true cell correspondence while
-  preserving the coverage pattern and marginal distributions. A calibrated model
-  should return near-zero reliability.
+  preserving the coverage pattern, marginal distributions and known variances.
+  One hundred targets are requested; requested, eligible, excluded and reasons
+  are reported. A calibrated model should return near-zero reliability.
 - **Prior sensitivity** (`prior_sensitivity`): the same fit at HalfNormal scales
-  0.5, 1.0, and 2.0. A range above 0.05 means the conclusion is prior-driven.
+  0.5, 1.0, and 2.0 on a 50 x 50 grid. A range above 0.05 means the conclusion is
+  prior-driven.
+
+The Phase 12 run used a smaller SBC (200 replicates) and an unaligned truth
+formula; its calibration numbers are historical and are superseded by Phase 12R.
+The point estimate is unaffected by the alignment correction.
 
 ## 6. Known limitations
 
 1. The additive Gaussian model may not describe sparse, heavy-tailed calcium
    responses; the input response distribution has a standard deviation of 23.8
    and large outliers.
-2. The negative control shows positive null bias: median $R(22)=0.176$ and q95
-   = 0.525 on permuted profiles. The model can manufacture reliability from
-   coverage and marginal structure alone.
-3. SBC rank uniformity fails (KS p = 1.4e-06), and held-out coverage is 0.896
-   with median absolute error 0.191. The interval is not calibrated.
-4. The deterministic grid is not a full posterior sampler; grid resolution and
+2. Most cells contain one event, so their within-cell sampling variance is
+   exactly zero. The fit uses an explicit `1e-8` floor and reports the floored
+   fraction; this is an approximation, not a measured variance. The
+   `min_events=2` sensitivity is reported because it changes both eligibility and
+   the pooled estimate.
+3. The Phase 12R negative control showed positive null bias: median $R(22)=0.120$
+   and q95 = 0.594 on permuted profiles (48 eligible of 100 requested). This is
+   the primary adversarial check; a positive null remains a model limitation.
+4. Phase 12R SBC rank uniformity failed (KS p = 1.43e-06) and held-out predictive
+   median absolute error was 0.207; coverage alone (0.933 SBC, 0.904 PPC) does
+   not make the interval calibrated.
+5. The deterministic grid is not a full posterior sampler; grid resolution and
    boundary mass are reported but do not fix model misspecification.
-5. The 0.8 coverage filter changes the responder population. The estimate applies
+6. The 0.8 coverage filter changes the responder population. The estimate applies
    to broadly observed responders, not to all responders.
-6. The model does not identify causal effects, neural mechanisms, or
+7. The model does not identify causal effects, neural mechanisms, or
    intervention responses. Perturbation predictions remain model-dependent.
 
 ## 7. External methods anchors

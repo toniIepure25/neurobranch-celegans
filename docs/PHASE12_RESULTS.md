@@ -1,5 +1,13 @@
 # Phase 12 results: hierarchical model, failed calibration, retained 0.560
 
+> **Correction (C10/C11):** this page is the original Phase 12 report. The
+> calibration harness had an alignment defect, and the animal-cluster benchmark
+> comparison was invalid because baseline and model `y_true` were not paired on
+> the same events. The aligned rerun is in
+> [PHASE12R_RESULTS.md](PHASE12R_RESULTS.md); it still fails calibration and
+> retains 0.560. The benchmark cluster table in Section 4 is **withdrawn** and
+> must not be cited as an underpowered positive result.
+
 Phase 12 asked whether an explicit hierarchical measurement model can replace the
 Phase 11 moment bound with a calibrated interval. The headline is negative: the
 model reproduces the point estimate but **fails the calibration gates**, so the
@@ -67,7 +75,13 @@ The prior-sensitivity gate passes, so the failure is not a prior-scale artefact.
 Changing the HalfNormal scale from 0.5 to 2.0 moves pooled R(22) only from 0.260
 to 0.263. The problem is the likelihood/coverage structure, not the prior width.
 
-## 4. Animal-cluster benchmark inference
+## 4. Animal-cluster benchmark inference (withdrawn)
+
+> **Withdrawn by C11:** the old merge paired baseline and model rows by
+> animal/target/neuron aggregates, not by the same events. Baseline and model
+> `y_true` differ for 1,334 of 1,334 compared rows. The table below is retained
+> only as a historical diagnostic; it is not evidence of an underpowered positive
+> comparison. See `PHASE12R_RESULTS.md` Section 4.
 
 Fold-level leaderboard values share animals across folds and cannot support a
 generalisation claim. Phase 12 resamples animals, computes within-animal pair

@@ -15,6 +15,13 @@ Nothing here is a causal claim. The intervention section is explicitly
 > increment has the right sign but a 95% CI that includes zero, and it does not
 > survive a quadratic behavioural baseline or identity-aligned neurons. These are
 > negative/inconclusive results and they are the main scientific output.
+>
+> **Phase 12R (2026-10-30).** The coverage-aware pooled ceiling remains **0.560**.
+> The hierarchical measurement model gives 0.304 at 22 animals and 80% coverage,
+> but fails SBC rank uniformity (KS p=1.43e-06), predictive error (MAE 0.207) and
+> the negative control (median R(22)=0.120); no calibrated interval is published.
+> The Phase 12 animal-cluster benchmark comparison is withdrawn because baseline
+> and model truth were not paired on the same events.
 
 ---
 

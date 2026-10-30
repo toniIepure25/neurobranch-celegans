@@ -1,0 +1,3 @@
+coverage,n_targets,n_ok,pooled_reliability_median,pooled_ceiling_median,single_animal_reliability_median,max_grid_edge_mass,n_variance_floored,variance_floor_fraction,status,min_events
+0.8,259,126,0.3035306473018537,0.5509361553772394,0.019430984446549504,0.006857106996704784,32427,0.7892469454315338,ok_with_failures,1
+0.8,259,36,0.19866646326177612,0.44572016250308455,0.011145741681742198,0.00492288642446463,1,0.00018625442354255913,ok_with_failures,2
