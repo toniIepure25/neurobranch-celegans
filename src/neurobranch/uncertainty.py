@@ -128,8 +128,8 @@ def two_way_bootstrap(
             animal_index = rng.integers(0, n_animals, size=n_animals)
             responder_index = rng.integers(0, n_responders, size=n_responders)
             resampled = _components_from_arrays(
-                values[np.ix_(animal_index, responder_index)],
-                noise[np.ix_(animal_index, responder_index)],
+                values.take(animal_index, axis=0).take(responder_index, axis=1),
+                noise.take(animal_index, axis=0).take(responder_index, axis=1),
                 min_animals=min_animals,
             )
             if resampled is None:
