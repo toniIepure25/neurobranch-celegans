@@ -6,12 +6,16 @@ from pathlib import Path
 
 import numpy as np
 import pandas as pd
+import pytest
 
 from neurobranch.active.acquisition import AcquisitionContext, select_batch
 from neurobranch.active.simulate import ActiveConfig, _choose_seed_targets, run_active_benchmark
 from neurobranch.active.state_features import StateCache, fit_state_projector
 from neurobranch.benchmark.conformal import conformal_interval, conformal_quantile
 from neurobranch.benchmark.metrics import interval_score
+from neurobranch.config import PROJECT_ROOT
+
+CONNECTOME = PROJECT_ROOT / "references" / "external" / "aconnectome_witvliet_2020_8_utf8.csv"
 
 
 def _synthetic_trials(n_targets: int = 20, n_responders: int = 8, n_animals: int = 8) -> pd.DataFrame:
@@ -113,6 +117,7 @@ def test_state_projector_uses_train_fill_only() -> None:
     assert set(projector.train_event_ids) == {f"e{i}" for i in range(10)}
 
 
+@pytest.mark.skipif(not CONNECTOME.exists(), reason="Witvliet connectome not present")
 def test_active_end_to_end_audit(tmp_path: Path) -> None:
     trials = _synthetic_trials()
     cfg = ActiveConfig(

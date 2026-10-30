@@ -4,9 +4,14 @@ from __future__ import annotations
 
 from pathlib import Path
 
+import pytest
 from streamlit.testing.v1 import AppTest
 
-APP = str(Path(__file__).resolve().parents[2] / "app" / "streamlit_app.py")
+ROOT = Path(__file__).resolve().parents[2]
+APP = str(ROOT / "app" / "streamlit_app.py")
+KATO_PATH = ROOT / "data" / "raw" / "kato2015" / "WT_NoStim.mat"
+
+pytestmark = pytest.mark.skipif(not KATO_PATH.exists(), reason="Kato 2015 dataset not present")
 
 
 def test_app_builds_all_tabs_without_exception() -> None:

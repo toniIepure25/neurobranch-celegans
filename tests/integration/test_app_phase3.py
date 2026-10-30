@@ -2,9 +2,13 @@ from __future__ import annotations
 
 from pathlib import Path
 
+import pytest
 from streamlit.testing.v1 import AppTest
 
 ROOT = Path(__file__).resolve().parents[2]
+KATO_PATH = ROOT / "data" / "raw" / "kato2015" / "WT_NoStim.mat"
+
+pytestmark = pytest.mark.skipif(not KATO_PATH.exists(), reason="Kato 2015 dataset not present")
 
 
 def test_app_retains_phase2_tabs_and_adds_prospective_tab():

@@ -1,10 +1,15 @@
 from __future__ import annotations
 
 import numpy as np
+import pytest
 
 from neurobranch.config import PROJECT_ROOT
 
+KATO_PATH = PROJECT_ROOT / "data" / "raw" / "kato2015" / "WT_NoStim.mat"
+requires_kato = pytest.mark.skipif(not KATO_PATH.exists(), reason="Kato 2015 dataset not present")
 
+
+@requires_kato
 def test_behavior_label_neurons_are_excluded_from_real_predictors():
     from neurobranch.data.kato import BEHAVIOR_LABEL_NEURONS, load_kato
     from neurobranch.preprocessing import make_worm_data
@@ -14,6 +19,7 @@ def test_behavior_label_neurons_are_excluded_from_real_predictors():
     assert not (set(data.predictor_names) & set(BEHAVIOR_LABEL_NEURONS))
 
 
+@requires_kato
 def test_real_data_split_windows_are_clean():
     from neurobranch.data.kato import load_kato
     from neurobranch.preprocessing import make_worm_data, split_starts
@@ -36,6 +42,7 @@ def test_ncmcm_markov_port_agrees_with_distributed_artifact():
     assert abs(s["markov_p_precomputed"] - s["markov_p_reimplemented"]) < 0.12
 
 
+@requires_kato
 def test_random_controls_exclude_hypothesis_candidates():
     from neurobranch.data.kato import load_kato
     from neurobranch.interventions.search import available_candidates, random_control_pool
@@ -47,6 +54,7 @@ def test_random_controls_exclude_hypothesis_candidates():
     assert not (set(pool) & set(available_candidates(data)))
 
 
+@requires_kato
 def test_official_bundlenet_evaluation_is_labelled_leaky():
     from neurobranch.representation.bundlenet import official_vs_reimplementation
 
