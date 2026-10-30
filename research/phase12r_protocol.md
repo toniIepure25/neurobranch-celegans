@@ -13,19 +13,31 @@ reported.
 ## 1. Reason for the correction
 
 Phase 12 reported that the hierarchical interval failed its calibration gates.
-During a post-report audit, the simulation path was found to discard the
-known cell-level sampling variance. `_cells_from_template` writes a `var`
-column, but `cell_summaries()` recomputes `var` from a single synthetic event,
-which returns zero. The SBC and negative-control fits therefore saw `v = 0`
-while their simulated truth used `template.nu > 0`. The real-data point
-estimate is not affected because the real fit computes cell variance from the
-observed events.
+A post-report audit initially suspected that the simulation path discarded the
+known cell-level sampling variance. That suspicion was tested directly before
+any Phase 12R result was produced and **was not reproduced**:
+`_cells_from_template()` returns per-cell summaries, and
+`fit_hierarchical_cells()` passes their `var / n` into the likelihood without
+recomputing them through `cell_summaries()`. The known-variance regression test
+is retained as a guard, but Phase 12 is not invalidated by a variance-loss bug.
 
-The Phase 12 calibration evidence is therefore **invalid as evidence about the
-declared model**, regardless of whether its conclusion happens to survive. A
-second alignment issue is that the fit centers each animal, while the SBC truth
-formula is uncentered. Phase 12R must address both before any gate is
-interpreted.
+The audit did find a real alignment defect. `prepare_templates()` returns
+targets that are already animal-centered and standardized; the SBC then
+simulates from those values, and `fit_hierarchical_cells()` centers the
+simulated rows again. The SBC truth formula, however, is the uncentered
+variance-component expression. Simulation and truth therefore describe
+different transformations. Phase 12R must align the simulation, the fit, and
+the truth before interpreting any gate.
+
+The audit also found that the Phase 12 prose said `min_events=2`,
+`min_animals=2`, and two responders, while the executed code used
+`min_events=1`, `min_animals=6`, and three responders. Phase 12R fixes the
+parameter record and treats `min_events=2` as a sensitivity, not a silent
+replacement.
+
+Phase 12's real-data point estimate is not changed by any of these issues. The
+question is whether its calibration conclusion survives an aligned reanalysis;
+it is not assumed either way.
 
 ## 2. Question
 
