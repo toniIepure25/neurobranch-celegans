@@ -4,11 +4,15 @@ Start here if you are reading the project for the first time.
 
 ## Current results
 
-- [CURRENT_STATUS.md](CURRENT_STATUS.md) - one-page state after Phase 12R:
-  0.560 headline, uncalibrated 0.304 model, withdrawn benchmark claim.
+- [CURRENT_STATUS.md](CURRENT_STATUS.md) - one-page state after Phase 13:
+  0.560 headline, rejected event-variance model, withdrawn benchmark claim.
+- [PHASE13_RESULTS.md](PHASE13_RESULTS.md) - projection-consistent variance and
+  event-level model; six of eleven gates failed. **Current measurement result.**
+- [METHODS_PHASE13.md](METHODS_PHASE13.md) - M0/M1/M2 equations, SBC design and
+  null controls.
 - [PHASE12R_RESULTS.md](PHASE12R_RESULTS.md) - aligned calibration rerun;
   hierarchical interval still not calibrated, benchmark cluster claim withdrawn.
-  **Current correction.**
+  Historical Phase 12 correction.
 - [PHASE11_RESULTS.md](PHASE11_RESULTS.md) - coverage-aware ceiling (0.560),
   failed extrapolation/shrinkage/bootstrap gates. **Current numbers.**
 - [PHASE12_RESULTS.md](PHASE12_RESULTS.md) - original hierarchical attempt;
