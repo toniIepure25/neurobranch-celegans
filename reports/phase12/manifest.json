@@ -1,0 +1,43 @@
+{
+  "artifacts": {
+    "benchmark_cluster.csv": "7984945e3df3edc96090af8bd0d9c88e01ef9106bdf515948757934dd6f359e3",
+    "benchmark_cluster.json": "59cccc4791a9a41b39829fe0f036e0c7a68e2d6e8707a21d90e0f0b73a4c105e",
+    "coverage_sensitivity.csv": "f60ba674ce15c457acd45c7ec2aa32f8fab39d70455250c839431e9dcbcbf18b",
+    "design_posterior.csv": "8ec2522e6f770d99c192ce7921efee9a817e81bab7e1e520c0b2d76fccd8d90f",
+    "heldout_ppc.json": "4cb7c38655fcadb2c2d4394b14da14eef5b0a8ecf82958f783014343848145a6",
+    "hierarchical_by_target.csv": "0a10b599291591b02afe48d5f333a718d92d93c3806e0026256e4718e083a8ff",
+    "negative_control.json": "34295db1114783f59fc37885397970c93e67a93ef27b5adc212cbb80d56d1aab",
+    "prior_sensitivity.json": "650c3daec77b732b4289a12533b207010d64e65cb99b22604268d00c9a42e456",
+    "sbc.json": "8afd4af0f0a4c59b79a6d35eea53ffc5fe99460a5d55a1310f78687c51126c36",
+    "summary.json": "234127452123b85938a3a22e9906628399672c8dfd73042ace7cd4c24a169fb7"
+  },
+  "created_utc": "2026-10-30T17:30:13+00:00",
+  "git_dirty": false,
+  "git_revision": "8d6df4187ddddeb81a591a97d2f79b7d423685f9",
+  "input": {
+    "path": "reports/phase3/randi_trial_table_phase3.csv.gz",
+    "redistributed": false,
+    "sha256": "8186c96bcb33cdce15dc9ae88691e09fc596e42c5513310b6d6a636e4d5dd515"
+  },
+  "notes": [
+    "git_dirty ignores the manifest files being written and reflects all other worktree changes.",
+    "Artifact hashes cover every file in this directory except manifest.json and manifest.sha256.",
+    "The derived input table is referenced by hash and is not redistributed."
+  ],
+  "parameters": {
+    "n_eval": [
+      1,
+      22
+    ],
+    "primary_coverage": 0.8,
+    "prior": "sigma, tau ~ HalfNormal(1) on the standardized scale",
+    "seed": 12,
+    "status": "not_adopted_gate_failures"
+  },
+  "phase": "phase12",
+  "software": {
+    "platform": "Windows-10-10.0.19045-SP0",
+    "python": "3.13.5",
+    "uv_lock_sha256": "217220b3c6efb2606252d4c06686c94e1d16e56afbb435c565a7cfc9ea89e233"
+  }
+}
