@@ -1,21 +1,24 @@
 {
   "captions": {
     "figure_coverage_sensitivity.png": "Pooled reliability and its attenuation ceiling at 22 animals as responders with incomplete animal coverage are excluded.",
-    "figure_phase12_calibration.png": "Phase 11 coverage curve and the Phase 12 hierarchical point estimate. The hierarchical interval was not calibrated and is not shown as an interval."
+    "figure_phase12_calibration.png": "Phase 11 coverage curve and the Phase 12 hierarchical point estimate. The hierarchical interval was not calibrated and is not shown as an interval.",
+    "figure_phase13_estimates.png": "Phase 13 model-based pooled R(22): M0 reference 0.3035, M1 projection-scaled 0.3138, M2 event-variance 0.2003. M2 is rejected; the bars are not calibrated intervals and 0.560 remains the descriptive ceiling."
   },
   "generated_from": {
     "claims": "reports\\phase10\\claims.json",
     "coverage_sensitivity": "reports\\phase11\\coverage_sensitivity.csv",
     "leaderboard": "reports\\phase11\\leaderboard.csv",
-    "phase12_summary": "reports\\phase12\\summary.json"
+    "phase12_summary": "reports\\phase12\\summary.json",
+    "phase13_summary": "reports\\phase13\\summary.json"
   },
   "hashes": {
     "README.md": "66c6704dabb13e3796ad092a674b71fd713adfabc26d2f59a67d42440bab6c0f",
     "figure_ceiling_curve_phase10.png": "ed35c1d38741b33a750fe2fea990a3ca7581394aca471e249a00bede4915de8a",
     "figure_coverage_sensitivity.png": "6ee3ff0349c94c1c123143b1e0995df9b169de16cf86701911e7dfc94df3f162",
     "figure_phase12_calibration.png": "003def1c5ded3d850ffd355184e991d411fccce79bca88b5e5c214bc1ae31f98",
-    "table_claims.csv": "081826000d53da101e43db44f72470eb3d5985595d5a2eea933632bd0930ab96",
-    "table_claims.md": "0641bd1d2e6dacff8f00f2b7ac8128bc151dba9145010eb96b786d03fca911d1",
+    "figure_phase13_estimates.png": "c22d9088a9220b3950cd1798140e669b5887288a377ac126f0cfbc396cbf0ec6",
+    "table_claims.csv": "551023b823b30beae5a31b930515f0e35ce6d790083c695c50fb8463f95cd442",
+    "table_claims.md": "19802f45992ab125483e9c0a46c57150f217fa0c51ba558f77c6df514fdc16e0",
     "table_cluster_benchmark.csv": "28d1da8bda6a7f612bd086f633800e6cae32e0d18c62da7bcf6fc4add51c39e7",
     "table_cluster_benchmark.md": "1b5dfc193225c42229c9cb15aa17a38a1cbe54824e20bcde41e3043bb758c46d",
     "table_coverage_sensitivity.csv": "82abfeb04e2abb45343f1c3bcd1a4b517f1755334f8017a1210c0d54d4b9b8f6",
@@ -25,6 +28,10 @@
     "table_leaderboard.csv": "64c1c24ea23184e270f4388abcb8b97a33c948e32044a610791bf26eba860dd2",
     "table_leaderboard.md": "9c64648d1d33eb6ff85efaba0240ab42a0ce7922b54d085d237feb74dda78c35",
     "table_phase12_gates.csv": "d8d3c34d236f852e86e3cdc597930ffe3fec008177af40bb5b55927108cf2924",
-    "table_phase12_gates.md": "5bc1e8e0637dd39c3a813286c831fe52d1473c76f5f03fc35dbca1adbe5b1710"
+    "table_phase12_gates.md": "5bc1e8e0637dd39c3a813286c831fe52d1473c76f5f03fc35dbca1adbe5b1710",
+    "table_phase13_estimates.csv": "5f271503411b54c168263bf1e528d2d503a5efb1036ce893296fb96a9cf3da6a",
+    "table_phase13_estimates.md": "34aba7eacd435979a203387329f269236bd324c204644f20cefb4d01660cf9b1",
+    "table_phase13_gates.csv": "52c339223f8c210a20988b763b90ea30084f6deff1674faa1935090abf482508",
+    "table_phase13_gates.md": "3699a506cc83fa24b70a7852cf6a51f9b9f382222853242cdf76431211c3f202"
   }
 }

@@ -1,0 +1,15 @@
+Table 7. Phase 13 frozen gates. Six of eleven failed.
+
+| gate | requirement | observed | result |
+| --- | --- | --- | --- |
+| G1a_sbc_coverage | 22-animal coverage in [0.93, 0.97] | 0.9244444444444444 | fail |
+| G1b_sbc_rank | KS rank-uniformity p > 0.01 | 0.0030626834019745275 | fail |
+| G1c_grid_edge | maximum edge posterior mass < 0.05 | 0.01210362806696956 | pass |
+| G1d_fit_integrity | failed or edge-dominated fits <= 5% | {'edge_failures': 0, 'failed': 0, 'n_fits': 1800} | pass |
+| G1e_one_event_stratum | coverage in [0.90, 0.98] when n=1 fraction >= 0.5 | 0.923120728929385 | pass |
+| G2_heldout_ppc | coverage >= 0.90 and MAE <= 0.10 | {'reason': 'G3 failed before a valid M2 PPC was implemented', 'status': 'not_run'} | fail |
+| G3_negative_control | median <= 0.05 and q95 <= 0.15 | {'median': 0.14849835254329538, 'q95': 0.4680454159407591} | fail |
+| G3b_signflip_control | median <= 0.05 and q95 <= 0.15 | {'median': 0.13409608964129704, 'q95': 0.5796420500729398} | fail |
+| G4_prior_sensitivity | pooled R(22) range <= 0.05 | 0.006613985482767815 | pass |
+| G5_event_variance_recovery | posterior coverage of omega^2 in [0.90, 0.98] | 0.9355555555555556 | pass |
+| G6_phase11_agreement | pooled R(22) within 0.05 of 0.314 | {'absolute_difference': 0.1137241205409269, 'observed': 0.2002758794590731, 'phase11_reference': 0.314} | fail |

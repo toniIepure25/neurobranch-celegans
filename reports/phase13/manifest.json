@@ -1,0 +1,54 @@
+{
+  "artifacts": {
+    "README.md": "63609b0948db5cd7f4660cae2303b1ca8f1a45cc0c99f054516232fd8c1c1c2b",
+    "coverage_sensitivity.csv": "8a860e1ea4a7ee075fd1b061f1241e4fd9b315dad6f88c90c54d1e9369aba55d",
+    "hierarchical_by_target.csv": "47a55601bbad9960052901376bdc1d853c059bd75132a74404ba1676c3f33710",
+    "hierarchical_by_target_m0_reference.csv": "8a88b71516af031e955339ed94cbf242d75cc6a3f547836c5588b81d8de87adc",
+    "hierarchical_by_target_m1_projection_scaled.csv": "e66c1ec33081395cca0a15f70313aa100fd7a3c139601298e97a0407c97470dc",
+    "hierarchical_by_target_m2_event_variance.csv": "47a55601bbad9960052901376bdc1d853c059bd75132a74404ba1676c3f33710",
+    "min_events_sensitivity.csv": "fd7436a634e9d2727c2ba920a8cd651119b40455a8e0c2c3b30648db5b618c82",
+    "negative_control.json": "9513cdf400f04fc94fc457df66c65ee7c4ff6a31d8375251d6e77333beb5808b",
+    "prior_sensitivity.json": "c16dd823f2e3ac10d64f1f28d64a822b5eb671791eab54dfe0af82a93a50da6d",
+    "sbc.json": "86a4698865b81f83209074d1147495cbc6b72c2ab2705c56712623b6bb9b43c8",
+    "sbc_m1.json": "387e0bc752e1bd1152e4568ccd4950cea0a79851153107e3ac696000e981bf24",
+    "signflip_control.json": "966ec99426c51c97ff82540b06e302667ec20bb41d8c0da709f4ff02fe0ad8c3",
+    "summary.json": "aff311dbbb46726be744e772d4ca721409d8788fd62f701f0dd289113998ad2c"
+  },
+  "created_utc": "2026-10-30T21:37:15+00:00",
+  "decision": "not_adopted_gate_failures",
+  "deviations": {
+    "path": "research/phase13_deviations.md",
+    "sha256": "513a915373a64e9a40401e55ce43bfd8484fa982e1b67af0b4e746a42d3e4af3"
+  },
+  "git_dirty": false,
+  "git_revision": "c114bf2efa4979f027b4b1dd1fb6068ab96f73ea",
+  "input": {
+    "path": "reports/phase3/randi_trial_table_phase3.csv.gz",
+    "redistributed": false,
+    "sha256": "8186c96bcb33cdce15dc9ae88691e09fc596e42c5513310b6d6a636e4d5dd515"
+  },
+  "notes": [
+    "git_dirty reflects code/worktree changes outside reports/; generated report files are excluded.",
+    "Artifact hashes cover every file except manifest.json, manifest.sha256 and validation.json.",
+    "The derived input table is referenced by hash and is not redistributed.",
+    "Quick-mode outputs are not decision evidence."
+  ],
+  "parameters": {
+    "config": null,
+    "seed": 12
+  },
+  "phase": "phase13",
+  "primary_model": "m2_event_variance",
+  "protocol": {
+    "path": "research/phase13_protocol.md",
+    "sha256": "5d23785be1af1031fef83fb0a6cd4ae00775cb321e5787a2526a471ac9031e24"
+  },
+  "quick": 0,
+  "software": {
+    "numpy": "2.3.1",
+    "pandas": "2.3.3",
+    "platform": "Windows-10-10.0.19045-SP0",
+    "python": "3.13.5",
+    "uv_lock_sha256": "217220b3c6efb2606252d4c06686c94e1d16e56afbb435c565a7cfc9ea89e233"
+  }
+}

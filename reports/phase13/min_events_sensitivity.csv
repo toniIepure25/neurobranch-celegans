@@ -1,0 +1,3 @@
+coverage,n_targets,n_ok,pooled_reliability_n22,pooled_ceiling_n22,variance_floor_fraction,min_events
+0.8,259,126,0.19730194406176263,0.4441868346335387,0.0,1
+0.8,259,36,0.29226804917801985,0.5406182101798087,0.0,2

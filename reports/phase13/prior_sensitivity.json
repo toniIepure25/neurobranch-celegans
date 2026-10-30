@@ -1,0 +1,21 @@
+{
+  "fits": {
+    "0.5": {
+      "n_ok": 126,
+      "pooled_reliability_median": 0.20433401897738007,
+      "status": "ok_with_failures"
+    },
+    "1": {
+      "n_ok": 126,
+      "pooled_reliability_median": 0.20980033276110246,
+      "status": "ok_with_failures"
+    },
+    "2": {
+      "n_ok": 126,
+      "pooled_reliability_median": 0.2109480044601479,
+      "status": "ok_with_failures"
+    }
+  },
+  "model": "m2_event_variance",
+  "range": 0.006613985482767815
+}
