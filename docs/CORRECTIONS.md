@@ -306,3 +306,34 @@ default; the old behavior is available only through the explicit
 **Impact:** no benchmark superiority claim, and no “underpowered but positive”
 framing, is permitted. Leaderboard values remain descriptive only. This is
 unfavourable to the project but prevents an invalid statistical claim.
+
+## C12. The Phase 12R 0.304 estimate was dominated by the variance floor, not centering
+
+**Was claimed in the Phase 13 plan:** the Phase 12R hierarchical reliability
+estimate could be repaired by correcting the animal-centering projection and by
+replacing the `1e-8` one-event variance floor with an event-level model.
+
+**What happened:** Phase 13 separated the two corrections. The projection-only
+model M1 gives pooled R(22) = 0.3138 (ceiling 0.5602), within 0.0002 of the
+Phase 11 reference 0.314; the centering algebra was therefore not the main driver
+of the Phase 12R point estimate. The event-variance model M2 gives
+R(22) = 0.2003 (ceiling 0.4475), a change of 0.1032. The median event variance is
+0.6906 on the standardized scale, and 78.9% of observed cells have one event, so
+the old floor treated most cells as almost noiseless.
+
+**Correct:** the Phase 12R estimate 0.3035 is floor-sensitive and must not be
+presented as a stable measurement limit. The lower M2 value is **not** a
+calibrated replacement: M2 fails SBC coverage (0.9244) and rank (KS p = 0.00306),
+both null controls (negative median 0.1485, q95 0.4680; sign-flip median 0.1341,
+q95 0.5796), and the Phase 11 agreement gate. The held-out PPC was not run
+(deviation D4). The decision is `not_adopted_gate_failures`; 0.560 remains the
+only descriptive coverage-aware ceiling.
+
+**Evidence:** `reports/phase13/summary.json`, `docs/PHASE13_RESULTS.md`,
+`research/phase13_deviations.md`.
+
+**Impact:** no calibrated interval, target ranking or animal-budget statement is
+published. The Phase 12R negative result stands and is now better diagnosed: the
+floor was the dominant approximation, while the centering correction was nearly
+neutral for the point estimate. This correction is unfavourable to the project
+and is reported anyway.

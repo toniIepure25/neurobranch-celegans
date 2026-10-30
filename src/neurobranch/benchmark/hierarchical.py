@@ -67,6 +67,8 @@ class TargetData:
     nu: float
     responders: tuple[str, ...]
     n_variance_floored: int = 0
+    n_events: np.ndarray | None = None
+    cell_var: np.ndarray | None = None
 
 
 # Backwards-compatible private alias for code that imported the old name.
@@ -115,7 +117,11 @@ def _normalize_target_with_reason(
     variances = subset.assign(v=subset["var"] / np.maximum(subset["n"], 1.0)).pivot_table(
         index="_animal", columns="_neuron", values="v", aggfunc="mean"
     )
+    counts = subset.pivot_table(index="_animal", columns="_neuron", values="n", aggfunc="mean")
+    cell_vars = subset.pivot_table(index="_animal", columns="_neuron", values="var", aggfunc="mean")
     variances = variances.reindex(index=means.index, columns=means.columns)
+    counts = counts.reindex(index=means.index, columns=means.columns)
+    cell_vars = cell_vars.reindex(index=means.index, columns=means.columns)
     if means.shape[1] < MIN_RESPONDERS:
         return None, "too_few_responders"
     coverage_by_responder = means.notna().sum(axis=0) / max(means.shape[0], 1)
@@ -124,14 +130,20 @@ def _normalize_target_with_reason(
         return None, "too_few_responders_after_coverage"
     means = means.loc[:, keep]
     variances = variances.loc[:, keep]
+    counts = counts.loc[:, keep]
+    cell_vars = cell_vars.loc[:, keep]
     keep_animals = means.notna().any(axis=1)
     means = means.loc[keep_animals]
     variances = variances.loc[keep_animals]
+    counts = counts.loc[keep_animals]
+    cell_vars = cell_vars.loc[keep_animals]
     if means.shape[0] < max(min_animals, MIN_RESPONDERS):
         return None, "too_few_animals"
 
     y = means.to_numpy(dtype=float)
     v = variances.to_numpy(dtype=float)
+    n_events = np.nan_to_num(counts.to_numpy(dtype=float), nan=1.0)
+    cell_var = np.nan_to_num(cell_vars.to_numpy(dtype=float), nan=0.0)
     mask = np.isfinite(y)
     if mask.sum() < MIN_RESPONDERS * MIN_RESPONDERS:
         return None, "insufficient_cells"
@@ -157,6 +169,7 @@ def _normalize_target_with_reason(
             return None, "nonfinite_scale"
         y = (y - center) / scale
         v = v / (scale**2)
+        cell_var = cell_var / (scale**2)
     return (
         TargetData(
             target=str(subset["_target"].iloc[0]),
@@ -169,6 +182,8 @@ def _normalize_target_with_reason(
             nu=float(np.mean(v[mask])),
             responders=tuple(str(column) for column in means.columns),
             n_variance_floored=n_variance_floored,
+            n_events=n_events,
+            cell_var=np.where(mask & (n_events >= 2.0), np.maximum(cell_var, 0.0), 0.0),
         ),
         "",
     )
@@ -229,6 +244,7 @@ def transform_target(
     y = np.asarray(data.y, dtype=float).copy()
     v = np.asarray(data.v, dtype=float).copy()
     mask = np.asarray(data.mask, dtype=bool)
+    cell_var = None if data.cell_var is None else np.asarray(data.cell_var, dtype=float).copy()
     if center_animals:
         row_means = np.nanmean(np.where(mask, y, np.nan), axis=1, keepdims=True)
         y = y - row_means
@@ -240,11 +256,14 @@ def transform_target(
             raise ValueError("cannot standardize a target with zero or non-finite scale")
         y = (y - center) / scale
         v = v / (scale**2)
+        if cell_var is not None:
+            cell_var = cell_var / (scale**2)
     return replace(
         data,
         y=y,
         v=v,
         nu=float(np.mean(v[mask])),
+        cell_var=cell_var,
     )
 
 
@@ -268,6 +287,18 @@ def _validate_target(data: TargetData) -> None:
         raise ValueError("observed sampling variances must be finite and non-negative")
     if data.responders and len(data.responders) != data.n_responders:
         raise ValueError("responder labels do not match the target matrix")
+    if data.n_events is not None:
+        n_events = np.asarray(data.n_events, dtype=float)
+        if n_events.shape != y.shape:
+            raise ValueError("event counts must match the target matrix")
+        if not np.isfinite(n_events[observed]).all() or bool((n_events[observed] < 1.0).any()):
+            raise ValueError("observed event counts must be finite and at least one")
+    if data.cell_var is not None:
+        cell_var = np.asarray(data.cell_var, dtype=float)
+        if cell_var.shape != y.shape:
+            raise ValueError("cell variances must match the target matrix")
+        if not np.isfinite(cell_var[observed]).all() or bool((cell_var[observed] < 0.0).any()):
+            raise ValueError("observed cell variances must be finite and non-negative")
     if not np.isfinite(data.nu) or data.nu <= 0.0:
         raise ValueError("target mean sampling variance is not positive and finite")
 

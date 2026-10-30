@@ -1,9 +1,9 @@
 # Research container for NeuroBranch.
 #
 # Build:
-#   docker build -t neurobranch:1.1 .
+#   docker build -t neurobranch:1.3.1 .
 # Run the app with reports mounted read-only:
-#   docker run --rm -p 8501:8501 -v "$PWD/reports:/app/reports:ro" neurobranch:1.1
+#   docker run --rm -p 8501:8501 -v "$PWD/reports:/app/reports:ro" neurobranch:1.3.1
 #
 # The image does not contain the Kato or Randi data. Mount data/raw and reports/
 # when reproducing analyses; the licence audit applies to both.

@@ -275,10 +275,22 @@ published; 0.560 remains the bound. The old benchmark cluster claim is withdrawn
 because baseline/model truth was not paired on events (C11). See
 `docs/PHASE12R_RESULTS.md`, `docs/CORRECTIONS.md` C10/C11.
 
-**Next model (not yet run).** Treat responder detection and coverage as part of
-the generative process instead of conditioning on the observed mask, and model
-the event-level measurement variance rather than flooring 79% of cell variances
-at `1e-8`. Require the negative-control median R(22) to be at most 0.05 before
-any real-data posterior is interpreted. A model that fails the permutation
-control should be rejected even if its point estimate matches the moment
-estimator.
+**Phase 13 outcome (2026-10-30).** The projection-consistent event-variance model
+(M2) removed the `1e-8` floor and lowered the pooled estimate from 0.3035 to
+0.2003 (ceiling 0.4475), but failed six frozen gates: SBC coverage 0.9244, SBC
+rank KS p = 0.00306, held-out PPC not run, negative-control median R(22) = 0.1485
+(q95 0.4680), sign-flip median 0.1341 (q95 0.5796), and the Phase 11 agreement
+gate (0.1137 away). The centering-only model M1 gave 0.3138 but also failed SBC
+rank. No target ranking or calibrated interval was published; 0.560 remains the
+bound. See `docs/PHASE13_RESULTS.md` and `research/phase13_deviations.md`.
+
+**Next model (not yet run).** The next protocol must make `sigma = 0` credible
+under the within-animal responder-permutation null before fitting real data. The
+minimal test is a spike-and-slab or zero-inflated prior on the between-target
+variance; the more principled test treats responder detection/coverage as part
+of the generative process rather than conditioning on the observed mask. Require
+the negative-control median R(22) to be at most 0.05, and the sign-flip q95 at
+most 0.15, in a pre-registered run before interpreting any real-data posterior.
+A model that fails the permutation control must be rejected even if its point
+estimate matches the moment estimator. This is a new protocol, not a Phase 13
+retry.

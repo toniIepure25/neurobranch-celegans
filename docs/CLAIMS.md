@@ -67,6 +67,7 @@ carry no p-value and are not in a family.
 | `phase8-eig-selection` | EIG selection beats random at k=8 | superiority | −0.0038 | [−0.0070, +0.0026] | bounded null (±0.01) |
 | `phase7-cro-share-of-ceiling` | CRO reaches 64% of the ceiling | descriptive | 0.0984 | — | not supported (superseded; coverage-aware share 17.6%) |
 | `phase12-hierarchical-interval` | Hierarchical posterior interval is calibrated for pooled reliability | pooled_fold | 0.3035 | — | not supported (SBC rank KS p = 1.43e-06; PPC MAE 0.207; negative-control median R(22) = 0.120, q95 0.594; C10) |
+| `phase13-event-variance-model` | Projection-consistent event-variance model is calibrated for pooled reliability | pooled_fold | 0.2003 | — | not supported (SBC coverage 0.9244; rank KS p = 0.00306; negative-control median 0.1485, q95 0.4680; sign-flip median 0.1341; PPC not run; 0.1137 below reference) |
 | `phase12-benchmark-cluster` | A benchmark configuration beats static CRO by >0.05 in the animal-cluster analysis | animal_cluster | — | — | not supported (withdrawn: baseline/model `y_true` mismatch in 1,334/1,334 paired rows; C11) |
 
 ## What is never claimed
@@ -79,6 +80,10 @@ carry no p-value and are not in a family.
 - That the animal jackknife interval is a calibrated confidence interval.
 - That the Phase 12 hierarchical posterior interval is calibrated, or that
   0.3035 replaces the 0.560 descriptive ceiling.
+- That the Phase 13 event-variance model is calibrated, or that 0.2003 is a
+  measurement limit. It failed its gates and the 0.560 ceiling remains.
+- That the event-variance model's lower estimate proves the true reliability is
+  near 0.20; the negative-control median 0.1485 shows positive null bias.
 - That any Phase 12 benchmark configuration is superior; the animal-cluster
   comparison is **withdrawn** because baseline and model truth were not paired
   on the same events (C11).

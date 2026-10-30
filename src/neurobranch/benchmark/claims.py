@@ -239,6 +239,33 @@ def build_claims(reliability_summary: dict[str, Any]) -> list[Claim]:
             ),
         ),
         Claim(
+            id="phase13-event-variance-model",
+            statement=(
+                "The Phase 13 projection-consistent event-variance model is calibrated "
+                "for the coverage-aware pooled reliability."
+            ),
+            status="not_supported",
+            test="calibration_gate",
+            estimate=0.2002758794590731,
+            estimand="pooled_fold",
+            n_eval_animals=22,
+            evidence=(
+                "reports/phase13/summary.json",
+                "reports/phase13/sbc.json",
+                "reports/phase13/negative_control.json",
+                "reports/phase13/signflip_control.json",
+            ),
+            notes=(
+                "Six of eleven frozen gates failed: SBC coverage 0.9244, SBC rank KS "
+                "p=0.00306, held-out PPC not run, negative-control median R(22)=0.1485 "
+                "(q95=0.4680), sign-flip median 0.1341 (q95=0.5796), and the estimate is "
+                "0.1137 below the Phase 11 0.314 reference. Replacing the 1e-8 variance "
+                "floor with an event-level variance model lowers the point estimate from "
+                "0.3035 to 0.2003 but does not repair the null bias. 0.560 remains the "
+                "only descriptive ceiling; no calibrated interval or ranking is published."
+            ),
+        ),
+        Claim(
             id="phase12-benchmark-cluster",
             statement=(
                 "A benchmark configuration beats the static CRO baseline by more than the "

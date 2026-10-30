@@ -40,6 +40,7 @@ reports/phase8/cache/
 reports/phase8/predictions.parquet
 reports/phase8/selection_log.jsonl
 reports/phase8/models/
+reports/*_quick/
 
 # OS/editor
 .DS_Store

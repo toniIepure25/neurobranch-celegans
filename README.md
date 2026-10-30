@@ -12,35 +12,40 @@ perturbation** on real calcium imaging and optogenetic atlases.
 > `interventions/safety.py` refuses to label any output as empirically
 > validated without a matched, provenance-checked intervention dataset.
 
-## What version 1.3.0 adds: aligned calibration correction and a withdrawn benchmark claim
+## What version 1.3.1 adds: the variance floor was the dominant defect
 
-Version 1.3.0 corrects the Phase 12 calibration harness. The suspected
-variance-loss bug was tested and **not reproduced**; the actual defect was
-double centering/standardization plus an uncentered SBC truth. The aligned rerun
-keeps the point estimate at **0.304** pooled reliability and **0.551** ceiling at
-80% coverage, within 0.05 of the Phase 11 moment estimate (0.314 / 0.560), but
-the posterior interval is still **not calibrated**:
+Version 1.3.1 tests the two remaining explanations for the Phase 12R failure: the
+animal-centering projection and the `1e-8` variance floor. It rejects both
+repairs as calibrated models.
 
-- SBC 22-animal coverage is 0.933 (pass), but rank uniformity fails
-  (KS p = 1.43e-06);
-- held-out animal coverage is 0.904 (pass) with median absolute error 0.207
-  (fail);
-- permuting responder labels within each animal gives median R(22) = 0.120 and
-  q95 = 0.594 (both fail);
-- 79% of observed cells have zero variance and use a `1e-8` floor; the
-  `min_events=2` sensitivity gives 36 targets and reliability 0.199.
+- Correcting only the centering (M1) gives pooled **R(22) = 0.3138** (ceiling
+  0.5602), essentially the Phase 11 moment estimate. The centering algebra was
+  not the main driver.
+- Replacing the floor with an event-level variance model (M2) gives pooled
+  **R(22) = 0.2003** (ceiling 0.4475). The old 0.304 estimate was substantially
+  inflated by treating 79% of cells (mostly one-event cells) as noiseless.
+- M2 still fails six frozen gates: SBC coverage 0.9244, SBC rank KS p = 0.00306,
+  negative-control median R(22) = 0.1485 (q95 0.4680), sign-flip median 0.1341
+  (q95 0.5796), held-out PPC not run, and the Phase 11 agreement gate (0.1137
+  away). The decision is `not_adopted_gate_failures`.
 
-The 0.560 coverage-aware ceiling therefore remains the headline. No target
-ranking, calibrated interval or validated animal-budget guarantee is published.
-
-The Phase 12 animal-cluster benchmark comparison is **withdrawn**: baseline and
-model `y_true` differ for 1,334 of 1,334 paired rows because the old merge paired
-aggregates rather than the same events. It is not an underpowered positive
-result. A synthetic check also found the remaining procedure undercovers
-(0.900--0.917 at nominal 0.95). See
-[`docs/PHASE12R_RESULTS.md`](docs/PHASE12R_RESULTS.md),
-[`docs/CORRECTIONS.md`](docs/CORRECTIONS.md) C10/C11 and
+The lower 0.2003 is **not** a calibrated replacement. Under the permutation null
+the model still reports nonzero reliability, so it manufactures apparent signal
+from sampling noise. The 0.560 coverage-aware ceiling remains the only
+defensible headline. No target ranking, calibrated interval or validated
+animal-budget guarantee is published. See
+[`docs/PHASE13_RESULTS.md`](docs/PHASE13_RESULTS.md),
+[`docs/METHODS_PHASE13.md`](docs/METHODS_PHASE13.md),
+[`docs/CORRECTIONS.md`](docs/CORRECTIONS.md) C12 and
 [`docs/CURRENT_STATUS.md`](docs/CURRENT_STATUS.md).
+
+The Phase 12 animal-cluster benchmark comparison remains **withdrawn**: baseline
+and model `y_true` differ for 1,334 of 1,334 paired rows because the old merge
+paired aggregates rather than the same events. It is not an underpowered
+positive result. A synthetic check also found the remaining procedure undercovers
+(0.900--0.917 at nominal 0.95). See
+[`docs/PHASE12R_RESULTS.md`](docs/PHASE12R_RESULTS.md) and
+[`docs/CORRECTIONS.md`](docs/CORRECTIONS.md) C10/C11.
 
 ## What version 1.1.0 adds: coverage sensitivity (read before the Phase 10 table)
 

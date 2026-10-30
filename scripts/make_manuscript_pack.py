@@ -161,6 +161,61 @@ def main(argv: list[str] | None = None) -> int:
     if source_figure.exists():
         shutil.copyfile(source_figure, args.out / "figure_ceiling_curve_phase10.png")
 
+    phase13 = args.reports / "phase13"
+    if (phase13 / "summary.json").exists():
+        summary13 = json.loads((phase13 / "summary.json").read_text(encoding="utf-8"))
+        gate13 = pd.DataFrame(summary13["gates"])[["gate", "requirement", "observed", "result"]]
+        gate13.to_csv(args.out / "table_phase13_gates.csv", index=False)
+        (args.out / "table_phase13_gates.md").write_text(
+            _markdown(gate13, "Table 7. Phase 13 frozen gates. Six of eleven failed."),
+            encoding="utf-8",
+        )
+        estimates = pd.DataFrame(
+            [
+                {
+                    "model": "M0 Phase 12R reference",
+                    "pooled_reliability_n22": summary13["real"]["m0_reference"]["pooled_reliability_median"],
+                    "ceiling_n22": summary13["real"]["m0_reference"]["pooled_ceiling_median"],
+                    "floor_fraction": summary13["real"]["m0_reference"]["variance_floor_fraction"],
+                },
+                {
+                    "model": "M1 projection-scaled",
+                    "pooled_reliability_n22": summary13["real"]["m1_projection_scaled"]["pooled_reliability_median"],
+                    "ceiling_n22": summary13["real"]["m1_projection_scaled"]["pooled_ceiling_median"],
+                    "floor_fraction": summary13["real"]["m1_projection_scaled"]["variance_floor_fraction"],
+                },
+                {
+                    "model": "M2 event-variance",
+                    "pooled_reliability_n22": summary13["real"]["m2_event_variance"]["pooled_reliability_median"],
+                    "ceiling_n22": summary13["real"]["m2_event_variance"]["pooled_ceiling_median"],
+                    "floor_fraction": summary13["real"]["m2_event_variance"]["variance_floor_fraction"],
+                },
+            ]
+        )
+        estimates.to_csv(args.out / "table_phase13_estimates.csv", index=False)
+        (args.out / "table_phase13_estimates.md").write_text(
+            _markdown(
+                estimates.round(4),
+                "Table 8. Phase 13 real-data estimates. M2 is rejected; none is a calibrated replacement.",
+            ),
+            encoding="utf-8",
+        )
+        fig13, ax13 = plt.subplots(figsize=(5.6, 3.4))
+        ax13.bar(
+            estimates["model"],
+            estimates["pooled_reliability_n22"],
+            color=["tab:gray", "tab:blue", "tab:red"],
+        )
+        ax13.axhline(0.314, color="black", linestyle=":", label="Phase 11 reference 0.314")
+        ax13.set_ylabel("Pooled R(22)")
+        ax13.set_ylim(0, 0.7)
+        ax13.tick_params(axis="x", rotation=15)
+        ax13.legend(frameon=False)
+        ax13.grid(axis="y", alpha=0.3)
+        fig13.tight_layout()
+        fig13.savefig(args.out / "figure_phase13_estimates.png", dpi=200)
+        plt.close(fig13)
+
     provenance = {
         "generated_from": {
             "coverage_sensitivity": str(
@@ -170,6 +225,9 @@ def main(argv: list[str] | None = None) -> int:
             "leaderboard": str((args.reports / "phase11" / "leaderboard.csv").relative_to(ROOT)),
             "phase12_summary": str((args.reports / "phase12" / "summary.json").relative_to(ROOT))
             if (args.reports / "phase12" / "summary.json").exists()
+            else None,
+            "phase13_summary": str((args.reports / "phase13" / "summary.json").relative_to(ROOT))
+            if (args.reports / "phase13" / "summary.json").exists()
             else None,
         },
         "hashes": {
@@ -185,6 +243,11 @@ def main(argv: list[str] | None = None) -> int:
             "figure_phase12_calibration.png": (
                 "Phase 11 coverage curve and the Phase 12 hierarchical point estimate. The "
                 "hierarchical interval was not calibrated and is not shown as an interval."
+            ),
+            "figure_phase13_estimates.png": (
+                "Phase 13 model-based pooled R(22): M0 reference 0.3035, M1 projection-scaled "
+                "0.3138, M2 event-variance 0.2003. M2 is rejected; the bars are not calibrated "
+                "intervals and 0.560 remains the descriptive ceiling."
             ),
         },
     }

@@ -96,3 +96,21 @@ def test_unaligned_truth_fails_closed() -> None:
     frame.loc[baseline, "y_true"] = frame.loc[baseline, "y_true"] + 1.0
     with pytest.raises(ValueError, match="not aligned"):
         paired_cluster_inference(frame, baseline="baseline", n_boot=100)
+
+
+def test_different_event_sets_fail_closed_even_when_aggregate_means_match() -> None:
+    frame = _predictions()
+    model = frame["model"] == "good"
+    frame.loc[model, "event_id"] = frame.loc[model, "event_id"] + ":shifted"
+    frame.loc[model, "y_true"] = 0.0
+    baseline = frame["model"] == "baseline"
+    frame.loc[baseline, "y_true"] = 0.0
+    with pytest.raises(ValueError, match="event sets differ"):
+        paired_cluster_inference(frame, baseline="baseline", n_boot=100)
+
+
+def test_duplicate_event_keys_fail_closed() -> None:
+    frame = _predictions()
+    frame = pd.concat([frame, frame.iloc[[0]]], ignore_index=True)
+    with pytest.raises(ValueError, match="duplicate event-key"):
+        paired_cluster_inference(frame, baseline="baseline", n_boot=100)

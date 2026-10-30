@@ -1,0 +1,149 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://neurobranch.local/schemas/phase13_summary.schema.json",
+  "title": "NeuroBranch Phase 13 measurement-model summary",
+  "type": "object",
+  "required": [
+    "decision",
+    "n_gates_failed",
+    "primary_model",
+    "real",
+    "gates",
+    "sbc_m1",
+    "sbc_m2",
+    "negative_control",
+    "signflip_control",
+    "prior_sensitivity",
+    "coverage",
+    "min_events",
+    "input",
+    "input_sha256",
+    "claim_boundary"
+  ],
+  "properties": {
+    "decision": {
+      "enum": [
+        "adopted",
+        "not_adopted_gate_failures"
+      ]
+    },
+    "n_gates_failed": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "primary_model": {
+      "const": "m2_event_variance"
+    },
+    "primary_model_estimate": {
+      "type": ["number", "null"]
+    },
+    "phase11_reference": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 1
+    },
+    "real": {
+      "type": "object",
+      "required": [
+        "m0_reference",
+        "m1_projection_scaled",
+        "m2_event_variance"
+      ],
+      "additionalProperties": {
+        "type": "object",
+        "required": [
+          "n_targets",
+          "n_ok",
+          "pooled_reliability_median",
+          "pooled_ceiling_median"
+        ]
+      }
+    },
+    "gates": {
+      "type": "array",
+      "minItems": 11,
+      "items": {
+        "type": "object",
+        "required": [
+          "gate",
+          "requirement",
+          "observed",
+          "result"
+        ],
+        "properties": {
+          "gate": {
+            "type": "string"
+          },
+          "requirement": {
+            "type": "string"
+          },
+          "observed": {},
+          "result": {
+            "enum": [
+              "pass",
+              "fail"
+            ]
+          }
+        }
+      }
+    },
+    "sbc_m1": {
+      "type": "object",
+      "required": [
+        "n_fits",
+        "n_failed_fits",
+        "parameters"
+      ]
+    },
+    "sbc_m2": {
+      "type": "object",
+      "required": [
+        "n_fits",
+        "n_failed_fits",
+        "parameters",
+        "event_variance_coverage"
+      ]
+    },
+    "negative_control": {
+      "type": "object",
+      "required": [
+        "n_eligible",
+        "median_reliability_n22",
+        "q95_reliability_n22"
+      ]
+    },
+    "signflip_control": {
+      "type": "object",
+      "required": [
+        "n_eligible",
+        "median_reliability_n22",
+        "q95_reliability_n22"
+      ]
+    },
+    "prior_sensitivity": {
+      "type": "object",
+      "required": [
+        "range",
+        "fits"
+      ]
+    },
+    "coverage": {
+      "type": "object"
+    },
+    "min_events": {
+      "type": "array"
+    },
+    "input": {
+      "type": "string"
+    },
+    "input_sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "claim_boundary": {
+      "type": "string",
+      "minLength": 50
+    }
+  },
+  "additionalProperties": true
+}

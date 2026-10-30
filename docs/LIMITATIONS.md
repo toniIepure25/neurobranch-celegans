@@ -128,8 +128,12 @@ No invariance, instrumental-variable, or interventional-data constraint is used.
 The Phase 12R hierarchical measurement model reproduces the Phase 11 point
 estimate but fails SBC rank uniformity (KS p 1.43e-06), predictive median
 absolute error (0.207), and the negative control (median R(22) 0.120, q95 0.594).
-No calibrated interval, target ranking, or animal-budget guarantee is published.
-The 0.560 coverage-aware descriptive ceiling remains the headline.
+Phase 13 tested whether projection-consistent variance and an event-level
+variance model repair this. They do not: M1 gives 0.3138 but fails SBC rank, and
+M2 gives 0.2003 but fails SBC coverage/rank, both null controls, and the Phase 11
+agreement gate. No calibrated interval, target ranking, or animal-budget
+guarantee is published. The 0.560 coverage-aware descriptive ceiling remains the
+headline.
 
 ---
 
@@ -353,3 +357,42 @@ calibration study before a positive claim. Leaderboard values are descriptive.
   target, session, or responder coverage.
 - None of these results identifies a mechanism, a causal effect, a digital twin,
   or a foundation model.
+
+
+## 13. Measurement-model limitations (Phase 13)
+
+- **The event-variance model is marginal and homogeneous.** M2 uses one
+  `omega_e` for all cells with `n >= 2`, a scaled chi-square likelihood, and a
+  plug-in posterior median. It does not model cell-level variance heterogeneity,
+  unequal-variance covariances induced by centering, or event-level detection.
+  The protocol deviations D1--D2 record these narrowings; they are not repaired
+  by the gate results.
+- **The centering correction is first-order and diagonal.** M1 scales the known
+  variance by `1 - 1/R_a` but ignores the off-diagonal covariance induced when
+  cell variances differ. Its point estimate is close to Phase 11, but its SBC
+  rank fails, so agreement is not validation.
+- **The variance floor was the dominant approximation.** M2 lowers the pooled
+  estimate from 0.3035 to 0.2003 while removing the floor. This is evidence that
+  the old point estimate was floor-dependent, not evidence that 0.2003 is the
+  true reliability. The `min_events=2` sensitivity gives 0.2923 on 36 targets,
+  so the result is also filter-sensitive.
+- **The negative control still fails.** Under within-animal responder
+  permutation, M2 reports median R(22) = 0.1485 and q95 = 0.4680; the sign-flip
+  control gives 0.1341 and 0.5796. The model therefore assigns nonzero
+  between-target variance to sampling noise. This is a specification failure;
+  the real-data estimate cannot be separated from it.
+- **SBC is not distributionally calibrated.** M2 coverage is 0.9244 (frozen gate
+  0.93--0.97) and rank KS p = 0.00306. Average interval coverage near nominal
+  does not imply rank uniformity. M1 also fails rank (p = 2.14e-06).
+- **The held-out PPC was not run.** After the null controls failed, no valid M2
+  animal-holdout PPC was implemented. Deviation D4 records this; G2 is counted
+  as a failure. No PPC value from Phase 12R is reused.
+- **The event-variance posterior is grid-discretised.** G5 coverage 0.9356
+  passes, but the 200-point log grid and plug-in median do not establish
+  cell-level variance recovery or interval calibration for individual targets.
+- **No target ranking or animal-budget claim.** The `by_target` table is a
+  conditional fit table, not a validated ranking. The model failed the controls
+  that would be required before ranking.
+- **No causal or generative claim.** The model is a measurement model for
+  repeated responses. It does not identify a mechanism, a perturbation effect, a
+  digital twin, or a foundation model.
