@@ -1,0 +1,61 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://neurobranch.local/schemas/phase12_summary.schema.json",
+  "title": "NeuroBranch Phase 12 summary",
+  "type": "object",
+  "required": [
+    "phase",
+    "status",
+    "primary_coverage",
+    "hierarchical",
+    "moment_phase11",
+    "gates",
+    "decision"
+  ],
+  "properties": {
+    "phase": {"const": 12},
+    "status": {
+      "enum": ["adopted", "not_adopted_gate_failures"]
+    },
+    "primary_coverage": {"type": "number", "minimum": 0, "maximum": 1},
+    "hierarchical": {
+      "type": "object",
+      "required": [
+        "pooled_reliability_median",
+        "pooled_ceiling_median",
+        "n_ok",
+        "n_ineligible"
+      ],
+      "properties": {
+        "pooled_reliability_median": {"type": "number", "minimum": 0, "maximum": 1},
+        "pooled_ceiling_median": {"type": "number", "minimum": 0, "maximum": 1},
+        "n_ok": {"type": "integer", "minimum": 0},
+        "n_ineligible": {"type": "integer", "minimum": 0}
+      }
+    },
+    "moment_phase11": {
+      "type": "object",
+      "required": ["pooled_reliability", "pooled_ceiling"],
+      "properties": {
+        "pooled_reliability": {"type": "number", "minimum": 0, "maximum": 1},
+        "pooled_ceiling": {"type": "number", "minimum": 0, "maximum": 1}
+      }
+    },
+    "gates": {
+      "type": "object",
+      "required": [
+        "g1_sbc",
+        "g2_heldout_ppc",
+        "g3_negative_control",
+        "g4_prior_sensitivity"
+      ],
+      "properties": {
+        "g1_sbc": {"type": "boolean"},
+        "g2_heldout_ppc": {"type": "boolean"},
+        "g3_negative_control": {"type": "boolean"},
+        "g4_prior_sensitivity": {"type": "boolean"}
+      }
+    },
+    "decision": {"type": "string", "minLength": 20}
+  }
+}
