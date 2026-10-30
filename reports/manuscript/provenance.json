@@ -2,14 +2,18 @@
   "captions": {
     "figure_coverage_sensitivity.png": "Pooled reliability and its attenuation ceiling at 22 animals as responders with incomplete animal coverage are excluded.",
     "figure_phase12_calibration.png": "Phase 11 coverage curve and the Phase 12 hierarchical point estimate. The hierarchical interval was not calibrated and is not shown as an interval.",
-    "figure_phase13_estimates.png": "Phase 13 model-based pooled R(22): M0 reference 0.3035, M1 projection-scaled 0.3138, M2 event-variance 0.2003. M2 is rejected; the bars are not calibrated intervals and 0.560 remains the descriptive ceiling."
+    "figure_phase13_estimates.png": "Phase 13 model-based pooled R(22): M0 reference 0.3035, M1 projection-scaled 0.3138, M2 event-variance 0.2003. M2 is rejected; the bars are not calibrated intervals and 0.560 remains the descriptive ceiling.",
+    "table_phase14_gates.md": "Phase 14 frozen gates; eight of twelve failed. A zero null median did not repair the q95 false-positive tail.",
+    "table_phase14_reference_audit.md": "Phase 14A reference audit: V1 delta from V0 is 0.0131, supporting the 0.560 descriptive ceiling; V2 is a different 36-target population."
   },
   "generated_from": {
     "claims": "reports\\phase10\\claims.json",
     "coverage_sensitivity": "reports\\phase11\\coverage_sensitivity.csv",
     "leaderboard": "reports\\phase11\\leaderboard.csv",
     "phase12_summary": "reports\\phase12\\summary.json",
-    "phase13_summary": "reports\\phase13\\summary.json"
+    "phase13_summary": "reports\\phase13\\summary.json",
+    "phase14_reference_audit": "reports\\phase14\\reference_audit.json",
+    "phase14_summary": "reports\\phase14\\summary.json"
   },
   "hashes": {
     "README.md": "66c6704dabb13e3796ad092a674b71fd713adfabc26d2f59a67d42440bab6c0f",
@@ -32,6 +36,12 @@
     "table_phase13_estimates.csv": "5f271503411b54c168263bf1e528d2d503a5efb1036ce893296fb96a9cf3da6a",
     "table_phase13_estimates.md": "34aba7eacd435979a203387329f269236bd324c204644f20cefb4d01660cf9b1",
     "table_phase13_gates.csv": "52c339223f8c210a20988b763b90ea30084f6deff1674faa1935090abf482508",
-    "table_phase13_gates.md": "3699a506cc83fa24b70a7852cf6a51f9b9f382222853242cdf76431211c3f202"
+    "table_phase13_gates.md": "3699a506cc83fa24b70a7852cf6a51f9b9f382222853242cdf76431211c3f202",
+    "table_phase14_estimates.csv": "2e0ad8f86404cb5815ee47f56518a821f112652d2a574d2d0dfe8b5591a197f1",
+    "table_phase14_estimates.md": "664d6aacb2db26e7aabc4d60e440678fb82e4dd38cdc88c886b67ed20a7dfbdb",
+    "table_phase14_gates.csv": "f643efa36f95102bc03ea1187be36a54da9e1b613cd37d04fc50a052fd40c22a",
+    "table_phase14_gates.md": "319cb7b4f8dc90c7ac36275b6d5b9a9ae913f74bbe4e09f159b156deac5bc247",
+    "table_phase14_reference_audit.csv": "5300bac68b0b57ae988849a3eb9a689ff8df41c78eaa66865fe12ae48da3c469",
+    "table_phase14_reference_audit.md": "192825bbca1cf75164b089d211193d2f633c141ac3c317dfdf63406729cf9a00"
   }
 }

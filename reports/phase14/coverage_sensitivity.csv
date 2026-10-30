@@ -1,0 +1,4 @@
+min_responder_coverage,status,n_targets,n_ok,pooled_reliability_median_n22,pooled_ceiling_median_n22
+0.5,ok_with_failures,259,126,7.517336047189254e-05,0.008670257232164023
+0.8,ok_with_failures,259,126,0.013917220621790146,0.11797127032371121
+1.0,ok_with_failures,259,79,0.07270959307067892,0.2696471640323312

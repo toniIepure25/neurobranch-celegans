@@ -294,3 +294,29 @@ most 0.15, in a pre-registered run before interpreting any real-data posterior.
 A model that fails the permutation control must be rejected even if its point
 estimate matches the moment estimator. This is a new protocol, not a Phase 13
 retry.
+
+## 0. Immediate analysis priorities after Phase 14
+
+Phase 14 rejected the exact zero/spike-and-slab model (8/12 gates). The next
+measurement analysis must be a **new protocol**, not a retune of `pi0`, the grid,
+or the seed on the same data.
+
+1. **Identify the null tail, not just the median.** Report q90/q95 and the full
+   null distribution for every candidate. A zero median with q95 > 0.15 is not a
+   valid null model.
+2. **Model the zero/nonzero decision separately from the reliability magnitude.**
+   A two-part or detection model with an explicit false-positive control is a
+   candidate; the exact spike alone was insufficient.
+3. **Use an external repeated-stimulation calibration set.** The current SBC
+   templates are real masks but simulated truths. An independent dataset with
+   repeated events per animal is needed for transport; it is currently
+   `not_evaluable`.
+4. **Pre-register a ranking-stability gate before any target ranking.** Phase 14
+   did not produce one, and the failed controls rule out ranking.
+5. **Do not treat the 0.560 bound as a target.** It is a descriptive Phase 11
+   ceiling for a specific 126-target population, not a calibration target for a
+   new model.
+
+The causal RIVL experiment below remains the highest-priority **biological** test.
+It is independent of the measurement-model failure and should not be postponed
+for another in-sample model retry.

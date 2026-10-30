@@ -1,0 +1,152 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://neurobranch.local/schemas/phase14_summary.schema.json",
+  "title": "NeuroBranch Phase 14 zero-inflated measurement summary",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "phase",
+    "model",
+    "decision",
+    "n_gates",
+    "n_gates_failed",
+    "failed_gates",
+    "real_fit",
+    "reference",
+    "gates",
+    "input",
+    "config"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": 1
+    },
+    "phase": {
+      "const": 14
+    },
+    "model": {
+      "const": "m4_spike_slab"
+    },
+    "decision": {
+      "enum": [
+        "adopted",
+        "not_adopted_gate_failures"
+      ]
+    },
+    "n_gates": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "n_gates_failed": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "failed_gates": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "real_fit": {
+      "type": "object",
+      "required": [
+        "status",
+        "n_targets",
+        "n_ok",
+        "pooled_reliability_median_n22",
+        "p_zero_median"
+      ],
+      "properties": {
+        "status": {
+          "type": "string"
+        },
+        "n_targets": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "n_ok": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "pooled_reliability_median_n22": {
+          "type": "number",
+          "minimum": 0.0,
+          "maximum": 1.0
+        },
+        "p_zero_median": {
+          "type": "number",
+          "minimum": 0.0,
+          "maximum": 1.0
+        }
+      }
+    },
+    "reference": {
+      "type": "object",
+      "required": [
+        "v1_pooled_reliability_at_fold",
+        "v0_pooled_reliability_at_fold",
+        "audit_decision"
+      ],
+      "properties": {
+        "v1_pooled_reliability_at_fold": {
+          "type": "number",
+          "minimum": 0.0,
+          "maximum": 1.0
+        },
+        "v0_pooled_reliability_at_fold": {
+          "type": "number",
+          "minimum": 0.0,
+          "maximum": 1.0
+        },
+        "audit_decision": {
+          "type": "object"
+        }
+      }
+    },
+    "gates": {
+      "type": "object",
+      "minProperties": 1,
+      "additionalProperties": {
+        "type": "object",
+        "required": [
+          "passed",
+          "requirement"
+        ],
+        "properties": {
+          "passed": {
+            "type": "boolean"
+          },
+          "value": {},
+          "requirement": {
+            "type": "string"
+          },
+          "note": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "input": {
+      "type": "object",
+      "required": [
+        "path",
+        "sha256"
+      ],
+      "properties": {
+        "path": {
+          "type": "string"
+        },
+        "sha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        }
+      }
+    },
+    "config": {
+      "type": "object"
+    },
+    "transport_status": {
+      "const": "not_evaluable"
+    }
+  }
+}

@@ -1,0 +1,60 @@
+{
+  "fits": {
+    "0.5|0.25": {
+      "n_ok": 126,
+      "pi0": 0.25,
+      "pooled_reliability_median": 0.12022874044913735,
+      "status": "ok_with_failures"
+    },
+    "0.5|0.5": {
+      "n_ok": 126,
+      "pi0": 0.5,
+      "pooled_reliability_median": 0.010609226263777354,
+      "status": "ok_with_failures"
+    },
+    "0.5|0.75": {
+      "n_ok": 126,
+      "pi0": 0.75,
+      "pooled_reliability_median": 0.0,
+      "status": "ok_with_failures"
+    },
+    "1|0.25": {
+      "n_ok": 126,
+      "pi0": 0.25,
+      "pooled_reliability_median": 0.12156228830573632,
+      "status": "ok_with_failures"
+    },
+    "1|0.5": {
+      "n_ok": 126,
+      "pi0": 0.5,
+      "pooled_reliability_median": 0.012316941821097046,
+      "status": "ok_with_failures"
+    },
+    "1|0.75": {
+      "n_ok": 126,
+      "pi0": 0.75,
+      "pooled_reliability_median": 0.0,
+      "status": "ok_with_failures"
+    },
+    "2|0.25": {
+      "n_ok": 126,
+      "pi0": 0.25,
+      "pooled_reliability_median": 0.12197708571916735,
+      "status": "ok_with_failures"
+    },
+    "2|0.5": {
+      "n_ok": 126,
+      "pi0": 0.5,
+      "pooled_reliability_median": 0.01282248925162904,
+      "status": "ok_with_failures"
+    },
+    "2|0.75": {
+      "n_ok": 126,
+      "pi0": 0.75,
+      "pooled_reliability_median": 0.0,
+      "status": "ok_with_failures"
+    }
+  },
+  "model": "m4_spike_slab",
+  "range": 0.12197708571916735
+}

@@ -4,10 +4,17 @@ Start here if you are reading the project for the first time.
 
 ## Current results
 
-- [CURRENT_STATUS.md](CURRENT_STATUS.md) - one-page state after Phase 13:
-  0.560 headline, rejected event-variance model, withdrawn benchmark claim.
+- [CURRENT_STATUS.md](CURRENT_STATUS.md) - one-page state after Phase 14:
+  0.560 reference audited, zero-inflated model rejected, benchmark claim
+  withdrawn.
+- [PHASE14_RESULTS.md](PHASE14_RESULTS.md) - reference audit and exact
+  zero/spike-and-slab model; 8/12 gates failed. **Current measurement result.**
+- [METHODS_PHASE14.md](METHODS_PHASE14.md) - variance treatments, M4 equations,
+  SBC/PPC/null design and gate logic.
+- [REFERENCE_AUDIT.md](REFERENCE_AUDIT.md) - V0/V1/V1h/V2 audit; why 0.560 is
+  robust to the one-event assumption but population-specific.
 - [PHASE13_RESULTS.md](PHASE13_RESULTS.md) - projection-consistent variance and
-  event-level model; six of eleven gates failed. **Current measurement result.**
+  event-level model; six of eleven gates failed. Historical measurement result.
 - [METHODS_PHASE13.md](METHODS_PHASE13.md) - M0/M1/M2 equations, SBC design and
   null controls.
 - [PHASE12R_RESULTS.md](PHASE12R_RESULTS.md) - aligned calibration rerun;

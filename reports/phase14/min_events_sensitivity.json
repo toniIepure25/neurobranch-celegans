@@ -1,0 +1,28 @@
+{
+  "coverage": 0.8,
+  "event_one_event_cell_fraction": 0.0,
+  "event_spike_fraction": 0.08333333333333333,
+  "event_variance_median": 1.917910261672489,
+  "grid_resolution": 50,
+  "max_grid_edge_mass": 0.00476536860541577,
+  "method": "m4 min_events=2 sensitivity",
+  "min_grid_n_eff": 13.992263578345966,
+  "model": "m4_spike_slab",
+  "n_eval": [
+    1,
+    22
+  ],
+  "n_ineligible": 223,
+  "n_observed_cells": 5369,
+  "n_ok": 36,
+  "n_targets": 259,
+  "n_variance_floored": 0,
+  "p_zero_mean": 0.3394457094011087,
+  "p_zero_median": 0.3982725261671994,
+  "pooled_ceiling_median": 0.19761287053878393,
+  "pooled_reliability_median": 0.03905084660257818,
+  "prior_scale": 1.0,
+  "single_animal_reliability_median": 0.0018439772162024918,
+  "status": "ok_with_failures",
+  "variance_floor_fraction": 0.0
+}

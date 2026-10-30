@@ -116,3 +116,69 @@ def test_single_responder_animals_are_dropped() -> None:
 def test_unknown_model_fails_closed() -> None:
     with pytest.raises(ValueError, match="unknown measurement model"):
         MeasurementConfig(model="not-a-model")
+
+
+def test_spike_slab_prior_configuration_is_validated() -> None:
+    with pytest.raises(ValueError, match="pi0"):
+        MeasurementConfig(model="m4_spike_slab", pi0=0.0)
+    with pytest.raises(ValueError, match="slab_scale"):
+        MeasurementConfig(model="m4_spike_slab", slab_scale=0.0)
+
+
+def test_spike_slab_zero_signal_selects_the_spike() -> None:
+    rng = np.random.default_rng(7)
+    y = rng.normal(0.0, 0.3, size=(20, 8))
+    v = np.full_like(y, 0.04)
+    data = TargetData(
+        target="zero-signal",
+        y=y,
+        v=v,
+        mask=np.ones_like(y, dtype=bool),
+        n_animals=20,
+        n_responders=8,
+        coverage=1.0,
+        nu=0.04,
+        responders=tuple(f"n{i}" for i in range(8)),
+        n_events=np.full_like(y, 3.0),
+        cell_var=np.full_like(y, 0.12),
+    )
+    fit = fit_measurement_target(
+        data,
+        config=MeasurementConfig(
+            model="m4_spike_slab", draws=1000, grid_resolution=50, event_grid=80
+        ),
+    )
+    assert fit.status == "ok"
+    assert 0.0 <= fit.row["p_zero"] <= 1.0
+    assert fit.row["p_zero"] > 0.5
+    assert fit.row["reliability_n22"] == 0.0
+    assert np.any(fit.draws[:, 0] == 0.0)
+
+
+def test_spike_slab_detects_a_shared_profile() -> None:
+    rng = np.random.default_rng(11)
+    mu = rng.normal(0.0, 1.0, size=8)
+    y = mu[None, :] + rng.normal(0.0, 0.2, size=(20, 8))
+    v = np.full_like(y, 0.04)
+    data = TargetData(
+        target="signal",
+        y=y,
+        v=v,
+        mask=np.ones_like(y, dtype=bool),
+        n_animals=20,
+        n_responders=8,
+        coverage=1.0,
+        nu=0.04,
+        responders=tuple(f"n{i}" for i in range(8)),
+        n_events=np.full_like(y, 3.0),
+        cell_var=np.full_like(y, 0.12),
+    )
+    fit = fit_measurement_target(
+        data,
+        config=MeasurementConfig(
+            model="m4_spike_slab", draws=1000, grid_resolution=50, event_grid=80
+        ),
+    )
+    assert fit.status == "ok"
+    assert fit.row["p_zero"] < 1e-6
+    assert fit.row["reliability_n22"] > 0.5

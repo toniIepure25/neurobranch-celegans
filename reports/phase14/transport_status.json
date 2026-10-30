@@ -1,0 +1,11 @@
+{
+  "checked_paths": [
+    "data/raw/kato2015/WT_NoStim.mat",
+    "data/raw/kato2015/WT_Stim.mat",
+    "data/raw/baskoylu2026",
+    "data/raw/kramer2026",
+    "data/raw/randi2023"
+  ],
+  "reason": "No independent repeated-stimulation atlas is available locally. Kato WT_NoStim is spontaneous imaging; WT_Stim is absent; behavioural datasets are a different estimand.",
+  "status": "not_evaluable"
+}

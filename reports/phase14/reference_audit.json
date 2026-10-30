@@ -1,0 +1,98 @@
+{
+  "analysis": "reference_audit",
+  "bootstrap": {
+    "v0_historical": {
+      "n_boot": 2000,
+      "n_targets_median": 119.0,
+      "pooled_reliability_high": 0.650048304807505,
+      "pooled_reliability_low": 0.5043642455184313
+    },
+    "v1_primary": {
+      "n_boot": 2000,
+      "n_targets_median": 119.0,
+      "pooled_reliability_high": 0.6393294612450189,
+      "pooled_reliability_low": 0.4901764252340509
+    }
+  },
+  "common_targets": {
+    "n_shared_targets": 126,
+    "v0_historical": {
+      "ceiling_of_mean_reliability": 0.5600069018705827,
+      "fold_size": 22.0,
+      "mean_target_ceiling": 0.4674426537646226,
+      "n_pooled_targets": 126.0,
+      "pooled_ceiling_at_fold": 0.5600069018705827,
+      "pooled_reliability_at_fold": 0.3136077301426884,
+      "pooled_reliability_observed": 0.27085130423709514
+    },
+    "v1_primary": {
+      "ceiling_of_mean_reliability": 0.5482246705175482,
+      "fold_size": 22.0,
+      "mean_target_ceiling": 0.4514734536228998,
+      "n_pooled_targets": 126.0,
+      "pooled_ceiling_at_fold": 0.5482246705175482,
+      "pooled_reliability_at_fold": 0.30055028936407424,
+      "pooled_reliability_observed": 0.2605558163404418
+    }
+  },
+  "decisions": {
+    "A1_reproduced": true,
+    "A2_delta": 0.013057440778614149,
+    "A2_reference_robust": true,
+    "A2_threshold": 0.05
+  },
+  "input": {
+    "path": "reports/phase3/randi_trial_table_phase3.csv.gz",
+    "redistributed": false,
+    "sha256": "8186c96bcb33cdce15dc9ae88691e09fc596e42c5513310b6d6a636e4d5dd515"
+  },
+  "omega2_definition": "median sample variance over cells with n>=2 and s2>0",
+  "omega2_median": 1.7629127112560417,
+  "phase": 14,
+  "reference": {
+    "coverage": 0.8,
+    "fold_size": 22,
+    "pooled_ceiling_at_fold": 0.5600069018705827,
+    "pooled_reliability_at_fold": 0.3136077301426884
+  },
+  "runtime_seconds": 150.5,
+  "schema_version": 1,
+  "treatments": {
+    "v0_historical": {
+      "ceiling_of_mean_reliability": 0.5600069018705827,
+      "fold_size": 22.0,
+      "mean_target_ceiling": 0.4674426537646226,
+      "n_pooled_targets": 126.0,
+      "pooled_ceiling_at_fold": 0.5600069018705827,
+      "pooled_reliability_at_fold": 0.3136077301426884,
+      "pooled_reliability_observed": 0.27085130423709514
+    },
+    "v1_primary": {
+      "ceiling_of_mean_reliability": 0.5482246705175482,
+      "fold_size": 22.0,
+      "mean_target_ceiling": 0.4514734536228998,
+      "n_pooled_targets": 126.0,
+      "pooled_ceiling_at_fold": 0.5482246705175482,
+      "pooled_reliability_at_fold": 0.30055028936407424,
+      "pooled_reliability_observed": 0.2605558163404418
+    },
+    "v1h_homogeneous": {
+      "ceiling_of_mean_reliability": 0.5602598822679044,
+      "fold_size": 22.0,
+      "mean_target_ceiling": 0.4681722101194243,
+      "n_pooled_targets": 126.0,
+      "pooled_ceiling_at_fold": 0.5602598822679044,
+      "pooled_reliability_at_fold": 0.3138911356788461,
+      "pooled_reliability_observed": 0.272463628045554
+    },
+    "v2_min_events_2": {
+      "ceiling_of_mean_reliability": 0.41877360224526,
+      "fold_size": 22.0,
+      "mean_target_ceiling": 0.24483692666531434,
+      "n_pooled_targets": 36.0,
+      "pooled_ceiling_at_fold": 0.41877360224526,
+      "pooled_reliability_at_fold": 0.17537132993747123,
+      "pooled_reliability_observed": 0.12745055427573873
+    }
+  }
+}

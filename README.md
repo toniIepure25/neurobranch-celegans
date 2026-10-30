@@ -12,31 +12,31 @@ perturbation** on real calcium imaging and optogenetic atlases.
 > `interventions/safety.py` refuses to label any output as empirically
 > validated without a matched, provenance-checked intervention dataset.
 
-## What version 1.3.1 adds: the variance floor was the dominant defect
+## What version 1.3.2 adds: reference audit and a rejected zero-inflated model
 
-Version 1.3.1 tests the two remaining explanations for the Phase 12R failure: the
-animal-centering projection and the `1e-8` variance floor. It rejects both
-repairs as calibrated models.
+Version 1.3.2 audits the Phase 11 reference and tests whether an exact zero
+(spike-and-slab) model repairs the Phase 13 null bias. The audit supports the
+reference; the model is **rejected**.
 
-- Correcting only the centering (M1) gives pooled **R(22) = 0.3138** (ceiling
-  0.5602), essentially the Phase 11 moment estimate. The centering algebra was
-  not the main driver.
-- Replacing the floor with an event-level variance model (M2) gives pooled
-  **R(22) = 0.2003** (ceiling 0.4475). The old 0.304 estimate was substantially
-  inflated by treating 79% of cells (mostly one-event cells) as noiseless.
-- M2 still fails six frozen gates: SBC coverage 0.9244, SBC rank KS p = 0.00306,
-  negative-control median R(22) = 0.1485 (q95 0.4680), sign-flip median 0.1341
-  (q95 0.5796), held-out PPC not run, and the Phase 11 agreement gate (0.1137
-  away). The decision is `not_adopted_gate_failures`.
+- Phase 14A replaces the one-event zero variance with a robust global event
+  variance. V1 gives **R(22) = 0.3006** (ceiling 0.5482), only 0.0131 from the
+  historical 0.3136 / 0.5600. V1h gives 0.3139 / 0.5603. The `0.560` ceiling is
+  robust to this assumption for the 126-target, 80%-coverage population.
+- Phase 14B adds an exact point mass at `sigma = 0`. The real-data median is
+  **R(22) = 0.0543**, but **8 of 12 frozen gates fail**: SBC rank KS
+  p = 3.35e-192, grid edge 0.0810, held-out PPC coverage 0.7697 / MAE 0.3998,
+  negative-control q95 0.3535, sign-flip q95 0.4509, prior range 0.1220,
+  reference gap 0.2463, and spike calibration 0.3561. The decision is
+  `not_adopted_gate_failures`.
+- A zero median is not a valid null model: the upper tails remain too heavy. No
+  calibrated interval, target ranking, animal-budget guarantee, causal effect,
+  digital-twin claim, or transport claim is published.
 
-The lower 0.2003 is **not** a calibrated replacement. Under the permutation null
-the model still reports nonzero reliability, so it manufactures apparent signal
-from sampling noise. The 0.560 coverage-aware ceiling remains the only
-defensible headline. No target ranking, calibrated interval or validated
-animal-budget guarantee is published. See
-[`docs/PHASE13_RESULTS.md`](docs/PHASE13_RESULTS.md),
-[`docs/METHODS_PHASE13.md`](docs/METHODS_PHASE13.md),
-[`docs/CORRECTIONS.md`](docs/CORRECTIONS.md) C12 and
+The `min_events=2` filter gives 0.1754 on 36 targets; it is a different
+population, not a corrected `0.560`. See
+[`docs/PHASE14_RESULTS.md`](docs/PHASE14_RESULTS.md),
+[`docs/REFERENCE_AUDIT.md`](docs/REFERENCE_AUDIT.md),
+[`docs/CORRECTIONS.md`](docs/CORRECTIONS.md) C13/C14 and
 [`docs/CURRENT_STATUS.md`](docs/CURRENT_STATUS.md).
 
 The Phase 12 animal-cluster benchmark comparison remains **withdrawn**: baseline

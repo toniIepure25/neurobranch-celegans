@@ -266,6 +266,37 @@ def build_claims(reliability_summary: dict[str, Any]) -> list[Claim]:
             ),
         ),
         Claim(
+            id="phase14-zero-inflated-model",
+            statement=(
+                "The Phase 14 exact zero/spike-and-slab model is calibrated for the "
+                "coverage-aware pooled reliability."
+            ),
+            status="not_supported",
+            test="calibration_gate",
+            estimate=0.05427091624796524,
+            estimand="pooled_fold",
+            n_eval_animals=22,
+            evidence=(
+                "reports/phase14/summary.json",
+                "reports/phase14/sbc.json",
+                "reports/phase14/heldout_ppc.json",
+                "reports/phase14/negative_control.json",
+                "reports/phase14/signflip_control.json",
+                "reports/phase14/prior_sensitivity.json",
+                "reports/phase14/reference_audit.json",
+            ),
+            notes=(
+                "Eight of twelve frozen gates failed: SBC rank KS p=3.35e-192, slab edge "
+                "mass 0.0810, held-out PPC coverage 0.7697 with MAE 0.3998, negative-control "
+                "q95=0.3535, sign-flip q95=0.4509, prior range 0.1220, reference gap 0.2463, "
+                "and median P(z=0 | true z=0)=0.3561. The real-data median R(22) is 0.0543, "
+                "not a calibrated estimate. The Phase 14A audit found the 0.560 reference "
+                "robust to a robust one-event variance imputation (V1 0.3006, delta 0.0131), "
+                "but that does not rescue the model. No calibrated interval, ranking, animal "
+                "budget, or causal claim is published."
+            ),
+        ),
+        Claim(
             id="phase12-benchmark-cluster",
             statement=(
                 "A benchmark configuration beats the static CRO baseline by more than the "

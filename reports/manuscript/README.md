@@ -13,6 +13,11 @@ the committed artifacts, not typed by hand.
 | `table_phase12_gates.csv/.md` | Phase 12 calibration gates and observed values |
 | `table_cluster_benchmark.csv/.md` | Animal-cluster paired benchmark deltas |
 | `figure_phase12_calibration.png` | Phase 11 coverage curve with the Phase 12 point estimate |
+| `figure_phase13_estimates.png` | Phase 13 M0/M1/M2 pooled estimates |
+| `table_phase13_gates.csv/.md`, `table_phase13_estimates.csv/.md` | Phase 13 gates and estimates (historical negative) |
+| `table_phase14_gates.csv/.md` | Phase 14 frozen gates (8/12 failed) |
+| `table_phase14_reference_audit.csv/.md` | Phase 14A V0/V1/V1h/V2 audit |
+| `table_phase14_estimates.csv/.md` | Phase 14B real-data estimate and audited reference |
 | `figure_ceiling_curve_phase10.png` | Historical Phase 10 curve |
 | `provenance.json` | Source paths, SHA-256 hashes and captions |
 
@@ -29,6 +34,10 @@ the committed artifacts, not typed by hand.
   ceiling. Do not call the hierarchical interval calibrated.
 - The Phase 12 animal-cluster benchmark has no supported configuration; all
   non-baseline deltas are underpowered at the 0.05 SESOI.
+- The Phase 14A audit supports the 0.560 reference under a robust one-event
+  variance treatment (delta 0.0131), but 0.560 is population-specific.
+- The Phase 14B zero/spike-and-slab model is rejected: 8/12 gates failed. Do not
+  report 0.0543 as a calibrated reliability or rank targets from it.
 
 Do not add a claim to a manuscript table unless it also exists in
 `reports/phase10/claims.json` and passes `scripts/audit_claims.py`.

@@ -1,0 +1,155 @@
+{
+  "config": {
+    "coverage": 0.8,
+    "draws": 2500,
+    "event_grid": 200,
+    "fold_size": 22,
+    "grid_resolution": 80,
+    "n_eval": [
+      1,
+      22
+    ],
+    "null_targets": 100,
+    "pi0": 0.5,
+    "ppc_splits": 20,
+    "ppc_targets": 40,
+    "sbc_reps": 1000,
+    "sbc_targets_per_rep": 3,
+    "seed": 12,
+    "slab_scale": 1.0
+  },
+  "decision": "not_adopted_gate_failures",
+  "failed_gates": [
+    "G1b_sbc_rank",
+    "G1c_grid_edge",
+    "G2_heldout_ppc",
+    "G3_negative_control",
+    "G3b_signflip_control",
+    "G4_prior_sensitivity",
+    "G6_reference_agreement",
+    "G7_spike_calibration"
+  ],
+  "gates": {
+    "G1a_sbc_coverage": {
+      "note": "",
+      "passed": true,
+      "requirement": "[0.93, 0.97]",
+      "value": 0.9673333333333334
+    },
+    "G1b_sbc_rank": {
+      "note": "",
+      "passed": false,
+      "requirement": "KS p > 0.01",
+      "value": 3.347420875139048e-192
+    },
+    "G1c_grid_edge": {
+      "note": "",
+      "passed": false,
+      "requirement": "< 0.05",
+      "value": 0.08100674492212144
+    },
+    "G1d_fit_integrity": {
+      "note": "0/3000 failed fits",
+      "passed": true,
+      "requirement": "<= 0.05",
+      "value": 0.0
+    },
+    "G1e_one_event_stratum": {
+      "note": "n=5870",
+      "passed": true,
+      "requirement": "[0.90, 0.98] with n >= 30",
+      "value": 0.9669505962521294
+    },
+    "G2_heldout_ppc": {
+      "note": "",
+      "passed": false,
+      "requirement": "coverage >= 0.90 and MAE <= 0.10; must be run",
+      "value": {
+        "coverage": 0.7697368421052632,
+        "median_abs_error": 0.39975175226159265,
+        "n": 304
+      }
+    },
+    "G3_negative_control": {
+      "note": "",
+      "passed": false,
+      "requirement": "median <= 0.05 and q95 <= 0.15",
+      "value": {
+        "median": 0.0,
+        "n": 100,
+        "q95": 0.35348801675532826
+      }
+    },
+    "G3b_signflip_control": {
+      "note": "",
+      "passed": false,
+      "requirement": "median <= 0.05 and q95 <= 0.15",
+      "value": {
+        "median": 0.0,
+        "n": 100,
+        "q95": 0.45086823641600177
+      }
+    },
+    "G4_prior_sensitivity": {
+      "note": "",
+      "passed": false,
+      "requirement": "range <= 0.05",
+      "value": 0.12197708571916735
+    },
+    "G5_event_variance_recovery": {
+      "note": "n=3000",
+      "passed": true,
+      "requirement": "[0.90, 0.98] with n >= 100",
+      "value": 0.9356666666666666
+    },
+    "G6_reference_agreement": {
+      "note": "model=0.05427091624796524, reference=0.30055028936407424",
+      "passed": false,
+      "requirement": "|R(22) - R_ref(V1)| <= 0.05",
+      "value": 0.246279373116109
+    },
+    "G7_spike_calibration": {
+      "note": "n=1503",
+      "passed": false,
+      "requirement": "median P(z=0 | true z=0) >= 0.80 with n >= 100",
+      "value": 0.35606217323737294
+    }
+  },
+  "input": {
+    "path": "reports/phase3/randi_trial_table_phase3.csv.gz",
+    "sha256": "8186c96bcb33cdce15dc9ae88691e09fc596e42c5513310b6d6a636e4d5dd515"
+  },
+  "model": "m4_spike_slab",
+  "n_gates": 12,
+  "n_gates_failed": 8,
+  "phase": 14,
+  "real_fit": {
+    "event_variance_median": 0.6905513520162312,
+    "max_grid_edge_mass": 0.0055856483717272665,
+    "min_grid_n_eff": 8.57878117827632,
+    "model": "m4_spike_slab",
+    "n_ok": 126,
+    "n_targets": 259,
+    "p_zero_mean": 0.2887205221112089,
+    "p_zero_median": 0.32353009622795587,
+    "pooled_ceiling_median_n22": 0.2329611904330102,
+    "pooled_reliability_median_n22": 0.05427091624796524,
+    "single_animal_reliability_median_n1": 0.0026016355502473817,
+    "spike_fraction": 0.06349206349206349,
+    "status": "ok_with_failures"
+  },
+  "reference": {
+    "audit_decision": {
+      "A1_reproduced": true,
+      "A2_delta": 0.013057440778614149,
+      "A2_reference_robust": true,
+      "A2_threshold": 0.05
+    },
+    "v0_pooled_reliability_at_fold": 0.3136077301426884,
+    "v1_pooled_ceiling_at_fold": 0.5482246705175482,
+    "v1_pooled_reliability_at_fold": 0.30055028936407424
+  },
+  "runtime_seconds": 193.0,
+  "schema_version": 1,
+  "transport_status": "not_evaluable"
+}

@@ -1,0 +1,25 @@
+{
+  "config": {
+    "draws": 2500,
+    "event_grid": 200,
+    "grid": 80,
+    "out": "D:\\ComputaCenter\\NeuroBranch\\neurobranch-celegans\\reports\\phase14",
+    "seed": 12,
+    "trials": "D:\\ComputaCenter\\NeuroBranch\\neurobranch-celegans\\reports\\phase3\\randi_trial_table_phase3.csv.gz"
+  },
+  "summary": {
+    "event_variance_median": 0.6905513520162312,
+    "max_grid_edge_mass": 0.0055856483717272665,
+    "min_grid_n_eff": 8.57878117827632,
+    "model": "m4_spike_slab",
+    "n_ok": 126,
+    "n_targets": 259,
+    "p_zero_mean": 0.2887205221112089,
+    "p_zero_median": 0.32353009622795587,
+    "pooled_ceiling_median_n22": 0.2329611904330102,
+    "pooled_reliability_median_n22": 0.05427091624796524,
+    "single_animal_reliability_median_n1": 0.0026016355502473817,
+    "spike_fraction": 0.06349206349206349,
+    "status": "ok_with_failures"
+  }
+}

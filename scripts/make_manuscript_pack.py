@@ -216,6 +216,74 @@ def main(argv: list[str] | None = None) -> int:
         fig13.savefig(args.out / "figure_phase13_estimates.png", dpi=200)
         plt.close(fig13)
 
+    phase14 = args.reports / "phase14"
+    if (phase14 / "summary.json").exists():
+        summary14 = json.loads((phase14 / "summary.json").read_text(encoding="utf-8"))
+        gate14 = pd.DataFrame(
+            [
+                {
+                    "gate": name,
+                    "requirement": gate.get("requirement", ""),
+                    "observed": str(gate.get("value", "")),
+                    "result": "pass" if gate.get("passed") else "fail",
+                }
+                for name, gate in summary14["gates"].items()
+            ]
+        )
+        gate14.to_csv(args.out / "table_phase14_gates.csv", index=False)
+        (args.out / "table_phase14_gates.md").write_text(
+            _markdown(gate14, "Table 9. Phase 14 frozen gates. Eight of twelve failed."),
+            encoding="utf-8",
+        )
+        reference = json.loads((phase14 / "reference_audit.json").read_text(encoding="utf-8"))
+        audit = pd.DataFrame(
+            [
+                {
+                    "treatment": name,
+                    "n_targets": block["n_pooled_targets"],
+                    "pooled_reliability_n22": block["pooled_reliability_at_fold"],
+                    "ceiling_n22": block["pooled_ceiling_at_fold"],
+                }
+                for name, block in reference["treatments"].items()
+            ]
+        )
+        audit.to_csv(args.out / "table_phase14_reference_audit.csv", index=False)
+        (args.out / "table_phase14_reference_audit.md").write_text(
+            _markdown(
+                audit.round(6),
+                "Table 10. Phase 14A reference audit. V1 is the primary robust treatment; V2 is a different 36-target population.",
+            ),
+            encoding="utf-8",
+        )
+        estimates14 = pd.DataFrame(
+            [
+                {
+                    "quantity": "M4 real-data median R(22)",
+                    "value": summary14["real_fit"]["pooled_reliability_median_n22"],
+                },
+                {
+                    "quantity": "M4 median P(z=0)",
+                    "value": summary14["real_fit"]["p_zero_median"],
+                },
+                {
+                    "quantity": "V1 reference R(22)",
+                    "value": summary14["reference"]["v1_pooled_reliability_at_fold"],
+                },
+                {
+                    "quantity": "V0 historical R(22)",
+                    "value": summary14["reference"]["v0_pooled_reliability_at_fold"],
+                },
+            ]
+        )
+        estimates14.to_csv(args.out / "table_phase14_estimates.csv", index=False)
+        (args.out / "table_phase14_estimates.md").write_text(
+            _markdown(
+                estimates14.round(6),
+                "Table 11. Phase 14B real-data estimate and audited reference. M4 is rejected.",
+            ),
+            encoding="utf-8",
+        )
+
     provenance = {
         "generated_from": {
             "coverage_sensitivity": str(
@@ -228,6 +296,14 @@ def main(argv: list[str] | None = None) -> int:
             else None,
             "phase13_summary": str((args.reports / "phase13" / "summary.json").relative_to(ROOT))
             if (args.reports / "phase13" / "summary.json").exists()
+            else None,
+            "phase14_summary": str((args.reports / "phase14" / "summary.json").relative_to(ROOT))
+            if (args.reports / "phase14" / "summary.json").exists()
+            else None,
+            "phase14_reference_audit": str(
+                (args.reports / "phase14" / "reference_audit.json").relative_to(ROOT)
+            )
+            if (args.reports / "phase14" / "reference_audit.json").exists()
             else None,
         },
         "hashes": {
@@ -248,6 +324,14 @@ def main(argv: list[str] | None = None) -> int:
                 "Phase 13 model-based pooled R(22): M0 reference 0.3035, M1 projection-scaled "
                 "0.3138, M2 event-variance 0.2003. M2 is rejected; the bars are not calibrated "
                 "intervals and 0.560 remains the descriptive ceiling."
+            ),
+            "table_phase14_gates.md": (
+                "Phase 14 frozen gates; eight of twelve failed. A zero null median did not "
+                "repair the q95 false-positive tail."
+            ),
+            "table_phase14_reference_audit.md": (
+                "Phase 14A reference audit: V1 delta from V0 is 0.0131, supporting the 0.560 "
+                "descriptive ceiling; V2 is a different 36-target population."
             ),
         },
     }

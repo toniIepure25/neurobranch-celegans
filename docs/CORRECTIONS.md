@@ -337,3 +337,55 @@ published. The Phase 12R negative result stands and is now better diagnosed: the
 floor was the dominant approximation, while the centering correction was nearly
 neutral for the point estimate. This correction is unfavourable to the project
 and is reported anyway.
+
+## C13. Phase 13 G6 compared two different one-event variance treatments
+
+**Was claimed in the Phase 13 protocol:** G6 tested whether M2 agreed with the
+Phase 11 reference `0.314 / 0.560` within 0.05.
+
+**What happened:** the Phase 11 reference uses `cell_summaries`, which fills a
+one-event cell variance with `0.0`. M2 uses `omega^2 / n`. G6 therefore compared
+two different variance treatments, not only two estimators. Phase 14A reproduced
+V0 exactly and replaced the one-event zero with a robust global event variance
+(`omega^2 = 1.7629`). V1 gives `R(22)=0.3006` and ceiling `0.5482`; the difference
+from V0 is 0.0131, below the 0.05 audit threshold. V1h gives `0.3139 / 0.5603`.
+The historical `0.560` is therefore robust to this assumption under a robust
+estimator.
+
+**Correct:** the G6 mismatch did not inflate `0.560` substantially. Phase 13's
+negative decision still stands for independent reasons: SBC rank, null controls,
+and the unrun PPC. The `0.560` bound remains population-specific (126 targets,
+80% coverage); the `min_events=2` estimate `0.1754` is a different 36-target
+estimand, not a correction.
+
+**Evidence:** `reports/phase14/reference_audit.json`,
+`docs/REFERENCE_AUDIT.md`, `research/phase14_deviations.md` D1.
+
+**Impact:** Phase 13 G6 is reclassified as a mismatched reference test, not as
+evidence that the reference was wrong. The Phase 14 model is still rejected.
+
+## C14. An exact zero spike does not repair the reliability null bias
+
+**Was proposed:** adding an exact point mass at `sigma = 0` would make the model
+assign zero reliability under a responder-permutation null and pass calibration.
+
+**What happened:** M4 removes the median null bias (median `R(22)=0`), but the
+upper tail remains too heavy: negative-control q95 = 0.3535 and sign-flip q95 =
+0.4509. The spike is also poorly calibrated when the truth is zero (median
+`P(z=0)=0.3561`), SBC ranks are non-uniform (KS p = 3.35e-192), slab edge mass is
+0.0810, held-out PPC coverage is 0.7697 with MAE 0.3998, prior range is 0.1220,
+and the real-data median `0.0543` is 0.2463 away from the V1 reference. Eight of
+twelve frozen gates fail.
+
+**Correct:** the decision is `not_adopted_gate_failures`. No calibrated interval,
+target ranking, animal budget, causal effect, or digital-twin claim is supported.
+No prior, grid, seed, or threshold was tuned after the full run. Phase 14 is
+published as a negative result; `v1.3.2` is the appropriate release.
+
+**Evidence:** `reports/phase14/summary.json`, `reports/phase14/sbc.json`,
+`reports/phase14/heldout_ppc.json`, `reports/phase14/negative_control.json`,
+`docs/PHASE14_RESULTS.md`.
+
+**Impact:** a zero median is not sufficient evidence of a valid null model. The
+false-positive tail and spike calibration must be reported alongside it. This is
+unfavourable to the proposed repair and is reported anyway.

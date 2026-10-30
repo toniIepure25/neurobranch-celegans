@@ -27,6 +27,15 @@ plugins:
 nav:
   - Home: README.md
   - Current status: CURRENT_STATUS.md
+  - Phase 14:
+      - Results: PHASE14_RESULTS.md
+      - Methods: METHODS_PHASE14.md
+      - Reference audit: REFERENCE_AUDIT.md
+      - Literature scan: LITERATURE_PHASE14.md
+      - Manuscript draft: PAPER_DRAFT.md
+  - Phase 13:
+      - Results: PHASE13_RESULTS.md
+      - Methods: METHODS_PHASE13.md
   - Phase 12R:
       - Results: PHASE12R_RESULTS.md
       - Hierarchical methods: METHODS_HIERARCHICAL.md

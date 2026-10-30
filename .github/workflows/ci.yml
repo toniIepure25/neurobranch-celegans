@@ -34,6 +34,12 @@ jobs:
           python -m pip install --upgrade pip
           pip install --no-cache-dir -e ".[dev]"
 
+      - name: Check uv lockfile
+        if: matrix.python-version == '3.13' && matrix.os == 'ubuntu-latest'
+        run: |
+          python -m pip install --quiet uv
+          uv lock --check
+
       - name: Lint
         run: ruff check .
 
@@ -70,6 +76,10 @@ jobs:
       - name: Validate Phase 13 reports
         if: matrix.python-version == '3.13'
         run: python scripts/phase13_validate.py --reports reports/phase13
+
+      - name: Validate Phase 14 reports
+        if: matrix.python-version == '3.13'
+        run: python scripts/phase14_validate.py --reports reports/phase14
 
       - name: Phase 12R report contracts
         if: matrix.python-version == '3.13'

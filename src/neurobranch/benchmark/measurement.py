@@ -36,6 +36,7 @@ from typing import Any
 import numpy as np
 import pandas as pd
 from scipy import special
+from scipy.special import logsumexp
 
 from neurobranch.benchmark.hierarchical import (
     MIN_TARGET_ANIMALS,
@@ -52,7 +53,7 @@ from neurobranch.benchmark.hierarchical import (
 )
 from neurobranch.benchmark.variance import DEFAULT_ANIMAL_COLUMN, cell_summaries
 
-MODELS = ("m0_reference", "m1_projection_scaled", "m2_event_variance")
+MODELS = ("m0_reference", "m1_projection_scaled", "m2_event_variance", "m4_spike_slab")
 
 
 @dataclass(frozen=True)
@@ -67,6 +68,8 @@ class MeasurementConfig:
     prior_scale: float = 1.0
     event_prior_scale: float = 1.0
     event_grid: int = 200
+    pi0: float = 0.5
+    slab_scale: float = 1.0
 
     def __post_init__(self) -> None:
         if self.model not in MODELS:
@@ -79,6 +82,10 @@ class MeasurementConfig:
             raise ValueError("event_grid >= 40 is required")
         if self.prior_scale <= 0 or self.event_prior_scale <= 0:
             raise ValueError("prior scales must be positive")
+        if not 0.0 < self.pi0 < 1.0:
+            raise ValueError("pi0 must be strictly between zero and one")
+        if self.slab_scale <= 0:
+            raise ValueError("slab_scale must be positive")
 
 
 @dataclass(frozen=True)
@@ -93,6 +100,140 @@ class EventVariancePosterior:
     n_zero_variance_cells: int
     n_one_event_cells: int
     grid_n_eff: float
+
+
+@dataclass(frozen=True)
+class SpikeSlabPosterior:
+    """Posterior summary for the exact zero/spike-and-slab model M4.
+
+    ``p_zero`` is the posterior probability that the target has exactly zero
+    shared signal, i.e. ``sigma = 0``.  The draws include that point mass, so a
+    reliability draw is exactly zero whenever the spike is selected.
+    """
+
+    p_zero: float
+    log_evidence: float
+    slab_log_evidence: float
+    spike_log_evidence: float
+    slab_edge_mass: float
+    slab_n_eff: float
+    sigma2: np.ndarray
+    tau2: np.ndarray
+
+
+def _spike_slab_grid(
+    data: TargetData,
+    *,
+    resolution: int,
+    draws: int,
+    seed: int,
+    prior_scale: float,
+    pi0: float,
+) -> SpikeSlabPosterior:
+    """Exact point mass at ``sigma=0`` plus the Phase 13 slab.
+
+    The slab is the existing ``(log sigma, log tau)`` grid with HalfNormal
+    priors.  The spike has ``sigma=0`` and a HalfNormal prior on ``tau`` only.
+    Both components share the same Gaussian likelihood and projection-scaled
+    sampling variances.
+    """
+    y, v, mask = data.y, data.v, data.mask
+    log_sigma = np.linspace(-6.0, float(np.log(20.0)), int(resolution))
+    log_tau = np.linspace(-6.0, float(np.log(20.0)), int(resolution))
+    sigma2_grid = np.exp(2.0 * log_sigma)
+    tau2_grid = np.exp(2.0 * log_tau)
+
+    slab = np.empty((log_sigma.size, log_tau.size), dtype=float)
+    spike_tau = np.empty(log_tau.size, dtype=float)
+    for j, tau2 in enumerate(tau2_grid):
+        d = tau2 + v
+        inv = np.where(mask, 1.0 / d, 0.0)
+        q = np.where(mask, y * y * inv, 0.0).sum(axis=0)
+        linear = np.where(mask, y * inv, 0.0).sum(axis=0)
+        log_det_base = np.where(mask, np.log(d), 0.0).sum(axis=0)
+        denominator = 1.0 + sigma2_grid[:, None] * inv.sum(axis=0)[None, :]
+        slab[:, j] = -0.5 * (
+            float(log_det_base.sum())
+            + np.log(denominator).sum(axis=1)
+            + float(q.sum())
+            - sigma2_grid * np.sum(linear[None, :] ** 2 / denominator, axis=1)
+        ) - 0.5 * (sigma2_grid + tau2) / (prior_scale**2) + log_sigma + float(log_tau[j])
+        # sigma = 0: mu is exactly zero, so the likelihood has no linear term.
+        spike_tau[j] = (
+            -0.5 * (float(log_det_base.sum()) + float(q.sum()))
+            - 0.5 * tau2 / (prior_scale**2)
+            + float(log_tau[j])
+        )
+
+    finite_slab = np.isfinite(slab)
+    if not finite_slab.any() or not np.isfinite(spike_tau).any():
+        nan = np.array([np.nan])
+        return SpikeSlabPosterior(
+            p_zero=float("nan"),
+            log_evidence=float("nan"),
+            slab_log_evidence=float("nan"),
+            spike_log_evidence=float("nan"),
+            slab_edge_mass=1.0,
+            slab_n_eff=0.0,
+            sigma2=nan,
+            tau2=nan,
+        )
+
+    slab_log_evidence = float(logsumexp(slab[finite_slab]))
+    spike_log_evidence = float(logsumexp(spike_tau[np.isfinite(spike_tau)]))
+    log_slab_joint = float(np.log1p(-pi0)) + slab_log_evidence
+    log_spike_joint = float(np.log(pi0)) + spike_log_evidence
+    log_evidence = float(np.logaddexp(log_slab_joint, log_spike_joint))
+    p_zero = float(np.exp(log_spike_joint - log_evidence))
+    p_zero = float(np.clip(p_zero, 0.0, 1.0))
+
+    slab_weights = np.exp(slab - slab_log_evidence)
+    slab_weights = np.where(finite_slab, slab_weights, 0.0)
+    slab_weights /= slab_weights.sum()
+    edge = float(
+        slab_weights[0, :].sum()
+        + slab_weights[-1, :].sum()
+        + slab_weights[:, 0].sum()
+        + slab_weights[:, -1].sum()
+    )
+    n_eff = float(1.0 / np.sum(slab_weights**2))
+
+    spike_weights = np.exp(spike_tau - spike_log_evidence)
+    spike_weights = np.where(np.isfinite(spike_tau), spike_weights, 0.0)
+    spike_weights /= spike_weights.sum()
+
+    rng = np.random.default_rng(seed)
+    n_spike = int(rng.binomial(int(draws), p_zero))
+    n_slab = int(draws) - n_spike
+    sigma_parts: list[np.ndarray] = []
+    tau_parts: list[np.ndarray] = []
+    step_sigma = float(log_sigma[1] - log_sigma[0])
+    step_tau = float(log_tau[1] - log_tau[0])
+    if n_spike:
+        cols = rng.choice(spike_weights.size, size=n_spike, p=spike_weights)
+        tau_spike = np.exp(log_tau[cols] + rng.uniform(-0.5, 0.5, size=cols.size) * step_tau)
+        sigma_parts.append(np.zeros(n_spike, dtype=float))
+        tau_parts.append(tau_spike**2)
+    if n_slab:
+        flat = rng.choice(slab_weights.size, size=n_slab, p=slab_weights.ravel())
+        rows, cols = np.divmod(flat, slab_weights.shape[1])
+        sigma_slab = np.exp(log_sigma[rows] + rng.uniform(-0.5, 0.5, size=rows.size) * step_sigma)
+        tau_slab = np.exp(log_tau[cols] + rng.uniform(-0.5, 0.5, size=cols.size) * step_tau)
+        sigma_parts.append(sigma_slab**2)
+        tau_parts.append(tau_slab**2)
+    sigma2 = np.concatenate(sigma_parts) if sigma_parts else np.array([np.nan])
+    tau2 = np.concatenate(tau_parts) if tau_parts else np.array([np.nan])
+    order = rng.permutation(sigma2.size)
+    return SpikeSlabPosterior(
+        p_zero=p_zero,
+        log_evidence=log_evidence,
+        slab_log_evidence=float(log_slab_joint),
+        spike_log_evidence=float(log_spike_joint),
+        slab_edge_mass=edge,
+        slab_n_eff=n_eff,
+        sigma2=sigma2[order],
+        tau2=tau2[order],
+    )
 
 
 def _drop_single_responder_animals(data: TargetData) -> tuple[TargetData, int]:
@@ -286,13 +427,78 @@ def _fit_grid(
     )
 
 
+def _fit_spike_slab(
+    data: TargetData,
+    *,
+    config: MeasurementConfig,
+    seed: int,
+) -> TargetFit:
+    _validate_target(data)
+    fit = _spike_slab_grid(
+        data,
+        resolution=config.grid_resolution,
+        draws=config.draws,
+        seed=seed,
+        prior_scale=config.slab_scale,
+        pi0=config.pi0,
+    )
+    row: dict[str, Any] = {
+        "target": data.target,
+        "model": config.model,
+        "status": "ok",
+        "reason": "",
+        "coverage": float(data.coverage),
+        "n_animals": data.n_animals,
+        "n_responders": data.n_responders,
+        "n_variance_floored": int(data.n_variance_floored),
+        "n_observed_cells": int(data.mask.sum()),
+        "mean_sampling_var": data.nu,
+        "grid_edge_mass": float(fit.slab_edge_mass),
+        "grid_n_eff": float(fit.slab_n_eff),
+        "n_draws": int(fit.sigma2.size),
+        "p_zero": float(fit.p_zero),
+        "spike_probability": float(fit.p_zero),
+        "log_evidence": float(fit.log_evidence),
+        "slab_log_evidence": float(fit.slab_log_evidence),
+        "spike_log_evidence": float(fit.spike_log_evidence),
+        "slab_edge_mass": float(fit.slab_edge_mass),
+        "slab_n_eff": float(fit.slab_n_eff),
+    }
+    if (
+        fit.sigma2.size == 0
+        or not np.isfinite(fit.sigma2).any()
+        or not np.isfinite(fit.tau2).any()
+        or not np.isfinite(fit.p_zero)
+    ):
+        row.update({"status": "fit_failed", "reason": "no_finite_posterior"})
+        return TargetFit(target=data.target, status="fit_failed", row=row, draws=None)
+    sigma2 = fit.sigma2
+    tau2 = fit.tau2
+    reliability = _reliability_draws(sigma2, tau2, data.nu, config.n_eval)
+    row["sigma2_median"] = float(np.median(sigma2))
+    row["tau2_median"] = float(np.median(tau2))
+    for n in config.n_eval:
+        values = reliability[n]
+        median_value = float(np.nanmedian(values))
+        row[f"reliability_n{n}"] = median_value
+        row[f"reliability_ci_low_n{n}"] = float(np.nanquantile(values, 0.025))
+        row[f"reliability_ci_high_n{n}"] = float(np.nanquantile(values, 0.975))
+        row[f"ceiling_n{n}"] = posterior_ceiling(median_value)
+    return TargetFit(
+        target=data.target,
+        status="ok",
+        row=row,
+        draws=np.column_stack([sigma2, tau2]),
+    )
+
+
 def fit_measurement_target(
     data: TargetData,
     *,
     config: MeasurementConfig | None = None,
     seed: int | None = None,
 ) -> TargetFit:
-    """Fit one pre-registered Phase 13 candidate to a target."""
+    """Fit one pre-registered Phase 13/14 candidate to a target."""
     cfg = config or MeasurementConfig()
     fit_seed = cfg.seed if seed is None else int(seed)
     if cfg.model == "m0_reference":
@@ -336,7 +542,10 @@ def fit_measurement_target(
         )
     event_data = _event_variance_data(data, omega2=event_post.omega2_median)
     centered, _factor = _center_projection_scaled(event_data)
-    fit = _fit_grid(centered, config=cfg, seed=fit_seed)
+    if cfg.model == "m4_spike_slab":
+        fit = _fit_spike_slab(centered, config=cfg, seed=fit_seed)
+    else:
+        fit = _fit_grid(centered, config=cfg, seed=fit_seed)
     fit.row.update(
         {
             "n_single_responder_animals_dropped": dropped,
@@ -367,8 +576,10 @@ def fit_measurement_cells(
     prior_scale: float = 1.0,
     event_prior_scale: float = 1.0,
     event_grid: int = 200,
+    pi0: float = 0.5,
+    slab_scale: float = 1.0,
 ) -> HierarchicalResult:
-    """Fit a Phase 13 candidate independently for every target."""
+    """Fit a Phase 13/14 candidate independently for every target."""
     cfg = MeasurementConfig(
         model=model,
         n_eval=n_eval,
@@ -378,6 +589,8 @@ def fit_measurement_cells(
         prior_scale=prior_scale,
         event_prior_scale=event_prior_scale,
         event_grid=event_grid,
+        pi0=pi0,
+        slab_scale=slab_scale,
     )
     rows: list[dict[str, Any]] = []
     draws_by_target: dict[str, np.ndarray] = {}
@@ -459,11 +672,15 @@ def fit_measurement_cells(
         "n_observed_cells": int(total_cells),
         "variance_floor_fraction": (total_floored / total_cells) if total_cells else 0.0,
     }
-    if model == "m2_event_variance" and "event_variance_median" in eligible.columns:
+    if model in {"m2_event_variance", "m4_spike_slab"} and "event_variance_median" in eligible.columns:
         summary["event_variance_median"] = float(eligible["event_variance_median"].median())
         summary["event_one_event_cell_fraction"] = float(
             eligible["event_one_event_cells"].sum() / max(eligible["n_observed_cells"].sum(), 1)
         )
+    if model == "m4_spike_slab" and "p_zero" in eligible.columns:
+        summary["p_zero_median"] = float(eligible["p_zero"].median())
+        summary["p_zero_mean"] = float(eligible["p_zero"].mean())
+        summary["event_spike_fraction"] = float((eligible["p_zero"] >= 0.5).mean())
     return HierarchicalResult(
         by_target=by_target,
         summary=summary,
@@ -491,8 +708,10 @@ def fit_measurement_reliability(
     prior_scale: float = 1.0,
     event_prior_scale: float = 1.0,
     event_grid: int = 200,
+    pi0: float = 0.5,
+    slab_scale: float = 1.0,
 ) -> HierarchicalResult:
-    """Fit a Phase 13 candidate from an event-level trial table."""
+    """Fit a Phase 13/14 candidate from an event-level trial table."""
     cells = cell_summaries(frame, response=response, animal=animal)
     return fit_measurement_cells(
         cells,
@@ -507,6 +726,8 @@ def fit_measurement_reliability(
         prior_scale=prior_scale,
         event_prior_scale=event_prior_scale,
         event_grid=event_grid,
+        pi0=pi0,
+        slab_scale=slab_scale,
     )
 
 
@@ -514,6 +735,7 @@ __all__ = [
     "MODELS",
     "EventVariancePosterior",
     "MeasurementConfig",
+    "SpikeSlabPosterior",
     "estimate_event_variance",
     "fit_measurement_cells",
     "fit_measurement_reliability",

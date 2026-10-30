@@ -68,6 +68,7 @@ carry no p-value and are not in a family.
 | `phase7-cro-share-of-ceiling` | CRO reaches 64% of the ceiling | descriptive | 0.0984 | — | not supported (superseded; coverage-aware share 17.6%) |
 | `phase12-hierarchical-interval` | Hierarchical posterior interval is calibrated for pooled reliability | pooled_fold | 0.3035 | — | not supported (SBC rank KS p = 1.43e-06; PPC MAE 0.207; negative-control median R(22) = 0.120, q95 0.594; C10) |
 | `phase13-event-variance-model` | Projection-consistent event-variance model is calibrated for pooled reliability | pooled_fold | 0.2003 | — | not supported (SBC coverage 0.9244; rank KS p = 0.00306; negative-control median 0.1485, q95 0.4680; sign-flip median 0.1341; PPC not run; 0.1137 below reference) |
+| `phase14-zero-inflated-model` | Exact zero/spike-and-slab model is calibrated for pooled reliability | pooled_fold | 0.0543 | — | not supported (8/12 gates failed: SBC rank p = 3.35e-192; edge 0.0810; PPC coverage 0.7697, MAE 0.3998; null q95 0.3535/0.4509; prior range 0.1220; reference gap 0.2463; spike calibration 0.3561) |
 | `phase12-benchmark-cluster` | A benchmark configuration beats static CRO by >0.05 in the animal-cluster analysis | animal_cluster | — | — | not supported (withdrawn: baseline/model `y_true` mismatch in 1,334/1,334 paired rows; C11) |
 
 ## What is never claimed

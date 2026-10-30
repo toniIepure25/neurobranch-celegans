@@ -37,6 +37,7 @@ from neurobranch.interventions import InterventionSpec, run_counterfactual  # no
 from neurobranch.interventions.search import available_candidates  # noqa: E402
 from neurobranch.interventions.spec import make_perturbation  # noqa: E402
 from neurobranch.preprocessing import split_starts  # noqa: E402
+from neurobranch.reporting.status import load_measurement_status  # noqa: E402
 
 CFG_PATH = ROOT / "configs" / "experiments" / "blocked_suite.yaml"
 COLORS = {"FWD": "#2E86AB", "REV": "#E4572E", "TURN": "#F3A712", "NOSTATE": "#7D8491"}
@@ -1121,55 +1122,50 @@ with tabs[12]:
 
 with tabs[13]:
     st.subheader("BoundedBench: measurement ceiling and claim status")
-    phase12r = ROOT / "reports" / "phase12r"
-    phase12 = ROOT / "reports" / "phase12"
-    audit_dir = phase12r if (phase12r / "summary.json").exists() else phase12
-    if (audit_dir / "summary.json").exists():
-        phase12_summary = json.loads((audit_dir / "summary.json").read_text(encoding="utf-8"))
-        hierarchical = phase12_summary.get("hierarchical", {})
-        gates = phase12_summary.get("gates", {})
-        moment = phase12_summary.get("moment_phase11") or phase12_summary.get("phase11_reference", {})
-        failed = [
-            name
-            for name in (
-                "g1a_sbc_coverage",
-                "g1b_sbc_rank",
-                "g1c_grid_edge",
-                "g1d_fit_integrity",
-                "g2_heldout_ppc",
-                "g3_negative_control",
-                "g4_prior_sensitivity",
-            )
-            if gates and not bool(gates.get(name, False))
-        ]
-        st.markdown("**Phase 12R hierarchical audit (post-correction)**")
+    status = load_measurement_status(ROOT / "reports")
+    if status is not None:
+        label = {
+            "phase14": "Phase 14 zero-inflated measurement audit",
+            "phase13": "Phase 13 measurement audit",
+            "phase12r": "Phase 12R historical hierarchical audit",
+            "phase12": "Phase 12 historical hierarchical audit",
+        }.get(status.phase, status.phase)
+        st.markdown(f"**{label}**")
         p1, p2, p3, p4 = st.columns(4)
-        p1.metric(
-            "Hierarchical R(22)", f"{float(hierarchical.get('pooled_reliability_median', float('nan'))):.3f}"
-        )
+        p1.metric("Current R(22)", f"{status.primary_estimate:.3f}")
         p2.metric(
-            "Hierarchical ceiling", f"{float(hierarchical.get('pooled_ceiling_median', float('nan'))):.3f}"
+            "Reference R(22)",
+            f"{status.reference_estimate:.3f}" if status.reference_estimate is not None else "not reported",
         )
-        p3.metric("Moment R(22)", f"{float(moment.get('pooled_reliability', float('nan'))):.3f}")
-        p4.metric("Failed gates", len(failed))
-        if phase12_summary.get("status") != "adopted":
+        p3.metric("Failed gates", len(status.failed_gates))
+        p4.metric("Decision", status.decision)
+        if not status.adopted:
             st.warning(
-                "The hierarchical interval is not calibrated: SBC rank uniformity, predictive "
-                "median absolute error and the negative control failed. The 0.560 coverage-aware "
-                "ceiling remains the only descriptive bound. The old benchmark cluster claim is "
-                "withdrawn because baseline and model truth were not paired on the same events."
+                "The hierarchical interval is not calibrated. The current measurement gate "
+                f"failures are: {', '.join(status.failed_gates) or 'not reported'}. The 0.560 "
+                "coverage-aware ceiling remains the only descriptive bound; no calibrated "
+                "interval, target ranking, animal-budget guarantee, or causal effect is claimed."
             )
-        audit_manifest = audit_dir / "manifest.json"
-        if audit_manifest.exists():
-            manifest = json.loads(audit_manifest.read_text(encoding="utf-8"))
-            checksum = "missing"
-            if (audit_dir / "manifest.sha256").exists():
-                checksum = (audit_dir / "manifest.sha256").read_text(encoding="utf-8").split()[0][:12]
-            st.caption(
-                f"Phase 12R status {phase12_summary.get('status')} | git "
-                f"{str(manifest.get('git_revision', 'unknown'))[:12]} | dirty "
-                f"{manifest.get('git_dirty')} | manifest {checksum}"
-            )
+        if status.gates:
+            gate_rows = [
+                {
+                    "gate": name,
+                    "passed": bool(gate.get("passed", False)),
+                    "value": str(gate.get("value", "")),
+                    "requirement": str(gate.get("requirement", "")),
+                }
+                for name, gate in status.gates.items()
+            ]
+            st.dataframe(pd.DataFrame(gate_rows), width="stretch", hide_index=True)
+        st.caption(
+            f"Phase {status.phase} status {status.decision} | model {status.model} | git "
+            f"{str(status.manifest.get('git_revision', 'unknown'))[:12]} | dirty "
+            f"{status.manifest.get('git_dirty', 'unknown')} | manifest {status.checksum}"
+        )
+        if status.historical:
+            st.info("No Phase 13/14 report is available; this is a historical fallback.")
+    else:
+        st.info("No measurement-audit report is available yet.")
     phase11 = ROOT / "reports" / "phase11"
     phase10 = ROOT / "reports" / "phase10"
     phase9 = ROOT / "reports" / "phase9"

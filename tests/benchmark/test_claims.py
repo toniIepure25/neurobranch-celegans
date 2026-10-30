@@ -42,7 +42,7 @@ def test_ledger_round_trip(tmp_path: Path) -> None:
     write_claims(path, build_claims(SUMMARY))
     payload = json.loads(path.read_text(encoding="utf-8"))
     assert payload["schema_version"] == 2
-    assert len(payload["claims"]) == 11
+    assert len(payload["claims"]) == 12
     assert all("evidence" in claim for claim in payload["claims"])
     assert all("estimand" in claim for claim in payload["claims"])
 

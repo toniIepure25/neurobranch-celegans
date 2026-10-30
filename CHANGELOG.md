@@ -1,5 +1,51 @@
 # Changelog
 
+## 1.3.2 - 2026-10-31
+
+Reference audit and a rejected exact zero/spike-and-slab model. The Phase 14A
+audit supports the 0.560 descriptive ceiling under a robust one-event variance
+treatment; Phase 14B fails 8/12 frozen gates and is not adopted.
+
+### Added
+
+- `src/neurobranch/benchmark/measurement.py`: `m4_spike_slab`, exact point mass
+  at `sigma = 0`, `SpikeSlabPosterior`, and the spike/slab evidence calculation.
+- `src/neurobranch/benchmark/measurement_calibration.py`: discrete-truth SBC,
+  spike calibration, held-out PPC, null `p_zero`, and multi-`pi0` prior
+  sensitivity.
+- `src/neurobranch/reporting/status.py`: dashboard status loader with explicit
+  `not_run`/`not_evaluable` handling and historical fallbacks.
+- `scripts/phase14_reference_audit.py`, `phase14_measurement.py`,
+  `phase14_manifest.py`, `phase14_validate.py`;
+  `schemas/phase14_summary.schema.json` and packaged copy.
+- `reports/phase14/`, `docs/PHASE14_RESULTS.md`, `docs/METHODS_PHASE14.md`,
+  `docs/REFERENCE_AUDIT.md`, corrections C13/C14.
+
+### Changed
+
+- `cell_summaries` and `profile_components_by_target` accept optional
+  `one_event_variance` / `event_variance`; defaults preserve V0 exactly.
+- The Streamlit status tab now shows Phase 14/13 and labels Phase 12R/12 as
+  historical fallbacks.
+- The claims ledger adds `phase14-zero-inflated-model` as `not_supported`
+  (12 claims total).
+- Version bump to 1.3.2; Docker labels updated.
+
+### Results
+
+- V0 0.3136077 / 0.5600069 reproduced exactly; V1 0.3005503 / 0.5482247;
+  V1h 0.3138911 / 0.5602599; V2 0.1753713 / 0.4187736 (36 targets).
+- M4 real-data median R(22)=0.0543, median P(z=0)=0.3235.
+- 8/12 gates failed: SBC rank p=3.35e-192, edge 0.0810, PPC coverage 0.7697 /
+  MAE 0.3998, null q95 0.3535 and 0.4509, prior range 0.1220, reference gap
+  0.2463, spike calibration 0.3561. Decision `not_adopted_gate_failures`.
+
+### Fixed
+
+- Phase 13 G6 is reclassified as a mismatched one-event variance comparison;
+  the reference itself is robust under the Phase 14A audit (C13).
+- The app no longer presents Phase 12R as the current measurement result.
+
 ## 1.3.1 - 2026-10-30
 
 Projection-consistent reliability and event-level variance. The event-variance

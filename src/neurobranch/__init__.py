@@ -7,7 +7,7 @@ counterfactuals*, not validated causal effects.
 
 from __future__ import annotations
 
-__version__ = "1.3.1"
+__version__ = "1.3.2"
 
 EPISTEMIC_WARNING = (
     "MODEL-DEPENDENT VIRTUAL PERTURBATION - NOT CAUSALLY VALIDATED. "

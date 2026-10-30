@@ -96,8 +96,22 @@ def cell_summaries(
     *,
     response: str = "response_mean",
     animal: str = DEFAULT_ANIMAL_COLUMN,
+    one_event_variance: float | None = None,
+    event_variance: float | None = None,
 ) -> pd.DataFrame:
-    """Per (animal, target, responder) mean, count and within-cell variance."""
+    """Per (animal, target, responder) mean, count and within-cell variance.
+
+    ``one_event_variance`` replaces the historical zero variance of cells with
+    one event.  ``event_variance`` replaces every cell variance with a common
+    per-event variance; both are audit/sensitivity options and leave the
+    default estimator unchanged.  The returned ``var`` column is a variance of
+    one event, so the sampling variance of a cell mean is ``var / n``.
+    """
+    if one_event_variance is not None and event_variance is not None:
+        raise ValueError("set at most one of one_event_variance and event_variance")
+    for value in (one_event_variance, event_variance):
+        if value is not None and (not np.isfinite(value) or value < 0):
+            raise ValueError("variance overrides must be finite and non-negative")
     work, _ = _resolve_columns(frame, response=response, animal=animal)
     cells = (
         work.groupby(["_animal", "_target", "_neuron"], dropna=False)["_y"]
@@ -105,6 +119,10 @@ def cell_summaries(
         .reset_index()
     )
     cells["var"] = cells["var"].fillna(0.0)
+    if one_event_variance is not None:
+        cells.loc[cells["n"] <= 1, "var"] = float(one_event_variance)
+    if event_variance is not None:
+        cells["var"] = float(event_variance)
     return cells
 
 
@@ -346,6 +364,8 @@ def animal_reliability_by_target(
     min_animals: int = 6,
     seed: int = 17,
     min_responder_coverage: float = 0.0,
+    one_event_variance: float | None = None,
+    event_variance: float | None = None,
 ) -> pd.DataFrame:
     """Across-animal reliability of each target's response profile.
 
@@ -363,6 +383,8 @@ def animal_reliability_by_target(
         min_events=min_events,
         min_animals=min_animals,
         min_responder_coverage=min_responder_coverage,
+        one_event_variance=one_event_variance,
+        event_variance=event_variance,
     )
     if components.empty:
         return components
@@ -389,6 +411,8 @@ def profile_components_by_target(
     min_events: int = 1,
     min_animals: int = 6,
     min_responder_coverage: float = 0.0,
+    one_event_variance: float | None = None,
+    event_variance: float | None = None,
 ) -> pd.DataFrame:
     """Signal, noise and interaction components for every eligible target.
 
@@ -396,8 +420,44 @@ def profile_components_by_target(
     ``noise``, ``interaction``, ``pooled_reliability`` (at the observed animal
     count) and ``single_animal_reliability``.  Targets with fewer than
     ``min_animals`` animals or fewer than three responders are omitted.
+
+    ``one_event_variance`` and ``event_variance`` are passed to
+    :func:`cell_summaries`; the default is the historical zero-variance
+    treatment for one-event cells.
     """
-    cells = cell_summaries(frame, response=response, animal=animal)
+    cells = cell_summaries(
+        frame,
+        response=response,
+        animal=animal,
+        one_event_variance=one_event_variance,
+        event_variance=event_variance,
+    )
+    return profile_components_from_cells(
+        cells,
+        min_events=min_events,
+        min_animals=min_animals,
+        min_responder_coverage=min_responder_coverage,
+    )
+
+
+def profile_components_from_cells(
+    cells: pd.DataFrame,
+    *,
+    min_events: int = 1,
+    min_animals: int = 6,
+    min_responder_coverage: float = 0.0,
+) -> pd.DataFrame:
+    """Signal/noise components from a precomputed cell-summary table.
+
+    ``cells`` must contain the ``_animal``, ``_target``, ``_neuron``, ``n``,
+    ``mean`` and ``var`` columns produced by :func:`cell_summaries`.  The
+    function exists so bootstrap and audit code can resample animals without
+    re-reading the event table.
+    """
+    required = {"_animal", "_target", "_neuron", "n", "mean", "var"}
+    missing = required - set(cells.columns)
+    if missing:
+        raise ValueError(f"cell table missing columns {sorted(missing)}")
     rows: list[dict[str, Any]] = []
     for target, tgroup in cells.groupby("_target", sort=False):
         components = _profile_from_cells(
@@ -767,7 +827,10 @@ __all__ = [
     "animal_reliability_by_target",
     "cell_summaries",
     "decompose_variance",
+    "profile_components_by_target",
+    "profile_components_from_cells",
     "repeat_reliability_by_target",
+    "summarise_components",
     "summarise_reliability",
 ]
 

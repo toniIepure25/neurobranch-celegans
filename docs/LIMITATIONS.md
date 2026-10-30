@@ -396,3 +396,35 @@ calibration study before a positive claim. Leaderboard values are descriptive.
 - **No causal or generative claim.** The model is a measurement model for
   repeated responses. It does not identify a mechanism, a perturbation effect, a
   digital twin, or a foundation model.
+
+## 14. Measurement-model limitations (Phase 14)
+
+- **The reference audit is conditional on a robust event variance.** V1 uses the
+  median observed within-cell sample variance (`omega^2 = 1.7629`) for one-event
+  cells. The raw-scale scaled-chi-square plug-in saturated at the grid edge
+  because of extreme outliers; that failure is recorded as D1. The audit does not
+  quantify uncertainty in `omega^2`, and the bootstrap is conditional on it.
+- **The reference is population-specific.** The `0.560` ceiling applies to the
+  126 targets at 80% responder coverage with the Phase 11 estimator. The
+  `min_events=2` filter yields 0.1754 on 36 targets; that is a different
+  population, not a corrected `0.560`.
+- **The zero/spike-and-slab model is rejected.** M4 fails eight of twelve frozen
+  gates, including SBC rank, grid edge, held-out PPC, both null q95 tails, prior
+  sensitivity, reference agreement, and spike calibration. The real-data median
+  `R(22)=0.0543` is not a calibrated estimate and must not be reported as one.
+- **A zero median does not fix the null tail.** The negative-control median is
+  zero because the spike is selected, but q95 is 0.3535 (permutation) and 0.4509
+  (sign flip). The model still produces high reliability on a minority of null
+  targets.
+- **Spike identification is weak.** When the truth is exactly zero, the median
+  posterior `P(z=0)` is 0.3561, far below the 0.80 calibration requirement. The
+  spike probability is not a validated detection score.
+- **The result is prior-dominated.** Moving `pi0` from 0.25 to 0.75 moves median
+  `R(22)` from 0.1220 to 0.0 (range 0.1220). No prior scale or `pi0` is adopted.
+- **The PPC is underperforming, not merely noisy.** Held-out coverage is 0.7697
+  and median absolute error is 0.3998 over 304 target-level records. It is a
+  genuine predictive failure, not a missing artifact.
+- **No target ranking, animal budget, causal effect, digital twin, foundation
+  model, or transport claim.** Transport is `not_evaluable`: no independent
+  repeated-stimulation atlas is available locally, and behavioural data are a
+  different estimand.
