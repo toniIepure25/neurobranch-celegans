@@ -60,9 +60,11 @@ def main(argv: list[str] | None = None) -> int:
         if path.is_file() and path.name not in {"manifest.json", "manifest.sha256", "validation.json"}
     }
     lockfile = ROOT / "uv.lock"
-    status_lines = _git("status", "--porcelain").splitlines()
-    reports_rel = str(reports.relative_to(ROOT)).replace("\\", "/")
-    dirty = any(reports_rel not in line for line in status_lines)
+    # Generated report artifacts are the subject of this manifest, not code
+    # provenance.  Exclude reports/ so a clean code commit can be certified even
+    # while its derived tables are being written or staged.
+    status_lines = _git("status", "--porcelain", "--", ".", ":(exclude)reports").splitlines()
+    dirty = bool(status_lines)
     payload: dict[str, Any] = {
         "phase": "phase13",
         "decision": summary.get("decision"),
@@ -97,7 +99,7 @@ def main(argv: list[str] | None = None) -> int:
         "git_dirty": dirty,
         "created_utc": datetime.now(timezone.utc).isoformat(timespec="seconds"),
         "notes": [
-            "git_dirty ignores manifest files being written but reflects all other worktree changes.",
+            "git_dirty reflects code/worktree changes outside reports/; generated report files are excluded.",
             "Artifact hashes cover every file except manifest.json, manifest.sha256 and validation.json.",
             "The derived input table is referenced by hash and is not redistributed.",
             "Quick-mode outputs are not decision evidence.",
