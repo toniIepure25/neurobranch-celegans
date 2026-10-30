@@ -13,9 +13,11 @@ Python 3.10-3.13. The project is validated on 3.13.5.
 
 ```powershell
 python -m ruff check .
-python -m mypy src/neurobranch/benchmark src/neurobranch/design
+python -m mypy src/neurobranch/benchmark src/neurobranch/design src/neurobranch/uncertainty.py
 python -m pytest -q
 python scripts/validate_reports.py --strict
+python scripts/audit_claims.py
+python -m pytest tests/test_phase12_reports.py -q
 python scripts/check_reproducibility.py
 ```
 

@@ -78,3 +78,23 @@ python scripts/phase10_design.py
 
 Artifacts: `reports/phase10/design_budget.csv`,
 `reports/phase10/coverage_study.json`.
+
+## Phase 12 posterior design table
+
+`neurobranch.design.posterior_design` propagates the hierarchical posterior
+uncertainty into the probability that a target reaches reliability 0.5 at a given
+animal count. The output is `reports/phase12/design_posterior.csv`: for each
+eligible target it reports the minimum number of animals at which the posterior
+probability is at least 0.8, or `not_reached_within_budget` within 60 animals.
+
+This is **not** a validated design engine. The hierarchical model failed its SBC
+rank test, held-out predictive check and negative control, so the table is
+conditional on a misspecified model. It is retained for transparency and for the
+next modelling attempt, not for recommending a cohort size.
+
+```powershell
+python scripts/phase12_hierarchy.py
+```
+
+The script writes the design table together with the calibration artifacts; see
+`docs/PHASE12_RESULTS.md`.

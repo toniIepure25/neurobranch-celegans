@@ -1,5 +1,46 @@
 # Changelog
 
+## 1.2.0 - 2026-10-30
+
+Hierarchical measurement audit, animal-cluster inference and release hardening.
+The calibration gates failed; 0.560 remains the descriptive ceiling.
+
+### Added
+
+- `neurobranch.benchmark.hierarchical`: additive hierarchical reliability model
+  with responder-coverage filtering, animal centering, known cell sampling
+  variance, a deterministic 2-D grid posterior and per-target posterior draws.
+- `neurobranch.benchmark.hierarchical_calibration`: simulation-based
+  calibration, animal-holdout predictive check, within-animal responder-label
+  permutation negative control and prior-sensitivity audit.
+- `neurobranch.benchmark.inference`: animal-cluster paired bootstrap, Holm
+  adjustment, minimum detectable effect and fail-closed benchmark status.
+- `neurobranch.design.posterior_design`: model-conditional reliability curve and
+  animal-budget planning table.
+- `scripts/phase12_hierarchy.py`, `phase12_benchmark.py`, `phase12_manifest.py`
+  and `reports/phase12/` artifacts, including SBC/PPC/negative-control JSON,
+  per-target posterior CSV, cluster benchmark CSV and manifest.
+- `schemas/phase12_summary.schema.json` plus contract tests for Phase 12
+  artifacts, cluster inference and the hierarchical model.
+- Phase 12 app panel with hierarchical estimates, gate-failure count and
+  manifest provenance.
+- `docs/PHASE12_ANALYSIS_PLAN.md`, `docs/METHODS_HIERARCHICAL.md` and
+  `docs/PHASE12_RESULTS.md`.
+
+### Changed
+
+- Version 1.2.0; citation metadata and benchmark card updated.
+- Claims ledger adds `phase12-hierarchical-interval` (not supported) and
+  `phase12-benchmark-cluster` (underpowered).
+- Claims audit checks Phase 12 gate/status consistency, ceiling arithmetic and
+  benchmark support conditions.
+
+### Fixed
+
+- Boolean serialization in Phase 12 summary artifacts.
+- Phase 11 moment-reference column mapping in the Phase 12 artifact script.
+- SBC centering now matches the real-data fit.
+
 ## 1.1.0 - 2026-10-29
 
 Coverage-aware measurement ceilings and research-release hardening.

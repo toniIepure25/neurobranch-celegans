@@ -265,3 +265,16 @@ animals required.
 **Kill criterion.** If the model cannot reproduce the coverage sensitivity
 without target-specific tuning, stop; the moment estimate remains the
 transparent bound.
+
+**Phase 12 outcome (2026-10-30).** The hierarchical model reproduced the point
+estimate (0.304 vs 0.314; ceiling 0.551 vs 0.560) but failed the calibration
+gates: SBC rank KS p = 1.4e-06, held-out coverage 0.896 with median absolute
+error 0.191, and a within-animal responder-permutation control with median
+R(22) = 0.176. No target ranking or calibrated interval was published; 0.560
+remains the bound. See `docs/PHASE12_RESULTS.md` and correction C9.
+
+**Next model (not yet run).** Treat responder detection and coverage as part of
+the generative process instead of conditioning on the observed mask, and require
+the negative-control median R(22) to be at most 0.05 before any real-data
+posterior is interpreted. A model that fails the permutation control should be
+rejected even if its point estimate matches the moment estimator.

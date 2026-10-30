@@ -1,8 +1,11 @@
-# Benchmark card: BoundedBench (NeuroBranch 1.1.0)
+# Benchmark card: BoundedBench (NeuroBranch 1.2.0)
 
-> **Phase 11 update.** The machine-readable card at
-> `reports/phase11/benchmark_card.json` uses the coverage-aware ceiling
-> **0.560**, not the Phase 10 0.833. The values below are the Phase 10 record.
+> **Phase 12 update.** The machine-readable Phase 11 card at
+> `reports/phase11/benchmark_card.json` remains authoritative for the
+> coverage-aware ceiling **0.560**. Phase 12 fitted a hierarchical model
+> (point estimate 0.304, ceiling 0.551) but its SBC rank test, held-out
+> predictive check and negative control failed, so the interval is **not
+> calibrated** and 0.560 is retained. See `docs/PHASE12_RESULTS.md`.
 
 A benchmark card states what a benchmark measures, what it does not measure,
 and how a reader can reproduce it. This card covers the Phase 6-10 evaluation
@@ -82,6 +85,16 @@ against the measurement ceiling.
   point estimate (0.314) fell outside the interval ([0.497, 0.583]) because
   resampling sparse responder rows inflates reliability. It is **not** a
   calibrated interval.
+- The Phase 12 hierarchical posterior is also not calibrated. SBC coverage was
+  0.923 (gate [0.93, 0.97]), rank uniformity failed (KS p = 1.4e-06),
+  held-out coverage was 0.896 with median absolute error 0.191, and the
+  animal-wise permutation null gave median R(22) = 0.176. The point estimate
+  is reported as a model-based sensitivity result, not a calibrated interval.
+- Phase 12 benchmark comparisons use an animal-cluster bootstrap with Holm
+  adjustment. The largest paired delta was +0.189 (global mean vs static CRO),
+  but MDE was 0.238 against a 0.05 SESOI and Holm p was 0.185. No
+  configuration is supported as superior; fold-level leaderboard values remain
+  descriptive.
 
 ## Known failure modes
 
@@ -105,7 +118,13 @@ against the measurement ceiling.
    the interval is uninformative. Report it, do not lean on it.
 7. **Unstable target ranking.** Per-target reliability rankings do not
    replicate across animal halves (median Spearman about 0.00). Do not
-   prioritise targets by estimated reliability.
+   prioritise targets by estimated reliability. Phase 12 did not produce a
+   ranking; the hierarchical model's target-level posterior is unpublished and
+   its planning table is conditional.
+8. **Positive null bias.** Permuting responder labels within each animal still
+   yields median R(22) = 0.176. The model can manufacture apparent reliability
+   from coverage and marginal structure, which is why the negative control is a
+   required gate rather than a formality.
 
 ## Intended use
 
@@ -128,6 +147,9 @@ python scripts/phase10_reliability.py
 python scripts/phase10_robustness.py
 python scripts/phase10_design.py
 python scripts/phase10_claims.py --check
+python scripts/phase12_hierarchy.py
+python scripts/phase12_benchmark.py
+python scripts/phase12_manifest.py
 python scripts/validate_reports.py --strict
 python scripts/check_reproducibility.py
 ```

@@ -22,3 +22,6 @@ def test_boundedbench_shows_provenance() -> None:
     captions = " ".join(item.value for item in app.caption)
     assert "Card 2.0" in captions
     assert "manifest" in captions.lower()
+    warnings = " ".join(item.value for item in app.warning)
+    assert "hierarchical interval is not calibrated" in warnings.lower()
+    assert "0.560" in warnings

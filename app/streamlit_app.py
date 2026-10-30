@@ -1119,6 +1119,34 @@ with tabs[12]:
 
 with tabs[13]:
     st.subheader("BoundedBench: measurement ceiling and claim status")
+    phase12 = ROOT / "reports" / "phase12"
+    if (phase12 / "summary.json").exists():
+        phase12_summary = json.loads((phase12 / "summary.json").read_text(encoding="utf-8"))
+        hierarchical = phase12_summary.get("hierarchical", {})
+        gates = phase12_summary.get("gates", {})
+        st.markdown("**Phase 12 hierarchical audit**")
+        p1, p2, p3, p4 = st.columns(4)
+        p1.metric("Hierarchical R(22)", f"{float(hierarchical.get('pooled_reliability_median', float('nan'))):.3f}")
+        p2.metric("Hierarchical ceiling", f"{float(hierarchical.get('pooled_ceiling_median', float('nan'))):.3f}")
+        p3.metric("Moment R(22)", f"{float(phase12_summary['moment_phase11']['pooled_reliability']):.3f}")
+        p4.metric("Gate failures", sum(not bool(gates.get(name, False)) for name in ("g1_sbc", "g2_heldout_ppc", "g3_negative_control", "g4_prior_sensitivity")))
+        if phase12_summary.get("status") != "adopted":
+            st.warning(
+                "The hierarchical interval is not calibrated: SBC rank uniformity, held-out "
+                "coverage and the negative control failed. The 0.560 coverage-aware ceiling "
+                "remains the only descriptive bound."
+            )
+        phase12_manifest = phase12 / "manifest.json"
+        if phase12_manifest.exists():
+            manifest = json.loads(phase12_manifest.read_text(encoding="utf-8"))
+            checksum = "missing"
+            if (phase12 / "manifest.sha256").exists():
+                checksum = (phase12 / "manifest.sha256").read_text(encoding="utf-8").split()[0][:12]
+            st.caption(
+                f"Phase 12 status {phase12_summary.get('status')} | git "
+                f"{str(manifest.get('git_revision', 'unknown'))[:12]} | dirty "
+                f"{manifest.get('git_dirty')} | manifest {checksum}"
+            )
     phase11 = ROOT / "reports" / "phase11"
     phase10 = ROOT / "reports" / "phase10"
     phase9 = ROOT / "reports" / "phase9"

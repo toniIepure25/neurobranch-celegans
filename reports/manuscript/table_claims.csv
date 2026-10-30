@@ -2,6 +2,8 @@ id,status,estimand,estimate,ci_low,ci_high,p_value,p_holm
 phase9-single-animal-ceiling-below-half,supported,single_animal,0.1623966428571429,0.1342021275896774,0.1905911581246084,,
 phase9-repeat-ceiling-below-half,supported,repeat,0.24262446710526317,0.20620589863204053,0.2790430355784858,,
 phase10-fold-ceiling,not_supported,pooled_fold,0.8327336863740054,,,,
+phase12-hierarchical-interval,not_supported,pooled_fold,0.3035306473018537,,,,
+phase12-benchmark-cluster,underpowered,animal_cluster,0.188908,,,,
 phase8-pair-advantage,underpowered,,0.0442,0.008,0.0901,0.03482708629479769,0.06965417258959539
 phase8-trajectory-advantage,not_supported,superiority,-6.6e-06,,,,
 phase8-sequential-rollout,not_supported,superiority,0.023,,,,

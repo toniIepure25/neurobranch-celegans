@@ -12,6 +12,27 @@ perturbation** on real calcium imaging and optogenetic atlases.
 > `interventions/safety.py` refuses to label any output as empirically
 > validated without a matched, provenance-checked intervention dataset.
 
+## What version 1.2.0 adds: hierarchical measurement audit (negative)
+
+Version 1.2.0 fits an explicit hierarchical measurement model with responder
+coverage, animal random effects and known cell-level sampling variance. The
+point estimate is **0.304** pooled reliability and **0.551** ceiling at 80%
+coverage, within 0.05 of the Phase 11 moment estimate (0.314 / 0.560). The
+posterior interval is **not calibrated**:
+
+- SBC 22-animal coverage 0.923, below the [0.93, 0.97] gate; rank uniformity
+  failed (KS p = 1.4e-06);
+- held-out animal coverage 0.896 with median absolute error 0.191;
+- permuting responder labels within each animal gave median R(22) = 0.176.
+
+The 0.560 coverage-aware ceiling therefore remains the headline. No target
+ranking, calibrated interval or validated animal-budget guarantee is published.
+The animal-cluster benchmark audit also finds no supported configuration: the
+largest paired delta is +0.189 against static CRO, but MDE is 0.238 versus a
+0.05 SESOI and Holm p is 0.185. See
+[`docs/PHASE12_RESULTS.md`](docs/PHASE12_RESULTS.md),
+[`docs/METHODS_HIERARCHICAL.md`](docs/METHODS_HIERARCHICAL.md) and correction C9.
+
 ## What version 1.1.0 adds: coverage sensitivity (read before the Phase 10 table)
 
 The Phase 10 pooled ceiling is **not robust to sparse responder coverage**. A

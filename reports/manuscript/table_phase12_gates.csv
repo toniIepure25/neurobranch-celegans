@@ -1,0 +1,7 @@
+gate,observed,pass
+"SBC coverage [0.93, 0.97]",0.9233333333333333,False
+SBC rank KS p > 0.01,1.3786940804282969e-06,False
+Held-out coverage >= 0.90,0.8961038961038961,False
+Held-out median error <= 0.10,0.1914586354287957,False
+Negative-control median R22 <= 0.05,0.17590236325865327,False
+Prior range <= 0.05,0.0031233113547247116,True

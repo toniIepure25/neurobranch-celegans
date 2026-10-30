@@ -10,6 +10,9 @@ the committed artifacts, not typed by hand.
 | `table_leaderboard.csv/.md` | Fold-level leaderboard (descriptive) |
 | `table_design_budget.csv/.md` | Animals required for target reliability |
 | `figure_coverage_sensitivity.png` | Reliability and ceiling versus coverage |
+| `table_phase12_gates.csv/.md` | Phase 12 calibration gates and observed values |
+| `table_cluster_benchmark.csv/.md` | Animal-cluster paired benchmark deltas |
+| `figure_phase12_calibration.png` | Phase 11 coverage curve with the Phase 12 point estimate |
 | `figure_ceiling_curve_phase10.png` | Historical Phase 10 curve |
 | `provenance.json` | Source paths, SHA-256 hashes and captions |
 
@@ -21,6 +24,11 @@ the committed artifacts, not typed by hand.
   curve beyond observed animals as validated or rank targets by reliability.
 - The two-way bootstrap interval is not calibrated and is not reported as a
   confidence interval.
+- The Phase 12 hierarchical interval failed SBC rank uniformity, held-out
+  predictive coverage and the negative control; 0.560 remains the descriptive
+  ceiling. Do not call the hierarchical interval calibrated.
+- The Phase 12 animal-cluster benchmark has no supported configuration; all
+  non-baseline deltas are underpowered at the 0.05 SESOI.
 
 Do not add a claim to a manuscript table unless it also exists in
 `reports/phase10/claims.json` and passes `scripts/audit_claims.py`.

@@ -84,6 +84,58 @@ def main(argv: list[str] | None = None) -> int:
             encoding="utf-8",
         )
 
+    phase12 = args.reports / "phase12"
+    if (phase12 / "summary.json").exists():
+        summary12 = json.loads((phase12 / "summary.json").read_text(encoding="utf-8"))
+        gates = summary12["gates"]
+        gate_frame = pd.DataFrame(
+            [
+                {"gate": "SBC coverage [0.93, 0.97]", "observed": gates["sbc_coverage_n22"], "pass": gates["g1_sbc"]},
+                {"gate": "SBC rank KS p > 0.01", "observed": gates["sbc_rank_ks_pvalue"], "pass": gates["g1_sbc"]},
+                {"gate": "Held-out coverage >= 0.90", "observed": gates["ppc_coverage"], "pass": gates["g2_heldout_ppc"]},
+                {"gate": "Held-out median error <= 0.10", "observed": gates["ppc_median_abs_error"], "pass": gates["g2_heldout_ppc"]},
+                {"gate": "Negative-control median R22 <= 0.05", "observed": gates["negative_median_n22"], "pass": gates["g3_negative_control"]},
+                {"gate": "Prior range <= 0.05", "observed": gates["prior_range"], "pass": gates["g4_prior_sensitivity"]},
+            ]
+        )
+        gate_frame.to_csv(args.out / "table_phase12_gates.csv", index=False)
+        (args.out / "table_phase12_gates.md").write_text(
+            _markdown(gate_frame.round(6), "Table 5. Phase 12 calibration gates and observed values."),
+            encoding="utf-8",
+        )
+        cluster_path = phase12 / "benchmark_cluster.csv"
+        if cluster_path.exists():
+            cluster = pd.read_csv(cluster_path)
+            cluster.to_csv(args.out / "table_cluster_benchmark.csv", index=False)
+            (args.out / "table_cluster_benchmark.md").write_text(
+                _markdown(
+                    cluster.round(4),
+                    "Table 6. Animal-cluster paired benchmark deltas with Holm adjustment and MDE.",
+                ),
+                encoding="utf-8",
+            )
+        fig2, ax2 = plt.subplots(figsize=(5.2, 3.4))
+        ax2.plot(
+            sensitivity["min_responder_coverage"],
+            sensitivity["pooled_reliability_at_fold"],
+            marker="o",
+            label="Phase 11 moment",
+        )
+        ax2.axhline(
+            summary12["hierarchical"]["pooled_reliability_median"],
+            color="tab:red",
+            linestyle="--",
+            label="Phase 12 hierarchical",
+        )
+        ax2.set_xlabel("Minimum responder coverage")
+        ax2.set_ylabel("Pooled reliability at 22 animals")
+        ax2.set_ylim(0, 1)
+        ax2.legend(frameon=False)
+        ax2.grid(alpha=0.3)
+        fig2.tight_layout()
+        fig2.savefig(args.out / "figure_phase12_calibration.png", dpi=200)
+        plt.close(fig2)
+
     fig, ax = plt.subplots(figsize=(5.2, 3.4))
     ax.plot(
         sensitivity["min_responder_coverage"],
@@ -116,6 +168,9 @@ def main(argv: list[str] | None = None) -> int:
             ),
             "claims": str((args.reports / "phase10" / "claims.json").relative_to(ROOT)),
             "leaderboard": str((args.reports / "phase11" / "leaderboard.csv").relative_to(ROOT)),
+            "phase12_summary": str((args.reports / "phase12" / "summary.json").relative_to(ROOT))
+            if (args.reports / "phase12" / "summary.json").exists()
+            else None,
         },
         "hashes": {
             path.name: _sha256(path)
@@ -126,6 +181,10 @@ def main(argv: list[str] | None = None) -> int:
             "figure_coverage_sensitivity.png": (
                 "Pooled reliability and its attenuation ceiling at 22 animals as responders "
                 "with incomplete animal coverage are excluded."
+            ),
+            "figure_phase12_calibration.png": (
+                "Phase 11 coverage curve and the Phase 12 hierarchical point estimate. The "
+                "hierarchical interval was not calibrated and is not shown as an interval."
             ),
         },
     }

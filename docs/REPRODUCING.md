@@ -769,3 +769,34 @@ Expected on this machine (about 200 s for the sensitivity script):
 Artifacts are in `reports/phase11/`; the manifest and `manifest.sha256` are
 regenerated last. `--allow-missing-input` is required in CI because the derived
 Randi table is not redistributed.
+
+## 19. Phase 12: hierarchical measurement audit
+
+Same input table as Phase 10/11. The script fits the hierarchical model at
+coverage 0.5, 0.8 and 1.0, then runs SBC, the held-out predictive check, the
+within-animal permutation control, prior sensitivity and the posterior design
+table:
+
+```powershell
+python scripts/phase12_hierarchy.py
+python scripts/phase12_benchmark.py
+python scripts/phase12_manifest.py
+python scripts/validate_reports.py --reports reports/phase12 --strict
+python scripts/check_reproducibility.py --reports reports/phase12 --allow-missing-input
+```
+
+Expected (about 7--12 min for the hierarchy script on this machine):
+
+- Coverage 0.8: 126 eligible targets, pooled reliability 0.304, ceiling 0.551.
+- Phase 11 moment reference: 0.314 / 0.560.
+- SBC coverage 0.923, rank KS p = 1.4e-06: gate fails.
+- Held-out coverage 0.896, median absolute error 0.191: gate fails.
+- Negative control median R(22) = 0.176, q95 = 0.525: gate fails.
+- Prior-sensitivity range 0.003: gate passes, but does not rescue the interval.
+- Benchmark: no configuration supported; largest delta +0.189, MDE 0.238,
+  Holm p 0.185.
+- Status `not_adopted_gate_failures`; 0.560 remains the descriptive ceiling.
+
+The app tab **BoundedBench** shows the Phase 12 gate count and warns that the
+hierarchical interval is not calibrated. Artifacts are in `reports/phase12/`;
+the manifest is regenerated last and includes the input SHA-256.

@@ -184,3 +184,36 @@ validated.
 This is unfavourable to the project: the coverage-aware measurement limit is
 lower, and the model is closer to it than Phase 10 reported. No claim is
 upgraded; Phase 8 statuses are unchanged.
+
+## C9. The Phase 12 hierarchical interval is not calibrated
+
+**Was attempted:** replace the Phase 11 moment bound with a hierarchical
+measurement model and a calibrated posterior interval for pooled reliability and
+the attenuation ceiling.
+
+**What happened:** the model reproduced the point estimate but failed every
+interval/calibration gate that matters:
+
+- SBC 22-animal coverage was **0.923**, below the [0.93, 0.97] gate; rank
+  uniformity failed (KS p = **1.4e-06**, mean rank 0.568);
+- held-out animal predictive coverage was **0.896** with median absolute error
+  **0.191** (gates: >= 0.90 and <= 0.10);
+- permuting responder labels within each animal still gave median
+  **R(22) = 0.176** and q95 = 0.525 (gates: <= 0.05 and <= 0.15);
+- prior sensitivity passed (range 0.003), but that cannot repair the other
+  failures.
+
+**Correct:** the hierarchical point estimate is **0.304** (ceiling **0.551**),
+within 0.05 of the Phase 11 moment estimate (0.314 / 0.560), but it is a
+model-based sensitivity result, not a calibrated interval. The **0.560**
+coverage-aware descriptive ceiling remains the headline. No target ranking and
+no posterior animal-budget guarantee are published.
+
+**Evidence:** `docs/PHASE12_RESULTS.md`, `reports/phase12/summary.json`,
+`reports/phase12/sbc.json`, `reports/phase12/heldout_ppc.json`,
+`reports/phase12/negative_control.json`.
+
+**Impact:** unfavourable to the project: a more elaborate model did not earn a
+better uncertainty statement. The Phase 8/9/10/11 claim statuses are unchanged.
+The Phase 12 benchmark cluster analysis also found no configuration supported
+at the 0.05 SESOI (largest delta +0.189, MDE 0.238, Holm p 0.185).

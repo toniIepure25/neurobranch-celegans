@@ -26,6 +26,8 @@ Every claim declares the facet it describes:
   deviation.
 - `repeat` - repeated stimulation of the same animal.
 - `pooled_fold` - a profile averaged over the animals in an evaluation fold.
+- `animal_cluster` - a paired model difference whose resampling unit is the
+  animal, used by the Phase 12 benchmark inference.
 - `superiority` / `equivalence` - a difference between models or conditions.
 - `descriptive` - arithmetic from fitted components, with no sampling claim.
 
@@ -64,6 +66,8 @@ carry no p-value and are not in a family.
 | `phase8-sequential-rollout` | 3-event rollout beats persistence | superiority | +0.0230 | — | not supported (coverage 0.904 < 0.95) |
 | `phase8-eig-selection` | EIG selection beats random at k=8 | superiority | −0.0038 | [−0.0070, +0.0026] | bounded null (±0.01) |
 | `phase7-cro-share-of-ceiling` | CRO reaches 64% of the ceiling | descriptive | 0.0984 | — | not supported (superseded; coverage-aware share 17.6%) |
+| `phase12-hierarchical-interval` | Hierarchical posterior interval is calibrated for pooled reliability | pooled_fold | 0.3035 | — | not supported (SBC rank KS p = 1.4e-06; held-out coverage 0.896; negative-control median R(22) = 0.176) |
+| `phase12-benchmark-cluster` | A benchmark configuration beats static CRO by >0.05 in the animal-cluster analysis | animal_cluster | +0.1889 | — | underpowered (MDE 0.238; Holm p = 0.185; no supported configuration) |
 
 ## What is never claimed
 
@@ -73,12 +77,19 @@ carry no p-value and are not in a family.
 - That a supported claim generalises beyond the atlas and response window.
 - That a rapid literature scan is a systematic review.
 - That the animal jackknife interval is a calibrated confidence interval.
+- That the Phase 12 hierarchical posterior interval is calibrated, or that
+  0.3035 replaces the 0.560 descriptive ceiling.
+- That any Phase 12 benchmark configuration is superior; all animal-cluster
+  comparisons are underpowered at the 0.05 SESOI.
 
 ## Regenerating the ledger
 
 ```bash
 python scripts/phase10_reliability.py
 python scripts/phase10_claims.py --check
+python scripts/phase12_hierarchy.py
+python scripts/phase12_benchmark.py
+python scripts/phase12_manifest.py
 python scripts/validate_reports.py --strict
 ```
 

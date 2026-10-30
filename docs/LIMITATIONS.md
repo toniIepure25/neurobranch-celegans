@@ -75,10 +75,11 @@ claim is "under this budget", not "these architectures cannot model the system".
 
 ### 3.2 Model classes are simple
 
-The suite contains persistence, VAR, MLPs, a GRU, PCA+MLP, and PCA+kNN. It does
-not contain switching linear dynamical systems, state-space models with
-input-dependent transitions, transformers, neural ODEs, or hierarchical Bayesian
-models. A model class not tested could perform better.
+The dynamics suite contains persistence, VAR, MLPs, a GRU, PCA+MLP, and PCA+kNN.
+It does not contain switching linear dynamical systems, state-space models with
+input-dependent transitions, transformers, or neural ODEs. Phase 12 adds a
+hierarchical Bayesian *measurement* model for reliability, not a new dynamics or
+perturbation model. A model class not tested could perform better.
 
 ### 3.3 One-step training, multi-step evaluation
 
@@ -286,3 +287,42 @@ generalization claim.
   real-data interval.
 - Empirical-Bayes shrinkage does not recover target rankings at coverage 0.8;
   no ranking is published.
+
+
+## 12. Hierarchical measurement and calibration limitations (Phase 12)
+
+- The hierarchical model is additive and Gaussian. The response table has a
+  standard deviation of 23.8 and heavy outliers; the likelihood is misspecified
+  for that distribution. The model is a sensitivity analysis, not a validated
+  measurement model.
+- SBC rank uniformity failed (KS p = 1.4e-06, mean rank 0.568), SBC coverage was
+  0.923 against a [0.93, 0.97] gate, held-out coverage was 0.896 with median
+  absolute error 0.191, and the animal-wise permutation control gave median
+  R(22) = 0.176 (q95 = 0.525). Any one of these blocks a calibrated interval;
+  together they establish positive null bias and model misspecification.
+- The point estimate (0.304; ceiling 0.551) is within 0.05 of the Phase 11
+  moment estimate (0.314), but agreement of point estimates does not repair a
+  failed interval. The 0.560 descriptive ceiling remains the headline.
+- The prior sensitivity gate passed (range 0.003 across HalfNormal scales 0.5,
+  1.0, 2.0), but this only shows the result is not driven by the prior scale; it
+  does not show the likelihood is correct.
+- The deterministic grid posterior is discretised. Boundary mass is low
+  (maximum 0.0069 at coverage 0.8), but low boundary mass is not a convergence
+  or calibration guarantee.
+- Animal centering removes stable animal-wide offsets. The uncentered fit gave
+  0.275; the centered fit gave 0.304. This choice is documented, not selected
+  post hoc to maximise the estimate, but it changes the estimand.
+- The coverage filter changes the responder population: coverage 1.0 gives 79
+  targets and a higher model estimate (0.359), which is not comparable to the
+  126-target 0.8 estimate without acknowledging the population change.
+- No target ranking is published. `design_posterior.csv` is a conditional
+  planning table, not a prospective sample-size guarantee.
+- Benchmark comparisons use 88--96 animal clusters. The largest paired delta
+  (global mean vs static CRO, +0.189) had MDE 0.238 against a 0.05 SESOI and a
+  Holm-adjusted p-value of 0.185. Every configuration is underpowered; none is
+  supported as superior.
+- The cluster bootstrap resamples whole animals, which respects animal sharing
+  but has low resolution with this cohort; it does not fix confounding by
+  target, session, or responder coverage.
+- None of these results identifies a mechanism, a causal effect, a digital twin,
+  or a foundation model.
