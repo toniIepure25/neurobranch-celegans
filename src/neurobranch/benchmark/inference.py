@@ -53,6 +53,7 @@ def _paired_frame(
     *,
     baseline: str,
     min_events: int,
+    require_aligned_truth: bool = True,
 ) -> pd.DataFrame:
     base = frame[frame["model"] == baseline]
     if base.empty:
@@ -67,6 +68,14 @@ def _paired_frame(
         if merged.empty:
             continue
         merged = merged.dropna(subset=["y_true", "y_pred_model", "y_pred_baseline", "dataset_id"])
+        if require_aligned_truth:
+            mismatch = (merged["y_true"] - merged["y_true_baseline"]).abs() > 1e-8
+            if bool(mismatch.any()):
+                raise ValueError(
+                    "baseline and model y_true are not aligned for "
+                    f"{int(mismatch.sum())} paired rows in {model!r}; "
+                    "pair on the same events before computing a delta"
+                )
         merged["model"] = model
         merged["k"] = int(k) if pd.notna(k) else 0
         merged["strategy"] = strategy
@@ -75,6 +84,58 @@ def _paired_frame(
     if not rows:
         return pd.DataFrame()
     return pd.concat(rows, ignore_index=True)
+
+
+def audit_paired_inputs(
+    predictions: pd.DataFrame,
+    *,
+    baseline: str = DEFAULT_BASELINE,
+    min_events: int = 2,
+) -> dict[str, Any]:
+    """Report alignment problems that can invalidate a paired comparison.
+
+    This is diagnostic: it does not silently drop rows.  The benchmark claim is
+    only interpretable when ``y_true`` agrees between baseline and model for the
+    same event and the resampling unit is unambiguous.
+    """
+    required = {"dataset_id", "target", "neuron", "event_id", "model", "y_true", "y_pred"}
+    missing = sorted(required - set(predictions.columns))
+    if missing:
+        return {"status": "missing_columns", "missing": missing}
+    keys = ["dataset_id", "target", "neuron", "event_id"]
+    event_truth = predictions.groupby(keys, dropna=False)["y_true"].nunique()
+    rows_sharing_event_keys = int(predictions.duplicated(keys, keep=False).sum())
+    base = predictions[predictions["model"] == baseline]
+    base_pairs = _baseline_pairs(base, min_events=min_events)
+    mismatched = 0
+    compared = 0
+    for (model, _k, _strategy), group in predictions.groupby(["model", "k", "strategy"], dropna=False):
+        if model == baseline:
+            continue
+        pairs = _animal_pairs(group, min_events=min_events)
+        merged = pairs.merge(base_pairs, on=["dataset_id", "target", "neuron"], how="inner")
+        if merged.empty:
+            continue
+        compared += int(len(merged))
+        mismatched += int((np.abs(merged["y_true"] - merged["y_true_baseline"]) > 1e-8).sum())
+    folds = (
+        predictions.groupby(["dataset_id"], dropna=False)["fold"].nunique()
+        if "fold" in predictions.columns
+        else pd.Series(dtype=int)
+    )
+    return {
+        "status": "ok",
+        "n_rows": int(len(predictions)),
+        "n_event_groups": int(event_truth.size),
+        "n_event_groups_with_multiple_truths": int((event_truth > 1).sum()),
+        "event_truth_mismatch_fraction": float((event_truth > 1).mean()),
+        "n_rows_sharing_event_keys": rows_sharing_event_keys,
+        "n_paired_rows_compared": compared,
+        "n_paired_y_true_mismatches": mismatched,
+        "paired_y_true_mismatch_fraction": (mismatched / compared) if compared else None,
+        "max_folds_per_animal": int(folds.max()) if not folds.empty else None,
+        "caveat": "Diagnostic only; paired inference is not repaired by this audit.",
+    }
 
 
 def _bootstrap_delta(
@@ -108,11 +169,22 @@ def paired_cluster_inference(
     seed: int = 29,
     min_events: int = 2,
     sesoi: float = DEFAULT_SESOI,
+    require_aligned_truth: bool = True,
 ) -> pd.DataFrame:
-    """Cluster-bootstrap paired model deltas with Holm adjustment and MDE."""
+    """Cluster-bootstrap paired model deltas with Holm adjustment and MDE.
+
+    The function fails closed when the baseline and model rows do not share the
+    same event truth.  Use ``require_aligned_truth=False`` only to reproduce a
+    historical artifact, never for a new claim.
+    """
     if n_boot < 50:
         raise ValueError("n_boot must be >= 50")
-    merged_all = _paired_frame(predictions, baseline=baseline, min_events=min_events)
+    merged_all = _paired_frame(
+        predictions,
+        baseline=baseline,
+        min_events=min_events,
+        require_aligned_truth=require_aligned_truth,
+    )
     if merged_all.empty:
         return pd.DataFrame()
     rows: list[dict[str, Any]] = []
@@ -206,6 +278,7 @@ def inference_summary(frame: pd.DataFrame, *, sesoi: float = DEFAULT_SESOI) -> d
 __all__ = [
     "DEFAULT_BASELINE",
     "DEFAULT_SESOI",
+    "audit_paired_inputs",
     "inference_summary",
     "paired_cluster_inference",
 ]

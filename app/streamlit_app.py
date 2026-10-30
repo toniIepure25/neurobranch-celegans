@@ -1098,7 +1098,9 @@ with tabs[12]:
         if not r8.get("audit_clean", False):
             st.error("Leakage audit did not pass; treat these results as invalid.")
         else:
-            st.caption("Leakage audit passed: no animal overlap, support/test overlap, or test-event leakage.")
+            st.caption(
+                "Leakage audit passed: no animal overlap, support/test overlap, or test-event leakage."
+            )
         table = r8.get("deployment_readout", {}).get("strategy_table_k8", [])
         if table:
             st.markdown("**Support strategy at the primary budget (k=8)**")
@@ -1119,31 +1121,52 @@ with tabs[12]:
 
 with tabs[13]:
     st.subheader("BoundedBench: measurement ceiling and claim status")
+    phase12r = ROOT / "reports" / "phase12r"
     phase12 = ROOT / "reports" / "phase12"
-    if (phase12 / "summary.json").exists():
-        phase12_summary = json.loads((phase12 / "summary.json").read_text(encoding="utf-8"))
+    audit_dir = phase12r if (phase12r / "summary.json").exists() else phase12
+    if (audit_dir / "summary.json").exists():
+        phase12_summary = json.loads((audit_dir / "summary.json").read_text(encoding="utf-8"))
         hierarchical = phase12_summary.get("hierarchical", {})
         gates = phase12_summary.get("gates", {})
-        st.markdown("**Phase 12 hierarchical audit**")
+        moment = phase12_summary.get("moment_phase11") or phase12_summary.get("phase11_reference", {})
+        failed = [
+            name
+            for name in (
+                "g1a_sbc_coverage",
+                "g1b_sbc_rank",
+                "g1c_grid_edge",
+                "g1d_fit_integrity",
+                "g2_heldout_ppc",
+                "g3_negative_control",
+                "g4_prior_sensitivity",
+            )
+            if gates and not bool(gates.get(name, False))
+        ]
+        st.markdown("**Phase 12R hierarchical audit (post-correction)**")
         p1, p2, p3, p4 = st.columns(4)
-        p1.metric("Hierarchical R(22)", f"{float(hierarchical.get('pooled_reliability_median', float('nan'))):.3f}")
-        p2.metric("Hierarchical ceiling", f"{float(hierarchical.get('pooled_ceiling_median', float('nan'))):.3f}")
-        p3.metric("Moment R(22)", f"{float(phase12_summary['moment_phase11']['pooled_reliability']):.3f}")
-        p4.metric("Gate failures", sum(not bool(gates.get(name, False)) for name in ("g1_sbc", "g2_heldout_ppc", "g3_negative_control", "g4_prior_sensitivity")))
+        p1.metric(
+            "Hierarchical R(22)", f"{float(hierarchical.get('pooled_reliability_median', float('nan'))):.3f}"
+        )
+        p2.metric(
+            "Hierarchical ceiling", f"{float(hierarchical.get('pooled_ceiling_median', float('nan'))):.3f}"
+        )
+        p3.metric("Moment R(22)", f"{float(moment.get('pooled_reliability', float('nan'))):.3f}")
+        p4.metric("Failed gates", len(failed))
         if phase12_summary.get("status") != "adopted":
             st.warning(
-                "The hierarchical interval is not calibrated: SBC rank uniformity, held-out "
-                "coverage and the negative control failed. The 0.560 coverage-aware ceiling "
-                "remains the only descriptive bound."
+                "The hierarchical interval is not calibrated: SBC rank uniformity, predictive "
+                "median absolute error and the negative control failed. The 0.560 coverage-aware "
+                "ceiling remains the only descriptive bound. The old benchmark cluster claim is "
+                "withdrawn because baseline and model truth were not paired on the same events."
             )
-        phase12_manifest = phase12 / "manifest.json"
-        if phase12_manifest.exists():
-            manifest = json.loads(phase12_manifest.read_text(encoding="utf-8"))
+        audit_manifest = audit_dir / "manifest.json"
+        if audit_manifest.exists():
+            manifest = json.loads(audit_manifest.read_text(encoding="utf-8"))
             checksum = "missing"
-            if (phase12 / "manifest.sha256").exists():
-                checksum = (phase12 / "manifest.sha256").read_text(encoding="utf-8").split()[0][:12]
+            if (audit_dir / "manifest.sha256").exists():
+                checksum = (audit_dir / "manifest.sha256").read_text(encoding="utf-8").split()[0][:12]
             st.caption(
-                f"Phase 12 status {phase12_summary.get('status')} | git "
+                f"Phase 12R status {phase12_summary.get('status')} | git "
                 f"{str(manifest.get('git_revision', 'unknown'))[:12]} | dirty "
                 f"{manifest.get('git_dirty')} | manifest {checksum}"
             )

@@ -327,10 +327,29 @@ def _grid_posterior(
     y, v, mask = data.y, data.v, data.mask
     log_sigma = np.linspace(-6.0, float(np.log(20.0)), int(resolution))
     log_tau = np.linspace(-6.0, float(np.log(20.0)), int(resolution))
+    sigma2 = np.exp(2.0 * log_sigma)
+    tau2_values = np.exp(2.0 * log_tau)
     log_post = np.empty((log_sigma.size, log_tau.size), dtype=float)
-    for i, sigma in enumerate(log_sigma):
-        for j, tau in enumerate(log_tau):
-            log_post[i, j] = _log_posterior(np.array([sigma, tau]), y, v, mask, prior_scale=prior_scale)
+    # Vectorize over the sigma grid for each tau.  The per-responder sums do
+    # not depend on sigma once tau is fixed, so this is algebraically the same
+    # likelihood as the scalar implementation but avoids resolution^2 Python
+    # calls per target.
+    for j, tau2 in enumerate(tau2_values):
+        d = tau2 + v
+        inv = np.where(mask, 1.0 / d, 0.0)
+        s = inv.sum(axis=0)
+        q = np.where(mask, y * y * inv, 0.0).sum(axis=0)
+        linear = np.where(mask, y * inv, 0.0).sum(axis=0)
+        log_det_base = np.where(mask, np.log(d), 0.0).sum(axis=0)
+        denominator = 1.0 + sigma2[:, None] * s[None, :]
+        log_likelihood = -0.5 * (
+            float(log_det_base.sum())
+            + np.log(denominator).sum(axis=1)
+            + float(q.sum())
+            - sigma2 * np.sum(linear[None, :] ** 2 / denominator, axis=1)
+        )
+        log_prior = -0.5 * ((sigma2 + tau2) / (prior_scale**2)) + log_sigma + float(log_tau[j])
+        log_post[:, j] = log_likelihood + log_prior
     finite = np.isfinite(log_post)
     if not finite.any():
         return _SampleOutput(
@@ -525,9 +544,7 @@ def fit_hierarchical_cells(
                 }
             )
             continue
-        target_seed = seed + int(
-            pd.util.hash_pandas_object(pd.Series([str(target)])).iloc[0] % 10_000
-        )
+        target_seed = seed + int(pd.util.hash_pandas_object(pd.Series([str(target)])).iloc[0] % 10_000)
         fit = fit_hierarchical_target(
             data,
             n_eval=n_eval,

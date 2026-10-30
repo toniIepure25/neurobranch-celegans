@@ -1,0 +1,190 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://neurobranch.local/schemas/phase12r_summary.schema.json",
+  "title": "NeuroBranch Phase 12R summary",
+  "type": "object",
+  "required": [
+    "phase",
+    "mode",
+    "status",
+    "primary_coverage",
+    "hierarchical",
+    "phase11_reference",
+    "gates",
+    "decision",
+    "input",
+    "config"
+  ],
+  "properties": {
+    "phase": {
+      "const": "12R"
+    },
+    "mode": {
+      "enum": [
+        "full",
+        "quick"
+      ]
+    },
+    "status": {
+      "enum": [
+        "adopted",
+        "not_adopted_gate_failures",
+        "not_adopted_estimate_mismatch",
+        "quick_mode_no_decision"
+      ]
+    },
+    "primary_coverage": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 1
+    },
+    "hierarchical": {
+      "type": "object",
+      "required": [
+        "pooled_reliability_median",
+        "pooled_ceiling_median",
+        "n_ok",
+        "n_ineligible",
+        "n_variance_floored",
+        "variance_floor_fraction",
+        "exclusion_reasons"
+      ],
+      "properties": {
+        "pooled_reliability_median": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "pooled_ceiling_median": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "single_animal_reliability_median": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "n_ok": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "n_ineligible": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "n_variance_floored": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "variance_floor_fraction": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "exclusion_reasons": {
+          "type": "object"
+        }
+      }
+    },
+    "phase11_reference": {
+      "type": "object",
+      "required": [
+        "pooled_reliability",
+        "pooled_ceiling"
+      ],
+      "properties": {
+        "pooled_reliability": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "pooled_ceiling": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        }
+      }
+    },
+    "gates": {
+      "type": "object",
+      "required": [
+        "g1a_sbc_coverage",
+        "g1b_sbc_rank",
+        "g1c_grid_edge",
+        "g1d_fit_integrity",
+        "g1_sbc_all",
+        "g2_heldout_ppc",
+        "g3_negative_control",
+        "g4_prior_sensitivity",
+        "all_gates"
+      ],
+      "properties": {
+        "g1a_sbc_coverage": {
+          "type": "boolean"
+        },
+        "g1b_sbc_rank": {
+          "type": "boolean"
+        },
+        "g1c_grid_edge": {
+          "type": "boolean"
+        },
+        "g1d_fit_integrity": {
+          "type": "boolean"
+        },
+        "g1_sbc_all": {
+          "type": "boolean"
+        },
+        "g2_heldout_ppc": {
+          "type": "boolean"
+        },
+        "g3_negative_control": {
+          "type": "boolean"
+        },
+        "g4_prior_sensitivity": {
+          "type": "boolean"
+        },
+        "all_gates": {
+          "type": "boolean"
+        },
+        "negative_exclusion_reasons": {
+          "type": [
+            "object",
+            "null"
+          ],
+          "additionalProperties": {
+            "type": "integer"
+          }
+        }
+      }
+    },
+    "decision": {
+      "type": "string",
+      "minLength": 20
+    },
+    "input": {
+      "type": "object",
+      "required": [
+        "path",
+        "sha256",
+        "n_rows"
+      ],
+      "properties": {
+        "path": {
+          "type": "string"
+        },
+        "sha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "n_rows": {
+          "type": "integer",
+          "minimum": 1
+        }
+      }
+    },
+    "config": {
+      "type": "object"
+    }
+  }
+}

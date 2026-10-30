@@ -19,6 +19,9 @@ import sys
 from pathlib import Path
 from typing import Any
 
+import pandas as pd
+
+from neurobranch.benchmark.inference import audit_paired_inputs
 from neurobranch.benchmark.reporting import ROOT
 
 STATUSES = {
@@ -101,9 +104,7 @@ def audit(reports: Path, *, tolerance: float = 1e-9) -> list[str]:
             if match and claim.get("estimate") is not None:
                 stated = float(match.group(1))
                 if abs(stated - float(claim["estimate"])) > 0.005 + tolerance:
-                    failures.append(
-                        f"{cid}: statement says {stated}, estimate is {claim['estimate']}"
-                    )
+                    failures.append(f"{cid}: statement says {stated}, estimate is {claim['estimate']}")
         expected = EXPECTED.get(str(cid))
         if expected is None:
             continue
@@ -122,12 +123,11 @@ def audit(reports: Path, *, tolerance: float = 1e-9) -> list[str]:
                     failures.append(
                         f"{cid}: {claim_key} {claim.get(claim_key)} != {source_payload.get(source_key)}"
                     )
-        if cid == "phase10-fold-ceiling" and claim.get("n_eval_animals") != int(
-            summary.get("fold_size", -1)
-        ):
+        if cid == "phase10-fold-ceiling" and claim.get("n_eval_animals") != int(summary.get("fold_size", -1)):
             failures.append(f"{cid}: n_eval_animals does not match summary fold_size")
     failures.extend(audit_phase11(tolerance=tolerance))
     failures.extend(audit_phase12(tolerance=tolerance))
+    failures.extend(audit_phase12r(tolerance=tolerance))
     return failures
 
 
@@ -152,16 +152,13 @@ def audit_phase11(*, tolerance: float = 1e-9) -> list[str]:
     if card.get("claim_statuses", {}).get("phase10-fold-ceiling") != "not_supported":
         failures.append("phase11: fold-ceiling claim must be not_supported")
     headline = summary.get("headline", {})
-    if not _numbers_match(
-        headline.get("coverage_0_8_pooled_reliability"), reliability, tolerance
-    ):
+    if not _numbers_match(headline.get("coverage_0_8_pooled_reliability"), reliability, tolerance):
         failures.append("phase11: summary headline does not match sensitivity table")
     if headline.get("extrapolation_gate_passed"):
         failures.append("phase11: extrapolation gate reported as passed")
     if headline.get("shrinkage_gate_passed"):
         failures.append("phase11: shrinkage gate reported as passed")
     return failures
-
 
 
 def audit_phase12(*, tolerance: float = 1e-9) -> list[str]:
@@ -173,7 +170,10 @@ def audit_phase12(*, tolerance: float = 1e-9) -> list[str]:
     summary = json.loads((phase12 / "summary.json").read_text(encoding="utf-8"))
     failures: list[str] = []
     gates = summary.get("gates", {})
-    gate_values = [gates.get(name) for name in ("g1_sbc", "g2_heldout_ppc", "g3_negative_control", "g4_prior_sensitivity")]
+    gate_values = [
+        gates.get(name)
+        for name in ("g1_sbc", "g2_heldout_ppc", "g3_negative_control", "g4_prior_sensitivity")
+    ]
     if not all(isinstance(value, bool) for value in gate_values):
         failures.append("phase12: gate flags must be booleans")
     expected_status = "adopted" if all(gate_values) else "not_adopted_gate_failures"
@@ -209,15 +209,158 @@ def audit_phase12(*, tolerance: float = 1e-9) -> list[str]:
             with (phase12 / "benchmark_cluster.csv").open(encoding="utf-8", newline="") as handle:
                 rows = list(csv.DictReader(handle))
             for row in rows:
-                if (
-                    row.get("status") == "supported"
-                    and (
-                        float(row["delta_ci_low"]) <= 0
-                        or float(row["mde_80"]) > float(benchmark.get("sesoi", 0.05))
-                    )
+                if row.get("status") == "supported" and (
+                    float(row["delta_ci_low"]) <= 0
+                    or float(row["mde_80"]) > float(benchmark.get("sesoi", 0.05))
                 ):
                     failures.append("phase12: unsupported benchmark status")
     return failures
+
+
+def audit_phase12r(*, tolerance: float = 1e-9) -> list[str]:
+    """Recompute Phase 12R gates from artifacts instead of trusting booleans."""
+    phase12r = ROOT / "reports" / "phase12r"
+    required = [
+        "summary.json",
+        "sbc.json",
+        "heldout_ppc.json",
+        "negative_control.json",
+        "prior_sensitivity.json",
+        "hierarchical_by_target.csv",
+        "min_events_sensitivity.csv",
+    ]
+    missing = [name for name in required if not (phase12r / name).exists()]
+    if missing:
+        return [f"phase12r: missing artifacts {missing}"]
+    summary = json.loads((phase12r / "summary.json").read_text(encoding="utf-8"))
+    sbc = json.loads((phase12r / "sbc.json").read_text(encoding="utf-8"))
+    ppc = json.loads((phase12r / "heldout_ppc.json").read_text(encoding="utf-8"))
+    negative = json.loads((phase12r / "negative_control.json").read_text(encoding="utf-8"))
+    prior = json.loads((phase12r / "prior_sensitivity.json").read_text(encoding="utf-8"))
+    failures: list[str] = []
+
+    sbc_n22 = sbc.get("parameters", {}).get("n22", {})
+    coverage = float(sbc_n22.get("coverage", float("nan")))
+    rank_p = float(sbc_n22.get("ks_pvalue", float("nan")))
+    primary_edge = float(summary.get("gates", {}).get("max_grid_edge_mass", float("nan")))
+    sbc_edge = float(sbc.get("max_edge_mass") or float("nan"))
+    edge = (
+        max(value for value in (primary_edge, sbc_edge) if math.isfinite(value))
+        if (math.isfinite(primary_edge) or math.isfinite(sbc_edge))
+        else float("nan")
+    )
+    attempted = int(sbc.get("n_fits", 0))
+    fit_fraction = (
+        (int(sbc.get("n_failed_fits", 0)) + int(sbc.get("n_edge_failures", 0))) / attempted
+        if attempted
+        else float("inf")
+    )
+    expected = {
+        "g1a_sbc_coverage": bool(math.isfinite(coverage) and 0.93 <= coverage <= 0.97),
+        "g1b_sbc_rank": bool(math.isfinite(rank_p) and rank_p > 0.01),
+        "g1c_grid_edge": bool(math.isfinite(edge) and edge < 0.05),
+        "g1d_fit_integrity": bool(attempted > 0 and fit_fraction <= 0.05),
+    }
+    expected["g1_sbc_all"] = all(expected.values())
+    expected["g2_heldout_ppc"] = bool(
+        ppc.get("status") == "ok"
+        and float(ppc.get("coverage", 0.0)) >= 0.90
+        and float(ppc.get("median_abs_error", 99.0)) <= 0.10
+    )
+    expected["g3_negative_control"] = bool(
+        negative.get("status") == "ok"
+        and float(negative.get("median_reliability_n22", 99.0)) <= 0.05
+        and float(negative.get("q95_reliability_n22", 99.0)) <= 0.15
+    )
+    prior_values = [
+        float(item["pooled_reliability_median"])
+        for item in prior.get("fits", {}).values()
+        if item.get("pooled_reliability_median") is not None
+    ]
+    prior_range = (max(prior_values) - min(prior_values)) if prior_values else float("nan")
+    expected["g4_prior_sensitivity"] = bool(math.isfinite(prior_range) and prior_range <= 0.05)
+    expected["all_gates"] = all(
+        expected[name]
+        for name in (
+            "g1a_sbc_coverage",
+            "g1b_sbc_rank",
+            "g1c_grid_edge",
+            "g1d_fit_integrity",
+            "g2_heldout_ppc",
+            "g3_negative_control",
+            "g4_prior_sensitivity",
+        )
+    )
+    for name, value in expected.items():
+        if summary.get("gates", {}).get(name) is not value:
+            failures.append(f"phase12r: {name} does not match artifacts")
+
+    hierarchical = summary.get("hierarchical", {})
+    reliability = float(hierarchical.get("pooled_reliability_median", float("nan")))
+    ceiling = float(hierarchical.get("pooled_ceiling_median", float("nan")))
+    if not (0.0 <= reliability <= 1.0 and 0.0 <= ceiling <= 1.0):
+        failures.append("phase12r: pooled reliability/ceiling outside [0, 1]")
+    if not _numbers_match(ceiling, math.sqrt(reliability), 1e-9):
+        failures.append("phase12r: ceiling is not sqrt(reliability)")
+
+    reference = float(summary.get("phase11_reference", {}).get("pooled_reliability", float("nan")))
+    estimate_close = bool(math.isfinite(reference) and abs(reliability - reference) <= 0.05)
+    if summary.get("estimate_within_0.05") is not estimate_close:
+        failures.append("phase12r: estimate_within_0.05 does not match artifacts")
+    if summary.get("mode") == "quick":
+        expected_status = "quick_mode_no_decision"
+    elif expected["all_gates"] and estimate_close:
+        expected_status = "adopted"
+    elif expected["all_gates"]:
+        expected_status = "not_adopted_estimate_mismatch"
+    else:
+        expected_status = "not_adopted_gate_failures"
+    if summary.get("status") != expected_status:
+        failures.append("phase12r: status does not follow recomputed gates")
+
+    targets = reports_table(phase12r / "hierarchical_by_target.csv")
+    ok = [row for row in targets if row["status"] == "ok"]
+    if len(ok) != int(hierarchical.get("n_ok", -1)):
+        failures.append("phase12r: n_ok does not match target table")
+    ineligible = [row for row in targets if row["status"] != "ok"]
+    if len(ineligible) != int(hierarchical.get("n_ineligible", -1)):
+        failures.append("phase12r: n_ineligible does not match target table")
+    if any(not row.get("reason") for row in ineligible):
+        failures.append("phase12r: ineligible target lacks a reason")
+    floored = sum(int(float(row["n_variance_floored"])) for row in ok)
+    cells = sum(int(float(row["n_observed_cells"])) for row in ok)
+    measured_fraction = floored / cells if cells else 0.0
+    if int(hierarchical.get("n_variance_floored", -1)) != floored:
+        failures.append("phase12r: n_variance_floored does not match target table")
+    if not _numbers_match(hierarchical.get("variance_floor_fraction"), measured_fraction, 1e-12):
+        failures.append("phase12r: variance_floor_fraction does not match target table")
+
+    sensitivity = reports_table(phase12r / "min_events_sensitivity.csv")
+    min_events = {int(float(row["min_events"])) for row in sensitivity}
+    if min_events != {1, 2}:
+        failures.append("phase12r: min_events sensitivity must contain 1 and 2")
+
+    claims_path = ROOT / "reports" / "phase10" / "claims.json"
+    predictions = ROOT / "reports" / "phase8" / "predictions.parquet"
+    if claims_path.exists() and predictions.exists():
+        audit = audit_paired_inputs(pd.read_parquet(predictions))
+        claims = json.loads(claims_path.read_text(encoding="utf-8")).get("claims", [])
+        benchmark = next(
+            (claim for claim in claims if claim.get("id") == "phase12-benchmark-cluster"),
+            None,
+        )
+        if (
+            benchmark is not None
+            and benchmark.get("status") in {"supported", "underpowered"}
+            and (audit.get("paired_y_true_mismatch_fraction") or 0.0) > 0.0
+        ):
+            failures.append("phase12r: benchmark claim remains positive despite unaligned y_true")
+    return failures
+
+
+def reports_table(path: Path) -> list[dict[str, str]]:
+    with path.open(encoding="utf-8", newline="") as handle:
+        return list(csv.DictReader(handle))
 
 
 def main(argv: list[str] | None = None) -> int:

@@ -129,6 +129,62 @@ def _validate_phase12(reports: Path, failures: list[str]) -> None:
         failures.append(f"missing report: {benchmark}")
 
 
+def _validate_phase12r(reports: Path, failures: list[str]) -> None:
+    summary = reports / "summary.json"
+    if not summary.exists():
+        failures.append(f"missing report: {summary}")
+        return
+    payload = json.loads(summary.read_text(encoding="utf-8"))
+    schema = json.loads(
+        files("neurobranch.schemas")
+        .joinpath("phase12r_summary.schema.json")
+        .read_text(encoding="utf-8")
+    )
+    errors = sorted(
+        Draft202012Validator(schema).iter_errors(payload), key=lambda error: list(error.path)
+    )
+    if errors:
+        failures.append("summary.json: " + "; ".join(error.message for error in errors))
+    else:
+        print("ok: summary.json (phase12r schema)")
+
+    targets = reports / "hierarchical_by_target.csv"
+    if not targets.exists():
+        failures.append(f"missing report: {targets}")
+        return
+    table = pd.read_csv(targets)
+    for column in ("target", "status", "reason", "reliability_n22", "ceiling_n22", "grid_edge_mass"):
+        if column not in table.columns:
+            failures.append(f"hierarchical_by_target.csv: missing {column}")
+    if "reliability_n22" in table.columns:
+        values = pd.to_numeric(table["reliability_n22"], errors="coerce").dropna()
+        if not values.between(0, 1).all():
+            failures.append("hierarchical_by_target.csv: reliability outside [0, 1]")
+    if "status" in table.columns and "reason" in table.columns:
+        bad = table[(table["status"] != "ok") & table["reason"].isna()]
+        if not bad.empty:
+            failures.append("hierarchical_by_target.csv: ineligible rows lack a reason")
+    print(f"ok: hierarchical_by_target.csv ({len(table)} rows)")
+
+    for name in ("sbc.json", "heldout_ppc.json", "negative_control.json", "prior_sensitivity.json"):
+        path = reports / name
+        if not path.exists():
+            failures.append(f"missing report: {path}")
+            continue
+        json.loads(path.read_text(encoding="utf-8"))
+        print(f"ok: {name}")
+
+    sensitivity = reports / "min_events_sensitivity.csv"
+    if not sensitivity.exists():
+        failures.append(f"missing report: {sensitivity}")
+    else:
+        table = pd.read_csv(sensitivity)
+        for column in ("min_events", "n_ok", "pooled_reliability_median"):
+            if column not in table.columns:
+                failures.append(f"min_events_sensitivity.csv: missing {column}")
+        print(f"ok: min_events_sensitivity.csv ({len(table)} rows)")
+
+
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--reports", type=Path, default=ROOT / "reports" / "phase10")
@@ -136,8 +192,11 @@ def main(argv: list[str] | None = None) -> int:
     args = parser.parse_args(argv)
 
     failures: list[str] = []
-    if args.reports.name == "phase12":
-        _validate_phase12(args.reports, failures)
+    if args.reports.name == "phase12" or args.reports.name.startswith("phase12r"):
+        if args.reports.name == "phase12":
+            _validate_phase12(args.reports, failures)
+        else:
+            _validate_phase12r(args.reports, failures)
         if failures:
             for failure in failures:
                 print(f"FAIL: {failure}", file=sys.stderr)

@@ -134,7 +134,8 @@ def simulation_based_calibration(
     ranks: dict[int, list[float]] = {n: [] for n in n_eval}
     covered: dict[int, list[bool]] = {n: [] for n in n_eval}
     widths: dict[int, list[float]] = {n: [] for n in n_eval}
-    failures = 0
+    failed_fits = 0
+    insufficient_draws = 0
     edge_failures = 0
     edge_masses: list[float] = []
     for rep in range(n_reps):
@@ -159,20 +160,18 @@ def simulation_based_calibration(
                 seed=int(rng.integers(0, 2**31 - 1)),
             )
             if fit.draws is None or fit.status != "ok":
-                failures += 1
+                failed_fits += 1
                 continue
             edge_mass = float(fit.row["grid_edge_mass"])
             edge_masses.append(edge_mass)
             if edge_mass >= 0.05:
                 edge_failures += 1
-            reliability = _reliability_draws(
-                fit.draws[:, 0], fit.draws[:, 1], simulated.nu, n_eval
-            )
+            reliability = _reliability_draws(fit.draws[:, 0], fit.draws[:, 1], simulated.nu, n_eval)
             for n in n_eval:
                 truth = _aligned_truth(sigma, tau, simulated.nu, simulated.n_responders, n)
                 values = reliability[n][np.isfinite(reliability[n])]
                 if values.size < 50:
-                    failures += 1
+                    insufficient_draws += 1
                     continue
                 below = float(np.sum(values < truth))
                 equal = float(np.sum(values == truth))
@@ -184,7 +183,9 @@ def simulation_based_calibration(
         "n_reps": int(n_reps),
         "targets_per_rep": int(targets_per_rep),
         "n_fits": int(n_reps * targets_per_rep),
-        "n_failures": int(failures),
+        "n_failed_fits": int(failed_fits),
+        "n_insufficient_draws": int(insufficient_draws),
+        "n_failures": int(failed_fits + insufficient_draws),
         "n_edge_failures": int(edge_failures),
         "max_edge_mass": float(max(edge_masses)) if edge_masses else None,
         "mean_edge_mass": float(np.mean(edge_masses)) if edge_masses else None,
@@ -443,18 +444,26 @@ def negative_control(
     )
     values = result.by_target.loc[result.by_target["status"] == "ok", "reliability_n22"]
     values = values[np.isfinite(values)]
+    excluded = result.by_target[result.by_target["status"] != "ok"]
+    reasons = (
+        excluded["reason"].fillna("unspecified").value_counts().to_dict()
+        if "reason" in excluded.columns
+        else {}
+    )
     if values.empty:
         return {
             "status": "no_eligible_targets",
             "n_requested": int(len(selected)),
             "n_targets": 0,
             "n_excluded": int(len(selected)),
+            "exclusion_reasons": reasons,
         }
     return {
         "status": "ok",
         "n_requested": int(len(selected)),
         "n_targets": int(len(values)),
         "n_excluded": int(len(selected) - len(values)),
+        "exclusion_reasons": reasons,
         "median_reliability_n22": float(values.median()),
         "q95_reliability_n22": float(np.quantile(values, 0.95)),
         "max_reliability_n22": float(values.max()),

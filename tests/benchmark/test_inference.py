@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import numpy as np
 import pandas as pd
+import pytest
 
 from neurobranch.benchmark.inference import inference_summary, paired_cluster_inference
 
@@ -15,6 +16,7 @@ def _predictions(n_animals: int = 16, n_targets: int = 4, n_neurons: int = 5) ->
         for target in range(n_targets):
             for neuron in range(n_neurons):
                 truth = rng.normal()
+                event_truth = truth + rng.normal(0, 0.3)
                 for event in range(2):
                     rows.append(
                         {
@@ -26,7 +28,7 @@ def _predictions(n_animals: int = 16, n_targets: int = 4, n_neurons: int = 5) ->
                             "model": "baseline",
                             "k": 0,
                             "strategy": "none",
-                            "y_true": truth + rng.normal(0, 0.3),
+                            "y_true": event_truth,
                             "y_pred": 0.0,
                         }
                     )
@@ -40,7 +42,7 @@ def _predictions(n_animals: int = 16, n_targets: int = 4, n_neurons: int = 5) ->
                             "model": "good",
                             "k": 4,
                             "strategy": "random",
-                            "y_true": truth + rng.normal(0, 0.3),
+                            "y_true": event_truth,
                             "y_pred": truth + rng.normal(0, 0.1),
                         }
                     )
@@ -86,3 +88,11 @@ def test_deterministic_seed() -> None:
     first = paired_cluster_inference(frame, baseline="baseline", n_boot=100, seed=9)
     second = paired_cluster_inference(frame, baseline="baseline", n_boot=100, seed=9)
     pd.testing.assert_frame_equal(first, second)
+
+
+def test_unaligned_truth_fails_closed() -> None:
+    frame = _predictions()
+    baseline = frame["model"] == "baseline"
+    frame.loc[baseline, "y_true"] = frame.loc[baseline, "y_true"] + 1.0
+    with pytest.raises(ValueError, match="not aligned"):
+        paired_cluster_inference(frame, baseline="baseline", n_boot=100)
