@@ -26,10 +26,13 @@ plugins:
 
 nav:
   - Home: README.md
+  - Current status: CURRENT_STATUS.md
+  - Phase 12R:
+      - Results: PHASE12R_RESULTS.md
+      - Hierarchical methods: METHODS_HIERARCHICAL.md
   - Phase 12:
       - Results: PHASE12_RESULTS.md
       - Analysis plan: PHASE12_ANALYSIS_PLAN.md
-      - Hierarchical methods: METHODS_HIERARCHICAL.md
   - Phase 11:
       - Results: PHASE11_RESULTS.md
       - Analysis plan: PHASE11_ANALYSIS_PLAN.md

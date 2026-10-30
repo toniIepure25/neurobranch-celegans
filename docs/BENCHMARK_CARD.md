@@ -1,11 +1,13 @@
-# Benchmark card: BoundedBench (NeuroBranch 1.2.0)
+# Benchmark card: BoundedBench (NeuroBranch 1.3.0)
 
-> **Phase 12 update.** The machine-readable Phase 11 card at
+> **Phase 12R update.** The machine-readable Phase 11 card at
 > `reports/phase11/benchmark_card.json` remains authoritative for the
-> coverage-aware ceiling **0.560**. Phase 12 fitted a hierarchical model
-> (point estimate 0.304, ceiling 0.551) but its SBC rank test, held-out
-> predictive check and negative control failed, so the interval is **not
-> calibrated** and 0.560 is retained. See `docs/PHASE12_RESULTS.md`.
+> coverage-aware ceiling **0.560**. The aligned Phase 12R fit gives 0.304 /
+> 0.551, but SBC rank uniformity, predictive median absolute error and the
+> negative control still fail, so the interval is **not calibrated** and 0.560 is
+> retained. The Phase 12 animal-cluster benchmark comparison is withdrawn
+> because baseline/model truth was not paired on events (C11). See
+> `docs/PHASE12R_RESULTS.md`.
 
 A benchmark card states what a benchmark measures, what it does not measure,
 and how a reader can reproduce it. This card covers the Phase 6-10 evaluation

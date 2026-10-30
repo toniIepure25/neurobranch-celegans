@@ -1,5 +1,49 @@
 # Changelog
 
+## 1.3.0 - 2026-10-30
+
+Aligned calibration correction, explicit variance-floor sensitivity and a
+withdrawn benchmark claim. The hierarchical interval remains uncalibrated and
+0.560 remains the only descriptive ceiling.
+
+### Added
+
+- `research/phase12r_protocol.md` and `research/phase12r_deviations.md`, frozen
+  before the corrected run. The suspected variance-loss bug was tested and not
+  reproduced; the actual defect was double centering/standardization plus an
+  uncentered SBC truth.
+- `scripts/phase12r_hierarchy.py`: aligned SBC/PPC/negative-control/prior run,
+  coverage and `min_events=2` sensitivities, frozen gates and a fail-closed
+  decision. `phase12r_manifest.py` writes artifact, input and protocol hashes.
+- `scripts/phase12r_inference_audit.py` and
+  `phase12r_inference_validation.py`: real paired-truth audit plus synthetic
+  type-I/coverage/power check.
+- `reports/phase12r/` and `reports/phase12r_first_pass/`; Phase 12R contract
+  tests; `schemas/phase12r_summary.schema.json`.
+- `docs/PHASE12R_RESULTS.md`, `docs/CURRENT_STATUS.md`, corrections C10/C11 and
+  a one-page status link in the docs index.
+
+### Changed
+
+- Phase 12R supersedes the original Phase 12 calibration evidence. SBC coverage
+  is 0.933, but rank uniformity fails (KS p=1.43e-06); PPC MAE is 0.207; the
+  negative control returns median R(22)=0.120 and q95=0.594. Status
+  `not_adopted_gate_failures`.
+- 79% of observed cells use the `1e-8` variance floor; `min_events=2` gives 36
+  targets and reliability 0.199. Reported as a limitation and predeclared
+  sensitivity, not hidden.
+- The Phase 12 benchmark cluster claim is withdrawn, not merely labelled
+  underpowered. `paired_cluster_inference` fails closed on unaligned truth.
+- Claims ledger updates the hierarchical interval notes and marks the benchmark
+  claim `not_supported`.
+
+### Fixed
+
+- SBC templates, fit transform and truth now use the same centering.
+- Negative-control artifacts record exclusion reasons.
+- Phase 12R reports are validated against a dedicated schema and recomputed
+  gates in `audit_claims.py`.
+
 ## 1.2.0 - 2026-10-30
 
 Hierarchical measurement audit, animal-cluster inference and release hardening.

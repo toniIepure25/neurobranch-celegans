@@ -4,14 +4,16 @@ title: "NeuroBranch: leakage-safe C. elegans dynamics and bounded virtual-pertur
 abstract: >-
   NeuroBranch is a research platform for C. elegans whole-brain population
   dynamics, latent branching and model-dependent virtual perturbation. Version
-  1.2.0 adds a hierarchical measurement audit, animal-cluster benchmark inference
-  and a model-conditional design table. The hierarchical posterior failed its
-  calibration gates, so the coverage-aware 0.560 ceiling remains descriptive and
-  no calibrated interval or ranking is claimed. Intervention outputs are
-  model-dependent and are not causally validated.
+  1.3.0 corrects the Phase 12 calibration harness and documents that the aligned
+  hierarchical model still fails rank uniformity, predictive error and the
+  negative control. The coverage-aware 0.560 ceiling remains descriptive; no
+  calibrated interval or ranking is claimed. The Phase 12 animal-cluster
+  benchmark comparison is withdrawn because baseline and model truth were not
+  paired on the same events. Intervention outputs are model-dependent and are
+  not causally validated.
 authors:
   - name: "NeuroBranch contributors"
-version: "1.2.0"
+version: "1.3.0"
 date-released: "2026-10-30"
 license: MIT
 keywords:

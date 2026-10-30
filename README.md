@@ -12,26 +12,35 @@ perturbation** on real calcium imaging and optogenetic atlases.
 > `interventions/safety.py` refuses to label any output as empirically
 > validated without a matched, provenance-checked intervention dataset.
 
-## What version 1.2.0 adds: hierarchical measurement audit (negative)
+## What version 1.3.0 adds: aligned calibration correction and a withdrawn benchmark claim
 
-Version 1.2.0 fits an explicit hierarchical measurement model with responder
-coverage, animal random effects and known cell-level sampling variance. The
-point estimate is **0.304** pooled reliability and **0.551** ceiling at 80%
-coverage, within 0.05 of the Phase 11 moment estimate (0.314 / 0.560). The
-posterior interval is **not calibrated**:
+Version 1.3.0 corrects the Phase 12 calibration harness. The suspected
+variance-loss bug was tested and **not reproduced**; the actual defect was
+double centering/standardization plus an uncentered SBC truth. The aligned rerun
+keeps the point estimate at **0.304** pooled reliability and **0.551** ceiling at
+80% coverage, within 0.05 of the Phase 11 moment estimate (0.314 / 0.560), but
+the posterior interval is still **not calibrated**:
 
-- SBC 22-animal coverage 0.923, below the [0.93, 0.97] gate; rank uniformity
-  failed (KS p = 1.4e-06);
-- held-out animal coverage 0.896 with median absolute error 0.191;
-- permuting responder labels within each animal gave median R(22) = 0.176.
+- SBC 22-animal coverage is 0.933 (pass), but rank uniformity fails
+  (KS p = 1.43e-06);
+- held-out animal coverage is 0.904 (pass) with median absolute error 0.207
+  (fail);
+- permuting responder labels within each animal gives median R(22) = 0.120 and
+  q95 = 0.594 (both fail);
+- 79% of observed cells have zero variance and use a `1e-8` floor; the
+  `min_events=2` sensitivity gives 36 targets and reliability 0.199.
 
 The 0.560 coverage-aware ceiling therefore remains the headline. No target
 ranking, calibrated interval or validated animal-budget guarantee is published.
-The animal-cluster benchmark audit also finds no supported configuration: the
-largest paired delta is +0.189 against static CRO, but MDE is 0.238 versus a
-0.05 SESOI and Holm p is 0.185. See
-[`docs/PHASE12_RESULTS.md`](docs/PHASE12_RESULTS.md),
-[`docs/METHODS_HIERARCHICAL.md`](docs/METHODS_HIERARCHICAL.md) and correction C9.
+
+The Phase 12 animal-cluster benchmark comparison is **withdrawn**: baseline and
+model `y_true` differ for 1,334 of 1,334 paired rows because the old merge paired
+aggregates rather than the same events. It is not an underpowered positive
+result. A synthetic check also found the remaining procedure undercovers
+(0.900--0.917 at nominal 0.95). See
+[`docs/PHASE12R_RESULTS.md`](docs/PHASE12R_RESULTS.md),
+[`docs/CORRECTIONS.md`](docs/CORRECTIONS.md) C10/C11 and
+[`docs/CURRENT_STATUS.md`](docs/CURRENT_STATUS.md).
 
 ## What version 1.1.0 adds: coverage sensitivity (read before the Phase 10 table)
 
