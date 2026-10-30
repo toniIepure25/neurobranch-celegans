@@ -1,0 +1,8 @@
+{
+  "status": "pass",
+  "n_issues": 0,
+  "issues": [],
+  "decision": "not_adopted_gate_failures",
+  "n_gates_failed": 8,
+  "primary_estimate": 0.05427091624796524
+}

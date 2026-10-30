@@ -1,0 +1,72 @@
+{
+  "artifacts": {
+    "coverage_sensitivity.csv": "023f5b1a9b2fa8c5053884c2c8aa7ce97a238f8fc2b8905ee635f7c37913733a",
+    "heldout_ppc.json": "1f0ef77e40f5ec45b579a12b15761a6be4b9f12942ca98bc59d3cbf88f89dcd0",
+    "hierarchical_by_target.csv": "a12dfa69931b0f4fe48796f21115a0d557310372694d20f6175bed26bcab58fc",
+    "min_events_sensitivity.json": "acab73b5c9da7385b39a187b7637649d3e9e9a064450616a9742784091d8aa78",
+    "negative_control.json": "64d685f600b8c4d5488ad7e6d5cf6c2ae38f239f452be8c29c47e2b7f16cdda0",
+    "prior_sensitivity.json": "6db969379dac6bc32d34a9a8d3299fd90dc5b553893c74c9f56e4ad28fe0e0fd",
+    "real_fit.json": "44207c80fc01407df910be1f140c54ca15784e3e39029b01c75f72f75ae96c66",
+    "reference_audit.json": "ac04d958a10e29c54bf244e70c9e85ea42599dbb3c98c734fa95d83b4b2daf53",
+    "reference_audit_bootstrap.csv": "5b39a4172243fe4c058f2acdb24ca23f238ea1424ee88c0d2d1cc21632096053",
+    "reference_audit_by_target.csv": "3989da51c9f80b8260a6fa5e81b5062008cb556e0b7770ea8c543e9a0c59d0bd",
+    "sbc.json": "f1349d7f2f30e1f2ee186f93f053403ba5cc59dd8550f1db739bce4e09c1f791",
+    "signflip_control.json": "deee2c2db229111542582aa02c3169bc852d10702823953741ad527e0ddde2b4",
+    "summary.json": "c4cedc74f18234cca887eeb9ebbbc4644f4bcb0d0bcf48730c90cd53801beebf",
+    "transport_status.json": "e504567c1d03522196b601e63e6eea577d4072985628cf48331203f9ed01b62e"
+  },
+  "created_utc": "2026-10-30T22:48:30+00:00",
+  "decision": "not_adopted_gate_failures",
+  "deviations": {
+    "path": "research/phase14_deviations.md",
+    "sha256": "2acfe342a872b1dc5fb3801c45c153f0b1fb63468fa8becc77dce1d158dca062"
+  },
+  "git_dirty": false,
+  "git_revision": "991ad2be7469e74ebbd96a5299903cbfc8a3f71c",
+  "input": {
+    "path": "reports/phase3/randi_trial_table_phase3.csv.gz",
+    "redistributed": false,
+    "sha256": "8186c96bcb33cdce15dc9ae88691e09fc596e42c5513310b6d6a636e4d5dd515"
+  },
+  "notes": [
+    "git_dirty reflects code/worktree changes outside reports/.",
+    "Artifact hashes cover every file except manifest.json, manifest.sha256 and validation.json.",
+    "The derived input table is referenced by hash and is not redistributed.",
+    "Hashes of text artifacts are LF-normalized for portability."
+  ],
+  "parameters": {
+    "config": {
+      "coverage": 0.8,
+      "draws": 2500,
+      "event_grid": 200,
+      "fold_size": 22,
+      "grid_resolution": 80,
+      "n_eval": [
+        1,
+        22
+      ],
+      "null_targets": 100,
+      "pi0": 0.5,
+      "ppc_splits": 20,
+      "ppc_targets": 40,
+      "sbc_reps": 1000,
+      "sbc_targets_per_rep": 3,
+      "seed": 12,
+      "slab_scale": 1.0
+    },
+    "seed": 12
+  },
+  "phase": "phase14",
+  "primary_model": "m4_spike_slab",
+  "protocol": {
+    "path": "research/phase14_protocol.md",
+    "sha256": "0ee533c71924c6c898d37c60807f273e9ff3f18fcd1d58194604ab41d07adb45"
+  },
+  "software": {
+    "numpy": "2.3.1",
+    "pandas": "2.3.3",
+    "platform": "Windows-10-10.0.19045-SP0",
+    "python": "3.13.5",
+    "uv_lock_sha256": "a660dbdc8cf4f03c31bffe6949645da709ff1fa15a4697f083bf27f37ee5f78f"
+  }
+}
