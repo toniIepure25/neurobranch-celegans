@@ -1,11 +1,11 @@
 {
   "artifacts": {
-    "ceiling_curve.csv": "4310da58ff8c0e0634b355594333080975f4e3f2f019239763b3a211af332c52",
-    "ceiling_curve_by_target.csv": "266e96844f4ef688f0b5f3596885b7c15365e74c2454fc9e341616095b3f1bca",
-    "profile_components.csv": "405273c0fefa3dd2abb38e80f7f50bd66a5261aaffa50eb375ce0c78cbd94486",
-    "reliability_by_target.csv": "f8175208e5679c8a9a25ec54f07bf0be9d674193ccfaf72f1d8a9025bab18a37",
-    "reliability_summary.json": "cb253e812d934488e1aad26b9ba9c752c9aaf897d6039525f546af0140645ff8",
-    "variance_components.json": "7bb294b0e9d5bcc86741a47a93ee2c6a9eda8e3c7a8c60f837f8818f82e9327f"
+    "ceiling_curve.csv": "ccbe15357150766bece82139348d47593a853de13cef98d33ae11020880f60f7",
+    "ceiling_curve_by_target.csv": "5461a782ab05753789aee843a1f2155eb1663bab554d25766611416e344dac34",
+    "profile_components.csv": "1d504d7aedf30969afb7fb8ae4ff4922992fc54c4a89cbf949c2c8949337b599",
+    "reliability_by_target.csv": "496235086e7627ef935fa97a8bf7ee3500680677e28b2ffc390d66eb118a5ba0",
+    "reliability_summary.json": "b90d5c28d48e6e79d39ac0a66aaba49c023b2c7ea2af1f743c38279adde60f6e",
+    "variance_components.json": "33acc525a0da4608716168c671d233dfac7c69cc8dd3346ccd1e417928da0339"
   },
   "created_utc": "2026-10-29T13:28:17+00:00",
   "git_revision": "154a141b05d35d7d4f3fe95bb7d2a85783d8341f",
@@ -39,7 +39,7 @@
     "repeat_min_responders": 3
   },
   "phase": "phase10",
-  "phase9_manifest_sha256": "04543fd3a5051c7bca14e28bcc18704af864180052c9df873a04c5e834a2c350",
+  "phase9_manifest_sha256": "94c72a5988a9c99567001daeaa65d146040853099c9c66372c9b57e74cfb2913",
   "software": {
     "numpy": "2.3.1",
     "pandas": "2.3.3",
