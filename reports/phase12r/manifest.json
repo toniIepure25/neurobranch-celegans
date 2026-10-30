@@ -13,13 +13,13 @@
     "sbc.json": "504676cd2e4c3f3bd355f3b3c4cae1b27550f5a701d5079043ed05147892d4db",
     "summary.json": "ab747a84b3e66e2bd87a0e25376f7ee6e081eeb51cce75a9e30bfa52a3c634ae"
   },
-  "created_utc": "2026-10-30T20:31:17+00:00",
+  "created_utc": "2026-10-30T20:40:38+00:00",
   "deviations": {
     "path": "research/phase12r_deviations.md",
     "sha256": "010252dccb165ac7a591028149a946760d3a7e4749f993392286b23e7eaac7bc"
   },
   "git_dirty": true,
-  "git_revision": "a1cfed1572c98a26d4d9d19d824829d7de6ed29e",
+  "git_revision": "581d7fe63282bebca0dfa2f9ab644ac06528db5c",
   "input": {
     "path": "reports/phase3/randi_trial_table_phase3.csv.gz",
     "redistributed": false,

@@ -102,9 +102,13 @@ def main(argv: list[str] | None = None) -> int:
         ],
     }
     manifest_path = args.reports / "manifest.json"
-    manifest_path.write_text(json.dumps(payload, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+    manifest_path.write_text(
+        json.dumps(payload, indent=2, sort_keys=True) + "\n", encoding="utf-8", newline="\n"
+    )
     checksum = _sha256(manifest_path)
-    (args.reports / "manifest.sha256").write_text(f"{checksum}  manifest.json\n", encoding="utf-8")
+    (args.reports / "manifest.sha256").write_text(
+        f"{checksum}  manifest.json\n", encoding="utf-8", newline="\n"
+    )
     print(f"wrote {manifest_path} ({len(artifacts)} artifacts, sha256 {checksum[:12]}...)")
     return 0
 
