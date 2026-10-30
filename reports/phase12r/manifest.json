@@ -1,0 +1,72 @@
+{
+  "artifacts": {
+    "README.md": "162d7b64eea931fadce7bbdf0cf0384efe4b9f7fefcce5dd9bcdb269f531cd06",
+    "coverage_sensitivity.csv": "81e6a1981eddc42a2c83bb2682100d068fb3ee5a5533d42ceffb22fb0a7395ce",
+    "design_posterior.csv": "8ec2522e6f770d99c192ce7921efee9a817e81bab7e1e520c0b2d76fccd8d90f",
+    "heldout_ppc.json": "aa7fda63bf3191a837f01443e4381fc0b323ec2155ce4a802132bc715567e2cc",
+    "hierarchical_by_target.csv": "3065205ce01a93a2722e9507750ca60c216d46cb31349935ac91175a7b1798b6",
+    "inference_alignment_audit.json": "b13325cdcc04991fb137f6fb3b017a7527249a3c67899c81dcce9f26ae9e8967",
+    "inference_validation.json": "411a28702b5d7e6002f0c4d1d84a3a7e817519ce3420a979b4173cd28fcdcf26",
+    "min_events_sensitivity.csv": "091353c5addf610e27418aad840f9b5159e44619b988129a61a0b1730e07bfaa",
+    "negative_control.json": "f86ce3c3d9f019f04844a86cdb3ca160c6891c69d73b6a1f2c19c4568d674539",
+    "prior_sensitivity.json": "650c3daec77b732b4289a12533b207010d64e65cb99b22604268d00c9a42e456",
+    "sbc.json": "96290d02c0ea08dec5ae0152b9b12f00eea413942984c10e724827248ea51785",
+    "summary.json": "3d66c3c2c0a2bc5935436ffede865bc6a0c1d866845735e487fe57645b56cb8a"
+  },
+  "created_utc": "2026-10-30T20:08:30+00:00",
+  "deviations": {
+    "path": "research/phase12r_deviations.md",
+    "sha256": "010252dccb165ac7a591028149a946760d3a7e4749f993392286b23e7eaac7bc"
+  },
+  "git_dirty": false,
+  "git_revision": "1e4993f9222bf4d7f51e7c8327f3ffff5fa97f4a",
+  "input": {
+    "path": "reports/phase3/randi_trial_table_phase3.csv.gz",
+    "redistributed": false,
+    "sha256": "8186c96bcb33cdce15dc9ae88691e09fc596e42c5513310b6d6a636e4d5dd515"
+  },
+  "mode": "full",
+  "notes": [
+    "git_dirty ignores manifest files being written but reflects all other worktree changes.",
+    "Artifact hashes cover every file except manifest.json and manifest.sha256.",
+    "The derived input table is referenced by hash and is not redistributed.",
+    "Quick-mode outputs are not decision evidence."
+  ],
+  "parameters": {
+    "config": {
+      "negative_draws": 1200,
+      "negative_grid": 50,
+      "negative_targets": 100,
+      "ppc_draws": 1200,
+      "ppc_grid": 60,
+      "ppc_splits": 20,
+      "ppc_targets": 40,
+      "primary_draws": 2500,
+      "primary_grid": 80,
+      "prior_draws": 1200,
+      "prior_grid": 50,
+      "sbc_draws": 2000,
+      "sbc_grid": 80,
+      "sbc_reps": 1000,
+      "sbc_targets": 3
+    },
+    "n_eval": [
+      1,
+      22
+    ],
+    "primary_coverage": 0.8,
+    "prior": "sigma, tau ~ HalfNormal(1) on the standardized scale",
+    "seed": 12
+  },
+  "phase": "phase12r",
+  "protocol": {
+    "path": "research/phase12r_protocol.md",
+    "sha256": "a8e60a3371822784e1fa4d01e2492a42de185ad42bc84cd57aa581d778f6ab00"
+  },
+  "software": {
+    "platform": "Windows-10-10.0.19045-SP0",
+    "python": "3.13.5",
+    "uv_lock_sha256": "217220b3c6efb2606252d4c06686c94e1d16e56afbb435c565a7cfc9ea89e233"
+  },
+  "status": "not_adopted_gate_failures"
+}
