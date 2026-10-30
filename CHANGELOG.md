@@ -1,5 +1,43 @@
 # Changelog
 
+## 1.3.1 - 2026-10-30
+
+Projection-consistent reliability and event-level variance. The event-variance
+model rejects the Phase 12R floor but still fails calibration; the decision is
+`not_adopted_gate_failures` and 0.560 remains the only descriptive ceiling.
+
+### Added
+
+- `src/neurobranch/benchmark/measurement.py`: M0 reference, M1 projection-scaled
+  known-variance and M2 event-variance models, including the scaled chi-square
+  event-variance posterior.
+- `src/neurobranch/benchmark/measurement_calibration.py`: SBC, within-animal
+  permutation, sign-flip, prior sensitivity and event-variance recovery.
+- `scripts/phase13_measurement.py`, `phase13_manifest.py`,
+  `phase13_validate.py`; `schemas/phase13_summary.schema.json`.
+- `reports/phase13/`, `docs/PHASE13_RESULTS.md`, `docs/METHODS_PHASE13.md`,
+  correction C12, and Phase 13 manuscript tables/figure.
+- Event-keyed paired inference with BCa intervals and fail-closed duplicate /
+  unaligned-truth checks.
+
+### Changed
+
+- M2 lowers pooled R(22) from 0.3035 to 0.2003 (ceiling 0.4475), showing the old
+  estimate was dominated by the one-event `1e-8` floor. M2 fails six frozen
+  gates: SBC coverage 0.9244, SBC rank KS p=0.00306, PPC not run, negative
+  control median 0.1485 (q95 0.4680), sign-flip median 0.1341 (q95 0.5796), and
+  Phase 11 agreement (0.1137 away).
+- M1 is nearly neutral for the point estimate (0.3138) but also fails SBC rank.
+  The centering algebra was not the main driver.
+- The claims ledger adds `phase13-event-variance-model` as `not_supported`.
+- Version bump to 1.3.1; Docker labels updated.
+
+### Fixed
+
+- `TargetData` carries event counts and cell variances through normalization and
+  target transformation.
+- M0 reproduces the historical Phase 12R path exactly (0.3035306473018537).
+
 ## 1.3.0 - 2026-10-30
 
 Aligned calibration correction, explicit variance-floor sensitivity and a
