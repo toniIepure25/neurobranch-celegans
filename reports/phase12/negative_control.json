@@ -1,0 +1,7 @@
+{
+  "status": "ok",
+  "n_targets": 26,
+  "median_reliability_n22": 0.17590236325865327,
+  "q95_reliability_n22": 0.5247926816219909,
+  "max_reliability_n22": 0.6197910285401176
+}

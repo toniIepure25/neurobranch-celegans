@@ -127,6 +127,7 @@ def audit(reports: Path, *, tolerance: float = 1e-9) -> list[str]:
         ):
             failures.append(f"{cid}: n_eval_animals does not match summary fold_size")
     failures.extend(audit_phase11(tolerance=tolerance))
+    failures.extend(audit_phase12(tolerance=tolerance))
     return failures
 
 
@@ -159,6 +160,63 @@ def audit_phase11(*, tolerance: float = 1e-9) -> list[str]:
         failures.append("phase11: extrapolation gate reported as passed")
     if headline.get("shrinkage_gate_passed"):
         failures.append("phase11: shrinkage gate reported as passed")
+    return failures
+
+
+
+def audit_phase12(*, tolerance: float = 1e-9) -> list[str]:
+    """Cross-check the Phase 12 gates, estimates and benchmark status."""
+    phase12 = ROOT / "reports" / "phase12"
+    required = ["summary.json", "hierarchical_by_target.csv", "benchmark_cluster.csv"]
+    if not all((phase12 / name).exists() for name in required):
+        return []
+    summary = json.loads((phase12 / "summary.json").read_text(encoding="utf-8"))
+    failures: list[str] = []
+    gates = summary.get("gates", {})
+    gate_values = [gates.get(name) for name in ("g1_sbc", "g2_heldout_ppc", "g3_negative_control", "g4_prior_sensitivity")]
+    if not all(isinstance(value, bool) for value in gate_values):
+        failures.append("phase12: gate flags must be booleans")
+    expected_status = "adopted" if all(gate_values) else "not_adopted_gate_failures"
+    if summary.get("status") != expected_status:
+        failures.append("phase12: status does not follow the gate flags")
+    hierarchical = summary.get("hierarchical", {})
+    for key in ("pooled_reliability_median", "pooled_ceiling_median"):
+        value = hierarchical.get(key)
+        if not isinstance(value, (int, float)) or not 0.0 <= float(value) <= 1.0:
+            failures.append(f"phase12: {key} is not a probability")
+    ceiling = hierarchical.get("pooled_ceiling_median")
+    reliability = hierarchical.get("pooled_reliability_median")
+    if (
+        isinstance(ceiling, (int, float))
+        and isinstance(reliability, (int, float))
+        and not _numbers_match(float(ceiling), math.sqrt(float(reliability)), 1e-9)
+    ):
+        failures.append("phase12: hierarchical ceiling is not sqrt(reliability)")
+    moment = summary.get("moment_phase11", {})
+    phase11_summary_path = ROOT / "reports" / "phase11" / "summary.json"
+    if phase11_summary_path.exists():
+        phase11 = json.loads(phase11_summary_path.read_text(encoding="utf-8"))
+        expected = phase11.get("headline", {}).get("coverage_0_8_pooled_reliability")
+        if expected is not None and not _numbers_match(moment.get("pooled_reliability"), expected, tolerance):
+            failures.append("phase12: Phase 11 moment reference drifted")
+    if gates.get("g1_sbc") is False and summary.get("status") == "adopted":
+        failures.append("phase12: adopted despite failed SBC")
+    benchmark_path = phase12 / "benchmark_cluster.json"
+    if benchmark_path.exists():
+        benchmark = json.loads(benchmark_path.read_text(encoding="utf-8"))
+        if benchmark.get("n_supported", 0) > 0:
+            # Supported entries must have a positive paired lower bound and MDE <= SESOI.
+            with (phase12 / "benchmark_cluster.csv").open(encoding="utf-8", newline="") as handle:
+                rows = list(csv.DictReader(handle))
+            for row in rows:
+                if (
+                    row.get("status") == "supported"
+                    and (
+                        float(row["delta_ci_low"]) <= 0
+                        or float(row["mde_80"]) > float(benchmark.get("sesoi", 0.05))
+                    )
+                ):
+                    failures.append("phase12: unsupported benchmark status")
     return failures
 
 

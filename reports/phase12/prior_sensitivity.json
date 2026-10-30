@@ -1,0 +1,26 @@
+{
+  "coverage": 0.8,
+  "fits": {
+    "0.5": {
+      "status": "ok_with_failures",
+      "pooled_reliability_median": 0.2599199708557377,
+      "single_animal_reliability_median": 0.015713095877092242,
+      "pooled_ceiling_median": 0.5098234702872532,
+      "n_ok": 126
+    },
+    "1": {
+      "status": "ok_with_failures",
+      "pooled_reliability_median": 0.2615606648577714,
+      "single_animal_reliability_median": 0.015845261874725954,
+      "pooled_ceiling_median": 0.5114300195117328,
+      "n_ok": 126
+    },
+    "2": {
+      "status": "ok_with_failures",
+      "pooled_reliability_median": 0.2630432822104624,
+      "single_animal_reliability_median": 0.015965599782604645,
+      "pooled_ceiling_median": 0.5128774534042829,
+      "n_ok": 126
+    }
+  }
+}

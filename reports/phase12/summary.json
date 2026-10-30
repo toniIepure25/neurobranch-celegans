@@ -1,0 +1,52 @@
+{
+  "phase": 12,
+  "status": "not_adopted_gate_failures",
+  "primary_coverage": 0.8,
+  "n_eval": [
+    1,
+    22
+  ],
+  "model": "hierarchical additive model with animal centering and known cell sampling variance",
+  "prior": "sigma, tau ~ HalfNormal(1) on the standardized scale",
+  "hierarchical": {
+    "pooled_reliability_median": 0.3035306473018537,
+    "pooled_ceiling_median": 0.5509361553772394,
+    "single_animal_reliability_median": 0.019430984446549504,
+    "n_ok": 126,
+    "n_ineligible": 133
+  },
+  "moment_phase11": {
+    "pooled_reliability": 0.3136077301426884,
+    "pooled_ceiling": 0.5600069018705827
+  },
+  "design": {
+    "status": "ok",
+    "n_targets": 126,
+    "n_reached": 31,
+    "median_required_animals": 29.0,
+    "max_required_animals": 59,
+    "caveat": "Planning approximation conditional on the hierarchical model; not prospectively validated."
+  },
+  "difference_vs_moment": -0.010077082840834695,
+  "reproduction_within_0.05": true,
+  "gates": {
+    "g1_sbc": false,
+    "g2_heldout_ppc": false,
+    "g3_negative_control": false,
+    "g4_prior_sensitivity": true,
+    "sbc_coverage_n22": 0.9233333333333333,
+    "sbc_rank_ks_pvalue": 1.3786940804282969e-06,
+    "max_grid_edge_mass": 0.006857106996704696,
+    "ppc_coverage": 0.8961038961038961,
+    "ppc_median_abs_error": 0.1914586354287957,
+    "negative_median_n22": 0.17590236325865327,
+    "negative_q95_n22": 0.5247926816219909,
+    "prior_range": 0.0031233113547247116
+  },
+  "decision": "Gates failed; retain Phase 11 coverage-aware 0.560 and do not call a hierarchical interval calibrated.",
+  "commands": [
+    "python scripts/phase12_hierarchy.py",
+    "python scripts/phase12_benchmark.py",
+    "python scripts/phase12_manifest.py"
+  ]
+}

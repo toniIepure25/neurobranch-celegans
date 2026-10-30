@@ -89,6 +89,46 @@ def _validate_csv(report: Path, contract: dict[str, list[str]], failures: list[s
         print(f"ok: {report.name} ({len(table)} rows)")
 
 
+def _validate_phase12(reports: Path, failures: list[str]) -> None:
+    summary = reports / "summary.json"
+    if not summary.exists():
+        failures.append(f"missing report: {summary}")
+        return
+    payload = json.loads(summary.read_text(encoding="utf-8"))
+    schema = json.loads(
+        files("neurobranch.schemas").joinpath("phase12_summary.schema.json").read_text(encoding="utf-8")
+    )
+    errors = sorted(Draft202012Validator(schema).iter_errors(payload), key=lambda error: list(error.path))
+    if errors:
+        failures.append("summary.json: " + "; ".join(error.message for error in errors))
+    else:
+        print("ok: summary.json (phase12 schema)")
+
+    targets = reports / "hierarchical_by_target.csv"
+    if targets.exists():
+        table = pd.read_csv(targets)
+        for column in ("target", "status", "reliability_n22", "ceiling_n22", "grid_edge_mass"):
+            if column not in table.columns:
+                failures.append(f"hierarchical_by_target.csv: missing {column}")
+        if "reliability_n22" in table.columns:
+            values = pd.to_numeric(table["reliability_n22"], errors="coerce").dropna()
+            if not values.between(0, 1).all():
+                failures.append("hierarchical_by_target.csv: reliability outside [0, 1]")
+        print(f"ok: hierarchical_by_target.csv ({len(table)} rows)")
+    else:
+        failures.append(f"missing report: {targets}")
+
+    benchmark = reports / "benchmark_cluster.csv"
+    if benchmark.exists():
+        table = pd.read_csv(benchmark)
+        for column in ("delta", "delta_ci_low", "delta_ci_high", "p_holm", "mde_80", "status"):
+            if column not in table.columns:
+                failures.append(f"benchmark_cluster.csv: missing {column}")
+        print(f"ok: benchmark_cluster.csv ({len(table)} rows)")
+    else:
+        failures.append(f"missing report: {benchmark}")
+
+
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--reports", type=Path, default=ROOT / "reports" / "phase10")
@@ -96,6 +136,13 @@ def main(argv: list[str] | None = None) -> int:
     args = parser.parse_args(argv)
 
     failures: list[str] = []
+    if args.reports.name == "phase12":
+        _validate_phase12(args.reports, failures)
+        if failures:
+            for failure in failures:
+                print(f"FAIL: {failure}", file=sys.stderr)
+            return 1
+        return 0
     for name, choices in JSON_TARGETS.items():
         report = args.reports / name
         if not report.exists():

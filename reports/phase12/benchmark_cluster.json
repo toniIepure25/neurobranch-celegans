@@ -1,0 +1,11 @@
+{
+  "status": "ok",
+  "unit": "animal_cluster",
+  "n_configurations": 5,
+  "n_supported": 0,
+  "sesoi": 0.05,
+  "best_supported_delta": null,
+  "caveat": "Supported means the paired animal-cluster interval excludes zero and MDE <= SESOI.",
+  "bootstrap": 1000,
+  "baseline": "cro_static"
+}

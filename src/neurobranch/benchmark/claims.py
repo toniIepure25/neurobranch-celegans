@@ -213,6 +213,53 @@ def build_claims(reliability_summary: dict[str, Any]) -> list[Claim]:
                 "sampling claim, and is retained only as a historical artifact."
             ),
         ),
+        Claim(
+            id="phase12-hierarchical-interval",
+            statement=(
+                "The Phase 12 hierarchical posterior interval is calibrated for the "
+                "coverage-aware pooled reliability."
+            ),
+            status="not_supported",
+            test="calibration_gate",
+            estimate=0.3035306473018537,
+            estimand="pooled_fold",
+            n_eval_animals=22,
+            evidence=(
+                "reports/phase12/summary.json",
+                "reports/phase12/sbc.json",
+                "reports/phase12/heldout_ppc.json",
+                "reports/phase12/negative_control.json",
+            ),
+            notes=(
+                "SBC rank uniformity failed (KS p=1.4e-06), held-out coverage was 0.896 "
+                "with median absolute error 0.191, and the profile-permutation negative "
+                "control gave median R(22)=0.176. The point estimate 0.304 is within 0.05 "
+                "of the Phase 11 0.314 but the interval is not calibrated; 0.560 remains "
+                "the only descriptive ceiling."
+            ),
+        ),
+        Claim(
+            id="phase12-benchmark-cluster",
+            statement=(
+                "A benchmark configuration beats the static CRO baseline by more than the "
+                "0.05 smallest effect of interest in the animal-cluster analysis."
+            ),
+            status="underpowered",
+            test="superiority",
+            estimate=0.188908,
+            margin=0.05,
+            mde=0.237901,
+            estimand="animal_cluster",
+            evidence=(
+                "reports/phase12/benchmark_cluster.csv",
+                "reports/phase12/benchmark_cluster.json",
+            ),
+            notes=(
+                "The largest paired delta was 0.189 (global_mean), but its Holm-adjusted "
+                "p-value was 0.185 and MDE 0.238 exceeded SESOI 0.05. No configuration is "
+                "supported as superior."
+            ),
+        ),
         _superiority_claim(
             claim_id="phase8-pair-advantage",
             statement="APT(k=0) improves pair-level Spearman over the static CRO baseline.",

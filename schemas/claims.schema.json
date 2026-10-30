@@ -116,6 +116,7 @@
               "single_animal",
               "repeat",
               "pooled_fold",
+              "animal_cluster",
               "superiority",
               "equivalence",
               "descriptive",
