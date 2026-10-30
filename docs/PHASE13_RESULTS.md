@@ -4,6 +4,13 @@
 `not_adopted_gate_failures`. This is a negative measurement-model result, not a
 biological discovery.
 
+> **Phase 14A follow-up.** The Phase 13 G6 comparison used a different one-event
+> variance treatment from the Phase 11 reference. Phase 14A reproduced the
+> reference and found it robust under a robust event variance (V1 0.3006 versus
+> V0 0.3136; delta 0.0131). The Phase 13 negative decision stands because its SBC
+> rank, null controls, and unrun PPC fail independently. See
+> [REFERENCE_AUDIT.md](REFERENCE_AUDIT.md) and correction C13.
+
 **Protocol:** `research/phase13_protocol.md` (frozen before the full run)
 **Deviations:** `research/phase13_deviations.md` (D1--D6, recorded before
 interpretation)
