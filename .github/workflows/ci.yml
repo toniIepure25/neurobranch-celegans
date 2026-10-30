@@ -67,6 +67,10 @@ jobs:
         if: matrix.python-version == '3.13'
         run: python scripts/validate_reports.py --reports reports/phase12r
 
+      - name: Validate Phase 13 reports
+        if: matrix.python-version == '3.13'
+        run: python scripts/phase13_validate.py --reports reports/phase13
+
       - name: Phase 12R report contracts
         if: matrix.python-version == '3.13'
         run: python -m pytest tests/test_phase12r_reports.py -q

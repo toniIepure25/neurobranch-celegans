@@ -11,14 +11,15 @@ from typing import Any
 ROOT = Path(__file__).resolve().parents[1]
 SCHEMA = ROOT / "schemas" / "phase13_summary.schema.json"
 DEFAULT_REPORTS = ROOT / "reports" / "phase13"
+TEXT_SUFFIXES = {".json", ".csv", ".md", ".txt", ".sha256"}
 
 
 def _sha256(path: Path) -> str:
-    digest = hashlib.sha256()
-    with path.open("rb") as handle:
-        for chunk in iter(lambda: handle.read(1 << 20), b""):
-            digest.update(chunk)
-    return digest.hexdigest()
+    """Hash with LF normalization so the check is portable across checkouts."""
+    data = path.read_bytes()
+    if path.suffix.lower() in TEXT_SUFFIXES:
+        data = data.replace(b"\r\n", b"\n").replace(b"\r", b"\n")
+    return hashlib.sha256(data).hexdigest()
 
 
 def _issue(code: str, message: str, **context: Any) -> dict[str, Any]:

@@ -16,14 +16,20 @@ ROOT = Path(__file__).resolve().parents[1]
 INPUT = ROOT / "reports" / "phase3" / "randi_trial_table_phase3.csv.gz"
 PROTOCOL = ROOT / "research" / "phase13_protocol.md"
 DEVIATIONS = ROOT / "research" / "phase13_deviations.md"
+TEXT_SUFFIXES = {".json", ".csv", ".md", ".txt", ".sha256"}
 
 
 def _sha256(path: Path) -> str:
-    digest = hashlib.sha256()
-    with path.open("rb") as handle:
-        for chunk in iter(lambda: handle.read(1 << 20), b""):
-            digest.update(chunk)
-    return digest.hexdigest()
+    """Hash a file after LF normalization for text artifacts.
+
+    Report files are stored in Git with LF endings but may be checked out with
+    CRLF on Windows.  Normalizing makes the manifest portable across the CI
+    matrix and makes the recorded digest match the committed blob.
+    """
+    data = path.read_bytes()
+    if path.suffix.lower() in TEXT_SUFFIXES:
+        data = data.replace(b"\r\n", b"\n").replace(b"\r", b"\n")
+    return hashlib.sha256(data).hexdigest()
 
 
 def _git(*args: str) -> str:
