@@ -1,25 +1,25 @@
 {
   "artifacts": {
     "README.md": "162d7b64eea931fadce7bbdf0cf0384efe4b9f7fefcce5dd9bcdb269f531cd06",
-    "coverage_sensitivity.csv": "81e6a1981eddc42a2c83bb2682100d068fb3ee5a5533d42ceffb22fb0a7395ce",
-    "design_posterior.csv": "8ec2522e6f770d99c192ce7921efee9a817e81bab7e1e520c0b2d76fccd8d90f",
-    "heldout_ppc.json": "aa7fda63bf3191a837f01443e4381fc0b323ec2155ce4a802132bc715567e2cc",
-    "hierarchical_by_target.csv": "3065205ce01a93a2722e9507750ca60c216d46cb31349935ac91175a7b1798b6",
-    "inference_alignment_audit.json": "b13325cdcc04991fb137f6fb3b017a7527249a3c67899c81dcce9f26ae9e8967",
-    "inference_validation.json": "411a28702b5d7e6002f0c4d1d84a3a7e817519ce3420a979b4173cd28fcdcf26",
-    "min_events_sensitivity.csv": "091353c5addf610e27418aad840f9b5159e44619b988129a61a0b1730e07bfaa",
-    "negative_control.json": "f86ce3c3d9f019f04844a86cdb3ca160c6891c69d73b6a1f2c19c4568d674539",
-    "prior_sensitivity.json": "650c3daec77b732b4289a12533b207010d64e65cb99b22604268d00c9a42e456",
-    "sbc.json": "96290d02c0ea08dec5ae0152b9b12f00eea413942984c10e724827248ea51785",
-    "summary.json": "3d66c3c2c0a2bc5935436ffede865bc6a0c1d866845735e487fe57645b56cb8a"
+    "coverage_sensitivity.csv": "0e527ecadf73f0804932be46a504eeed5ebfeac7f25a8e672e0d5d26527494e9",
+    "design_posterior.csv": "8b96a323e76414ed3ae9575c2194fb9e1316241495d1978c8210c7978d434326",
+    "heldout_ppc.json": "e46e4ae5df2e1c7e17610fbe544cd0066805d86b6d6ae0d02cc3c1e16d280bb8",
+    "hierarchical_by_target.csv": "aea029695649939286d00492fd08439b8842e627335a56444d088d3fe471d6aa",
+    "inference_alignment_audit.json": "d1f3846903c0778c3f2bc90c7801995f945a127d7c9fc54117d727a2724d6c4b",
+    "inference_validation.json": "e2924e449e168a55a203c7f76d9f7e4ec432ee7680bb69b53e52057534757d8e",
+    "min_events_sensitivity.csv": "f589cd998d462dc751aec87eb047096f95026797a3a4916e09c17774551ed099",
+    "negative_control.json": "17582c8d70c87bc957d6417f2fc46a133a38641239ccca818fc6568325c9f948",
+    "prior_sensitivity.json": "ab1133d579816214e5b22a24e4ef7870326336b7e4937c90efc31182174f85f4",
+    "sbc.json": "504676cd2e4c3f3bd355f3b3c4cae1b27550f5a701d5079043ed05147892d4db",
+    "summary.json": "ab747a84b3e66e2bd87a0e25376f7ee6e081eeb51cce75a9e30bfa52a3c634ae"
   },
-  "created_utc": "2026-10-30T20:08:30+00:00",
+  "created_utc": "2026-10-30T20:31:17+00:00",
   "deviations": {
     "path": "research/phase12r_deviations.md",
     "sha256": "010252dccb165ac7a591028149a946760d3a7e4749f993392286b23e7eaac7bc"
   },
-  "git_dirty": false,
-  "git_revision": "1e4993f9222bf4d7f51e7c8327f3ffff5fa97f4a",
+  "git_dirty": true,
+  "git_revision": "a1cfed1572c98a26d4d9d19d824829d7de6ed29e",
   "input": {
     "path": "reports/phase3/randi_trial_table_phase3.csv.gz",
     "redistributed": false,
