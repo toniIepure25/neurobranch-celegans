@@ -1,27 +1,27 @@
 {
   "artifacts": {
     "README.md": "63609b0948db5cd7f4660cae2303b1ca8f1a45cc0c99f054516232fd8c1c1c2b",
-    "coverage_sensitivity.csv": "8a860e1ea4a7ee075fd1b061f1241e4fd9b315dad6f88c90c54d1e9369aba55d",
-    "hierarchical_by_target.csv": "47a55601bbad9960052901376bdc1d853c059bd75132a74404ba1676c3f33710",
-    "hierarchical_by_target_m0_reference.csv": "8a88b71516af031e955339ed94cbf242d75cc6a3f547836c5588b81d8de87adc",
-    "hierarchical_by_target_m1_projection_scaled.csv": "e66c1ec33081395cca0a15f70313aa100fd7a3c139601298e97a0407c97470dc",
-    "hierarchical_by_target_m2_event_variance.csv": "47a55601bbad9960052901376bdc1d853c059bd75132a74404ba1676c3f33710",
-    "min_events_sensitivity.csv": "fd7436a634e9d2727c2ba920a8cd651119b40455a8e0c2c3b30648db5b618c82",
-    "negative_control.json": "9513cdf400f04fc94fc457df66c65ee7c4ff6a31d8375251d6e77333beb5808b",
-    "prior_sensitivity.json": "c16dd823f2e3ac10d64f1f28d64a822b5eb671791eab54dfe0af82a93a50da6d",
-    "sbc.json": "86a4698865b81f83209074d1147495cbc6b72c2ab2705c56712623b6bb9b43c8",
-    "sbc_m1.json": "387e0bc752e1bd1152e4568ccd4950cea0a79851153107e3ac696000e981bf24",
-    "signflip_control.json": "966ec99426c51c97ff82540b06e302667ec20bb41d8c0da709f4ff02fe0ad8c3",
-    "summary.json": "aff311dbbb46726be744e772d4ca721409d8788fd62f701f0dd289113998ad2c"
+    "coverage_sensitivity.csv": "042e19dc354fb6304eb3e4beb99b65719e0ca14bf9f407e0389ee1a5db70f7ba",
+    "hierarchical_by_target.csv": "e5d322cb25916f2f3b27f4e6b6ab1eb271b9cbc63897696fe10d42756a6a8248",
+    "hierarchical_by_target_m0_reference.csv": "1b1a620d7777fdb668d32a53a6c25b96b0382b5a33e5b6a12be0ec6eb687cfd8",
+    "hierarchical_by_target_m1_projection_scaled.csv": "50e2f9ec3bd5ea38fe27b5f9dbf627abb30be743fb98af70a32f56d03837ee73",
+    "hierarchical_by_target_m2_event_variance.csv": "e5d322cb25916f2f3b27f4e6b6ab1eb271b9cbc63897696fe10d42756a6a8248",
+    "min_events_sensitivity.csv": "e19cd723c250db20ba7a528e6217e0a6e5cfea80f4c7447e45630e2cfbad0d7c",
+    "negative_control.json": "5aeb5f890567340ff8cfceac4d16afcd62e71797bf6fadea3c82c9f9ef455831",
+    "prior_sensitivity.json": "4c5ebcaa9215b896985294a0261320fb04a65b6da008eb277bcb9e7fb6817699",
+    "sbc.json": "5821df870e2749b1eddc2c9f8ed911d6a35a5b08384e4c4883953600013d5aa8",
+    "sbc_m1.json": "11e2f6069c22905627206099398458b77aa441c9325588d3e3db2b16f7ea9861",
+    "signflip_control.json": "2b989a15e662eb937213d397430e92821bc60e63ed1b15c5858439dd480f2a28",
+    "summary.json": "b8225c06caadbba8de4f0bc36df906962ce519c5e3937dde628289422c7120a6"
   },
-  "created_utc": "2026-10-30T21:37:15+00:00",
+  "created_utc": "2026-10-30T21:45:20+00:00",
   "decision": "not_adopted_gate_failures",
   "deviations": {
     "path": "research/phase13_deviations.md",
     "sha256": "513a915373a64e9a40401e55ce43bfd8484fa982e1b67af0b4e746a42d3e4af3"
   },
   "git_dirty": false,
-  "git_revision": "c114bf2efa4979f027b4b1dd1fb6068ab96f73ea",
+  "git_revision": "74622c854417dd3e113f964267f7ba73b1c51b39",
   "input": {
     "path": "reports/phase3/randi_trial_table_phase3.csv.gz",
     "redistributed": false,
