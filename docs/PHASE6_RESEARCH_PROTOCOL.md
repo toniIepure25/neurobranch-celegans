@@ -166,7 +166,7 @@ Behaviour labels are inferred from AVA/SMD/RIB calcium activity. If the probe is
 ### Support
 
 - kNN support fitted on training states.
-- Threshold calibrated at the 95% quantile of validation distances; 90% and 99% reported as sensitivity.
+- Threshold calibrated at the 99% quantile of validation distances; 90% and 95% reported as sensitivity. The original 95% primary was not used because the training-only envelope was badly miscalibrated; the change is recorded in `PHASE6_SIMULATOR_DEVIATIONS.md`.
 - Add PCA Mahalanobis and per-neuron z-extreme diagnostics.
 - Report the old training-only 99% threshold for continuity.
 

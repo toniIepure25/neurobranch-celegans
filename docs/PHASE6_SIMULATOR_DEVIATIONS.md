@@ -4,7 +4,7 @@ Changes from the frozen protocol, with timing relative to test inspection.
 
 | Decision | Timing | Reason | Consequence |
 |---|---|---|---|
-| Default support threshold changed to validation 99th percentile | before test | training-only LOO envelope flagged 79% of selected-model states; no external calibration | OOD fractions drop; old threshold retained for continuity |
+| Default support threshold set to validation 99th percentile, not the original 95% primary | before test | training-only LOO envelope flagged 79% of selected-model states; no external calibration | OOD fractions drop; 90/95 sensitivity reported; protocol wording corrected to match the run |
 | Real history window replaces repeated `x0` | before test | confirmed timing/history bug | GRU results change; h1 models reproduce exactly |
 | Autocorrelation metric rewritten | before test | old formula correlated concatenated blocks | corrected errors are higher |
 | Gate 2 uses free-running skill | before test | one-step ΔR² is not dynamical evidence | Gate 2 is now fail |

@@ -5,9 +5,10 @@
   "test_block_reused": true,
   "git": {
     "branch": "research/phase6-dynamical-validation",
-    "head": "01e2b548aa275e424e1626c56e7dc1cde3e492cf",
+    "head": "3cf4db4ce19487c0a4bde716535ffd2110079166",
     "start_head": "8d945f9ad755aabb4f0a30e93c2f24a8928a0614",
     "recent_commits": [
+      "3cf4db4 research: add phase6 simulator provenance manifest",
       "01e2b54 research: record phase6 exploratory validation and negative gates",
       "c1c1d68 research: add phase6 autonomous simulators and evaluation contract",
       "51c2b3f research: audit simulator timing and freeze phase6 protocol",
@@ -18,11 +19,11 @@
       "66ce57d feat: validate simulator gates against a bundled schema",
       "1714647 feat: add core dynamics simulator tab",
       "37e9347 docs: visualize simulator trajectories, branching and perturbations",
-      "b1ef4d5 research: sweep named-neuron virtual perturbations with controls",
-      "9ba52f9 research: test simulated reversal branching against nulls"
+      "b1ef4d5 research: sweep named-neuron virtual perturbations with controls"
     ],
     "status_porcelain": [
-      "M scripts/phase6_simulator_manifest.py"
+      "M docs/PHASE6_RESEARCH_PROTOCOL.md",
+      " M docs/PHASE6_SIMULATOR_DEVIATIONS.md"
     ]
   },
   "environment": {
@@ -41,7 +42,7 @@
   "config": "configs\\experiments\\blocked_suite.yaml",
   "config_sha256": "742af528d660643df8a713e3e9ba537e795bd18ad8f7944587e271de8a180342",
   "data_sha256": "7531811c1718e26a0455f59cb2f8188cf25809278cfea85770dfe03315a0098a",
-  "protocol_sha256": "0c3eff58c1b8f464339cb6af65a4f042725ece5cd69de19c456de3f2d66d3c83",
+  "protocol_sha256": "81200e3abd888b2d443264001c2434389ec36cf801c4b62e77718d766760ed56",
   "commands": [
     "python scripts/phase6_audit.py",
     "python scripts/phase6_select.py --families var stochastic switching",
