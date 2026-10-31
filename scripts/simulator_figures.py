@@ -141,7 +141,7 @@ def perturbation_figure(reports: Path) -> None:
     axes[1].set_ylabel("count")
     axes[1].set_title("Specificity control")
     axes[1].legend(frameon=False, fontsize=7)
-    for target in ["AIBL", "AIBR", "AVEL", "RIVL"]:
+    for target in ["AVBL", "AVBR", "AVEL", "RIVL"]:
         sub = dose[dose.target == target].groupby("amplitude").delta_turn.mean()
         axes[2].plot(sub.index, sub.values, marker="o", label=target)
     axes[2].axhline(0, color="black", lw=0.8)

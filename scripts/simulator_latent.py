@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import argparse
+import hashlib
 import json
 from pathlib import Path
 from typing import Any
@@ -109,9 +110,12 @@ def main(argv: list[str] | None = None) -> int:
     for data in datasets:
         pca = PCAEncoder.fit(data, n_components=3)
         bundle = None
+        encoder_path = reports / "latent_encoders" / f"bundlenet_worm{data.worm_id}_seed{args.seed}.pt"
+        encoder_sha = None
         if not args.skip_bundlenet:
             bundle = BunDLeEncoder.fit(data, epochs=args.epochs, seed=args.seed)
-            bundle.save(str(reports / "latent_encoders" / f"bundlenet_worm{data.worm_id}_seed{args.seed}.pt"))
+            bundle.save(str(encoder_path))
+            encoder_sha = hashlib.sha256(encoder_path.read_bytes()).hexdigest()
         encoder_rows.append(
             {
                 "worm_id": int(data.worm_id),
@@ -120,6 +124,8 @@ def main(argv: list[str] | None = None) -> int:
                 "bundlenet_best_val_loss": bundle.metadata["best_val_loss"] if bundle else None,
                 "bundlenet_best_epoch": bundle.metadata["best_epoch"] if bundle else None,
                 "bundlenet_train_windows": bundle.metadata["train_windows"] if bundle else None,
+                "bundlenet_weights": encoder_path.relative_to(PROJECT_ROOT).as_posix() if encoder_sha else None,
+                "bundlenet_sha256": encoder_sha,
             }
         )
         worm_rows, _ = evaluate_worm(

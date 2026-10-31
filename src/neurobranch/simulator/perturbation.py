@@ -17,7 +17,7 @@ from neurobranch.simulator.adapters import NeuralSimulator
 from neurobranch.simulator.branching import entropy, js, tv
 from neurobranch.simulator.types import WARNING, PerturbationSpec
 
-CANDIDATES = ("AVEL", "AVER", "AIBL", "AIBR", "RIVL", "RIVR")
+CANDIDATES = ("AVBL", "AVBR", "AVEL", "AVER", "RIVL", "RIVR")
 
 
 def outcome_distribution(rollouts, initial: int) -> np.ndarray:

@@ -3,70 +3,70 @@
   "gate_5": {
     "status": "fail",
     "criterion": "at least one named-neuron direction has mean |delta TV| above the random-neuron 95th percentile, agrees in sign in >=4/5 worms, and agrees in >=2/3 model seeds",
-    "random_control_q95_abs_delta_tv": 0.6,
+    "random_control_q95_abs_delta_tv": 0.5,
     "n_candidates": 6,
     "top_effect": {
-      "target": "AIBL",
+      "target": "AVEL",
       "direction": "inhibition",
-      "abs_mean_delta_tv": 0.1825,
-      "mean_delta_turn": 0.06000000000000001,
+      "abs_mean_delta_tv": 0.146,
+      "mean_delta_turn": 0.10600000000000001,
       "direction_of_effect": "more TURN",
-      "mean_shift_sd": 7.881571547072403,
-      "worms_same_sign": 3,
-      "seed_direction_agreement": 2,
-      "seed_effects_delta_turn": "{\"17\": 0.06000000000000001, \"23\": 0.0, \"31\": 0.019999999999999997}",
+      "mean_shift_sd": 7.67568134816517,
+      "worms_same_sign": 2,
+      "seed_direction_agreement": 3,
+      "seed_effects_delta_turn": "{\"17\": 0.106, \"23\": 0.024, \"31\": 0.07200000000000001}",
       "specific_vs_random_q95": false,
       "robust_across_worms": false,
       "robust_across_seeds": true,
-      "ood_fraction": 0.98828125
+      "ood_fraction": 0.989125
     },
     "warning": "MODEL-DEPENDENT VIRTUAL PERTURBATION - NOT CAUSALLY VALIDATED. No empirical stimulation-response model is registered; experimental category C is not_evaluable on Kato.",
     "empirical_response_status": "not_evaluable",
     "dose_summary": [
       {
+        "target": "AVBL",
+        "spearman_rho": 0.2985838072651101,
+        "p_value": 1.358662228990042e-07,
+        "n": 300
+      },
+      {
+        "target": "AVBR",
+        "spearman_rho": 0.22880254741611822,
+        "p_value": 6.344558162119718e-05,
+        "n": 300
+      },
+      {
         "target": "AVEL",
-        "spearman_rho": -0.3504957986826374,
-        "p_value": 2.4120040487336634e-08,
-        "n": 240
+        "spearman_rho": -0.35480005557251815,
+        "p_value": 2.505024882727367e-10,
+        "n": 300
       },
       {
         "target": "AVER",
-        "spearman_rho": -0.17450694740943806,
-        "p_value": 0.006725031492649915,
-        "n": 240
-      },
-      {
-        "target": "AIBL",
-        "spearman_rho": -0.4957125551914616,
-        "p_value": 2.74287459399606e-16,
-        "n": 240
-      },
-      {
-        "target": "AIBR",
-        "spearman_rho": -0.43280878170678533,
-        "p_value": 2.2365718447856553e-12,
-        "n": 240
+        "spearman_rho": -0.0929230779907551,
+        "p_value": 0.10822273397786641,
+        "n": 300
       },
       {
         "target": "RIVL",
-        "spearman_rho": 0.2249778785456736,
-        "p_value": 0.00044428022863718993,
-        "n": 240
+        "spearman_rho": 0.19550347072923716,
+        "p_value": 0.0006616436317760289,
+        "n": 300
       },
       {
         "target": "RIVR",
-        "spearman_rho": 0.1450460699736534,
-        "p_value": 0.024626643592000143,
-        "n": 240
+        "spearman_rho": 0.1575198244936983,
+        "p_value": 0.006256583234879394,
+        "n": 300
       }
     ],
     "n_rows": {
-      "main": 480,
-      "initial_state": 240,
-      "dose": 1440,
-      "timing": 720,
-      "seed": 1440,
-      "random_controls": 720
+      "main": 600,
+      "initial_state": 300,
+      "dose": 1800,
+      "timing": 900,
+      "seed": 1800,
+      "random_controls": 900
     }
   }
 }

@@ -93,7 +93,7 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--horizon", type=int, default=15)
     parser.add_argument("--rollouts", type=int, default=10)
     parser.add_argument("--noise-std", type=float, default=0.05)
-    parser.add_argument("--frames", type=int, default=8)
+    parser.add_argument("--frames", type=int, default=10)
     parser.add_argument("--controls", type=int, default=30)
     parser.add_argument("--seed", type=int, default=17)
     parser.add_argument("--model-seeds", nargs="+", type=int, default=[17, 23, 31])

@@ -18,7 +18,7 @@ def test_app_builds_all_tabs_without_exception() -> None:
     app = AppTest.from_file(APP)
     app.run(timeout=90)
     assert not app.exception
-    assert len(app.tabs) == 14
+    assert len(app.tabs) == 15
 
 
 def test_boundedbench_shows_provenance() -> None:
