@@ -1,0 +1,49 @@
+{
+  "schema_version": 1,
+  "generated_at_utc": "2026-10-31T19:30:13.612248+00:00",
+  "warning": "EXPLORATORY EXTERNAL AUTONOMOUS-DYNAMICS PILOT \u2014 NOT A SENSORY-RESPONSE, DIGITAL-TWIN OR CAUSAL-INTERVENTION RESULT.",
+  "evidence_tier": "exploratory_external_pilot",
+  "protocol": "B_per_animal_refit",
+  "frozen_config": {
+    "lag": 2,
+    "ridge": 10.0,
+    "spectral_cap": 0.995,
+    "support_quantile": 0.99
+  },
+  "model_selection": "none; Phase 6 VAR hyperparameters frozen before this run",
+  "input_used": false,
+  "oxygen": {
+    "identity": "O2",
+    "segment": "0 <= t < 360.0 s",
+    "concentration_percent": 21.0,
+    "switch_in_segment": false,
+    "interpretation": "constant environmental condition, not targeted neuronal stimulation"
+  },
+  "split": "chronological 2/3 train, 1/6 validation, purge 12, remainder test",
+  "baseline": "constant initial state held across the rollout horizon",
+  "primary_horizon": 20,
+  "n_sessions_attempted": 7,
+  "n_sessions_ok": 7,
+  "failures": [],
+  "n_positive_skill": 0,
+  "median_skill_vs_persistence": -0.6024504825438775,
+  "mean_skill_vs_persistence": -0.5932872260043359,
+  "bootstrap_95ci_mean_skill": [
+    -1.02403218480517,
+    -0.24116359993628472
+  ],
+  "mean_energy_distance": 8.660754256768787,
+  "mean_autocorr_error": 0.2795902969348707,
+  "mean_covariance_error": 1.0590899677632122,
+  "mean_ood_fraction": 0.014739229024943309,
+  "frozen_phase5_var_applicable": false,
+  "frozen_phase5_var_reason": "Phase 5/6 VAR checkpoints are tied to each NoStim worm's ordered 103-127-dimensional trace panel; external worms have different panels and trace-level multi-labels. No valid frozen-transfer comparison exists.",
+  "comparison_to_phase6": "Descriptive only. Phase 6 used five different NoStim sessions, a blocked split and a reused test block; these are unpaired observations from different animals.",
+  "limitations": [
+    "Seven recording sessions; animal independence is not proven by OSF metadata.",
+    "Constant-oxygen first half only; no oxygen-response or sensory-input test was run.",
+    "Behaviour labels are inferred from calcium signals, not independent behaviour.",
+    "Different coarse behaviour vocabulary and trace panels from NoStim.",
+    "Small n; bootstrap interval is descriptive and does not rescue a failed effect."
+  ]
+}
