@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
-  "generated_at_utc": "2026-10-31T13:11:22.337884+00:00",
-  "git_revision": "f74d4e656207b63cc827dee9eb0de3d7c828cfb3",
+  "generated_at_utc": "2026-10-31T13:11:45.490320+00:00",
+  "git_revision": "ffc6322f0b41aa9b5d5385bf3a9e230801ee69d6",
   "git_branch": "research/core-dynamics-simulator",
   "git_dirty": true,
   "python": "3.13.5",
@@ -19,46 +19,46 @@
   },
   "reports": {
     "selection.json": {
-      "sha256": "e4189d4329eec6658d9fc782003c7e31be9fff08775d22a294ceb5873adae8e1"
+      "sha256": "12031e62222651852dac265a5ec1bcae31a20fa5d2e213cd5002c0d423a7be11"
     },
     "summary.json": {
-      "sha256": "ad1d0fc0c284950985295fbf653070cb9358cfb0e2529c5a9de8e74bda95e06d"
+      "sha256": "ab6cb0694b8657645e37148b60e7085fa69866ad8fa3befcc17c55ff63d84100"
     },
     "gates.json": {
-      "sha256": "bdf1a10aa9033a601d33a8dbb333e099134a0d8e336c7e678315762fba686d2c"
+      "sha256": "c8a594f37665c3227bf2a7697fcae88dd4c01f4d854cc60fca657c48116af653"
     },
     "rollout_metrics.csv": {
-      "sha256": "d1dbdf869d5b5d808f104c75f7a8215c494ac7f4fef74b1bc8d1052a8bda06af"
+      "sha256": "8e10f57236190b0fd51fd5218b3f876067a970b03734144200a43c65598f5a93"
     },
     "one_step_metrics.csv": {
-      "sha256": "6224927064b968d4a903ac75c937adad02e0ac1768023f1b228799b305d9d5ac"
+      "sha256": "beaa9c186c118d8450bbfc9f21d0c5475a9633b42a77304c9fd53b5f5d9b399e"
     },
     "selected_model_test.csv": {
-      "sha256": "28cf4a220c178e073c06add42fd063ebdc08af9584373057dadef8ab65b26a06"
+      "sha256": "b8416b87da8a81aa89e571701d0c163bc9cf4a92a5746c9d79e2847bf63aedd2"
     },
     "latent_metrics.csv": {
-      "sha256": "3ab2ac1e00e9c02c6ab3398df5fc3f48f055e3bdd9a99e6402315c8b5621d6cf"
+      "sha256": "14655af31f7a7c51536cd37755d15568e04575cc3b248d748be153d368aeae03"
     },
     "latent_stability.json": {
-      "sha256": "9b6b95cd1a0dac4710926b4f4299d35a16b199d1bc1ce5676d1f6b4952d75e65"
+      "sha256": "3250b9372258c08e7f744ec8d924149b7515e96ad8359faafad8299eaebd6b9e"
     },
     "branching_summary.json": {
-      "sha256": "e1d871b2e0862841b3728969fe926d042ca385e69753fcc1882027b9f27e1004"
+      "sha256": "bb07424164ccb233ffee631873c8b48308af3a70cac24aa1321e8a75fb4dad8d"
     },
     "branching_events.csv": {
-      "sha256": "f74d7e46ffceeadfea10db536ed04aa762d45f23114cb745505a21a0f86a8b87"
+      "sha256": "5c06647cefcf4b50d18aeed21af6c81071d3c0218b88475bab401e4261379e9e"
     },
     "perturbation_summary.json": {
-      "sha256": "2bea98eb0c6d9af9efd34a195b9ee3cc580016f9fc995f6978babd52c8d13169"
+      "sha256": "b8bb655316e506e0f9b66ef1f333e595fdcb5f3cc6015851d0813f6633c78ca8"
     },
     "perturbation_specificity.csv": {
-      "sha256": "8cfc356d9896b827901acf146da52ea800139d4e9633b9f551455803ba8c16f7"
+      "sha256": "7952cb245c55ef8227f98141ea9a43e3fd9bccd2298f267a3fae9b8ef2cc8696"
     },
     "perturbation_effects.csv": {
-      "sha256": "5b4e1b685a9e54dd920bfcb876825fe195573979aafcc8fc710327312991870c"
+      "sha256": "daf788e23250a0b4960f07be610d48bca56ce998de76312d3def180e03027857"
     },
     "perturbation_controls.csv": {
-      "sha256": "8d80523b9a04d299430501c0c3dbe19ca1ee0156d426e4d94b262928a877d83a"
+      "sha256": "0a57dcc3868603ac5caac59c199c554b8b87bd461187453af933e8eff82f9a19"
     }
   },
   "commands": [
@@ -73,5 +73,6 @@
     "python scripts/simulator_manifest.py"
   ],
   "checkpoint_policy": "Existing Phase 2 checkpoints are reused. --fit-missing never overwrites; latent encoder weights are local only and excluded by .gitignore/.gitattributes.",
+  "manifest_note": "Generated before its own commit; git_dirty is true because the manifest itself was untracked. Text hashes are LF-normalised, so a clean checkout verifies.",
   "warning": "MODEL-DEPENDENT VIRTUAL PERTURBATION - NOT CAUSALLY VALIDATED. Kato 2015 is observational; Gate 6 is not_evaluable."
 }

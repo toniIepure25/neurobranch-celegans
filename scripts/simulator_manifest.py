@@ -17,8 +17,13 @@ import torch
 from neurobranch.config import PROJECT_ROOT
 
 
-def sha256(path: Path) -> str:
+def sha256(path: Path, *, text: bool = False) -> str:
     h = hashlib.sha256()
+    if text:
+        # Git stores these text artifacts with LF; hash the normalised bytes so
+        # a fresh checkout verifies on Windows and Unix alike.
+        h.update(path.read_bytes().replace(b"\r\n", b"\n"))
+        return h.hexdigest()
     with path.open("rb") as fh:
         for chunk in iter(lambda: fh.read(1 << 20), b""):
             h.update(chunk)
@@ -70,13 +75,17 @@ def main() -> int:
             "kato_path": str(kato.relative_to(PROJECT_ROOT)),
             "kato_sha256": sha256(kato) if kato.exists() else None,
             "config_path": "configs/experiments/blocked_suite.yaml",
-            "config_sha256": sha256(PROJECT_ROOT / "configs/experiments/blocked_suite.yaml"),
+            "config_sha256": sha256(PROJECT_ROOT / "configs/experiments/blocked_suite.yaml", text=True),
             "split_path": "configs/splits/blocked.yaml",
-            "split_sha256": sha256(PROJECT_ROOT / "configs/splits/blocked.yaml")
+            "split_sha256": sha256(PROJECT_ROOT / "configs/splits/blocked.yaml", text=True)
             if (PROJECT_ROOT / "configs/splits/blocked.yaml").exists()
             else None,
         },
-        "reports": {name: {"sha256": sha256(reports / name)} for name in files if (reports / name).exists()},
+        "reports": {
+            name: {"sha256": sha256(reports / name, text=True)}
+            for name in files
+            if (reports / name).exists()
+        },
         "commands": [
             "python scripts/simulator_fit.py",
             "python scripts/simulator_evaluate.py",
@@ -91,6 +100,10 @@ def main() -> int:
         "checkpoint_policy": (
             "Existing Phase 2 checkpoints are reused. --fit-missing never overwrites; latent "
             "encoder weights are local only and excluded by .gitignore/.gitattributes."
+        ),
+        "manifest_note": (
+            "Generated before its own commit; git_dirty is true because the manifest itself "
+            "was untracked. Text hashes are LF-normalised, so a clean checkout verifies."
         ),
         "warning": (
             "MODEL-DEPENDENT VIRTUAL PERTURBATION - NOT CAUSALLY VALIDATED. "
