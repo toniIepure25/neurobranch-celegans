@@ -832,3 +832,57 @@ Expected (about 4--5 min for the hierarchy script on this machine):
 
 Artifacts are in `reports/phase12r/`; `reports/phase12r_first_pass/` is retained
 only as run history. The manifest is regenerated last.
+
+## 21. Core dynamics simulator (research branch)
+
+This path reuses the frozen Phase 2 checkpoints under
+`artifacts/runs/blocked_suite/`. It does not retrain them unless a checkpoint is
+missing. The primary commands are:
+
+```powershell
+python scripts/simulator_fit.py
+python scripts/simulator_evaluate.py
+python scripts/simulator_latent.py
+python scripts/simulator_branching.py
+python scripts/simulator_perturb.py
+python scripts/simulator_figures.py
+python scripts/simulator_gates.py
+python scripts/validate_reports.py --reports reports/simulator --strict
+python scripts/simulator_manifest.py
+```
+
+Expected outputs:
+
+- 105 checkpoints discovered (7 kinds × 5 worms × 3 seeds); selected kind
+  `mlp_residual` on validation one-step R².
+- G1 pass; G2 fail 0/5; G3 fail 0/5; G4 pass (interface only); G5 fail; G6
+  `not_evaluable`.
+- `mlp_residual` free-running test R² −0.5098; VAR 0.5325.
+- Simulated reversal entropy near zero versus observed 0.48–0.84; marginal null
+  closer in all worms.
+- No perturbation candidate above random-control q95; AVEL inhibition is the
+  largest mean |ΔTV| (0.146), OOD 0.989.
+
+The latent step trains seven small BunDLe encoders on CPU and is the slowest
+(about 5–10 minutes here); the perturbation sweep is next. Encoder `.pt` files
+are local and ignored; metadata is committed. If a binary file is accidentally
+staged, remove it from the index and rely on `.gitattributes`:
+
+```text
+reports/simulator/latent_encoders/*.pt binary
+reports/simulator/demo/*.npz binary
+```
+
+Launch the app (the simulator is tab 15, index 14, after the existing tabs):
+
+```powershell
+streamlit run app/streamlit_app.py
+```
+
+The app shows the selected model, free-running ensemble, named-neuron virtual
+perturbation, static figures and the standing warning. It is a research demo,
+not a clinical or BCI tool.
+
+Protocol deviations are recorded in `docs/SIMULATOR_RESEARCH_PROTOCOL.md` §10.
+Do not call the simulator "causal", "validated", "whole-brain", "a digital twin",
+or a "bifurcation" result.

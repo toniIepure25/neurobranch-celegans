@@ -35,6 +35,33 @@ counterfactual; `R_id` is a different population.
 This is a measurement/reliability audit, not a causal or generative model of the
 animal.
 
+## Core dynamics simulator research branch
+
+A separate branch, `research/core-dynamics-simulator`, adds a free-running
+population simulator over the existing Kato checkpoints. Its scientific result
+is negative and is reported separately from the Phase 15 measurement audit:
+
+| Gate | Question | Status |
+| --- | --- | --- |
+| G1 | Valid free-running rollout from `x(0)` | pass |
+| G2 | Advantage over constant-state / persistence | fail (0/5 worms) |
+| G3 | Reversal branching better than marginal null | fail (0/5) |
+| G4 | Named-neuron perturbation interface | pass (interface only) |
+| G5 | Specific, robust perturbation | fail |
+| G6 | Biological validation | not_evaluable |
+
+The selected model (`mlp_residual`) has the best validation one-step R²
+(0.7134) but the worst free-running test R² (−0.5098) and an OOD fraction of
+0.79. VAR is the best descriptive free-running model (R² 0.5325, ΔMSE −0.0491,
+OOD 0.0076) but was not selected and is not a causal simulator. No
+named-neuron effect exceeds the random-control 95th percentile. Every
+perturbation output is a **model-dependent virtual perturbation, not causally
+validated**.
+
+Start at [SIMULATOR_RESULTS.md](SIMULATOR_RESULTS.md),
+[SIMULATOR_LIMITATIONS.md](SIMULATOR_LIMITATIONS.md), and
+[SIMULATOR_SUPERVISOR_BRIEF.md](SIMULATOR_SUPERVISOR_BRIEF.md).
+
 ## Phase 15 gate result
 
 The final statuses are produced by `scripts/phase15_reliability.py` and checked

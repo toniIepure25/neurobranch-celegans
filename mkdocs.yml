@@ -27,6 +27,18 @@ plugins:
 nav:
   - Home: README.md
   - Current status: CURRENT_STATUS.md
+  - Core dynamics simulator:
+      - Objective (provisional): ORIGINAL_RESEARCH_OBJECTIVE.md
+      - Gap analysis: SIMULATOR_GAP_ANALYSIS.md
+      - Protocol: SIMULATOR_RESEARCH_PROTOCOL.md
+      - Dynamics model: NEURAL_DYNAMICS_MODEL.md
+      - Latent validation: LATENT_SIMULATION_VALIDATION.md
+      - Branching: BRANCHING_SIMULATION.md
+      - Perturbation methods: NEURONAL_PERTURBATION_METHODS.md
+      - Results: SIMULATOR_RESULTS.md
+      - Limitations: SIMULATOR_LIMITATIONS.md
+      - Supervisor brief: SIMULATOR_SUPERVISOR_BRIEF.md
+      - Questions for Denis: QUESTIONS_FOR_DENIS.md
   - Phase 15:
       - Results: PHASE15_RESULTS.md
       - Methods: METHODS_PHASE15.md

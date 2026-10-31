@@ -2,6 +2,30 @@
 
 Start here if you are reading the project for the first time.
 
+## Simulator research branch
+
+- [ORIGINAL_RESEARCH_OBJECTIVE.md](ORIGINAL_RESEARCH_OBJECTIVE.md) - provisional
+  reconstruction of the neural-branch brief; not confirmed requirements.
+- [SIMULATOR_GAP_ANALYSIS.md](SIMULATOR_GAP_ANALYSIS.md) - what was missing
+  before this branch.
+- [SIMULATOR_RESEARCH_PROTOCOL.md](SIMULATOR_RESEARCH_PROTOCOL.md) - frozen
+  gates, splits, estimands and deviations.
+- [NEURAL_DYNAMICS_MODEL.md](NEURAL_DYNAMICS_MODEL.md) - free-running model,
+  interface and why one-step fit is not dynamical validity.
+- [LATENT_SIMULATION_VALIDATION.md](LATENT_SIMULATION_VALIDATION.md) - PCA versus
+  BunDLe, encoder stability and inverse-decoder limits.
+- [BRANCHING_SIMULATION.md](BRANCHING_SIMULATION.md) - reversal outcome
+  distributions, block nulls and the entropy deficit.
+- [NEURONAL_PERTURBATION_METHODS.md](NEURONAL_PERTURBATION_METHODS.md) - named
+  neuron edits, controls, dose, timing and model seeds.
+- [SIMULATOR_RESULTS.md](SIMULATOR_RESULTS.md) - gates G1–G6 and the negative
+  findings.
+- [SIMULATOR_LIMITATIONS.md](SIMULATOR_LIMITATIONS.md) - what cannot be claimed.
+- [SIMULATOR_SUPERVISOR_BRIEF.md](SIMULATOR_SUPERVISOR_BRIEF.md) - one-page
+  decision brief.
+- [QUESTIONS_FOR_DENIS.md](QUESTIONS_FOR_DENIS.md) - open questions, explicitly
+  not reconstructed requirements.
+
 ## Current results
 
 - [CURRENT_STATUS.md](CURRENT_STATUS.md) - one-page state after Phase 14:

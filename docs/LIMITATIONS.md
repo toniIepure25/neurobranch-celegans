@@ -434,3 +434,25 @@ calibration study before a positive claim. Leaderboard values are descriptive.
   model, or transport claim.** Transport is `not_evaluable`: no independent
   repeated-stimulation atlas is available locally, and behavioural data are a
   different estimand.
+
+## Core dynamics simulator (research branch)
+
+See [SIMULATOR_LIMITATIONS.md](SIMULATOR_LIMITATIONS.md) for the full list. The
+short version:
+
+- **Observational only.** Kato 2015 contains no stimulation, ablation or clamp.
+  A simulated perturbation is not a biological intervention.
+- **Phenomenological.** The model maps calcium states to calcium states. It does
+  not model membrane potential, synapses, gap junctions, muscles or body
+  mechanics.
+- **No dynamical advantage.** The selected one-step model has the worst
+  free-running test error; VAR is the best descriptive free-running model but
+  was not selected and is not causal.
+- **No branching advantage.** Simulated reversal outcomes are farther from the
+  observed conditional distributions than a marginal null. Observed data show
+  an entropy deficit versus a block null, not an excess.
+- **No specific perturbation.** No candidate exceeds the random-control 95th
+  percentile, and OOD is ~0.99 under perturbation.
+- **No latent anchor.** BunDLe is unstable across seeds and has no published
+  inverse; named-neuron edits are applied in neuron space.
+- **No biological validation.** Gate 6 is `not_evaluable`.

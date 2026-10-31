@@ -118,3 +118,21 @@ the ledger against the schema on every push.
 3. Use `classify_superiority` or `classify_bound`; do not write a status by hand.
 4. Add the claim in `src/neurobranch/benchmark/claims.py` with an evidence path.
 5. Regenerate and validate.
+
+## Core dynamics simulator branch
+
+These are **not** additions to the Phase 8 claims schema and carry no calibrated
+interval. They record what the simulator branch did not establish.
+
+| Claim | Status | Evidence |
+| --- | --- | --- |
+| The simulator reproduces held-out free-running trajectories better than a constant-state baseline across worms | **not supported** | G2 fail 0/5; `reports/simulator/rollout_metrics.csv` |
+| The simulator reproduces conditional reversal branching better than a marginal-outcome null | **not supported** | G3 fail 0/5; `reports/simulator/branching_summary.json` |
+| A named predictor neuron has a specific, robust virtual-perturbation effect | **not supported** | G5 fail; no candidate above random-control q95; `reports/simulator/perturbation_specificity.csv` |
+| A named-neuron perturbation is causally validated | **not_evaluable** | No stimulation-response dataset; category C refused |
+| The simulator shows a bifurcation | **not tested / prohibited** | No parameter-dependent vector-field analysis |
+| The model is a whole-brain or digital-twin model | **not supported** | 103–127 predictor traces of 302 neurons; phenomenological map |
+
+The only supported capability statement is: **the software implements and
+executes a free-running simulator and a typed virtual-perturbation interface,
+with provenance and tests.** That is a software claim, not a biological one.

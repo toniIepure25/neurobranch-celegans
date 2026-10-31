@@ -12,6 +12,44 @@ perturbation** on real calcium imaging and optogenetic atlases.
 > `interventions/safety.py` refuses to label any output as empirically
 > validated without a matched, provenance-checked intervention dataset.
 
+## Core dynamics simulator (research branch)
+
+The `research/core-dynamics-simulator` branch implements a free-running
+population simulator over the frozen Kato checkpoints:
+
+```text
+x(t+1) = F_theta(x(t), history, u(t)) + epsilon(t)
+```
+
+It can roll out from an observed initial state, compare against constant-state
+and one-step-persistence baselines, quantify reversal-outcome branching against a
+marginal null, project through train-only PCA/BunDLe encoders, and apply an
+explicit named-neuron virtual perturbation (`initial_state` or
+`dynamical_input`). It is implemented, tested, executed and documented.
+
+The result is negative and is not hidden:
+
+- **G1 pass:** rollouts are finite, start at `x(0)`, and never read future
+  observations.
+- **G2 fail, 0/5 worms:** the selected `mlp_residual` model has the best
+  validation one-step R² (0.7134) and the worst free-running test R² (−0.5098,
+  MSE +0.840 versus constant state, OOD 0.79). VAR is the best descriptive
+  free-running model (R² 0.5325, ΔMSE −0.0491) but was not selected.
+- **G3 fail, 0/5:** simulated reversal outcomes are farther from observed
+  conditional distributions than the marginal null. Observed data show an
+  entropy **deficit** versus a block null, not an excess.
+- **G4 pass (interface only):** named neurons can be perturbed with matched
+  controls.
+- **G5 fail:** no candidate exceeds the random-control 95th percentile; OOD is
+  ~0.99 under perturbation.
+- **G6 not_evaluable:** Kato is observational; no stimulation-response model.
+
+Start with [`docs/SIMULATOR_RESULTS.md`](docs/SIMULATOR_RESULTS.md),
+[`docs/SIMULATOR_LIMITATIONS.md`](docs/SIMULATOR_LIMITATIONS.md), and
+[`docs/SIMULATOR_SUPERVISOR_BRIEF.md`](docs/SIMULATOR_SUPERVISOR_BRIEF.md).
+Every perturbation output carries:
+`MODEL-DEPENDENT VIRTUAL PERTURBATION - NOT CAUSALLY VALIDATED.`
+
 ## What version 1.4.0 adds: the 0.560 headline was extrapolation
 
 Version 1.4.0 replaces the single "coverage-aware ceiling" with a frozen,

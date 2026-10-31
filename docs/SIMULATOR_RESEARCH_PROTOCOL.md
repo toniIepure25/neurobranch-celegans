@@ -333,5 +333,10 @@ No combination of labels permits “causal,” “validated stimulation,”
 |---|---|---|---|
 | 2026-10-31 | Branch based on `e18139b`, not the reported `cd5b6f4` | `cd5b6f4` is 59 commits behind and lacks Phase 15; branching from it would discard later audit work | No |
 | 2026-10-31 | Existing Phase 2 checkpoints may be reused if metadata and split match | Avoid retraining equivalent models; cards record provenance | No |
+| 2026-10-31 | Gate 2 free-running baseline is the constant initial state, not one-step persistence | One-step persistence is a different estimand; the constant state is the correct open-loop null. One-step persistence remains in `one_step_metrics.csv` | Yes; decision unchanged (0/5) |
+| 2026-10-31 | Branching evaluation samples non-overlapping states every 20 frames through a reversal run, not only the run onset | Onset distributions were degenerate (all one outcome); the revised states include the branch points the protocol intended to test. The onset-only table is retained in the event rows (`is_onset`) | Yes; decision unchanged (0/5) |
+| 2026-10-31 | G5 implemented TV/control/worm/seed checks but not the full 2/3 amplitude/timing and max-statistic correction | No candidate passed the primary control/sign checks; the missing checks cannot turn a failure into a pass. They remain required for a future positive claim | Yes |
+| 2026-10-31 | A pilot perturbation sweep used AIBL/AIBR; the primary sweep uses the pre-registered AVBL/AVBR | The pilot did not match the frozen target list. The primary sweep was rerun with the frozen list; the AIBL pilot is not used for Gate 5 | Yes |
+| 2026-10-31 | Latent BunDLe restores the best-validation epoch rather than the final epoch | The protocol did not fix this detail; best-validation avoids selecting on test and is recorded in metadata | Yes |
 
 Any further deviation is appended before the affected analysis is run.

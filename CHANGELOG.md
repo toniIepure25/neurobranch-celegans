@@ -1,5 +1,53 @@
 # Changelog
 
+## Unreleased - core dynamics simulator research branch
+
+A free-running simulator, latent comparison, branching evaluation and named-neuron
+virtual-perturbation interface over the frozen Kato/Phase 2 checkpoints. The
+scientific result is negative: no dynamical or branching advantage, no specific
+perturbation, and no biological validation.
+
+### Added
+
+- `src/neurobranch/simulator/`: `NeuralSimulator`, typed `PerturbationSpec`,
+  rollout ensembles, one-step/free-running/distribution metrics, train-only PCA
+  and BunDLe encoders, reversal-outcome branching, and six-neuron perturbation
+  sweeps.
+- `scripts/simulator_{fit,evaluate,latent,branching,perturb,figures,gates,manifest}.py`.
+- `schemas/simulator_gates.schema.json` plus packaged copy;
+  `scripts/validate_reports.py --reports reports/simulator` validates it.
+- `reports/simulator/`, `figures/simulator/`, model cards, gate report and
+  manifest.
+- `app/simulator_ui.py` and a fifteenth app tab, "Core Dynamics Simulator".
+- `docs/NEURAL_DYNAMICS_MODEL.md`, `LATENT_SIMULATION_VALIDATION.md`,
+  `BRANCHING_SIMULATION.md`, `NEURONAL_PERTURBATION_METHODS.md`,
+  `SIMULATOR_RESULTS.md`, `SIMULATOR_LIMITATIONS.md`,
+  `SIMULATOR_SUPERVISOR_BRIEF.md`, `QUESTIONS_FOR_DENIS.md`.
+- Tests under `tests/simulator/` plus an app tab-count update.
+
+### Results
+
+- G1 pass; G2 fail 0/5; G3 fail 0/5; G4 pass (interface only); G5 fail; G6
+  `not_evaluable`.
+- Selected `mlp_residual`: validation one-step R² 0.7134, free-running test R²
+  −0.5098, ΔMSE +0.8398 versus constant state, OOD 0.7903.
+- VAR is the best descriptive free-running model (R² 0.5325, ΔMSE −0.0491, OOD
+  0.0076) but was not selected.
+- Simulated reversal entropy 0.000–0.107 versus observed 0.482–0.837; the
+  marginal null is closer than the simulator in all five worms.
+- No perturbation candidate exceeds the random-control 95th percentile (0.500);
+  top AVEL inhibition mean |ΔTV| 0.146, 2/5 worms, OOD 0.989.
+- PCA 3-D explained variance 0.386–0.531; BunDLe cross-seed CKA 0.102/0.284.
+
+### Notes
+
+- Every perturbation output carries
+  `MODEL-DEPENDENT VIRTUAL PERTURBATION - NOT CAUSALLY VALIDATED.`
+- Protocol deviations (constant-state baseline, branching state sampling, G5
+  simplification, AIBL/AIBR pilot) are recorded in
+  `docs/SIMULATOR_RESEARCH_PROTOCOL.md`.
+- No release tag and no remote push; the branch preserves `e18139b`.
+
 ## 1.4.0 - 2026-11-01
 
 Three-estimand reliability audit. The Phase 11 0.560 headline is **withdrawn as

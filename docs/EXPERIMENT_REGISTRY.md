@@ -362,3 +362,31 @@ figures/
 | `reports/phase12r/min_events_sensitivity.csv` | same | Primary `min_events=1` vs sensitivity `min_events=2` |
 | `reports/phase12r/inference_alignment_audit.json` | `python scripts/phase12r_inference_audit.py` | Baseline/model `y_true` mismatch audit |
 | `reports/phase12r/manifest.json` | `python scripts/phase12r_manifest.py` | Artifact hashes, input/protocol hashes, git state |
+
+## Core dynamics simulator (2026-10-31): research branch
+
+Branch `research/core-dynamics-simulator`, based on `e18139b`. All commands are
+run from the repository root. Checkpoints are the frozen Phase 2 suite; no model
+is retrained by the primary path.
+
+| Artifact | Command | Purpose |
+| --- | --- | --- |
+| `reports/simulator/selection.json` | `python scripts/simulator_fit.py` | Validation-only model ranking and selected kind |
+| `reports/simulator/model_cards/` | same | One provenance/parameter card per checkpoint |
+| `reports/simulator/rollout_metrics.csv` | `python scripts/simulator_evaluate.py` | Free-running metrics, constant-state deltas, OOD |
+| `reports/simulator/one_step_metrics.csv` | same | Teacher-forced one-step metrics (separate estimand) |
+| `reports/simulator/summary.json` | same | G1/G2 gate evidence |
+| `reports/simulator/latent_metrics.csv` | `python scripts/simulator_latent.py` | PCA/BunDLe path geometry and latent distance |
+| `reports/simulator/latent_stability.json` | same | Cross-seed CKA and Procrustes stability |
+| `reports/simulator/branching_events.csv` | `python scripts/simulator_branching.py` | Per-state observed/simulated/null outcome distributions |
+| `reports/simulator/branching_summary.json` | same | G3 evidence and observed block nulls |
+| `reports/simulator/perturbation_effects.csv` | `python scripts/simulator_perturb.py` | Main pre-registered perturbation sweep |
+| `reports/simulator/perturbation_specificity.csv` | same | Target-level robustness and control comparison |
+| `reports/simulator/perturbation_summary.json` | same | G5 evidence |
+| `reports/simulator/gates.json` | `python scripts/simulator_gates.py` | Aggregated G1-G6 statuses |
+| `reports/simulator/manifest.json` | `python scripts/simulator_manifest.py` | Input/report hashes, versions and commands |
+| `figures/simulator/*.png` | `python scripts/simulator_figures.py` | Trajectory, model, branching, perturbation and latent figures |
+
+Gate decision: `functional_simulator_no_dynamical_or_branching_advantage`.
+G1 pass, G2 fail 0/5, G3 fail 0/5, G4 pass (interface), G5 fail, G6
+`not_evaluable`. See `docs/SIMULATOR_RESULTS.md`.
