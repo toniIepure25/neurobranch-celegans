@@ -31,6 +31,7 @@ def test_app_retains_phase2_tabs_and_adds_prospective_tab():
         "Active Probing",
         "Adaptive Twin",
         "BoundedBench",
+        "Core Dynamics Simulator",
     ]
 
 

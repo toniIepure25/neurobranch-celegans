@@ -39,6 +39,9 @@ from neurobranch.interventions.spec import make_perturbation  # noqa: E402
 from neurobranch.preprocessing import split_starts  # noqa: E402
 from neurobranch.reporting.status import load_measurement_status  # noqa: E402
 
+sys.path.insert(0, str(ROOT / "app"))
+from simulator_ui import render as render_simulator  # noqa: E402
+
 CFG_PATH = ROOT / "configs" / "experiments" / "blocked_suite.yaml"
 COLORS = {"FWD": "#2E86AB", "REV": "#E4572E", "TURN": "#F3A712", "NOSTATE": "#7D8491"}
 
@@ -185,6 +188,7 @@ tabs = st.tabs(
         "Active Probing",
         "Adaptive Twin",
         "BoundedBench",
+        "Core Dynamics Simulator",
     ]
 )
 
@@ -1340,6 +1344,9 @@ with tabs[13]:
     else:
         st.info("No reliability reports are generated in this checkout.")
         st.caption("Run `python scripts/phase10_reliability.py` and `python scripts/phase10_claims.py`.")
+
+with tabs[14]:
+    render_simulator(data, pca, int(worm_id), model_name, int(seed), models_dir)
 
 st.divider()
 st.caption(EPISTEMIC_WARNING)
