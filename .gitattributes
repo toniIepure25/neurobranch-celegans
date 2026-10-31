@@ -1,1 +1,5 @@
 reports/** text eol=lf
+
+# Binary simulator artifacts must never be line-normalised.
+reports/simulator/latent_encoders/*.pt binary
+reports/simulator/demo/*.npz binary
