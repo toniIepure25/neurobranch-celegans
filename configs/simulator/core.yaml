@@ -1,0 +1,62 @@
+name: simulator_core
+notes: >
+  Frozen core simulator protocol. Models are existing Phase 2 blocked-suite
+  checkpoints; this config is not a new hyperparameter search. Evaluation uses
+  held-out test block 2, selection uses validation block 4, and the stress test
+  is reported separately from configs/experiments/forward_stress.yaml.
+data:
+  dataset: kato2015
+  path: data/raw/kato2015/WT_NoStim.mat
+  exclude_behavior_neurons: true
+  smoothing_sigma_frames: 0.0
+  detrend_window_frames: 0
+split:
+  mode: blocked
+  n_blocks: 5
+  test_block: 2
+  val_block: 4
+  purge_frames: 12
+model:
+  latent_dim: 16
+  hidden_dim: 128
+  history: 1
+  dropout: 0.0
+  behavior_weight: 0.2
+  n_behaviors: 4
+train:
+  epochs: 60
+  batch_size: 256
+  learning_rate: 0.001
+  weight_decay: 0.0001
+  patience: 15
+  seed: 17
+  num_threads: 4
+evaluation:
+  horizons: [1, 3, 5, 10, 20]
+  seeds: [17, 23, 31]
+  bootstrap_samples: 2000
+  transition_horizon: 20
+  branching_k: 40
+  min_neighbors: 15
+  n_starts: 20
+  n_rollouts: 100
+  noise_std: 0.05
+simulator:
+  checkpoint_root: artifacts/runs/blocked_suite
+  reports: reports/simulator
+  model_kinds:
+    - persistence
+    - var
+    - mlp
+    - mlp_residual
+    - gru
+    - latent_mlp
+    - latent_knn
+  target_neurons:
+    - AVBL
+    - AVBR
+    - AVEL
+    - AVER
+    - RIVL
+    - RIVR
+output_dir: artifacts/runs/blocked_suite
