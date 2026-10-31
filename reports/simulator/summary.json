@@ -1,0 +1,123 @@
+{
+  "schema_version": 1,
+  "selected_kind": "mlp_residual",
+  "selection": {
+    "path": "selection.json",
+    "criterion": "mean validation R2; tie lower 5-step MSE; tie simpler model",
+    "selected_kind": "mlp_residual",
+    "selected_means": {
+      "mean_val_r2": 0.7134392596471996,
+      "mean_val_mse5": 0.48455879849185035,
+      "n": 15
+    },
+    "means": {
+      "persistence": {
+        "mean_val_r2": 0.7096574845539604,
+        "mean_val_mse5": 0.42975769640746775,
+        "n": 15
+      },
+      "var": {
+        "mean_val_r2": 0.4645117365089699,
+        "mean_val_mse5": 0.3342951277339164,
+        "n": 15
+      },
+      "mlp": {
+        "mean_val_r2": 0.33715468818619393,
+        "mean_val_mse5": 0.45479371096007704,
+        "n": 15
+      },
+      "mlp_residual": {
+        "mean_val_r2": 0.7134392596471996,
+        "mean_val_mse5": 0.48455879849185035,
+        "n": 15
+      },
+      "gru": {
+        "mean_val_r2": 0.3309727996396901,
+        "mean_val_mse5": 0.498258429427685,
+        "n": 15
+      },
+      "latent_mlp": {
+        "mean_val_r2": 0.3858457817065802,
+        "mean_val_mse5": 0.4536042700239968,
+        "n": 15
+      },
+      "latent_knn": {
+        "mean_val_r2": 0.3874852347932742,
+        "mean_val_mse5": 0.5386558000402437,
+        "n": 15
+      }
+    },
+    "test_block_used_for_selection": false
+  },
+  "config": "blocked_suite.yaml",
+  "horizon": 20,
+  "starts": 20,
+  "noise_std": 0.0,
+  "seeds": [
+    17,
+    23,
+    31
+  ],
+  "n_models": 105,
+  "gate_1": {
+    "status": "pass",
+    "criterion": "selected model, seed 17, 5/5 worms, finite fraction >= 0.95",
+    "n_worms": 5
+  },
+  "gate_2": {
+    "status": "fail",
+    "criterion": "mean delta R2 >= 0.02, seed-17 block-bootstrap CI > 0, mean h5 MSE <= persistence, in >=4/5 worms",
+    "n_worms_passed": 0,
+    "worms": [
+      {
+        "worm_id": 0,
+        "mean_delta_r2": -0.004115131852617433,
+        "seed17_ci_low": -0.004568700738130901,
+        "seed17_ci_high": -0.0029503840109715135,
+        "mean_mse5": 0.40972148034433564,
+        "mean_persistence_h5": 0.3360293418169021,
+        "passed": false
+      },
+      {
+        "worm_id": 1,
+        "mean_delta_r2": -0.0068396406560319685,
+        "seed17_ci_low": -0.007643258107699655,
+        "seed17_ci_high": -0.005392826721740554,
+        "mean_mse5": 0.5324247671764418,
+        "mean_persistence_h5": 0.4161946475505829,
+        "passed": false
+      },
+      {
+        "worm_id": 2,
+        "mean_delta_r2": 0.0015952436873631903,
+        "seed17_ci_low": 0.0030858683920695325,
+        "seed17_ci_high": 0.005707473376603186,
+        "mean_mse5": 0.6080176936723792,
+        "mean_persistence_h5": 0.5468707174062729,
+        "passed": false
+      },
+      {
+        "worm_id": 3,
+        "mean_delta_r2": 0.0011002083293520555,
+        "seed17_ci_low": -0.0017482862101053265,
+        "seed17_ci_high": -0.0003688408194311606,
+        "mean_mse5": 0.33872510143802487,
+        "mean_persistence_h5": 0.30927450954914093,
+        "passed": false
+      },
+      {
+        "worm_id": 4,
+        "mean_delta_r2": 0.047840299912655405,
+        "seed17_ci_low": 0.025554932245104862,
+        "seed17_ci_high": 0.035291374173615275,
+        "mean_mse5": 0.6835204973154955,
+        "mean_persistence_h5": 0.6778022468090056,
+        "passed": false
+      }
+    ]
+  },
+  "gate_6": {
+    "status": "not_evaluable",
+    "reason": "Kato WT_NoStim has no matched named-neuron intervention."
+  }
+}

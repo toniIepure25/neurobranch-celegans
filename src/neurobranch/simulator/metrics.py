@@ -160,11 +160,12 @@ def rollout_metrics(
             continue
         pred = rollout.states[1:]
         mse = float(np.mean((pred - real[1:]) ** 2))
-        pers = float(np.mean((real[:-1] - real[1:]) ** 2))
+        constant = np.repeat(real[:1], horizon, axis=0)
+        pers = float(np.mean((constant - real[1:]) ** 2))
         h5 = min(5, horizon)
         h10 = min(10, horizon)
-        pers_h5 = float(np.mean((real[:h5] - real[1 : h5 + 1]) ** 2))
-        pers_h10 = float(np.mean((real[:h10] - real[1 : h10 + 1]) ** 2))
+        pers_h5 = float(np.mean((constant[:h5] - real[1 : h5 + 1]) ** 2))
+        pers_h10 = float(np.mean((constant[:h10] - real[1 : h10 + 1]) ** 2))
         row = {
             "frame": int(t),
             "seed": seed,
@@ -203,6 +204,7 @@ def rollout_metrics(
         "persistence_mse": float(np.nanmean([r["persistence_mse"] for r in valid]))
         if valid
         else float("nan"),
+        "persistence_baseline": "constant initial state held over the rollout horizon (not one-step persistence)",
         "delta_mse_vs_persistence": float(
             np.nanmean([r["mse"] - r["persistence_mse"] for r in valid])
         )
