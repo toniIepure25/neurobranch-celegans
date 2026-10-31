@@ -51,7 +51,7 @@ def _verify_manifest(manifest_path: Path) -> dict[str, Any]:
             )
     return {
         "manifest": str(manifest_path),
-        "manifest_sha256": sha256_file(manifest_path),
+        "manifest_sha256_lf_normalized": _lf_sha256(manifest_path),
         "n_artifacts": len(manifest.get("artifacts", {})),
         "raw_byte_matches": raw,
         "lf_normalized_matches": lf,
@@ -230,7 +230,7 @@ def main() -> int:
         encoding="utf-8",
     )
     (REPORTS / "phase6_freeze_manifest.sha256").write_text(
-        f"{sha256_file(REPORTS / 'phase6_freeze.json')}  phase6_freeze.json\n",
+        f"{_lf_sha256(REPORTS / 'phase6_freeze.json')}  phase6_freeze.json\n",
         encoding="utf-8",
     )
     print(

@@ -1,8 +1,8 @@
 {
-  "generated_at_utc": "2026-10-31T19:29:54.530154+00:00",
+  "generated_at_utc": "2026-10-31T19:32:00.008820+00:00",
   "manifest": {
     "manifest": "D:\\ComputaCenter\\NeuroBranch\\neurobranch-celegans\\reports\\simulator\\phase6\\simulator_manifest.json",
-    "manifest_sha256": "7d0dd2994a92e77c07e7a7f951c472e5864f7cfcd18d522f72daf8d50a25db67",
+    "manifest_sha256_lf_normalized": "d6e17447345270ac0bc14e2b54d6b8bd37d97a33e9c26ae6ab5a2becd110650b",
     "n_artifacts": 46,
     "raw_byte_matches": 6,
     "lf_normalized_matches": 40,
