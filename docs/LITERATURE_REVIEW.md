@@ -209,3 +209,27 @@ BunDLe-Net's text is careful enough to use "bifurcation points" descriptively; t
 - **Two preprints** (BunDLe-Net; the ML-method arXiv papers) should be re-checked for journal versions before submission.
 - **URLs checked 2026-10-23.** All 16 DOIs were re-resolved through Crossref immediately before submission, with title, venue, year, volume and pages matched. The WormWideWeb dataset table (the source for Atanas 2023 recording counts) renders client-side, so row counts could not be confirmed from the page.
 - **One expected item excluded.** No verifiable publication by D. Kovačević on *C. elegans* or causal neuroinformatics was found via Crossref author/affiliation queries; rather than cite something unverified, the collaboration is treated as programmatic context only.
+
+---
+
+## 14. Simulator-reset targeted verification (2026-10-31)
+
+This is an addendum to the targeted review above, not a new systematic search.
+Four identifiers that define the simulator's boundary were re-resolved through
+Crossref immediately before the reset:
+
+| Reference | Crossref result | Relevance to this phase |
+|---|---|---|
+| `10.1101/2023.08.08.551978` | Posted content, openRxiv, 2023-08-12; BunDLe-Net | Representation and transition baseline; no inverse decoder or intervention |
+| `10.1371/journal.pcbi.1012674` | PLOS Computational Biology, 2024-12-16; a `new_version` update is recorded for 2025-01-09 | State abstraction and Markovianity test; not a stochastic generator |
+| `10.1371/journal.pcbi.1013818` | PLOS Computational Biology, 2025-12-29; a `new_version` update is recorded for 2026-01-05 | Mechanistic premotor model; not fitted to the Kato five-worm subset |
+| `10.1016/j.cell.2015.09.034` | Cell, 2015-10; Kato et al. | Primary observational dataset; no matched perturbation in `WT_NoStim` |
+
+The Crossref records do not establish that any of these papers validates a
+simulated named-neuron perturbation. BunDLe-Net remains a preprint in the
+record returned here. The existence of a `new_version` relation is not a
+retraction, correction, or expression of concern; it is a publisher update and
+was not treated as a scientific change.
+
+No claim in this repository depends on an unverified quotation attributed to
+Denis Kovačević. The collaboration context remains programmatic.
