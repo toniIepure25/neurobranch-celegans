@@ -50,7 +50,7 @@ def _verify_manifest(manifest_path: Path) -> dict[str, Any]:
                 {"path": rel, "status": "hash_mismatch", "expected": expected["sha256"], "actual": actual_raw}
             )
     return {
-        "manifest": str(manifest_path),
+        "manifest": str(manifest_path.relative_to(PROJECT_ROOT)),
         "manifest_sha256_lf_normalized": _lf_sha256(manifest_path),
         "n_artifacts": len(manifest.get("artifacts", {})),
         "raw_byte_matches": raw,
