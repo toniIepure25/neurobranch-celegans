@@ -1,0 +1,370 @@
+{
+  "schema_version": 1,
+  "generated_at_utc": "2026-10-31T19:29:54.530154+00:00",
+  "official_phase6": {
+    "status": "pass",
+    "support_quantile": 0.99,
+    "support_rule": ">=90% perturbed states inside validation-calibrated support",
+    "evidence_tier": "exploratory",
+    "test_block_reused": true,
+    "note": "The official 99th-percentile result is preserved unchanged."
+  },
+  "prespecified": {
+    "support_quantile": 0.95,
+    "source": "docs/PHASE6_SIMULATOR_DEVIATIONS.md and the original protocol wording",
+    "deviation_documented_before_test": true,
+    "reason_recorded": "training-only leave-one-out envelope flagged 79% of selected-model states as OOD"
+  },
+  "support_sensitivity": {
+    "per_family_worm": [
+      {
+        "family": "stochastic_var",
+        "worm_id": 0,
+        "threshold_q90": 10.899621742479455,
+        "threshold_q95": 11.326995599989411,
+        "threshold_q99": 11.762728843022655,
+        "q95_over_q99": 0.9629564492348466,
+        "observed_test_support_q90": 0.977671451355662,
+        "observed_test_support_q95": 0.977671451355662,
+        "observed_test_support_q99": 0.977671451355662,
+        "rollout_support_q90": 1.0,
+        "rollout_support_q95": 1.0,
+        "rollout_support_q99": 1.0
+      },
+      {
+        "family": "stochastic_var",
+        "worm_id": 1,
+        "threshold_q90": 20.19098079293949,
+        "threshold_q95": 21.272422583851554,
+        "threshold_q99": 22.526476163444517,
+        "q95_over_q99": 0.9443297935063624,
+        "observed_test_support_q90": 1.0,
+        "observed_test_support_q95": 1.0,
+        "observed_test_support_q99": 1.0,
+        "rollout_support_q90": 1.0,
+        "rollout_support_q95": 1.0,
+        "rollout_support_q99": 1.0
+      },
+      {
+        "family": "stochastic_var",
+        "worm_id": 2,
+        "threshold_q90": 19.567245668846077,
+        "threshold_q95": 30.08433839868177,
+        "threshold_q99": 40.54659840503066,
+        "q95_over_q99": 0.7419694766540311,
+        "observed_test_support_q90": 1.0,
+        "observed_test_support_q95": 1.0,
+        "observed_test_support_q99": 1.0,
+        "rollout_support_q90": 1.0,
+        "rollout_support_q95": 1.0,
+        "rollout_support_q99": 1.0
+      },
+      {
+        "family": "stochastic_var",
+        "worm_id": 3,
+        "threshold_q90": 9.764740436254264,
+        "threshold_q95": 10.005113658733675,
+        "threshold_q99": 10.776716279928166,
+        "q95_over_q99": 0.9284009524653056,
+        "observed_test_support_q90": 0.756797583081571,
+        "observed_test_support_q95": 0.783987915407855,
+        "observed_test_support_q99": 0.9169184290030212,
+        "rollout_support_q90": 1.0,
+        "rollout_support_q95": 1.0,
+        "rollout_support_q99": 1.0
+      },
+      {
+        "family": "stochastic_var",
+        "worm_id": 4,
+        "threshold_q90": 11.306218055060732,
+        "threshold_q95": 11.516584334248297,
+        "threshold_q99": 11.995022319597952,
+        "q95_over_q99": 0.9601136227510003,
+        "observed_test_support_q90": 0.9105960264900662,
+        "observed_test_support_q95": 0.9387417218543046,
+        "observed_test_support_q99": 0.97682119205298,
+        "rollout_support_q90": 1.0,
+        "rollout_support_q95": 1.0,
+        "rollout_support_q99": 1.0
+      },
+      {
+        "family": "switching_var",
+        "worm_id": 0,
+        "threshold_q90": 10.899621742479455,
+        "threshold_q95": 11.326995599989411,
+        "threshold_q99": 11.762728843022655,
+        "q95_over_q99": 0.9629564492348466,
+        "observed_test_support_q90": 0.977671451355662,
+        "observed_test_support_q95": 0.977671451355662,
+        "observed_test_support_q99": 0.977671451355662,
+        "rollout_support_q90": 1.0,
+        "rollout_support_q95": 1.0,
+        "rollout_support_q99": 1.0
+      },
+      {
+        "family": "switching_var",
+        "worm_id": 1,
+        "threshold_q90": 20.19098079293949,
+        "threshold_q95": 21.272422583851554,
+        "threshold_q99": 22.526476163444517,
+        "q95_over_q99": 0.9443297935063624,
+        "observed_test_support_q90": 1.0,
+        "observed_test_support_q95": 1.0,
+        "observed_test_support_q99": 1.0,
+        "rollout_support_q90": 1.0,
+        "rollout_support_q95": 1.0,
+        "rollout_support_q99": 1.0
+      },
+      {
+        "family": "switching_var",
+        "worm_id": 2,
+        "threshold_q90": 19.567245668846077,
+        "threshold_q95": 30.08433839868177,
+        "threshold_q99": 40.54659840503066,
+        "q95_over_q99": 0.7419694766540311,
+        "observed_test_support_q90": 1.0,
+        "observed_test_support_q95": 1.0,
+        "observed_test_support_q99": 1.0,
+        "rollout_support_q90": 1.0,
+        "rollout_support_q95": 1.0,
+        "rollout_support_q99": 1.0
+      },
+      {
+        "family": "switching_var",
+        "worm_id": 3,
+        "threshold_q90": 9.764740436254264,
+        "threshold_q95": 10.005113658733675,
+        "threshold_q99": 10.776716279928166,
+        "q95_over_q99": 0.9284009524653056,
+        "observed_test_support_q90": 0.756797583081571,
+        "observed_test_support_q95": 0.783987915407855,
+        "observed_test_support_q99": 0.9169184290030212,
+        "rollout_support_q90": 0.685,
+        "rollout_support_q95": 0.755,
+        "rollout_support_q99": 0.965
+      },
+      {
+        "family": "switching_var",
+        "worm_id": 4,
+        "threshold_q90": 11.306218055060732,
+        "threshold_q95": 11.516584334248297,
+        "threshold_q99": 11.995022319597952,
+        "q95_over_q99": 0.9601136227510003,
+        "observed_test_support_q90": 0.9105960264900662,
+        "observed_test_support_q95": 0.9387417218543046,
+        "observed_test_support_q99": 0.97682119205298,
+        "rollout_support_q90": 0.9,
+        "rollout_support_q95": 0.93,
+        "rollout_support_q99": 0.99
+      },
+      {
+        "family": "var",
+        "worm_id": 0,
+        "threshold_q90": 10.899621742479455,
+        "threshold_q95": 11.326995599989411,
+        "threshold_q99": 11.762728843022655,
+        "q95_over_q99": 0.9629564492348466,
+        "observed_test_support_q90": 0.977671451355662,
+        "observed_test_support_q95": 0.977671451355662,
+        "observed_test_support_q99": 0.977671451355662,
+        "rollout_support_q90": 1.0,
+        "rollout_support_q95": 1.0,
+        "rollout_support_q99": 1.0
+      },
+      {
+        "family": "var",
+        "worm_id": 1,
+        "threshold_q90": 20.19098079293949,
+        "threshold_q95": 21.272422583851554,
+        "threshold_q99": 22.526476163444517,
+        "q95_over_q99": 0.9443297935063624,
+        "observed_test_support_q90": 1.0,
+        "observed_test_support_q95": 1.0,
+        "observed_test_support_q99": 1.0,
+        "rollout_support_q90": 1.0,
+        "rollout_support_q95": 1.0,
+        "rollout_support_q99": 1.0
+      },
+      {
+        "family": "var",
+        "worm_id": 2,
+        "threshold_q90": 19.567245668846077,
+        "threshold_q95": 30.08433839868177,
+        "threshold_q99": 40.54659840503066,
+        "q95_over_q99": 0.7419694766540311,
+        "observed_test_support_q90": 1.0,
+        "observed_test_support_q95": 1.0,
+        "observed_test_support_q99": 1.0,
+        "rollout_support_q90": 1.0,
+        "rollout_support_q95": 1.0,
+        "rollout_support_q99": 1.0
+      },
+      {
+        "family": "var",
+        "worm_id": 3,
+        "threshold_q90": 9.764740436254264,
+        "threshold_q95": 10.005113658733675,
+        "threshold_q99": 10.776716279928166,
+        "q95_over_q99": 0.9284009524653056,
+        "observed_test_support_q90": 0.756797583081571,
+        "observed_test_support_q95": 0.783987915407855,
+        "observed_test_support_q99": 0.9169184290030212,
+        "rollout_support_q90": 1.0,
+        "rollout_support_q95": 1.0,
+        "rollout_support_q99": 1.0
+      },
+      {
+        "family": "var",
+        "worm_id": 4,
+        "threshold_q90": 11.306218055060732,
+        "threshold_q95": 11.516584334248297,
+        "threshold_q99": 11.995022319597952,
+        "q95_over_q99": 0.9601136227510003,
+        "observed_test_support_q90": 0.9105960264900662,
+        "observed_test_support_q95": 0.9387417218543046,
+        "observed_test_support_q99": 0.97682119205298,
+        "rollout_support_q90": 1.0,
+        "rollout_support_q95": 1.0,
+        "rollout_support_q99": 1.0
+      }
+    ],
+    "q95_over_q99_min": 0.7419694766540311,
+    "q95_over_q99_max": 0.9629564492348466,
+    "q95_rollout_min": 0.755,
+    "q99_rollout_min": 0.965,
+    "switching_var_q95_rollout": [
+      1.0,
+      1.0,
+      1.0,
+      0.755,
+      0.93
+    ],
+    "n_family_worm_below_90pct_at_q95": 1,
+    "n_family_worm_below_90pct_at_q99": 0,
+    "observed_test_below_90pct_at_q95": 3,
+    "observed_test_below_90pct_at_q99": 0
+  },
+  "g5_threshold_sensitivity": {
+    "recomputable_from_published_events": false,
+    "reason": "perturbation_events.csv records in_support at q=0.99 but not support distances or thresholds, so condition-level G5 cannot be exactly reconstructed at q=0.95.",
+    "evidence_that_q95_may_matter": "Switching-VAR rollout in-support falls to 0.755 for worm 3 and 0.93 for worm 4 at q=0.95, below or near the 0.90 condition-level rule; this is not a condition-level G5 recomputation.",
+    "status": "not_evaluable_at_condition_level"
+  },
+  "spectral_cap_audit": {
+    "rows": [
+      {
+        "family": "var",
+        "worm_id": 0,
+        "n_neurons": 103,
+        "history": 2,
+        "nominal_cap": 0.995,
+        "realized_spectral_radius": 0.9959754019747253,
+        "exceeds_nominal_cap": true
+      },
+      {
+        "family": "var",
+        "worm_id": 1,
+        "n_neurons": 127,
+        "history": 2,
+        "nominal_cap": 0.995,
+        "realized_spectral_radius": 0.9959637688750069,
+        "exceeds_nominal_cap": true
+      },
+      {
+        "family": "var",
+        "worm_id": 2,
+        "n_neurons": 123,
+        "history": 2,
+        "nominal_cap": 0.995,
+        "realized_spectral_radius": 1.0188795377394009,
+        "exceeds_nominal_cap": true
+      },
+      {
+        "family": "var",
+        "worm_id": 3,
+        "n_neurons": 118,
+        "history": 2,
+        "nominal_cap": 0.995,
+        "realized_spectral_radius": 0.9963383770435239,
+        "exceeds_nominal_cap": true
+      },
+      {
+        "family": "var",
+        "worm_id": 4,
+        "n_neurons": 121,
+        "history": 2,
+        "nominal_cap": 0.995,
+        "realized_spectral_radius": 1.0498057722931993,
+        "exceeds_nominal_cap": true
+      },
+      {
+        "family": "stochastic_var",
+        "worm_id": 0,
+        "n_neurons": 103,
+        "history": 2,
+        "nominal_cap": 0.995,
+        "realized_spectral_radius": 0.9959754019747253,
+        "exceeds_nominal_cap": true
+      },
+      {
+        "family": "stochastic_var",
+        "worm_id": 1,
+        "n_neurons": 127,
+        "history": 2,
+        "nominal_cap": 0.995,
+        "realized_spectral_radius": 0.9959637688750069,
+        "exceeds_nominal_cap": true
+      },
+      {
+        "family": "stochastic_var",
+        "worm_id": 2,
+        "n_neurons": 123,
+        "history": 2,
+        "nominal_cap": 0.995,
+        "realized_spectral_radius": 1.0188795377394009,
+        "exceeds_nominal_cap": true
+      },
+      {
+        "family": "stochastic_var",
+        "worm_id": 3,
+        "n_neurons": 118,
+        "history": 2,
+        "nominal_cap": 0.995,
+        "realized_spectral_radius": 0.9963383770435239,
+        "exceeds_nominal_cap": true
+      },
+      {
+        "family": "stochastic_var",
+        "worm_id": 4,
+        "n_neurons": 121,
+        "history": 2,
+        "nominal_cap": 0.995,
+        "realized_spectral_radius": 1.0498057722931993,
+        "exceeds_nominal_cap": true
+      }
+    ],
+    "n_checkpoints": 10,
+    "n_exceeding": 10,
+    "note": "One-shot scaling of the VAR coefficient matrix does not scale companion-matrix eigenvalues linearly because the companion retains an identity block. The nominal 0.995 cap is therefore not exactly enforced. This is reported as an implementation limitation; no post-hoc model change was applied to the official Phase 6 result."
+  },
+  "freeze_manifest": {
+    "manifest": "D:\\ComputaCenter\\NeuroBranch\\neurobranch-celegans\\reports\\simulator\\phase6\\simulator_manifest.json",
+    "manifest_sha256": "7d0dd2994a92e77c07e7a7f951c472e5864f7cfcd18d522f72daf8d50a25db67",
+    "n_artifacts": 46,
+    "raw_byte_matches": 6,
+    "lf_normalized_matches": 40,
+    "other_mismatches": 0,
+    "missing": 0,
+    "all_verify_under_lf_normalization": true,
+    "mismatches": [],
+    "note": "Windows working-tree CRLF causes raw-byte mismatches; the manifest hashes are LF-normalized. Both values are reported rather than silently rewriting the manifest."
+  },
+  "negative_findings_preserved": {
+    "G2": "fail",
+    "G3": "fail",
+    "G4": "fail",
+    "G6": "not_evaluable",
+    "G7": "not_evaluable",
+    "test_block_reused": true
+  }
+}

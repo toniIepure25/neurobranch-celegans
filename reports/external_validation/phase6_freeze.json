@@ -1,0 +1,244 @@
+{
+  "generated_at_utc": "2026-10-31T19:29:54.530154+00:00",
+  "manifest": {
+    "manifest": "D:\\ComputaCenter\\NeuroBranch\\neurobranch-celegans\\reports\\simulator\\phase6\\simulator_manifest.json",
+    "manifest_sha256": "7d0dd2994a92e77c07e7a7f951c472e5864f7cfcd18d522f72daf8d50a25db67",
+    "n_artifacts": 46,
+    "raw_byte_matches": 6,
+    "lf_normalized_matches": 40,
+    "other_mismatches": 0,
+    "missing": 0,
+    "all_verify_under_lf_normalization": true,
+    "mismatches": [],
+    "note": "Windows working-tree CRLF causes raw-byte mismatches; the manifest hashes are LF-normalized. Both values are reported rather than silently rewriting the manifest."
+  },
+  "spectral_cap_audit": {
+    "rows": [
+      {
+        "family": "var",
+        "worm_id": 0,
+        "n_neurons": 103,
+        "history": 2,
+        "nominal_cap": 0.995,
+        "realized_spectral_radius": 0.9959754019747253,
+        "exceeds_nominal_cap": true
+      },
+      {
+        "family": "var",
+        "worm_id": 1,
+        "n_neurons": 127,
+        "history": 2,
+        "nominal_cap": 0.995,
+        "realized_spectral_radius": 0.9959637688750069,
+        "exceeds_nominal_cap": true
+      },
+      {
+        "family": "var",
+        "worm_id": 2,
+        "n_neurons": 123,
+        "history": 2,
+        "nominal_cap": 0.995,
+        "realized_spectral_radius": 1.0188795377394009,
+        "exceeds_nominal_cap": true
+      },
+      {
+        "family": "var",
+        "worm_id": 3,
+        "n_neurons": 118,
+        "history": 2,
+        "nominal_cap": 0.995,
+        "realized_spectral_radius": 0.9963383770435239,
+        "exceeds_nominal_cap": true
+      },
+      {
+        "family": "var",
+        "worm_id": 4,
+        "n_neurons": 121,
+        "history": 2,
+        "nominal_cap": 0.995,
+        "realized_spectral_radius": 1.0498057722931993,
+        "exceeds_nominal_cap": true
+      },
+      {
+        "family": "stochastic_var",
+        "worm_id": 0,
+        "n_neurons": 103,
+        "history": 2,
+        "nominal_cap": 0.995,
+        "realized_spectral_radius": 0.9959754019747253,
+        "exceeds_nominal_cap": true
+      },
+      {
+        "family": "stochastic_var",
+        "worm_id": 1,
+        "n_neurons": 127,
+        "history": 2,
+        "nominal_cap": 0.995,
+        "realized_spectral_radius": 0.9959637688750069,
+        "exceeds_nominal_cap": true
+      },
+      {
+        "family": "stochastic_var",
+        "worm_id": 2,
+        "n_neurons": 123,
+        "history": 2,
+        "nominal_cap": 0.995,
+        "realized_spectral_radius": 1.0188795377394009,
+        "exceeds_nominal_cap": true
+      },
+      {
+        "family": "stochastic_var",
+        "worm_id": 3,
+        "n_neurons": 118,
+        "history": 2,
+        "nominal_cap": 0.995,
+        "realized_spectral_radius": 0.9963383770435239,
+        "exceeds_nominal_cap": true
+      },
+      {
+        "family": "stochastic_var",
+        "worm_id": 4,
+        "n_neurons": 121,
+        "history": 2,
+        "nominal_cap": 0.995,
+        "realized_spectral_radius": 1.0498057722931993,
+        "exceeds_nominal_cap": true
+      }
+    ],
+    "n_checkpoints": 10,
+    "n_exceeding": 10,
+    "note": "One-shot scaling of the VAR coefficient matrix does not scale companion-matrix eigenvalues linearly because the companion retains an identity block. The nominal 0.995 cap is therefore not exactly enforced. This is reported as an implementation limitation; no post-hoc model change was applied to the official Phase 6 result."
+  },
+  "official_gates": [
+    {
+      "gate": "G1",
+      "name": "functionality",
+      "status": "pass",
+      "evidence": {
+        "min_finite_fraction": 1.0,
+        "n_worms": 5
+      },
+      "tier": "exploratory"
+    },
+    {
+      "gate": "G2",
+      "name": "autonomous skill and baseline superiority",
+      "status": "fail",
+      "evidence": {
+        "mean_skill_vs_persistence": 0.0930021648975005,
+        "skill_ci_low": 0.002770788900513077,
+        "skill_ci_high": 0.18680817527521065,
+        "worms_beating_persistence": 4,
+        "worms_beating_phase5_var": 3,
+        "criterion": "skill>0.02, CI>0, >=4/5 vs persistence and frozen Phase 5 VAR"
+      },
+      "tier": "exploratory"
+    },
+    {
+      "gate": "G3",
+      "name": "dynamical and distributional fidelity",
+      "status": "fail",
+      "evidence": {
+        "worms_with_all_three_better_than_persistence": 0,
+        "mean_energy_selected": 2.618253366684526,
+        "mean_energy_persistence": 0.20315421851079588,
+        "mean_autocorr_selected": 0.2480071975481219,
+        "mean_autocorr_persistence": 0.289035929996126
+      },
+      "tier": "exploratory"
+    },
+    {
+      "gate": "G4",
+      "name": "stochastic branching fidelity",
+      "status": "fail",
+      "evidence": {
+        "mean_tv_sim": 0.5129945851250198,
+        "mean_tv_markov": 0.2642046249402771,
+        "mean_tv_marginal": 0.24536006715663464,
+        "mean_entropy_observed": 0.6801810816400058,
+        "mean_entropy_simulated": 0.5068557029037878
+      },
+      "tier": "exploratory"
+    },
+    {
+      "gate": "G5",
+      "name": "support-constrained perturbation",
+      "status": "pass",
+      "evidence": {
+        "mean_in_support_fraction": 1.0,
+        "conditions_in_support": 36,
+        "conditions": 36,
+        "criterion": ">=90% perturbed states inside validation-calibrated support"
+      },
+      "tier": "exploratory"
+    },
+    {
+      "gate": "G6",
+      "name": "robust named-neuron virtual sensitivity",
+      "status": "not_evaluable",
+      "evidence": {
+        "n_model_families_tested": 1,
+        "n_robust_targets": 2,
+        "criterion": "one target/direction has consistent sign in >=4/5 worms and >=2/3 model families, conditional on G5",
+        "reason": "only one family was evaluated; the protocol requires >=2/3 families",
+        "exploratory_targets": [
+          {
+            "target": "AVEL",
+            "mean_tv": 0.025185185185185165,
+            "mean_control": 0.00814814814814814,
+            "mean_excess": 0.017037037037037024,
+            "worms_positive": 4
+          },
+          {
+            "target": "AVBR",
+            "mean_tv": 0.025925925925925908,
+            "mean_control": 0.009629629629629622,
+            "mean_excess": 0.016296296296296288,
+            "worms_positive": 3
+          },
+          {
+            "target": "RIVL",
+            "mean_tv": 0.019999999999999987,
+            "mean_control": 0.011851851851851843,
+            "mean_excess": 0.008148148148148144,
+            "worms_positive": 4
+          },
+          {
+            "target": "AVBL",
+            "mean_tv": 0.025185185185185165,
+            "mean_control": 0.019259259259259247,
+            "mean_excess": 0.0059259259259259196,
+            "worms_positive": 4
+          },
+          {
+            "target": "RIVR",
+            "mean_tv": 0.01777777777777777,
+            "mean_control": 0.013333333333333326,
+            "mean_excess": 0.004444444444444447,
+            "worms_positive": 3
+          },
+          {
+            "target": "AVER",
+            "mean_tv": 0.008888888888888884,
+            "mean_control": 0.012592592592592582,
+            "mean_excess": -0.0037037037037036986,
+            "worms_positive": 1
+          }
+        ],
+        "control_note": "controls used a deterministic random neuron; protocol asked for innovation-SD/autocorrelation matching, so specificity is descriptive only"
+      },
+      "tier": "exploratory"
+    },
+    {
+      "gate": "G7",
+      "name": "biological validation",
+      "status": "not_evaluable",
+      "evidence": {
+        "reason": "Kato is unstimulated and contains no matched intervention or stimulation-response data"
+      },
+      "tier": "not_evaluable"
+    }
+  ],
+  "evidence_tier": "exploratory",
+  "test_block_reused": true
+}

@@ -1,0 +1,328 @@
+{
+  "schema_version": 1,
+  "generated_at_utc": "2026-10-31T19:29:21.965296+00:00",
+  "warning": "Recording sessions are not proven independent animals. Oxygen changes are measured environmental input, not targeted neuronal stimulation.",
+  "datasets": {
+    "kato2015_wt_stim": {
+      "n_sessions": 7,
+      "files": [
+        {
+          "path": "WT_Stim.mat",
+          "bytes": 42652798,
+          "sha256": "96ffc39afbc90b66ff1b4c98de199f8424391450d4a8050cbe2b65b3a2fdaa72",
+          "n_sessions": 7
+        }
+      ],
+      "n_frames_min": 2017,
+      "n_frames_max": 2201,
+      "duration_seconds_min": 719.6430342092216,
+      "duration_seconds_max": 719.6728759654702,
+      "fps_min": 2.801388888888889,
+      "fps_max": 3.0569444444444445,
+      "n_traces_min": 107,
+      "n_traces_max": 151,
+      "n_labeled_traces_min": 37,
+      "n_labeled_traces_max": 51,
+      "state_names": [
+        "fwd",
+        "rev",
+        "revsus",
+        "turn"
+      ],
+      "stimulus": {
+        "conc": [
+          4.0,
+          21.0
+        ],
+        "concunits": "%",
+        "identity": "O2",
+        "initialstate": [
+          2.0
+        ],
+        "switchtimes": [
+          360.0,
+          390.0,
+          420.0,
+          450.0,
+          480.0,
+          510.0,
+          540.0,
+          570.0,
+          600.0,
+          630.0,
+          660.0,
+          690.0
+        ],
+        "type": "binarysteps"
+      },
+      "common_named_neurons": [
+        "AIBL",
+        "AIBR",
+        "ALA",
+        "AVAL",
+        "AVAR",
+        "AVEL",
+        "AVFR",
+        "BAGL",
+        "BAGR",
+        "OLQDR",
+        "RID",
+        "RIML",
+        "RIMR",
+        "RMED",
+        "RMEL",
+        "SABVR",
+        "SMBDR",
+        "URYDR",
+        "VB02"
+      ],
+      "n_common_named_neurons": 19,
+      "n_union_named_neurons": 82,
+      "per_session_named_label_counts": [
+        52,
+        51,
+        46,
+        52,
+        48,
+        45,
+        51
+      ],
+      "per_session_named_label_count_min": 45,
+      "per_session_named_label_count_max": 52,
+      "pairwise_jaccard_min": 0.46774193548387094,
+      "pairwise_jaccard_max": 0.6551724137931034,
+      "animal_independence": "OSF files identify recording sessions/dates but contain no animal IDs. Independence and non-overlap with Kato NoStim are therefore not provable from metadata; they are not assumed.",
+      "provenance": "https://osf.io/2395t/",
+      "paper_doi": "10.1016/j.cell.2015.09.034",
+      "preparation": "immobilized whole-brain calcium imaging (dLDS paper description)",
+      "behavior": "four coarse fictive states",
+      "oxygen_segment": "21% for 0-360 s; 4/21% steps every 30 s from 360 s"
+    },
+    "kato2015_wt_nostim": {
+      "n_sessions": 5,
+      "files": [
+        {
+          "path": "WT_NoStim.mat",
+          "bytes": 56390975,
+          "sha256": "7531811c1718e26a0455f59cb2f8188cf25809278cfea85770dfe03315a0098a"
+        }
+      ],
+      "n_frames_min": 3021,
+      "n_frames_max": 3311,
+      "duration_seconds_min": 1079.6425024826217,
+      "duration_seconds_max": 1079.6738145575355,
+      "fps_min": 2.797222222222222,
+      "fps_max": 3.0657407407407407,
+      "n_traces_min": 109,
+      "n_traces_max": 135,
+      "n_common_named_neurons": 46,
+      "common_named_neurons": [
+        "1",
+        "10",
+        "103",
+        "105",
+        "11",
+        "12",
+        "14",
+        "18",
+        "2",
+        "20",
+        "28",
+        "3",
+        "4",
+        "47",
+        "5",
+        "50",
+        "6",
+        "7",
+        "8",
+        "86",
+        "9",
+        "92",
+        "94",
+        "99",
+        "AIBL",
+        "AIBR",
+        "ALA",
+        "ASKR",
+        "AVAL",
+        "AVAR",
+        "AVBL",
+        "AVBR",
+        "AVEL",
+        "AVER",
+        "RIBL",
+        "RID",
+        "RIML",
+        "RIMR",
+        "RIVL",
+        "RIVR",
+        "RMED",
+        "RMEL",
+        "RMER",
+        "SMDDR",
+        "SMDVR",
+        "VB02"
+      ],
+      "animal_independence": "Five recording sessions; no animal IDs in the OSF file. The test block has already been reused in Phase 5/6.",
+      "stimulus": {
+        "identity": "O2",
+        "type": "constant hyperoxia",
+        "concentrations_percent": [
+          21
+        ]
+      },
+      "provenance": "https://osf.io/2395t/",
+      "paper_doi": "10.1016/j.cell.2015.09.034",
+      "preparation": "immobilized whole-brain calcium imaging",
+      "behavior": "eight fine fictive states"
+    },
+    "nichols2017": {
+      "n_sessions": 44,
+      "files": [
+        {
+          "path": "npr1_prelet.mat",
+          "bytes": 62603879,
+          "sha256": "23e214c7e616bad103e3a0d75410ad0ebd8c3a17e6ab26feda9184de3cba2484",
+          "n_sessions": 10
+        },
+        {
+          "path": "npr1_let.mat",
+          "bytes": 81053212,
+          "sha256": "5540f9a6099111200e6bb612e31447c9c9719c45efac1eea5ff5a4cb9dd157e0",
+          "n_sessions": 11
+        },
+        {
+          "path": "n2_let.mat",
+          "bytes": 79195250,
+          "sha256": "7aeabb334ab52894068359f72335b5b53704793d9b1f9338a8d2bcb91f39f95c",
+          "n_sessions": 12
+        },
+        {
+          "path": "n2_prelet.mat",
+          "bytes": 61439723,
+          "sha256": "3f2f11ab3081f226d10497c29ddfbec6fef8a4ff315d3252bfcf101359e2ab2e",
+          "n_sessions": 11
+        }
+      ],
+      "n_frames_min": 3033,
+      "n_frames_max": 4943,
+      "duration_seconds_min": 1079.6439169139467,
+      "duration_seconds_max": 1079.7815092049364,
+      "fps_min": 2.808333333333333,
+      "fps_max": 4.576851851851852,
+      "n_traces_min": 80,
+      "n_traces_max": 130,
+      "n_labeled_traces_min": 23,
+      "n_labeled_traces_max": 44,
+      "state_names": [
+        "dorsal turn",
+        "forward",
+        "quiescence",
+        "reversal",
+        "undefined turn",
+        "ventral turn"
+      ],
+      "stimulus": {
+        "conc": [
+          10.0,
+          21.0
+        ],
+        "concunits": "%",
+        "identity": "O2",
+        "initialstate": [
+          1.0
+        ],
+        "switchtimes": [
+          360.0,
+          720.0
+        ],
+        "type": "binarysteps"
+      },
+      "common_named_neurons": [
+        "AVAL",
+        "RIS"
+      ],
+      "n_common_named_neurons": 2,
+      "n_union_named_neurons": 87,
+      "per_session_named_label_counts": [
+        38,
+        39,
+        31,
+        38,
+        41,
+        38,
+        34,
+        27,
+        29,
+        34,
+        35,
+        46,
+        28,
+        43,
+        47,
+        42,
+        37,
+        42,
+        40,
+        38,
+        36,
+        23,
+        36,
+        35,
+        35,
+        33,
+        25,
+        34,
+        35,
+        39,
+        30,
+        29,
+        36,
+        35,
+        38,
+        30,
+        39,
+        35,
+        27,
+        35,
+        33,
+        33,
+        39,
+        32
+      ],
+      "per_session_named_label_count_min": 23,
+      "per_session_named_label_count_max": 47,
+      "pairwise_jaccard_min": 0.23404255319148937,
+      "pairwise_jaccard_max": 0.7619047619047619,
+      "animal_independence": "OSF files identify recording sessions/dates but contain no animal IDs. Independence and non-overlap with Kato NoStim are therefore not provable from metadata; they are not assumed.",
+      "provenance": "https://osf.io/kbf38/",
+      "paper_doi": "10.1126/science.aam6851",
+      "preparation": "brainwide calcium imaging during lethargus; OSF metadata does not document immobilization",
+      "behavior": "five/six states including quiescence",
+      "genotypes": "npr-1 and N2 backgrounds; PreLet and Let stages"
+    }
+  },
+  "cross_dataset": {
+    "kato_stim_vs_nostim_common_named_neurons": [
+      "AIBL",
+      "AIBR",
+      "ALA",
+      "AVAL",
+      "AVAR",
+      "AVEL",
+      "RID",
+      "RIML",
+      "RIMR",
+      "RMED",
+      "RMEL",
+      "VB02"
+    ],
+    "kato_stim_vs_nostim_n_common_named_neurons": 12,
+    "note": "A common name is not a shared panel: trace order, numeric trace IDs, coverage and multi-neuron labels differ. No frozen model transfer is licensed."
+  },
+  "known_discrepancies": [
+    "The dLDS paper's Table 3 trace counts differ from the raw OSF HDF5 shapes for some Kato worms; raw file shapes are authoritative here.",
+    "Trace-level labels can name several neurons and names can recur across traces; they are not one-to-one cell identities."
+  ]
+}
