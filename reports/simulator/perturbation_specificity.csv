@@ -1,0 +1,13 @@
+target,direction,abs_mean_delta_tv,mean_delta_turn,direction_of_effect,mean_shift_sd,worms_same_sign,seed_direction_agreement,seed_effects_delta_turn,specific_vs_random_q95,robust_across_worms,robust_across_seeds,ood_fraction
+AIBL,inhibition,0.1825,0.06000000000000001,more TURN,7.881571547072403,3,2,"{""17"": 0.06000000000000001, ""23"": 0.0, ""31"": 0.019999999999999997}",False,False,True,0.98828125
+AIBR,inhibition,0.155,0.0725,more TURN,8.110603952570534,2,3,"{""17"": 0.0725, ""23"": 0.0225, ""31"": 0.015000000000000003}",False,False,True,0.9868750000000001
+AVEL,inhibition,0.14750000000000002,0.0975,more TURN,7.673990510192672,2,3,"{""17"": 0.0975, ""23"": 0.03, ""31"": 0.045}",False,False,True,0.9893750000000001
+RIVL,activation,0.12250000000000001,0.12250000000000001,more TURN,7.678385894059848,2,3,"{""17"": 0.12250000000000001, ""23"": 0.01, ""31"": 0.0725}",False,False,True,0.99375
+RIVR,activation,0.0325,0.0325,more TURN,7.578239015267644,2,2,"{""17"": 0.0325, ""23"": 0.0, ""31"": 0.019999999999999997}",False,False,True,0.9859375
+RIVL,inhibition,0.025,0.0,none,7.675085961328696,0,0,"{""17"": 0.0, ""23"": 0.0, ""31"": -0.005}",False,False,False,0.97890625
+AVER,inhibition,0.025,0.025,more TURN,7.527846483541279,1,3,"{""17"": 0.025, ""23"": 0.045, ""31"": 0.0225}",False,False,True,0.98796875
+AVER,activation,0.015,0.0,none,7.565035431962373,0,0,"{""17"": 0.0, ""23"": 0.0, ""31"": -0.005}",False,False,False,0.99
+AVEL,activation,0.0,0.0,none,7.5183686605129765,0,0,"{""17"": 0.0, ""23"": 0.0125, ""31"": -0.005}",False,False,False,0.9887499999999999
+AIBL,activation,0.0,0.0,none,7.682923968866897,0,0,"{""17"": 0.0, ""23"": 0.0, ""31"": -0.005}",False,False,False,0.99
+AIBR,activation,0.0,0.0,none,7.805786772077792,0,0,"{""17"": 0.0, ""23"": 0.0, ""31"": -0.005}",False,False,False,0.9917187500000001
+RIVR,inhibition,0.0,0.0,none,7.5423460499463975,0,0,"{""17"": 0.0, ""23"": 0.0, ""31"": -0.005}",False,False,False,0.9887499999999999
