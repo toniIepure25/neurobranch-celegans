@@ -88,6 +88,32 @@ Start at [SIMULATOR_PHASE6_RESULTS.md](SIMULATOR_PHASE6_RESULTS.md) and
 [PHASE6_SIMULATOR_SUPERVISOR_BRIEF.md](PHASE6_SIMULATOR_SUPERVISOR_BRIEF.md).
 The older Phase 5 tables above are retained as run history.
 
+### External-validation readiness
+
+The external audit keeps the Phase 6 result frozen and asks whether any public
+recording can test it without reusing Kato test block 2. Frozen transfer is
+blocked: each checkpoint is tied to a worm-specific ordered trace panel, and the
+external files have different panels and multi-neuron trace labels. Kato Stim
+supports only a limited per-animal refit on its constant-21%-oxygen first 360 s;
+Nichols 2017 is a different developmental/preparation regime and was not run.
+
+The Kato Stim pilot is negative: **0/7 sessions** beat persistence at H=20
+(median skill −0.602; mean −0.593; bootstrap 95% CI −1.024 to −0.241). Oxygen is
+treated as measured environmental input, not targeted neuronal stimulation.
+
+The Phase 6 audit also records that the official support threshold is the 99th
+percentile, while the original protocol named the 95th; the q=0.95
+condition-level gate status cannot be reconstructed from the published event
+table. The nominal VAR spectral cap is not exactly realized (realized radii
+0.996–1.050), and the Phase 6 manifest verifies only under LF-normalized hashes
+(40/46 files on Windows). These are implementation/provenance limitations, not a
+retroactive change to the official result.
+
+Start at [EXTERNAL_DATASET_COMPATIBILITY.md](EXTERNAL_DATASET_COMPATIBILITY.md),
+[EXTERNAL_VALIDATION_PROTOCOL.md](EXTERNAL_VALIDATION_PROTOCOL.md),
+[PHASE6_FINAL_SCIENTIFIC_AUDIT.md](PHASE6_FINAL_SCIENTIFIC_AUDIT.md) and
+[RESEARCH_DIRECTION_FOR_DENIS.md](RESEARCH_DIRECTION_FOR_DENIS.md).
+
 ## Phase 15 gate result
 
 The final statuses are produced by `scripts/phase15_reliability.py` and checked

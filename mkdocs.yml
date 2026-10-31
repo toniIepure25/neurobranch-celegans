@@ -51,6 +51,11 @@ nav:
       - Phase 6 next experiments: PHASE6_NEXT_EXPERIMENTS.md
       - Phase 6 deviations: PHASE6_SIMULATOR_DEVIATIONS.md
       - Questions for Denis: QUESTIONS_FOR_DENIS.md
+  - External validation:
+      - Dataset compatibility: EXTERNAL_DATASET_COMPATIBILITY.md
+      - Validation protocol: EXTERNAL_VALIDATION_PROTOCOL.md
+      - Phase 6 final audit: PHASE6_FINAL_SCIENTIFIC_AUDIT.md
+      - Research direction for Denis: RESEARCH_DIRECTION_FOR_DENIS.md
   - Phase 15:
       - Results: PHASE15_RESULTS.md
       - Methods: METHODS_PHASE15.md
