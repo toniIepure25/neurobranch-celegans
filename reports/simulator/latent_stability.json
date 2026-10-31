@@ -1,0 +1,21 @@
+{
+  "schema_version": 1,
+  "selected_model": "mlp_residual",
+  "stability": [
+    {
+      "worm_id": 0,
+      "seed_a": 17,
+      "seed_b": 23,
+      "linear_cka": 0.10150737541163922,
+      "procrustes_error": 1.021253059446179
+    },
+    {
+      "worm_id": 0,
+      "seed_a": 17,
+      "seed_b": 31,
+      "linear_cka": 0.2843141999754933,
+      "procrustes_error": 2.0334015263537637
+    }
+  ],
+  "note": "BunDLe-Net is used as an encoder and visualisation. It has no published inverse decoder, so a named-neuron perturbation is not one latent coordinate."
+}
