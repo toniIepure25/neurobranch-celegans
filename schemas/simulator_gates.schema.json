@@ -1,0 +1,40 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://neurobranch.local/schemas/simulator_gates.schema.json",
+  "title": "NeuroBranch core dynamics simulator gate report",
+  "type": "object",
+  "required": ["schema_version", "generated_by", "gates", "decision", "warning"],
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {"const": 1},
+    "generated_by": {"type": "string", "minLength": 1},
+    "decision": {"type": "string", "minLength": 1},
+    "warning": {"type": "string", "minLength": 1},
+    "gates": {
+      "type": "object",
+      "required": ["G1", "G2", "G3", "G4", "G5", "G6"],
+      "additionalProperties": false,
+      "patternProperties": {
+        "^G[1-6]$": {
+          "type": "object",
+          "required": ["status", "criterion", "evidence_paths", "notes"],
+          "additionalProperties": false,
+          "properties": {
+            "status": {"enum": ["pass", "fail", "not_evaluable"]},
+            "criterion": {"type": "string", "minLength": 1},
+            "evidence_paths": {
+              "type": "array",
+              "items": {"type": "string", "minLength": 1},
+              "minItems": 1
+            },
+            "notes": {"type": "string", "minLength": 1}
+          }
+        }
+      }
+    },
+    "source_reports": {
+      "type": "object",
+      "additionalProperties": {"type": "string"}
+    }
+  }
+}

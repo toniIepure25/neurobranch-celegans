@@ -192,6 +192,21 @@ def main(argv: list[str] | None = None) -> int:
     args = parser.parse_args(argv)
 
     failures: list[str] = []
+    if args.reports.name == "simulator":
+        report = args.reports / "gates.json"
+        if not report.exists():
+            failures.append(f"missing report: {report}")
+        else:
+            _validate_json(
+                report,
+                ("simulator_gates.schema.json", "simulator_gates.schema.json"),
+                failures,
+            )
+        if failures:
+            for failure in failures:
+                print(f"FAIL: {failure}", file=sys.stderr)
+            return 1
+        return 0
     if args.reports.name == "phase12" or args.reports.name.startswith("phase12r"):
         if args.reports.name == "phase12":
             _validate_phase12(args.reports, failures)
