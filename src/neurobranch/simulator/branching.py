@@ -68,7 +68,7 @@ def observed_local(
         candidates,
         k=k,
         horizon=horizon,
-        exclude_temporal_radius=12,
+        exclude_temporal_radius=horizon + 2,
     )
     return {r.frame: r for r in results}, candidates
 
@@ -133,6 +133,38 @@ def persistence_local(
         seed=base_seed,
     )
     counts = outcome_counts(rollout.behavior_proba.argmax(axis=1), initial)
+    return counts / max(1.0, counts.sum())
+
+
+def markov_transition_matrix(data: WormData) -> np.ndarray:
+    """First-order macrostate transition matrix fitted on training frames."""
+    starts = split_starts(data, "train", history=1, horizon=1)
+    counts = np.full((4, 4), 0.5, dtype=np.float64)  # smoothed
+    for t in starts:
+        counts[int(data.y_macro[int(t)]), int(data.y_macro[int(t) + 1])] += 1.0
+    return counts / counts.sum(axis=1, keepdims=True)
+
+
+def markov_local(
+    transition: np.ndarray,
+    initial: int,
+    *,
+    horizon: int = 20,
+    n_chains: int = 2000,
+    seed: int = 0,
+) -> np.ndarray:
+    """Monte Carlo first-exit distribution under a first-order Markov chain."""
+    rng = np.random.default_rng(seed)
+    counts = np.zeros(4, dtype=np.float64)
+    for _ in range(n_chains):
+        state = int(initial)
+        for _step in range(horizon):
+            state = int(rng.choice(4, p=transition[state]))
+            if state != int(initial):
+                counts[state] += 1.0
+                break
+        else:
+            counts[int(initial)] += 1.0
     return counts / max(1.0, counts.sum())
 
 
@@ -205,6 +237,7 @@ def branch_summary(
     for s in outcomes:
         marginal_counts[MACRO_ORDER.index(str(s))] += 1
     marginal = marginal_counts / marginal_counts.sum()
+    transition = markov_transition_matrix(data)
     rows = []
     for t in states:
         obs = local.get(int(t))
@@ -216,10 +249,11 @@ def branch_summary(
             int(t),
             horizon=horizon,
             n_rollouts=n_rollouts,
-            noise_std=noise_std,
+            noise_std=0.0,
             base_seed=seed * 1000 + int(t),
         )
         p_pers = persistence_local(persistence, int(t), horizon=horizon, base_seed=seed)
+        p_mark = markov_local(transition, int(data.y_macro[int(t)]), horizon=horizon, seed=seed)
         rows.append(
             {
                 "worm_id": int(data.worm_id),
@@ -229,14 +263,18 @@ def branch_summary(
                 "simulated_entropy": entropy(p_sim),
                 "persistence_entropy": entropy(p_pers),
                 "marginal_entropy": entropy(marginal),
+                "markov_entropy": entropy(p_mark),
                 "tv_sim_observed": tv(p_sim, p_obs),
                 "tv_persistence_observed": tv(p_pers, p_obs),
                 "tv_marginal_observed": tv(marginal, p_obs),
+                "tv_markov_observed": tv(p_mark, p_obs),
                 "js_sim_observed": js(p_sim, p_obs),
+                "js_markov_observed": js(p_mark, p_obs),
                 "stochastic": sim_meta["stochastic"],
                 "ood_fraction": sim_meta["ood_fraction"],
                 "observed_distribution": ";".join(f"{s}:{p_obs[i]:.4f}" for i, s in enumerate(MACRO_ORDER)),
                 "simulated_distribution": ";".join(f"{s}:{p_sim[i]:.4f}" for i, s in enumerate(MACRO_ORDER)),
+                "markov_distribution": ";".join(f"{s}:{p_mark[i]:.4f}" for i, s in enumerate(MACRO_ORDER)),
                 "observed_n": int(obs.n_neighbors),
                 "n_rollouts": int(n_rollouts),
             }
@@ -251,6 +289,9 @@ def branch_summary(
         "mean_tv_sim": float(np.mean([r["tv_sim_observed"] for r in rows])),
         "mean_tv_persistence": float(np.mean([r["tv_persistence_observed"] for r in rows])),
         "mean_tv_marginal": float(np.mean([r["tv_marginal_observed"] for r in rows])),
+        "mean_tv_markov": float(np.mean([r["tv_markov_observed"] for r in rows])),
+        "mean_js_markov": float(np.mean([r["js_markov_observed"] for r in rows])),
+        "mean_entropy_markov": float(np.mean([r["markov_entropy"] for r in rows])),
         "mean_entropy_observed": float(np.mean([r["observed_entropy"] for r in rows])),
         "mean_entropy_simulated": float(np.mean([r["simulated_entropy"] for r in rows])),
         "mean_entropy_persistence": float(np.mean([r["persistence_entropy"] for r in rows])),

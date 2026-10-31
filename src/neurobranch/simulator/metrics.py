@@ -100,6 +100,16 @@ def _cross_corr_error(sim: np.ndarray, real: np.ndarray) -> float:
     return float(np.mean(np.abs(a - b)))
 
 
+def _covariance_error(sim: np.ndarray, real: np.ndarray) -> float:
+    """Relative Frobenius error of the neuron-by-neuron covariance matrix."""
+    if sim.shape[1] < 2 or len(sim) < 3:
+        return float("nan")
+    a = np.cov(sim, rowvar=False)
+    b = np.cov(real, rowvar=False)
+    denom = np.linalg.norm(b, ord="fro")
+    return float(np.linalg.norm(a - b, ord="fro") / denom) if denom > 1e-12 else float("nan")
+
+
 def _energy_distance(a: np.ndarray, b: np.ndarray, *, max_n: int = 400, seed: int = 0) -> float:
     a = np.asarray(a, dtype=np.float64)
     b = np.asarray(b, dtype=np.float64)
@@ -137,6 +147,7 @@ def distribution_metrics(sim_states: np.ndarray, real_states: np.ndarray) -> dic
         "energy_distance": _energy_distance(sim_states, real_states),
         "autocorr_error": _autocorr_error(sim_states, real_states),
         "cross_corr_error": _cross_corr_error(sim_states, real_states),
+        "covariance_error": _covariance_error(sim_states, real_states),
         "variance_ratio": float(sim_var / real_var) if real_var > 1e-12 else float("nan"),
     }
 

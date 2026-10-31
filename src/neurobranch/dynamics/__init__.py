@@ -10,3 +10,4 @@ from neurobranch.dynamics.models import (  # noqa: F401
     VARModel,
     fit_model,
 )
+from neurobranch.dynamics.switching import SwitchingVARModel  # noqa: F401

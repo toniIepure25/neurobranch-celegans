@@ -15,6 +15,7 @@ from typing import Protocol
 
 import numpy as np
 import torch
+from sklearn.covariance import LedoitWolf
 from sklearn.decomposition import PCA
 from sklearn.linear_model import LogisticRegression
 from torch import nn
@@ -191,6 +192,7 @@ class PersistenceModel:
         noise_std: float = 0.0,
         perturb: PerturbFn | None = None,
         initial_history: Array | None = None,
+        stochastic: bool = False,
     ) -> Array:
         rng = np.random.default_rng(seed)
         hist = _initial_history(x0, initial_history, self.n_neurons)
@@ -215,6 +217,12 @@ class VARModel:
     name: str = "var1"
     latent_dim: int | None = None
     ridge: float = 1e-2
+    spectral_cap: float | None = None
+    noise_cov: Array | None = None
+    residuals: Array | None = None
+    noise_model: str = "none"
+    bootstrap_block: int = 5
+    native_stochastic: bool = False
 
     @classmethod
     def fit(
@@ -226,6 +234,9 @@ class VARModel:
         history: int = 1,
         ridge: float = 1e-2,
         seed: int = 17,
+        spectral_cap: float | None = None,
+        noise_model: str = "none",
+        bootstrap_block: int = 5,
     ) -> VARModel:
         H = np.stack([X[t - history + 1 : t + 1].ravel() for t in starts])
         Y = X[starts + 1]
@@ -237,15 +248,59 @@ class VARModel:
         A_aug = np.linalg.solve(Hs.T @ Hs + ridge * np.eye(Hs.shape[1]), Hs.T @ Y)
         b = Y.mean(axis=0) - (mu / sd) @ A_aug
         A = (A_aug / sd[:, None]).T
-        probe = BehaviorProbe(seed=seed).fit(X[starts], y[starts])
-        return cls(
+        if spectral_cap is not None:
+            if spectral_cap <= 0:
+                raise ValueError("spectral_cap must be positive")
+            companion = np.zeros((X.shape[1] * history, X.shape[1] * history))
+            companion[: X.shape[1], :] = A
+            if history > 1:
+                companion[X.shape[1] :, : -X.shape[1]] = np.eye(X.shape[1] * (history - 1))
+            rho = float(np.max(np.abs(np.linalg.eigvals(companion))))
+            if rho > spectral_cap:
+                A = A * (spectral_cap / rho)
+        model = cls(
             n_neurons=X.shape[1],
             A=A,
             b=b,
             history_len=history,
-            probe=probe,
+            probe=BehaviorProbe(seed=seed),
             ridge=ridge,
+            spectral_cap=spectral_cap,
+            noise_model=noise_model,
+            bootstrap_block=bootstrap_block,
+            native_stochastic=noise_model != "none",
         )
+        model.probe.fit(X[starts], y[starts])
+        if noise_model != "none":
+            residuals = Y - model.predict_next(H)
+            model.residuals = np.asarray(residuals, dtype=np.float64)
+            cov = LedoitWolf().fit(model.residuals).covariance_
+            model.noise_cov = np.asarray(cov, dtype=np.float64)
+        return model
+
+    @property
+    def spectral_radius(self) -> float:
+        size = self.n_neurons * self.history_len
+        companion = np.zeros((size, size))
+        companion[: self.n_neurons, :] = self.A
+        if self.history_len > 1:
+            companion[self.n_neurons :, : -self.n_neurons] = np.eye(
+                self.n_neurons * (self.history_len - 1)
+            )
+        return float(np.max(np.abs(np.linalg.eigvals(companion))))
+
+    def _innovation(self, rng: np.random.Generator, buffer: list[Array]) -> Array:
+        if self.noise_model == "gaussian" and self.noise_cov is not None:
+            return rng.multivariate_normal(np.zeros(self.n_neurons), self.noise_cov)
+        if self.noise_model.startswith("bootstrap") and self.residuals is not None:
+            if not buffer:
+                block = self.bootstrap_block if self.noise_model.endswith("block") else 1
+                start = int(rng.integers(0, max(1, len(self.residuals) - block + 1)))
+                buffer.extend(self.residuals[start : start + block].copy())
+            if not buffer:
+                return np.zeros(self.n_neurons)
+            return buffer.pop(0)
+        return np.zeros(self.n_neurons)
 
     def predict_next(self, history: Array) -> Array:
         h = np.asarray(history)
@@ -269,14 +324,18 @@ class VARModel:
         noise_std: float = 0.0,
         perturb: PerturbFn | None = None,
         initial_history: Array | None = None,
+        stochastic: bool = False,
     ) -> Array:
         rng = np.random.default_rng(seed)
         hist = _initial_history(x0, initial_history, self.n_neurons)
         seq = [hist[-1].copy()]
         buffer = [row.copy() for row in hist]
+        residual_buffer: list[Array] = []
         for s in range(steps):
             window = _history_from_rollout(np.stack(buffer), self.history_len)[None]
             x = self.predict_next(window)[0]
+            if stochastic:
+                x = x + self._innovation(rng, residual_buffer)
             if noise_std > 0:
                 x = x + rng.normal(scale=noise_std, size=x.shape)
             if perturb is not None:
@@ -326,6 +385,7 @@ class MLPDynamics:
         noise_std: float = 0.0,
         perturb: PerturbFn | None = None,
         initial_history: Array | None = None,
+        stochastic: bool = False,
     ) -> Array:
         rng = np.random.default_rng(seed)
         hist = _initial_history(x0, initial_history, self.n_neurons)
@@ -664,6 +724,7 @@ class LatentMLPDynamics:
         noise_std: float = 0.0,
         perturb: PerturbFn | None = None,
         initial_history: Array | None = None,
+        stochastic: bool = False,
     ) -> Array:
         rng = np.random.default_rng(seed)
         hist = _initial_history(x0, initial_history, self.n_neurons)

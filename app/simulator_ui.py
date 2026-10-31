@@ -1,10 +1,11 @@
-"""Streamlit tab for free-running simulation and virtual perturbations."""
+"""Streamlit tab for Phase 6 free-running simulation and bounded perturbations."""
 
 from __future__ import annotations
 
 import json
 from pathlib import Path
 
+import numpy as np
 import pandas as pd
 import plotly.graph_objects as go
 import streamlit as st
@@ -18,145 +19,180 @@ from neurobranch.simulator.train import load_simulator_for
 from neurobranch.simulator.types import PerturbationSpec
 
 REPORT_DIR = PROJECT_ROOT / "reports" / "simulator"
+PHASE6_DIR = REPORT_DIR / "phase6"
+WARNING = "MODEL-DEPENDENT VIRTUAL PERTURBATION — NOT CAUSALLY VALIDATED."
 
 
-def _json(name: str, default=None):
+def _json(path: Path, default=None):
     try:
-        return json.loads((REPORT_DIR / name).read_text(encoding="utf-8"))
+        return json.loads(path.read_text(encoding="utf-8"))
     except Exception:
         return default
 
 
-@st.cache_resource(show_spinner="Loading simulator …")
-def _sim(kind: str, worm_id: int, seed: int, root: str):
+@st.cache_resource(show_spinner="Loading Phase 6 simulator …")
+def _sim(family: str, worm_id: int, root: str):
     from neurobranch.config import ExperimentConfig
     from neurobranch.dynamics.training import load_worm_data
+    from neurobranch.simulator import NeuralSimulator
+    from neurobranch.simulator.train import checkpoint_root
 
     cfg = ExperimentConfig.load(PROJECT_ROOT / "configs/experiments/blocked_suite.yaml")
     data = load_worm_data(cfg)[worm_id]
-    return load_simulator_for(data, kind, seed, root=root)
+    if family == "phase5_mlp":
+        return load_simulator_for(data, "mlp_residual", 17, root=str(root))
+    path = checkpoint_root(cfg) / "phase6" / family / f"worm{worm_id}.pt"
+    return NeuralSimulator.from_checkpoint(path, data)
+
+
+def _test_frames(data, horizon: int) -> list[int]:
+    starts = split_starts(data, "test", history=3, horizon=horizon)
+    return [int(t) for t in starts[:120]]
+
+
+def _support_text(sim) -> str:
+    quant = sim.support.calibration_quantile
+    return (
+        f"support threshold={sim.support.threshold:.3f} "
+        f"({'validation ' + str(quant) + ' quantile' if quant is not None else 'training LOO'})"
+    )
 
 
 def render(data, pca, worm_id: int, model_name: str, seed: int, root: Path) -> None:
     st.subheader("Core dynamics simulator")
     st.warning(
-        "MODEL-DEPENDENT VIRTUAL PERTURBATION — NOT CAUSALLY VALIDATED. "
-        "These are free-running model rollouts under stated assumptions; no stimulation-response "
-        "model was fitted to Kato 2015. Category C is not_evaluable.",
+        f"{WARNING} These are free-running model rollouts under stated assumptions. "
+        "No stimulation-response model was fitted to Kato 2015; Gate 7 is not_evaluable.",
         icon="⚠️",
     )
-    summary = _json("summary.json", {})
-    selection = _json("selection.json", {})
-    g1 = summary.get("gate_1", {})
-    g2 = summary.get("gate_2", {})
-    g6 = summary.get("gate_6", {})
+    gates = _json(PHASE6_DIR / "gates.json", {}) or {}
+    gate_map = {g["gate"]: g for g in gates.get("gates", [])}
     c1, c2, c3, c4 = st.columns(4)
-    c1.metric("G1 functioning", str(g1.get("status", "not_run")).upper())
-    c2.metric("G2 dynamical advantage", str(g2.get("status", "not_run")).upper())
-    c3.metric("Selected model", str(selection.get("selected_kind", model_name)))
-    c4.metric("G6 biological validation", str(g6.get("status", "not_evaluable")))
+    c1.metric("G1 functioning", str(gate_map.get("G1", {}).get("status", "not_run")).upper())
+    c2.metric("G2 autonomous skill", str(gate_map.get("G2", {}).get("status", "not_run")).upper())
+    c3.metric("G3 distributional", str(gate_map.get("G3", {}).get("status", "not_run")).upper())
+    c4.metric("G7 biological", str(gate_map.get("G7", {}).get("status", "not_evaluable")))
     st.caption(
-        "G2 compares free-running rollouts with a constant-initial-state baseline and one-step "
-        "persistence; the selected checkpoint is chosen on validation one-step R² only."
+        "Test block 2 was reused from Phase 5: every displayed test result is exploratory, "
+        "not confirmatory. Gate details are in reports/simulator/phase6/gates.json."
     )
 
+    family = st.selectbox(
+        "Model family",
+        ["var", "stochastic_var", "switching_var", "phase5_mlp"],
+        index=0,
+        help="VAR is deterministic; stochastic/switching families use native innovations.",
+    )
     with st.expander("Observed vs simulated trajectories", expanded=True):
-        frames = [
-            int(t)
-            for t in split_starts(data, "test", history=1, horizon=1)
-            if data.masks["test"][int(t) : int(t) + 31].all()
-        ]
+        frames = _test_frames(data, 20)
         frame = st.select_slider(
-            "Initial frame (held-out)",
-            options=frames[:80],
+            "Initial frame (held-out, real 3-frame history)",
+            options=frames,
             value=frames[0],
             format_func=lambda t: f"frame {t} · {MACRO_ORDER[int(data.y_macro[t])]}",
         )
-        horizon = st.slider("Horizon", 5, 30, 20, key="sim_horizon")
+        horizon = st.slider("Horizon", 5, 100, 20, key="sim_horizon")
         n = st.slider("Ensemble size", 10, 60, 30, step=10, key="sim_n")
-        noise = st.slider("Noise SD (standardised units)", 0.0, 0.2, 0.05, 0.01, key="sim_noise")
+        sim_preview = _sim(family, int(worm_id), str(root))
+        native = bool(getattr(sim_preview.model, "native_stochastic", False))
+        stochastic = st.checkbox(
+            "Use native stochasticity",
+            value=native,
+            disabled=not native,
+            help="Deterministic models have no innovation distribution; adding arbitrary noise is not native.",
+        )
+        noise = 0.0 if native else st.slider(
+            "Extra noise SD (standardised units)", 0.0, 0.10, 0.0, 0.01, key="sim_noise"
+        )
         run = st.button("Roll out simulator", type="primary")
         if run:
             try:
-                sim = _sim(selection.get("selected_kind", model_name), int(worm_id), int(seed), str(root))
+                sim = _sim(family, int(worm_id), str(root))
+                hist = sim.initial_history(int(frame), history=int(getattr(sim.model, "history_len", 1)))
                 ensemble = sim.rollout_ensemble(
-                    data.X[frame], n, horizon, base_seed=1000 + frame, noise_std=noise
+                    None,
+                    n,
+                    horizon,
+                    initial_history=hist,
+                    initial_macro=int(data.y_macro[frame]),
+                    base_seed=1000 + frame,
+                    noise_std=float(noise),
+                    stochastic=stochastic if native else False,
                 )
                 Zobs = pca.transform(data.X[frame : frame + horizon + 1])
                 fig = go.Figure()
                 fig.add_trace(
                     go.Scatter(
-                        x=Zobs[:, 0],
-                        y=Zobs[:, 1],
-                        mode="lines+markers",
-                        name="observed",
-                        line=dict(color="black", width=4),
+                        x=Zobs[:, 0], y=Zobs[:, 1], mode="lines+markers",
+                        name="observed", line=dict(color="black", width=4),
                     )
                 )
                 for r in ensemble.rollouts:
                     Z = pca.transform(r.states)
                     fig.add_trace(
                         go.Scatter(
-                            x=Z[:, 0],
-                            y=Z[:, 1],
-                            mode="lines",
-                            line=dict(color="#2E86AB", width=1),
-                            opacity=0.25,
-                            showlegend=False,
-                            hoverinfo="skip",
+                            x=Z[:, 0], y=Z[:, 1], mode="lines",
+                            line=dict(color="#2E86AB", width=1), opacity=0.25,
+                            showlegend=False, hoverinfo="skip",
                         )
                     )
                 fig.update_layout(
-                    height=420,
-                    xaxis_title="PC1",
-                    yaxis_title="PC2",
-                    legend=dict(orientation="h", y=1.05),
-                    margin=dict(l=10, r=10, t=40, b=10),
+                    height=420, xaxis_title="PC1", yaxis_title="PC2",
+                    legend=dict(orientation="h", y=1.05), margin=dict(l=10, r=10, t=40, b=10),
                 )
                 st.plotly_chart(fig, width="stretch")
                 st.caption(
-                    f"Ensemble stochastic: {ensemble.stochastic}; OOD fraction: {ensemble.ood_fraction:.3f}; "
-                    f"observed initial label: {MACRO_ORDER[int(data.y_macro[frame])]}."
+                    f"{_support_text(sim)} · native stochastic={ensemble.stochastic} · "
+                    f"OOD fraction={ensemble.ood_fraction:.3f} · "
+                    f"readout support={np.mean([r.metadata['readout_supported_fraction'] for r in ensemble.rollouts]):.3f}."
+                )
+                st.info(
+                    "A visually diverging trajectory is not a bifurcation. Native stochasticity "
+                    "is sampled from fitted innovations, not added to force entropy."
                 )
             except Exception as exc:
                 st.error(f"Simulator unavailable: {exc}")
 
-    with st.expander("Named-neuron virtual perturbation", expanded=False):
+    with st.expander("Support-constrained named-neuron perturbation", expanded=False):
         target = st.selectbox("Target neuron", [n for n in CANDIDATES if n in data.predictor_names])
+        j = data.predictor_names.index(target)
+        train = split_starts(data, "train", history=1, horizon=1)
+        delta = data.X[train + 1, j] - data.X[train, j]
+        delta_sd = float(np.std(delta))
+        lo, hi = np.quantile(data.X[:, j], [0.05, 0.95])
+        cap = max(1e-6, 0.5 * (hi - lo))
+        amplitude = float(min(delta_sd, cap))
+        direction = st.radio("Direction", ["increase (+)", "decrease (−)"], horizontal=True)
+        q = st.slider("Amplitude multiplier q (observed one-step Δ)", 0.5, 2.0, 1.0, 0.5)
         protocol = st.radio(
             "Protocol",
-            ["dynamical_input", "initial_state"],
+            ["initial_state", "dynamical_input"],
             horizontal=True,
             help="Initial-state probes test mathematical sensitivity; they are not stimulation.",
         )
-        amplitude = st.slider("Amplitude (training SD units)", -3.0, 3.0, 1.0, 0.5)
-        onset = st.slider("Onset (frames)", 0, 10, 0)
-        duration = st.slider("Duration (frames)", 0, 15, 10)
-        run_p = st.button("Run virtual perturbation")
+        duration = 1 if protocol == "initial_state" else st.slider("Duration (frames)", 1, 5, 1)
+        run_p = st.button("Run bounded virtual perturbation")
         if run_p:
             try:
-                sim = _sim(selection.get("selected_kind", model_name), int(worm_id), int(seed), str(root))
-                frames = [
-                    int(t)
-                    for t in split_starts(data, "test", history=1, horizon=1)
-                    if data.masks["test"][int(t) : int(t) + 21].all()
-                ]
-                frame = frames[0]
+                sim = _sim(family, int(worm_id), str(root))
+                frame_h = int(_test_frames(data, 20)[0])
+                hist = sim.initial_history(int(frame_h), history=int(getattr(sim.model, "history_len", 1)))
                 base = sim.rollout_ensemble(
-                    data.X[frame], 20, 20, base_seed=500 + frame, noise_std=0.05
+                    None, 20, 20, initial_history=hist,
+                    initial_macro=int(data.y_macro[frame_h]), base_seed=500 + frame_h,
+                    stochastic=native,
                 )
+                signed = (1.0 if direction.startswith("increase") else -1.0) * q * amplitude
                 spec = PerturbationSpec(
-                    target=target,
-                    protocol=protocol,
-                    mode="additive",
-                    amplitude=float(amplitude),
-                    onset=int(onset),
-                    duration=int(duration),
+                    target=target, protocol=protocol, mode="additive",
+                    amplitude=float(signed), onset=0, duration=int(duration),
                 )
                 pert = sim.rollout_ensemble(
-                    data.X[frame], 20, 20, base_seed=500 + frame, noise_std=0.05, perturbation=spec
+                    None, 20, 20, initial_history=hist,
+                    initial_macro=int(data.y_macro[frame_h]), base_seed=500 + frame_h,
+                    stochastic=native, perturbation=spec,
                 )
-                initial = int(data.y_macro[frame])
+                initial = int(data.y_macro[frame_h])
                 p0 = outcome_distribution(base.rollouts, initial)
                 p1 = outcome_distribution(pert.rollouts, initial)
                 fig = go.Figure(
@@ -166,30 +202,32 @@ def render(data, pca, worm_id: int, model_name: str, seed: int, root: Path) -> N
                     ]
                 )
                 fig.update_layout(
-                    barmode="group",
-                    height=320,
-                    yaxis_title="outcome probability",
+                    barmode="group", height=320, yaxis_title="outcome probability",
                     margin=dict(l=10, r=10, t=30, b=10),
                 )
                 st.plotly_chart(fig, width="stretch")
                 st.metric("TV(perturbed, baseline)", f"{tv(p1, p0):.3f}")
                 st.caption(
-                    f"{spec.protocol} on {target}; model seed {seed}; OOD fraction {pert.ood_fraction:.3f}. "
-                    "A non-zero TV is a model prediction, not an experimental effect."
+                    f"{protocol} on {target}; signed amplitude {signed:+.3f} standardised units "
+                    f"(q={q:g}, observed Δ SD={delta_sd:.3f}, cap={cap:.3f}); "
+                    f"in-support={1 - pert.ood_fraction:.3f}; readout support="
+                    f"{np.mean([r.metadata['readout_supported_fraction'] for r in pert.rollouts]):.3f}."
                 )
+                st.warning(WARNING)
             except Exception as exc:
                 st.error(f"Perturbation unavailable: {exc}")
 
     st.divider()
-    st.markdown("**Frozen reports**")
-    spec = pd.read_csv(REPORT_DIR / "perturbation_specificity.csv") if (REPORT_DIR / "perturbation_specificity.csv").exists() else None
-    if spec is not None:
-        st.dataframe(spec, width="stretch", hide_index=True)
-    for name in ["trajectory_pca.png", "branching.png", "perturbation.png"]:
-        path = PROJECT_ROOT / "figures" / "simulator" / name
-        if path.exists():
-            st.image(str(path), caption=name.replace("_", " ").replace(".png", ""), width="stretch")
+    st.markdown("**Phase 6 frozen evidence**")
+    col1, col2 = st.columns(2)
+    for col, name in ((col1, "test_overview.json"), (col2, "branching_overview.json")):
+        payload = _json(PHASE6_DIR / name)
+        if payload:
+            col.json(payload)
+    table = PHASE6_DIR / "perturbation_summary.csv"
+    if table.exists():
+        st.dataframe(pd.read_csv(table), width="stretch", hide_index=True)
     st.caption(
-        "G3 branching and G5 perturbation reports are in reports/simulator/. "
-        "No report establishes a bifurcation, a causal effect, or whole-brain dynamics."
+        "No report establishes a bifurcation, a causal effect, or whole-brain dynamics. "
+        "Gate 6/7 are not_evaluable without matched intervention data."
     )

@@ -19,6 +19,7 @@ from neurobranch.dynamics.models import (
     VARModel,
     _LatentNet,
 )
+from neurobranch.dynamics.switching import SwitchingVARModel
 from neurobranch.dynamics.torch_utils import GRUNet, MLPNet
 
 
@@ -35,6 +36,28 @@ def save_model(model: Any, path: str | Path, *, metadata: dict[str, Any] | None 
             b=model.b,
             history_len=model.history_len,
             ridge=model.ridge,
+            spectral_cap=model.spectral_cap,
+            noise_cov=model.noise_cov,
+            residuals=model.residuals,
+            noise_model=model.noise_model,
+            bootstrap_block=model.bootstrap_block,
+            native_stochastic=model.native_stochastic,
+            probe=model.probe.state_dict(),
+            n_neurons=model.n_neurons,
+        )
+    elif isinstance(model, SwitchingVARModel):
+        payload.update(
+            kind="switching_var",
+            A=model.A,
+            b=model.b,
+            variances=model.variances,
+            P=model.P,
+            pi=model.pi,
+            K=model.K,
+            ridge=model.ridge,
+            log_likelihood=model.log_likelihood,
+            diagnostics=model.diagnostics,
+            diagonal=model.diagonal,
             probe=model.probe.state_dict(),
             n_neurons=model.n_neurons,
         )
@@ -143,6 +166,30 @@ def load_model(path: str | Path) -> tuple[Any, dict[str, Any]]:
                 history_len=int(payload["history_len"]),
                 probe=BehaviorProbe.from_state_dict(payload["probe"]),
                 ridge=float(payload.get("ridge", 1e-2)),
+                spectral_cap=payload.get("spectral_cap"),
+                noise_cov=np.asarray(payload["noise_cov"]) if payload.get("noise_cov") is not None else None,
+                residuals=np.asarray(payload["residuals"]) if payload.get("residuals") is not None else None,
+                noise_model=str(payload.get("noise_model", "none")),
+                bootstrap_block=int(payload.get("bootstrap_block", 5)),
+                native_stochastic=bool(payload.get("native_stochastic", False)),
+            ),
+            metadata,
+        )
+    if kind == "switching_var":
+        return (
+            SwitchingVARModel(
+                n_neurons=int(payload["n_neurons"]),
+                K=int(payload["K"]),
+                A=np.asarray(payload["A"]),
+                b=np.asarray(payload["b"]),
+                variances=np.asarray(payload["variances"]),
+                P=np.asarray(payload["P"]),
+                pi=np.asarray(payload["pi"]),
+                probe=BehaviorProbe.from_state_dict(payload["probe"]),
+                ridge=float(payload.get("ridge", 1e-2)),
+                log_likelihood=float(payload.get("log_likelihood", float("-inf"))),
+                diagnostics=payload.get("diagnostics", {}),
+                diagonal=bool(payload.get("diagonal", True)),
             ),
             metadata,
         )

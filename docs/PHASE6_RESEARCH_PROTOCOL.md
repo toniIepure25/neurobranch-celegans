@@ -61,7 +61,7 @@ Confirmed defects and their impact:
 2. **Time indexing:** evaluation now uses `x[t-history+1:t+1]` and scores `t+1 ... t+H`; no future frame passes into the model.
 3. **Autocorrelation:** the old formula correlated concatenated simulated and real blocks. It was not a per-neuron lag correlation. Mean corrected errors are 0.457 (VAR), 0.533 (selected MLP) and 0.539 (GRU), versus 0.266, 0.225 and 0.331 under the old formula. The old metric understated temporal mismatch.
 4. **Gate 2:** the old Gate 2 used a one-step R² difference. It now uses free-running skill against a constant-state baseline.
-5. **Support:** the old threshold was the 99th percentile of leave-one-out training distance. It now defaults to the 99th percentile of held-out validation distances, with 90%/95%/99% sensitivity reported. The old threshold flagged 79% of selected-model rollout states as OOD; the calibrated diagnostic flags 22.6%.
+5. **Support:** the old threshold was the 99th percentile of leave-one-out training distance. It now defaults to the 99th percentile of held-out validation distances, with 90%/95%/99% sensitivity reported. The old threshold flagged 79% of selected-model rollout states as OOD; the calibrated diagnostic flags 22.6%. Sensitivity on the selected rollouts is 100% in support at all three quantiles for VAR/stochastic VAR, 91.7/93.7/99.1% for switching; observed test states are 92.9/94.0/97.4% in support. The metric is permissive for shrunken rollouts, so in-support is not accuracy.
 6. **Perturbations:** previous ±1–2 SD inputs accumulated after each prediction. They are re-scaled to observed one-step variation and gated on support.
 7. **Initial behaviour:** ensembles now record the observed initial macrostate instead of inferring it from the model probe.
 
@@ -82,7 +82,7 @@ The Phase 5 selected residual MLP is dramatically worse than a constant state ov
 1. Persistence (constant initial state).
 2. Frozen Phase 5 selected `mlp_residual`, seed 17.
 3. Frozen Phase 5 `var` checkpoint.
-4. B1 regularized VAR: lag `1–3`, ridge `1e-4 … 10`, optional spectral cap.
+4. B1 regularized VAR: lag `1–3`, ridge `1e-3 … 10`, optional spectral cap.
 5. B2 stochastic VAR: Gaussian innovations with Ledoit–Wolf covariance; iid residual bootstrap; moving-block residual bootstrap.
 6. B3 compact switching VAR: K=2 primary, K=3 sensitivity; diagonal Gaussian innovations; sticky transitions; five restarts.
 7. B4 compact nonlinear: only if B1–B3 have positive validation skill in at least three worms.

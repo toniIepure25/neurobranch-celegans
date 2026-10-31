@@ -51,3 +51,4 @@ Thumbs.db
 # Simulator weights are regenerated locally; metadata and hashes are committed.
 reports/simulator/latent_encoders/*.pt
 reports/simulator/demo/*.npz
+artifacts/runs/blocked_suite/phase6/**/*.pt

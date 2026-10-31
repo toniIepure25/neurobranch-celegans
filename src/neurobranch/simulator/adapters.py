@@ -221,6 +221,7 @@ class NeuralSimulator:
         noise_std: float = 0.0,
         perturbation: PerturbationSpec | None = None,
         include_latent: bool = False,
+        stochastic: bool | None = None,
     ) -> Rollout:
         """Generate one free-running trajectory.
 
@@ -266,6 +267,11 @@ class NeuralSimulator:
             hist[-1] = self._apply(hist[-1], int(idx[0]), perturbation)
             x = hist[-1].copy()
             callback = None
+        use_stochastic = (
+            bool(getattr(self.model, "native_stochastic", False))
+            if stochastic is None
+            else bool(stochastic)
+        )
         states = np.asarray(
             self.model.rollout(
                 x,
@@ -274,6 +280,7 @@ class NeuralSimulator:
                 noise_std=float(noise_std),
                 perturb=callback,
                 initial_history=hist,
+                stochastic=use_stochastic,
             ),
             dtype=np.float64,
         )
@@ -323,6 +330,7 @@ class NeuralSimulator:
         noise_std: float = 0.0,
         perturbation: PerturbationSpec | None = None,
         include_latent: bool = False,
+        stochastic: bool | None = None,
     ) -> RolloutEnsemble:
         if n < 1:
             raise ValueError("n must be at least 1")
@@ -336,6 +344,7 @@ class NeuralSimulator:
                 noise_std=noise_std,
                 perturbation=perturbation,
                 include_latent=include_latent,
+                stochastic=stochastic,
             )
             for seed in seeds
         )
