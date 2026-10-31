@@ -62,6 +62,32 @@ Start at [SIMULATOR_RESULTS.md](SIMULATOR_RESULTS.md),
 [SIMULATOR_LIMITATIONS.md](SIMULATOR_LIMITATIONS.md), and
 [SIMULATOR_SUPERVISOR_BRIEF.md](SIMULATOR_SUPERVISOR_BRIEF.md).
 
+### Phase 6 dynamical validation
+
+Phase 6 corrects the history/evaluation contract, selects all models on validation
+block 4, and treats test block 2 as exploratory because Phase 5 had already
+inspected it.
+
+| Gate | Phase 6 status |
+| --- | --- |
+| G1 functionality | pass |
+| G2 autonomous skill | fail (3/5 vs frozen Phase 5 VAR) |
+| G3 distributional fidelity | fail (0/5) |
+| G4 stochastic branching | fail |
+| G5 support-constrained perturbation | pass |
+| G6 robust target specificity | not_evaluable (one family only) |
+| G7 biological validation | not_evaluable |
+
+No learned family beat persistence by median validation skill. The validation-selected VAR
+(p2, ridge 10) reaches exploratory H=20 test skill 0.093 versus 0.101 for the
+frozen Phase 5 VAR; the Phase 5 MLP diverges (H=20 −1.356, H=100 −18.0). The
+stochastic VAR improves autocorrelation but is worse than persistence on energy
+distance and covariance; branching TV is 0.513 versus 0.264 for a Markov chain.
+
+Start at [SIMULATOR_PHASE6_RESULTS.md](SIMULATOR_PHASE6_RESULTS.md) and
+[PHASE6_SIMULATOR_SUPERVISOR_BRIEF.md](PHASE6_SIMULATOR_SUPERVISOR_BRIEF.md).
+The older Phase 5 tables above are retained as run history.
+
 ## Phase 15 gate result
 
 The final statuses are produced by `scripts/phase15_reliability.py` and checked

@@ -1,0 +1,68 @@
+{
+  "summary": [
+    {
+      "family": "stochastic_var",
+      "quantile": 0.9,
+      "mean_rollout_in_support": 1.0,
+      "mean_observed_test_in_support": 0.9290130121854598,
+      "mean_threshold": 14.345761339116004
+    },
+    {
+      "family": "stochastic_var",
+      "quantile": 0.95,
+      "mean_rollout_in_support": 1.0,
+      "mean_observed_test_in_support": 0.9400802177235643,
+      "mean_threshold": 16.841090915100942
+    },
+    {
+      "family": "stochastic_var",
+      "quantile": 0.99,
+      "mean_rollout_in_support": 1.0,
+      "mean_observed_test_in_support": 0.9742822144823327,
+      "mean_threshold": 19.52150840220479
+    },
+    {
+      "family": "switching_var",
+      "quantile": 0.9,
+      "mean_rollout_in_support": 0.917,
+      "mean_observed_test_in_support": 0.9290130121854598,
+      "mean_threshold": 14.345761339116004
+    },
+    {
+      "family": "switching_var",
+      "quantile": 0.95,
+      "mean_rollout_in_support": 0.937,
+      "mean_observed_test_in_support": 0.9400802177235643,
+      "mean_threshold": 16.841090915100942
+    },
+    {
+      "family": "switching_var",
+      "quantile": 0.99,
+      "mean_rollout_in_support": 0.991,
+      "mean_observed_test_in_support": 0.9742822144823327,
+      "mean_threshold": 19.52150840220479
+    },
+    {
+      "family": "var",
+      "quantile": 0.9,
+      "mean_rollout_in_support": 1.0,
+      "mean_observed_test_in_support": 0.9290130121854598,
+      "mean_threshold": 14.345761339116004
+    },
+    {
+      "family": "var",
+      "quantile": 0.95,
+      "mean_rollout_in_support": 1.0,
+      "mean_observed_test_in_support": 0.9400802177235643,
+      "mean_threshold": 16.841090915100942
+    },
+    {
+      "family": "var",
+      "quantile": 0.99,
+      "mean_rollout_in_support": 1.0,
+      "mean_observed_test_in_support": 0.9742822144823327,
+      "mean_threshold": 19.52150840220479
+    }
+  ],
+  "note": "threshold calibrated on validation block 4"
+}

@@ -1,0 +1,319 @@
+{
+  "schema_version": 1,
+  "phase": 6,
+  "evidence_tier": "exploratory",
+  "test_block_reused": true,
+  "gates": [
+    {
+      "gate": "G1",
+      "name": "functionality",
+      "status": "pass",
+      "evidence": {
+        "min_finite_fraction": 1.0,
+        "n_worms": 5
+      },
+      "tier": "exploratory"
+    },
+    {
+      "gate": "G2",
+      "name": "autonomous skill and baseline superiority",
+      "status": "fail",
+      "evidence": {
+        "mean_skill_vs_persistence": 0.0930021648975005,
+        "skill_ci_low": 0.002770788900513077,
+        "skill_ci_high": 0.18680817527521065,
+        "worms_beating_persistence": 4,
+        "worms_beating_phase5_var": 3,
+        "criterion": "skill>0.02, CI>0, >=4/5 vs persistence and frozen Phase 5 VAR"
+      },
+      "tier": "exploratory"
+    },
+    {
+      "gate": "G3",
+      "name": "dynamical and distributional fidelity",
+      "status": "fail",
+      "evidence": {
+        "worms_with_all_three_better_than_persistence": 0,
+        "mean_energy_selected": 2.618253366684526,
+        "mean_energy_persistence": 0.20315421851079588,
+        "mean_autocorr_selected": 0.2480071975481219,
+        "mean_autocorr_persistence": 0.289035929996126
+      },
+      "tier": "exploratory"
+    },
+    {
+      "gate": "G4",
+      "name": "stochastic branching fidelity",
+      "status": "fail",
+      "evidence": {
+        "mean_tv_sim": 0.5129945851250198,
+        "mean_tv_markov": 0.2642046249402771,
+        "mean_tv_marginal": 0.24536006715663464,
+        "mean_entropy_observed": 0.6801810816400058,
+        "mean_entropy_simulated": 0.5068557029037878
+      },
+      "tier": "exploratory"
+    },
+    {
+      "gate": "G5",
+      "name": "support-constrained perturbation",
+      "status": "pass",
+      "evidence": {
+        "mean_in_support_fraction": 1.0,
+        "conditions_in_support": 36,
+        "conditions": 36,
+        "criterion": ">=90% perturbed states inside validation-calibrated support"
+      },
+      "tier": "exploratory"
+    },
+    {
+      "gate": "G6",
+      "name": "robust named-neuron virtual sensitivity",
+      "status": "not_evaluable",
+      "evidence": {
+        "n_model_families_tested": 1,
+        "n_robust_targets": 2,
+        "criterion": "one target/direction has consistent sign in >=4/5 worms and >=2/3 model families, conditional on G5",
+        "reason": "only one family was evaluated; the protocol requires >=2/3 families",
+        "exploratory_targets": [
+          {
+            "target": "AVEL",
+            "mean_tv": 0.025185185185185165,
+            "mean_control": 0.00814814814814814,
+            "mean_excess": 0.017037037037037024,
+            "worms_positive": 4
+          },
+          {
+            "target": "AVBR",
+            "mean_tv": 0.025925925925925908,
+            "mean_control": 0.009629629629629622,
+            "mean_excess": 0.016296296296296288,
+            "worms_positive": 3
+          },
+          {
+            "target": "RIVL",
+            "mean_tv": 0.019999999999999987,
+            "mean_control": 0.011851851851851843,
+            "mean_excess": 0.008148148148148144,
+            "worms_positive": 4
+          },
+          {
+            "target": "AVBL",
+            "mean_tv": 0.025185185185185165,
+            "mean_control": 0.019259259259259247,
+            "mean_excess": 0.0059259259259259196,
+            "worms_positive": 4
+          },
+          {
+            "target": "RIVR",
+            "mean_tv": 0.01777777777777777,
+            "mean_control": 0.013333333333333326,
+            "mean_excess": 0.004444444444444447,
+            "worms_positive": 3
+          },
+          {
+            "target": "AVER",
+            "mean_tv": 0.008888888888888884,
+            "mean_control": 0.012592592592592582,
+            "mean_excess": -0.0037037037037036986,
+            "worms_positive": 1
+          }
+        ],
+        "control_note": "controls used a deterministic random neuron; protocol asked for innovation-SD/autocorrelation matching, so specificity is descriptive only"
+      },
+      "tier": "exploratory"
+    },
+    {
+      "gate": "G7",
+      "name": "biological validation",
+      "status": "not_evaluable",
+      "evidence": {
+        "reason": "Kato is unstimulated and contains no matched intervention or stimulation-response data"
+      },
+      "tier": "not_evaluable"
+    }
+  ],
+  "long_run": [
+    {
+      "family": "var",
+      "worm_id": 0,
+      "horizon": 200,
+      "seed": 17,
+      "n_starts": 10,
+      "evidence_tier": "exploratory",
+      "test_block_reused": true,
+      "finite": true,
+      "max_abs": 4.473086357116699,
+      "final_norm_ratio": 0.3838981857482588
+    },
+    {
+      "family": "stochastic_var",
+      "worm_id": 0,
+      "horizon": 200,
+      "seed": 17,
+      "n_starts": 10,
+      "evidence_tier": "exploratory",
+      "test_block_reused": true,
+      "finite": true,
+      "max_abs": 4.473086357116699,
+      "final_norm_ratio": 1.210275448785009
+    },
+    {
+      "family": "switching_var",
+      "worm_id": 0,
+      "horizon": 200,
+      "seed": 17,
+      "n_starts": 10,
+      "evidence_tier": "exploratory",
+      "test_block_reused": true,
+      "finite": true,
+      "max_abs": 4.473086357116699,
+      "final_norm_ratio": 0.9618358621763669
+    },
+    {
+      "family": "var",
+      "worm_id": 1,
+      "horizon": 200,
+      "seed": 17,
+      "n_starts": 10,
+      "evidence_tier": "exploratory",
+      "test_block_reused": true,
+      "finite": true,
+      "max_abs": 4.884586334228516,
+      "final_norm_ratio": 0.291908614117494
+    },
+    {
+      "family": "stochastic_var",
+      "worm_id": 1,
+      "horizon": 200,
+      "seed": 17,
+      "n_starts": 10,
+      "evidence_tier": "exploratory",
+      "test_block_reused": true,
+      "finite": true,
+      "max_abs": 4.884586334228516,
+      "final_norm_ratio": 1.3085941050318843
+    },
+    {
+      "family": "switching_var",
+      "worm_id": 1,
+      "horizon": 200,
+      "seed": 17,
+      "n_starts": 10,
+      "evidence_tier": "exploratory",
+      "test_block_reused": true,
+      "finite": true,
+      "max_abs": 7.204513490860177,
+      "final_norm_ratio": 1.1281461411628664
+    },
+    {
+      "family": "var",
+      "worm_id": 2,
+      "horizon": 200,
+      "seed": 17,
+      "n_starts": 10,
+      "evidence_tier": "exploratory",
+      "test_block_reused": true,
+      "finite": true,
+      "max_abs": 3.2922849655151367,
+      "final_norm_ratio": 0.0324651396323594
+    },
+    {
+      "family": "stochastic_var",
+      "worm_id": 2,
+      "horizon": 200,
+      "seed": 17,
+      "n_starts": 10,
+      "evidence_tier": "exploratory",
+      "test_block_reused": true,
+      "finite": true,
+      "max_abs": 3.9438403661468886,
+      "final_norm_ratio": 0.9512894257545588
+    },
+    {
+      "family": "switching_var",
+      "worm_id": 2,
+      "horizon": 200,
+      "seed": 17,
+      "n_starts": 10,
+      "evidence_tier": "exploratory",
+      "test_block_reused": true,
+      "finite": true,
+      "max_abs": 5.23898531296469,
+      "final_norm_ratio": 1.181774617911206
+    },
+    {
+      "family": "var",
+      "worm_id": 3,
+      "horizon": 200,
+      "seed": 17,
+      "n_starts": 10,
+      "evidence_tier": "exploratory",
+      "test_block_reused": true,
+      "finite": true,
+      "max_abs": 5.015403747558594,
+      "final_norm_ratio": 0.3236989099207998
+    },
+    {
+      "family": "stochastic_var",
+      "worm_id": 3,
+      "horizon": 200,
+      "seed": 17,
+      "n_starts": 10,
+      "evidence_tier": "exploratory",
+      "test_block_reused": true,
+      "finite": true,
+      "max_abs": 5.015403747558594,
+      "final_norm_ratio": 1.182415325838593
+    },
+    {
+      "family": "switching_var",
+      "worm_id": 3,
+      "horizon": 200,
+      "seed": 17,
+      "n_starts": 10,
+      "evidence_tier": "exploratory",
+      "test_block_reused": true,
+      "finite": true,
+      "max_abs": 5.015403747558594,
+      "final_norm_ratio": 1.15769720440738
+    },
+    {
+      "family": "var",
+      "worm_id": 4,
+      "horizon": 200,
+      "seed": 17,
+      "n_starts": 10,
+      "evidence_tier": "exploratory",
+      "test_block_reused": true,
+      "finite": true,
+      "max_abs": 8.001601219177246,
+      "final_norm_ratio": 0.011964840778576
+    },
+    {
+      "family": "stochastic_var",
+      "worm_id": 4,
+      "horizon": 200,
+      "seed": 17,
+      "n_starts": 10,
+      "evidence_tier": "exploratory",
+      "test_block_reused": true,
+      "finite": true,
+      "max_abs": 8.001601219177246,
+      "final_norm_ratio": 0.9082325495806992
+    },
+    {
+      "family": "switching_var",
+      "worm_id": 4,
+      "horizon": 200,
+      "seed": 17,
+      "n_starts": 10,
+      "evidence_tier": "exploratory",
+      "test_block_reused": true,
+      "finite": true,
+      "max_abs": 8.001601219177246,
+      "final_norm_ratio": 1.2585423632680224
+    }
+  ],
+  "warning": "A failed gate is not relabelled. No causal or digital-twin claim is supported."
+}

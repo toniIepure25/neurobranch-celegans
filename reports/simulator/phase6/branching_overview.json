@@ -1,0 +1,37 @@
+{
+  "evidence_tier": "exploratory",
+  "test_block_reused": true,
+  "horizon": 20,
+  "n_rollouts_per_state": 80,
+  "families": [
+    "stochastic_var",
+    "switching_var"
+  ],
+  "aggregate": [
+    {
+      "family": "stochastic_var",
+      "n_worms": 5,
+      "n_states": 93,
+      "mean_tv_sim": 0.5129945851250198,
+      "mean_tv_persistence": 0.5314328714763497,
+      "mean_tv_marginal": 0.24536006715663464,
+      "mean_tv_markov": 0.2642046249402771,
+      "mean_entropy_observed": 0.6801810816400058,
+      "mean_entropy_simulated": 0.5068557029037878,
+      "mean_ood": 0.0026513169370312225
+    },
+    {
+      "family": "switching_var",
+      "n_worms": 5,
+      "n_states": 93,
+      "mean_tv_sim": 0.6572091893613632,
+      "mean_tv_persistence": 0.5314328714763497,
+      "mean_tv_marginal": 0.24536006715663464,
+      "mean_tv_markov": 0.2642046249402771,
+      "mean_entropy_observed": 0.6801810816400058,
+      "mean_entropy_simulated": 0.711158902562825,
+      "mean_ood": 0.008947758590615732
+    }
+  ],
+  "note": "Empirical reference is held-out kNN conditional distribution; no shuffled-null entropy claim."
+}

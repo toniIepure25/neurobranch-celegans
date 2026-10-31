@@ -886,3 +886,38 @@ not a clinical or BCI tool.
 Protocol deviations are recorded in `docs/SIMULATOR_RESEARCH_PROTOCOL.md` §10.
 Do not call the simulator "causal", "validated", "whole-brain", "a digital twin",
 or a "bifurcation" result.
+
+### 21.1 Phase 6 dynamical validation
+
+Phase 6 supersedes the Phase 5 one-step selection for the simulator. It uses real
+history windows, validation-only model selection, frozen test reuse disclosure and
+collision-safe outputs under `reports/simulator/phase6/`.
+
+```powershell
+python scripts/phase6_audit.py
+python scripts/phase6_select.py --families var stochastic switching
+python scripts/phase6_evaluate.py
+python scripts/phase6_branching.py --rollouts 80
+python scripts/phase6_perturbation.py
+python scripts/phase6_support_sensitivity.py
+python scripts/phase6_gates.py
+python scripts/phase6_cards.py
+python scripts/phase6_figures.py
+python scripts/validate_reports.py --reports reports/simulator --strict
+python scripts/phase6_simulator_manifest.py
+```
+
+Expected Phase 6 outputs:
+
+- Validation selected VAR(p2, ridge 10, cap 0.995), stochastic Gaussian and
+  switching K=3; all had negative validation median skill (0/5 positive worms).
+- B4 nonlinear trigger not met.
+- Test H=20 skill: new VAR 0.093, frozen Phase 5 VAR 0.101, stochastic VAR
+  −0.410, switching −1.748, Phase 5 MLP −1.356; H=100 new VAR 0.255.
+- Gates: G1 pass, G2/G3/G4 fail, G5 pass, G6/G7 `not_evaluable`.
+- Branching TV: stochastic 0.513 vs Markov 0.264 and marginal 0.245.
+- Perturbation: 100% in-support across 36/36 conditions; target specificity
+  remains exploratory and one-family only.
+
+All test results are exploratory because block 2 was inspected in Phase 5.
+The Phase 5 reports remain in place; Phase 6 reports do not overwrite them.

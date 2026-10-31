@@ -38,6 +38,18 @@ nav:
       - Results: SIMULATOR_RESULTS.md
       - Limitations: SIMULATOR_LIMITATIONS.md
       - Supervisor brief: SIMULATOR_SUPERVISOR_BRIEF.md
+      - Phase 6 results: SIMULATOR_PHASE6_RESULTS.md
+      - Phase 6 supervisor brief: PHASE6_SIMULATOR_SUPERVISOR_BRIEF.md
+      - Phase 6 protocol: PHASE6_RESEARCH_PROTOCOL.md
+      - Phase 6 model selection: PHASE6_DYNAMICAL_MODEL_SELECTION.md
+      - Phase 6 VAR and switching: PHASE6_VAR_AND_SWITCHING_DYNAMICS.md
+      - Phase 6 free-running validation: PHASE6_FREE_RUNNING_VALIDATION.md
+      - Phase 6 stochastic branching: PHASE6_STOCHASTIC_BRANCHING.md
+      - Phase 6 latent geometry: PHASE6_LATENT_GEOMETRY.md
+      - Phase 6 perturbation support: PHASE6_PERTURBATION_SUPPORT.md
+      - Phase 6 intervention limits: PHASE6_INTERVENTION_LIMITATIONS.md
+      - Phase 6 next experiments: PHASE6_NEXT_EXPERIMENTS.md
+      - Phase 6 deviations: PHASE6_SIMULATOR_DEVIATIONS.md
       - Questions for Denis: QUESTIONS_FOR_DENIS.md
   - Phase 15:
       - Results: PHASE15_RESULTS.md

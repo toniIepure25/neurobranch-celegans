@@ -1,0 +1,55 @@
+{
+  "schema_version": 1,
+  "phase": 6,
+  "family": "var",
+  "worm_id": 4,
+  "selection": "var_p2_r10_c0.995",
+  "config": {
+    "lag": 2,
+    "ridge": 10.0,
+    "spectral_cap": 0.995
+  },
+  "checkpoint": "artifacts\\runs\\blocked_suite\\phase6\\var\\worm4.pt",
+  "checkpoint_sha256": "41926d31295cb816e6d7c037d969791bae57aea6897756efea13caa3a5814a3c",
+  "data_sha256": "7531811c1718e26a0455f59cb2f8188cf25809278cfea85770dfe03315a0098a",
+  "config_sha256": "742af528d660643df8a713e3e9ba537e795bd18ad8f7944587e271de8a180342",
+  "split": {
+    "train_blocks": [
+      0,
+      1,
+      3
+    ],
+    "val_block": 4,
+    "test_block": 2,
+    "purge": 12
+  },
+  "history": 2,
+  "native_stochastic": false,
+  "test_metrics": [
+    {
+      "horizon": 20,
+      "mean_skill": 0.0683521161944525,
+      "mean_energy": 4.500236869346898,
+      "mean_ood": 0.0028571428571428,
+      "mean_autocorr": 0.3114515291570626,
+      "finite": 1.0
+    },
+    {
+      "horizon": 100,
+      "mean_skill": 0.2284105510825986,
+      "mean_energy": 7.414278871175117,
+      "mean_ood": 0.0,
+      "mean_autocorr": 0.2914399288035152,
+      "finite": 1.0
+    }
+  ],
+  "evidence_tier": "exploratory",
+  "test_block_reused": true,
+  "warning": "MODEL-DEPENDENT VIRTUAL PERTURBATION \u2014 NOT CAUSALLY VALIDATED.",
+  "limitations": [
+    "standardised calcium traces, not membrane potential or spikes",
+    "immobilised, unstimulated WT worms",
+    "test block 2 was inspected in Phase 5",
+    "no matched empirical intervention for biological validation"
+  ]
+}

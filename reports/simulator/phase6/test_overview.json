@@ -1,0 +1,117 @@
+{
+  "evidence_tier": "exploratory",
+  "test_block_reused": true,
+  "n_summary_rows": 100,
+  "by_family_horizon": [
+    {
+      "family": "persistence",
+      "horizon": 20,
+      "mean_skill": 3.834408013325685e-09,
+      "median_skill": 2.3234641988167937e-09,
+      "mean_energy": 0.2031542185107959,
+      "mean_ood": 0.032,
+      "finite_fraction": 1.0
+    },
+    {
+      "family": "persistence",
+      "horizon": 100,
+      "mean_skill": 3.319980623750496e-09,
+      "median_skill": -3.051203734116825e-11,
+      "mean_energy": 0.5347387533421927,
+      "mean_ood": 0.0,
+      "finite_fraction": 1.0
+    },
+    {
+      "family": "phase5_mlp",
+      "horizon": 20,
+      "mean_skill": -1.3556169828481524,
+      "median_skill": -1.5168834808688447,
+      "mean_energy": 1.956539881635658,
+      "mean_ood": 0.2980952380952381,
+      "finite_fraction": 1.0
+    },
+    {
+      "family": "phase5_mlp",
+      "horizon": 100,
+      "mean_skill": -17.999428435583212,
+      "median_skill": -18.084066332838898,
+      "mean_energy": 19.70856785406096,
+      "mean_ood": 0.7871287128712872,
+      "finite_fraction": 1.0
+    },
+    {
+      "family": "phase5_var",
+      "horizon": 20,
+      "mean_skill": 0.1007675499360134,
+      "median_skill": 0.18734421549969715,
+      "mean_energy": 2.077834760698031,
+      "mean_ood": 0.0015238095238095239,
+      "finite_fraction": 1.0
+    },
+    {
+      "family": "phase5_var",
+      "horizon": 100,
+      "mean_skill": 0.25441804216284886,
+      "median_skill": 0.27205839077450245,
+      "mean_energy": 3.5728095853684207,
+      "mean_ood": 0.0,
+      "finite_fraction": 1.0
+    },
+    {
+      "family": "stochastic_var",
+      "horizon": 20,
+      "mean_skill": -0.4095754900248211,
+      "median_skill": -0.42602925699311833,
+      "mean_energy": 1.2771228874560245,
+      "mean_ood": 0.0017142857142857142,
+      "finite_fraction": 1.0
+    },
+    {
+      "family": "stochastic_var",
+      "horizon": 100,
+      "mean_skill": -0.17304026670452294,
+      "median_skill": -0.1437510943232705,
+      "mean_energy": 1.924858087917453,
+      "mean_ood": 0.0,
+      "finite_fraction": 1.0
+    },
+    {
+      "family": "switching_var",
+      "horizon": 20,
+      "mean_skill": -1.7478161170107782,
+      "median_skill": -1.4942220201126983,
+      "mean_energy": 3.3925387488796823,
+      "mean_ood": 0.008888888888888889,
+      "finite_fraction": 1.0
+    },
+    {
+      "family": "switching_var",
+      "horizon": 100,
+      "mean_skill": -0.7209446188752957,
+      "median_skill": -0.6105795005441563,
+      "mean_energy": 3.367104434675153,
+      "mean_ood": 0.005610561056105611,
+      "finite_fraction": 1.0
+    },
+    {
+      "family": "var",
+      "horizon": 20,
+      "mean_skill": 0.09300216489750053,
+      "median_skill": 0.1325656148789165,
+      "mean_energy": 2.618253366684526,
+      "mean_ood": 0.0015238095238095239,
+      "finite_fraction": 1.0
+    },
+    {
+      "family": "var",
+      "horizon": 100,
+      "mean_skill": 0.254878791460656,
+      "median_skill": 0.2933069885825975,
+      "mean_energy": 4.629672509945378,
+      "mean_ood": 0.0,
+      "finite_fraction": 1.0
+    }
+  ],
+  "start_manifest": "test_start_manifest.json",
+  "warning": "Block 2 was inspected in Phase 5; these are not confirmatory results."
+}

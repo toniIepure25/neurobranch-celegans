@@ -1,0 +1,34 @@
+{
+  "family": "switching_var",
+  "K": 3,
+  "label": "switching_K3",
+  "validation_median_skill": -3.308445708186926,
+  "validation_positive_worms": 0,
+  "validation_table": [
+    {
+      "config": "switching_K3",
+      "median_skill": -3.308445708186926,
+      "mean_skill": -3.116638424919952,
+      "positive_worms": 0,
+      "mean_energy": 6.881223967018711,
+      "min_occupancy": 0.14535545741161374,
+      "K": 3
+    },
+    {
+      "config": "switching_K2",
+      "median_skill": -3.3969348902124086,
+      "mean_skill": -3.168179946714312,
+      "positive_worms": 0,
+      "mean_energy": 6.998314462834119,
+      "min_occupancy": 0.5,
+      "K": 2
+    }
+  ],
+  "checkpoints": {
+    "0": "71fb8f89ba16602f59a36b8dfd744e330db93e3da192f978eeded6514030df1e",
+    "1": "477f4175a3500f49c4cebc3c7ee629a14f6fcad60711830e26da53bdcb056320",
+    "2": "876b8da2516f20529e4007964de80fbb78a6d331bb87ea770b97be1607d0407b",
+    "3": "96e914c73197122a312f9b3a024d18ab413bdc6baa9f205c206419eebf857da7",
+    "4": "8c5f82ae7f8b591a5d47afb95afe8f193ee8f1d46ca0b4eebe31033ea2d49889"
+  }
+}
