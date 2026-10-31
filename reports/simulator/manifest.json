@@ -1,0 +1,77 @@
+{
+  "schema_version": 1,
+  "generated_at_utc": "2026-10-31T13:11:22.337884+00:00",
+  "git_revision": "f74d4e656207b63cc827dee9eb0de3d7c828cfb3",
+  "git_branch": "research/core-dynamics-simulator",
+  "git_dirty": true,
+  "python": "3.13.5",
+  "platform": "Windows-10-10.0.19045-SP0",
+  "numpy": "2.3.1",
+  "pandas": "2.3.3",
+  "torch": "2.7.1+cpu",
+  "input": {
+    "kato_path": "data\\raw\\kato2015\\WT_NoStim.mat",
+    "kato_sha256": "7531811c1718e26a0455f59cb2f8188cf25809278cfea85770dfe03315a0098a",
+    "config_path": "configs/experiments/blocked_suite.yaml",
+    "config_sha256": "742af528d660643df8a713e3e9ba537e795bd18ad8f7944587e271de8a180342",
+    "split_path": "configs/splits/blocked.yaml",
+    "split_sha256": null
+  },
+  "reports": {
+    "selection.json": {
+      "sha256": "e4189d4329eec6658d9fc782003c7e31be9fff08775d22a294ceb5873adae8e1"
+    },
+    "summary.json": {
+      "sha256": "ad1d0fc0c284950985295fbf653070cb9358cfb0e2529c5a9de8e74bda95e06d"
+    },
+    "gates.json": {
+      "sha256": "bdf1a10aa9033a601d33a8dbb333e099134a0d8e336c7e678315762fba686d2c"
+    },
+    "rollout_metrics.csv": {
+      "sha256": "d1dbdf869d5b5d808f104c75f7a8215c494ac7f4fef74b1bc8d1052a8bda06af"
+    },
+    "one_step_metrics.csv": {
+      "sha256": "6224927064b968d4a903ac75c937adad02e0ac1768023f1b228799b305d9d5ac"
+    },
+    "selected_model_test.csv": {
+      "sha256": "28cf4a220c178e073c06add42fd063ebdc08af9584373057dadef8ab65b26a06"
+    },
+    "latent_metrics.csv": {
+      "sha256": "3ab2ac1e00e9c02c6ab3398df5fc3f48f055e3bdd9a99e6402315c8b5621d6cf"
+    },
+    "latent_stability.json": {
+      "sha256": "9b6b95cd1a0dac4710926b4f4299d35a16b199d1bc1ce5676d1f6b4952d75e65"
+    },
+    "branching_summary.json": {
+      "sha256": "e1d871b2e0862841b3728969fe926d042ca385e69753fcc1882027b9f27e1004"
+    },
+    "branching_events.csv": {
+      "sha256": "f74d7e46ffceeadfea10db536ed04aa762d45f23114cb745505a21a0f86a8b87"
+    },
+    "perturbation_summary.json": {
+      "sha256": "2bea98eb0c6d9af9efd34a195b9ee3cc580016f9fc995f6978babd52c8d13169"
+    },
+    "perturbation_specificity.csv": {
+      "sha256": "8cfc356d9896b827901acf146da52ea800139d4e9633b9f551455803ba8c16f7"
+    },
+    "perturbation_effects.csv": {
+      "sha256": "5b4e1b685a9e54dd920bfcb876825fe195573979aafcc8fc710327312991870c"
+    },
+    "perturbation_controls.csv": {
+      "sha256": "8d80523b9a04d299430501c0c3dbe19ca1ee0156d426e4d94b262928a877d83a"
+    }
+  },
+  "commands": [
+    "python scripts/simulator_fit.py",
+    "python scripts/simulator_evaluate.py",
+    "python scripts/simulator_latent.py",
+    "python scripts/simulator_branching.py",
+    "python scripts/simulator_perturb.py",
+    "python scripts/simulator_figures.py",
+    "python scripts/simulator_gates.py",
+    "python scripts/validate_reports.py --reports reports/simulator --strict",
+    "python scripts/simulator_manifest.py"
+  ],
+  "checkpoint_policy": "Existing Phase 2 checkpoints are reused. --fit-missing never overwrites; latent encoder weights are local only and excluded by .gitignore/.gitattributes.",
+  "warning": "MODEL-DEPENDENT VIRTUAL PERTURBATION - NOT CAUSALLY VALIDATED. Kato 2015 is observational; Gate 6 is not_evaluable."
+}
