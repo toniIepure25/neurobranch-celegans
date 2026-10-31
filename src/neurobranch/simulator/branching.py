@@ -94,10 +94,13 @@ def simulated_local(
     base_seed: int = 0,
 ) -> tuple[np.ndarray, dict[str, Any]]:
     initial = int(sim.data.y_macro[int(frame)])
+    history = int(getattr(sim.model, "history_len", 1))
     ensemble = sim.rollout_ensemble(
-        sim.data.X[int(frame)],
+        None,
         n_rollouts,
         horizon,
+        initial_history=sim.initial_history(int(frame), history=history),
+        initial_macro=initial,
         base_seed=base_seed,
         noise_std=noise_std,
         include_latent=False,
@@ -122,7 +125,13 @@ def persistence_local(
     base_seed: int = 0,
 ) -> np.ndarray:
     initial = int(sim.data.y_macro[int(frame)])
-    rollout = sim.rollout(sim.data.X[int(frame)], horizon, seed=base_seed)
+    history = int(getattr(sim.model, "history_len", 1))
+    rollout = sim.rollout(
+        None,
+        horizon,
+        initial_history=sim.initial_history(int(frame), history=history),
+        seed=base_seed,
+    )
     counts = outcome_counts(rollout.behavior_proba.argmax(axis=1), initial)
     return counts / max(1.0, counts.sum())
 

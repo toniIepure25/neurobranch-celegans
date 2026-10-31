@@ -100,7 +100,8 @@ class DynamicsModel(Protocol):
     def predict_next(self, history: Array) -> Array: ...
     def behavior_proba(self, history: Array) -> Array: ...
     def rollout(self, x0: Array, steps: int, *, seed: int = 0, noise_std: float = 0.0,
-                perturb: PerturbFn | None = None) -> Array: ...
+                perturb: PerturbFn | None = None,
+                initial_history: Array | None = None) -> Array: ...
     def latent(self, history: Array) -> Array | None: ...
 
 
@@ -110,6 +111,29 @@ def _history_from_rollout(seq: Array, history_len: int) -> Array:
         return seq[-history_len:]
     pad = np.repeat(seq[:1], history_len - seq.shape[0], axis=0)
     return np.concatenate([pad, seq], axis=0)
+
+
+def _initial_history(
+    x0: Array,
+    initial_history: Array | None,
+    n_neurons: int,
+) -> Array:
+    """Return a validated ``(history, n_neurons)`` initial window.
+
+    ``x0`` is retained for backwards compatibility.  Models with more than one
+    input frame must receive ``initial_history`` during evaluation; padding a
+    single frame hides the fact that the real past was discarded.
+    """
+    if initial_history is not None:
+        hist = np.asarray(initial_history, dtype=np.float64)
+    else:
+        arr = np.asarray(x0, dtype=np.float64)
+        hist = arr[None] if arr.ndim == 1 else arr
+    if hist.ndim != 2 or hist.shape[1] != n_neurons:
+        raise ValueError(f"initial history must be (history, {n_neurons}), got {hist.shape}")
+    if not np.isfinite(hist).all():
+        raise ValueError("initial history contains non-finite values")
+    return hist
 
 
 def _last_states(history: Array, n_neurons: int) -> Array:
@@ -166,9 +190,11 @@ class PersistenceModel:
         seed: int = 0,
         noise_std: float = 0.0,
         perturb: PerturbFn | None = None,
+        initial_history: Array | None = None,
     ) -> Array:
         rng = np.random.default_rng(seed)
-        seq = [np.asarray(x0, dtype=np.float64).copy()]
+        hist = _initial_history(x0, initial_history, self.n_neurons)
+        seq = [hist[-1].copy()]
         for s in range(steps):
             x = seq[-1].copy()
             if noise_std > 0:
@@ -242,17 +268,21 @@ class VARModel:
         seed: int = 0,
         noise_std: float = 0.0,
         perturb: PerturbFn | None = None,
+        initial_history: Array | None = None,
     ) -> Array:
         rng = np.random.default_rng(seed)
-        seq = [np.asarray(x0, dtype=np.float64).copy()]
+        hist = _initial_history(x0, initial_history, self.n_neurons)
+        seq = [hist[-1].copy()]
+        buffer = [row.copy() for row in hist]
         for s in range(steps):
-            hist = _history_from_rollout(np.stack(seq), self.history_len)[None]
-            x = self.predict_next(hist)[0]
+            window = _history_from_rollout(np.stack(buffer), self.history_len)[None]
+            x = self.predict_next(window)[0]
             if noise_std > 0:
                 x = x + rng.normal(scale=noise_std, size=x.shape)
             if perturb is not None:
                 x = perturb(x, s)
             seq.append(x)
+            buffer.append(x)
         return np.stack(seq)
 
 
@@ -295,19 +325,23 @@ class MLPDynamics:
         seed: int = 0,
         noise_std: float = 0.0,
         perturb: PerturbFn | None = None,
+        initial_history: Array | None = None,
     ) -> Array:
         rng = np.random.default_rng(seed)
-        seq = [np.asarray(x0, dtype=np.float64).copy()]
+        hist = _initial_history(x0, initial_history, self.n_neurons)
+        seq = [hist[-1].copy()]
+        buffer = [row.copy() for row in hist]
         self.net.eval()
         with torch.no_grad():
             for s in range(steps):
-                hist = _history_from_rollout(np.stack(seq), self.history_len)[None]
-                x = self.predict_next(hist)[0]
+                window = _history_from_rollout(np.stack(buffer), self.history_len)[None]
+                x = self.predict_next(window)[0]
                 if noise_std > 0:
                     x = x + rng.normal(scale=noise_std, size=x.shape)
                 if perturb is not None:
                     x = perturb(x, s)
                 seq.append(x)
+                buffer.append(x)
         return np.stack(seq)
 
 
@@ -629,9 +663,11 @@ class LatentMLPDynamics:
         seed: int = 0,
         noise_std: float = 0.0,
         perturb: PerturbFn | None = None,
+        initial_history: Array | None = None,
     ) -> Array:
         rng = np.random.default_rng(seed)
-        X = [np.asarray(x0, dtype=np.float64).copy()]
+        hist = _initial_history(x0, initial_history, self.n_neurons)
+        X = [hist[-1].copy()]
         z = self.encode(X[0][None])[0]
         for s in range(steps):
             z = self.predict_next_latent(z[None])[0]
@@ -718,9 +754,11 @@ class LatentKNNDynamics:
         noise_std: float = 0.0,
         perturb: PerturbFn | None = None,
         stochastic: bool = True,
+        initial_history: Array | None = None,
     ) -> Array:
         rng = np.random.default_rng(seed)
-        X = [np.asarray(x0, dtype=np.float64).copy()]
+        hist = _initial_history(x0, initial_history, self.n_neurons)
+        X = [hist[-1].copy()]
         z = self.encode(X[0][None])[0]
         for s in range(steps):
             idx, dist = self._neighbors(z)

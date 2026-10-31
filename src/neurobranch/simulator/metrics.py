@@ -61,17 +61,35 @@ def one_step_metrics(
     }
 
 
+def _lag_correlation(x: np.ndarray, lag: int) -> np.ndarray:
+    """Per-neuron Pearson correlation between x[t] and x[t+lag]."""
+    a = np.asarray(x[:-lag], dtype=np.float64)
+    b = np.asarray(x[lag:], dtype=np.float64)
+    a = a - a.mean(axis=0)
+    b = b - b.mean(axis=0)
+    denom = np.sqrt((a * a).sum(axis=0) * (b * b).sum(axis=0))
+    out = np.full(a.shape[1], np.nan, dtype=np.float64)
+    ok = denom > 1e-12
+    out[ok] = (a[:, ok] * b[:, ok]).sum(axis=0) / denom[ok]
+    return out
+
+
 def _autocorr_error(sim: np.ndarray, real: np.ndarray, lags: tuple[int, ...] = (1, 2, 5, 10)) -> float:
-    """Mean absolute lag-correlation error across neurons."""
-    if len(sim) <= max(lags) + 1:
+    """Mean absolute per-neuron lag-correlation error.
+
+    The two arrays are separate trajectories; correlating their concatenation
+    measures cross-block similarity, not temporal autocorrelation.
+    """
+    if len(sim) <= max(lags) + 1 or sim.shape != real.shape:
         return float("nan")
     errs = []
     for lag in lags:
-        a = np.corrcoef(sim[:-lag].T, sim[lag:].T)
-        b = np.corrcoef(real[:-lag].T, real[lag:].T)
-        n = sim.shape[1]
-        errs.append(float(np.mean(np.abs(a[:n, n:] - b[:n, n:]))))
-    return float(np.nanmean(errs))
+        a = _lag_correlation(sim, lag)
+        b = _lag_correlation(real, lag)
+        valid = np.isfinite(a) & np.isfinite(b)
+        if valid.any():
+            errs.append(float(np.mean(np.abs(a[valid] - b[valid]))))
+    return float(np.nanmean(errs)) if errs else float("nan")
 
 
 def _cross_corr_error(sim: np.ndarray, real: np.ndarray) -> float:
@@ -139,9 +157,17 @@ def rollout_metrics(
         raise ValueError("No eligible test starts for this horizon")
     rows: list[dict[str, Any]] = []
     all_sim, all_real = [], []
+    history = int(getattr(sim.model, "history_len", 1))
     for i, t in enumerate(starts):
         seed = int(base_seed + i)
-        rollout = sim.rollout(sim.data.X[int(t)], horizon, seed=seed, noise_std=noise_std)
+        hist = sim.initial_history(int(t), history=history)
+        rollout = sim.rollout(
+            None,
+            horizon,
+            initial_history=hist,
+            seed=seed,
+            noise_std=noise_std,
+        )
         real = sim.data.X[int(t) : int(t) + horizon + 1]
         if not rollout.finite:
             rows.append(
@@ -179,6 +205,9 @@ def rollout_metrics(
             "mse_h10": float(np.mean((pred[: min(10, horizon)] - real[1 : min(10, horizon) + 1]) ** 2)),
             "ood_fraction": rollout.ood_fraction,
             "max_support_distance": float(np.nanmax(rollout.support_distance)),
+            "readout_supported_fraction": float(
+                rollout.metadata.get("readout_supported_fraction", float("nan"))
+            ),
             "behavior_accuracy": float(
                 np.mean(rollout.behavior_proba.argmax(1) == sim.data.y_macro[int(t) + 1 : int(t) + horizon + 1])
             ),
@@ -210,9 +239,21 @@ def rollout_metrics(
         )
         if valid
         else float("nan"),
+        "skill_vs_persistence": float(
+            1.0
+            - np.nanmean([r["mse"] for r in valid])
+            / np.nanmean([r["persistence_mse"] for r in valid])
+        )
+        if valid and np.nanmean([r["persistence_mse"] for r in valid]) > 0
+        else float("nan"),
         "mse_h5": float(np.nanmean([r["mse_h5"] for r in valid])) if valid else float("nan"),
         "mse_h10": float(np.nanmean([r["mse_h10"] for r in valid])) if valid else float("nan"),
         "ood_fraction": float(np.nanmean([r["ood_fraction"] for r in valid])) if valid else float("nan"),
+        "readout_supported_fraction": float(
+            np.nanmean([r["readout_supported_fraction"] for r in valid])
+        )
+        if valid
+        else float("nan"),
         "behavior_accuracy": float(np.nanmean([r["behavior_accuracy"] for r in valid]))
         if valid
         else float("nan"),
@@ -243,10 +284,13 @@ def transition_distribution(
     rows: list[dict[str, Any]] = []
     for t in np.asarray(starts, dtype=np.int64):
         initial = int(sim.data.y_macro[int(t)])
+        history = int(getattr(sim.model, "history_len", 1))
         ensemble = sim.rollout_ensemble(
-            sim.data.X[int(t)],
+            None,
             n_rollouts,
             horizon,
+            initial_history=sim.initial_history(int(t), history=history),
+            initial_macro=initial,
             base_seed=base_seed,
             noise_std=noise_std,
             include_latent=False,

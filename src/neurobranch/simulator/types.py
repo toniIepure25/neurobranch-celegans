@@ -95,6 +95,8 @@ class Rollout:
     perturbation: PerturbationSpec | None = None
     latent: np.ndarray | None = None
     valid: bool = True
+    initial_history: np.ndarray | None = None
+    native_stochastic: bool = False
     metadata: dict[str, Any] = field(default_factory=dict)
 
     def __post_init__(self) -> None:

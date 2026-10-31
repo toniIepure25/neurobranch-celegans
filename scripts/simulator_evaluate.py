@@ -71,6 +71,35 @@ def _paired_ci(
     }
 
 
+def _free_running_ci(
+    per_start: list[dict[str, Any]],
+    *,
+    n_boot: int = 2000,
+    seed: int = 0,
+) -> dict[str, float]:
+    """Block-bootstrap interval for free-running skill vs constant state."""
+    rows = [r for r in per_start if r.get("finite")]
+    if not rows:
+        return {"skill": float("nan"), "ci_low": float("nan"), "ci_high": float("nan")}
+    mse = np.asarray([r["mse"] for r in rows], dtype=np.float64)
+    base = np.asarray([r["persistence_mse"] for r in rows], dtype=np.float64)
+    point = float(1.0 - mse.mean() / base.mean()) if base.mean() > 0 else float("nan")
+    rng = np.random.default_rng(seed)
+    vals = []
+    for _ in range(n_boot):
+        idx = _moving_block_indices(len(rows), rng=rng)
+        denom = base[idx].mean()
+        if denom > 0:
+            vals.append(float(1.0 - mse[idx].mean() / denom))
+    if not vals:
+        return {"skill": point, "ci_low": float("nan"), "ci_high": float("nan")}
+    return {
+        "skill": point,
+        "ci_low": float(np.quantile(vals, 0.025)),
+        "ci_high": float(np.quantile(vals, 0.975)),
+    }
+
+
 def _composite(dist: dict[str, Any]) -> float:
     keys = ("mean_abs_error", "mean_sd_error", "autocorr_error", "cross_corr_error")
     vals = [float(dist.get(k, np.nan)) for k in keys]
@@ -129,14 +158,18 @@ def evaluate(args: argparse.Namespace) -> dict[str, Any]:
                 if kind == selected_kind:
                     pred, truth, persistence = _paired_predictions(sim)
                     ci = _paired_ci(pred, truth, persistence, seed=seed)
+                    free_ci = _free_running_ci(per_start, seed=seed)
                     selected_rows.append(
                         {
                             "kind": kind,
                             "worm_id": int(data.worm_id),
                             "seed": seed,
-                            "delta_r2": ci["delta_r2"],
-                            "ci_low": ci["ci_low"],
-                            "ci_high": ci["ci_high"],
+                            "delta_r2_one_step": ci["delta_r2"],
+                            "ci_low_one_step": ci["ci_low"],
+                            "ci_high_one_step": ci["ci_high"],
+                            "free_running_skill": free_ci["skill"],
+                            "free_running_ci_low": free_ci["ci_low"],
+                            "free_running_ci_high": free_ci["ci_high"],
                             "mse_h5": summary["mse_h5"],
                             "persistence_h5": float(
                                 np.mean([r["persistence_h5"] for r in per_start if r.get("finite")])
@@ -171,21 +204,23 @@ def evaluate(args: argparse.Namespace) -> dict[str, Any]:
         if sub.empty:
             gate2_worms.append({"worm_id": data.worm_id, "passed": False, "reason": "missing"})
             continue
-        mean_delta = float(sub["delta_r2"].mean())
+        mean_delta = float(sub["delta_r2_one_step"].mean())
+        mean_skill = float(sub["free_running_skill"].mean())
         mean_mse5 = float(sub["mse_h5"].mean())
         mean_pers5 = float(sub["persistence_h5"].mean())
         seed17 = sub[sub["seed"] == 17].iloc[0]
         passed = bool(
-            mean_delta >= 0.02
-            and float(seed17["ci_low"]) > 0
+            mean_skill >= 0.02
+            and float(seed17["free_running_ci_low"]) > 0
             and mean_mse5 <= mean_pers5
         )
         gate2_worms.append(
             {
                 "worm_id": int(data.worm_id),
-                "mean_delta_r2": mean_delta,
-                "seed17_ci_low": float(seed17["ci_low"]),
-                "seed17_ci_high": float(seed17["ci_high"]),
+                "mean_one_step_delta_r2": mean_delta,
+                "mean_free_running_skill": mean_skill,
+                "seed17_free_running_ci_low": float(seed17["free_running_ci_low"]),
+                "seed17_free_running_ci_high": float(seed17["free_running_ci_high"]),
                 "mean_mse5": mean_mse5,
                 "mean_persistence_h5": mean_pers5,
                 "passed": passed,
@@ -218,7 +253,7 @@ def evaluate(args: argparse.Namespace) -> dict[str, Any]:
         },
         "gate_2": {
             "status": "pass" if g2 else "fail",
-            "criterion": "mean delta R2 >= 0.02, seed-17 block-bootstrap CI > 0, mean h5 MSE <= persistence, in >=4/5 worms",
+            "criterion": "free-running skill >= 0.02, seed-17 block-bootstrap CI > 0, mean h5 MSE <= persistence, in >=4/5 worms",
             "n_worms_passed": int(n_pass),
             "worms": gate2_worms,
         },

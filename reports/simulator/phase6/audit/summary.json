@@ -1,0 +1,58 @@
+{
+  "schema_version": 1,
+  "config": "D:\\ComputaCenter\\NeuroBranch\\neurobranch-celegans\\configs\\experiments\\blocked_suite.yaml",
+  "data_sha256": "7531811c1718e26a0455f59cb2f8188cf25809278cfea85770dfe03315a0098a",
+  "checkpoint_root": "D:\\ComputaCenter\\NeuroBranch\\neurobranch-celegans\\artifacts\\runs\\blocked_suite",
+  "horizon": 20,
+  "starts": 20,
+  "kinds": [
+    "mlp_residual",
+    "var",
+    "gru"
+  ],
+  "seeds": [
+    17,
+    23,
+    31
+  ],
+  "n_rows": 45,
+  "by_kind": [
+    {
+      "kind": "gru",
+      "mean_one_step_delta_r2": -0.09334103272415822,
+      "mean_free_skill": -0.14026171086793404,
+      "mean_legacy_skill": -0.18224561289663946,
+      "mean_legacy_autocorr": 0.33091125138512745,
+      "mean_corrected_autocorr": 0.538845289691459,
+      "mean_ood": 0.0009523809523809523,
+      "n_rows": 15
+    },
+    {
+      "kind": "mlp_residual",
+      "mean_one_step_delta_r2": 0.00791619588414425,
+      "mean_free_skill": -1.6273186746603083,
+      "mean_legacy_skill": -1.6273186043346242,
+      "mean_legacy_autocorr": 0.22507083654906165,
+      "mean_corrected_autocorr": 0.5330232791031183,
+      "mean_ood": 0.2261904761904762,
+      "n_rows": 15
+    },
+    {
+      "kind": "var",
+      "mean_one_step_delta_r2": 0.007456524637124029,
+      "mean_free_skill": 0.1370374120966751,
+      "mean_legacy_skill": 0.1370374469336865,
+      "mean_legacy_autocorr": 0.2658714399737096,
+      "mean_corrected_autocorr": 0.45715158671930006,
+      "mean_ood": 0.0,
+      "n_rows": 15
+    }
+  ],
+  "findings": {
+    "history": "evaluation now uses the real observed history window; x0-only is retained as legacy",
+    "autocorrelation": "corrected metric compares separate per-neuron lag correlations",
+    "gate2": "free-running skill is now the gate quantity; one-step delta R2 is descriptive",
+    "support": "threshold is the 99th percentile of held-out validation distances by default"
+  },
+  "start_manifest_sha256": null
+}

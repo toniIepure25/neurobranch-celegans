@@ -25,19 +25,36 @@ PerturbFn = Callable[[np.ndarray, int], np.ndarray]
 class SupportModel:
     """Distance-to-training-support diagnostic.
 
-    The threshold is the 99th percentile of the leave-one-out training distance
-    (second nearest neighbour because the first is the point itself).  It is a
-    descriptive OOD flag, not a biological plausibility test.
+    The default threshold is the 99th percentile of the leave-one-out training
+    distance (second nearest neighbour because the first is the point itself).
+    If ``calibration_X`` is supplied, the threshold is instead the requested
+    quantile of held-out (validation) distances.  The calibrated form is the
+    Phase 6 default because a training-only envelope has no external check.
     """
 
-    def __init__(self, train_X: np.ndarray, *, quantile: float = 0.99):
+    def __init__(
+        self,
+        train_X: np.ndarray,
+        *,
+        quantile: float = 0.99,
+        calibration_X: np.ndarray | None = None,
+    ):
         X = np.asarray(train_X, dtype=np.float64)
         if X.ndim != 2 or len(X) < 3:
             raise ValueError("SupportModel needs at least three training states")
         self.nn = NearestNeighbors(n_neighbors=1).fit(X)
         dist, _ = NearestNeighbors(n_neighbors=2).fit(X).kneighbors(X)
         # dist[:, 0] is self; the second neighbour estimates local support.
-        self.threshold = float(np.quantile(dist[:, 1], quantile))
+        self.training_threshold = float(np.quantile(dist[:, 1], quantile))
+        self.calibration_quantile = float(quantile) if calibration_X is not None else None
+        if calibration_X is None:
+            self.threshold = self.training_threshold
+        else:
+            cal = np.asarray(calibration_X, dtype=np.float64)
+            if cal.ndim != 2 or cal.shape[1] != X.shape[1] or len(cal) == 0:
+                raise ValueError("calibration_X must be a non-empty (n, n_neurons) array")
+            self.threshold = float(np.quantile(self.score(cal), quantile))
+        self.quantile = float(quantile)
 
     def score(self, X: np.ndarray) -> np.ndarray:
         arr = np.asarray(X, dtype=np.float64)
@@ -68,13 +85,24 @@ class NeuralSimulator:
         checkpoint: str | Path | None = None,
         metadata: dict[str, Any] | None = None,
         empirical_evidence: dict[str, Any] | None = None,
+        support_calibration_X: np.ndarray | None = None,
+        support_quantile: float = 0.99,
     ):
         self.model = model
         self.data = data
         self.checkpoint = str(checkpoint) if checkpoint is not None else None
         self.metadata = dict(metadata or {})
         self.empirical_evidence = empirical_evidence
-        self.support = SupportModel(data.X[data.masks["train"]])
+        calibration = (
+            np.asarray(support_calibration_X, dtype=np.float64)
+            if support_calibration_X is not None
+            else data.X[data.masks["val"]]
+        )
+        self.support = SupportModel(
+            data.X[data.masks["train"]],
+            quantile=support_quantile,
+            calibration_X=calibration,
+        )
         if int(model.n_neurons) != int(data.X.shape[1]):
             raise ValueError(
                 f"Checkpoint has {model.n_neurons} neurons, data has {data.X.shape[1]}"
@@ -104,6 +132,8 @@ class NeuralSimulator:
         data: WormData,
         *,
         empirical_evidence: dict[str, Any] | None = None,
+        support_calibration_X: np.ndarray | None = None,
+        support_quantile: float = 0.99,
     ) -> NeuralSimulator:
         model, metadata = load_model(checkpoint)
         return cls(
@@ -112,6 +142,8 @@ class NeuralSimulator:
             checkpoint=checkpoint,
             metadata=metadata,
             empirical_evidence=empirical_evidence,
+            support_calibration_X=support_calibration_X,
+            support_quantile=support_quantile,
         )
 
     def _target_index(self, target: str) -> int:
@@ -181,35 +213,68 @@ class NeuralSimulator:
 
     def rollout(
         self,
-        x0: np.ndarray,
+        x0: np.ndarray | None,
         steps: int,
         *,
+        initial_history: np.ndarray | None = None,
         seed: int = 0,
         noise_std: float = 0.0,
         perturbation: PerturbationSpec | None = None,
         include_latent: bool = False,
     ) -> Rollout:
-        """Generate one free-running trajectory from ``x0``.
+        """Generate one free-running trajectory.
 
-        Only the supplied initial state and model inputs are used.  There is no
+        Supply exactly one of ``x0`` or ``initial_history``.  The latter must be
+        the real observed window for models with more than one input frame; a
+        single frame is padded only for the backwards-compatible ``x0`` path,
+        and that fact is recorded in the rollout metadata.
+
+        Only the supplied history and model inputs are used.  There is no
         argument for future observations.
         """
         if steps < 1:
             raise ValueError("steps must be at least 1")
         if noise_std < 0:
             raise ValueError("noise_std must be non-negative")
-        x = np.asarray(x0, dtype=np.float64)
-        if x.shape != (self.n_neurons,):
-            raise ValueError(f"x0 must have shape ({self.n_neurons},), got {x.shape}")
-        if not np.isfinite(x).all():
-            raise ValueError("x0 contains non-finite values")
+        history_len = int(getattr(self.model, "history_len", 1))
+        if (x0 is None) == (initial_history is None):
+            raise ValueError("supply exactly one of x0 or initial_history")
+        if initial_history is None:
+            arr = np.asarray(x0, dtype=np.float64)
+            if arr.shape != (self.n_neurons,):
+                raise ValueError(f"x0 must have shape ({self.n_neurons},), got {arr.shape}")
+            hist = np.repeat(arr[None], history_len, axis=0)
+            padded = history_len > 1
+        else:
+            hist = np.asarray(initial_history, dtype=np.float64)
+            if hist.ndim != 2 or hist.shape[1] != self.n_neurons:
+                raise ValueError(
+                    f"initial_history must be (history, {self.n_neurons}), got {hist.shape}"
+                )
+            if len(hist) != history_len:
+                raise ValueError(
+                    f"model requires {history_len} history frames, got {len(hist)}"
+                )
+            padded = False
+        if not np.isfinite(hist).all():
+            raise ValueError("initial history contains non-finite values")
+        x = hist[-1].copy()
 
         callback, idx, notes = self._perturbation_callback(perturbation)
         if perturbation is not None and perturbation.protocol == "initial_state":
-            x = self._apply(x, int(idx[0]), perturbation)
+            hist = hist.copy()
+            hist[-1] = self._apply(hist[-1], int(idx[0]), perturbation)
+            x = hist[-1].copy()
             callback = None
         states = np.asarray(
-            self.model.rollout(x, steps, seed=int(seed), noise_std=float(noise_std), perturb=callback),
+            self.model.rollout(
+                x,
+                steps,
+                seed=int(seed),
+                noise_std=float(noise_std),
+                perturb=callback,
+                initial_history=hist,
+            ),
             dtype=np.float64,
         )
         if states.shape != (steps + 1, self.n_neurons):
@@ -219,10 +284,16 @@ class NeuralSimulator:
             raise RuntimeError(f"Behaviour probe returned shape {probs.shape}")
         support_distance = self.support.score(states)
         latent = self._latent(states[:-1]) if include_latent else None
+        threshold = self.support.threshold
+        readout_supported = float(np.mean(support_distance[:-1] <= threshold))
         metadata = {
-            "support_threshold": self.support.threshold,
+            "support_threshold": threshold,
+            "training_support_threshold": self.support.training_threshold,
+            "support_calibration_quantile": self.support.calibration_quantile,
             "perturbation_notes": notes,
-            "history": int(getattr(self.model, "history_len", 1)),
+            "history": history_len,
+            "initial_history_padded": bool(padded),
+            "readout_supported_fraction": readout_supported,
             "warning": "Model output; not an experimental intervention.",
         }
         return Rollout(
@@ -235,15 +306,19 @@ class NeuralSimulator:
             perturbation=perturbation,
             latent=latent,
             valid=bool(np.isfinite(states).all() and np.isfinite(probs).all()),
+            initial_history=hist,
+            native_stochastic=bool(getattr(self.model, "native_stochastic", False)),
             metadata=metadata,
         )
 
     def rollout_ensemble(
         self,
-        x0: np.ndarray,
+        x0: np.ndarray | None,
         n: int,
         steps: int,
         *,
+        initial_history: np.ndarray | None = None,
+        initial_macro: int | None = None,
         base_seed: int = 0,
         noise_std: float = 0.0,
         perturbation: PerturbationSpec | None = None,
@@ -256,6 +331,7 @@ class NeuralSimulator:
             self.rollout(
                 x0,
                 steps,
+                initial_history=initial_history,
                 seed=seed,
                 noise_std=noise_std,
                 perturbation=perturbation,
@@ -263,28 +339,41 @@ class NeuralSimulator:
             )
             for seed in seeds
         )
+        reference = rollouts[0].states[0]
         return RolloutEnsemble(
-            x0=np.asarray(x0, dtype=np.float64),
+            x0=np.asarray(reference, dtype=np.float64),
             rollouts=rollouts,
             seeds=seeds,
             model_kind=self.model_kind,
+            initial_macro=initial_macro,
         )
 
-    def test_starts(self, *, horizon: int = 20) -> np.ndarray:
-        """Held-out test frames whose full real future stays in the test block."""
-        starts = split_starts(self.data, "test", history=1, horizon=1)
-        starts = starts[starts + horizon < self.data.n_frames]
+    def test_starts(self, *, horizon: int = 20, history: int | None = None) -> np.ndarray:
+        """Held-out test frames whose full past and future stay in the block."""
+        h = int(history or getattr(self.model, "history_len", 1))
+        starts = split_starts(self.data, "test", history=h, horizon=horizon)
         mask = self.data.masks["test"]
-        keep = [int(t) for t in starts if mask[int(t) : int(t) + horizon + 1].all()]
-        return np.asarray(keep, dtype=np.int64)
-
-    def validation_starts(self, *, horizon: int = 1) -> np.ndarray:
-        starts = split_starts(self.data, "val", history=1, horizon=horizon)
-        mask = self.data.masks["val"]
         return np.asarray(
-            [int(t) for t in starts if mask[int(t) : int(t) + horizon + 1].all()],
+            [int(t) for t in starts if mask[int(t) - h + 1 : int(t) + horizon + 1].all()],
             dtype=np.int64,
         )
+
+    def validation_starts(self, *, horizon: int = 1, history: int | None = None) -> np.ndarray:
+        h = int(history or getattr(self.model, "history_len", 1))
+        starts = split_starts(self.data, "val", history=h, horizon=horizon)
+        mask = self.data.masks["val"]
+        return np.asarray(
+            [int(t) for t in starts if mask[int(t) - h + 1 : int(t) + horizon + 1].all()],
+            dtype=np.int64,
+        )
+
+    def initial_history(self, frame: int, history: int | None = None) -> np.ndarray:
+        """Real observed history ending at ``frame``; never padded."""
+        h = int(history or getattr(self.model, "history_len", 1))
+        frame = int(frame)
+        if frame - h + 1 < 0:
+            raise ValueError(f"frame {frame} has no complete {h}-frame history")
+        return self.data.X[frame - h + 1 : frame + 1].copy()
 
 
 def available_predictors(data: WormData) -> tuple[str, ...]:
