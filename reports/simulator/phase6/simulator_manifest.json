@@ -1,0 +1,251 @@
+{
+  "schema_version": 1,
+  "phase": 6,
+  "evidence_tier": "exploratory",
+  "test_block_reused": true,
+  "git": {
+    "branch": "research/phase6-dynamical-validation",
+    "head": "01e2b548aa275e424e1626c56e7dc1cde3e492cf",
+    "start_head": "8d945f9ad755aabb4f0a30e93c2f24a8928a0614",
+    "recent_commits": [
+      "01e2b54 research: record phase6 exploratory validation and negative gates",
+      "c1c1d68 research: add phase6 autonomous simulators and evaluation contract",
+      "51c2b3f research: audit simulator timing and freeze phase6 protocol",
+      "8d945f9 fix: normalise manifest hashes for cross-platform verification",
+      "ffc6322 chore: record simulator artifact manifest",
+      "f74d4e6 docs: report the simulator branch and its negative scientific result",
+      "661ac60 fix: use pre-registered named-neuron targets in simulator sweep",
+      "66ce57d feat: validate simulator gates against a bundled schema",
+      "1714647 feat: add core dynamics simulator tab",
+      "37e9347 docs: visualize simulator trajectories, branching and perturbations",
+      "b1ef4d5 research: sweep named-neuron virtual perturbations with controls",
+      "9ba52f9 research: test simulated reversal branching against nulls"
+    ],
+    "status_porcelain": [
+      "M scripts/phase6_simulator_manifest.py"
+    ]
+  },
+  "environment": {
+    "python": "3.13.5 (tags/v3.13.5:6cb20a2, Jun 11 2025, 16:15:46) [MSC v.1943 64 bit (AMD64)]",
+    "platform": "Windows-10-10.0.19045-SP0",
+    "packages": {
+      "numpy": "2.3.1",
+      "pandas": "2.3.3",
+      "scipy": "1.16.0",
+      "scikit-learn": "1.9.1",
+      "torch": "2.7.1",
+      "matplotlib": "3.11.0",
+      "streamlit": "1.66.1"
+    }
+  },
+  "config": "configs\\experiments\\blocked_suite.yaml",
+  "config_sha256": "742af528d660643df8a713e3e9ba537e795bd18ad8f7944587e271de8a180342",
+  "data_sha256": "7531811c1718e26a0455f59cb2f8188cf25809278cfea85770dfe03315a0098a",
+  "protocol_sha256": "0c3eff58c1b8f464339cb6af65a4f042725ece5cd69de19c456de3f2d66d3c83",
+  "commands": [
+    "python scripts/phase6_audit.py",
+    "python scripts/phase6_select.py --families var stochastic switching",
+    "python scripts/phase6_evaluate.py",
+    "python scripts/phase6_branching.py --rollouts 80",
+    "python scripts/phase6_perturbation.py",
+    "python scripts/phase6_support_sensitivity.py",
+    "python scripts/phase6_gates.py",
+    "python scripts/phase6_cards.py",
+    "python scripts/phase6_figures.py",
+    "python -m pytest tests/simulator -q",
+    "python -m ruff check src scripts app tests"
+  ],
+  "artifacts": {
+    "reports\\simulator\\phase6\\audit\\reproduction.csv": {
+      "sha256": "c1e07bed19bdd36cba1347715d3db0b6109551ea346b47fbd88e333736fdc1bc",
+      "bytes": 15372
+    },
+    "reports\\simulator\\phase6\\audit\\summary.json": {
+      "sha256": "10833d6417359f7da31e5c30a7ed37409e46fd05b6d0e928c6e8d9f61e0fb335",
+      "bytes": 2013
+    },
+    "reports\\simulator\\phase6\\branching_events.csv": {
+      "sha256": "e7fbbd67459551ad2034c88fa7345116b4fb4f670a20fe7b1e76493603349db7",
+      "bytes": 66715
+    },
+    "reports\\simulator\\phase6\\branching_overview.json": {
+      "sha256": "2d8803fdeff17a5142480565e08e62dca8bf3dcf7ff6ee38f4953accb26de35d",
+      "bytes": 1164
+    },
+    "reports\\simulator\\phase6\\branching_summary.csv": {
+      "sha256": "1f642530756483af7eedf6fa23985ca5a2d39a1a3f716051f9377fc11392c86a",
+      "bytes": 3312
+    },
+    "reports\\simulator\\phase6\\gates.json": {
+      "sha256": "4a959082d5d24570fd0117eb32ba414e6778b89cd99d1e7afa96939aaa7176b3",
+      "bytes": 9249
+    },
+    "reports\\simulator\\phase6\\long_run_stability.csv": {
+      "sha256": "c653249bb131660f929255e5c5dec5ac8b7599a9fcf2109e40c3d0486a7795c4",
+      "bytes": 1347
+    },
+    "reports\\simulator\\phase6\\model_cards\\stochastic_var_worm0.json": {
+      "sha256": "bada01532393329395e3ebf8edf4c26b45fe8e322d3bbb43f1c52f29987be087",
+      "bytes": 1613
+    },
+    "reports\\simulator\\phase6\\model_cards\\stochastic_var_worm1.json": {
+      "sha256": "3f3aec5a4b987706c52c25e59b613b6a9f24b15c554738c419c77330840e8ae9",
+      "bytes": 1601
+    },
+    "reports\\simulator\\phase6\\model_cards\\stochastic_var_worm2.json": {
+      "sha256": "ef7814f9f0869c1c6d51d11bdc985a786260a94b191b0c70b998b2351e049581",
+      "bytes": 1600
+    },
+    "reports\\simulator\\phase6\\model_cards\\stochastic_var_worm3.json": {
+      "sha256": "561fa27693feb58cae34ef6e336f094a35097281c76eccce00bf0616df06b8eb",
+      "bytes": 1615
+    },
+    "reports\\simulator\\phase6\\model_cards\\stochastic_var_worm4.json": {
+      "sha256": "12ce95e04e95ffb4a5580d69b209299b95d1f262d40763799466ac9fb9c8f672",
+      "bytes": 1613
+    },
+    "reports\\simulator\\phase6\\model_cards\\switching_var_worm0.json": {
+      "sha256": "3ffd429ae1e55a2763d1f2c8441e29a64b40710871eeece0da88dc6903b3d38d",
+      "bytes": 1543
+    },
+    "reports\\simulator\\phase6\\model_cards\\switching_var_worm1.json": {
+      "sha256": "48a3d8870dc98a7201dcee2f656f8ed4684d14985bd54ebf3bc642e99bf0e60e",
+      "bytes": 1526
+    },
+    "reports\\simulator\\phase6\\model_cards\\switching_var_worm2.json": {
+      "sha256": "a9a5f99e244fc795129344c0847dfdca62c86aeaceec549bf5e839e0792b2d58",
+      "bytes": 1527
+    },
+    "reports\\simulator\\phase6\\model_cards\\switching_var_worm3.json": {
+      "sha256": "8915ad10bfed513353cadd9cd2123b20f96dcbf10d7a202a75a47dd165ce753b",
+      "bytes": 1560
+    },
+    "reports\\simulator\\phase6\\model_cards\\switching_var_worm4.json": {
+      "sha256": "4d5a17850a697f67bcd9bb368e0306355006e91c6e030d4022b700a3362caac0",
+      "bytes": 1564
+    },
+    "reports\\simulator\\phase6\\model_cards\\var_worm0.json": {
+      "sha256": "5381558ff16b1ccbe3de5a30a660e13801516bb8e77f41a989ccc7770dd32c92",
+      "bytes": 1589
+    },
+    "reports\\simulator\\phase6\\model_cards\\var_worm1.json": {
+      "sha256": "43caae19d720e021a044f61e3919272890ec81352e281daa7cc04d6dd5fdd1b9",
+      "bytes": 1575
+    },
+    "reports\\simulator\\phase6\\model_cards\\var_worm2.json": {
+      "sha256": "bd346264b70d492768aa690bb0f9538a22818ba8ce65f8259efef1b4d3d2d664",
+      "bytes": 1575
+    },
+    "reports\\simulator\\phase6\\model_cards\\var_worm3.json": {
+      "sha256": "5b5432fc90b80163b382f0aafa77874a53c9547c0c8f6ea54a7495db985efdac",
+      "bytes": 1589
+    },
+    "reports\\simulator\\phase6\\model_cards\\var_worm4.json": {
+      "sha256": "417ede0f56351093e5495fd9c57457f2a18a08bd9da9e47655ebe55774f2f965",
+      "bytes": 1589
+    },
+    "reports\\simulator\\phase6\\perturbation_events.csv": {
+      "sha256": "9b8e21769b8d274a4312982d0369a01cf04bb92ba60916ebbc94be0a51b8417e",
+      "bytes": 111506
+    },
+    "reports\\simulator\\phase6\\perturbation_overview.json": {
+      "sha256": "ac2e4ab2bf4d6ec633b570124d5d0997921ac4acc9e4445300a1c288f8289ee2",
+      "bytes": 17041
+    },
+    "reports\\simulator\\phase6\\perturbation_summary.csv": {
+      "sha256": "cf553e2b8602c45cf4f7e281f8b7e3b16c885a9099215e7b5e2e9c8acf697b5a",
+      "bytes": 4856
+    },
+    "reports\\simulator\\phase6\\selection_frozen.json": {
+      "sha256": "623b58c13cb697ee3899e95a0ec3eddd76cdc77036bb4ff53d5a24da5df71428",
+      "bytes": 9248
+    },
+    "reports\\simulator\\phase6\\selection_manifest.json": {
+      "sha256": "7c121805b8d3207437f1e0f323c737800f03a2c14c1ab2275c6813055269dc49",
+      "bytes": 3684
+    },
+    "reports\\simulator\\phase6\\stochastic_selection.json": {
+      "sha256": "9a10f6a54ea0aa7c1f5912021e492c6580eac6d2917f1f598f54c31264915020",
+      "bytes": 1356
+    },
+    "reports\\simulator\\phase6\\stochastic_validation_grid.csv": {
+      "sha256": "a2e569280063bcdd44a9f052f45a7a44bc770c4cad30b3c8481339400e1fbc90",
+      "bytes": 3169
+    },
+    "reports\\simulator\\phase6\\support_sensitivity.csv": {
+      "sha256": "9fae593d34e8b3f375c467e0f57ffda889331570abd410eb40b42c012309e049",
+      "bytes": 2532
+    },
+    "reports\\simulator\\phase6\\support_sensitivity.json": {
+      "sha256": "5ef52a41871f95f28a762dab38fdb3ea0bb4c0495e331d8887ae8f561a280789",
+      "bytes": 2009
+    },
+    "reports\\simulator\\phase6\\switching_selection.json": {
+      "sha256": "119171ff6f1d6ec76c457987241e61d2631427d940fcf778cdb0f896fc08839d",
+      "bytes": 1109
+    },
+    "reports\\simulator\\phase6\\switching_validation_grid.csv": {
+      "sha256": "ad28b7eb5d7f59e129dc69adf47e43f3295651b2252618ee2e7319a46acbe092",
+      "bytes": 2224
+    },
+    "reports\\simulator\\phase6\\test_overview.json": {
+      "sha256": "00290e5d02c4b8664a12a81caca22e8ad17b5ee227ce3d9f7044a47cb65b1b91",
+      "bytes": 3391
+    },
+    "reports\\simulator\\phase6\\test_per_start.csv": {
+      "sha256": "cc812224370f0f01ca7e235343fca52a64d110f87f25c41f43ca2d82b0b02e36",
+      "bytes": 775927
+    },
+    "reports\\simulator\\phase6\\test_start_manifest.json": {
+      "sha256": "68ad9afc52a83c76a6484bf3c0017641871f45659ceffe770ce8c201de003dfd",
+      "bytes": 6800
+    },
+    "reports\\simulator\\phase6\\test_summary.csv": {
+      "sha256": "b6bf86bda8ce72d13ebfa39594a05458fccf79b345808140e0e21c24aba03591",
+      "bytes": 56901
+    },
+    "reports\\simulator\\phase6\\var_selection.json": {
+      "sha256": "5ab32bf0ed494401597c9d7c0c0c2fa832a1156599053d6b8ecd21667dd0725f",
+      "bytes": 5301
+    },
+    "reports\\simulator\\phase6\\var_validation_grid.csv": {
+      "sha256": "ee8965f2e423e4a1eb0062e05edd8041dfc7522ad4b22c417cd479cb8cabdfd1",
+      "bytes": 13937
+    },
+    "figures\\simulator\\phase6\\audit_autocorr.png": {
+      "sha256": "eb70c1237fbc942d65b6bde4ac666428345605cbbe114de8a185c268c5b7dcd4",
+      "bytes": 37242
+    },
+    "figures\\simulator\\phase6\\branching_tv.png": {
+      "sha256": "e8e81fa9fd1ac905a737bfe869f960759a849e8f2b47fc1006f83a4499940ad2",
+      "bytes": 35892
+    },
+    "figures\\simulator\\phase6\\long_run_stability.png": {
+      "sha256": "15f68abb2078ff80c5759328471d3d70c78f569c540394edd24fc67d1db35bf8",
+      "bytes": 37083
+    },
+    "figures\\simulator\\phase6\\perturbation_support.png": {
+      "sha256": "cd58ad85b8afc97e479d7ca4d74ae374894bff85fbf98b17f0fe6b1de5fbe6cc",
+      "bytes": 48241
+    },
+    "figures\\simulator\\phase6\\README.md": {
+      "sha256": "ec7989fec52e4ae1f8ec070d12476b297ad2878e234c375091a9ed97a9456840",
+      "bytes": 141
+    },
+    "figures\\simulator\\phase6\\test_skill.png": {
+      "sha256": "3020aab8591e9c63dc561a3615e2942209d15f717174e9bae9231301e743b206",
+      "bytes": 46715
+    },
+    "figures\\simulator\\phase6\\validation_var_heatmap.png": {
+      "sha256": "00c8a3b6c1b5b799f2956c7982420c3cd6b60ae91cbdcf57fa377db9ddb67fd2",
+      "bytes": 56656
+    }
+  },
+  "limitations": [
+    "test block 2 was inspected in Phase 5; no confirmatory claim",
+    "Kato is unstimulated WT; no matched empirical intervention",
+    "switching VAR is diagonal and failed validation skill",
+    "no model beats persistence on the validation block"
+  ],
+  "warning": "MODEL-DEPENDENT VIRTUAL PERTURBATION \u2014 NOT CAUSALLY VALIDATED."
+}

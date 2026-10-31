@@ -15,9 +15,13 @@ from neurobranch.config import PROJECT_ROOT, ExperimentConfig, sha256_file
 
 
 def _sha(path: Path) -> str:
+    """Hash text artefacts with LF endings so Windows/Linux checkouts agree."""
     h = hashlib.sha256()
+    text_suffix = path.suffix.lower() in {".csv", ".json", ".md", ".txt", ".yaml", ".yml"}
     with path.open("rb") as fh:
         for chunk in iter(lambda: fh.read(1 << 20), b""):
+            if text_suffix:
+                chunk = chunk.replace(b"\r\n", b"\n")
             h.update(chunk)
     return h.hexdigest()
 
