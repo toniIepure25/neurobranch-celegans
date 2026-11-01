@@ -1,0 +1,42 @@
+{
+  "schema_version": 1,
+  "protocol_version": "1.0.0",
+  "branch": "research/context-conditioned-generative-dynamics",
+  "base_commit": "4da6c24236d2c6399f5f1b859a21ae479e3521cc",
+  "thresholds_frozen_before_final_test": true,
+  "gates": {
+    "G1_data_integrity": {
+      "status": "PASS",
+      "evidence": "dataset_manifest.json contains raw SHA256 for WT_NoStim and WT_Stim; artifact_manifest.json records raw and canonical-text hashes separately; no raw datasets are committed"
+    },
+    "G2_stability": {
+      "status": "PASS",
+      "evidence": "exact companion-matrix cap implemented and verified; stable VAR and latent/compositional operators store realized radii at or below 0.995"
+    },
+    "G3_causality_and_leakage": {
+      "status": "PASS",
+      "evidence": "train-only PCA; short-prefix vs long-prefix filter equality; causal coefficient policy; calibration-prefix-only shared map; known-schedule-only external input"
+    },
+    "G4_support_audit": {
+      "status": "CONDITIONAL",
+      "evidence": "q99 preserved as official Phase 6 choice; switching_var mean maximum-distance coverage 0.86; context latent session 1 q99 maximum-distance coverage 0.093; per-start audit is conservative"
+    },
+    "G5_autonomous_rollout": {
+      "status": "FAIL",
+      "evidence": "latent LDS median H20 skill -0.911 and H100 -0.164; stable VAR median H20 -0.770 and H100 -0.061; only one of ten session-horizon latent cells is positive"
+    },
+    "G6_compositionality": {
+      "status": "FAIL",
+      "evidence": "two operators selected on validation; test H20 mean skill -1.771 and all five sessions worse than the latent LDS; coefficient policy RMSE 0.375-0.393 and low coefficient entropy indicate policy/operator collapse"
+    },
+    "G7_perturbation_validation": {
+      "status": "NOT_EVALUABLE",
+      "evidence": "no matched experimental interventions for the named model targets; virtual perturbations are model-dependent and linear-symmetric"
+    },
+    "G8_intervention_compatibility": {
+      "status": "NOT_EVALUABLE",
+      "evidence": "no compatible targeted-intervention dataset in this branch"
+    }
+  },
+  "warning": "A model rollout is not an animal response. Oxygen is environmental sensory input, not targeted neuronal stimulation. No optogenetic dose equivalence is claimed."
+}

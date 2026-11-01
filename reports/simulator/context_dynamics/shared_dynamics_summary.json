@@ -1,0 +1,118 @@
+{
+  "schema_version": 1,
+  "stage": "E_shared_dynamics",
+  "evidence_tier": "exploratory_session_disjoint",
+  "common_named_neurons": [
+    "AIBL",
+    "AIBR",
+    "ALA",
+    "ASKR",
+    "AVBL",
+    "AVBR",
+    "AVEL",
+    "AVER",
+    "RID",
+    "RIML",
+    "RIMR",
+    "RIVL",
+    "RIVR",
+    "RMED",
+    "RMEL",
+    "RMER"
+  ],
+  "n_common_named_neurons": 16,
+  "panel_rule": "alphabetic labels present in all five recordings; numeric IDs excluded because they are worm-specific",
+  "latent_dim": 5,
+  "ridge": 0.01,
+  "spectral_cap": 0.995,
+  "test_design": "leave-one-session-out; observation map and aligned map fitted on a calibration prefix of the held-out training block; test block never used",
+  "independence_warning": "session-disjoint, not animal-independent; five recordings are not five independently identified animals",
+  "models": {
+    "shared_zero_shot": "shared A, held-out PCA observation map, R=I",
+    "shared_calibrated": "shared A, held-out observation map, linear R fitted on calibration transitions",
+    "local_calibration": "per-session PCA+LDS fitted on exactly the same calibration prefix",
+    "local_full_train_reference": "per-session PCA+LDS fitted on the full training block (not a fair calibration baseline)"
+  },
+  "metadata": {
+    "held_out_0": {
+      "n_donor_sessions": 4,
+      "n_pooled_transitions": 8761,
+      "latent_dim": 5,
+      "ridge": 0.01,
+      "stability": {
+        "requested_cap": 0.995,
+        "initial_radius": 0.993187407476731,
+        "realized_radius": 0.993187407476731,
+        "iterations": 0,
+        "tolerance": 1e-10,
+        "converged": true
+      },
+      "basis_alignment_warning": "PCA bases are not identifiable across sessions; shared A is a model coordinate, not a biological common coordinate."
+    },
+    "held_out_1": {
+      "n_donor_sessions": 4,
+      "n_pooled_transitions": 8763,
+      "latent_dim": 5,
+      "ridge": 0.01,
+      "stability": {
+        "requested_cap": 0.995,
+        "initial_radius": 0.9889668508995891,
+        "realized_radius": 0.9889668508995891,
+        "iterations": 0,
+        "tolerance": 1e-10,
+        "converged": true
+      },
+      "basis_alignment_warning": "PCA bases are not identifiable across sessions; shared A is a model coordinate, not a biological common coordinate."
+    },
+    "held_out_2": {
+      "n_donor_sessions": 4,
+      "n_pooled_transitions": 8815,
+      "latent_dim": 5,
+      "ridge": 0.01,
+      "stability": {
+        "requested_cap": 0.995,
+        "initial_radius": 0.9937245347794519,
+        "realized_radius": 0.9937245347794519,
+        "iterations": 0,
+        "tolerance": 1e-10,
+        "converged": true
+      },
+      "basis_alignment_warning": "PCA bases are not identifiable across sessions; shared A is a model coordinate, not a biological common coordinate."
+    },
+    "held_out_3": {
+      "n_donor_sessions": 4,
+      "n_pooled_transitions": 8639,
+      "latent_dim": 5,
+      "ridge": 0.01,
+      "stability": {
+        "requested_cap": 0.995,
+        "initial_radius": 0.9877997076496058,
+        "realized_radius": 0.9877997076496058,
+        "iterations": 0,
+        "tolerance": 1e-10,
+        "converged": true
+      },
+      "basis_alignment_warning": "PCA bases are not identifiable across sessions; shared A is a model coordinate, not a biological common coordinate."
+    },
+    "held_out_4": {
+      "n_donor_sessions": 4,
+      "n_pooled_transitions": 8842,
+      "latent_dim": 5,
+      "ridge": 0.01,
+      "stability": {
+        "requested_cap": 0.995,
+        "initial_radius": 0.9899396625482594,
+        "realized_radius": 0.9899396625482594,
+        "iterations": 0,
+        "tolerance": 1e-10,
+        "converged": true
+      },
+      "basis_alignment_warning": "PCA bases are not identifiable across sessions; shared A is a model coordinate, not a biological common coordinate."
+    }
+  },
+  "git": {
+    "commit": "4da6c24236d2c6399f5f1b859a21ae479e3521cc",
+    "dirty": true,
+    "branch": "research/context-conditioned-generative-dynamics"
+  }
+}

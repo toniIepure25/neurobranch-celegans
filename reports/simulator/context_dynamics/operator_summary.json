@@ -1,0 +1,141 @@
+{
+  "schema_version": 1,
+  "stage": "C_compositional_operators",
+  "evidence_tier": "exploratory_temporal_holdout",
+  "selected_latent": {
+    "latent_dim": 15,
+    "ridge": 0.01,
+    "spectral_cap": 0.995
+  },
+  "selected_n_operators": 2,
+  "selection_rule": "median validation H20 skill across worms; test not used",
+  "evaluation_note": "H20 uses every held-out start; H100 uses up to 80 evenly spaced starts",
+  "reference": {
+    "paper_doi": "10.1038/s42003-025-08599-3",
+    "code_zenodo": "10.5281/zenodo.15866270",
+    "relation": "independent implementation of the published operator form; not a reproduction and not biologically identified"
+  },
+  "operator_diagnostics": {
+    "worm0": {
+      "n_operators": 2,
+      "operator_spectral_radii": [
+        0.9929320710193996,
+        0.9950000000000007
+      ],
+      "max_operator_radius": 0.9950000000000007,
+      "mean_coefficients": [
+        0.47424523716817196,
+        0.5257547628318275
+      ],
+      "sd_coefficients": [
+        0.39307306155945265,
+        0.393073061559453
+      ],
+      "mean_coefficient_entropy": 0.2821973462538762,
+      "max_coefficient_entropy": 0.6931471805599453,
+      "coefficient_policy_rmse": 0.3750874107354885,
+      "n_transitions": 2194,
+      "alternations": 5,
+      "identification_warning": "Operator signs/ordering are not identifiable; coefficients are model-internal, not biological states. Policy is fitted to retrospective coefficients and can collapse.",
+      "reference_relation": "Inspired by the dLDS form but independently implemented; not a reproduction of Yezerets et al. (2025) and not evidence for synaptic mechanisms."
+    },
+    "worm1": {
+      "n_operators": 2,
+      "operator_spectral_radii": [
+        0.985342936547606,
+        0.995
+      ],
+      "max_operator_radius": 0.995,
+      "mean_coefficients": [
+        0.5976042556097309,
+        0.4023957443902689
+      ],
+      "sd_coefficients": [
+        0.39645763252916233,
+        0.39645763252916233
+      ],
+      "mean_coefficient_entropy": 0.24802655910213006,
+      "max_coefficient_entropy": 0.6931471805599453,
+      "coefficient_policy_rmse": 0.3859070492806007,
+      "n_transitions": 2192,
+      "alternations": 5,
+      "identification_warning": "Operator signs/ordering are not identifiable; coefficients are model-internal, not biological states. Policy is fitted to retrospective coefficients and can collapse.",
+      "reference_relation": "Inspired by the dLDS form but independently implemented; not a reproduction of Yezerets et al. (2025) and not evidence for synaptic mechanisms."
+    },
+    "worm2": {
+      "n_operators": 2,
+      "operator_spectral_radii": [
+        0.9908465054367586,
+        0.9831454701290575
+      ],
+      "max_operator_radius": 0.9908465054367586,
+      "mean_coefficients": [
+        0.5601941321602327,
+        0.4398058678397672
+      ],
+      "sd_coefficients": [
+        0.39941129967425393,
+        0.39941129967425376
+      ],
+      "mean_coefficient_entropy": 0.25950610223479814,
+      "max_coefficient_entropy": 0.6931471805599453,
+      "coefficient_policy_rmse": 0.3927304675622764,
+      "n_transitions": 2140,
+      "alternations": 5,
+      "identification_warning": "Operator signs/ordering are not identifiable; coefficients are model-internal, not biological states. Policy is fitted to retrospective coefficients and can collapse.",
+      "reference_relation": "Inspired by the dLDS form but independently implemented; not a reproduction of Yezerets et al. (2025) and not evidence for synaptic mechanisms."
+    },
+    "worm3": {
+      "n_operators": 2,
+      "operator_spectral_radii": [
+        0.9949999999999988,
+        0.9949999999999982
+      ],
+      "max_operator_radius": 0.9949999999999988,
+      "mean_coefficients": [
+        0.577922051724421,
+        0.4220779482755791
+      ],
+      "sd_coefficients": [
+        0.4008563314125012,
+        0.4008563314125012
+      ],
+      "mean_coefficient_entropy": 0.24854829253589042,
+      "max_coefficient_entropy": 0.6931471805599453,
+      "coefficient_policy_rmse": 0.38163124546676785,
+      "n_transitions": 2316,
+      "alternations": 5,
+      "identification_warning": "Operator signs/ordering are not identifiable; coefficients are model-internal, not biological states. Policy is fitted to retrospective coefficients and can collapse.",
+      "reference_relation": "Inspired by the dLDS form but independently implemented; not a reproduction of Yezerets et al. (2025) and not evidence for synaptic mechanisms."
+    },
+    "worm4": {
+      "n_operators": 2,
+      "operator_spectral_radii": [
+        0.9906456371061343,
+        0.98977866644726
+      ],
+      "max_operator_radius": 0.9906456371061343,
+      "mean_coefficients": [
+        0.49341178777419215,
+        0.5065882122258076
+      ],
+      "sd_coefficients": [
+        0.39581480640411276,
+        0.3958148064041129
+      ],
+      "mean_coefficient_entropy": 0.2778717953300499,
+      "max_coefficient_entropy": 0.6931471805599453,
+      "coefficient_policy_rmse": 0.37934220148195913,
+      "n_transitions": 2113,
+      "alternations": 5,
+      "identification_warning": "Operator signs/ordering are not identifiable; coefficients are model-internal, not biological states. Policy is fitted to retrospective coefficients and can collapse.",
+      "reference_relation": "Inspired by the dLDS form but independently implemented; not a reproduction of Yezerets et al. (2025) and not evidence for synaptic mechanisms."
+    }
+  },
+  "git": {
+    "commit": "4da6c24236d2c6399f5f1b859a21ae479e3521cc",
+    "dirty": true,
+    "branch": "research/context-conditioned-generative-dynamics"
+  },
+  "warning": "Coefficients/operators are model-internal, not synaptic or circuit mechanisms."
+}

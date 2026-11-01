@@ -1,0 +1,25 @@
+{
+  "schema_version": 1,
+  "stage": "B_latent_lds",
+  "evidence_tier": "exploratory_temporal_holdout",
+  "config": "configs\\experiments\\forward_stress.yaml",
+  "selected_latent": {
+    "latent_dim": 15,
+    "ridge": 0.01,
+    "spectral_cap": 0.995
+  },
+  "selected_stable_var": {
+    "lag": 1,
+    "ridge": 1.0
+  },
+  "selection_rule": "highest median validation H20 skill vs persistence across the five temporal holdouts; test not used",
+  "test_block": "final 1/6 of each NoStim recording; same recordings as Phase 6, new chronological split; NOT animal-independent",
+  "frozen_baselines": "trained on the Phase 6 blocked split; descriptive only",
+  "git": {
+    "commit": "4da6c24236d2c6399f5f1b859a21ae479e3521cc",
+    "dirty": true,
+    "branch": "research/context-conditioned-generative-dynamics"
+  },
+  "n_models_latent": 60,
+  "n_models_var": 20
+}

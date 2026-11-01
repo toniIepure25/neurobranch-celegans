@@ -1,0 +1,65 @@
+{
+  "schema_version": 1,
+  "stage": "G_perturbations",
+  "evidence_tier": "exploratory",
+  "targets_requested": [
+    "AVBL",
+    "AVBR",
+    "AVEL",
+    "AVER",
+    "RIVL",
+    "RIVR"
+  ],
+  "targets_present_by_worm": {
+    "0": [
+      "AVBL",
+      "AVBR",
+      "AVEL",
+      "AVER",
+      "RIVL",
+      "RIVR"
+    ],
+    "1": [
+      "AVBL",
+      "AVBR",
+      "AVEL",
+      "AVER",
+      "RIVL",
+      "RIVR"
+    ],
+    "2": [
+      "AVBL",
+      "AVBR",
+      "AVEL",
+      "AVER",
+      "RIVL",
+      "RIVR"
+    ],
+    "3": [
+      "AVBL",
+      "AVBR",
+      "AVEL",
+      "AVER",
+      "RIVL",
+      "RIVR"
+    ],
+    "4": [
+      "AVBL",
+      "AVBR",
+      "AVEL",
+      "AVER",
+      "RIVL",
+      "RIVR"
+    ]
+  },
+  "control_target_rule": "deterministic alphabetic non-target neuron; same signed amplitude/protocol",
+  "amplitude_rule": "min(one-step SD of target, half central 90% range); standardised model units",
+  "warning": "MODEL-DEPENDENT VIRTUAL PERTURBATION - NOT CAUSALLY VALIDATED. Not an experimental dose.",
+  "gate7": "not_evaluable: no matched experimental intervention",
+  "gate8": "not_evaluable: no compatible intervention dataset",
+  "git": {
+    "commit": "4da6c24236d2c6399f5f1b859a21ae479e3521cc",
+    "dirty": true,
+    "branch": "research/context-conditioned-generative-dynamics"
+  }
+}

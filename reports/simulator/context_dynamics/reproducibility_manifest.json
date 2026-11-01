@@ -1,0 +1,35 @@
+{
+  "schema_version": 1,
+  "python": "3.13.5",
+  "platform": "Windows-10-10.0.19045-SP0",
+  "numpy": "2.3.1",
+  "scipy": "1.16.0",
+  "scikit_learn": "1.9.1",
+  "git": {
+    "commit": "568d14cbdbe5ae4bdc9b853b9293d37c7f743f56",
+    "dirty": true,
+    "branch": "research/context-conditioned-generative-dynamics"
+  },
+  "commands": [
+    "python scripts/context_latent_baseline.py",
+    "python scripts/context_compositional.py",
+    "python scripts/context_oxygen_audit.py",
+    "python scripts/context_oxygen_models.py",
+    "python scripts/context_shared_dynamics.py",
+    "python scripts/context_branching.py",
+    "python scripts/context_perturbations.py",
+    "python scripts/context_support_audit.py",
+    "python scripts/context_figures.py",
+    "python scripts/context_manifests.py"
+  ],
+  "seeds": {
+    "model_fit": 17,
+    "rollout": 17000,
+    "bootstrap": 17
+  },
+  "notes": [
+    "No test block was used for model selection.",
+    "Kato Stim forecasts supply the measured schedule and are not forecasts of a future stimulus.",
+    "The Kato Stim test block is a chronological tail, not animal-independent."
+  ]
+}

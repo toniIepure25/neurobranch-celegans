@@ -1,0 +1,31 @@
+{
+  "datasets": {
+    "kato2015_nostim": {
+      "label": "Kato 2015 WT_NoStim",
+      "path": "D:\\ComputaCenter\\NeuroBranch\\neurobranch-celegans\\data\\raw\\kato2015\\WT_NoStim.mat",
+      "exists": true,
+      "used_for": "Stages B, C, E, F, G; Phase 6 comparison",
+      "bytes": 56390975,
+      "sha256_raw": "7531811c1718e26a0455f59cb2f8188cf25809278cfea85770dfe03315a0098a",
+      "algorithm": "sha256",
+      "normalization": "raw_binary"
+    },
+    "kato2015_stim": {
+      "label": "Kato 2015 WT_Stim",
+      "path": "C:\\Users\\COMPUT~1\\AppData\\Local\\Temp\\neurobranch_external\\WT_Stim.mat",
+      "exists": true,
+      "used_for": "Stage D oxygen input audit and models",
+      "bytes": 42652798,
+      "sha256_raw": "96ffc39afbc90b66ff1b4c98de199f8424391450d4a8050cbe2b65b3a2fdaa72",
+      "algorithm": "sha256",
+      "normalization": "raw_binary"
+    }
+  },
+  "raw_data_committed_to_git": false,
+  "not_used": "Nichols 2017 is not used in this branch; no cross-dataset claim is made.",
+  "git": {
+    "commit": "568d14cbdbe5ae4bdc9b853b9293d37c7f743f56",
+    "dirty": true,
+    "branch": "research/context-conditioned-generative-dynamics"
+  }
+}

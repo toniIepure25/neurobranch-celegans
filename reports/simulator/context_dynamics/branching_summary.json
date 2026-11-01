@@ -1,0 +1,20 @@
+{
+  "schema_version": 1,
+  "stage": "F_branching",
+  "evidence_tier": "exploratory_temporal_holdout",
+  "model": "selected latent LDS",
+  "ensemble": "stochastic draws from fitted process covariance; no arbitrary neural noise",
+  "comparators": [
+    "persistence",
+    "first-order Markov",
+    "marginal first-exit",
+    "observed local kNN outcome distribution"
+  ],
+  "interpretation_warning": "Agreement or disagreement with the observed local outcome distribution is a model diagnostic. It is not evidence that the living network contains a bifurcation or that the model has identified one.",
+  "n_rollouts_per_state": 40,
+  "git": {
+    "commit": "4da6c24236d2c6399f5f1b859a21ae479e3521cc",
+    "dirty": true,
+    "branch": "research/context-conditioned-generative-dynamics"
+  }
+}

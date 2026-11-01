@@ -1,0 +1,175 @@
+{
+  "schema_version": 1,
+  "stage": "A_support_audit",
+  "q90_q95_q99": true,
+  "phase6": {
+    "official_quantile": 0.99,
+    "note": "Phase 6 official support remains q99. The per-start table stores only each rollout's maximum distance, so the audit is conservative and cannot recover the full per-event distance distribution without re-simulation.",
+    "official_q99_fractions": [
+      {
+        "family": "stochastic_var",
+        "mean_q99_fraction": 0.9771428571428572
+      },
+      {
+        "family": "switching_var",
+        "mean_q99_fraction": 0.86
+      },
+      {
+        "family": "var",
+        "mean_q99_fraction": 0.9771428571428572
+      }
+    ]
+  },
+  "context": {
+    "thresholds": [
+      {
+        "model": "latent_lds",
+        "worm_id": 0,
+        "q90_threshold": 11.24148830718583,
+        "q95_threshold": 11.540808551983273,
+        "q99_threshold": 12.253791269732458,
+        "n_calibration_scores": 470,
+        "calibration_score_mean": 9.72563498804203,
+        "calibration_score_max": 12.846508134318741
+      },
+      {
+        "model": "var_stable",
+        "worm_id": 0,
+        "q90_threshold": 11.24148830718583,
+        "q95_threshold": 11.540808551983273,
+        "q99_threshold": 12.253791269732458,
+        "n_calibration_scores": 470,
+        "calibration_score_mean": 9.72563498804203,
+        "calibration_score_max": 12.846508134318741
+      },
+      {
+        "model": "latent_lds",
+        "worm_id": 1,
+        "q90_threshold": 12.231536356525677,
+        "q95_threshold": 12.557004281293406,
+        "q99_threshold": 13.277136789969118,
+        "n_calibration_scores": 470,
+        "calibration_score_mean": 10.883465053433518,
+        "calibration_score_max": 14.493288657576297
+      },
+      {
+        "model": "var_stable",
+        "worm_id": 1,
+        "q90_threshold": 12.231536356525677,
+        "q95_threshold": 12.557004281293406,
+        "q99_threshold": 13.277136789969118,
+        "n_calibration_scores": 470,
+        "calibration_score_mean": 10.883465053433518,
+        "calibration_score_max": 14.493288657576297
+      },
+      {
+        "model": "latent_lds",
+        "worm_id": 2,
+        "q90_threshold": 13.63831559353392,
+        "q95_threshold": 14.482496252151218,
+        "q99_threshold": 17.90871020174787,
+        "n_calibration_scores": 458,
+        "calibration_score_mean": 11.567169619035628,
+        "calibration_score_max": 19.374203025455184
+      },
+      {
+        "model": "var_stable",
+        "worm_id": 2,
+        "q90_threshold": 13.63831559353392,
+        "q95_threshold": 14.482496252151218,
+        "q99_threshold": 17.90871020174787,
+        "n_calibration_scores": 458,
+        "calibration_score_mean": 11.567169619035628,
+        "calibration_score_max": 19.374203025455184
+      },
+      {
+        "model": "latent_lds",
+        "worm_id": 3,
+        "q90_threshold": 10.705003135657071,
+        "q95_threshold": 11.184167480981491,
+        "q99_threshold": 12.049428586752615,
+        "n_calibration_scores": 496,
+        "calibration_score_mean": 8.694211399832842,
+        "calibration_score_max": 13.68561671320877
+      },
+      {
+        "model": "var_stable",
+        "worm_id": 3,
+        "q90_threshold": 10.705003135657071,
+        "q95_threshold": 11.184167480981491,
+        "q99_threshold": 12.049428586752615,
+        "n_calibration_scores": 496,
+        "calibration_score_mean": 8.694211399832842,
+        "calibration_score_max": 13.68561671320877
+      },
+      {
+        "model": "latent_lds",
+        "worm_id": 4,
+        "q90_threshold": 12.227140553726645,
+        "q95_threshold": 18.01229234694571,
+        "q99_threshold": 24.76294061485155,
+        "n_calibration_scores": 453,
+        "calibration_score_mean": 10.739533216811585,
+        "calibration_score_max": 26.80344514371034
+      },
+      {
+        "model": "var_stable",
+        "worm_id": 4,
+        "q90_threshold": 12.227140553726645,
+        "q95_threshold": 18.01229234694571,
+        "q99_threshold": 24.76294061485155,
+        "n_calibration_scores": 453,
+        "calibration_score_mean": 10.739533216811585,
+        "calibration_score_max": 26.80344514371034
+      }
+    ],
+    "summary": [
+      {
+        "worm_id": 0,
+        "n_starts": 1552,
+        "mean_max_support_distance": 11.198687931098126,
+        "fraction_max_inside_q90": 0.5038659793814433,
+        "fraction_max_inside_q95": 0.6932989690721649,
+        "fraction_max_inside_q99": 0.9317010309278351
+      },
+      {
+        "worm_id": 1,
+        "n_starts": 1548,
+        "mean_max_support_distance": 18.046002391188203,
+        "fraction_max_inside_q90": 0.020671834625323,
+        "fraction_max_inside_q95": 0.04909560723514212,
+        "fraction_max_inside_q99": 0.09302325581395349
+      },
+      {
+        "worm_id": 2,
+        "n_starts": 1504,
+        "mean_max_support_distance": 15.209180219354485,
+        "fraction_max_inside_q90": 0.7074468085106383,
+        "fraction_max_inside_q95": 0.7393617021276596,
+        "fraction_max_inside_q99": 0.7992021276595744
+      },
+      {
+        "worm_id": 3,
+        "n_starts": 1656,
+        "mean_max_support_distance": 9.83588325918088,
+        "fraction_max_inside_q90": 0.857487922705314,
+        "fraction_max_inside_q95": 0.9154589371980676,
+        "fraction_max_inside_q99": 0.9589371980676329
+      },
+      {
+        "worm_id": 4,
+        "n_starts": 1480,
+        "mean_max_support_distance": 10.739884523644136,
+        "fraction_max_inside_q90": 0.9891891891891892,
+        "fraction_max_inside_q95": 1.0,
+        "fraction_max_inside_q99": 1.0
+      }
+    ]
+  },
+  "warning": "A support threshold is a train/validation calibration diagnostic. Being inside it does not make a rollout scientifically valid or a forecast correct.",
+  "git": {
+    "commit": "4da6c24236d2c6399f5f1b859a21ae479e3521cc",
+    "dirty": true,
+    "branch": "research/context-conditioned-generative-dynamics"
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "schema_version": 1,
+  "stage": "D_oxygen_input_models",
+  "evidence_tier": "exploratory_low_power",
+  "n_sessions": 7,
+  "held_out_transitions_per_session": 3,
+  "total_held_out_transition_events": 21,
+  "forecast_semantics": "known measured oxygen schedule supplied; not a stimulus forecast and not targeted neuronal stimulation",
+  "horizons": "H20 only, on an evenly spaced subset of up to 40 held-out starts per session; H100 is covered in Stage B",
+  "models": {
+    "A_no_input": "autonomous latent LDS",
+    "B_observed_o2": "latent LDS with measured oxygen input",
+    "C_compositional_o2": "compositional operators with causal coefficient policy and oxygen input",
+    "D_lagged_o2_12f": "oxygen delayed by 12 frames (~4 s) as a timing control",
+    "D_time_since_transition": "elapsed time since last oxygen switch as a non-specific control",
+    "D_time_index": "linear time as a non-specific control",
+    "E_stimulus_only_o2": "current oxygen alone with no neural history"
+  },
+  "warning": "Oxygen is an environmental sensory input. This is not targeted neuronal stimulation or optogenetics.",
+  "power_warning": "Seven sessions share a fixed schedule; transition events are not independent biological replicates. Any positive difference is low-power and exploratory.",
+  "git": {
+    "commit": "4da6c24236d2c6399f5f1b859a21ae479e3521cc",
+    "dirty": true,
+    "branch": "research/context-conditioned-generative-dynamics"
+  }
+}

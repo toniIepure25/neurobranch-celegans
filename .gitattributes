@@ -1,5 +1,9 @@
 reports/** text eol=lf
 
+# Context-dynamics reports include raw-byte manifests, PNG figures and NPZ trajectories.
+# Preserve their exact bytes so the declared raw SHA256 values remain verifiable.
+reports/simulator/context_dynamics/** -text
+
 # Binary simulator artifacts must never be line-normalised.
 reports/simulator/latent_encoders/*.pt binary
 reports/simulator/demo/*.npz binary
