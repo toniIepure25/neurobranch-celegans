@@ -1,0 +1,106 @@
+{
+  "stage": "E_oxygen_response",
+  "evidence_tier": "exploratory; repeated fixed schedule, sessions are not independent animals",
+  "source_sha256": "96ffc39afbc90b66ff1b4c98de199f8424391450d4a8050cbe2b65b3a2fdaa72",
+  "n_sessions": 7,
+  "n_transitions_per_session": [
+    12,
+    12,
+    12,
+    12,
+    12,
+    12,
+    12
+  ],
+  "oxygen_levels": [
+    4.0,
+    21.0
+  ],
+  "directions": {
+    "down": 42,
+    "up": 42
+  },
+  "sensory_labels_present": [
+    "AQR",
+    "BAGL",
+    "BAGR",
+    "URXL",
+    "URXR"
+  ],
+  "time_confound_max_r2": 0.024443619993050336,
+  "schedule_jitter_sd_seconds_max": 0.11292982054346791,
+  "aggregate_model": [
+    {
+      "model": "placebo_event",
+      "mean_skill": -3.9819318518006557,
+      "median_skill": -3.793689456589872,
+      "n_sessions": 7
+    },
+    {
+      "model": "event_only",
+      "mean_skill": -4.03063167232457,
+      "median_skill": -3.948129047810819,
+      "n_sessions": 7
+    },
+    {
+      "model": "time_only",
+      "mean_skill": -19.367807771930707,
+      "median_skill": -15.990068990007384,
+      "n_sessions": 7
+    },
+    {
+      "model": "placebo_plus_time",
+      "mean_skill": -19.40803362660592,
+      "median_skill": -15.992425285233018,
+      "n_sessions": 7
+    },
+    {
+      "model": "event_plus_time",
+      "mean_skill": -19.443247144451735,
+      "median_skill": -16.362634691345256,
+      "n_sessions": 7
+    }
+  ],
+  "baseline_corrected_window_model": [
+    {
+      "model": "time_only",
+      "mean_skill": -0.09666683844812583,
+      "median_skill": -0.10623901857324936,
+      "n_sessions": 7
+    },
+    {
+      "model": "event_plus_time",
+      "mean_skill": -0.18400149214181963,
+      "median_skill": -0.21237962004398359,
+      "n_sessions": 7
+    },
+    {
+      "model": "event_lag",
+      "mean_skill": -0.19359503462037905,
+      "median_skill": -0.2211362387725757,
+      "n_sessions": 7
+    },
+    {
+      "model": "placebo_event_lag",
+      "mean_skill": -0.2693081220948744,
+      "median_skill": -0.34722812508348966,
+      "n_sessions": 7
+    }
+  ],
+  "session_disjoint_models": {
+    "event_only": -6.947844301219234,
+    "event_plus_time": -10.628974168413839,
+    "time_only": -11.798464315302608
+  },
+  "warnings": [
+    "oxygen is a controlled environmental input, not targeted neuronal stimulation",
+    "the 30 s schedule is repeated in every session; event and elapsed time are strongly confounded",
+    "seven sessions are not seven independent animals",
+    "no claim about sensory mechanism or behavioural causality"
+  ],
+  "git": {
+    "commit": "b48a4847efde8d6c0e63640afc6ff472f3057759",
+    "dirty": true,
+    "branch": "research/generative-failure-diagnostics"
+  }
+}

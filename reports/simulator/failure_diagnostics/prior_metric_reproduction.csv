@@ -1,0 +1,9 @@
+source,key,metric,reported,recomputed,abs_difference,tolerance,within_tolerance
+documented_context_headline,context_latent_H20_mean,skill_vs_persistence,-1.616,-1.6164927903236257,0.0004927903236255915,0.001,True
+documented_context_headline,context_latent_H20_median,skill_vs_persistence,-0.9107,-0.9107277136072194,2.7713607219426173e-05,0.001,True
+documented_context_headline,context_latent_H100_mean,skill_vs_persistence,-0.7147,-0.7147289406551753,2.8940655175335728e-05,0.001,True
+documented_context_headline,context_latent_H100_median,skill_vs_persistence,-0.1639,-0.1638518186917912,4.8181308208800067e-05,0.001,True
+documented_context_headline,stable_var_H20_mean,skill_vs_persistence,-1.4813,-1.4812785754295792,2.1424570420869316e-05,0.001,True
+documented_context_headline,stable_var_H20_median,skill_vs_persistence,-0.7699,-0.7699494454251288,4.9445425128746834e-05,0.001,True
+documented_context_headline,stable_var_H100_mean,skill_vs_persistence,-0.6124,-0.6124193686788685,1.9368678868425526e-05,0.001,True
+documented_context_headline,stable_var_H100_median,skill_vs_persistence,-0.0606,-0.0606206410178331,2.0641017833097908e-05,0.001,True

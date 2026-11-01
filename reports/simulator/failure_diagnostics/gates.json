@@ -1,0 +1,68 @@
+{
+  "branch": "research/generative-failure-diagnostics",
+  "base_commit": "b48a4847efde8d6c0e63640afc6ff472f3057759",
+  "evidence_tier": "exploratory, repeated-session, not animal-independent",
+  "hypotheses": {
+    "H1_limited_forecastability": {
+      "status": "SUPPORTED",
+      "evidence": "Persistence mean R2 0.071 at 20 frames and -0.365 at 50 frames; no model has positive mean skill vs persistence at any tested horizon."
+    },
+    "H2_observation_model_mismatch": {
+      "status": "PARTIALLY_SUPPORTED",
+      "evidence": "Calcium-filtered synthetic controls have lower attainable skill; the causal calcium model improves one-step real skill (-0.529) but explodes at H20/H100 and does not beat persistence."
+    },
+    "H3_missing_state_variables": {
+      "status": "UNRESOLVED",
+      "evidence": "Population VAR improves modestly over independent neurons but remains far below persistence; no direct measurement of the missing state."
+    },
+    "H4_inadequate_model_identification": {
+      "status": "SUPPORTED",
+      "evidence": "Test-third performance degrades monotonically; half-split latent subspaces differ by 56-62 degrees despite 3-6 degree bootstrap stability."
+    },
+    "H5_data_evaluation_mismatch": {
+      "status": "SUPPORTED",
+      "evidence": "Test reconstruction R2 is negative for all five sessions; later test thirds are worse for every model."
+    },
+    "H6_structural_non_identifiability": {
+      "status": "SUPPORTED_FOR_PERTURBATION",
+      "evidence": "Cross-model perturbation cosine is near zero for compositional vs latent/VAR models; target-ranking median Spearman is 0.371."
+    }
+  },
+  "milestones": {
+    "FORECASTABILITY_CHARACTERIZED": {
+      "status": "PASS",
+      "definition": "Per-neuron, per-session and horizon-resolved skill versus persistence/mean/trend was measured with the same starts."
+    },
+    "OBSERVATION_MODEL_TESTED": {
+      "status": "PASS",
+      "definition": "Synthetic known-truth and real causal observation-aware tests were executed; the real autonomous model did not improve."
+    },
+    "IDENTIFIABILITY_ASSESSED": {
+      "status": "PASS",
+      "definition": "Effective dimension, half-split and bootstrap subspace stability, eigenvalues, observability and reconstruction were measured."
+    },
+    "OXYGEN_RESPONSE_ASSESSED": {
+      "status": "PASS",
+      "definition": "Verified event times, directions, reliability, direction contrast and time/placebo controls were evaluated; no reproducible response was established."
+    },
+    "PERTURBATION_UNCERTAINTY_CHARACTERIZED": {
+      "status": "PASS",
+      "definition": "Five model forms were compared on the same mapped virtual perturbation; disagreement and resampling stability were quantified."
+    },
+    "BIOLOGICAL_INTERVENTION_VALIDATION": {
+      "status": "NOT_EVALUABLE",
+      "definition": "Requires a matched experimental perturbation with independent animals; none is available."
+    }
+  },
+  "key_negatives": [
+    "No tested model beats persistence on mean held-out skill.",
+    "The causal calcium LDS is numerically unstable in autonomous rollout.",
+    "Oxygen transitions do not produce a reproducible response vector and are confounded with elapsed time.",
+    "Virtual perturbation directions are model-dependent; no biological intervention claim is justified."
+  ],
+  "warnings": [
+    "NoStim test tails were previously inspected; this is exploratory, not a newly untouched confirmatory test.",
+    "Sessions are repeated recordings, not independent animals.",
+    "MODEL-DEPENDENT VIRTUAL PERTURBATION — NOT CAUSALLY VALIDATED."
+  ]
+}

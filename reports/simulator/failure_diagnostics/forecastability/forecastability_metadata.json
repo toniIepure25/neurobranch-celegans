@@ -1,0 +1,39 @@
+{
+  "stage": "B_forecastability",
+  "evidence_tier": "exploratory",
+  "source_sha256": "7531811c1718e26a0455f59cb2f8188cf25809278cfea85770dfe03315a0098a",
+  "config": "data/raw/kato2015/WT_NoStim.mat",
+  "horizons_frames": [
+    1,
+    3,
+    5,
+    10,
+    20,
+    50,
+    100
+  ],
+  "sampling": {
+    "0": 2.9046296296296297,
+    "1": 2.901851851851852,
+    "2": 2.8324074074074073,
+    "3": 3.0657407407407407,
+    "4": 2.797222222222222
+  },
+  "history_frames": 5,
+  "test_starts": "all starts wholly inside the chronological test mask",
+  "bootstrap": "moving-block, block=20, 400 draws, descriptive",
+  "models": [
+    "persistence",
+    "train_mean",
+    "local_trend",
+    "neuron_ar5",
+    "population_var",
+    "latent_lds"
+  ],
+  "selection": "none on test; prespecified model settings",
+  "git": {
+    "commit": "b48a4847efde8d6c0e63640afc6ff472f3057759",
+    "dirty": true,
+    "branch": "research/generative-failure-diagnostics"
+  }
+}

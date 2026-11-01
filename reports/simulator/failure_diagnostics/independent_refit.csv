@@ -1,0 +1,3 @@
+source,model,worm_id,horizon,n_starts,mse,persistence_mse,skill_vs_persistence,realized_spectral_radius
+independent_refit_session0,latent_lds,0,20,428,1.2105702309410666,0.40737903118133545,-1.9716066323556283,
+independent_refit_session0,stable_var,0,20,428,1.0705444812774658,0.40737903118133545,-1.6278831244039593,0.9950000000000023

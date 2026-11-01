@@ -1,0 +1,52 @@
+{
+  "stage": "A_reproduction_audit",
+  "evidence_tier": "exploratory; prior test tails already inspected",
+  "source_file": "data/raw/kato2015/WT_NoStim.mat",
+  "source_sha256": "7531811c1718e26a0455f59cb2f8188cf25809278cfea85770dfe03315a0098a",
+  "n_recordings": 5,
+  "n_sessions": 5,
+  "prior_metric_reproduction": {
+    "n_checks": 8,
+    "n_discrepancies": 0,
+    "discrepancies": [],
+    "unresolved": [
+      {
+        "source": "context_free_running_latent_per_start",
+        "status": "UNRESOLVED_SCHEMA",
+        "reason": "the stored per-start table has model and worm_id but no horizon column; horizon-specific recomputation is impossible without guessing row groups"
+      }
+    ]
+  },
+  "independent_refit": [
+    {
+      "source": "independent_refit_session0",
+      "model": "latent_lds",
+      "worm_id": 0,
+      "horizon": 20,
+      "n_starts": 428,
+      "mse": 1.2105702309410666,
+      "persistence_mse": 0.40737903118133545,
+      "skill_vs_persistence": -1.9716066323556283,
+      "realized_spectral_radius": NaN
+    },
+    {
+      "source": "independent_refit_session0",
+      "model": "stable_var",
+      "worm_id": 0,
+      "horizon": 20,
+      "n_starts": 428,
+      "mse": 1.0705444812774658,
+      "persistence_mse": 0.40737903118133545,
+      "skill_vs_persistence": -1.6278831244039593,
+      "realized_spectral_radius": 0.9950000000000023
+    }
+  ],
+  "missing_phase6_checkpoints": [],
+  "missing_checkpoint_count": 0,
+  "discrepancy_policy": "prior reports are not modified; differences are recorded in this file",
+  "git": {
+    "commit": "b48a4847efde8d6c0e63640afc6ff472f3057759",
+    "dirty": true,
+    "branch": "research/generative-failure-diagnostics"
+  }
+}

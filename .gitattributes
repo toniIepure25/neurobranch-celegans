@@ -7,3 +7,4 @@ reports/simulator/context_dynamics/** -text
 # Binary simulator artifacts must never be line-normalised.
 reports/simulator/latent_encoders/*.pt binary
 reports/simulator/demo/*.npz binary
+reports/simulator/failure_diagnostics/figures/** -text

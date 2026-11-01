@@ -1,0 +1,383 @@
+{
+  "stage": "D_identifiability",
+  "evidence_tier": "exploratory",
+  "rotation_ambiguity": "subspace and eigenvalue diagnostics only; latent coordinates are not anatomical",
+  "n_sessions": 5,
+  "results": [
+    {
+      "worm_id": 0,
+      "pca": {
+        "n_frames": 2195,
+        "n_neurons": 103,
+        "participation_ratio": 8.759227285607654,
+        "n_components_90pct": 36,
+        "top_component_fraction": 0.2595003121574222,
+        "top5_component_fraction": 0.6132756032866418
+      },
+      "subspace": {
+        "half_subspace": {
+          "mean_angle_deg": 56.154175496578276,
+          "max_angle_deg": 88.39330445289923,
+          "mean_cos2_overlap": 0.35153425675934674,
+          "min_cos2_overlap": 0.000786154808113064
+        },
+        "bootstrap_mean_angle_deg": 4.446341803550363,
+        "bootstrap_max_angle_deg": 5.887492292113369,
+        "bootstrap_angles_deg": [
+          5.486843736107872,
+          3.809655038009008,
+          5.887492292113369,
+          3.837842497948335,
+          3.2098754535732255
+        ]
+      },
+      "operator": {
+        "latent_dim": 15,
+        "observability_rank": 15,
+        "observability_sigma_min": 1.1919978607545298,
+        "observability_sigma_max": 4.8090940516565945,
+        "observability_condition": 4.034482116110894,
+        "eigenvalue_magnitudes_sorted": [
+          0.9942246795365951,
+          0.9829557283632585,
+          0.9785881360094119,
+          0.9785881360094119,
+          0.9749145246540313,
+          0.9531067326771357,
+          0.9444514831161559,
+          0.9162111182577298,
+          0.9162111182577298,
+          0.8944354227621226,
+          0.8715761243337999,
+          0.859202189766802,
+          0.7736980845734728,
+          0.7174795419036002,
+          0.5471484460310909
+        ],
+        "eigenvalue_angles_deg_sorted": [
+          2.2758413010848155,
+          0.09091501663797541,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          -0.09091501663797541,
+          -2.2758413010848155
+        ],
+        "realized_spectral_radius": 0.9942246795365951
+      },
+      "reconstruction": {
+        "test_reconstruction_r2": -0.9378359821381967,
+        "test_reconstruction_mse": 0.8920870689846359
+      }
+    },
+    {
+      "worm_id": 1,
+      "pca": {
+        "n_frames": 2193,
+        "n_neurons": 127,
+        "participation_ratio": 12.628522751463384,
+        "n_components_90pct": 52,
+        "top_component_fraction": 0.21867532093994202,
+        "top5_component_fraction": 0.5047383442431506
+      },
+      "subspace": {
+        "half_subspace": {
+          "mean_angle_deg": 56.026547816885504,
+          "max_angle_deg": 86.48338223483461,
+          "mean_cos2_overlap": 0.3553031905787799,
+          "min_cos2_overlap": 0.003762354010932029
+        },
+        "bootstrap_mean_angle_deg": 3.4124194486412613,
+        "bootstrap_max_angle_deg": 3.760184225350565,
+        "bootstrap_angles_deg": [
+          3.28132633879316,
+          3.480618700819751,
+          3.760184225350565,
+          3.4071225552860813,
+          3.1328454229567493
+        ]
+      },
+      "operator": {
+        "latent_dim": 15,
+        "observability_rank": 15,
+        "observability_sigma_min": 1.2190709309244387,
+        "observability_sigma_max": 4.6774808912240005,
+        "observability_condition": 3.836922670018061,
+        "eigenvalue_magnitudes_sorted": [
+          0.992282762481488,
+          0.9799897012564472,
+          0.975501044903439,
+          0.9705503492720421,
+          0.9705503492720421,
+          0.9487129632406436,
+          0.9353420123432387,
+          0.9192433262463862,
+          0.9056440742256892,
+          0.8873301492570594,
+          0.8482814803183332,
+          0.7821884025372756,
+          0.7821884025372756,
+          0.7582366525498516,
+          0.5749221999918475
+        ],
+        "eigenvalue_angles_deg_sorted": [
+          2.9457830833805883,
+          0.8688265015181037,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          -0.8688265015181037,
+          -2.9457830833805883
+        ],
+        "realized_spectral_radius": 0.992282762481488
+      },
+      "reconstruction": {
+        "test_reconstruction_r2": -3.1189513426204547,
+        "test_reconstruction_mse": 2.2647065461044824
+      }
+    },
+    {
+      "worm_id": 2,
+      "pca": {
+        "n_frames": 2141,
+        "n_neurons": 123,
+        "participation_ratio": 13.288961513468639,
+        "n_components_90pct": 61,
+        "top_component_fraction": 0.22774270104591673,
+        "top5_component_fraction": 0.4704377768895455
+      },
+      "subspace": {
+        "half_subspace": {
+          "mean_angle_deg": 61.741479933165834,
+          "max_angle_deg": 89.59838082289859,
+          "mean_cos2_overlap": 0.2825687982193216,
+          "min_cos2_overlap": 4.913336471558347e-05
+        },
+        "bootstrap_mean_angle_deg": 5.111874360118792,
+        "bootstrap_max_angle_deg": 6.606461985709635,
+        "bootstrap_angles_deg": [
+          4.782012494419853,
+          4.998196698222029,
+          4.733034594160843,
+          6.606461985709635,
+          4.439666028081599
+        ]
+      },
+      "operator": {
+        "latent_dim": 15,
+        "observability_rank": 15,
+        "observability_sigma_min": 1.1850734153504445,
+        "observability_sigma_max": 4.278833434285483,
+        "observability_condition": 3.6106062112786197,
+        "eigenvalue_magnitudes_sorted": [
+          0.9931719038532537,
+          0.9702858745592787,
+          0.9573664825170624,
+          0.9573664825170624,
+          0.9460154655529499,
+          0.9388907079203119,
+          0.9202722189458292,
+          0.8840855536012684,
+          0.8583202470444291,
+          0.8157079896951595,
+          0.798400175261925,
+          0.798400175261925,
+          0.7343845559507536,
+          0.6273771133197229,
+          0.5398404843866522
+        ],
+        "eigenvalue_angles_deg_sorted": [
+          3.383289883657616,
+          0.9096436065790567,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          -0.9096436065790567,
+          -3.383289883657616
+        ],
+        "realized_spectral_radius": 0.9931719038532537
+      },
+      "reconstruction": {
+        "test_reconstruction_r2": -0.011987242053189684,
+        "test_reconstruction_mse": 2.07766164991981
+      }
+    },
+    {
+      "worm_id": 3,
+      "pca": {
+        "n_frames": 2317,
+        "n_neurons": 118,
+        "participation_ratio": 10.050963811395802,
+        "n_components_90pct": 38,
+        "top_component_fraction": 0.23924626507081675,
+        "top5_component_fraction": 0.5831781404356426
+      },
+      "subspace": {
+        "half_subspace": {
+          "mean_angle_deg": 59.33354358116063,
+          "max_angle_deg": 89.92515238941375,
+          "mean_cos2_overlap": 0.312421746841678,
+          "min_cos2_overlap": 1.7065160190524132e-06
+        },
+        "bootstrap_mean_angle_deg": 2.834594299183922,
+        "bootstrap_max_angle_deg": 3.0317258184421765,
+        "bootstrap_angles_deg": [
+          2.7733164405673163,
+          2.5209700237738293,
+          2.9639937508643257,
+          2.882965462271966,
+          3.0317258184421765
+        ]
+      },
+      "operator": {
+        "latent_dim": 15,
+        "observability_rank": 15,
+        "observability_sigma_min": 1.2527567093308356,
+        "observability_sigma_max": 4.299444531343349,
+        "observability_condition": 3.4319868329740677,
+        "eigenvalue_magnitudes_sorted": [
+          0.9905029774709896,
+          0.9905029774709896,
+          0.9864618174229652,
+          0.9864618174229652,
+          0.9708339504117602,
+          0.9607115758941415,
+          0.9579917507668045,
+          0.9579917507668045,
+          0.9197247529961176,
+          0.9124434539846694,
+          0.9032166328351893,
+          0.8794905716952619,
+          0.8404359896168797,
+          0.7765077399625255,
+          0.6046912268343487
+        ],
+        "eigenvalue_angles_deg_sorted": [
+          1.1839394403290953,
+          0.538435173326498,
+          0.1089046798750646,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          -0.1089046798750646,
+          -0.538435173326498,
+          -1.1839394403290953
+        ],
+        "realized_spectral_radius": 0.9905029774709896
+      },
+      "reconstruction": {
+        "test_reconstruction_r2": -0.10181501148313465,
+        "test_reconstruction_mse": 0.6255048698634768
+      }
+    },
+    {
+      "worm_id": 4,
+      "pca": {
+        "n_frames": 2114,
+        "n_neurons": 121,
+        "participation_ratio": 16.46567875186202,
+        "n_components_90pct": 63,
+        "top_component_fraction": 0.1875511473898503,
+        "top5_component_fraction": 0.44476391800315596
+      },
+      "subspace": {
+        "half_subspace": {
+          "mean_angle_deg": 60.42460699694434,
+          "max_angle_deg": 89.04464181676019,
+          "mean_cos2_overlap": 0.29880815317125925,
+          "min_cos2_overlap": 0.0002780013738654555
+        },
+        "bootstrap_mean_angle_deg": 5.772934007329441,
+        "bootstrap_max_angle_deg": 7.254242128295211,
+        "bootstrap_angles_deg": [
+          5.089280857031388,
+          7.254242128295211,
+          6.329806048635307,
+          4.751068706768562,
+          5.440272295916734
+        ]
+      },
+      "operator": {
+        "latent_dim": 15,
+        "observability_rank": 15,
+        "observability_sigma_min": 1.000127449428452,
+        "observability_sigma_max": 4.610839766049137,
+        "observability_condition": 4.610252192042242,
+        "eigenvalue_magnitudes_sorted": [
+          0.9798671852854579,
+          0.9718979729300133,
+          0.9718979729300133,
+          0.9611182163847503,
+          0.9611182163847503,
+          0.9319285380925342,
+          0.9319285380925342,
+          0.9166393814447407,
+          0.8532990252506084,
+          0.8210394370965213,
+          0.7929098410645087,
+          0.6032986302376552,
+          0.5093174125171962,
+          0.2922290961102282,
+          0.016146793131807446
+        ],
+        "eigenvalue_angles_deg_sorted": [
+          1.7655946839217171,
+          0.38328022415454166,
+          0.31211998650897704,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          -0.31211998650897704,
+          -0.38328022415454166,
+          -1.7655946839217171
+        ],
+        "realized_spectral_radius": 0.9798671852854579
+      },
+      "reconstruction": {
+        "test_reconstruction_r2": -0.07034742175450237,
+        "test_reconstruction_mse": 0.710490705472285
+      }
+    }
+  ],
+  "git": {
+    "commit": "b48a4847efde8d6c0e63640afc6ff472f3057759",
+    "dirty": true,
+    "branch": "research/generative-failure-diagnostics"
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "stage": "C_observation_model",
+  "evidence_tier": "exploratory",
+  "data_sha256": "7531811c1718e26a0455f59cb2f8188cf25809278cfea85770dfe03315a0098a",
+  "latent_dim": 10,
+  "models": [
+    "ar1_latent_lds",
+    "second_order_latent_lds",
+    "causal_calcium_lds"
+  ],
+  "selection": "alpha selected on train one-step MSE; no test selection",
+  "synthetic_conditions": [
+    "calcium_filtered",
+    "oscillatory_filtered",
+    "oscillatory_unfiltered",
+    "stable_unfiltered"
+  ],
+  "synthetic_note": "synthetic success is not biological validation",
+  "git": {
+    "commit": "b48a4847efde8d6c0e63640afc6ff472f3057759",
+    "dirty": true,
+    "branch": "research/generative-failure-diagnostics"
+  }
+}
