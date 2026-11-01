@@ -18,9 +18,10 @@ def test_app_builds_all_tabs_without_exception() -> None:
     app = AppTest.from_file(APP)
     app.run(timeout=90)
     assert not app.exception
-    assert len(app.tabs) == 21
+    assert len(app.tabs) == 27
     labels = [tab.label for tab in app.tabs]
     assert "CONTEXT-AWARE NEURAL SIMULATOR" in labels
+    assert "GENERATIVE FAILURE DIAGNOSTICS" in labels
     assert "Latent model" in labels
     assert "Oxygen context" in labels
 

@@ -41,6 +41,7 @@ from neurobranch.reporting.status import load_measurement_status  # noqa: E402
 
 sys.path.insert(0, str(ROOT / "app"))
 from context_ui import render as render_context  # noqa: E402
+from genfail_ui import render as render_genfail  # noqa: E402
 from simulator_ui import render as render_simulator  # noqa: E402
 
 CFG_PATH = ROOT / "configs" / "experiments" / "blocked_suite.yaml"
@@ -191,6 +192,7 @@ tabs = st.tabs(
         "BoundedBench",
         "Core Dynamics Simulator",
         "CONTEXT-AWARE NEURAL SIMULATOR",
+        "GENERATIVE FAILURE DIAGNOSTICS",
     ]
 )
 
@@ -1352,6 +1354,9 @@ with tabs[14]:
 
 with tabs[15]:
     render_context(data, pca, int(worm_id), int(seed))
+
+with tabs[16]:
+    render_genfail()
 
 st.divider()
 st.caption(EPISTEMIC_WARNING)

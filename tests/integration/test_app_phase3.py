@@ -38,6 +38,12 @@ def test_app_retains_phase2_tabs_and_adds_prospective_tab():
         "Oxygen context",
         "Branching",
         "Perturbations",
+        "GENERATIVE FAILURE DIAGNOSTICS",
+        "Forecastability",
+        "Observation model",
+        "Identifiability",
+        "Oxygen response",
+        "Perturbation",
     ]
 
 
