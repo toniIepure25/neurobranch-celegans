@@ -40,6 +40,7 @@ from neurobranch.preprocessing import split_starts  # noqa: E402
 from neurobranch.reporting.status import load_measurement_status  # noqa: E402
 
 sys.path.insert(0, str(ROOT / "app"))
+from context_ui import render as render_context  # noqa: E402
 from simulator_ui import render as render_simulator  # noqa: E402
 
 CFG_PATH = ROOT / "configs" / "experiments" / "blocked_suite.yaml"
@@ -189,6 +190,7 @@ tabs = st.tabs(
         "Adaptive Twin",
         "BoundedBench",
         "Core Dynamics Simulator",
+        "CONTEXT-AWARE NEURAL SIMULATOR",
     ]
 )
 
@@ -1347,6 +1349,9 @@ with tabs[13]:
 
 with tabs[14]:
     render_simulator(data, pca, int(worm_id), model_name, int(seed), models_dir)
+
+with tabs[15]:
+    render_context(data, pca, int(worm_id), int(seed))
 
 st.divider()
 st.caption(EPISTEMIC_WARNING)

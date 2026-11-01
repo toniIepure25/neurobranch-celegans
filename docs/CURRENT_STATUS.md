@@ -114,6 +114,33 @@ Start at [EXTERNAL_DATASET_COMPATIBILITY.md](EXTERNAL_DATASET_COMPATIBILITY.md),
 [PHASE6_FINAL_SCIENTIFIC_AUDIT.md](PHASE6_FINAL_SCIENTIFIC_AUDIT.md) and
 [RESEARCH_DIRECTION_FOR_DENIS.md](RESEARCH_DIRECTION_FOR_DENIS.md).
 
+### Context-conditioned generative dynamics branch
+
+The separate branch `research/context-conditioned-generative-dynamics` asks whether
+stimulus-aware, compositional, low-dimensional dynamics improve free-running
+simulation. The answer on the available recordings is **no**:
+
+- selected latent LDS median H20/H100 skill: −0.911 / −0.164;
+- corrected stable VAR median H20/H100 skill: −0.770 / −0.061;
+- compositional 2-operator test H20 mean skill −1.771, with coefficient-policy
+  collapse and no session better than the latent LDS;
+- measured oxygen did not improve H20 prediction (B−A paired MSE difference +0.008);
+- shared zero-shot dynamics H20 mean skill −2.822; calibration adaptation made it
+  worse;
+- q99 maximum-distance support coverage is 0.86 for the Phase 6 switching VAR and
+  0.093 for context latent session 1.
+
+Gates: G1 PASS, G2 PASS, G3 PASS, G4 CONDITIONAL, G5 FAIL, G6 FAIL, G7
+NOT_EVALUABLE, G8 NOT_EVALUABLE. The new dashboard tab is
+“CONTEXT-AWARE NEURAL SIMULATOR”; it preserves all existing tabs and labels
+measured oxygen, hypothetical oxygen, model perturbation, and actual stimulation
+data separately.
+
+Start at [SIMULATOR_CONTEXT_RESEARCH_PROTOCOL.md](SIMULATOR_CONTEXT_RESEARCH_PROTOCOL.md),
+[SIMULATOR_CONTEXT_RESULTS.md](SIMULATOR_CONTEXT_RESULTS.md),
+[SIMULATOR_CONTEXT_LIMITATIONS.md](SIMULATOR_CONTEXT_LIMITATIONS.md), and
+[SIMULATOR_CONTEXT_SUPERVISOR_BRIEF.md](SIMULATOR_CONTEXT_SUPERVISOR_BRIEF.md).
+
 ## Phase 15 gate result
 
 The final statuses are produced by `scripts/phase15_reliability.py` and checked

@@ -38,23 +38,53 @@ class SupportModel:
         *,
         quantile: float = 0.99,
         calibration_X: np.ndarray | None = None,
+        audit_quantiles: tuple[float, ...] = (0.90, 0.95, 0.99),
     ):
         X = np.asarray(train_X, dtype=np.float64)
         if X.ndim != 2 or len(X) < 3:
             raise ValueError("SupportModel needs at least three training states")
-        self.nn = NearestNeighbors(n_neighbors=1).fit(X)
-        dist, _ = NearestNeighbors(n_neighbors=2).fit(X).kneighbors(X)
+        self.nn = NearestNeighbors(n_neighbors=1, n_jobs=-1).fit(X)
+        dist, _ = NearestNeighbors(n_neighbors=2, n_jobs=-1).fit(X).kneighbors(X)
         # dist[:, 0] is self; the second neighbour estimates local support.
         self.training_threshold = float(np.quantile(dist[:, 1], quantile))
         self.calibration_quantile = float(quantile) if calibration_X is not None else None
+        self.calibration_scores: np.ndarray | None = None
         if calibration_X is None:
             self.threshold = self.training_threshold
+            scores = dist[:, 1]
         else:
             cal = np.asarray(calibration_X, dtype=np.float64)
             if cal.ndim != 2 or cal.shape[1] != X.shape[1] or len(cal) == 0:
                 raise ValueError("calibration_X must be a non-empty (n, n_neurons) array")
-            self.threshold = float(np.quantile(self.score(cal), quantile))
+            scores = self.score(cal)
+            self.calibration_scores = np.asarray(scores, dtype=np.float64)
+            self.threshold = float(np.quantile(scores, quantile))
         self.quantile = float(quantile)
+        if any(not (0 < q < 1) for q in audit_quantiles):
+            raise ValueError("audit quantiles must lie strictly between 0 and 1")
+        self.audit_quantiles = tuple(float(q) for q in audit_quantiles)
+        self.thresholds = {
+            f"q{int(round(q * 100)):02d}": float(np.quantile(scores, q))
+            for q in self.audit_quantiles
+        }
+
+    def threshold_at(self, quantile: float) -> float:
+        """Audit threshold at a requested calibration quantile."""
+        if self.calibration_scores is None:
+            raise RuntimeError("no calibration scores; threshold_at is unavailable")
+        return float(np.quantile(self.calibration_scores, float(quantile)))
+
+    def support_table(self, X: np.ndarray) -> dict[str, np.ndarray]:
+        """Raw support distances and every audited Boolean flag.
+
+        Raw distances are retained so a q95 conclusion can be recomputed without
+        re-running the simulator.
+        """
+        d = self.score(X)
+        return {
+            "distance": d,
+            **{name: d <= value for name, value in self.thresholds.items()},
+        }
 
     def score(self, X: np.ndarray) -> np.ndarray:
         arr = np.asarray(X, dtype=np.float64)
@@ -222,6 +252,7 @@ class NeuralSimulator:
         perturbation: PerturbationSpec | None = None,
         include_latent: bool = False,
         stochastic: bool | None = None,
+        external_input: np.ndarray | None = None,
     ) -> Rollout:
         """Generate one free-running trajectory.
 
@@ -231,12 +262,32 @@ class NeuralSimulator:
         and that fact is recorded in the rollout metadata.
 
         Only the supplied history and model inputs are used.  There is no
-        argument for future observations.
+        argument for future observations.  ``external_input`` is a *known
+        schedule* of length ``steps`` (for example measured oxygen); it is not a
+        future neural observation.
         """
         if steps < 1:
             raise ValueError("steps must be at least 1")
         if noise_std < 0:
             raise ValueError("noise_std must be non-negative")
+        input_array: np.ndarray | None = None
+        if external_input is not None:
+            if not bool(getattr(self.model, "supports_input", False)):
+                raise ValueError("this model does not accept an external input")
+            input_array = np.asarray(external_input, dtype=np.float64)
+            if input_array.ndim == 1:
+                input_array = input_array[:, None]
+            if input_array.shape[0] != steps:
+                raise ValueError(
+                    f"external_input must have {steps} rows, got {input_array.shape[0]}"
+                )
+            if not np.isfinite(input_array).all():
+                raise ValueError("external_input contains non-finite values")
+            expected = int(getattr(self.model, "input_dim", 0))
+            if expected and input_array.shape[1] != expected:
+                raise ValueError(
+                    f"external_input has {input_array.shape[1]} channels, model expects {expected}"
+                )
         history_len = int(getattr(self.model, "history_len", 1))
         if (x0 is None) == (initial_history is None):
             raise ValueError("supply exactly one of x0 or initial_history")
@@ -272,16 +323,17 @@ class NeuralSimulator:
             if stochastic is None
             else bool(stochastic)
         )
+        rollout_kwargs = {
+            "seed": int(seed),
+            "noise_std": float(noise_std),
+            "perturb": callback,
+            "initial_history": hist,
+            "stochastic": use_stochastic,
+        }
+        if input_array is not None:
+            rollout_kwargs["inputs"] = input_array
         states = np.asarray(
-            self.model.rollout(
-                x,
-                steps,
-                seed=int(seed),
-                noise_std=float(noise_std),
-                perturb=callback,
-                initial_history=hist,
-                stochastic=use_stochastic,
-            ),
+            self.model.rollout(x, steps, **rollout_kwargs),
             dtype=np.float64,
         )
         if states.shape != (steps + 1, self.n_neurons):
@@ -301,6 +353,7 @@ class NeuralSimulator:
             "history": history_len,
             "initial_history_padded": bool(padded),
             "readout_supported_fraction": readout_supported,
+            "external_input_supplied": bool(input_array is not None),
             "warning": "Model output; not an experimental intervention.",
         }
         return Rollout(
@@ -331,6 +384,7 @@ class NeuralSimulator:
         perturbation: PerturbationSpec | None = None,
         include_latent: bool = False,
         stochastic: bool | None = None,
+        external_input: np.ndarray | None = None,
     ) -> RolloutEnsemble:
         if n < 1:
             raise ValueError("n must be at least 1")
@@ -345,6 +399,7 @@ class NeuralSimulator:
                 perturbation=perturbation,
                 include_latent=include_latent,
                 stochastic=stochastic,
+                external_input=external_input,
             )
             for seed in seeds
         )
@@ -383,6 +438,21 @@ class NeuralSimulator:
         if frame - h + 1 < 0:
             raise ValueError(f"frame {frame} has no complete {h}-frame history")
         return self.data.X[frame - h + 1 : frame + 1].copy()
+
+    def input_slice(self, frame: int, steps: int) -> np.ndarray | None:
+        """Known external schedule for frames ``frame+1 .. frame+steps``.
+
+        This is a schedule, not a neural observation.  Returns ``None`` when the
+        data have no attached external input.
+        """
+        values = getattr(self.data, "external_input", None)
+        if values is None:
+            return None
+        start = int(frame) + 1
+        stop = start + int(steps)
+        if start < 0 or stop > len(values):
+            raise ValueError("external schedule does not cover the requested rollout")
+        return np.asarray(values[start:stop], dtype=np.float64)
 
 
 def available_predictors(data: WormData) -> tuple[str, ...]:

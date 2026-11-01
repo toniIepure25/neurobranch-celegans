@@ -159,6 +159,7 @@ def rollout_metrics(
     horizon: int = 20,
     noise_std: float = 0.0,
     base_seed: int = 0,
+    use_external_input: bool = False,
 ) -> tuple[dict[str, Any], list[dict[str, Any]]]:
     """Evaluate free-running rollouts from held-out initial states."""
     if starts is None:
@@ -178,6 +179,9 @@ def rollout_metrics(
             initial_history=hist,
             seed=seed,
             noise_std=noise_std,
+            external_input=(
+                sim.input_slice(int(t), horizon) if use_external_input else None
+            ),
         )
         real = sim.data.X[int(t) : int(t) + horizon + 1]
         if not rollout.finite:
@@ -216,6 +220,15 @@ def rollout_metrics(
             "mse_h10": float(np.mean((pred[: min(10, horizon)] - real[1 : min(10, horizon) + 1]) ** 2)),
             "ood_fraction": rollout.ood_fraction,
             "max_support_distance": float(np.nanmax(rollout.support_distance)),
+            "support_q90_fraction": float(
+                np.mean(rollout.support_distance <= sim.support.thresholds["q90"])
+            ),
+            "support_q95_fraction": float(
+                np.mean(rollout.support_distance <= sim.support.thresholds["q95"])
+            ),
+            "support_q99_fraction": float(
+                np.mean(rollout.support_distance <= sim.support.thresholds["q99"])
+            ),
             "readout_supported_fraction": float(
                 rollout.metadata.get("readout_supported_fraction", float("nan"))
             ),
@@ -260,6 +273,15 @@ def rollout_metrics(
         "mse_h5": float(np.nanmean([r["mse_h5"] for r in valid])) if valid else float("nan"),
         "mse_h10": float(np.nanmean([r["mse_h10"] for r in valid])) if valid else float("nan"),
         "ood_fraction": float(np.nanmean([r["ood_fraction"] for r in valid])) if valid else float("nan"),
+        "support_q90_fraction": float(np.nanmean([r["support_q90_fraction"] for r in valid]))
+        if valid
+        else float("nan"),
+        "support_q95_fraction": float(np.nanmean([r["support_q95_fraction"] for r in valid]))
+        if valid
+        else float("nan"),
+        "support_q99_fraction": float(np.nanmean([r["support_q99_fraction"] for r in valid]))
+        if valid
+        else float("nan"),
         "readout_supported_fraction": float(
             np.nanmean([r["readout_supported_fraction"] for r in valid])
         )

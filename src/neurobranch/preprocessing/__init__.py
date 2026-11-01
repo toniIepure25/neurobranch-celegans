@@ -29,6 +29,33 @@ class WormData:
     masks: dict[str, np.ndarray]
     split_bounds: dict[str, tuple[int, int]]
     excluded_neurons: tuple[str, ...]
+    external_input: np.ndarray | None = None
+    input_name: str = ""
+    time_seconds: np.ndarray | None = None
+
+    def with_external_input(
+        self,
+        values: np.ndarray,
+        *,
+        name: str,
+        time_seconds: np.ndarray | None = None,
+    ) -> WormData:
+        """Attach a known external schedule without changing any neural data."""
+        values = np.asarray(values, dtype=np.float64).reshape(-1)
+        if len(values) != self.n_frames:
+            raise ValueError(
+                f"external input length {len(values)} does not match {self.n_frames} frames"
+            )
+        if not np.isfinite(values).all():
+            raise ValueError("external input contains non-finite values")
+        self.external_input = values
+        self.input_name = str(name)
+        if time_seconds is not None:
+            time_seconds = np.asarray(time_seconds, dtype=np.float64).reshape(-1)
+            if len(time_seconds) != self.n_frames:
+                raise ValueError("time_seconds length does not match frames")
+            self.time_seconds = time_seconds
+        return self
 
     @property
     def worm_id(self) -> int:

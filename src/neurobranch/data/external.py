@@ -419,3 +419,70 @@ def build_kato_stim_worm_data(
         purge_frames=int(purge_frames),
     )
     return make_worm_data(worm, split)
+
+
+def build_kato_stim_context_worm_data(
+    rec: ExternalRecording,
+    *,
+    max_seconds: float | None = None,
+    train_fraction: float = 2.0 / 3.0,
+    val_fraction: float = 1.0 / 6.0,
+    purge_frames: int = 12,
+) -> WormData:
+    """Build a full-recording view with the measured oxygen schedule attached.
+
+    Unlike :func:`build_kato_stim_worm_data`, this view deliberately crosses the
+    first 360 s switch.  The oxygen series is a controlled environmental input,
+    not targeted neuronal stimulation, and the model must never assert a
+    biological mechanism from it.  Behaviour-label traces are excluded exactly
+    as in Phase 6.  The default chronological split is 2/3 train, 1/6 validation
+    and 1/6 test with purging; the test block therefore contains later oxygen
+    transitions that are not in training.
+    """
+    if rec.source != "kato2015_wt_stim":
+        raise ValueError("build_kato_stim_context_worm_data expects a Kato WT_Stim recording")
+    oxygen = rec.oxygen_percent
+    if oxygen is None:
+        raise ValueError("recording has no oxygen schedule metadata")
+    if not rec.stimulus or "switchtimes" not in rec.stimulus:
+        raise ValueError("recording has no oxygen switch times")
+    if max_seconds is None:
+        n = rec.n_frames
+    else:
+        n = int(np.searchsorted(rec.time_seconds, float(max_seconds), side="left"))
+    if n < 240:
+        raise ValueError(f"segment too short for a context experiment: {n} frames")
+    if np.unique(oxygen[:n]).size < 2:
+        raise ValueError("context adapter needs at least one oxygen transition")
+    keep = ~rec.behavior_mask
+    if int(keep.sum()) < 5:
+        raise ValueError("fewer than five non-behaviour traces remain")
+    traces = rec.traces[:n, keep]
+    raw = rec.raw_traces[:n, keep] if rec.raw_traces is not None else traces.copy()
+    names = tuple(rec.neurons[j] for j in np.flatnonzero(keep))
+    state_map = {"fwd": "fwd", "rev": "rev1", "revsus": "revsus", "turn": "dt"}
+    states = tuple(state_map[state] for state in rec.states[:n])
+    worm = WormRecording(
+        worm_id=rec.worm_index,
+        dataset_name=rec.dataset_name,
+        neurons=names,
+        traces=traces.astype(np.float32),
+        raw_traces=raw.astype(np.float32),
+        states=states,
+        fps=rec.fps,
+        time_seconds=rec.time_seconds[:n].copy(),
+        source_file=rec.source_file,
+        source_sha256=rec.source_sha256,
+    )
+    split = SplitConfig(
+        mode="temporal",
+        train_fraction=train_fraction,
+        val_fraction=val_fraction,
+        purge_frames=int(purge_frames),
+    )
+    data = make_worm_data(worm, split)
+    return data.with_external_input(
+        np.asarray(oxygen[:n], dtype=np.float64),
+        name="oxygen_percent",
+        time_seconds=rec.time_seconds[:n],
+    )

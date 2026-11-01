@@ -56,6 +56,20 @@ nav:
       - Validation protocol: EXTERNAL_VALIDATION_PROTOCOL.md
       - Phase 6 final audit: PHASE6_FINAL_SCIENTIFIC_AUDIT.md
       - Research direction for Denis: RESEARCH_DIRECTION_FOR_DENIS.md
+  - Context-conditioned dynamics:
+      - Protocol: SIMULATOR_CONTEXT_RESEARCH_PROTOCOL.md
+      - Technical audit: SIMULATOR_CONTEXT_TECHNICAL_AUDIT.md
+      - Latent models: SIMULATOR_CONTEXT_LATENT_MODELS.md
+      - dLDS reference: SIMULATOR_CONTEXT_DLDS_REPRODUCTION.md
+      - Oxygen input: SIMULATOR_CONTEXT_OXYGEN_INPUT.md
+      - Shared dynamics: SIMULATOR_CONTEXT_SHARED_DYNAMICS.md
+      - Branching: SIMULATOR_CONTEXT_BRANCHING.md
+      - Perturbations: SIMULATOR_CONTEXT_PERTURBATIONS.md
+      - Results: SIMULATOR_CONTEXT_RESULTS.md
+      - Limitations: SIMULATOR_CONTEXT_LIMITATIONS.md
+      - Supervisor brief: SIMULATOR_CONTEXT_SUPERVISOR_BRIEF.md
+      - Next experiments: SIMULATOR_CONTEXT_NEXT_EXPERIMENTS.md
+      - Final report: SIMULATOR_CONTEXT_FINAL_REPORT.md
   - Phase 15:
       - Results: PHASE15_RESULTS.md
       - Methods: METHODS_PHASE15.md

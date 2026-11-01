@@ -6,6 +6,7 @@ import numpy as np
 
 from neurobranch.data.external import (
     ExternalRecording,
+    build_kato_stim_context_worm_data,
     build_kato_stim_worm_data,
     piecewise_oxygen,
 )
@@ -87,3 +88,46 @@ def test_stim_adapter_rejects_late_segment_with_changing_oxygen():
         assert "constant" in str(exc)
     else:
         raise AssertionError("expected ValueError for segment crossing the 360 s oxygen switch")
+
+
+def test_context_adapter_attaches_measured_oxygen_and_keeps_masks_disjoint():
+    rec = _synthetic_recording(n_frames=2400)
+    data = build_kato_stim_context_worm_data(
+        rec,
+        train_fraction=0.6,
+        val_fraction=0.2,
+        purge_frames=5,
+    )
+    assert data.n_frames == 2400
+    assert data.external_input is not None
+    assert data.input_name == "oxygen_percent"
+    assert np.unique(data.external_input).size == 2
+    train = data.masks["train"]
+    val = data.masks["val"]
+    test = data.masks["test"]
+    assert not (train & val).any() and not (train & test).any() and not (val & test).any()
+    assert data.external_input.shape == (data.n_frames,)
+    # The training block must contain an oxygen change; otherwise B is not
+    # identifiable and the experiment should not be called input-conditioned.
+    assert np.unique(data.external_input[train]).size == 2
+
+
+def test_context_adapter_rejects_constant_oxygen():
+    rec = _synthetic_recording(n_frames=1200)
+    try:
+        build_kato_stim_context_worm_data(rec, max_seconds=300.0)
+    except ValueError as exc:
+        assert "transition" in str(exc)
+    else:
+        raise AssertionError("expected ValueError without an oxygen transition")
+
+
+def test_context_adapter_aligns_to_actual_frame_times_not_nominal_30s():
+    rec = _synthetic_recording(n_frames=2400)
+    data = build_kato_stim_context_worm_data(rec, train_fraction=0.6, val_fraction=0.2)
+    change = np.flatnonzero(np.diff(data.external_input) != 0) + 1
+    expected = int(np.flatnonzero(rec.time_seconds >= 360.0)[0])
+    assert change.size >= 1
+    assert int(change[0]) == expected
+    assert data.time_seconds is not None
+    np.testing.assert_allclose(data.time_seconds, rec.time_seconds)

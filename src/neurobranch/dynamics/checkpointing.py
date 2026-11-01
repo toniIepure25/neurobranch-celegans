@@ -9,6 +9,11 @@ import numpy as np
 import torch
 from sklearn.decomposition import PCA
 
+from neurobranch.dynamics.context_models import (
+    CompositionalLatentLDS,
+    SharedLatentModel,
+    StableLatentLDS,
+)
 from neurobranch.dynamics.models import (
     BehaviorProbe,
     LatentKNNDynamics,
@@ -19,6 +24,7 @@ from neurobranch.dynamics.models import (
     VARModel,
     _LatentNet,
 )
+from neurobranch.dynamics.stable_var import StableVARModel
 from neurobranch.dynamics.switching import SwitchingVARModel
 from neurobranch.dynamics.torch_utils import GRUNet, MLPNet
 
@@ -29,6 +35,89 @@ def save_model(model: Any, path: str | Path, *, metadata: dict[str, Any] | None 
     payload: dict[str, Any] = {"metadata": metadata or {}, "name": getattr(model, "name", type(model).__name__)}
     if isinstance(model, PersistenceModel):
         payload.update(kind="persistence", probe=model.probe.state_dict(), n_neurons=model.n_neurons)
+    elif isinstance(model, SharedLatentModel):
+        payload.update(
+            kind="shared_latent",
+            A=model.A,
+            b=model.b,
+            process_cov=model.process_cov,
+            obs_cov=model.obs_cov,
+            initial_cov=model.initial_cov,
+            D=model.D,
+            mean=model.mean,
+            R=model.R,
+            latent_dim=model.latent_dim,
+            spectral_cap=model.spectral_cap,
+            diagnostics=model.diagnostics,
+            probe=model.probe.state_dict(),
+            n_neurons=model.n_neurons,
+        )
+    elif isinstance(model, CompositionalLatentLDS):
+        payload.update(
+            kind="compositional_lds",
+            A=model.A,
+            b=model.b,
+            B=model.B,
+            F=model.F,
+            coefficient_weights=model.coefficient_weights,
+            operator_names=model.operator_names,
+            coefficient_diagnostics=model.coefficient_diagnostics,
+            n_operators=model.n_operators,
+            process_cov=model.process_cov,
+            obs_cov=model.obs_cov,
+            initial_cov=model.initial_cov,
+            pca_components=model.pca.components_,
+            pca_mean=model.pca.mean_,
+            pca_explained_variance=model.pca.explained_variance_,
+            latent_dim=model.latent_dim,
+            input_dim=model.input_dim,
+            input_mean=model.input_mean,
+            input_std=model.input_std,
+            spectral_cap=model.spectral_cap,
+            stability=model.stability,
+            diagnostics=model.diagnostics,
+            probe=model.probe.state_dict(),
+            n_neurons=model.n_neurons,
+        )
+    elif isinstance(model, StableLatentLDS):
+        payload.update(
+            kind="latent_lds",
+            A=model.A,
+            b=model.b,
+            B=model.B,
+            process_cov=model.process_cov,
+            obs_cov=model.obs_cov,
+            initial_cov=model.initial_cov,
+            pca_components=model.pca.components_,
+            pca_mean=model.pca.mean_,
+            pca_explained_variance=model.pca.explained_variance_,
+            latent_dim=model.latent_dim,
+            input_dim=model.input_dim,
+            input_mean=model.input_mean,
+            input_std=model.input_std,
+            spectral_cap=model.spectral_cap,
+            stability=model.stability,
+            diagnostics=model.diagnostics,
+            probe=model.probe.state_dict(),
+            n_neurons=model.n_neurons,
+        )
+    elif isinstance(model, StableVARModel):
+        payload.update(
+            kind="stable_var",
+            A=model.A,
+            b=model.b,
+            history_len=model.history_len,
+            ridge=model.ridge,
+            spectral_cap=model.spectral_cap,
+            noise_cov=model.noise_cov,
+            residuals=model.residuals,
+            noise_model=model.noise_model,
+            bootstrap_block=model.bootstrap_block,
+            native_stochastic=model.native_stochastic,
+            stabilization=model.stabilization,
+            probe=model.probe.state_dict(),
+            n_neurons=model.n_neurons,
+        )
     elif isinstance(model, VARModel):
         payload.update(
             kind="var",
@@ -145,6 +234,19 @@ def _restore_pca(payload: dict[str, Any]) -> PCALatent:
     )
 
 
+def _restore_raw_pca(payload: dict[str, Any]) -> PCA:
+    pca = PCA(n_components=int(np.asarray(payload["pca_components"]).shape[0]))
+    pca.components_ = np.asarray(payload["pca_components"])
+    pca.mean_ = np.asarray(payload["pca_mean"])
+    pca.explained_variance_ = np.asarray(payload["pca_explained_variance"])
+    pca.n_features_in_ = pca.components_.shape[1]
+    pca.n_components_ = pca.components_.shape[0]
+    pca.explained_variance_ratio_ = pca.explained_variance_ / max(
+        1e-12, float(np.sum(pca.explained_variance_))
+    )
+    return pca
+
+
 def load_model(path: str | Path) -> tuple[Any, dict[str, Any]]:
     payload = torch.load(Path(path), map_location="cpu", weights_only=False)
     kind = payload["kind"]
@@ -154,6 +256,93 @@ def load_model(path: str | Path) -> tuple[Any, dict[str, Any]]:
             PersistenceModel(
                 n_neurons=int(payload["n_neurons"]),
                 probe=BehaviorProbe.from_state_dict(payload["probe"]),
+            ),
+            metadata,
+        )
+    if kind == "stable_var":
+        return (
+            StableVARModel(
+                n_neurons=int(payload["n_neurons"]),
+                A=np.asarray(payload["A"]),
+                b=np.asarray(payload["b"]),
+                history_len=int(payload["history_len"]),
+                probe=BehaviorProbe.from_state_dict(payload["probe"]),
+                ridge=float(payload.get("ridge", 1e-2)),
+                spectral_cap=payload.get("spectral_cap"),
+                noise_cov=np.asarray(payload["noise_cov"]) if payload.get("noise_cov") is not None else None,
+                residuals=np.asarray(payload["residuals"]) if payload.get("residuals") is not None else None,
+                noise_model=str(payload.get("noise_model", "none")),
+                bootstrap_block=int(payload.get("bootstrap_block", 5)),
+                native_stochastic=bool(payload.get("native_stochastic", False)),
+                stabilization=payload.get("stabilization", {}),
+            ),
+            metadata,
+        )
+    if kind == "latent_lds":
+        return (
+            StableLatentLDS(
+                pca=_restore_raw_pca(payload),
+                A=np.asarray(payload["A"]),
+                b=np.asarray(payload["b"]),
+                B=np.asarray(payload["B"]),
+                process_cov=np.asarray(payload["process_cov"]),
+                obs_cov=np.asarray(payload["obs_cov"]),
+                initial_cov=np.asarray(payload["initial_cov"]),
+                probe=BehaviorProbe.from_state_dict(payload["probe"]),
+                n_neurons=int(payload["n_neurons"]),
+                latent_dim=int(payload["latent_dim"]),
+                input_dim=int(payload.get("input_dim", 0)),
+                input_mean=np.asarray(payload.get("input_mean", np.zeros(0))),
+                input_std=np.asarray(payload.get("input_std", np.ones(0))),
+                spectral_cap=float(payload.get("spectral_cap", 0.995)),
+                stability=payload.get("stability", {}),
+                diagnostics=payload.get("diagnostics", {}),
+            ),
+            metadata,
+        )
+    if kind == "compositional_lds":
+        return (
+            CompositionalLatentLDS(
+                pca=_restore_raw_pca(payload),
+                A=np.asarray(payload["A"]),
+                b=np.asarray(payload["b"]),
+                B=np.asarray(payload["B"]),
+                process_cov=np.asarray(payload["process_cov"]),
+                obs_cov=np.asarray(payload["obs_cov"]),
+                initial_cov=np.asarray(payload["initial_cov"]),
+                probe=BehaviorProbe.from_state_dict(payload["probe"]),
+                n_neurons=int(payload["n_neurons"]),
+                latent_dim=int(payload["latent_dim"]),
+                input_dim=int(payload.get("input_dim", 0)),
+                input_mean=np.asarray(payload.get("input_mean", np.zeros(0))),
+                input_std=np.asarray(payload.get("input_std", np.ones(0))),
+                spectral_cap=float(payload.get("spectral_cap", 0.995)),
+                stability=payload.get("stability", {}),
+                diagnostics=payload.get("diagnostics", {}),
+                F=np.asarray(payload["F"]),
+                coefficient_weights=np.asarray(payload["coefficient_weights"]),
+                operator_names=tuple(payload.get("operator_names", ())),
+                coefficient_diagnostics=payload.get("coefficient_diagnostics", {}),
+                n_operators=int(payload.get("n_operators", 0)),
+            ),
+            metadata,
+        )
+    if kind == "shared_latent":
+        return (
+            SharedLatentModel.from_shared(
+                A=np.asarray(payload["A"]),
+                b=np.asarray(payload["b"]),
+                process_cov=np.asarray(payload["process_cov"]),
+                D=np.asarray(payload["D"]),
+                mean=np.asarray(payload["mean"]),
+                R=np.asarray(payload["R"]),
+                probe=BehaviorProbe.from_state_dict(payload["probe"]),
+                n_neurons=int(payload["n_neurons"]),
+                latent_dim=int(payload["latent_dim"]),
+                obs_cov=np.asarray(payload["obs_cov"]),
+                initial_cov=np.asarray(payload["initial_cov"]),
+                spectral_cap=float(payload.get("spectral_cap", 0.995)),
+                metadata=payload.get("diagnostics", {}),
             ),
             metadata,
         )

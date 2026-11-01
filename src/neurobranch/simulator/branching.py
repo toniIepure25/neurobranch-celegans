@@ -90,8 +90,9 @@ def simulated_local(
     *,
     horizon: int = 20,
     n_rollouts: int = 100,
-    noise_std: float = 0.05,
+    noise_std: float = 0.0,
     base_seed: int = 0,
+    stochastic: bool = False,
 ) -> tuple[np.ndarray, dict[str, Any]]:
     initial = int(sim.data.y_macro[int(frame)])
     history = int(getattr(sim.model, "history_len", 1))
@@ -103,6 +104,7 @@ def simulated_local(
         initial_macro=initial,
         base_seed=base_seed,
         noise_std=noise_std,
+        stochastic=stochastic,
         include_latent=False,
     )
     counts = np.zeros(4, dtype=np.float64)
@@ -225,6 +227,7 @@ def branch_summary(
     n_rollouts: int = 100,
     noise_std: float = 0.05,
     seed: int = 17,
+    stochastic: bool = False,
 ) -> tuple[list[dict[str, Any]], dict[str, Any]]:
     states = reversal_states(data, horizon=horizon)
     local, candidates = observed_local(data, encoder, horizon=horizon)
@@ -251,6 +254,7 @@ def branch_summary(
             n_rollouts=n_rollouts,
             noise_std=0.0,
             base_seed=seed * 1000 + int(t),
+            stochastic=stochastic,
         )
         p_pers = persistence_local(persistence, int(t), horizon=horizon, base_seed=seed)
         p_mark = markov_local(transition, int(data.y_macro[int(t)]), horizon=horizon, seed=seed)

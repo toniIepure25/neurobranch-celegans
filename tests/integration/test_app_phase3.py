@@ -32,6 +32,12 @@ def test_app_retains_phase2_tabs_and_adds_prospective_tab():
         "Adaptive Twin",
         "BoundedBench",
         "Core Dynamics Simulator",
+        "CONTEXT-AWARE NEURAL SIMULATOR",
+        "Overview",
+        "Latent model",
+        "Oxygen context",
+        "Branching",
+        "Perturbations",
     ]
 
 
