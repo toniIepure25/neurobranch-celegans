@@ -145,7 +145,28 @@ A second, smaller experiment is an **animal-disjoint re-split** of existing data
 
 The dashboard tab `GENERATIVE FAILURE DIAGNOSTICS` renders the same artifacts interactively and preserves all existing tabs.
 
-## 20. Numerical summary table
+## 20. Reproduction commands
+
+From `neurobranch-celegans` with the bundled Python environment:
+
+```powershell
+$env:OMP_NUM_THREADS='1'; $env:OPENBLAS_NUM_THREADS='1'
+$env:MKL_NUM_THREADS='1'; $env:NUMEXPR_NUM_THREADS='1'
+python scripts/genfail_audit.py
+python scripts/genfail_forecastability.py
+python scripts/genfail_observation.py
+python scripts/genfail_identifiability.py
+python scripts/genfail_oxygen.py
+python scripts/genfail_perturbation.py
+python scripts/genfail_figures.py
+python -m pytest -q
+python -m ruff check .
+python -m mkdocs build --strict
+```
+
+The single-threaded environment variables were necessary on this Windows checkout because BLAS thread oversubscription made the latent and observation runs impractically slow. They do not change the numerical results.
+
+## 21. Numerical summary table
 
 | quantity | value |
 |---|---|
@@ -166,7 +187,7 @@ The dashboard tab `GENERATIVE FAILURE DIAGNOSTICS` renders the same artifacts in
 | perturbation cosine range | −0.073 to 0.976 |
 | perturbation target-ranking median | 0.371 |
 
-## 21. Decision record
+## 22. Decision record
 
 | milestone | status |
 |---|---|
