@@ -70,6 +70,17 @@ nav:
       - Supervisor brief: SIMULATOR_CONTEXT_SUPERVISOR_BRIEF.md
       - Next experiments: SIMULATOR_CONTEXT_NEXT_EXPERIMENTS.md
       - Final report: SIMULATOR_CONTEXT_FINAL_REPORT.md
+  - Generative failure diagnostics:
+      - Protocol: GENFAIL_RESEARCH_PROTOCOL.md
+      - Reproduction audit: GENFAIL_REPRODUCTION_AUDIT.md
+      - Forecastability: GENFAIL_FORECASTABILITY.md
+      - Observation model: GENFAIL_OBSERVATION_MODEL.md
+      - Dynamical identifiability: GENFAIL_DYNAMICAL_IDENTIFIABILITY.md
+      - Oxygen response: GENFAIL_OXYGEN_RESPONSE.md
+      - Perturbation identifiability: GENFAIL_PERTURBATION_IDENTIFIABILITY.md
+      - Results: GENFAIL_RESULTS.md
+      - Supervisor brief: GENFAIL_SUPERVISOR_BRIEF.md
+      - Next experiments: GENFAIL_NEXT_EXPERIMENTS.md
   - Phase 15:
       - Results: PHASE15_RESULTS.md
       - Methods: METHODS_PHASE15.md
