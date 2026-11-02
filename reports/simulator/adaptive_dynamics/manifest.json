@@ -1,6 +1,6 @@
 {
   "root": "adaptive_dynamics",
-  "n_files": 35,
+  "n_files": 39,
   "files": {
     "adaptation_correlations.csv": {
       "sha256": "6e1c392da71f1bad748c8650c6c91e6e8a16f1a23b0cb6bad947261e12439db2",
@@ -121,6 +121,22 @@
     "nonstationarity_windows.csv": {
       "sha256": "efa6330d6f69e03f8d5d626850783c983d0bdf220cb0b7173b942b5171543197",
       "bytes": 54876
+    },
+    "oxygen_adaptive_metadata.json": {
+      "sha256": "438104edcfbc95acac90d8d54efaa0a2e0dd872ec716b51f8ef2e262ac63f558",
+      "bytes": 2363
+    },
+    "oxygen_adaptive_per_landmark.csv": {
+      "sha256": "211789a7567495988d34e7d1090d8f7911e2380ae204a1233f998699f1348c22",
+      "bytes": 24491
+    },
+    "oxygen_adaptive_summary.csv": {
+      "sha256": "9199b64550c1c45448d6ea510862b25446ad5c768527296ffa8dfa26bb514cde",
+      "bytes": 823
+    },
+    "oxygen_adaptive_updates.csv": {
+      "sha256": "b6e657548e161fe64938b217a4106f01767aea0d952f1656fb9c919c9998800b",
+      "bytes": 104432
     },
     "perturbation_metadata.json": {
       "sha256": "d97da8dc7204011143e1d06bd5e45655ff14a396de38e8fd927e18b10b2c4f46",

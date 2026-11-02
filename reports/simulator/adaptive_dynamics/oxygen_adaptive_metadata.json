@@ -1,0 +1,78 @@
+{
+  "stage": "E_oxygen_transition_stratification",
+  "n_sessions": 7,
+  "n_landmarks": 163,
+  "window_frames": 20,
+  "caveat": "Seven repeated sessions, not independent animals. The 30 s oxygen schedule is fixed across sessions, so transition proximity remains confounded with elapsed time. Oxygen is an environmental sensory input, not targeted neuronal stimulation.",
+  "summary": [
+    {
+      "model": "rolling_w500",
+      "subset": "outside_transition_window",
+      "n": 130,
+      "mean_improvement": 0.45152837486304015,
+      "ci_low": 0.2414486143207005,
+      "ci_high": 0.6109500713614517
+    },
+    {
+      "model": "rolling_w500",
+      "subset": "within_20_frames_of_transition",
+      "n": 33,
+      "mean_improvement": 0.47296726150043505,
+      "ci_low": 0.3482928252417325,
+      "ci_high": 0.5646865912582976
+    },
+    {
+      "model": "rolling_w500",
+      "subset": "oxygen_4_percent",
+      "n": 100,
+      "mean_improvement": 0.46137032196320155,
+      "ci_low": 0.25295974339149346,
+      "ci_high": 0.654547496229168
+    },
+    {
+      "model": "rolling_w500",
+      "subset": "oxygen_21_percent",
+      "n": 63,
+      "mean_improvement": 0.4471361296093561,
+      "ci_low": 0.18217886898629715,
+      "ci_high": 0.6100067741255956
+    },
+    {
+      "model": "ewma_h1000",
+      "subset": "outside_transition_window",
+      "n": 130,
+      "mean_improvement": 0.512316442434233,
+      "ci_low": 0.33828920569908194,
+      "ci_high": 0.6375753570532611
+    },
+    {
+      "model": "ewma_h1000",
+      "subset": "within_20_frames_of_transition",
+      "n": 33,
+      "mean_improvement": 0.5226877692396242,
+      "ci_low": 0.3955121773415886,
+      "ci_high": 0.5986358070655888
+    },
+    {
+      "model": "ewma_h1000",
+      "subset": "oxygen_4_percent",
+      "n": 100,
+      "mean_improvement": 0.5027902005801949,
+      "ci_low": 0.3186746564970636,
+      "ci_high": 0.6689922285537282
+    },
+    {
+      "model": "ewma_h1000",
+      "subset": "oxygen_21_percent",
+      "n": 63,
+      "mean_improvement": 0.5328700610053715,
+      "ci_low": 0.354287612134756,
+      "ci_high": 0.6442823583440083
+    }
+  ],
+  "git": {
+    "commit": "46da2fcbbbef76e56037a168582b1a14f11b7e73",
+    "dirty": true,
+    "branch": "research/adaptive-dynamics-stability"
+  }
+}

@@ -31,6 +31,8 @@ REQUIRED = [
     "adaptation_regression.csv",
     "adaptation_strata.csv",
     "perturbation_sensitivity.csv",
+    "oxygen_adaptive_summary.csv",
+    "oxygen_adaptive_per_landmark.csv",
     "gates.json",
     "manifest.json",
 ]
