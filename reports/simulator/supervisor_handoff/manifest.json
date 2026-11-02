@@ -1,0 +1,129 @@
+{
+  "schema_version": 1,
+  "root": "reports/simulator/supervisor_handoff",
+  "hash_algorithm": "sha256",
+  "files": {
+    "claim_ledger.csv": {
+      "bytes": 4947,
+      "sha256": "baa9779eb564b850f4d9536fb6bb4d82095e68d94f3c53fe90f3df3c2f112760"
+    },
+    "figures/fig01_evidence_timeline.png": {
+      "bytes": 534853,
+      "sha256": "0d14569ac531d84f860050bccf9050d8433409ea3cc9d74193797017ecb479d9"
+    },
+    "figures/fig02_central_result.png": {
+      "bytes": 174054,
+      "sha256": "ffb566a0bec7587d37bb3dc872cdedab6545213c258fd70435ec3b8ac2f7d4d1"
+    },
+    "figures/fig03_calibration.png": {
+      "bytes": 212210,
+      "sha256": "20453179edae45cf880fcce72e9cdf25f0255ad8682de6d3d0c1403570dafa59"
+    },
+    "figures/fig04_example_trajectory.png": {
+      "bytes": 184595,
+      "sha256": "c15c3c015f33c1ce150564e82a25c550ff13f20b6db909156e253c5c5b8d6e4f"
+    },
+    "figures/fig05_proposed_scope.png": {
+      "bytes": 66032,
+      "sha256": "4c3bdec50f6f5c3c4c2748131ec390918bd87b6b0d5987fa40955f43a1edce4b"
+    },
+    "NeuroBranch_Handoff_Memo.pdf": {
+      "bytes": 120313,
+      "sha256": "7ac86724be1f3eff043fab491338b355a60c5a87099da691eb526052c187b6d2"
+    },
+    "NeuroBranch_Handoff_Presentation.html": {
+      "bytes": 19164,
+      "sha256": "6e8748a7785354162eda42c9774189921b8c64b901cb9a1703461f7b31fc6844"
+    },
+    "NeuroBranch_Handoff_Presentation.pdf": {
+      "bytes": 561152,
+      "sha256": "b09f6c44a233474cb6858b72136c316e4b63f80f5f3e382a20d12b1e82f8151d"
+    },
+    "phase_timeline.csv": {
+      "bytes": 5686,
+      "sha256": "467157595b9d357add31bbaffc831feb389a704cbce7f2ed1d97867d5b01e429"
+    },
+    "provenance_audit.json": {
+      "bytes": 4403,
+      "sha256": "571a21de235ce5a3b2519f443a4a03941d28b60b8bd6072fb1723474e2bfcec3"
+    },
+    "summary.json": {
+      "bytes": 17719,
+      "sha256": "8effa788656652843bf7593d4a4180035064d3dca356676da24ce98571fb2e23"
+    }
+  },
+  "documents": {
+    "HANDOFF_EXECUTIVE_SUMMARY.md": {
+      "bytes": 6340,
+      "sha256": "ca4a4876123a56a8f09dd13ba11c6baa45f0c802afdfb1c8d89b75223fcf4445"
+    },
+    "HANDOFF_RESEARCH_MEMO.md": {
+      "bytes": 8458,
+      "sha256": "c21c7a0463798c8c4340401089da251e7585b22e34a89f78cf08e90e1071ead5"
+    },
+    "HANDOFF_PRESENTATION.md": {
+      "bytes": 8603,
+      "sha256": "260e147f010b306de0ce79a3dc172b9631b8fb0b0f6df3f1cc325039c0d80ec3"
+    },
+    "HANDOFF_SCIENTIFIC_CLAIMS.md": {
+      "bytes": 12762,
+      "sha256": "e7ba0bd4dd6e2d714cd6ff60dc29f615b1ce161d3b0b7d7f923b5e68c2297ca8"
+    },
+    "HANDOFF_METHODS_AND_LIMITATIONS.md": {
+      "bytes": 11910,
+      "sha256": "d0b74272e8435b9e3a7dfbe53f8cf59177f15181df1e179da3d984d2b4c15c89"
+    },
+    "HANDOFF_RESEARCH_PROPOSALS.md": {
+      "bytes": 11726,
+      "sha256": "efcdac200ace78f21d1a7999edff997b510c09e48f58f9e83f0a741dac6925d9"
+    },
+    "HANDOFF_QUESTIONS_FOR_DENIS.md": {
+      "bytes": 7468,
+      "sha256": "9bce421207173f4a0800619e78566376f81636d3bd517915d296bb7698127d01"
+    },
+    "HANDOFF_DEMO_GUIDE.md": {
+      "bytes": 6725,
+      "sha256": "3e00593112b16f7c34f9d06ec6490d8b091681003234483a3ed7890e71ef72ad"
+    },
+    "HANDOFF_REPRODUCIBILITY.md": {
+      "bytes": 8346,
+      "sha256": "29f7e113b1f6b5ec5ac9814dad8c3d90d70d321607aa1012306f60c11c6bcfe5"
+    }
+  },
+  "referenced_sources": {
+    "reports/simulator/joint_dynamics/score_summary.csv": {
+      "bytes": 3836,
+      "sha256": "3d2a14a34f809d061a62fb33da0cdaa7e5aa9e7ee83b92aef08ee7648108f7f2"
+    },
+    "reports/simulator/joint_dynamics/paired_scores.csv": {
+      "bytes": 2841,
+      "sha256": "8d443a0d803dafbd715e33bb5010623a84aef517abcc9b332ed6923781f1a727"
+    },
+    "reports/simulator/joint_dynamics/secondary_paired.csv": {
+      "bytes": 1181,
+      "sha256": "bd4ac0064a43acbf7af2503ed9e9e3f6d41f598d48dad3fa775a98d3cb6a3597"
+    },
+    "reports/simulator/joint_dynamics/calibration_h20.csv": {
+      "bytes": 1764,
+      "sha256": "226ed32eaee1676aea4772882963c7aa31847c8f599e6c0d985ffac8cd36b164"
+    },
+    "reports/simulator/joint_dynamics/gates.json": {
+      "bytes": 2128,
+      "sha256": "6e5e8b2cdabe9e21e4d4d9fbfd74a84946f017f0ae852a0ae774db0b20f68aa8"
+    },
+    "reports/simulator/joint_dynamics/example_observed.csv": {
+      "bytes": 522,
+      "sha256": "d5aa7bf18a49e923949485509e33970819930032306ea27afacdcc7f30bc6004"
+    },
+    "reports/simulator/joint_dynamics/example_bands.csv": {
+      "bytes": 9776,
+      "sha256": "55416bb2ed152f5c556c4a81d771f82980c02b2d13d8ebbecbab90cfd105b9b2"
+    }
+  },
+  "excluded": [
+    "raw data and checkpoints",
+    "trajectory_examples.npz (optional 8.2 MB visualization subset)",
+    "full per-landmark score tables",
+    "manifest.json itself"
+  ]
+}

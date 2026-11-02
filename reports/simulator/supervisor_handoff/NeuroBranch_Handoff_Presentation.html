@@ -1,0 +1,385 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>NeuroBranch: Evaluating Generative Neural Population Dynamics and Model-Dependent Perturbations in *C. elegans*</title>
+<style>
+@page { size: 13.333in 7.5in; margin: 0; }
+* { box-sizing: border-box; }
+html, body {
+  margin: 0; padding: 0; background: #0d1b1e; color: #17202a;
+  font-family: "Segoe UI", Calibri, Arial, sans-serif;
+}
+.deck { width: 100vw; height: 100vh; overflow: hidden; position: relative; }
+.slide {
+  display: none; width: 100vw; height: 100vh; padding: 5.2vh 5.2vw 4.2vh 5.2vw;
+  background: #fbfcfc; position: relative; flex-direction: column;
+  justify-content: flex-start;
+}
+.slide.active { display: flex; }
+.slide.cover {
+  background:
+    radial-gradient(circle at 82% 18%, rgba(162,217,206,0.50), transparent 34%),
+    linear-gradient(135deg, #0b3d4a 0%, #102a33 62%, #17202a 100%);
+  color: white; justify-content: center;
+}
+.cover .kicker { color: #a2d9ce; letter-spacing: 0.14em; font-size: 1.05vw; font-weight: 700; }
+.cover h1 { color: white; font-size: 3.25vw; line-height: 1.08; max-width: 84%; margin: 2.0vh 0 2.2vh 0; }
+.cover .sub { color: #d5dbdb; font-size: 1.3vw; line-height: 1.35; max-width: 66%; }
+.cover .labels { margin-top: 3.2vh; display: flex; gap: 0.8vw; flex-wrap: wrap; }
+.cover .label {
+  border: 1px solid rgba(255,255,255,0.36); border-radius: 999px;
+  padding: 0.7vh 1.0vw; color: white; font-size: 0.9vw;
+}
+.slide h2 {
+  font-size: 2.05vw; line-height: 1.13; color: #0b3d4a; margin: 0 0 1.4vh 0;
+  letter-spacing: -0.02em;
+}
+.slide h2 .num { color: #117a65; margin-right: 0.7vw; }
+.slide-body { font-size: 1.23vw; line-height: 1.35; flex: 1; min-height: 0; }
+.slide-body p { margin: 0 0 1.0vh 0; }
+.slide-body ul, .slide-body ol { margin: 0 0 1.0vh 1.5vw; padding: 0; }
+.slide-body li { margin: 0 0 0.65vh 0; }
+.slide-body strong { color: #0b3d4a; }
+.slide-body table { border-collapse: collapse; width: 100%; font-size: 0.92vw; margin: 1.0vh 0; }
+.slide-body th { background: #eaf2f1; color: #0b3d4a; text-align: left; padding: 0.65vh 0.65vw; border-bottom: 1px solid #a2d9ce; }
+.slide-body td { padding: 0.55vh 0.65vw; border-bottom: 1px solid #e5e8e8; vertical-align: top; }
+.slide-body tr:nth-child(even) td { background: #f6f9f8; }
+.slide-body blockquote {
+  margin: 1.2vh 0; padding: 1.1vh 1.2vw; border-left: 4px solid #b9770e;
+  background: #fef9e7; font-size: 1.18vw;
+}
+.slide-body blockquote p { margin: 0; }
+.figure { margin-top: 1.1vh; text-align: center; }
+.figure img { max-height: 30vh; max-width: 92%; object-fit: contain; border: 1px solid #e5e8e8; background: white; }
+.figure .caption { font-size: 0.78vw; color: #5d6d7e; margin-top: 0.4vh; }
+.notes {
+  display: none; margin-top: 1.2vh; padding: 1.2vh 1.2vw; background: #eef6f5;
+  border-left: 4px solid #117a65; font-size: 0.98vw; line-height: 1.35; color: #17202a;
+  max-height: 27vh; overflow: auto;
+}
+.deck.show-notes .notes { display: block; }
+.notes p { margin: 0 0 0.5vh 0; }
+.chrome {
+  position: fixed; left: 0; right: 0; bottom: 0; height: 4.2vh;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 1.4vw; background: rgba(13,27,30,0.90); color: #d5dbdb;
+  font-size: 0.78vw; z-index: 20;
+}
+.chrome button {
+  background: transparent; color: white; border: 1px solid rgba(255,255,255,0.30);
+  border-radius: 4px; padding: 0.35vh 0.7vw; cursor: pointer; font-size: 0.78vw;
+}
+.chrome button:hover { background: rgba(255,255,255,0.12); }
+.progress { position: fixed; top: 0; left: 0; height: 0.42vh; background: #117a65; z-index: 30; width: 0; }
+.warning {
+  position: fixed; left: 1.4vw; bottom: 4.9vh; z-index: 25;
+  background: #922b21; color: white; padding: 0.55vh 0.8vw;
+  font-size: 0.72vw; letter-spacing: 0.02em; border-radius: 3px;
+}
+@media print {
+  html, body { background: white; }
+  .deck { width: auto; height: auto; overflow: visible; }
+  .slide {
+    display: flex !important; width: 13.333in; height: 7.5in;
+    page-break-after: always; break-after: page;
+  }
+  .chrome, .progress, .warning { display: none !important; }
+  .notes { display: none !important; }
+}
+</style>
+</head><body>
+<div class="progress" id="progress"></div>
+<div class="deck" id="deck">
+
+<section class="slide cover active" data-slide="0">
+  <div class="kicker">NEUROBRANCH · MSc SUPERVISOR HANDOFF</div>
+  <h1>NeuroBranch: Evaluating Generative Neural Population Dynamics and Model-Dependent Perturbations in <em>C. elegans</em></h1>
+  <div class="sub">Exploratory repeated-session reanalysis of <em>C. elegans</em> population
+  calcium dynamics, joint forecasting and model-dependent virtual perturbations.</div>
+  <div class="labels">
+    <span class="label">5 Kato sessions, not 5 animals</span>
+    <span class="label">Fixed 10-D PCA</span>
+    <span class="label">Calibration not established</span>
+    <span class="label">Biological validation NOT_EVALUABLE</span>
+  </div>
+</section>
+<section class="slide" data-slide="1">
+  <h2><span class="num">01</span>Title and disclosure (0:30)</h2>
+  <div class="slide-body">
+<blockquote>
+<p>NeuroBranch: Evaluating Generative Neural Population Dynamics and<br>
+Model-Dependent Perturbations in <em>C. elegans</em></p>
+<p>Internal MSc handoff · exploratory reanalysis · November 2026</p>
+</blockquote><div class="notes"><strong>Speaker notes</strong><p>This is a handoff of what the repository can and cannot support. The original<br>
+brief from our conversation is reconstructed, not confirmed. I will separate the<br>
+one result I think is worth following from the many claims the data do not<br>
+support.</p></div></div>
+</section>
+<section class="slide" data-slide="2">
+  <h2><span class="num">02</span>The question, and what is provisional (0:55)</h2>
+  <div class="slide-body">
+<ul>
+<li>Can a model start from a measured population state and roll forward without<br>
+  future observations?</li>
+<li>Do alternative futures depend on a modelled perturbation of a named neuron?</li>
+<li>Would that generate experimentally testable stimulation hypotheses?</li>
+</ul>
+<p><strong>Provisional:</strong> preparation, target circuit, intervention modality, behavioural<br>
+endpoint and deliverables were not specified in writing.</p><div class="notes"><strong>Speaker notes</strong><p>The motivating picture was low-dimensional trajectories that appear to branch,<br>
+and a virtual perturbation that changes the probability of one future. That is a<br>
+good scientific question, but it is not yet an operational specification. The<br>
+project deliberately treats the exact assignment as open.</p></div></div>
+</section>
+<section class="slide" data-slide="3">
+  <h2><span class="num">03</span>What was actually tested (1:00)</h2>
+  <div class="slide-body">
+<table>
+<thead>
+<tr>
+<th>Workstream</th>
+<th>What it established</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>BunDLe-Net / NC-MCM audit</td>
+<td>distributed embedding is transductive; NC-MCM test ported, training not reproduced</td>
+</tr>
+<tr>
+<td>Kato baselines</td>
+<td>persistence is strong; nonlinear free-running models do not robustly beat it</td>
+</tr>
+<tr>
+<td>Randi intervention atlas</td>
+<td>3,371 events, 110 animals; low reliability; held-out-target effect misses its gate</td>
+</tr>
+<tr>
+<td>Branching / turn direction</td>
+<td>entropy deficit, not excess; no neural increment beyond behaviour</td>
+</tr>
+<tr>
+<td>Simulator</td>
+<td>software contract passes; dynamical and perturbation-specificity gates fail</td>
+</tr>
+<tr>
+<td>Calibration / joint dynamics</td>
+<td>overdispersion corrected; mean signal survives; calibration fails</td>
+</tr>
+</tbody>
+</table><div class="notes"><strong>Speaker notes</strong><p>This is six workstreams and several negative results. The important point is that<br>
+they are connected: each one removes a possible explanation for the next.</p></div></div>
+</section>
+<section class="slide" data-slide="4">
+  <h2><span class="num">04</span>The evidence ladder (0:55)</h2>
+  <div class="slide-body">
+<ol>
+<li>Representation: leaked artifact geometry is not generalization.</li>
+<li>Prediction: persistence is hard to beat in full-neuron space.</li>
+<li>Branching: observed outcomes are concentrated, not broadly branching.</li>
+<li>Intervention: response reliability is low and target specificity is absent.</li>
+<li>Generation: free-running rollouts fail distributional fidelity.</li>
+<li>Calibration: correcting the innovation pool fixes overdispersion, not calibration.</li>
+</ol><div class="notes"><strong>Speaker notes</strong><p>The project did not fail because one model was badly tuned. It failed repeatedly<br>
+at different levels. That pattern is why I stopped adding architectures and<br>
+started treating the problem as measurement- and design-limited.</p></div></div>
+</section>
+<section class="slide" data-slide="5">
+  <h2><span class="num">05</span>The central result (1:30)</h2>
+  <div class="slide-body">
+<p>Fixed 10-D PCA, training frames only. 175 H20 landmarks. 100 members.</p>
+<table>
+<thead>
+<tr>
+<th>Contrast</th>
+<th style="text-align: right;">Improvement</th>
+<th>95% interval</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>J5 population vs J1 independent AR, energy</td>
+<td style="text-align: right;"><strong>+0.446</strong></td>
+<td><strong>[0.183, 0.660]</strong></td>
+</tr>
+<tr>
+<td>J5 vs J1, trajectory</td>
+<td style="text-align: right;"><strong>+0.375</strong></td>
+<td><strong>[0.218, 0.522]</strong></td>
+</tr>
+<tr>
+<td>J5 vs persistence, energy</td>
+<td style="text-align: right;">+0.250</td>
+<td>[0.020, 0.427]</td>
+</tr>
+<tr>
+<td>J5 vs J1, full-neuron CRPS</td>
+<td style="text-align: right;">+0.005</td>
+<td>[−0.007, 0.016]</td>
+</tr>
+</tbody>
+</table>
+<p>J2 (parametric diagonal) is effectively identical: energy 2.700, trajectory 2.058.</p><div class="figure"><img src="figures/fig02_central_result.png" alt="Paired H20 contrasts in the fixed 10-D PCA."><div class="caption">Paired H20 contrasts in the fixed 10-D PCA.</div></div><div class="notes"><strong>Speaker notes</strong><p>This is the result I would defend, with qualifications. The population<br>
+conditional mean carries joint information that independent AR misses. It is not<br>
+a marginal per-neuron gain. It is not a covariance gain. It is a joint<br>
+trajectory gain in one fixed representation. J2 reproduces it, so it is not an<br>
+artefact of one bootstrap.</p></div></div>
+</section>
+<section class="slide" data-slide="6">
+  <h2><span class="num">06</span>Mean, not covariance (0:55)</h2>
+  <div class="slide-body">
+<ul>
+<li>Mean main effect: <strong>+0.221</strong> energy, <strong>+0.230</strong> trajectory.</li>
+<li>Full-covariance main effect: <strong>−0.086</strong> energy, <strong>−0.071</strong> trajectory.</li>
+<li>Full covariance coverage: 0.767 / 0.957 / 0.992; covariance error 0.762.</li>
+<li>Interpretation: the identifiable signal is the conditional mean; the<br>
+  103-dimensional innovation covariance is not stable enough to help.</li>
+</ul><div class="notes"><strong>Speaker notes</strong><p>This is the most useful scientific decomposition. It tells the next study what<br>
+to replicate: the mean operator, not a more elaborate noise model. It also<br>
+explains why adding covariance made things worse rather than better.</p></div></div>
+</section>
+<section class="slide" data-slide="7">
+  <h2><span class="num">07</span>What fails (1:10)</h2>
+  <div class="slide-body">
+<ul>
+<li>50% coverage: <strong>0.588</strong> full-neuron, <strong>0.546</strong> in 10-D PCA.</li>
+<li>Neural covariance error: <strong>0.604</strong> against a 0.50 gate.</li>
+<li>Student-t correction: energy <strong>2.829</strong>, worse than 2.700.</li>
+<li>Parameter ensemble: energy <strong>2.807</strong>, worse.</li>
+<li>Session 1 negative; session 2 ambiguous.</li>
+<li>Block-10 interval for J5 vs persistence includes zero.</li>
+<li>Test split reused; five sessions are not five animals.</li>
+</ul>
+<p><strong>Stop label:</strong> <code>PROBABILISTIC CALIBRATION NOT ESTABLISHED</code>.</p><div class="figure"><img src="figures/fig03_calibration.png" alt="Full-neuron and 10-D PCA coverage; the 50% level fails."><div class="caption">Full-neuron and 10-D PCA coverage; the 50% level fails.</div></div><div class="notes"><strong>Speaker notes</strong><p>The model over-covers at 50%, and its covariance is wrong. That is not a cosmetic<br>
+problem: it means the ensemble cannot be read as a calibrated distribution of<br>
+alternative futures. The test reuse and session structure make even the positive<br>
+result exploratory.</p></div></div>
+</section>
+<section class="slide" data-slide="8">
+  <h2><span class="num">08</span>Perturbation: model edit versus biology (1:00)</h2>
+  <div class="slide-body">
+<ul>
+<li>The intervention engine edits a <strong>model state</strong>: additive, clamp, zero, scale.</li>
+<li>It is a valid mathematical counterfactual inside the fitted model.</li>
+<li>It is not optogenetics, a lesion, a dose, or a prediction of a wet-lab effect.</li>
+<li>Corrected random-neuron controls made the example candidate non-specific<br>
+  (empirical one-sided p ≈ 0.21).</li>
+<li>No matched neuronal intervention exists for this model.</li>
+</ul>
+<blockquote>
+<p><strong>MODEL-DEPENDENT VIRTUAL PERTURBATION — NOT CAUSALLY VALIDATED.</strong></p>
+</blockquote>
+<p>Biological validation: <code>NOT_EVALUABLE</code>.</p><div class="notes"><strong>Speaker notes</strong><p>I want to be very explicit here. A virtual perturbation can be useful for<br>
+generating hypotheses, but it cannot validate them. The model's causal graph is<br>
+assumed, not identified. Observational data alone cannot tell us what would<br>
+happen under a real stimulation.</p></div></div>
+</section>
+<section class="slide" data-slide="9">
+  <h2><span class="num">09</span>Decision and two next studies (1:10)</h2>
+  <div class="slide-body">
+<p><strong>Do not</strong> run another architecture search on the reused test split.</p>
+<p><strong>A. Replicate the population mean.</strong> Independent cohort; fixed representation;<br>
+H20 joint energy; J1 and persistence baselines; animal-level resampling.<br>
+150–180 h.</p>
+<p><strong>B. Intervention-aware design.</strong> Specify target, timing, sham and outcome;<br>
+audit matched data; run a minimal held-out-animal/-target falsification test.<br>
+Deliver a protocol, not a causal simulator.</p><div class="figure"><img src="figures/fig05_proposed_scope.png" alt="Two bounded 6-ECTS work plans."><div class="caption">Two bounded 6-ECTS work plans.</div></div><div class="notes"><strong>Speaker notes</strong><p>The choice depends on what you want the MSc to establish. A is a clean<br>
+replication study with a prespecified endpoint. B is a design and feasibility<br>
+study that could fail early for lack of data, but it asks the intervention<br>
+question honestly. I would not promise a full causal simulator in 150 hours.</p></div></div>
+</section>
+<section class="slide" data-slide="10">
+  <h2><span class="num">10</span>Questions for discussion (0:30)</h2>
+  <div class="slide-body">
+<ul>
+<li>Which target is primary: trajectory simulation or a behavioural event?</li>
+<li>What counts as "branching" for your purpose?</li>
+<li>Is a model-dependent virtual perturbation useful even when not causally valid?</li>
+<li>Is there an independent cohort or matched stimulation dataset?</li>
+<li>What would make you say stop?</li>
+</ul><div class="notes"><strong>Speaker notes</strong><p>These are genuine questions, not reconstructed requirements. The answers change<br>
+the scope, the data request and the claim boundary.</p>
+<h2>Timing summary</h2>
+<table>
+<thead>
+<tr>
+<th>Section</th>
+<th style="text-align: right;">Time</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Title, question, scope</td>
+<td style="text-align: right;">1:25</td>
+</tr>
+<tr>
+<td>What was tested and the evidence ladder</td>
+<td style="text-align: right;">1:55</td>
+</tr>
+<tr>
+<td>Central result and decomposition</td>
+<td style="text-align: right;">2:25</td>
+</tr>
+<tr>
+<td>Failures and perturbation boundary</td>
+<td style="text-align: right;">2:10</td>
+</tr>
+<tr>
+<td>Decision, next studies, questions</td>
+<td style="text-align: right;">1:40</td>
+</tr>
+<tr>
+<td><strong>Total</strong></td>
+<td style="text-align: right;"><strong>9:35</strong></td>
+</tr>
+</tbody>
+</table>
+<p>For a strict 8-minute slot, drop slide 6 and fold its one-sentence conclusion<br>
+into slide 5.</p>
+<h2>Demo cues</h2>
+<ul>
+<li>After slide 5: show "Central result" and "Real trajectory" in the focused demo.</li>
+<li>After slide 7: show "Calibration" and "Perturbation boundary".</li>
+<li>Do not demo a perturbation trajectory as if it were a biological prediction.</li>
+<li>If the demo fails, the slides and <code>HANDOFF_DEMO_GUIDE.md</code> contain every number.</li>
+</ul></div></div>
+</section>
+</div>
+<div class="warning">MODEL-DEPENDENT VIRTUAL PERTURBATION — NOT CAUSALLY VALIDATED.</div>
+<div class="chrome">
+  <div><button id="prev">← Prev</button> <button id="next">Next →</button>
+    <button id="toggle-notes">Notes (N)</button></div>
+  <div id="counter">1 / 11</div>
+  <div>Arrow keys · Home/End · N notes</div>
+</div>
+<script>
+const slides = Array.from(document.querySelectorAll('.slide'));
+const progress = document.getElementById('progress');
+const counter = document.getElementById('counter');
+const deck = document.getElementById('deck');
+let current = 0;
+function show(i) {
+  current = Math.max(0, Math.min(slides.length - 1, i));
+  slides.forEach((s, j) => s.classList.toggle('active', j === current));
+  progress.style.width = ((current + 1) / slides.length * 100) + '%';
+  counter.textContent = (current + 1) + ' / ' + slides.length;
+  history.replaceState(null, '', '?slide=' + (current + 1));
+}
+document.getElementById('prev').onclick = () => show(current - 1);
+document.getElementById('next').onclick = () => show(current + 1);
+document.getElementById('toggle-notes').onclick = () => {
+  deck.classList.toggle('show-notes');
+  document.getElementById('toggle-notes').textContent =
+    deck.classList.contains('show-notes') ? 'Hide notes (N)' : 'Notes (N)';
+};
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'ArrowRight' || e.key === 'PageDown' || e.key === ' ') { e.preventDefault(); show(current + 1); }
+  if (e.key === 'ArrowLeft' || e.key === 'PageUp') { e.preventDefault(); show(current - 1); }
+  if (e.key === 'Home') { e.preventDefault(); show(0); }
+  if (e.key === 'End') { e.preventDefault(); show(slides.length - 1); }
+  if (e.key.toLowerCase() === 'n') { document.getElementById('toggle-notes').click(); }
+});
+const params = new URLSearchParams(location.search);
+const start = parseInt(params.get('slide') || '1', 10) - 1;
+show(Number.isFinite(start) ? start : 0);
+</script>
+</body></html>
