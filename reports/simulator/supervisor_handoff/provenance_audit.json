@@ -1,0 +1,73 @@
+{
+  "schema_version": 1,
+  "checked_on": "2026-11-02",
+  "source_hashes": {
+    "docs/DATA_PROVENANCE.md": "6eb3084be45423a461c91da12cf2c1d85166ebfee9b7a6aad20d03c301edeed3",
+    "docs/SIMULATOR_RESULTS.md": "b3b9941a753141c52a52bad0ab487bc66cde092441ebc1b8ea203c7629a6f4b1",
+    "docs/ADAPTIVE_DYNAMICS_RESULTS.md": "d4bc423654d8ab0799f9ab6b9398efe83761f367f86e478e356f9b33f935dc52",
+    "docs/GENFAIL_RESULTS.md": "9e62e15a1d41bfd09773cb20486c9504e22f261ef99e3134ba5a985b391f3264",
+    "docs/PHASE15_RESULTS.md": "111aa7ecc26f0df62454150935084a69b10483da359f59a0b9725bcebfff4671",
+    "docs/BUNDLENET_REPRODUCTION_AUDIT.md": "a9a179e810cffcc9e6ae6a4d38499d40e3cc959e4d3ce7210aeb69b2f237488c",
+    "reports/external_validation/kato_stim_pilot_summary.json": "3d83cdb741293630f62c2d7be22de386c40f3da35f22cc82a11892daf9c7f625",
+    "reports/phase15/summary.json": "9d9290b9b6e7c5efbf291e789d79373f6dd3328759a3a90738e0a2a89d157a32",
+    "reports/simulator/joint_dynamics/score_summary.csv": "3d2a14a34f809d061a62fb33da0cdaa7e5aa9e7ee83b92aef08ee7648108f7f2",
+    "reports/simulator/joint_dynamics/paired_scores.csv": "8d443a0d803dafbd715e33bb5010623a84aef517abcc9b332ed6923781f1a727",
+    "reports/simulator/joint_dynamics/gates.json": "6e5e8b2cdabe9e21e4d4d9fbfd74a84946f017f0ae852a0ae774db0b20f68aa8"
+  },
+  "discrepancies": [
+    {
+      "id": "kato_stim_availability",
+      "finding": "WT_Stim.mat is not present in the checkout, but a completed seven-session external pilot is documented in reports/external_validation.",
+      "resolution": "Report the pilot as exploratory and historical; it cannot be rerun without re-downloading the raw file. Do not claim cross-stimulation was never analysed.",
+      "severity": "important"
+    },
+    {
+      "id": "data_provenance_stim_sentence",
+      "finding": "docs/DATA_PROVENANCE.md says no WT_Stim.mat was downloaded or analysed; later external-validation work supersedes that statement for its own scope.",
+      "resolution": "Scope the DATA_PROVENANCE sentence to the original inventory. The handoff records the later evidence rather than deleting it.",
+      "severity": "important"
+    },
+    {
+      "id": "five_sessions_animals",
+      "finding": "Kato NoStim has five recording sessions; the OSF metadata does not document five independent animals.",
+      "resolution": "Use 'sessions' everywhere; no animal-independent replication claim.",
+      "severity": "critical"
+    },
+    {
+      "id": "genfail_vs_adaptive",
+      "finding": "GENFAIL reports no positive mean full-neuron MSE skill; adaptive dynamics reports a rolling VAR gain over frozen VAR and persistence.",
+      "resolution": "Different frozen/adaptive models, splits and metrics. The joint result is a third estimand: 10-D PCA energy/trajectory, 175 landmarks. Neither earlier result is overwritten.",
+      "severity": "important"
+    },
+    {
+      "id": "j2_j5_equivalence",
+      "finding": "J2 and J5 have nearly identical scores; the headline uses J5 but the mean advantage is not unique to its innovation sampler.",
+      "resolution": "Report J2 as an internal replication and avoid 'J5 is uniquely best'.",
+      "severity": "important"
+    },
+    {
+      "id": "innovation_acf_summary",
+      "finding": "The protocol gate uses median absolute ACF5 0.00886; the signed median is 0.00783. Both are below threshold.",
+      "resolution": "State the summary convention; the decision is unchanged.",
+      "severity": "minor"
+    },
+    {
+      "id": "test_reuse",
+      "finding": "The Kato NoStim test block was inspected in earlier phases and reused in the joint-dynamics experiment.",
+      "resolution": "All test-split claims are exploratory; no confirmatory significance.",
+      "severity": "critical"
+    },
+    {
+      "id": "phase15_ceiling",
+      "finding": "Phase 11's 0.560 ceiling is not a bound; Phase 15 shows R(22) is extrapolated for 87 of 126 targets.",
+      "resolution": "Use the three Phase 15 estimands and no target ranking.",
+      "severity": "critical"
+    }
+  ],
+  "unresolved": [
+    "No documented animal IDs for the Kato NoStim sessions.",
+    "No matched neuronal intervention dataset for the fitted model.",
+    "No current-checkout raw WT_Stim file for re-running the external pilot.",
+    "No independent cohort for the joint-dynamics representation."
+  ]
+}

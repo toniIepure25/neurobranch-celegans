@@ -1,0 +1,548 @@
+{
+  "schema_version": 1,
+  "title": "NeuroBranch: Evaluating Generative Neural Population Dynamics and Model-Dependent Perturbations in C. elegans",
+  "generated_for": "MSc discussion with Denis Kovacevic, University of Vienna",
+  "evidence_tier": "exploratory repeated-session reanalysis",
+  "status": {
+    "probabilistic": "PROBABILISTIC CALIBRATION NOT ESTABLISHED",
+    "biological_validation": "NOT_EVALUABLE",
+    "warning": "MODEL-DEPENDENT VIRTUAL PERTURBATION — NOT CAUSALLY VALIDATED.",
+    "history_policy": "additive only; no amend, rebase, force-push or reset"
+  },
+  "data": {
+    "primary": "Kato et al. 2015 WT_NoStim",
+    "sessions": 5,
+    "frames": 15662,
+    "predictors": "103 per session (one session 102)",
+    "landmarks": 175,
+    "landmark_stride": 10,
+    "primary_horizon": 20,
+    "representation": "10-D PCA fitted on training frames only; 54.7%-71.0% variance",
+    "ensemble_members": 100,
+    "animal_independence": "not documented; five repeated sessions are not five animals"
+  },
+  "central_claim": {
+    "short": "The corrected population conditional mean improves joint H20 prediction over independent AR in a fixed 10-D PCA.",
+    "long": "In a fixed 10-D PCA fitted on training frames only, the corrected population-mean VAR provides evidence of improved joint neural-trajectory prediction over an independent-neuron AR baseline at H20. The gain is a conditional-mean gain; calibration and intervention validity remain unresolved.",
+    "status": "exploratory, internally supported, not confirmatory",
+    "primary": {
+      "model": "J5_population_lead1_boot",
+      "reference": "J1_independent_diag",
+      "metric": "energy_h20",
+      "n_pairs": 175,
+      "improvement": 0.445563184,
+      "ci_low": 0.183252848,
+      "ci_high": 0.660215531,
+      "fraction_better": 0.611428571
+    },
+    "trajectory": {
+      "model": "J5_population_lead1_boot",
+      "reference": "J1_independent_diag",
+      "metric": "trajectory_energy_h20",
+      "n_pairs": 175,
+      "improvement": 0.37515908,
+      "ci_low": 0.218360167,
+      "ci_high": 0.522065886,
+      "fraction_better": 0.708571429
+    },
+    "scores": {
+      "J5_energy": 2.7001496961975793,
+      "J1_energy": 3.1457128799856453,
+      "J5_trajectory": 2.059962140668421,
+      "J1_trajectory": 2.435121220691635,
+      "J2_energy": 2.700283360297526,
+      "J2_trajectory": 2.0576276640958344
+    },
+    "why_not_confirmatory": [
+      "The test split has been reused across phases.",
+      "The 175 landmarks overlap and are not independent samples.",
+      "The five sessions are repeated recordings, not documented independent animals.",
+      "The bootstrap resamples landmarks, not animals.",
+      "The model choice was informed by earlier test results."
+    ]
+  },
+  "scores": [
+    {
+      "model": "J0_persistence",
+      "label": "J0 persistence",
+      "n": 175,
+      "energy_h20": 2.95033412,
+      "trajectory_h20": 2.28578712,
+      "crps_h20_full": 0.452405527,
+      "coverage_full_50": 0.493780659,
+      "coverage_full_80": 0.790664276,
+      "coverage_full_95": 0.93647724,
+      "coverage_pca_50": 0.511428571,
+      "coverage_pca_80": 0.813714286,
+      "coverage_pca_95": 0.944,
+      "covariance_error": 0.629856595,
+      "autocorr_error": 0.195325124,
+      "width_95": 5.61995666
+    },
+    {
+      "model": "J1_independent_diag",
+      "label": "J1 independent AR",
+      "n": 175,
+      "energy_h20": 3.14571288,
+      "trajectory_h20": 2.43512122,
+      "crps_h20_full": 0.418209329,
+      "coverage_full_50": 0.471116952,
+      "coverage_full_80": 0.745612181,
+      "coverage_full_95": 0.889816328,
+      "coverage_pca_50": 0.317142857,
+      "coverage_pca_80": 0.554285714,
+      "coverage_pca_95": 0.714285714,
+      "covariance_error": 0.504655998,
+      "autocorr_error": 0.174480789,
+      "width_95": 2.55288474
+    },
+    {
+      "model": "J2_population_diag",
+      "label": "J2 population diag",
+      "n": 175,
+      "energy_h20": 2.70028336,
+      "trajectory_h20": 2.05762766,
+      "crps_h20_full": 0.413678851,
+      "coverage_full_50": 0.58647447,
+      "coverage_full_80": 0.845665984,
+      "coverage_full_95": 0.944428381,
+      "coverage_pca_50": 0.524571429,
+      "coverage_pca_80": 0.805714286,
+      "coverage_pca_95": 0.928,
+      "covariance_error": 0.571609916,
+      "autocorr_error": 0.160149954,
+      "width_95": 4.43784737
+    },
+    {
+      "model": "J3_population_full",
+      "label": "J3 population full",
+      "n": 175,
+      "energy_h20": 3.01094573,
+      "trajectory_h20": 2.27656702,
+      "crps_h20_full": 0.459413706,
+      "coverage_full_50": 0.766964858,
+      "coverage_full_80": 0.956984415,
+      "coverage_full_95": 0.991800891,
+      "coverage_pca_50": 0.764,
+      "coverage_pca_80": 0.958285714,
+      "coverage_pca_95": 0.990857143,
+      "covariance_error": 0.761717717,
+      "autocorr_error": 0.213238044,
+      "width_95": 8.02563853
+    },
+    {
+      "model": "J4_independent_full",
+      "label": "J4 independent full",
+      "n": 175,
+      "energy_h20": 3.00724411,
+      "trajectory_h20": 2.35854861,
+      "crps_h20_full": 0.424164901,
+      "coverage_full_50": 0.559871147,
+      "coverage_full_80": 0.819505507,
+      "coverage_full_95": 0.934450133,
+      "coverage_pca_50": 0.405142857,
+      "coverage_pca_80": 0.670285714,
+      "coverage_pca_95": 0.821142857,
+      "covariance_error": 0.516514621,
+      "autocorr_error": 0.188982973,
+      "width_95": 3.40424999
+    },
+    {
+      "model": "J5_population_lead1_boot",
+      "label": "J5 population lead-1",
+      "n": 175,
+      "energy_h20": 2.7001497,
+      "trajectory_h20": 2.05996214,
+      "crps_h20_full": 0.413369647,
+      "coverage_full_50": 0.587780669,
+      "coverage_full_80": 0.848664699,
+      "coverage_full_95": 0.946997953,
+      "coverage_pca_50": 0.546285714,
+      "coverage_pca_80": 0.829714286,
+      "coverage_pca_95": 0.938285714,
+      "covariance_error": 0.604034771,
+      "autocorr_error": 0.164464777,
+      "width_95": 4.73596647
+    }
+  ],
+  "paired": [
+    {
+      "model": "J5_population_lead1_boot",
+      "reference": "J1_independent_diag",
+      "metric": "energy_h20",
+      "n_pairs": 175,
+      "improvement": 0.445563184,
+      "ci_low": 0.183252848,
+      "ci_high": 0.660215531,
+      "fraction_better": 0.611428571
+    },
+    {
+      "model": "J5_population_lead1_boot",
+      "reference": "J1_independent_diag",
+      "metric": "trajectory_energy_h20",
+      "n_pairs": 175,
+      "improvement": 0.37515908,
+      "ci_low": 0.218360167,
+      "ci_high": 0.522065886,
+      "fraction_better": 0.708571429
+    },
+    {
+      "model": "J5_population_lead1_boot",
+      "reference": "J0_persistence",
+      "metric": "energy_h20",
+      "n_pairs": 175,
+      "improvement": 0.250184424,
+      "ci_low": 0.0197582873,
+      "ci_high": 0.426979086,
+      "fraction_better": 0.565714286
+    },
+    {
+      "model": "J5_population_lead1_boot",
+      "reference": "J0_persistence",
+      "metric": "trajectory_energy_h20",
+      "n_pairs": 175,
+      "improvement": 0.225824982,
+      "ci_low": 0.0892346882,
+      "ci_high": 0.337033995,
+      "fraction_better": 0.622857143
+    },
+    {
+      "model": "J2_population_diag",
+      "reference": "J1_independent_diag",
+      "metric": "energy_h20",
+      "n_pairs": 175,
+      "improvement": 0.44542952,
+      "ci_low": 0.183593549,
+      "ci_high": 0.661718633,
+      "fraction_better": 0.605714286
+    },
+    {
+      "model": "J2_population_diag",
+      "reference": "J1_independent_diag",
+      "metric": "trajectory_energy_h20",
+      "n_pairs": 175,
+      "improvement": 0.377493557,
+      "ci_low": 0.223640951,
+      "ci_high": 0.527507305,
+      "fraction_better": 0.714285714
+    },
+    {
+      "model": "J3_population_full",
+      "reference": "J1_independent_diag",
+      "metric": "energy_h20",
+      "n_pairs": 175,
+      "improvement": 0.134767153,
+      "ci_low": -0.132622154,
+      "ci_high": 0.355806312,
+      "fraction_better": 0.508571429
+    },
+    {
+      "model": "J3_population_full",
+      "reference": "J1_independent_diag",
+      "metric": "trajectory_energy_h20",
+      "n_pairs": 175,
+      "improvement": 0.158554202,
+      "ci_low": -0.00481851585,
+      "ci_high": 0.309191352,
+      "fraction_better": 0.497142857
+    }
+  ],
+  "secondary": [
+    {
+      "model": "J5_population_lead1_boot",
+      "reference": "J1_independent_diag",
+      "metric": "crps_h20_full",
+      "improvement": 0.00483968228,
+      "ci_low": -0.00727925334,
+      "ci_high": 0.0155845718,
+      "fraction_better": 0.56
+    },
+    {
+      "model": "J2_population_diag",
+      "reference": "J1_independent_diag",
+      "metric": "crps_h20_full",
+      "improvement": 0.00453047791,
+      "ci_low": -0.00730942683,
+      "ci_high": 0.0151163745,
+      "fraction_better": 0.554285714
+    },
+    {
+      "model": "J5_population_lead1_boot",
+      "reference": "J1_independent_diag",
+      "metric": "variogram_h20",
+      "improvement": 0.047686968,
+      "ci_low": 0.0187922385,
+      "ci_high": 0.0728291387,
+      "fraction_better": 0.588571429
+    },
+    {
+      "model": "J2_population_diag",
+      "reference": "J1_independent_diag",
+      "metric": "variogram_h20",
+      "improvement": 0.0489228142,
+      "ci_low": 0.0200689299,
+      "ci_high": 0.0735410497,
+      "fraction_better": 0.617142857
+    },
+    {
+      "model": "J5_population_lead1_boot",
+      "reference": "J1_independent_diag",
+      "metric": "energy_h20_full",
+      "improvement": 0.203112511,
+      "ci_low": -0.0102293706,
+      "ci_high": 0.442269617,
+      "fraction_better": 0.554285714
+    },
+    {
+      "model": "J2_population_diag",
+      "reference": "J1_independent_diag",
+      "metric": "energy_h20_full",
+      "improvement": 0.191420006,
+      "ci_low": -0.0167008425,
+      "ci_high": 0.41964972,
+      "fraction_better": 0.56
+    },
+    {
+      "model": "J5_population_lead1_boot",
+      "reference": "J1_independent_diag",
+      "metric": "energy_h20_no_top5",
+      "improvement": 0.201591443,
+      "ci_low": -0.0166331886,
+      "ci_high": 0.437107663,
+      "fraction_better": 0.542857143
+    },
+    {
+      "model": "J2_population_diag",
+      "reference": "J1_independent_diag",
+      "metric": "energy_h20_no_top5",
+      "improvement": 0.191091917,
+      "ci_low": -0.02386827,
+      "ci_high": 0.418513285,
+      "fraction_better": 0.56
+    }
+  ],
+  "calibration": [
+    {
+      "model": "J0_persistence",
+      "label": "J0 persistence",
+      "full_50": 0.493780659,
+      "full_80": 0.790664276,
+      "full_95": 0.93647724,
+      "pca_50": 0.511428571,
+      "pca_80": 0.813714286,
+      "pca_95": 0.944,
+      "width_95": 5.61995666,
+      "pit_error": 0.00982857143
+    },
+    {
+      "model": "J1_independent_diag",
+      "label": "J1 independent AR",
+      "full_50": 0.471116952,
+      "full_80": 0.745612181,
+      "full_95": 0.889816328,
+      "pca_50": 0.317142857,
+      "pca_80": 0.554285714,
+      "pca_95": 0.714285714,
+      "width_95": 2.55288474,
+      "pit_error": 0.0469714286
+    },
+    {
+      "model": "J2_population_diag",
+      "label": "J2 population diag",
+      "full_50": 0.58647447,
+      "full_80": 0.845665984,
+      "full_95": 0.944428381,
+      "pca_50": 0.524571429,
+      "pca_80": 0.805714286,
+      "pca_95": 0.928,
+      "width_95": 4.43784737,
+      "pit_error": 0.0113142857
+    },
+    {
+      "model": "J3_population_full",
+      "label": "J3 population full",
+      "full_50": 0.766964858,
+      "full_80": 0.956984415,
+      "full_95": 0.991800891,
+      "pca_50": 0.764,
+      "pca_80": 0.958285714,
+      "pca_95": 0.990857143,
+      "width_95": 8.02563853,
+      "pit_error": 0.0533714286
+    },
+    {
+      "model": "J4_independent_full",
+      "label": "J4 independent full",
+      "full_50": 0.559871147,
+      "full_80": 0.819505507,
+      "full_95": 0.934450133,
+      "pca_50": 0.405142857,
+      "pca_80": 0.670285714,
+      "pca_95": 0.821142857,
+      "width_95": 3.40424999,
+      "pit_error": 0.0248
+    },
+    {
+      "model": "J5_population_lead1_boot",
+      "label": "J5 population lead-1",
+      "full_50": 0.587780669,
+      "full_80": 0.848664699,
+      "full_95": 0.946997953,
+      "pca_50": 0.546285714,
+      "pca_80": 0.829714286,
+      "pca_95": 0.938285714,
+      "width_95": 4.73596647,
+      "pit_error": 0.0133714286
+    }
+  ],
+  "sessions": [
+    {
+      "session": 0,
+      "improvement": 0.637909604,
+      "ci_low": 0.27640202,
+      "ci_high": 1.00727721
+    },
+    {
+      "session": 1,
+      "improvement": -0.151860573,
+      "ci_low": -0.416219791,
+      "ci_high": 0.0418653841
+    },
+    {
+      "session": 2,
+      "improvement": 0.243397856,
+      "ci_low": -0.237210928,
+      "ci_high": 0.683249168
+    },
+    {
+      "session": 3,
+      "improvement": 0.752161202,
+      "ci_low": 0.158752051,
+      "ci_high": 1.36169583
+    },
+    {
+      "session": 4,
+      "improvement": 0.730429949,
+      "ci_low": 0.0704781123,
+      "ci_high": 0.95684308
+    }
+  ],
+  "block_sensitivity": [
+    {
+      "block": 3,
+      "improvement": 0.250184424,
+      "ci_low": 0.0341557121,
+      "ci_high": 0.409832001
+    },
+    {
+      "block": 5,
+      "improvement": 0.250184424,
+      "ci_low": 0.0197582873,
+      "ci_high": 0.426979086
+    },
+    {
+      "block": 10,
+      "improvement": 0.250184424,
+      "ci_low": -0.0317592047,
+      "ci_high": 0.442245112
+    }
+  ],
+  "gates": {
+    "G1_reproduction": {
+      "status": "PASS",
+      "max_relative_difference": 5.540549151021293e-09
+    },
+    "G2_population_information": {
+      "status": "PASS",
+      "evidence": [
+        {
+          "model": "J5_population_lead1_boot",
+          "reference": "J1_independent_diag",
+          "metric": "energy_h20",
+          "n_pairs": 175,
+          "mean_improvement": 0.4455631837880658,
+          "ci_low": 0.1832528479956501,
+          "ci_high": 0.6602155314105737,
+          "fraction_better": 0.6114285714285714
+        }
+      ]
+    },
+    "G3_innovation_validity": {
+      "status": "PASS",
+      "median_abs_acf1": 0.02173527819825,
+      "median_abs_acf5": 0.0088585460609832
+    },
+    "G4_marginal_calibration": {
+      "status": "FAIL",
+      "coverage_h20": [
+        {
+          "model": "J5_population_lead1_boot",
+          "coverage_50": 0.5462857142857143,
+          "coverage_80": 0.8297142857142857,
+          "coverage_95": 0.9382857142857143,
+          "coverage_full_50": 0.5877806686121884,
+          "coverage_full_80": 0.848664698525473,
+          "coverage_full_95": 0.9469979533831153,
+          "width_95": 4.735966470355558,
+          "crps_h20": 0.6882281198419117,
+          "crps_h20_full": 0.4133696466941094,
+          "energy_h20": 2.7001496961975793,
+          "trajectory_energy_h20": 2.059962140668421,
+          "pit_calibration_error": 0.013371428571428572,
+          "width_ratio_vs_persistence": 0.8427051585498986
+        }
+      ],
+      "max_horizon_deviation": 0.10857142857142854
+    },
+    "G5_joint_trajectory": {
+      "status": "FAIL",
+      "trajectory_ratio_vs_persistence": 0.9012047187463207,
+      "neural_cov_error": 0.6040347705575752,
+      "autocorr_error": 0.16446477726210135
+    },
+    "G6_robustness": {
+      "status": "PASS",
+      "sessions_positive": 4
+    },
+    "G7_generative_credibility": {
+      "status": "FAIL",
+      "requires": [
+        "G2",
+        "G4",
+        "G5",
+        "G6"
+      ]
+    },
+    "G8_biological_intervention": {
+      "status": "NOT_EVALUABLE",
+      "reason": "no compatible experimental intervention data"
+    },
+    "stop_label": "PROBABILISTIC CALIBRATION NOT ESTABLISHED"
+  },
+  "factorial": {
+    "mean_effect_energy": 0.220864,
+    "full_covariance_effect_energy": -0.086097,
+    "interaction_energy": 0.449131,
+    "mean_effect_trajectory": 0.229738,
+    "full_covariance_effect_trajectory": -0.071183,
+    "interaction_trajectory": 0.295512
+  },
+  "reconciliations": [
+    "Earlier GENFAIL free-running failure and later adaptive MSE gains use different frozen models, splits and metrics; neither overturns the other.",
+    "J5 and J2 are effectively identical; the mean advantage is replicated across block-bootstrap and parametric diagonal innovations.",
+    "The 0.560 reliability value is withdrawn as a bound; Phase 15 reports three different estimands and no calibrated interval.",
+    "Kato Stim was analysed historically but WT_Stim.mat is absent from this checkout; the pilot is exploratory and cannot be rerun without re-downloading."
+  ],
+  "limitations": [
+    "No documented independent animals; five repeated sessions.",
+    "Reused test split; exploratory inference.",
+    "Overlapping landmarks; effective sample smaller than 175.",
+    "One fixed 10-D evaluation representation.",
+    "Post-hoc model choice after earlier test results.",
+    "50% coverage fails; covariance fails.",
+    "No biological intervention; virtual edits are model-state edits.",
+    "Behaviour labels are decoded from the same neural population.",
+    "External Kato Stim pilot: seven sessions, undocumented independence, raw file absent."
+  ],
+  "warning": "MODEL-DEPENDENT VIRTUAL PERTURBATION — NOT CAUSALLY VALIDATED."
+}
