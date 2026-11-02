@@ -57,6 +57,14 @@ def test_app_retains_phase2_tabs_and_adds_prospective_tab():
         "Calibration",
         "Trajectories",
         "Decision",
+        "NEURAL UNCERTAINTY & CALIBRATION",
+        "Overview",
+        "Forecast intervals",
+        "Variance growth",
+        "Innovation validity",
+        "Calibration",
+        "Trajectory fidelity",
+        "Gates",
     ]
 
 

@@ -45,6 +45,7 @@ from context_ui import render as render_context  # noqa: E402
 from genfail_ui import render as render_genfail  # noqa: E402
 from probabilistic_ui import render as render_probabilistic  # noqa: E402
 from simulator_ui import render as render_simulator  # noqa: E402
+from uncertainty_ui import render as render_uncertainty  # noqa: E402
 
 CFG_PATH = ROOT / "configs" / "experiments" / "blocked_suite.yaml"
 COLORS = {"FWD": "#2E86AB", "REV": "#E4572E", "TURN": "#F3A712", "NOSTATE": "#7D8491"}
@@ -197,6 +198,7 @@ tabs = st.tabs(
         "GENERATIVE FAILURE DIAGNOSTICS",
         "ADAPTIVE DYNAMICS & STABILITY",
         "PROBABILISTIC ADAPTIVE SIMULATOR",
+        "NEURAL UNCERTAINTY & CALIBRATION",
     ]
 )
 
@@ -1367,6 +1369,9 @@ with tabs[17]:
 
 with tabs[18]:
     render_probabilistic()
+
+with tabs[19]:
+    render_uncertainty()
 
 st.divider()
 st.caption(EPISTEMIC_WARNING)
