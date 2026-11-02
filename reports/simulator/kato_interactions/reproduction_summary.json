@@ -1,0 +1,16 @@
+{
+  "status": "PASS",
+  "max_abs_reproduction_difference": 8.881784197001252e-16,
+  "tolerance": 1e-06,
+  "j2_j5_max_abs_energy_difference": 0.7495086614973783,
+  "j2_j5_mean_signed_energy_difference": 0.00013366409994623193,
+  "j2_j5_mean_abs_energy_difference": 0.12581798048164647,
+  "j2_j5_mean_signed_trajectory_difference": -0.002334476572586825,
+  "j2_j5_mean_abs_trajectory_difference": 0.06226299480532009,
+  "j2_j5_energy_ci_low": -0.026637312297873583,
+  "j2_j5_energy_ci_high": 0.024684398044460473,
+  "j2_j5_energy_correlation": 0.9922357193252883,
+  "j2_j5_equivalent_mean": true,
+  "frozen_rows": 1050,
+  "rerun_rows": 700
+}

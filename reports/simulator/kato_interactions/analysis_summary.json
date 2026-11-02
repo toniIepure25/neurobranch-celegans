@@ -1,0 +1,21 @@
+{
+  "dataset": "Kato 2015 WT_NoStim only",
+  "sessions": 5,
+  "frames": 15662,
+  "landmarks": 175,
+  "members": 100,
+  "horizon": 20,
+  "surrogate_draws": 6,
+  "elapsed_seconds": 485.32420800000546,
+  "targets": [
+    "AVBL",
+    "AVBR",
+    "AVEL",
+    "AVER",
+    "RIVL",
+    "RIVR"
+  ],
+  "amplitudes_sd": [
+    1.0
+  ]
+}

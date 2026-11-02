@@ -1,0 +1,267 @@
+{
+  "status": "PASS",
+  "checks": {
+    "reproduction": {
+      "status": "PASS",
+      "max_abs_reproduction_difference": 8.881784197001252e-16,
+      "tolerance": 1e-06,
+      "j2_j5_max_abs_energy_difference": 0.7495086614973783,
+      "j2_j5_mean_signed_energy_difference": 0.00013366409994623193,
+      "j2_j5_mean_abs_energy_difference": 0.12581798048164647,
+      "j2_j5_mean_signed_trajectory_difference": -0.002334476572586825,
+      "j2_j5_mean_abs_trajectory_difference": 0.06226299480532009,
+      "j2_j5_energy_ci_low": -0.026637312297873583,
+      "j2_j5_energy_ci_high": 0.024684398044460473,
+      "j2_j5_energy_correlation": 0.9922357193252883,
+      "j2_j5_equivalent_mean": true,
+      "frozen_rows": 1050,
+      "rerun_rows": 700
+    },
+    "baseline_metrics": [
+      "autocorr_error",
+      "energy_h20",
+      "neural_cov_error",
+      "trajectory_energy_h20"
+    ],
+    "cross_models": {
+      "B0_persistence": 175,
+      "B1_independent_common": 175,
+      "B1_independent_exact": 175,
+      "B2_local_mean": 175,
+      "B3_population": 175,
+      "B4_diagonal_population": 175,
+      "B4_refit_diagonal": 175,
+      "B5_block": 175,
+      "B5_circular": 175
+    },
+    "primary_pairs": [
+      {
+        "model": "B3_population",
+        "reference": "B1_independent_common",
+        "metric": "energy_h20",
+        "n_pairs": 175,
+        "mean_improvement": 0.3710434844387748,
+        "ci_low": 0.1275216174770541,
+        "ci_high": 0.5298702075260564,
+        "fraction_better": 0.6057142857142858,
+        "block": 5
+      },
+      {
+        "model": "B4_diagonal_population",
+        "reference": "B1_independent_common",
+        "metric": "energy_h20",
+        "n_pairs": 175,
+        "mean_improvement": -1.4964096007019425,
+        "ci_low": -1.9764588407121952,
+        "ci_high": -1.0580245470945262,
+        "fraction_better": 0.1942857142857142,
+        "block": 5
+      },
+      {
+        "model": "B5_circular",
+        "reference": "B1_independent_common",
+        "metric": "energy_h20",
+        "n_pairs": 175,
+        "mean_improvement": -0.878275104293795,
+        "ci_low": -1.2220415269029332,
+        "ci_high": -0.5554350024762477,
+        "fraction_better": 0.2571428571428571,
+        "block": 5
+      },
+      {
+        "model": "B5_block",
+        "reference": "B1_independent_common",
+        "metric": "energy_h20",
+        "n_pairs": 175,
+        "mean_improvement": -1.058671231518287,
+        "ci_low": -1.4841468992523263,
+        "ci_high": -0.6411370570839882,
+        "fraction_better": 0.2628571428571428,
+        "block": 5
+      },
+      {
+        "model": "B2_local_mean",
+        "reference": "B1_independent_common",
+        "metric": "energy_h20",
+        "n_pairs": 175,
+        "mean_improvement": -1.5434966700025303,
+        "ci_low": -2.027609121426891,
+        "ci_high": -1.070041954754348,
+        "fraction_better": 0.1885714285714285,
+        "block": 5
+      },
+      {
+        "model": "B3_population",
+        "reference": "B4_diagonal_population",
+        "metric": "energy_h20",
+        "n_pairs": 175,
+        "mean_improvement": 1.8674530851407172,
+        "ci_low": 1.408252761759757,
+        "ci_high": 2.2705178475140766,
+        "fraction_better": 0.8571428571428571,
+        "block": 5
+      },
+      {
+        "model": "B5_circular",
+        "reference": "B4_diagonal_population",
+        "metric": "energy_h20",
+        "n_pairs": 175,
+        "mean_improvement": 0.6181344964081474,
+        "ci_low": 0.4692520415313562,
+        "ci_high": 0.7785450544322245,
+        "fraction_better": 0.8628571428571429,
+        "block": 5
+      },
+      {
+        "model": "B3_population",
+        "reference": "B4_refit_diagonal",
+        "metric": "energy_h20",
+        "n_pairs": 175,
+        "mean_improvement": 0.5467815201521192,
+        "ci_low": 0.3549351137513301,
+        "ci_high": 0.697763509755833,
+        "fraction_better": 0.72,
+        "block": 5
+      },
+      {
+        "model": "B3_population",
+        "reference": "B5_circular",
+        "metric": "energy_h20",
+        "n_pairs": 175,
+        "mean_improvement": 1.2493185887325695,
+        "ci_low": 0.8877518026986648,
+        "ci_high": 1.536891268443721,
+        "fraction_better": 0.84,
+        "block": 5
+      }
+    ],
+    "surrogate_diagnostics": {
+      "block": {
+        "window_acf1_abs_error": 0.02475346623549545,
+        "diag_ar_corr": 0.8899260415739014
+      },
+      "circular": {
+        "window_acf1_abs_error": 0.00207202642273975,
+        "diag_ar_corr": 0.9027517099450653
+      }
+    },
+    "surrogate_draw_count": {
+      "block": 1050,
+      "circular": 1050
+    },
+    "operator_rows": 45,
+    "state_rows": 25200,
+    "finite_difference_max": 8.379935074795421e-15,
+    "ood_median": 0.011719551661536001,
+    "analysis_summary": {
+      "dataset": "Kato 2015 WT_NoStim only",
+      "sessions": 5,
+      "frames": 15662,
+      "landmarks": 175,
+      "members": 100,
+      "horizon": 20,
+      "surrogate_draws": 6,
+      "elapsed_seconds": 485.32420800000546,
+      "targets": [
+        "AVBL",
+        "AVBR",
+        "AVEL",
+        "AVER",
+        "RIVL",
+        "RIVR"
+      ],
+      "amplitudes_sd": [
+        1.0
+      ]
+    },
+    "gates": {
+      "G1_reproduction": {
+        "status": "PASS",
+        "max_abs_reproduction_difference": 8.881784197001252e-16,
+        "tolerance": 1e-06,
+        "j2_j5_max_abs_energy_difference": 0.7495086614973783,
+        "j2_j5_mean_signed_energy_difference": 0.00013366409994623193,
+        "j2_j5_mean_abs_energy_difference": 0.12581798048164647,
+        "j2_j5_mean_signed_trajectory_difference": -0.002334476572586825,
+        "j2_j5_mean_abs_trajectory_difference": 0.06226299480532009,
+        "j2_j5_energy_ci_low": -0.026637312297873583,
+        "j2_j5_energy_ci_high": 0.024684398044460473,
+        "j2_j5_energy_correlation": 0.9922357193252883,
+        "j2_j5_equivalent_mean": true,
+        "frozen_rows": 1050,
+        "rerun_rows": 700
+      },
+      "G2_cross_neuron_information": {
+        "status": "PASS",
+        "b3_vs_b1_energy": {
+          "model": "B3_population",
+          "reference": "B1_independent_common",
+          "metric": "energy_h20",
+          "n_pairs": 175,
+          "mean_improvement": 0.37104348443877483,
+          "ci_low": 0.12752161747705418,
+          "ci_high": 0.5298702075260564,
+          "fraction_better": 0.6057142857142858,
+          "block": 5
+        },
+        "b3_vs_b4r_energy": {
+          "model": "B3_population",
+          "reference": "B4_refit_diagonal",
+          "metric": "energy_h20",
+          "n_pairs": 175,
+          "mean_improvement": 0.5467815201521192,
+          "ci_low": 0.3549351137513301,
+          "ci_high": 0.697763509755833,
+          "fraction_better": 0.72,
+          "block": 5
+        },
+        "b3_vs_circular_surrogate_energy": {
+          "model": "B3_population",
+          "reference": "B5_circular",
+          "metric": "energy_h20",
+          "n_pairs": 175,
+          "mean_improvement": 1.2493185887325697,
+          "ci_low": 0.8877518026986648,
+          "ci_high": 1.536891268443721,
+          "fraction_better": 0.84,
+          "block": 5
+        }
+      },
+      "G3_operator_reliability": {
+        "status": "FAIL",
+        "median_segment_cv_spectral_radius": 0.0015311860038571402,
+        "median_segment_cv_leading_decay": 0.22390607849576033,
+        "median_segment_cv_nonnormality": 0.11318294699039604,
+        "median_pairwise_offdiag_corr": 0.05200513859723742
+      },
+      "G4_state_transition_fidelity": {
+        "status": "FAIL",
+        "b3_transition_tv": 0.053344225173420856,
+        "markov_transition_tv": 0.030517725390680046,
+        "marginal_transition_tv": 0.7969119543033537
+      },
+      "G5_sensitivity_reliability": {
+        "status": "FAIL",
+        "median_response_cosine": 0.5559367067498807,
+        "median_sign_agreement": 0.8,
+        "n": 90
+      },
+      "G6_empirical_support": {
+        "status": "PASS",
+        "median_target_ood_fraction": 0.014049586776859505,
+        "threshold": 0.05
+      },
+      "G7_generative_validity": {
+        "status": "FAIL",
+        "joint_calibration_gate": "FAIL",
+        "joint_trajectory_gate": "FAIL"
+      },
+      "G8_biological_validation": {
+        "status": "NOT_EVALUABLE",
+        "reason": "no matched Kato intervention recording"
+      }
+    },
+    "manifest_files": 36
+  },
+  "errors": []
+}

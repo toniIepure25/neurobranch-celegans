@@ -1,0 +1,201 @@
+{
+  "schema": "neurobranch.kato_interactions.manifest.v1",
+  "generated_utc": "2026-11-02T20:33:33.817536+00:00",
+  "git_head": "86e0e2223f9f1f89ac6b69dd00d30df7d4841e1a",
+  "dataset": "Kato et al. (2015) WT_NoStim only",
+  "protocol": "docs/KATO_INTERACTIONS_PROTOCOL.md",
+  "n_files": 36,
+  "files": [
+    {
+      "path": "src/neurobranch/kato_interactions/metrics.py",
+      "bytes": 4699,
+      "sha256": "f9466f869bc88863cc23fc8b22c8469145696aaf91fb9631b3df46aae6586ad9"
+    },
+    {
+      "path": "src/neurobranch/kato_interactions/models.py",
+      "bytes": 5639,
+      "sha256": "212d251344bbc1518e685713e03005b322fd04a1742a1c934de0c902f0aecb53"
+    },
+    {
+      "path": "src/neurobranch/kato_interactions/sensitivity.py",
+      "bytes": 5925,
+      "sha256": "33dd74233a36f3253d9257f897f5aa1d50b20300cfabcd52acc75b7a0dd71d71"
+    },
+    {
+      "path": "src/neurobranch/kato_interactions/spectra.py",
+      "bytes": 4810,
+      "sha256": "1ca1ea2ef4b9afd77d31d8d33a27e7b84c540023c0841e310db475e55c50f17c"
+    },
+    {
+      "path": "src/neurobranch/kato_interactions/states.py",
+      "bytes": 5438,
+      "sha256": "991d8a33dbaadff385217bda7f792abc02c9f38b9ab20853ca58b7fb12bdd4da"
+    },
+    {
+      "path": "src/neurobranch/kato_interactions/surrogates.py",
+      "bytes": 3188,
+      "sha256": "aa30052d6033e41bbb36cd716a044b2cb865c965d88824f5c68657a98a5c7e5d"
+    },
+    {
+      "path": "src/neurobranch/kato_interactions/synthetic.py",
+      "bytes": 3541,
+      "sha256": "63f23d7beea4369549aafd5c4e6b20a2bd235d9c3e6243b79c893cb5f1d6cab6"
+    },
+    {
+      "path": "scripts/kato_interactions_figures.py",
+      "bytes": 9859,
+      "sha256": "120476af7987353b1de9747f0f0be9c315c2ff32974477bb993ec4a4f0ae4541"
+    },
+    {
+      "path": "scripts/kato_interactions_main.py",
+      "bytes": 47101,
+      "sha256": "e9e173547d16c2637b5c6034230eceb7f13b8fff7b5798022d1f6e3240705232"
+    },
+    {
+      "path": "scripts/kato_interactions_manifest.py",
+      "bytes": 3720,
+      "sha256": "9ec3c3d9326cd94bae5e8313fa925e46928634aca1fae22f1c53bc2678408430"
+    },
+    {
+      "path": "scripts/validate_kato_interactions.py",
+      "bytes": 10461,
+      "sha256": "8e29502ee8da1640ee76b690d27925f32d189337c3ba3c3c3b035cd28e8c2b2f"
+    },
+    {
+      "path": "tests/test_kato_interactions.py",
+      "bytes": 12863,
+      "sha256": "5919c66a46669320f9fede9741852bf0931cbaf88757200e40803819efae1343"
+    },
+    {
+      "path": "docs/KATO_INTERACTIONS_CROSS_NEURON_INFORMATION.md",
+      "bytes": 4590,
+      "sha256": "9d270fe2bb1123257015f1245cc8c050cdee1e53ffec12151611dd8c38fb42e1"
+    },
+    {
+      "path": "docs/KATO_INTERACTIONS_DYNAMICAL_MODES.md",
+      "bytes": 3193,
+      "sha256": "8680c1b6ae6e4d465cb3e11cd4cd4544d5bcf76bba0a4a198c567473253816a6"
+    },
+    {
+      "path": "docs/KATO_INTERACTIONS_IDENTIFIABILITY.md",
+      "bytes": 3095,
+      "sha256": "7eccab83368e35888abeaecbaa77a07ebadf1997e14bf8da37e3a313377d9ad6"
+    },
+    {
+      "path": "docs/KATO_INTERACTIONS_LIMITATIONS.md",
+      "bytes": 3625,
+      "sha256": "f69d1116f40c5ef0a565dadf26a2e0386e820d09641cddce2ef9d03fcacdbf04"
+    },
+    {
+      "path": "docs/KATO_INTERACTIONS_NEURAL_STATES.md",
+      "bytes": 2614,
+      "sha256": "1777de481d03433284b38614e827859d33ad0c02854f8db25175dd2d340c570c"
+    },
+    {
+      "path": "docs/KATO_INTERACTIONS_NEXT_EXPERIMENTS.md",
+      "bytes": 3519,
+      "sha256": "9a856000b0cbb8d0e41adf090a133613708f00e513bdb0482e3b893a3af4b4d0"
+    },
+    {
+      "path": "docs/KATO_INTERACTIONS_PROTOCOL.md",
+      "bytes": 8283,
+      "sha256": "c5aac159d7eb14335126cfa2bed5215ea35d8fbb0ea99542a4f3cf32bea2e694"
+    },
+    {
+      "path": "docs/KATO_INTERACTIONS_REPRODUCTION.md",
+      "bytes": 2804,
+      "sha256": "bd89530405b0e7978a243e3c06796336e681fefc7f9f735882e89f30f62d0b34"
+    },
+    {
+      "path": "docs/KATO_INTERACTIONS_RESULTS.md",
+      "bytes": 5876,
+      "sha256": "b85301752b85c33a57d59a1183e998ea37cf48460c515cde6dedc73f1c560571"
+    },
+    {
+      "path": "docs/KATO_INTERACTIONS_SENSITIVITY.md",
+      "bytes": 3881,
+      "sha256": "9b3c57838e3d26c60a1ea46fcc8a64f52ef7c7c47f24a67ece13b76f8f4880eb"
+    },
+    {
+      "path": "docs/KATO_INTERACTIONS_SUPERVISOR_BRIEF.md",
+      "bytes": 3672,
+      "sha256": "d357d7b5dc8d555888dafbb735bf6366fd4cc65c9c6f8f64a7a41cf1f3756396"
+    },
+    {
+      "path": "reports/simulator/kato_interactions/figures/fig_cross_neuron_controls.png",
+      "bytes": 45835,
+      "sha256": "05dfe1b6085410ef78f349f9931c71db05b99a06dbed0956cf11031fc19bbb41"
+    },
+    {
+      "path": "reports/simulator/kato_interactions/figures/fig_cross_neuron_energy.png",
+      "bytes": 60275,
+      "sha256": "ad8c84f5c6acd9ca88ec15817a9884ffeae3bf88b2e3f9119040927befb71d1f"
+    },
+    {
+      "path": "reports/simulator/kato_interactions/figures/fig_j2_j5_equivalence.png",
+      "bytes": 48583,
+      "sha256": "ad251e7d810c60a899a26f0469757d7fae25d38eed1c8cf54491dd937efcad38"
+    },
+    {
+      "path": "reports/simulator/kato_interactions/figures/fig_operator_spectra.png",
+      "bytes": 71265,
+      "sha256": "9e60234ff9dec7cfadcb00a37be81a6a2fadbef0c16417837721b0b83ec1186e"
+    },
+    {
+      "path": "reports/simulator/kato_interactions/figures/fig_operator_stability.png",
+      "bytes": 40152,
+      "sha256": "17eb6ba7d8d459755687c7f34d0e168d9e179a14c82b55d8bf14a0598104b38c"
+    },
+    {
+      "path": "reports/simulator/kato_interactions/figures/fig_sensitivity_agreement.png",
+      "bytes": 53041,
+      "sha256": "82fac641feb5346a1e221b7b0b803b6ff138fe95a6d4c72118d3ffb5074893fb"
+    },
+    {
+      "path": "reports/simulator/kato_interactions/figures/fig_sensitivity_ood.png",
+      "bytes": 41955,
+      "sha256": "8101714bc76c74d71b10506b5aaddea9d20fea3dd3c2b05495b4e0b860bc9683"
+    },
+    {
+      "path": "reports/simulator/kato_interactions/figures/fig_state_transitions.png",
+      "bytes": 47461,
+      "sha256": "f41b45b112b0cf76c9f632888c4832552dfa854193e5e2d77f4490bbfb7c277d"
+    },
+    {
+      "path": "reports/simulator/kato_interactions/figures/fig_surrogate_controls.png",
+      "bytes": 30452,
+      "sha256": "85fd7643807019d68ad9117ea8d012c20c1f134cc81c2fc06b716cdc9dbf1ac0"
+    },
+    {
+      "path": "app/handoff_demo.py",
+      "bytes": 39274,
+      "sha256": "0ccd6cc6410d9109862fd68d145e37155a98a9d9ae432ee4654b30f64ebda07d"
+    },
+    {
+      "path": "mkdocs.yml",
+      "bytes": 8608,
+      "sha256": "4e8808bbca8804314330a7b52b5ae926bcb0ccb96c6cbe522dbfc330e0e75891"
+    },
+    {
+      "path": "reports/simulator/joint_dynamics/scores_by_landmark.csv",
+      "bytes": 1182036,
+      "sha256": "88bfd9b268763788fa5009e3caf293e26e1e05ff379ad2d3a8833cdbbdea2580"
+    },
+    {
+      "path": "reports/simulator/joint_dynamics/gates.json",
+      "bytes": 2128,
+      "sha256": "6e5e8b2cdabe9e21e4d4d9fbfd74a84946f017f0ae852a0ae774db0b20f68aa8"
+    }
+  ],
+  "external_input": {
+    "path": "data/raw/kato2015/WT_NoStim.mat",
+    "bytes": 56390975,
+    "sha256": "7531811c1718e26a0455f59cb2f8188cf25809278cfea85770dfe03315a0098a",
+    "usage": "input only; not redistributed or committed"
+  },
+  "excluded": [
+    "_stage_a_cache.pkl",
+    "validation_report.json",
+    "manifest.json"
+  ]
+}
