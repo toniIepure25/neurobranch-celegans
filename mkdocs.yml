@@ -101,6 +101,18 @@ nav:
       - Limitations: PROBADAPT_LIMITATIONS.md
       - Supervisor brief: PROBADAPT_SUPERVISOR_BRIEF.md
       - Next experiments: PROBADAPT_NEXT_EXPERIMENTS.md
+  - Neural uncertainty and calibration:
+      - Protocol: UNCAL_RESEARCH_PROTOCOL.md
+      - Variance propagation: UNCAL_VARIANCE_PROPAGATION.md
+      - Innovation validity: UNCAL_INNOVATION_VALIDITY.md
+      - Simple baselines: UNCAL_SIMPLE_BASELINES.md
+      - Probabilistic models: UNCAL_PROBABILISTIC_MODELS.md
+      - Calibration: UNCAL_CALIBRATION.md
+      - Trajectory fidelity: UNCAL_TRAJECTORY_FIDELITY.md
+      - Results: UNCAL_RESULTS.md
+      - Limitations: UNCAL_LIMITATIONS.md
+      - Supervisor brief: UNCAL_SUPERVISOR_BRIEF.md
+      - Next experiments: UNCAL_NEXT_EXPERIMENTS.md
   - Phase 15:
       - Results: PHASE15_RESULTS.md
       - Methods: METHODS_PHASE15.md
