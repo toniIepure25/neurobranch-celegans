@@ -94,6 +94,15 @@ distributional change; it is broadly tracking local level and damping variance.
 Recent frozen error has a negative coefficient (−0.286 [−0.640, 0.089],
 including zero).
 
+An exploratory extension to the seven WT_Stim sessions gave the same picture.
+For rolling w500, mean H20 improvement was 0.473 [0.348, 0.565] within 20 frames
+of a measured oxygen transition versus 0.452 [0.241, 0.611] outside those
+windows. For EWMA h1000 it was 0.523 [0.396, 0.599] versus 0.512 [0.338, 0.638].
+The difference is small and the intervals overlap heavily. The schedule is
+fixed at 30 s across repeated sessions, so transition proximity is still
+confounded with elapsed time; this is not evidence of an oxygen-specific
+adaptive benefit.
+
 ### 9. Does adaptation improve the match to measured neural temporal statistics?
 
 Only partially. At H20, rolling w500 reduces autocorrelation error from 0.748 to
@@ -206,6 +215,7 @@ python scripts/adaptive_nonstationarity.py
 python scripts/adaptive_calcium.py
 python scripts/adaptive_models.py
 python scripts/adaptive_indicators.py
+python scripts/adaptive_oxygen.py
 python scripts/adaptive_perturbation.py
 python scripts/adaptive_figures.py
 python scripts/adaptive_manifest.py

@@ -79,6 +79,14 @@ def _nonstationarity() -> None:
             "Stationary surrogate 95th percentiles are in the summary table. Large absolute angles "
             "are not evidence of a biological state transition."
         )
+    oxygen = _read_csv("oxygen_adaptive_summary.csv")
+    if not oxygen.empty:
+        st.markdown("**WT_Stim exploratory stratification by oxygen-transition proximity**")
+        st.dataframe(oxygen, width="stretch", hide_index=True)
+        st.caption(
+            "Repeated sessions, fixed 30 s schedule. Transition proximity remains confounded with "
+            "elapsed time; oxygen is an environmental input, not targeted stimulation."
+        )
 
 
 def _calcium() -> None:
