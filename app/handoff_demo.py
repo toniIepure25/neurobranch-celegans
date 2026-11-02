@@ -20,6 +20,7 @@ import streamlit as st
 ROOT = Path(__file__).resolve().parents[1]
 OUT = ROOT / "reports" / "simulator" / "supervisor_handoff"
 JOINT = ROOT / "reports" / "simulator" / "joint_dynamics"
+INTERACTIONS = ROOT / "reports" / "simulator" / "kato_interactions"
 
 INK = "#17202a"
 MUTED = "#5d6d7e"
@@ -45,6 +46,7 @@ SECTIONS = [
     "Mean vs stochastic",
     "Calibration",
     "Perturbation boundary",
+    "NEURAL INTERACTION & SENSITIVITY EXPLORER",
     "Decision and next",
 ]
 
@@ -559,6 +561,309 @@ def section_perturbation(summary: dict) -> None:
     )
 
 
+def section_interactions(summary: dict) -> None:
+    st.subheader("NEURAL INTERACTION & SENSITIVITY EXPLORER")
+    st.caption(
+        "Optional Kato-only audit. It asks whether cross-neuron lag structure improves "
+        "joint forecasts, whether inferred modes are stable, and what a bounded virtual "
+        "edit does inside the fitted model. It does not rerun the frozen pipeline."
+    )
+    needed = [
+        INTERACTIONS / "gates.json",
+        INTERACTIONS / "cross_neuron_summary.csv",
+        INTERACTIONS / "cross_neuron_paired.csv",
+        INTERACTIONS / "surrogate_summary.csv",
+        INTERACTIONS / "operator_fits.csv",
+        INTERACTIONS / "operator_modes.csv",
+        INTERACTIONS / "state_transition_summary.csv",
+        INTERACTIONS / "state_transition_probabilities.csv",
+        INTERACTIONS / "sensitivity_summary.csv",
+        INTERACTIONS / "sensitivity_identifiability_summary.csv",
+        INTERACTIONS / "reproduction_summary.json",
+    ]
+    if not all(path.exists() for path in needed):
+        st.info(
+            "The optional interaction artifacts are absent. Run "
+            "`python scripts/kato_interactions_main.py` to populate "
+            "`reports/simulator/kato_interactions/`."
+        )
+        return
+    st.markdown(
+        chip("EXPLORATORY REANALYSIS", AMBER)
+        + chip("REPEATED SESSIONS, NOT ANIMALS", GRAY)
+        + chip("MODEL-DEPENDENT", RED)
+        + chip("BIOLOGICAL VALIDATION NOT_EVALUABLE", RED),
+        unsafe_allow_html=True,
+    )
+    gates = load_json(str(INTERACTIONS / "gates.json"))
+    cols = st.columns(4)
+    cols[0].metric("G2 cross-neuron", gates["G2_cross_neuron_information"]["status"])
+    cols[1].metric("G3 operator", gates["G3_operator_reliability"]["status"])
+    cols[2].metric("G5 sensitivity", gates["G5_sensitivity_reliability"]["status"])
+    cols[3].metric("G8 biological", gates["G8_biological_validation"]["status"])
+    st.caption(
+        "Gate PASS is a technical audit status, not biological validation or a license "
+        "to call a perturbation causal."
+    )
+
+    tabs = st.tabs(
+        [
+            "Measured and forecast",
+            "Modes",
+            "Cross-neuron controls",
+            "States",
+            "Bounded sensitivity",
+        ]
+    )
+
+    with tabs[0]:
+        st.markdown("#### A measured continuation, J5, and independent-neuron J1")
+        observed, bands = trajectory_frame()
+        fig = go.Figure()
+        fig.add_trace(
+            go.Scatter(
+                x=observed["step"],
+                y=observed["observed_pc1"],
+                mode="lines+markers",
+                name="Observed continuation",
+                line=dict(color=INK, width=2.5),
+                marker=dict(size=3),
+            )
+        )
+        for model, color, label in [
+            ("J5_population_lead1_boot", TEAL, "J5 population"),
+            ("J1_independent_diag", AMBER, "J1 independent AR"),
+        ]:
+            frame = bands[bands["model"] == model]
+            fig.add_trace(
+                go.Scatter(
+                    x=frame["step"],
+                    y=frame["q50"],
+                    mode="lines",
+                    name=label,
+                    line=dict(color=color, width=2.2),
+                )
+            )
+        fig.update_layout(
+            height=360,
+            margin=dict(l=10, r=10, t=20, b=35),
+            xaxis_title="H20 step after the last observed frame",
+            yaxis_title="PC1 of fixed training PCA",
+            plot_bgcolor="white",
+            legend=dict(orientation="h", yanchor="bottom", y=1.02, x=0),
+        )
+        st.plotly_chart(fig, width="stretch")
+        st.caption(
+            "This is the frozen visual example, not a new reroll. The audit's matched "
+            "comparison uses the same J5 innovations for B3 and B1."
+        )
+        reproduction = load_json(str(INTERACTIONS / "reproduction_summary.json"))
+        st.markdown(
+            f"Frozen reproduction max |difference|: **{reproduction['max_abs_reproduction_difference']:.2e}**. "
+            f"J2/J5 mean signed H20 difference: **{reproduction['j2_j5_mean_signed_energy_difference']:+.5f}** "
+            f"(95% interval [{reproduction['j2_j5_energy_ci_low']:+.4f}, {reproduction['j2_j5_energy_ci_high']:+.4f}]). "
+            "J2/J5 are mean-equivalent, not per-landmark identical."
+        )
+
+    with tabs[1]:
+        st.markdown("#### Fitted modes are not automatically oscillations")
+        op = load_csv(str(INTERACTIONS / "operator_fits.csv"))
+        frozen = op[op["kind"] == "frozen"]
+        st.dataframe(
+            frozen[
+                [
+                    "session",
+                    "spectral_radius",
+                    "leading_decay_frames",
+                    "nonnormality",
+                    "transient_peak",
+                    "offdiagonal_energy",
+                ]
+            ],
+            hide_index=True,
+            width="stretch",
+        )
+        modes = load_csv(str(INTERACTIONS / "operator_modes.csv"))
+        modes = modes[modes["fit_id"] == "frozen_train"]
+        fig = go.Figure()
+        theta = np.linspace(0, 2 * np.pi, 300)
+        fig.add_trace(
+            go.Scatter(
+                x=np.cos(theta),
+                y=np.sin(theta),
+                mode="lines",
+                line=dict(color=GRAY, width=1, dash="dash"),
+                name="unit circle",
+            )
+        )
+        fig.add_trace(
+            go.Scatter(
+                x=modes["real"],
+                y=modes["imag"],
+                mode="markers",
+                marker=dict(
+                    size=5,
+                    color=modes["magnitude"],
+                    colorscale="Viridis",
+                    colorbar=dict(title="|eigenvalue|"),
+                ),
+                text=modes["session"].astype(str),
+                name="modes",
+            )
+        )
+        fig.update_layout(
+            height=340,
+            xaxis_title="real eigenvalue",
+            yaxis_title="imaginary eigenvalue",
+            plot_bgcolor="white",
+            margin=dict(l=10, r=10, t=20, b=35),
+        )
+        st.plotly_chart(fig, width="stretch")
+        st.caption(
+            "Complex eigenvalues are common in a 103-dimensional fitted operator; their "
+            "presence alone is not evidence of a biological oscillator. G3 tests "
+            "cross-segment stability."
+        )
+
+    with tabs[2]:
+        st.markdown("#### Cross-neuron information and matched temporal controls")
+        cross = load_csv(str(INTERACTIONS / "cross_neuron_summary.csv"))
+        wanted = [
+            "B0_persistence",
+            "B1_independent_common",
+            "B3_population",
+            "B4_diagonal_population",
+            "B4_refit_diagonal",
+            "B5_circular",
+            "B5_block",
+        ]
+        st.dataframe(
+            cross[cross["model"].isin(wanted)][
+                ["model", "energy_h20", "trajectory_energy_h20", "mse_mean_h20", "coverage_80"]
+            ],
+            hide_index=True,
+            width="stretch",
+        )
+        paired = load_csv(str(INTERACTIONS / "cross_neuron_paired.csv"))
+        primary = paired[(paired["metric"] == "energy_h20") & (paired["block"] == 5)]
+        primary = primary[
+            (primary["model"] == "B3_population")
+            & primary["reference"].isin(
+                ["B1_independent_common", "B4_refit_diagonal", "B5_circular"]
+            )
+        ]
+        st.dataframe(
+            primary[
+                ["reference", "mean_improvement", "ci_low", "ci_high", "fraction_better"]
+            ].rename(
+                columns={
+                    "reference": "reference (minus B3)",
+                    "mean_improvement": "H20 energy improvement",
+                    "fraction_better": "fraction of landmarks better",
+                }
+            ),
+            hide_index=True,
+            width="stretch",
+        )
+        surrogate = load_csv(str(INTERACTIONS / "surrogate_summary.csv"))
+        st.dataframe(surrogate, hide_index=True, width="stretch")
+        st.caption(
+            "Surrogates shift or block-permute each neuron inside the causal window. "
+            "They preserve marginals and local autocorrelation while breaking cross-neuron "
+            "alignment. Intervals are within-session block intervals, not animal-level."
+        )
+
+    with tabs[3]:
+        st.markdown("#### Training-only neural states and transitions")
+        states = load_csv(str(INTERACTIONS / "state_transition_summary.csv"))
+        st.dataframe(
+            states[
+                [
+                    "model",
+                    "transition_tv_observed",
+                    "occupancy_tv_observed",
+                    "dwell_l1_observed",
+                    "recurrence_model",
+                    "recurrence_observed",
+                ]
+            ],
+            hide_index=True,
+            width="stretch",
+        )
+        probs = load_csv(str(INTERACTIONS / "state_transition_probabilities.csv"))
+        session = int(probs["session"].min())
+        landmark = int(probs[probs["session"] == session]["landmark"].min())
+        part = probs[
+            (probs["session"] == session)
+            & (probs["landmark"] == landmark)
+            & (probs["model"] == "B3_population")
+        ]
+        if len(part):
+            matrix = part.pivot(index="from_state", columns="to_state", values="probability")
+            fig = go.Figure(
+                data=go.Heatmap(
+                    z=matrix.to_numpy(),
+                    x=matrix.columns.astype(str),
+                    y=matrix.index.astype(str),
+                    colorscale="Magma",
+                    zmin=0,
+                    zmax=1,
+                    colorbar=dict(title="probability"),
+                )
+            )
+            fig.update_layout(
+                height=340,
+                xaxis_title="to state",
+                yaxis_title="from state",
+                margin=dict(l=10, r=10, t=20, b=35),
+            )
+            st.plotly_chart(fig, width="stretch")
+            st.caption(
+                f"B3 model transition probabilities, session {session}, landmark {landmark}. "
+                "States are KMeans partitions of the training-only 10-D PCA; they are not "
+                "independent behavioural labels."
+            )
+        st.caption(
+            "The Markov null uses the training transition matrix only. B3 does not beat it "
+            "on transition TV, so transition fidelity remains unresolved."
+        )
+
+    with tabs[4]:
+        st.error(WARNING)
+        st.markdown("#### Bounded mathematical edit of one named neuron")
+        sens = load_csv(str(INTERACTIONS / "sensitivity_summary.csv"))
+        ident = load_csv(str(INTERACTIONS / "sensitivity_identifiability_summary.csv"))
+        targets = sorted(sens["target"].unique())
+        target = st.selectbox("Named target", targets, index=0, key="interaction_target")
+        role = st.radio("Role", ["target", "control"], horizontal=True, key="interaction_role")
+        merged = sens[(sens["target"] == target) & (sens["role"] == role)].merge(
+            ident[(ident["target"] == target) & (ident["role"] == role)],
+            on=["target", "role"],
+            how="left",
+        )
+        st.dataframe(merged, hide_index=True, width="stretch")
+        st.markdown(
+            "Perturbation: **+1.0 training SD** in the selected standardized neuron, "
+            "propagated for 20 frames from a prespecified test landmark. The output is a "
+            "linear model response, not an optogenetic or thermal dose."
+        )
+        st.markdown(
+            f"OOD support (median / max): **{float(merged['ood_median'].iloc[0]):.3f} / "
+            f"{float(merged['ood_max'].iloc[0]):.3f}**. Finite-difference relative error: "
+            f"**{float(merged['finite_difference_max'].iloc[0]):.2e}**."
+        )
+        st.caption(
+            "Model disagreement is summarized by pairwise response cosine and baseline "
+            "prediction spread across rolling, frozen, segment, and bootstrap fits. "
+            "Low cosine means the sign or direction of the virtual effect is not stable. "
+            + WARNING
+        )
+        st.caption(
+            "No neuron is ranked as a stimulation target. Biological validation: "
+            "NOT_EVALUABLE."
+        )
+
+
 def section_decision(summary: dict) -> None:
     st.subheader("Do not run another architecture search on the reused test split")
     st.markdown(
@@ -645,7 +950,7 @@ def main() -> None:
     st.sidebar.markdown(
         "---\n"
         "**Route:** Start → Timeline → Central → Real trajectory → Mean vs stochastic → "
-        "Calibration → Perturbation → Decision.\n\n"
+        "Calibration → Perturbation → Decision. The interaction explorer is optional.\n\n"
         "The sidebar does not change any data. All views are read-only."
     )
     st.sidebar.caption(f"Artifacts: `{OUT.relative_to(ROOT)}`")
@@ -664,6 +969,8 @@ def main() -> None:
         section_calibration(summary)
     elif section == "Perturbation boundary":
         section_perturbation(summary)
+    elif section == "NEURAL INTERACTION & SENSITIVITY EXPLORER":
+        section_interactions(summary)
     elif section == "Decision and next":
         section_decision(summary)
     footer(summary)
