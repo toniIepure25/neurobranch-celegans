@@ -1,0 +1,33 @@
+{
+  "C1_frozen_var": {
+    "class": "FrozenVAR",
+    "fit": "weighted ridge lag-one VAR on all pre-test transitions; coefficients frozen",
+    "parameters": "full 103x103 A and 103 intercepts per session",
+    "stability": "spectral radius capped at 0.995 by uniform scaling"
+  },
+  "C2_rolling_var": {
+    "class": "RollingVAR",
+    "history_windows_frames": [
+      200,
+      500,
+      1000
+    ],
+    "fit": "equal-weight ridge on transitions with target <= landmark",
+    "stability": "same spectral cap at every refit",
+    "primary": "rolling_w500"
+  },
+  "C3_ewma_var": {
+    "class": "EWMAVAR",
+    "halflives_frames": [
+      100,
+      300,
+      1000
+    ],
+    "fit": "exponentially weighted ridge on all transitions <= landmark; half-life fixed",
+    "stability": "same spectral cap at every refit"
+  },
+  "C4_local_latent": {
+    "status": "not fitted",
+    "reason": "Stage A found no stable train-only latent orientation; adding a local latent encoder would mix incompatible coordinate systems and is not justified before C1-C3 are resolved."
+  }
+}

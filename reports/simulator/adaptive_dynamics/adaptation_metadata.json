@@ -1,0 +1,321 @@
+{
+  "stage": "E_adaptation_heterogeneity",
+  "n_landmarks": 175,
+  "indicators": [
+    "covariance_shift",
+    "subspace_angle",
+    "amplitude_shift",
+    "occupancy_shift",
+    "recent_error"
+  ],
+  "available_at_prediction_time": true,
+  "regression": [
+    {
+      "model": "rolling_w500",
+      "term": "intercept",
+      "coefficient": 0.4691102482810032,
+      "ci_low": 0.22817901540675556,
+      "ci_high": 0.7739913545723606,
+      "n": 175
+    },
+    {
+      "model": "rolling_w500",
+      "term": "covariance_shift",
+      "coefficient": 0.044443665689916034,
+      "ci_low": -0.21749483447410461,
+      "ci_high": 0.4125033843043508,
+      "n": 175
+    },
+    {
+      "model": "rolling_w500",
+      "term": "subspace_angle",
+      "coefficient": -0.09899513288343446,
+      "ci_low": -0.39989215806782363,
+      "ci_high": 0.24116964627323476,
+      "n": 175
+    },
+    {
+      "model": "rolling_w500",
+      "term": "amplitude_shift",
+      "coefficient": -0.06892713666574325,
+      "ci_low": -0.3029609948894942,
+      "ci_high": 0.2541135094841978,
+      "n": 175
+    },
+    {
+      "model": "rolling_w500",
+      "term": "occupancy_shift",
+      "coefficient": 0.5328713479765779,
+      "ci_low": 0.10792050347765317,
+      "ci_high": 0.8393739149670087,
+      "n": 175
+    },
+    {
+      "model": "rolling_w500",
+      "term": "recent_error",
+      "coefficient": -0.28614972207251915,
+      "ci_low": -0.6395345846797134,
+      "ci_high": 0.0893512625935693,
+      "n": 175
+    },
+    {
+      "model": "rolling_w500",
+      "term": "worm_1",
+      "coefficient": -0.06149509113946641,
+      "ci_low": -0.5207894301014069,
+      "ci_high": 0.7339086702867027,
+      "n": 175
+    },
+    {
+      "model": "rolling_w500",
+      "term": "worm_2",
+      "coefficient": -0.7587065132105212,
+      "ci_low": -2.0030820679598174,
+      "ci_high": 0.06927701844422005,
+      "n": 175
+    },
+    {
+      "model": "rolling_w500",
+      "term": "worm_3",
+      "coefficient": 0.09928737266769516,
+      "ci_low": -0.17841019399023722,
+      "ci_high": 0.2946787272294369,
+      "n": 175
+    },
+    {
+      "model": "rolling_w500",
+      "term": "worm_4",
+      "coefficient": 0.040624485548086176,
+      "ci_low": -0.5313054355076329,
+      "ci_high": 0.4459889734374208,
+      "n": 175
+    },
+    {
+      "model": "ewma_h100",
+      "term": "intercept",
+      "coefficient": 0.2740466562437944,
+      "ci_low": -0.08515002345487856,
+      "ci_high": 0.7048396492934245,
+      "n": 175
+    },
+    {
+      "model": "ewma_h100",
+      "term": "covariance_shift",
+      "coefficient": -0.039086372162663904,
+      "ci_low": -0.423193303649335,
+      "ci_high": 0.8495613655420743,
+      "n": 175
+    },
+    {
+      "model": "ewma_h100",
+      "term": "subspace_angle",
+      "coefficient": -0.17293540831645285,
+      "ci_low": -0.8465938770008025,
+      "ci_high": 0.23991150083328933,
+      "n": 175
+    },
+    {
+      "model": "ewma_h100",
+      "term": "amplitude_shift",
+      "coefficient": -0.06749618346549083,
+      "ci_low": -0.3429068152416781,
+      "ci_high": 0.42818242103260734,
+      "n": 175
+    },
+    {
+      "model": "ewma_h100",
+      "term": "occupancy_shift",
+      "coefficient": 0.6525428137068315,
+      "ci_low": 0.14754750258985627,
+      "ci_high": 1.3075674578698109,
+      "n": 175
+    },
+    {
+      "model": "ewma_h100",
+      "term": "recent_error",
+      "coefficient": -0.4414120606191778,
+      "ci_low": -1.0175645883818605,
+      "ci_high": 0.15434055834015398,
+      "n": 175
+    },
+    {
+      "model": "ewma_h100",
+      "term": "worm_1",
+      "coefficient": 0.1344623421575806,
+      "ci_low": -0.7348212104438706,
+      "ci_high": 1.3136181701292526,
+      "n": 175
+    },
+    {
+      "model": "ewma_h100",
+      "term": "worm_2",
+      "coefficient": -0.7012028231882081,
+      "ci_low": -3.4496208837419737,
+      "ci_high": 0.2039763068202157,
+      "n": 175
+    },
+    {
+      "model": "ewma_h100",
+      "term": "worm_3",
+      "coefficient": 0.1850566934783321,
+      "ci_low": -0.12399510240064317,
+      "ci_high": 0.634838824863138,
+      "n": 175
+    },
+    {
+      "model": "ewma_h100",
+      "term": "worm_4",
+      "coefficient": 0.1916039235412184,
+      "ci_low": -0.4541643044592764,
+      "ci_high": 0.9741854512291392,
+      "n": 175
+    },
+    {
+      "model": "rolling_w200",
+      "term": "intercept",
+      "coefficient": -0.3834028374839602,
+      "ci_low": -1.2286407386424352,
+      "ci_high": 0.4406913142546947,
+      "n": 175
+    },
+    {
+      "model": "rolling_w200",
+      "term": "covariance_shift",
+      "coefficient": -0.6734992182076733,
+      "ci_low": -1.6156603262378078,
+      "ci_high": 0.003118291899900266,
+      "n": 175
+    },
+    {
+      "model": "rolling_w200",
+      "term": "subspace_angle",
+      "coefficient": -0.5857815728107933,
+      "ci_low": -1.5574235694816663,
+      "ci_high": 0.4175181562274135,
+      "n": 175
+    },
+    {
+      "model": "rolling_w200",
+      "term": "amplitude_shift",
+      "coefficient": 0.21783026987830886,
+      "ci_low": -0.35526498302356396,
+      "ci_high": 1.0921333449700261,
+      "n": 175
+    },
+    {
+      "model": "rolling_w200",
+      "term": "occupancy_shift",
+      "coefficient": 0.9220430639066156,
+      "ci_low": -0.09957480729878265,
+      "ci_high": 1.4546789550483896,
+      "n": 175
+    },
+    {
+      "model": "rolling_w200",
+      "term": "recent_error",
+      "coefficient": -0.4613674677201904,
+      "ci_low": -1.1303455091761385,
+      "ci_high": 0.6491837498243425,
+      "n": 175
+    },
+    {
+      "model": "rolling_w200",
+      "term": "worm_1",
+      "coefficient": 0.3050706080319965,
+      "ci_low": -0.34714095416261687,
+      "ci_high": 2.014025485954828,
+      "n": 175
+    },
+    {
+      "model": "rolling_w200",
+      "term": "worm_2",
+      "coefficient": 0.6343850493195702,
+      "ci_low": -1.2610270694431844,
+      "ci_high": 3.9416605590675884,
+      "n": 175
+    },
+    {
+      "model": "rolling_w200",
+      "term": "worm_3",
+      "coefficient": 0.40511788922623093,
+      "ci_low": -0.33687526079916513,
+      "ci_high": 0.8710047611007277,
+      "n": 175
+    },
+    {
+      "model": "rolling_w200",
+      "term": "worm_4",
+      "coefficient": 0.45142981680943417,
+      "ci_low": -0.8068662210287226,
+      "ci_high": 1.7270991493907868,
+      "n": 175
+    }
+  ],
+  "correlations": [
+    {
+      "model": "rolling_w500",
+      "indicator": "covariance_shift",
+      "pearson": -0.37686986814908263,
+      "spearman": -0.10264666368114644
+    },
+    {
+      "model": "rolling_w500",
+      "indicator": "subspace_angle",
+      "pearson": -0.2033789834857782,
+      "spearman": -0.11387371249440216
+    },
+    {
+      "model": "rolling_w500",
+      "indicator": "amplitude_shift",
+      "pearson": 0.16015936428471728,
+      "spearman": 0.30071204657411554
+    },
+    {
+      "model": "rolling_w500",
+      "indicator": "occupancy_shift",
+      "pearson": 0.1819589093496261,
+      "spearman": 0.4377854903716973
+    },
+    {
+      "model": "rolling_w500",
+      "indicator": "recent_error",
+      "pearson": -0.20782024791436454,
+      "spearman": 0.12166368114643977
+    },
+    {
+      "model": "ewma_h100",
+      "indicator": "covariance_shift",
+      "pearson": -0.38988052070644796,
+      "spearman": -0.1196484549932826
+    },
+    {
+      "model": "ewma_h100",
+      "indicator": "subspace_angle",
+      "pearson": -0.26458632146442346,
+      "spearman": -0.17583743842364533
+    },
+    {
+      "model": "ewma_h100",
+      "indicator": "amplitude_shift",
+      "pearson": 0.03102706002422095,
+      "spearman": 0.21879534258844605
+    },
+    {
+      "model": "ewma_h100",
+      "indicator": "occupancy_shift",
+      "pearson": 0.05321491074032487,
+      "spearman": 0.40121137483206454
+    },
+    {
+      "model": "ewma_h100",
+      "indicator": "recent_error",
+      "pearson": -0.26354943344170906,
+      "spearman": 0.09094715629198388
+    }
+  ],
+  "git": {
+    "commit": "c8f4f53fb623d8b45baf7bcc3bc96fc4caeee8c1",
+    "dirty": true,
+    "branch": "research/adaptive-dynamics-stability"
+  }
+}

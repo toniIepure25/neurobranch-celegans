@@ -1,0 +1,119 @@
+{
+  "stage": "A_nonstationarity",
+  "evidence_tier": "exploratory repeated-session; previously inspected test tails",
+  "window_frames": 256,
+  "step_frames": 64,
+  "principal_components": 10,
+  "summary": [
+    {
+      "n_windows": 46,
+      "early_reference_angle_mean_deg": 55.19016874647487,
+      "late_reference_angle_mean_deg": 62.66787955345666,
+      "max_reference_angle_mean_deg": 70.23406917994954,
+      "late_covariance_relative_change": 0.9784332224725943,
+      "late_amplitude_shift": 0.6494863821736684,
+      "late_occupancy_shift": 0.7199189540180725,
+      "late_local_ar_relative_change": 0.9616547526495692,
+      "surrogate_angle_mean_95pct": 59.75854704668631,
+      "surrogate_angle_max_95pct": 89.80758486648405,
+      "observed_exceeds_surrogate_mean": true,
+      "worm_id": 0,
+      "fps": 2.9046296296296297
+    },
+    {
+      "n_windows": 45,
+      "early_reference_angle_mean_deg": 55.68541203965302,
+      "late_reference_angle_mean_deg": 62.594677282045545,
+      "max_reference_angle_mean_deg": 73.63573586375011,
+      "late_covariance_relative_change": 1.1881426296785547,
+      "late_amplitude_shift": 0.5471484397389974,
+      "late_occupancy_shift": 0.706158793874153,
+      "late_local_ar_relative_change": 1.0066957602464603,
+      "surrogate_angle_mean_95pct": 55.33896003396524,
+      "surrogate_angle_max_95pct": 89.72615126356825,
+      "observed_exceeds_surrogate_mean": true,
+      "worm_id": 1,
+      "fps": 2.901851851851852
+    },
+    {
+      "n_windows": 44,
+      "early_reference_angle_mean_deg": 57.52619620407032,
+      "late_reference_angle_mean_deg": 64.21364115228346,
+      "max_reference_angle_mean_deg": 74.54936627865287,
+      "late_covariance_relative_change": 1.927198520771888,
+      "late_amplitude_shift": 0.4710162791288235,
+      "late_occupancy_shift": 0.669898191208074,
+      "late_local_ar_relative_change": 1.0696899572683152,
+      "surrogate_angle_mean_95pct": 52.22087111128649,
+      "surrogate_angle_max_95pct": 89.69228993553867,
+      "observed_exceeds_surrogate_mean": true,
+      "worm_id": 2,
+      "fps": 2.8324074074074073
+    },
+    {
+      "n_windows": 48,
+      "early_reference_angle_mean_deg": 61.58810883246397,
+      "late_reference_angle_mean_deg": 63.7388131143463,
+      "max_reference_angle_mean_deg": 68.62531342304126,
+      "late_covariance_relative_change": 0.9416941099362354,
+      "late_amplitude_shift": 0.7096095385949975,
+      "late_occupancy_shift": 0.6594433144869524,
+      "late_local_ar_relative_change": 0.9754754911945019,
+      "surrogate_angle_mean_95pct": 60.3536540859149,
+      "surrogate_angle_max_95pct": 89.72983474059409,
+      "observed_exceeds_surrogate_mean": true,
+      "worm_id": 3,
+      "fps": 3.0657407407407407
+    },
+    {
+      "n_windows": 44,
+      "early_reference_angle_mean_deg": 57.343961716727485,
+      "late_reference_angle_mean_deg": 62.892307601241974,
+      "max_reference_angle_mean_deg": 71.41241020277286,
+      "late_covariance_relative_change": 1.0723833792017563,
+      "late_amplitude_shift": 0.4787065390597864,
+      "late_occupancy_shift": 0.5486651057995834,
+      "late_local_ar_relative_change": 1.066950158255362,
+      "surrogate_angle_mean_95pct": 54.95183285194032,
+      "surrogate_angle_max_95pct": 89.84384335670704,
+      "observed_exceeds_surrogate_mean": true,
+      "worm_id": 4,
+      "fps": 2.797222222222222
+    }
+  ],
+  "synthetic": [
+    {
+      "n_windows": 43,
+      "early_reference_angle_mean_deg": 7.537811229399553,
+      "late_reference_angle_mean_deg": 8.229926604244797,
+      "max_reference_angle_mean_deg": 9.144898987350922,
+      "late_covariance_relative_change": 0.46261773751929913,
+      "late_amplitude_shift": 0.07911183493218395,
+      "late_occupancy_shift": 0.14915197534594532,
+      "late_local_ar_relative_change": 0.4410425391847324,
+      "surrogate_angle_mean_95pct": 9.382334410290257,
+      "surrogate_angle_max_95pct": 21.3814615735624,
+      "observed_exceeds_surrogate_mean": false,
+      "synthetic_condition": "stationary"
+    },
+    {
+      "n_windows": 43,
+      "early_reference_angle_mean_deg": 16.190741974351482,
+      "late_reference_angle_mean_deg": 62.82437280858133,
+      "max_reference_angle_mean_deg": 63.69490063081713,
+      "late_covariance_relative_change": 1.2179651493884691,
+      "late_amplitude_shift": 0.20797238018077369,
+      "late_occupancy_shift": 0.15111456737319734,
+      "late_local_ar_relative_change": 1.2659957825042163,
+      "surrogate_angle_mean_95pct": 26.438129157489193,
+      "surrogate_angle_max_95pct": 88.05716389593881,
+      "observed_exceeds_surrogate_mean": true,
+      "synthetic_condition": "regime_switch"
+    }
+  ],
+  "git": {
+    "commit": "c8f4f53fb623d8b45baf7bcc3bc96fc4caeee8c1",
+    "dirty": true,
+    "branch": "research/adaptive-dynamics-stability"
+  }
+}

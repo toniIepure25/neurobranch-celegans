@@ -1,0 +1,16 @@
+{
+  "stage": "F_descriptive_sensitivity",
+  "status": "descriptive only; no biological intervention validation",
+  "warning": "MODEL-DEPENDENT VIRTUAL PERTURBATION \u2014 NOT CAUSALLY VALIDATED.",
+  "n_trajectories": 75,
+  "median_cosine": 0.0602778302751241,
+  "range_cosine": [
+    -0.1615662427662957,
+    0.5700217328518618
+  ],
+  "git": {
+    "commit": "c8f4f53fb623d8b45baf7bcc3bc96fc4caeee8c1",
+    "dirty": true,
+    "branch": "research/adaptive-dynamics-stability"
+  }
+}

@@ -1,0 +1,36 @@
+{
+  "protocol": "ADAPTIVE_DYNAMICS_PROTOCOL.md",
+  "evidence_tier": "exploratory repeated-session; previously inspected chronological test tails",
+  "gates": {
+    "A_nonstationarity_characterized": {
+      "status": "PASS",
+      "evidence": "Matched stationary surrogate and synthetic stationary/regime controls; late-window excess 2.3-12.0 degrees, large absolute angles partly artifact."
+    },
+    "B_numerical_stability": {
+      "status": "PASS",
+      "evidence": "Corrected calcium recursion finite on all 175 real landmarks and synthetic stable-calcium control; original feedback defect localized."
+    },
+    "C_adaptive_model_advantage": {
+      "status": "PASS",
+      "evidence": "Prespecified rolling_w500 paired H20 improvement 0.6566, 95% CI [0.3261, 0.9856], 4/5 sessions."
+    },
+    "D_distributional_improvement": {
+      "status": "FAIL",
+      "evidence": "H20 std ratio 0.238, covariance relative error 1.018, OOD 5.4%; MSE gain is shrink-to-mean."
+    },
+    "E_perturbation_interpretation": {
+      "status": "MODEL_DEPENDENT_ONLY",
+      "evidence": "Median frozen-versus-adaptive impulse cosine 0.060; no causal validation."
+    },
+    "F_independent_biological_validation": {
+      "status": "NOT_EVALUABLE",
+      "evidence": "No independent animals or matched experimental intervention in this stage."
+    }
+  },
+  "caveats": [
+    "Session 2 is not improved by the primary adaptive model.",
+    "Sessions are repeated recordings, not independent animals.",
+    "Oxygen timing was not analyzed in this stage.",
+    "No virtual perturbation is a biological intervention."
+  ]
+}

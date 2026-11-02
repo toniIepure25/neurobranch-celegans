@@ -1,0 +1,30 @@
+{
+  "branch": "research/adaptive-dynamics-stability",
+  "data": "Kato WT_NoStim, all five sessions",
+  "standardization": "existing train-only WormData.X",
+  "ridge": 1.0,
+  "spectral_cap": 0.995,
+  "forecast_horizons": [
+    1,
+    5,
+    10,
+    20,
+    50,
+    100
+  ],
+  "landmark_stride_frames": 10,
+  "frozen_fit": "existing train-split-only VAR baseline, then fixed",
+  "rolling_windows": [
+    200,
+    500,
+    1000
+  ],
+  "ewma_halflives": [
+    100,
+    300,
+    1000
+  ],
+  "primary_metric": "paired H20 free-running MSE improvement versus frozen VAR",
+  "primary_adaptive_model": "prespecified rolling_w500; all candidates reported",
+  "uncertainty": "moving-block bootstrap over prediction landmarks, block=5, 1000 draws"
+}

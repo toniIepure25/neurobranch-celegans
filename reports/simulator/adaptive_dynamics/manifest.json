@@ -1,0 +1,146 @@
+{
+  "root": "adaptive_dynamics",
+  "n_files": 35,
+  "files": {
+    "adaptation_correlations.csv": {
+      "sha256": "6e1c392da71f1bad748c8650c6c91e6e8a16f1a23b0cb6bad947261e12439db2",
+      "bytes": 719
+    },
+    "adaptation_indicators.csv": {
+      "sha256": "4e74159ca9af43203ee9c88aa7ff40c5bcb2f8670898a35f1d13444571a5b50d",
+      "bytes": 17835
+    },
+    "adaptation_metadata.json": {
+      "sha256": "2f3f6d60de00b1e6cef6e061f96a4b62dbc79d1f75a27b81f0c76b4fc74d013d",
+      "bytes": 8404
+    },
+    "adaptation_regression.csv": {
+      "sha256": "68f7a2519fc8f194bc67d7f203ea63f90bb3d3d787a80943e701f65f5bfe913c",
+      "bytes": 2679
+    },
+    "adaptation_strata.csv": {
+      "sha256": "64d2f25780e311d0a3f6adaca006ddc83e101ac23995bb279902a33ac4f93daa",
+      "bytes": 4383
+    },
+    "adaptation_strata.png": {
+      "sha256": "439cc77941d02449218dd4c80b5cbee558227d5121298dd335f773ee94f47958",
+      "bytes": 73833
+    },
+    "calcium_diagnostics.json": {
+      "sha256": "89f5dd7ab77c17b485dab6a7d142bb01611343f957aee9f17268171de8b43b55",
+      "bytes": 36526
+    },
+    "calcium_forecasts.csv": {
+      "sha256": "243f71c39fd87721aa7f55b7f3d959cc55d8dce2bfc23c244d38e55858530719",
+      "bytes": 368373
+    },
+    "calcium_h20.png": {
+      "sha256": "8c1a0c3914c5ad52180854f01d2da4300bc6f9cc19391a86d8457b4e1bcaa224",
+      "bytes": 50784
+    },
+    "calcium_paired.csv": {
+      "sha256": "bdd178ad2e9db0faa5bf37a0922ecd259dbe307718a7eae49ab0d1b655a400c2",
+      "bytes": 1189
+    },
+    "calcium_summary.csv": {
+      "sha256": "1790a442c0f8027e91075354186fbb2605902bea8b9d10ebe11a3adef8b90d23",
+      "bytes": 10336
+    },
+    "forecast_horizon.png": {
+      "sha256": "c4609a2e6bcf744bb4f19eadbba6a8f7c37d36f029e343c37b83e28a007b8da2",
+      "bytes": 105441
+    },
+    "gates.json": {
+      "sha256": "716fe585fa2309361a97037d1e5135e58fb84418c4fffe24d1d708e7d0b048ae",
+      "bytes": 1608
+    },
+    "model_cards.json": {
+      "sha256": "e70a6a67482e3ed4f4ed0a7dd37821321fe184a3298de3fad752a0461d6f2ee1",
+      "bytes": 1098
+    },
+    "model_configurations.json": {
+      "sha256": "13df9114bdd2fa9c0ced8b6a07bf199d4cd2a7f80cc8b6ae19aeeb4aa91d54a5",
+      "bytes": 766
+    },
+    "model_horizon_curves.csv": {
+      "sha256": "953b6dd59e70ca100b86a5118bce1113cca9deb0577f06d6039c27fa6773d6c3",
+      "bytes": 4684
+    },
+    "model_metadata.json": {
+      "sha256": "4d9c373c97ce354de34c3d98350fc0eafed5a7c6406743f6d9c89c0327689501",
+      "bytes": 18772
+    },
+    "model_paired_by_session.csv": {
+      "sha256": "2b1abeb4d486242fde974847ecdf7e41bb5abe33c8246f7bf4e7e0e456556c9e",
+      "bytes": 4875
+    },
+    "model_paired_overall.csv": {
+      "sha256": "2a66d60ec2481ec2217748c3daed21c86a643d3a28f9fd1d86df8a63f57a6413",
+      "bytes": 1049
+    },
+    "model_per_landmark.csv": {
+      "sha256": "2856f1b626448c3794ba95c964ebfca614f61a7369ee59ba399928c067585350",
+      "bytes": 1266027
+    },
+    "model_per_neuron_h20.csv": {
+      "sha256": "56493240ed32921f313cb74bbe0e39571a0e46332cbd54b9c7fede2bb85506c7",
+      "bytes": 12959211
+    },
+    "model_per_neuron_summary.csv": {
+      "sha256": "b00f4571026b173c4d4eeca462ac76942a0b9574b42292d91cadc4551da9bb30",
+      "bytes": 272301
+    },
+    "model_per_session_h20.csv": {
+      "sha256": "e725fd0d5376652d06785e46a4a4ac14e6008f74632308b8878197f306aad4b2",
+      "bytes": 5380
+    },
+    "model_update_summary.csv": {
+      "sha256": "e18a455c61793215b7bfcfe0da1615172d0c0cb025814a5913fdec45071e339d",
+      "bytes": 983
+    },
+    "model_updates.csv": {
+      "sha256": "f8fedf690d2c90efdb6e03e9476e8bec87d25d69989a0c4c158357b282fdfacc",
+      "bytes": 113288
+    },
+    "nonstationarity_metadata.json": {
+      "sha256": "bac2caae07b9949e12ef63fa32aba5f66d21a9db17b8000086b6f0f284c73e30",
+      "bytes": 4948
+    },
+    "nonstationarity_null.csv": {
+      "sha256": "a5a2365c19e51ce33cc7c038f3e33cfee48c9ca802730b7706c44d72f7d42b9e",
+      "bytes": 375528
+    },
+    "nonstationarity_summary.csv": {
+      "sha256": "8efb23ac6eba6645c88c7e8442ab419be14a73992a24de30a9a9447e48faf48c",
+      "bytes": 1277
+    },
+    "nonstationarity_synthetic.csv": {
+      "sha256": "7baf7f9ab38372370ed65023949e9492d7b88ef3163ae2737da8547c9106c983",
+      "bytes": 692
+    },
+    "nonstationarity_windows.csv": {
+      "sha256": "efa6330d6f69e03f8d5d626850783c983d0bdf220cb0b7173b942b5171543197",
+      "bytes": 54876
+    },
+    "perturbation_metadata.json": {
+      "sha256": "d97da8dc7204011143e1d06bd5e45655ff14a396de38e8fd927e18b10b2c4f46",
+      "bytes": 494
+    },
+    "perturbation_sensitivity.csv": {
+      "sha256": "1c26a0ee0fb8a01df29f5b271451b144016f5fa18dd2af8e5435101868232b84",
+      "bytes": 8487
+    },
+    "perturbation_summary.csv": {
+      "sha256": "89fc4e315dee1022e65f5544973e4644ad7bf00ea75fc281992b148208605517",
+      "bytes": 581
+    },
+    "session_h20.png": {
+      "sha256": "64a91510bad3b4a5cdde064ac7654562cedbb892cf8a00f1802aa44d94783552",
+      "bytes": 42399
+    },
+    "subspace_drift.png": {
+      "sha256": "b039455e8c0500868f788aa049856d8ad2b058dc50ffd5cda7366f36203e0026",
+      "bytes": 168591
+    }
+  }
+}
