@@ -1,0 +1,19 @@
+{
+  "rule": "temporal innovation model justified only if median one-step population ACF1 >= 0.15 and ACF5 >= 0.08",
+  "median_by_model": {
+    "independent_ar": {
+      "acf1": 0.1356241615879158,
+      "acf5": 0.03738762920978782,
+      "temporal_cross_cov_lag1": 0.12224048805217913
+    },
+    "population_var": {
+      "acf1": 0.021735278198250055,
+      "acf5": 0.007829896908331573,
+      "temporal_cross_cov_lag1": 0.006873136998196991
+    }
+  },
+  "temporal_model_justified": false,
+  "chosen_rank": 8,
+  "max_history": 1000,
+  "note": "Only lead==1 prequential residuals enter this analysis; multi-step errors are excluded."
+}

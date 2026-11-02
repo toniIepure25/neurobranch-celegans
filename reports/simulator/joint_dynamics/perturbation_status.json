@@ -1,0 +1,6 @@
+{
+  "status": "NOT_LAUNCHED",
+  "warning": "MODEL-DEPENDENT VIRTUAL PERTURBATION \u2014 NOT CAUSALLY VALIDATED.",
+  "biological_validation": "NOT_EVALUABLE",
+  "reason": "no compatible intervention data; calibration and covariance gates failed"
+}

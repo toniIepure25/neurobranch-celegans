@@ -1,0 +1,47 @@
+[
+  {
+    "figure": "jd_autocorrelation.png",
+    "sha256": "15954a87b994d57689220f7523d593f0caeade2165559634d5bbcf237fb0ba78",
+    "bytes": 45031
+  },
+  {
+    "figure": "jd_calibration.png",
+    "sha256": "49333cc1aef72f23f6938a3fa064a50232d48dc02034c5349e490b07f30b5e63",
+    "bytes": 144910
+  },
+  {
+    "figure": "jd_covariance.png",
+    "sha256": "c00c01e4876fe37e76cae655c4baf04eaed4fbc6ab89687010fbdf9f746d3516",
+    "bytes": 40259
+  },
+  {
+    "figure": "jd_example_trajectory.png",
+    "sha256": "81550bab23f1b9f8fa04ecb76a70747dd36c0cd1318fb021601acdaf13d04c7e",
+    "bytes": 236157
+  },
+  {
+    "figure": "jd_factorial.png",
+    "sha256": "b80dd0d11e939663e1c18a4fb277286d37e34c099da1d6c2de9ebee6cb4f61ed",
+    "bytes": 31123
+  },
+  {
+    "figure": "jd_parameter.png",
+    "sha256": "7194ba9f25b9f7b1efe6d63f05f7e9707c7af093ca75a44d175fb374ad31374c",
+    "bytes": 45661
+  },
+  {
+    "figure": "jd_pit.png",
+    "sha256": "c98800f08a63091b93d7778152dfc9b20d98fdc0a42a23ccc7a48458076c1bde",
+    "bytes": 55393
+  },
+  {
+    "figure": "jd_scores.png",
+    "sha256": "a0f9c33d5a98df7bea113136bf521036274b713efae5078da1fc59edc213aeed",
+    "bytes": 50829
+  },
+  {
+    "figure": "jd_trajectories.html",
+    "sha256": "ce9b85b79ee45a2e0c0153cb27ed63739d0579e84c1d9db74b8b3bb7cdc0c7d8",
+    "bytes": 9558
+  }
+]

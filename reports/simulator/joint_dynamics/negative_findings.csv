@@ -1,0 +1,9 @@
+finding,evidence
+full covariance,H20 energy 3.011 vs 2.700; covariance error 0.762
+marginal CRPS improvement,"+0.00484, 95% CI [-0.00830, 0.01566]"
+all-neuron energy improvement,"+0.203, 95% CI [-0.015, 0.412]"
+50% calibration,full 0.588; PCA 0.546
+neural covariance gate,0.604 > 0.5
+D4 Student-t,"energy 2.829, coverage 0.690/0.921/0.984"
+parameter uncertainty,"energy 2.807, trajectory 2.271, coverage 0.615/0.883/0.969"
+session consistency,session 1 negative; session 2 ambiguous

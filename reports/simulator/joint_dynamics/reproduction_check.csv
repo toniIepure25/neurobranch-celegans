@@ -1,0 +1,16 @@
+new_model,historical_model,metric,historical,rerun,relative_difference
+J0_persistence,P0_persistence,energy_h20,2.9503341202212297,2.9503341202212297,0.0
+J0_persistence,P0_persistence,crps_h20_full,0.4524055270076668,0.45240552700766684,1.2270219508241573e-16
+J0_persistence,P0_persistence,coverage_h20_full_50,0.4937806593662871,0.4937806593662871,0.0
+J0_persistence,P0_persistence,coverage_h20_full_80,0.7906642760256112,0.7906642760256112,0.0
+J0_persistence,P0_persistence,coverage_h20_full_95,0.9364772404951272,0.9364772404951272,0.0
+J5_population_lead1_boot,P6_adaptive_lead1,energy_h20,2.7001496961975797,2.7001496961975793,1.6446836650406475e-16
+J5_population_lead1_boot,P6_adaptive_lead1,crps_h20_full,0.4133696466941094,0.4133696466941094,0.0
+J5_population_lead1_boot,P6_adaptive_lead1,coverage_h20_full_50,0.5877806686121885,0.5877806686121885,0.0
+J5_population_lead1_boot,P6_adaptive_lead1,coverage_h20_full_80,0.8486646985254728,0.8486646985254728,0.0
+J5_population_lead1_boot,P6_adaptive_lead1,coverage_h20_full_95,0.9469979533831152,0.9469979533831153,1.1723605322048752e-16
+P6_historical_block,P6_adaptive_block,energy_h20,4.608757251598473,4.6087572771335195,5.540549151021293e-09
+P6_historical_block,P6_adaptive_block,crps_h20_full,0.6491555974857081,0.6491555974857096,2.3943600586598027e-15
+P6_historical_block,P6_adaptive_block,coverage_full_50,0.90995952672137,0.90995952672137,0.0
+P6_historical_block,P6_adaptive_block,coverage_full_80,0.9920701128029974,0.9920701128029974,0.0
+P6_historical_block,P6_adaptive_block,coverage_full_95,0.9989027025748156,0.9989027025748156,0.0

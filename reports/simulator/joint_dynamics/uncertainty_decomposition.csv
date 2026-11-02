@@ -1,0 +1,5 @@
+component,model,energy_h20,coverage_50,coverage_80,coverage_95,status
+process innovation (diagonal),J2_population_diag,2.700283360297525,0.5864744703398024,0.8456659835842655,0.9444283814876167,estimated
+parameter uncertainty,H_parameter_ensemble,2.8068407720198323,0.6148571428571429,0.8834285714285717,0.9691428571428572,estimated; worsens dispersion
+initial-state uncertainty,none,,,,,set to observed initial state
+observation uncertainty,none,,,,,NOT_IDENTIFIABLE

@@ -1,0 +1,42 @@
+{
+  "frozen_before_final_summary": true,
+  "G1_reproduction": {
+    "max_relative_difference": 0.02,
+    "metrics": ["H20 energy", "H20 CRPS", "H20 coverage 50/80/95"]
+  },
+  "G2_population_information": {
+    "primary_comparison": "J5_population_lead1_boot minus J1_independent_diag",
+    "metric": "H20 energy score improvement (reference - model)",
+    "minimum_mean_improvement": 0.05,
+    "paired_ci_lower_must_exceed": 0.0,
+    "block_length": 5
+  },
+  "G3_innovation_validity": {
+    "population_median_abs_acf1_max": 0.15,
+    "population_median_abs_acf5_max": 0.10,
+    "multi_step_errors_allowed_in_pool": false
+  },
+  "G4_marginal_calibration": {
+    "horizon": 20,
+    "levels": [0.5, 0.8, 0.95],
+    "max_abs_coverage_error_each_level": 0.05,
+    "max_horizon_deviation": 0.10
+  },
+  "G5_joint_trajectory": {
+    "trajectory_energy_max_relative_to_persistence": 1.0,
+    "neural_covariance_relative_error_max": 0.5,
+    "autocorrelation_error_max": 0.35
+  },
+  "G6_robustness": {
+    "sessions_with_same_direction_min": 4,
+    "bootstrap_blocks": [3, 5, 10],
+    "sensitivity_sets": ["10D PCA", "top-20 training-variance neurons", "all neurons", "exclude top-5 training-variance neurons"]
+  },
+  "G7_generative_credibility": {
+    "requires": ["G2", "G4", "G5", "G6"]
+  },
+  "G8_biological_intervention": {
+    "status": "NOT_EVALUABLE",
+    "requires": "compatible experimental intervention data"
+  }
+}

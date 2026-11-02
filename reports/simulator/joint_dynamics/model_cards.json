@@ -1,0 +1,32 @@
+{
+  "J0_persistence": {
+    "label": "persistence",
+    "definition": "probabilistic persistence, block-bootstrap innovations",
+    "role": "baseline"
+  },
+  "J1_independent_diag": {
+    "label": "independent AR",
+    "definition": "per-neuron AR(1), diagonal Gaussian lead-1 innovations",
+    "role": "baseline"
+  },
+  "J2_population_diag": {
+    "label": "population VAR diag",
+    "definition": "rolling population VAR(1), diagonal Gaussian lead-1 innovations",
+    "role": "population mean + marginal noise"
+  },
+  "J3_population_full": {
+    "label": "population VAR full",
+    "definition": "rolling population VAR(1), Ledoit-Wolf full covariance",
+    "role": "prespecified covariance stress test; rejected"
+  },
+  "J4_independent_full": {
+    "label": "independent AR full",
+    "definition": "per-neuron AR(1) mean, full covariance from its residuals",
+    "role": "full-covariance factorial control; rejected"
+  },
+  "J5_population_lead1_boot": {
+    "label": "population lead-1",
+    "definition": "rolling population VAR(1), lead-1 block bootstrap",
+    "role": "corrected historical comparator"
+  }
+}

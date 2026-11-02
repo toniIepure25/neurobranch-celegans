@@ -1,0 +1,72 @@
+{
+  "G1_reproduction": {
+    "status": "PASS",
+    "max_relative_difference": 5.540549151021293e-09
+  },
+  "G2_population_information": {
+    "status": "PASS",
+    "evidence": [
+      {
+        "model": "J5_population_lead1_boot",
+        "reference": "J1_independent_diag",
+        "metric": "energy_h20",
+        "n_pairs": 175,
+        "mean_improvement": 0.4455631837880658,
+        "ci_low": 0.1832528479956501,
+        "ci_high": 0.6602155314105737,
+        "fraction_better": 0.6114285714285714
+      }
+    ]
+  },
+  "G3_innovation_validity": {
+    "status": "PASS",
+    "median_abs_acf1": 0.02173527819825,
+    "median_abs_acf5": 0.0088585460609832
+  },
+  "G4_marginal_calibration": {
+    "status": "FAIL",
+    "coverage_h20": [
+      {
+        "model": "J5_population_lead1_boot",
+        "coverage_50": 0.5462857142857143,
+        "coverage_80": 0.8297142857142857,
+        "coverage_95": 0.9382857142857143,
+        "coverage_full_50": 0.5877806686121884,
+        "coverage_full_80": 0.848664698525473,
+        "coverage_full_95": 0.9469979533831153,
+        "width_95": 4.735966470355558,
+        "crps_h20": 0.6882281198419117,
+        "crps_h20_full": 0.4133696466941094,
+        "energy_h20": 2.7001496961975793,
+        "trajectory_energy_h20": 2.059962140668421,
+        "pit_calibration_error": 0.013371428571428572,
+        "width_ratio_vs_persistence": 0.8427051585498986
+      }
+    ],
+    "max_horizon_deviation": 0.10857142857142854
+  },
+  "G5_joint_trajectory": {
+    "status": "FAIL",
+    "trajectory_ratio_vs_persistence": 0.9012047187463207,
+    "neural_cov_error": 0.6040347705575752,
+    "autocorr_error": 0.16446477726210135
+  },
+  "G6_robustness": {
+    "status": "PASS",
+    "sessions_positive": 4
+  },
+  "G7_generative_credibility": {
+    "status": "FAIL",
+    "requires": [
+      "G2",
+      "G4",
+      "G5",
+      "G6"
+    ]
+  },
+  "G8_biological_intervention": {
+    "status": "NOT_EVALUABLE",
+    "reason": "no compatible experimental intervention data"
+  },
+  "stop_label": "PROBABILISTIC CALIBRATION NOT ESTABLISHED"
+}

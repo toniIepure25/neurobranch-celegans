@@ -1,0 +1,44 @@
+{
+  "method": "moving-block bootstrap of causal transition pairs, 5 draws x 20 members",
+  "block_length": 25,
+  "window": 500,
+  "draws": 5,
+  "process_covariance": "diagonal from lead-1 residuals, held fixed across parameter draws",
+  "initial_state_uncertainty": "none; observed initial state used",
+  "observation_uncertainty": "not separately identifiable",
+  "test_refit": false,
+  "synthetic": [
+    {
+      "model": "innovation_only",
+      "coverage_50": 0.46,
+      "coverage_80": 0.7475,
+      "coverage_95": 0.93,
+      "width_95": 2.03612613081419,
+      "energy_h20": 0.4976128647343485,
+      "ensemble_std": 0.5204353052341759,
+      "n_parameter_draws": 0
+    },
+    {
+      "model": "parameter_ensemble",
+      "coverage_50": 0.5125,
+      "coverage_80": 0.75,
+      "coverage_95": 0.915,
+      "width_95": 1.9160872235252882,
+      "energy_h20": 0.48991236146942485,
+      "ensemble_std": 0.5225921708094303,
+      "n_parameter_draws": 20
+    },
+    {
+      "model": "oracle",
+      "coverage_50": 0.4925,
+      "coverage_80": 0.7925,
+      "coverage_95": 0.9475,
+      "width_95": 2.173151218644166,
+      "energy_h20": 0.4881847938061441,
+      "ensemble_std": 0.5656956871445404,
+      "n_parameter_draws": 0
+    }
+  ],
+  "accepted": false,
+  "reason": "real-data parameter ensemble worsens energy, trajectory and coverage relative to the diagonal population model"
+}

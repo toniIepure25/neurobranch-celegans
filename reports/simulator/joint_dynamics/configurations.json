@@ -1,0 +1,112 @@
+{
+  "horizons": [
+    1,
+    5,
+    10,
+    20,
+    50,
+    100
+  ],
+  "primary_horizon": 20,
+  "members": 100,
+  "stride": 10,
+  "n_landmarks": 175,
+  "sessions": 5,
+  "fps": [
+    2.9046296296296297,
+    2.901851851851852,
+    2.8324074074074073,
+    3.0657407407407407,
+    2.797222222222222
+  ],
+  "models": [
+    {
+      "name": "J0_persistence",
+      "mean": "persistence",
+      "series": "persistence",
+      "innovation": "block",
+      "block": 20,
+      "lead1": false
+    },
+    {
+      "name": "J1_independent_diag",
+      "mean": "independent_ar",
+      "series": "independent_ar",
+      "innovation": "diag",
+      "block": 1,
+      "lead1": true
+    },
+    {
+      "name": "J2_population_diag",
+      "mean": "var",
+      "series": "population",
+      "innovation": "diag",
+      "block": 1,
+      "lead1": true
+    },
+    {
+      "name": "J3_population_full",
+      "mean": "var",
+      "series": "population",
+      "innovation": "full",
+      "block": 1,
+      "lead1": true
+    },
+    {
+      "name": "J4_independent_full",
+      "mean": "independent_ar",
+      "series": "independent_ar",
+      "innovation": "full",
+      "block": 1,
+      "lead1": true
+    },
+    {
+      "name": "J5_population_lead1_boot",
+      "mean": "var",
+      "series": "population",
+      "innovation": "block",
+      "block": 10,
+      "lead1": true
+    }
+  ],
+  "projection": "fixed 10-component PCA fitted on training frames only",
+  "subset": "top-20 training-variance neurons",
+  "seeds": "7000 + worm_id*10000 + landmark",
+  "dataset": "Kato et al. 2015 WT_NoStim",
+  "dataset_file": "data/raw/kato2015/WT_NoStim.mat",
+  "frames": [
+    3137,
+    3134,
+    3059,
+    3311,
+    3021
+  ],
+  "predictors": [
+    103,
+    103,
+    102,
+    103,
+    103
+  ],
+  "split": {
+    "train": "0:2195",
+    "validation": "2207:2677",
+    "test": "2689:3137",
+    "purge": 12
+  },
+  "landmarks": "35 per session, stride 10, horizon max 100, overlapping",
+  "innovation_rule": "only lead==1 causal prequential residuals",
+  "d4": {
+    "distribution": "multivariate Student-t",
+    "df": 5,
+    "scale": 0.85,
+    "selected_on": "validation only"
+  },
+  "parameter_uncertainty": {
+    "block": 25,
+    "draws": 5,
+    "members_per_draw": 20,
+    "window": 500
+  },
+  "historical_invalid_model": "P6_historical_block, multi-step pool, diagnostic only"
+}

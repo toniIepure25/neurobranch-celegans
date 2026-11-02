@@ -17,3 +17,6 @@ reports/simulator/probabilistic_adaptive/** -text
 
 # Uncertainty-calibration artifacts are covered by a SHA256 manifest.
 reports/simulator/uncertainty_calibration/** -text
+
+# Joint-dynamics artifacts are covered by a SHA256 manifest.
+reports/simulator/joint_dynamics/** -text

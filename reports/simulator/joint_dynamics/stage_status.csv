@@ -1,0 +1,9 @@
+stage,status,detail
+A reproduction,PASS,max relative difference 5.5e-9
+B population information,PARTIAL,mean helps; covariance hurts; marginal CRPS unresolved
+C innovation structure,PASS,lead-1 pool near white; temporal model not justified
+D calibration,FAIL,D1 best but 50% coverage fails; D2/D4 worse; D3 not fitted
+E probabilistic evaluation,FAIL,energy improves; coverage and covariance fail
+F robustness,PARTIAL,4/5 sessions; all-neuron CI includes zero; block-10 persistence CI crosses zero
+G generative trajectory,FAIL,trajectory energy and autocorr pass; covariance fails
+H parameter uncertainty,REJECTED,parameter ensemble worsens energy and coverage
