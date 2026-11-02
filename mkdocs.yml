@@ -113,6 +113,18 @@ nav:
       - Limitations: UNCAL_LIMITATIONS.md
       - Supervisor brief: UNCAL_SUPERVISOR_BRIEF.md
       - Next experiments: UNCAL_NEXT_EXPERIMENTS.md
+  - Joint neural dynamics and calibration:
+      - Protocol: JOINTDYN_PROTOCOL.md
+      - Reproduction: JOINTDYN_REPRODUCTION.md
+      - Population information: JOINTDYN_POPULATION_INFORMATION.md
+      - Innovation structure: JOINTDYN_INNOVATION_STRUCTURE.md
+      - Calibration: JOINTDYN_CALIBRATION.md
+      - Parameter uncertainty: JOINTDYN_PARAMETER_UNCERTAINTY.md
+      - Trajectory fidelity: JOINTDYN_TRAJECTORY_FIDELITY.md
+      - Results: JOINTDYN_RESULTS.md
+      - Limitations: JOINTDYN_LIMITATIONS.md
+      - Supervisor brief: JOINTDYN_SUPERVISOR_BRIEF.md
+      - Next experiments: JOINTDYN_NEXT_EXPERIMENTS.md
   - Phase 15:
       - Results: PHASE15_RESULTS.md
       - Methods: METHODS_PHASE15.md
