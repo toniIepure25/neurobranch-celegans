@@ -65,6 +65,14 @@ def test_app_retains_phase2_tabs_and_adds_prospective_tab():
         "Calibration",
         "Trajectory fidelity",
         "Gates",
+        "JOINT NEURAL DYNAMICS & CALIBRATION",
+        "Overview",
+        "Joint trajectories",
+        "Scores",
+        "Calibration",
+        "Covariance & autocorrelation",
+        "Uncertainty",
+        "Gates",
     ]
 
 

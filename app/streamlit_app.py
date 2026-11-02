@@ -43,6 +43,7 @@ sys.path.insert(0, str(ROOT / "app"))
 from adaptive_ui import render as render_adaptive  # noqa: E402
 from context_ui import render as render_context  # noqa: E402
 from genfail_ui import render as render_genfail  # noqa: E402
+from joint_dynamics_ui import render as render_joint_dynamics  # noqa: E402
 from probabilistic_ui import render as render_probabilistic  # noqa: E402
 from simulator_ui import render as render_simulator  # noqa: E402
 from uncertainty_ui import render as render_uncertainty  # noqa: E402
@@ -199,6 +200,7 @@ tabs = st.tabs(
         "ADAPTIVE DYNAMICS & STABILITY",
         "PROBABILISTIC ADAPTIVE SIMULATOR",
         "NEURAL UNCERTAINTY & CALIBRATION",
+        "JOINT NEURAL DYNAMICS & CALIBRATION",
     ]
 )
 
@@ -1372,6 +1374,9 @@ with tabs[18]:
 
 with tabs[19]:
     render_uncertainty()
+
+with tabs[20]:
+    render_joint_dynamics()
 
 st.divider()
 st.caption(EPISTEMIC_WARNING)
