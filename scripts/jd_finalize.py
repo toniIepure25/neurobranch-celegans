@@ -121,6 +121,7 @@ def main() -> None:
         "n_landmarks": 175,
         "primary_horizon": 20,
         "members": 100,
+        "trajectory_examples": "compact 10-member float32 visualization subset; all scores use 100 members",
         "stop_label": "PROBABILISTIC CALIBRATION NOT ESTABLISHED",
         "raw_recordings_committed": False,
         "model_weights_committed": False,
