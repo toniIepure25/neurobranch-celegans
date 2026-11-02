@@ -90,6 +90,17 @@ nav:
       - Limitations: ADAPTIVE_DYNAMICS_LIMITATIONS.md
       - Supervisor brief: ADAPTIVE_DYNAMICS_SUPERVISOR_BRIEF.md
       - Next experiments: ADAPTIVE_DYNAMICS_NEXT_EXPERIMENTS.md
+  - Probabilistic adaptive dynamics:
+      - Protocol: PROBADAPT_RESEARCH_PROTOCOL.md
+      - Baseline ablation: PROBADAPT_BASELINE_ABLATION.md
+      - Residual diagnostics: PROBADAPT_RESIDUAL_DIAGNOSTICS.md
+      - Stochastic models: PROBADAPT_STOCHASTIC_MODELS.md
+      - Probabilistic evaluation: PROBADAPT_PROBABILISTIC_EVALUATION.md
+      - Trajectory fidelity: PROBADAPT_TRAJECTORY_FIDELITY.md
+      - Results: PROBADAPT_RESULTS.md
+      - Limitations: PROBADAPT_LIMITATIONS.md
+      - Supervisor brief: PROBADAPT_SUPERVISOR_BRIEF.md
+      - Next experiments: PROBADAPT_NEXT_EXPERIMENTS.md
   - Phase 15:
       - Results: PHASE15_RESULTS.md
       - Methods: METHODS_PHASE15.md
