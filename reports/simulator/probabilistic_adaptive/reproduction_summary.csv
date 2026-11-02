@@ -1,0 +1,12 @@
+quantity,value,definition
+n_landmarks,175.0,"35 chronological test landmarks per session, stride 10 frames"
+frozen_mean_h20_mse,1.5971593750773094,unweighted mean over 175 landmarks
+rolling_w500_mean_h20_mse,0.940602179631416,unweighted mean over 175 landmarks
+mean_paired_difference,0.6565571954458932,mean_i(frozen_i - adaptive_i)
+relative_improvement_aggregate,0.4110780712877281,1 - mean_i(adaptive_i) / mean_i(frozen_i); ratio of aggregate MSEs
+relative_improvement_per_landmark_mean,0.3386255542548329,mean_i[(frozen_i - adaptive_i) / frozen_i]; equal weight per landmark
+mean_difference_over_frozen_mean,0.41107807128772794,mean_i(frozen_i - adaptive_i) / mean_i(frozen_i); a third aggregation of the same numbers
+max_abs_reproduction_difference_frozen,1.1035616864774056e-13,max |historical frozen MSE - recomputed frozen MSE|
+max_abs_reproduction_difference_rolling,4.698463840213662e-13,max |historical rolling w500 MSE - recomputed rolling MSE|
+train_standardized_predictor_mean_abs,1.1717139614120242e-07,mean absolute train-split predictor mean after existing standardization
+train_standardized_predictor_std_mean,0.9999998807907104,mean train-split predictor standard deviation after existing standardization

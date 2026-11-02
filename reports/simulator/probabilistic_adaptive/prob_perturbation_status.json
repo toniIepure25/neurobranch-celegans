@@ -1,0 +1,10 @@
+{
+  "stage": "H_perturbation_status",
+  "status": "NOT_LAUNCHED",
+  "reason": "The prespecified primary stochastic model failed Gate D (proper-score advantage over simple probabilistic baselines), Gate E (calibration) and Gate F (variance fidelity). Propagating an intervention through a model with 3.4x inflated total variance would produce a precise-looking but indefensible response.",
+  "warning": "MODEL-DEPENDENT VIRTUAL PERTURBATION — NOT CAUSALLY VALIDATED.",
+  "biological_interpretation": "NOT_EVALUABLE",
+  "screen_performed": false,
+  "neuron_ranking_performed": false,
+  "permitted_future_use": "Only after a stochastic model passes calibration and trajectory-fidelity gates, with common random numbers and a small prespecified neuron set."
+}

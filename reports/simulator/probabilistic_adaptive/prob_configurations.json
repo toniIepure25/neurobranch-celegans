@@ -1,0 +1,28 @@
+{
+  "primary_model": "P6_adaptive_block",
+  "conditional_mean": "Rolling VAR w500, ridge 1.0, spectral cap 0.995",
+  "n_members": 100,
+  "horizons": [
+    5,
+    20,
+    50,
+    100
+  ],
+  "projection": "per-session training-fitted PCA, 10 components",
+  "innovation_models": {
+    "P0": "persistence + moving-block difference bootstrap (block 20)",
+    "P1": "local mean + moving-block residual bootstrap (block 10)",
+    "P2": "independent adaptive AR + diagonal Gaussian innovations",
+    "P3": "frozen VAR + moving-block residual bootstrap (block 10)",
+    "P4": "adaptive VAR + Ledoit-Wolf Gaussian covariance",
+    "P5": "adaptive VAR + iid empirical residual bootstrap",
+    "P6": "adaptive VAR + moving-block residual bootstrap (block 10)",
+    "P7": "adaptive VAR + diagonal Gaussian innovations"
+  },
+  "baseline_config": {
+    "local_window": 100,
+    "ewma_halflife": 100.0,
+    "ar_window": 200
+  },
+  "selection_policy": "baseline settings selected on last 20% of train; innovation model selected on training residuals only"
+}

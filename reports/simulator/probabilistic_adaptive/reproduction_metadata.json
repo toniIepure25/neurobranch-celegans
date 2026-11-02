@@ -1,0 +1,21 @@
+{
+  "stage": "A_reproduction_and_metric_reconciliation",
+  "historical_artifact": "reports\\simulator\\adaptive_dynamics\\model_per_landmark.csv",
+  "git": {
+    "commit": "a33c1fd9dfcba63ab6cbd79ac9c897d2fa6b27ce",
+    "dirty": true,
+    "branch": "research/probabilistic-adaptive-dynamics"
+  },
+  "evaluation_landmarks": "split_starts(test, history=2, horizon=100)[::10]",
+  "frozen_baseline": "train-split-only weighted ridge VAR, ridge=1.0, spectral cap=0.995",
+  "primary_model": "prespecified Rolling VAR w500; not selected on test",
+  "primary_metric": "paired H20 free-running MSE improvement versus frozen VAR",
+  "relative_definitions": {
+    "aggregate": "1 - mean(adaptive MSE) / mean(frozen MSE) = 0.411078",
+    "per_landmark_mean": "mean[(frozen MSE - adaptive MSE)/frozen MSE] = 0.338626",
+    "difference_over_frozen_mean": "mean(frozen - adaptive)/mean(frozen) = 0.411078"
+  },
+  "uncertainty": "moving-block bootstrap over overlapping landmarks; blocks 1-50 reported",
+  "evidence_tier": "exploratory repeated-session reanalysis; not animal-level inference",
+  "overlap_note": "H20 forecasts at stride 10 overlap 10 frames; landmarks are dependent."
+}

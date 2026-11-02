@@ -1,0 +1,17 @@
+{
+  "stage": "G_trajectory_example",
+  "worm_id": 0,
+  "landmark": 2800,
+  "horizon": 20,
+  "n_stored_trajectories": 20,
+  "n_ensemble": 100,
+  "primary_model": "P6_adaptive_block",
+  "projection": "per-session training PCA, first two components for visualization only",
+  "warning": "MODEL-DEPENDENT VIRTUAL PERTURBATION \u2014 NOT CAUSALLY VALIDATED.",
+  "note": "Divergent simulated paths are not biological bifurcations.",
+  "git": {
+    "commit": "a33c1fd9dfcba63ab6cbd79ac9c897d2fa6b27ce",
+    "dirty": true,
+    "branch": "research/probabilistic-adaptive-dynamics"
+  }
+}

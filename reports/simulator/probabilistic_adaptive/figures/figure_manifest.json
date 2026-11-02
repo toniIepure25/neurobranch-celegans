@@ -1,0 +1,11 @@
+{
+  "figures": [
+    "prob_calibration.png",
+    "prob_energy_comparison.png",
+    "prob_example_rollouts.png",
+    "prob_horizon.png",
+    "prob_residual_autocorrelation.png",
+    "prob_variance_decomposition.png"
+  ],
+  "warning": "MODEL-DEPENDENT VIRTUAL PERTURBATION \u2014 NOT CAUSALLY VALIDATED."
+}

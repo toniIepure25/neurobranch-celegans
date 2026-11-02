@@ -1,0 +1,22 @@
+{
+  "stage": "D_E_F_probabilistic_adaptive",
+  "git": {
+    "commit": "a33c1fd9dfcba63ab6cbd79ac9c897d2fa6b27ce",
+    "dirty": true,
+    "branch": "research/probabilistic-adaptive-dynamics"
+  },
+  "primary_model": "P6_adaptive_block",
+  "n_landmarks": 175,
+  "n_models": 8,
+  "primary_score": "multivariate energy score on 10-D training PCA projection at H20, lower better",
+  "secondary_scores": [
+    "per-neuron CRPS",
+    "50/80/95% interval coverage and width",
+    "variogram score",
+    "PIT histogram",
+    "temporal covariance and autocorrelation error",
+    "OOD frequency"
+  ],
+  "uncertainty": "moving-block bootstrap over overlapping landmarks; not animal-level inference",
+  "evidence_tier": "exploratory repeated-session reanalysis"
+}

@@ -1,0 +1,12 @@
+{
+  "decision_rule": "block bootstrap if median absolute lag-1 residual autocorrelation > 0.1, otherwise iid bootstrap",
+  "train_median_abs_lag1_acf": 0.570071787508906,
+  "primary_model": "P6_adaptive_block",
+  "n_train_residuals": 8450,
+  "evidence": "training-split residual diagnostics only; no test residuals used for this choice",
+  "git": {
+    "commit": "a33c1fd9dfcba63ab6cbd79ac9c897d2fa6b27ce",
+    "dirty": true,
+    "branch": "research/probabilistic-adaptive-dynamics"
+  }
+}

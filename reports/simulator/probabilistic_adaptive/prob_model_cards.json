@@ -1,0 +1,50 @@
+{
+  "P6_adaptive_block": {
+    "type": "stochastic adaptive VAR",
+    "mean": "Rolling VAR w500",
+    "innovations": "moving-block empirical bootstrap, block 10",
+    "status": "prespecified primary"
+  },
+  "P5_adaptive_boot": {
+    "type": "stochastic adaptive VAR",
+    "mean": "Rolling VAR w500",
+    "innovations": "iid empirical bootstrap",
+    "status": "secondary comparator"
+  },
+  "P0_persistence": {
+    "type": "stochastic random walk",
+    "mean": "last observation",
+    "innovations": "moving-block difference bootstrap, block 20",
+    "status": "simple probabilistic baseline"
+  },
+  "P1_local_mean": {
+    "type": "stochastic local level",
+    "mean": "rolling mean window 100",
+    "innovations": "moving-block residual bootstrap, block 10",
+    "status": "strong simple baseline"
+  },
+  "P2_independent_ar": {
+    "type": "diagonal adaptive AR",
+    "mean": "independent AR(1), window 200",
+    "innovations": "diagonal Gaussian",
+    "status": "no cross-neuron coupling"
+  },
+  "P3_frozen_var": {
+    "type": "stochastic frozen VAR",
+    "mean": "train-only frozen VAR",
+    "innovations": "moving-block residual bootstrap, block 10",
+    "status": "historical reference"
+  },
+  "P4_adaptive_gauss": {
+    "type": "stochastic adaptive VAR",
+    "mean": "Rolling VAR w500",
+    "innovations": "Ledoit-Wolf Gaussian",
+    "status": "innovation sensitivity"
+  },
+  "P7_adaptive_diag": {
+    "type": "stochastic adaptive VAR",
+    "mean": "Rolling VAR w500",
+    "innovations": "diagonal Gaussian",
+    "status": "covariance sensitivity"
+  }
+}

@@ -1,0 +1,89 @@
+{
+  "stage": "I_decision_gates",
+  "protocol": "docs/PROBADAPT_RESEARCH_PROTOCOL.md",
+  "criteria_frozen_before_results": true,
+  "gates": {
+    "A_reproduction": {
+      "status": "PASS",
+      "max_abs_frozen_mse_difference": 1.103562e-13,
+      "max_abs_rolling_mse_difference": 4.698464e-13,
+      "aggregate_relative_improvement": 0.411078,
+      "mean_per_landmark_relative_improvement": 0.338626,
+      "block5_difference_ci": [0.326071, 0.985638],
+      "interpretation": "The prior deterministic result reproduces exactly. 41.1% is the ratio of aggregate MSEs; 33.9% is the equal-weight mean of per-landmark relative improvements."
+    },
+    "B_cross_neuron_information": {
+      "status": "FAIL",
+      "rolling_minus_local_mean": 0.026462,
+      "rolling_minus_local_mean_ci": [-0.129194, 0.151788],
+      "rolling_minus_independent_ar": 0.011046,
+      "rolling_minus_independent_ar_ci": [-0.079797, 0.077529],
+      "interpretation": "Full adaptive population VAR is not distinguishable from local-mean tracking or independent per-neuron AR once those baselines are allowed to adapt. The deterministic gain over frozen VAR is mostly local level adaptation, not demonstrated cross-neuron dynamics."
+    },
+    "C_innovation_diagnostics": {
+      "status": "DESCRIPTIVE_PASS",
+      "train_median_abs_lag1_residual_acf": 0.570072,
+      "effective_rank_mean": 27.43,
+      "n_train_residuals": 8450,
+      "primary_innovation_model": "P6_adaptive_block",
+      "interpretation": "Innovations are strongly autocorrelated and cross-correlated; block resampling was therefore prespecified. This choice is valid diagnostically but does not imply the resulting stochastic model is calibrated."
+    },
+    "D_probabilistic_score_advantage": {
+      "status": "FAIL",
+      "primary_energy_h20": 4.604596,
+      "local_mean_energy_h20": 3.263222,
+      "independent_ar_energy_h20": 3.076699,
+      "persistence_energy_h20": 2.948344,
+      "paired_vs_local_mean": -1.341375,
+      "paired_vs_local_mean_ci": [-1.766626, -0.955520],
+      "paired_vs_independent_ar": -1.527898,
+      "paired_vs_independent_ar_ci": [-1.887496, -1.210520],
+      "interpretation": "The prespecified primary stochastic model is worse than every simple probabilistic baseline. The block bootstrap interacts with the near-unit-root operator and inflates variance."
+    },
+    "E_calibration": {
+      "status": "FAIL",
+      "coverage_50": 0.904041,
+      "coverage_80": 0.991504,
+      "coverage_95": 0.998761,
+      "width_95": 9.966962,
+      "pit_calibration_error": 0.084952,
+      "spread_error_ratio": 14.847327,
+      "interpretation": "Intervals are far too wide and coverage is near 1. Calibration fails despite nominal-looking coverage."
+    },
+    "F_trajectory_fidelity": {
+      "status": "FAIL",
+      "total_std_ratio": 3.397823,
+      "within_ensemble_var": 11.460690,
+      "observed_var": 0.860892,
+      "error_var": 1.042051,
+      "temporal_covariance_error": 0.998033,
+      "ood_h20": 0.379611,
+      "interpretation": "The model implies about 3.4 times the observed standard deviation and is grossly overdispersed. Trajectory diversity is not credible."
+    },
+    "G_perturbation_sensitivity": {
+      "status": "MODEL_DEPENDENT_ONLY",
+      "interpretation": "No perturbation screen. A trajectory example is descriptive. Divergent paths are not biological bifurcations."
+    },
+    "H_biological_validation": {
+      "status": "NOT_EVALUABLE",
+      "interpretation": "No interventional data were used. No biological causal claim is possible."
+    }
+  },
+  "overall": "The conditional-mean improvement does not survive conversion to a calibrated stochastic simulator. The main scientific result is a negative structural finding: adaptive VAR mean accuracy and innovation uncertainty are incompatible in this parameterization, and the cross-neuron operator adds no demonstrated information beyond simpler adaptive baselines.",
+  "exploratory_secondary_finding": {
+    "model": "P7_adaptive_diag",
+    "energy_h20": 2.838000,
+    "paired_vs_local_mean": 0.425222,
+    "paired_vs_local_mean_ci": [0.077973, 0.788893],
+    "paired_vs_independent_ar": 0.238699,
+    "paired_vs_independent_ar_ci": [-0.018402, 0.470491],
+    "coverage_95": 0.985822,
+    "spread_error_ratio": 3.121309,
+    "status": "POST_HOC_EXPLORATORY_NOT_A_GATE_PASS",
+    "interpretation": "A diagonal-innovation variant scores better than the local mean but not reliably better than independent AR, and it remains strongly overdispersed. This is a lead for future work, not a calibrated simulator."
+  },
+  "git": {
+    "branch": "research/probabilistic-adaptive-dynamics",
+    "starting_commit": "a33c1fd9dfcba63ab6cbd79ac9c897d2fa6b27ce"
+  }
+}

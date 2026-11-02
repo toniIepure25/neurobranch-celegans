@@ -1,0 +1,6 @@
+worm_id,landmark_stride_frames,horizon_frames,adjacent_forecast_overlap_frames,adjacent_forecast_jaccard,n_landmarks,test_frames
+0,10,20,10,0.3333333333333333,35,448
+1,10,20,10,0.3333333333333333,35,447
+2,10,20,10,0.3333333333333333,34,436
+3,10,20,10,0.3333333333333333,38,474
+4,10,20,10,0.3333333333333333,33,430
