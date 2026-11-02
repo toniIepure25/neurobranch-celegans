@@ -125,6 +125,18 @@ nav:
       - Limitations: JOINTDYN_LIMITATIONS.md
       - Supervisor brief: JOINTDYN_SUPERVISOR_BRIEF.md
       - Next experiments: JOINTDYN_NEXT_EXPERIMENTS.md
+  - Kato neural interactions:
+      - Protocol: KATO_INTERACTIONS_PROTOCOL.md
+      - Reproduction: KATO_INTERACTIONS_REPRODUCTION.md
+      - Cross-neuron information: KATO_INTERACTIONS_CROSS_NEURON_INFORMATION.md
+      - Dynamical modes: KATO_INTERACTIONS_DYNAMICAL_MODES.md
+      - Neural states: KATO_INTERACTIONS_NEURAL_STATES.md
+      - Sensitivity: KATO_INTERACTIONS_SENSITIVITY.md
+      - Identifiability: KATO_INTERACTIONS_IDENTIFIABILITY.md
+      - Results: KATO_INTERACTIONS_RESULTS.md
+      - Limitations: KATO_INTERACTIONS_LIMITATIONS.md
+      - Supervisor brief: KATO_INTERACTIONS_SUPERVISOR_BRIEF.md
+      - Next experiments: KATO_INTERACTIONS_NEXT_EXPERIMENTS.md
   - Supervisor handoff:
       - Executive summary: HANDOFF_EXECUTIVE_SUMMARY.md
       - Research memo: HANDOFF_RESEARCH_MEMO.md
