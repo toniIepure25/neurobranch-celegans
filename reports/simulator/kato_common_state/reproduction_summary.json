@@ -1,0 +1,16 @@
+{
+  "status": "PASS",
+  "max_abs_reproduction_difference": 9.42922611990582e-07,
+  "max_abs_mse_difference": 1.6504589313015572e-06,
+  "max_abs_trajectory_difference": 5.142692334203502e-07,
+  "tolerance": 1e-06,
+  "tolerance_applies_to": "H20 energy",
+  "n_models": 5,
+  "j2_j5_mean_signed_energy_difference": 0.00013366374670657725,
+  "j2_j5_mean_abs_energy_difference": 0.12581798156029006,
+  "j2_j5_energy_ci_low": -0.02663731148661722,
+  "j2_j5_energy_ci_high": 0.024684393037085653,
+  "j2_j5_energy_correlation": 0.9922357198328192,
+  "j2_j5_mean_signed_trajectory_difference": -0.0023344750789807646,
+  "j2_j5_equivalent_mean": true
+}

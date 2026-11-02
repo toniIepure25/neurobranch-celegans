@@ -21,6 +21,7 @@ ROOT = Path(__file__).resolve().parents[1]
 OUT = ROOT / "reports" / "simulator" / "supervisor_handoff"
 JOINT = ROOT / "reports" / "simulator" / "joint_dynamics"
 INTERACTIONS = ROOT / "reports" / "simulator" / "kato_interactions"
+COMMON = ROOT / "reports" / "simulator" / "kato_common_state"
 
 INK = "#17202a"
 MUTED = "#5d6d7e"
@@ -47,6 +48,7 @@ SECTIONS = [
     "Calibration",
     "Perturbation boundary",
     "NEURAL INTERACTION & SENSITIVITY EXPLORER",
+    "COMMON-STATE PREDICTIVE CONTROLS",
     "Decision and next",
 ]
 
@@ -864,6 +866,101 @@ def section_interactions(summary: dict) -> None:
         )
 
 
+def section_common_state(summary: dict) -> None:
+    st.subheader("COMMON-STATE PREDICTIVE CONTROLS")
+    st.caption(
+        "Optional Kato-only reanalysis. It asks whether population history retains H20 "
+        "predictive information after own-neuron history, local drift and a fixed "
+        "ten-factor control. Predictive information is not coupling or causality."
+    )
+    needed = [
+        COMMON / "gates.json",
+        COMMON / "model_summary.csv",
+        COMMON / "paired_contrasts.csv",
+        COMMON / "residual_cross_neuron.csv",
+        COMMON / "decomposition.csv",
+        COMMON / "factor_variance.csv",
+        COMMON / "session_effects.csv",
+    ]
+    if not all(path.exists() for path in needed):
+        st.info(
+            "The optional common-state artifacts are absent. Run "
+            "`python scripts/kato_common_state_main.py` to populate "
+            "`reports/simulator/kato_common_state/`."
+        )
+        return
+    gates = load_json(str(COMMON / "gates.json"))
+    paired = load_csv(str(COMMON / "residual_cross_neuron.csv"))
+    primary = paired[paired["block"] == 5]
+    if primary.empty:
+        st.warning("Primary B3-B5 contrast is absent.")
+        return
+    row = primary.iloc[0]
+    cols = st.columns(4)
+    cols[0].metric("G4 residual information", gates["G4_residual_cross_neuron_information"]["status"])
+    cols[1].metric("B3 advantage (B5 - B3)", fmt(float(row["mean_improvement"])))
+    cols[2].metric(
+        "95% block interval",
+        f"[{fmt(float(row['ci_low']))}, {fmt(float(row['ci_high']))}]",
+    )
+    cols[3].metric("fraction better", f"{float(row['fraction_better']):.2f}")
+    st.markdown(
+        "Positive means the full population VAR (B3) has lower H20 energy than the "
+        "own-neuron-plus-ten-factor control (B5). The interval is a repeated-session "
+        "block interval, not an animal-level interval."
+    )
+    summary_table = load_csv(str(COMMON / "model_summary.csv"))
+    wanted = [
+        "B0_persistence",
+        "B1_matched_own",
+        "B2_own_trend",
+        "B4_matched_own_500",
+        "B5_common_k10",
+        "B3_population",
+    ]
+    labels = {
+        "B0_persistence": "B0 persistence",
+        "B1_matched_own": "B1m own AR",
+        "B2_own_trend": "B2 own + drift",
+        "B4_matched_own_500": "B4m own AR (500)",
+        "B5_common_k10": "B5 common factors (10)",
+        "B3_population": "B3 population VAR",
+    }
+    part = summary_table[summary_table["model"].isin(wanted)].copy()
+    part["label"] = part["model"].map(labels)
+    fig = go.Figure(
+        go.Bar(
+            x=part["energy_h20"],
+            y=part["label"],
+            orientation="h",
+            marker_color=TEAL,
+            text=[f"{v:.2f}" for v in part["energy_h20"]],
+            textposition="outside",
+        )
+    )
+    fig.update_layout(
+        height=330,
+        margin=dict(l=10, r=30, t=20, b=20),
+        xaxis_title="H20 multivariate energy (lower is better)",
+        yaxis_title="",
+        showlegend=False,
+    )
+    st.plotly_chart(fig, width="stretch")
+    decomp = load_csv(str(COMMON / "decomposition.csv"))
+    st.dataframe(
+        decomp[["contrast", "mean_improvement", "ci_low", "ci_high", "fraction_better"]],
+        hide_index=True,
+        width="stretch",
+    )
+    st.caption(
+        "Own history, drift, window, common factors and residual cross-neuron terms are "
+        "separate paired contrasts. Common factors are statistical PCA controls, not "
+        "measured biological inputs. G7 structural identifiability is FAIL; G8 biological "
+        "intervention validity is NOT_EVALUABLE."
+    )
+    st.warning(WARNING)
+
+
 def section_decision(summary: dict) -> None:
     st.subheader("Do not run another architecture search on the reused test split")
     st.markdown(
@@ -951,6 +1048,7 @@ def main() -> None:
         "---\n"
         "**Route:** Start → Timeline → Central → Real trajectory → Mean vs stochastic → "
         "Calibration → Perturbation → Decision. The interaction explorer is optional.\n\n"
+        "The common-state controls view is an optional follow-up.\n\n"
         "The sidebar does not change any data. All views are read-only."
     )
     st.sidebar.caption(f"Artifacts: `{OUT.relative_to(ROOT)}`")
@@ -971,6 +1069,8 @@ def main() -> None:
         section_perturbation(summary)
     elif section == "NEURAL INTERACTION & SENSITIVITY EXPLORER":
         section_interactions(summary)
+    elif section == "COMMON-STATE PREDICTIVE CONTROLS":
+        section_common_state(summary)
     elif section == "Decision and next":
         section_decision(summary)
     footer(summary)

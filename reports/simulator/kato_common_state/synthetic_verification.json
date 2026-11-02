@@ -1,0 +1,7 @@
+{
+  "status": "PASS",
+  "direct_mean_b3_minus_b5_3_mse_gain": 0.00200401069381638,
+  "common_mean_b3_minus_b5_3_mse_gain": -0.0006839509951336956,
+  "direct_seeds_positive": 6,
+  "n_direct": 6
+}

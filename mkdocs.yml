@@ -137,6 +137,13 @@ nav:
       - Limitations: KATO_INTERACTIONS_LIMITATIONS.md
       - Supervisor brief: KATO_INTERACTIONS_SUPERVISOR_BRIEF.md
       - Next experiments: KATO_INTERACTIONS_NEXT_EXPERIMENTS.md
+  - Kato common-state controls:
+      - Protocol: KATO_COMMON_STATE_PROTOCOL.md
+      - Model controls: KATO_COMMON_STATE_CONTROLS.md
+      - Synthetic audit: KATO_COMMON_STATE_SYNTHETIC.md
+      - Results: KATO_COMMON_STATE_RESULTS.md
+      - Limitations: KATO_COMMON_STATE_LIMITATIONS.md
+      - Supervisor note: KATO_COMMON_STATE_SUPERVISOR_NOTE.md
   - Supervisor handoff:
       - Executive summary: HANDOFF_EXECUTIVE_SUMMARY.md
       - Research memo: HANDOFF_RESEARCH_MEMO.md

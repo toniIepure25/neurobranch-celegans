@@ -1,0 +1,13 @@
+model,reference,metric,n_pairs,mean_improvement,ci_low,ci_high,fraction_better,block,sign_convention
+B3_population,surrogate_circular_full,energy_h20,175,1.270421228685306,0.9613892471159424,1.5177234833655975,0.8114285714285714,3,surrogate minus B3; positive means B3 has lower energy
+B3_population,surrogate_circular_full,energy_h20,175,1.270421228685306,0.8897757043840422,1.5827115901582243,0.8114285714285714,5,surrogate minus B3; positive means B3 has lower energy
+B3_population,surrogate_circular_full,energy_h20,175,1.270421228685306,0.8476976641610177,1.5211459377273506,0.8114285714285714,10,surrogate minus B3; positive means B3 has lower energy
+B3_population,surrogate_block_full,energy_h20,175,1.4378563623663503,1.0907263852360067,1.7232289172298447,0.8114285714285714,3,surrogate minus B3; positive means B3 has lower energy
+B3_population,surrogate_block_full,energy_h20,175,1.4378563623663503,1.0097576143736144,1.7990691100850926,0.8114285714285714,5,surrogate minus B3; positive means B3 has lower energy
+B3_population,surrogate_block_full,energy_h20,175,1.4378563623663503,0.9461077701137249,1.759659044643217,0.8114285714285714,10,surrogate minus B3; positive means B3 has lower energy
+B3_population,surrogate_common_preserved_residual_shift,energy_h20,175,0.5572535031765835,0.35179981858003134,0.7311638908660976,0.7485714285714286,3,surrogate minus B3; positive means B3 has lower energy
+B3_population,surrogate_common_preserved_residual_shift,energy_h20,175,0.5572535031765835,0.31616337462098487,0.7676616523997206,0.7485714285714286,5,surrogate minus B3; positive means B3 has lower energy
+B3_population,surrogate_common_preserved_residual_shift,energy_h20,175,0.5572535031765835,0.28254286647924953,0.7273086393256366,0.7485714285714286,10,surrogate minus B3; positive means B3 has lower energy
+B3_population,surrogate_residual_preserved_factor_shift,energy_h20,175,1.4706999387691588,1.2356603763907794,1.6558237103028253,0.88,3,surrogate minus B3; positive means B3 has lower energy
+B3_population,surrogate_residual_preserved_factor_shift,energy_h20,175,1.4706999387691588,1.197411551499245,1.6762978033070457,0.88,5,surrogate minus B3; positive means B3 has lower energy
+B3_population,surrogate_residual_preserved_factor_shift,energy_h20,175,1.4706999387691588,1.159330028407886,1.6625022618297531,0.88,10,surrogate minus B3; positive means B3 has lower energy

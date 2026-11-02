@@ -1,7 +1,7 @@
 {
   "schema": "neurobranch.kato_interactions.manifest.v1",
-  "generated_utc": "2026-11-02T20:35:26.715328+00:00",
-  "git_head": "f29b3d56aa96410f1423161c0a4d1b2feffc7192",
+  "generated_utc": "2026-11-02T23:01:03.351858+00:00",
+  "git_head": "4896ab13fb939d4617fd80dfd3f2021b1ff27c90",
   "dataset": "Kato et al. (2015) WT_NoStim only",
   "protocol": "docs/KATO_INTERACTIONS_PROTOCOL.md",
   "n_files": 36,
@@ -168,13 +168,13 @@
     },
     {
       "path": "app/handoff_demo.py",
-      "bytes": 39274,
-      "sha256": "0ccd6cc6410d9109862fd68d145e37155a98a9d9ae432ee4654b30f64ebda07d"
+      "bytes": 43203,
+      "sha256": "f852e719ebd5c0296288cf77e07f40f8555388afa4f32ce662f1bf5e66abc967"
     },
     {
       "path": "mkdocs.yml",
-      "bytes": 8419,
-      "sha256": "8fe00d6491c387448e4e101c947f35e7bedaea7ce5e9cbb4376a273fb8ec80d0"
+      "bytes": 8771,
+      "sha256": "5c5d5da0ac387fe78df6cdec580ffa0a791b1b011453674f61bfffa836685902"
     },
     {
       "path": "reports/simulator/joint_dynamics/scores_by_landmark.csv",

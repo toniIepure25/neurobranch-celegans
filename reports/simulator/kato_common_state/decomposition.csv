@@ -1,0 +1,7 @@
+model,reference,metric,n_pairs,mean_improvement,ci_low,ci_high,fraction_better,block,contrast,positive_means,fraction_of_population_gain
+B1_matched_own,B0_persistence,pca10_energy_h20,175,0.6110443961599828,0.49293063594215664,0.8370468199258405,0.7942857142857143,5,own_history_B1m_vs_B0,B1_matched_own,
+B2_own_trend,B1_matched_own,pca10_energy_h20,175,-0.5226095780829315,-0.7150103856008294,-0.3020770016501362,0.22285714285714286,5,local_drift_B2_vs_B1m,B2_own_trend,
+B4_matched_own_500,B1_matched_own,pca10_energy_h20,175,-0.19375370437744185,-0.36539007516857835,-0.06893408859625079,0.4057142857142857,5,window_B4m_vs_B1m,B4_matched_own_500,
+B5_common_k10,B4_matched_own_500,pca10_energy_h20,175,0.27507939616572663,0.15050331413732163,0.4082472140961517,0.6514285714285715,5,common_factors_B5_vs_B4m,B5_common_k10,0.5098619652652594
+B3_population,B5_common_k10,pca10_energy_h20,175,0.2644379926683563,0.07499291957903519,0.40311649156808815,0.64,5,residual_cross_B3_vs_B5,B3_population,0.49013803473474066
+B3_population,B4_matched_own_500,pca10_energy_h20,175,0.539517388834083,0.34701707652426006,0.6863100089170878,0.7257142857142858,5,population_B3_vs_B4m,B3_population,

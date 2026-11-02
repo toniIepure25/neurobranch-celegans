@@ -27,6 +27,9 @@ reports/simulator/uncertainty_calibration/** -text
 # Joint-dynamics artifacts are covered by a SHA256 manifest.
 reports/simulator/joint_dynamics/** -text
 
+# Common-state control artifacts are byte-hashed.
+reports/simulator/kato_common_state/** -text
+
 # Supervisor-handoff figures, PDFs and manifests are byte-hashed.
 reports/simulator/supervisor_handoff/** -text
 

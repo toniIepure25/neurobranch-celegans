@@ -1,0 +1,15 @@
+model,family,window,n_parameters_per_neuron_or_total,penalty,intercept,innovation,role
+B0_persistence,none,,0,none,none,common_J5,persistence
+B1_historical,historical independent AR,200.0,2,weak (1 added to sum of squares),unpenalized,J1 exact,JD J1
+B1_matched_own,matched independent AR,200.0,2,ridge 1.0,unpenalized,common_J5,own lag only
+B2_own_trend,own AR + local linear drift,200.0,3,ridge 1.0,unpenalized,common_J5,own lag + target-frame time
+B4_matched_own_500,matched independent AR,500.0,2,ridge 1.0,unpenalized,common_J5,"own lag only, matched window"
+B5_common_k1,own AR + 1 common factor,500.0,3,ridge 1.0,unpenalized,common_J5,factor VAR + own lag
+B5_common_k3,own AR + 3 common factors,500.0,5,ridge 1.0,unpenalized,common_J5,factor VAR + own lag
+B5_common_k5,own AR + 5 common factors,500.0,7,ridge 1.0,unpenalized,common_J5,factor VAR + own lag
+B5_common_k10,own AR + 10 common factors,500.0,12,ridge 1.0,unpenalized,common_J5,"factor VAR + own lag, primary control"
+B3_population,full population VAR,500.0,n*(n+1),ridge 1.0,unpenalized,common_J5,full lag-one population operator
+B6_coefficient_ablation,B3 with off-diagonals zeroed,500.0,n diagonal + n intercept,inherited,unpenalized,common_J5,"coefficient ablation, not refit"
+B4r_historical,historical independent AR,500.0,2,weak (1 added to sum of squares),unpenalized,J5 exact,reproduction only
+J2_population_diag,historical population VAR,500.0,n*(n+1),ridge 1.0,unpenalized,J2 exact,reproduction only
+J5_population_lead1_boot,historical population VAR,500.0,n*(n+1),ridge 1.0,unpenalized,J5 exact,reproduction only

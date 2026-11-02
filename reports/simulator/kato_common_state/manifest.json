@@ -1,0 +1,111 @@
+{
+  "schema": "kato_common_state_manifest_v1",
+  "git_head": "4896ab13fb939d4617fd80dfd3f2021b1ff27c90",
+  "files": {
+    "analysis_summary.json": {
+      "sha256": "a86d6b4c866e620a8985cd09281aeb2e4ea74495856dab4046dbe8174b33bb3e",
+      "bytes": 445
+    },
+    "decomposition.csv": {
+      "sha256": "a9765f67fbce8ffedf8970a5a0418bb1c5eb7299d6d5fdb173e87281faecb37a",
+      "bytes": 1189
+    },
+    "factor_variance.csv": {
+      "sha256": "51b0f8f9510dae994ea3a822bdc33c689dd30c513ff80e2225d6d0d542122535",
+      "bytes": 965
+    },
+    "figures/decomposition.png": {
+      "sha256": "67e16b530b9e54f26c484474fa2b6b595913dad7af8835b8005b11114709924c",
+      "bytes": 49083
+    },
+    "figures/model_ladder.png": {
+      "sha256": "a624f357c0e61ae1442c53306e80c51b9a370ef6a5c8668f763557c01c75d474",
+      "bytes": 46155
+    },
+    "figures/session_effects.png": {
+      "sha256": "2bc5e0113ba3713939444df51f6d252461526d222f5b179026a0c29fbb4a2c62",
+      "bytes": 29001
+    },
+    "figures/surrogate_controls.png": {
+      "sha256": "ba74b0a1f7a395777c7acb7257b16e6f8797cb31a00c70edbf0c2fb9bfdb7d38",
+      "bytes": 40139
+    },
+    "figures/synthetic_controls.png": {
+      "sha256": "790aaf148263b64d1e024e94c798d3cc21b59ed15715c6f2b2d8f17cd6e9b093",
+      "bytes": 38008
+    },
+    "gates.json": {
+      "sha256": "cfa01eaf38af68e5b2ed859dcae86d1a5bd29700998daa856869969ce3bc612f",
+      "bytes": 1681
+    },
+    "horizon_profile.csv": {
+      "sha256": "15fcff390aebf12eaabb61aae20bc9159008314984850e2a34fdd08524bcbdd8",
+      "bytes": 1381
+    },
+    "model_config.csv": {
+      "sha256": "9d74ec025ff218ff67ccb98954b9bb0429801a87a85bf3616ced2b6d7df16175",
+      "bytes": 1605
+    },
+    "model_per_landmark.csv": {
+      "sha256": "faa430f1a69350dcc135b83ef72d944fd9fa53a3dd222adfecca33573aac862d",
+      "bytes": 918797
+    },
+    "model_summary.csv": {
+      "sha256": "cae056359fc35e8840d0cb872add5917d532820ba37bc3d571394c14d8260602",
+      "bytes": 2038
+    },
+    "paired_contrasts.csv": {
+      "sha256": "ea097e24611ba37f253efa5c80041faa0e101dc5d61c0627ce1bcb01b8f4c038",
+      "bytes": 5246
+    },
+    "representation_sensitivity.csv": {
+      "sha256": "6bedc019fe07b01c6a7d9ef6077cdd14abcf7a101fa748b5c0eca0a9fc077d75",
+      "bytes": 652
+    },
+    "reproduction_summary.json": {
+      "sha256": "4e56a225825ef137a54957bedcf101a2ea8505082be43c92280a5175e6dc740f",
+      "bytes": 656
+    },
+    "residual_cross_neuron.csv": {
+      "sha256": "a874680aa3669ad24c0ce1edf897dd1e750bfde66c9b78c1632c13010f211852",
+      "bytes": 594
+    },
+    "session_effects.csv": {
+      "sha256": "a8b98b8516dd73a4d2c2a8400df04e1c06e5d58f55691c58d01721ceda460bac",
+      "bytes": 172
+    },
+    "stage_a_comparison.csv": {
+      "sha256": "a7ca03c3ed5ec482e2f9e38acf741bec2f4a07f3385654c6762c8535bc3d7d0a",
+      "bytes": 1450
+    },
+    "surrogate_diagnostics.csv": {
+      "sha256": "b7c78d16bd377a7569834a8347892df122fd3c311539a7ca5dc47205477c1330",
+      "bytes": 337155
+    },
+    "surrogate_draws.csv": {
+      "sha256": "7e30654224ce47c6fbf20c26544add8f0304a9aac722497eca7f8a44a3012460",
+      "bytes": 406393
+    },
+    "surrogate_paired.csv": {
+      "sha256": "1aad9e991f5e72bdf7613130adbcbb423a81af15c2a4ec034c41ad43e3d9bc4f",
+      "bytes": 2404
+    },
+    "surrogate_summary.csv": {
+      "sha256": "88c5cbe4168c2fcaf42010163891d949dcbe396b3a3b4e1ef60b72947d334bcf",
+      "bytes": 378
+    },
+    "synthetic_audit.csv": {
+      "sha256": "8eb5e818059e244f0ed8c6b36c9ae349caad8d33f69245ca2e4dd0b58ff9cb06",
+      "bytes": 3715
+    },
+    "synthetic_summary.csv": {
+      "sha256": "69ca14b55a354e22433bb862596d32fc1900b692bafea90c17fa0fbd1d28de2d",
+      "bytes": 799
+    },
+    "synthetic_verification.json": {
+      "sha256": "7c7760ad34442c426b30fa9c37ad55976701b940f3f0f8a2f492cb3660b10fcb",
+      "bytes": 200
+    }
+  },
+  "n_files": 26
+}
