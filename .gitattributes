@@ -14,3 +14,6 @@ docs/assets/adaptive_dynamics/** -text
 
 # Probabilistic report figures and CSV bytes are covered by manifest hashes.
 reports/simulator/probabilistic_adaptive/** -text
+
+# Uncertainty-calibration artifacts are covered by a SHA256 manifest.
+reports/simulator/uncertainty_calibration/** -text

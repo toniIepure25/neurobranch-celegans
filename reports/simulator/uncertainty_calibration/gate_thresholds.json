@@ -1,0 +1,29 @@
+{
+  "D": "H20 CRPS improvement over P0 and P1 with paired 95% bootstrap lower bound > 0",
+  "E": {
+    "coverage_50": 0.07,
+    "coverage_80": 0.07,
+    "coverage_95": 0.05,
+    "pit_error_max": 0.05,
+    "width_ratio_range": [
+      0.3,
+      2.0
+    ],
+    "standardized_error_variance_range": [
+      0.7,
+      1.4
+    ],
+    "max_horizon_deviation": 0.12
+  },
+  "F": {
+    "trajectory_improvement_ci_low": 0.0,
+    "total_std_ratio_range": [
+      0.75,
+      1.35
+    ],
+    "autocorrelation_error_max": 0.25,
+    "covariance_relative_error_max": 0.5,
+    "ood_max": 0.2
+  },
+  "frozen_before_final_evaluation": true
+}

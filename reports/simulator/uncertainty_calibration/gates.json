@@ -1,0 +1,43 @@
+{
+  "A_reproduction": "PASS",
+  "B_variance_failure_diagnosed": "PASS",
+  "C_innovation_assumptions": "PASS_FOR_PRIMARY_ONLY",
+  "D_proper_score_improvement": "PASS",
+  "E_marginal_calibration": "FAIL",
+  "F_joint_trajectory_fidelity": "FAIL",
+  "G_generative_credibility": "FAIL",
+  "H_biological_intervention": "NOT_EVALUABLE",
+  "stop_label": "PROBABILISTIC CALIBRATION NOT ESTABLISHED",
+  "primary_model": "P2_independent_ar_lead1",
+  "diagnostic_population_lead1_marginal_calibration": false,
+  "diagnostic_population_lead1_95_calibrated": true,
+  "diagnostic_population_lead1_50_calibrated": false,
+  "diagnostic_population_lead1_joint_pass": false,
+  "gate_e_values": {
+    "coverage_50": 0.4725481674634217,
+    "coverage_80": 0.7470182046453233,
+    "coverage_95": 0.8906755516925009,
+    "width_ratio": 0.7306312516746208,
+    "pit_error": 0.014492249746487034,
+    "standardized_error_variance": 1.730138769432111,
+    "max_horizon_coverage_deviation": 0.12407680546895439
+  },
+  "gate_f_values": {
+    "trajectory_improvement_over_p0": -0.1493340983893183,
+    "trajectory_ci_low": -0.29838253577806484,
+    "relative_covariance_error": 0.728826361642233,
+    "temporal_autocorrelation_error": 0.4269136793299111,
+    "ood_fraction": 0.0756018324530897,
+    "total_std_ratio": 0.5169987619781579
+  },
+  "diagnostic_p6_lead1_values": {
+    "coverage_50": 0.5899367424791153,
+    "coverage_80": 0.8501617654160027,
+    "coverage_95": 0.9477521850403207,
+    "crps_h20": 0.4152106636316636,
+    "trajectory_improvement_over_p0": 0.22582498163389533,
+    "trajectory_ci_low": 0.08791854455387788,
+    "relative_covariance_error": 0.4915928510553461
+  },
+  "warning": "MODEL-DEPENDENT VIRTUAL PERTURBATION \u2014 NOT CAUSALLY VALIDATED."
+}

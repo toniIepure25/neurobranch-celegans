@@ -1,0 +1,16 @@
+{
+  "block_all_over_analytic_all": 2.7615037493251835,
+  "block_lead1_over_analytic_lead1": 1.0352490635195863,
+  "block_all_over_block_lead1": 3.2333499265685854,
+  "analytic_lead1_over_all": 0.8208281706427173,
+  "gaussian_mc_over_analytic_lead1": 1.000354912375116,
+  "p20_over_q_lead1": 2.2503600280189016,
+  "p100_over_p20_lead1": 1.6579881479926857,
+  "operator_norm_a20_median": 5.915437070132295,
+  "spectral_radius_median": 0.9912528597009324,
+  "nonnormality_median": 0.6918740457091475,
+  "residual_trace_lead1_median": 41.33354827018299,
+  "residual_trace_all_median": 47.42431165212408,
+  "observed_h20_mse_mean": 1.0361183669985083,
+  "observed_h1_mse_mean": 0.3424783207187306
+}

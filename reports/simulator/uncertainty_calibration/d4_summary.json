@@ -1,0 +1,11 @@
+{
+  "factors": {
+    "0": 2.9742998743850917,
+    "1": 1.8430210966076768,
+    "2": 4.0,
+    "3": 3.794337988690379,
+    "4": 2.181056224199884
+  },
+  "mean_factor": 2.9585430367766063,
+  "note": "Validation-fitted global variance scaling; diagnostic only."
+}

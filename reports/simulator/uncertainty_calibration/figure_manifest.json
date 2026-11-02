@@ -1,0 +1,32 @@
+[
+  {
+    "figure": "uncal_coverage_by_horizon.png",
+    "bytes": 118509,
+    "sha256": "a65ba71995a6e86aa1a005c4a3c995fc946d81c785012e2a6fdaa51cab3c608e"
+  },
+  {
+    "figure": "uncal_energy_comparison.png",
+    "bytes": 41851,
+    "sha256": "d57fc9d59f901d5d915195fee356f2bbf432c82d65d858613461c705c291ebca"
+  },
+  {
+    "figure": "uncal_example_trajectory.png",
+    "bytes": 60341,
+    "sha256": "4da71487d7c58e84278913226f473e6bc88baa157d2c725be74fe6f9ca327666"
+  },
+  {
+    "figure": "uncal_lead_pooling.png",
+    "bytes": 46316,
+    "sha256": "b7b75ea67bf73ac67c3c5ca6d05b4dfa110433176ee65d59e27d85b36cb379fc"
+  },
+  {
+    "figure": "uncal_pit.png",
+    "bytes": 52601,
+    "sha256": "cb7c1e50e4db2ee4f22daac8e49482b3483bc95f3a83c7bcfb589bc21ecabdaf"
+  },
+  {
+    "figure": "uncal_variance_growth.png",
+    "bytes": 73246,
+    "sha256": "8127f94e959c361444510b8634d7c4c9c14fac64d45edead500f93b986385933"
+  }
+]

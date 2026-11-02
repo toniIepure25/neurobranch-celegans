@@ -1,0 +1,24 @@
+{
+  "study": "Neural uncertainty decomposition and calibrated forecasts",
+  "status": "exploratory repeated-session reanalysis",
+  "historical_reports_frozen": true,
+  "raw_recordings_committed": false,
+  "large_weights_committed": false,
+  "reproduction_commands": [
+    "python scripts/uncal_diagnostics.py",
+    "python scripts/uncal_evaluation.py",
+    "python scripts/uncal_d4.py",
+    "python scripts/uncal_lowrank.py",
+    "python scripts/uncal_synthetic.py",
+    "python scripts/uncal_reproduction.py",
+    "python scripts/uncal_summarize.py",
+    "python scripts/uncal_examples.py",
+    "python scripts/uncal_figures.py",
+    "python scripts/uncal_manifest.py",
+    "python scripts/validate_uncal_reports.py"
+  ],
+  "warning": "MODEL-DEPENDENT VIRTUAL PERTURBATION \u2014 NOT CAUSALLY VALIDATED.",
+  "biological_validation": "NOT_EVALUABLE",
+  "repeated_sessions_not_animals": true,
+  "landmark_overlap": "H20 landmarks overlap by 10 frames; H50/H100 overlap more"
+}

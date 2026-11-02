@@ -1,0 +1,6 @@
+{
+  "status": "NOT_LAUNCHED",
+  "reason": "Generative gate failed; no neuron ranking, stimulation-target search or perturbation screen was performed.",
+  "warning": "MODEL-DEPENDENT VIRTUAL PERTURBATION \u2014 NOT CAUSALLY VALIDATED.",
+  "biological_validation": "NOT_EVALUABLE"
+}

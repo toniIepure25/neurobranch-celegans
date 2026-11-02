@@ -1,0 +1,13 @@
+{
+  "chosen_rank_by_session": {
+    "0": 0,
+    "1": 3,
+    "2": 0,
+    "3": 0,
+    "4": 0
+  },
+  "mean_rank": 0.6,
+  "diagonal_wins_sessions": 4,
+  "build_lowrank_model": false,
+  "reason": "Diagonal covariance won the held-out Gaussian likelihood in most sessions; low-rank did not add stable value."
+}

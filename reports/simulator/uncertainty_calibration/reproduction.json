@@ -1,0 +1,9 @@
+{
+  "gate": "PASS",
+  "max_relative_difference": 0.007391233330636711,
+  "historical_energy": 4.604596489334302,
+  "rerun_energy": 4.608757251598473,
+  "historical_frozen_mse": 1.597159,
+  "historical_rolling_mse": 0.940602,
+  "note": "Rerun P6 with the frozen 1000-residual history and block-50 adaptive residual definition; no historical artifact was overwritten."
+}

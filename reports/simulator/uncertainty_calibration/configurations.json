@@ -1,0 +1,103 @@
+{
+  "branch": "research/neural-uncertainty-calibration",
+  "starting_head": "2c94fe7c1120a7536367ac962f8586797969f5c9",
+  "data": "Kato WT_NoStim, five repeated sessions, existing train-standardized X",
+  "split": {
+    "train_frames": "0:2195",
+    "validation_frames": "2207:2677",
+    "test_frames": "2689:3137",
+    "test_landmarks": "split_starts(test, history=2, horizon=100)[::10]",
+    "n_landmarks": 175,
+    "horizons": [
+      1,
+      5,
+      10,
+      20,
+      50,
+      100
+    ],
+    "primary_horizon": 20
+  },
+  "ensembles": {
+    "n_members": 100,
+    "seed_formula": "7000 + worm_id*10000 + landmark",
+    "pca_components": 10
+  },
+  "baselines": {
+    "P0_persistence": {
+      "innovation": "moving-block bootstrap",
+      "block": 20,
+      "history": 1000
+    },
+    "P1_local_mean": {
+      "window": 100,
+      "innovation": "moving-block bootstrap",
+      "block": 10,
+      "history": 1000
+    },
+    "P6_adaptive_block": {
+      "mean": "rolling VAR w500",
+      "residual_block": 50,
+      "innovation": "moving-block bootstrap",
+      "innovation_block": 10,
+      "history": 1000
+    },
+    "P6_adaptive_lead1": {
+      "mean": "rolling VAR w500",
+      "residual_block": 10,
+      "innovation": "moving-block bootstrap",
+      "innovation_block": 10,
+      "lead": 1,
+      "history": 1000
+    }
+  },
+  "primary": {
+    "name": "P2_independent_ar_lead1",
+    "mean": "independent per-neuron AR(1)",
+    "window": 200,
+    "ridge": 1.0,
+    "spectral_cap": 0.995,
+    "residual_block": 10,
+    "innovation_lead": 1,
+    "innovation": "diagonal Gaussian",
+    "scale_history": 1000
+  },
+  "secondary": {
+    "P2_fixed_train_scale": {
+      "scale": "training lead-1 residuals only"
+    },
+    "P3_state_ar": {
+      "variance_features": [
+        "abs_level",
+        "abs_change",
+        "recent_std",
+        "recent_abs_mean"
+      ],
+      "ridge": 1.0,
+      "clip": [
+        0.01,
+        3.0
+      ]
+    }
+  },
+  "scores": {
+    "primary": "mean per-neuron CRPS at H20",
+    "secondary": [
+      "energy",
+      "CRPS",
+      "variogram",
+      "PIT",
+      "coverage",
+      "width",
+      "variance ratio",
+      "covariance error",
+      "autocorrelation error",
+      "OOD"
+    ],
+    "trajectory_representation": "flattened H20 x 10-D training PCA, normalized by sqrt(20)"
+  },
+  "uncertainty": {
+    "block_bootstrap": 5,
+    "n_boot": 1000
+  }
+}

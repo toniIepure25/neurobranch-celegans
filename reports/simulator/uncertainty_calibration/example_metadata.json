@@ -1,0 +1,19 @@
+{
+  "worm_id": 0,
+  "landmark": 2750,
+  "horizon": 20,
+  "members": 200,
+  "selected_neurons": [
+    "1",
+    "2",
+    "3",
+    "6"
+  ],
+  "models": [
+    "P2_independent_ar_lead1",
+    "P0_persistence",
+    "P6_adaptive_block",
+    "P6_adaptive_lead1"
+  ],
+  "note": "Executed ensembles; not decorative trajectories."
+}
