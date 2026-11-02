@@ -81,6 +81,15 @@ nav:
       - Results: GENFAIL_RESULTS.md
       - Supervisor brief: GENFAIL_SUPERVISOR_BRIEF.md
       - Next experiments: GENFAIL_NEXT_EXPERIMENTS.md
+  - Adaptive dynamics and stability:
+      - Protocol: ADAPTIVE_DYNAMICS_PROTOCOL.md
+      - Nonstationarity: ADAPTIVE_DYNAMICS_NONSTATIONARITY.md
+      - Calcium stability: ADAPTIVE_DYNAMICS_CALCIUM_STABILITY.md
+      - Models: ADAPTIVE_DYNAMICS_MODELS.md
+      - Results: ADAPTIVE_DYNAMICS_RESULTS.md
+      - Limitations: ADAPTIVE_DYNAMICS_LIMITATIONS.md
+      - Supervisor brief: ADAPTIVE_DYNAMICS_SUPERVISOR_BRIEF.md
+      - Next experiments: ADAPTIVE_DYNAMICS_NEXT_EXPERIMENTS.md
   - Phase 15:
       - Results: PHASE15_RESULTS.md
       - Methods: METHODS_PHASE15.md
