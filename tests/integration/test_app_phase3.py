@@ -44,6 +44,12 @@ def test_app_retains_phase2_tabs_and_adds_prospective_tab():
         "Identifiability",
         "Oxygen response",
         "Perturbation",
+        "ADAPTIVE DYNAMICS & STABILITY",
+        "Overview",
+        "Nonstationarity",
+        "Calcium stability",
+        "Adaptive models",
+        "Perturbation",
     ]
 
 

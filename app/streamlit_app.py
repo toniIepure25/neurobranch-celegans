@@ -40,6 +40,7 @@ from neurobranch.preprocessing import split_starts  # noqa: E402
 from neurobranch.reporting.status import load_measurement_status  # noqa: E402
 
 sys.path.insert(0, str(ROOT / "app"))
+from adaptive_ui import render as render_adaptive  # noqa: E402
 from context_ui import render as render_context  # noqa: E402
 from genfail_ui import render as render_genfail  # noqa: E402
 from simulator_ui import render as render_simulator  # noqa: E402
@@ -193,6 +194,7 @@ tabs = st.tabs(
         "Core Dynamics Simulator",
         "CONTEXT-AWARE NEURAL SIMULATOR",
         "GENERATIVE FAILURE DIAGNOSTICS",
+        "ADAPTIVE DYNAMICS & STABILITY",
     ]
 )
 
@@ -1357,6 +1359,9 @@ with tabs[15]:
 
 with tabs[16]:
     render_genfail()
+
+with tabs[17]:
+    render_adaptive()
 
 st.divider()
 st.caption(EPISTEMIC_WARNING)
