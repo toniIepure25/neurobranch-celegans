@@ -11,3 +11,6 @@ reports/simulator/failure_diagnostics/figures/** -text
 
 reports/simulator/adaptive_dynamics/** -text
 docs/assets/adaptive_dynamics/** -text
+
+# Probabilistic report figures and CSV bytes are covered by manifest hashes.
+reports/simulator/probabilistic_adaptive/** -text
