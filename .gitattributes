@@ -20,3 +20,9 @@ reports/simulator/uncertainty_calibration/** -text
 
 # Joint-dynamics artifacts are covered by a SHA256 manifest.
 reports/simulator/joint_dynamics/** -text
+
+# Supervisor-handoff figures, PDFs and manifests are byte-hashed.
+reports/simulator/supervisor_handoff/** -text
+
+# Markdown sources are hashed in the handoff manifest; force stable LF checkout.
+docs/HANDOFF_*.md text eol=lf

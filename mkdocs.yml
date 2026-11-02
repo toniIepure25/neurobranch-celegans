@@ -125,6 +125,16 @@ nav:
       - Limitations: JOINTDYN_LIMITATIONS.md
       - Supervisor brief: JOINTDYN_SUPERVISOR_BRIEF.md
       - Next experiments: JOINTDYN_NEXT_EXPERIMENTS.md
+  - Supervisor handoff:
+      - Executive summary: HANDOFF_EXECUTIVE_SUMMARY.md
+      - Research memo: HANDOFF_RESEARCH_MEMO.md
+      - Presentation: HANDOFF_PRESENTATION.md
+      - Scientific claims: HANDOFF_SCIENTIFIC_CLAIMS.md
+      - Methods and limitations: HANDOFF_METHODS_AND_LIMITATIONS.md
+      - Research proposals: HANDOFF_RESEARCH_PROPOSALS.md
+      - Questions for Denis: HANDOFF_QUESTIONS_FOR_DENIS.md
+      - Demo guide: HANDOFF_DEMO_GUIDE.md
+      - Reproducibility: HANDOFF_REPRODUCIBILITY.md
   - Phase 15:
       - Results: PHASE15_RESULTS.md
       - Methods: METHODS_PHASE15.md
