@@ -50,6 +50,13 @@ def test_app_retains_phase2_tabs_and_adds_prospective_tab():
         "Calcium stability",
         "Adaptive models",
         "Perturbation",
+        "PROBABILISTIC ADAPTIVE SIMULATOR",
+        "Overview",
+        "Baseline ablation",
+        "Residuals",
+        "Calibration",
+        "Trajectories",
+        "Decision",
     ]
 
 

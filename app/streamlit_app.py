@@ -43,6 +43,7 @@ sys.path.insert(0, str(ROOT / "app"))
 from adaptive_ui import render as render_adaptive  # noqa: E402
 from context_ui import render as render_context  # noqa: E402
 from genfail_ui import render as render_genfail  # noqa: E402
+from probabilistic_ui import render as render_probabilistic  # noqa: E402
 from simulator_ui import render as render_simulator  # noqa: E402
 
 CFG_PATH = ROOT / "configs" / "experiments" / "blocked_suite.yaml"
@@ -195,6 +196,7 @@ tabs = st.tabs(
         "CONTEXT-AWARE NEURAL SIMULATOR",
         "GENERATIVE FAILURE DIAGNOSTICS",
         "ADAPTIVE DYNAMICS & STABILITY",
+        "PROBABILISTIC ADAPTIVE SIMULATOR",
     ]
 )
 
@@ -1362,6 +1364,9 @@ with tabs[16]:
 
 with tabs[17]:
     render_adaptive()
+
+with tabs[18]:
+    render_probabilistic()
 
 st.divider()
 st.caption(EPISTEMIC_WARNING)
