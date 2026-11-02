@@ -8,3 +8,6 @@ reports/simulator/context_dynamics/** -text
 reports/simulator/latent_encoders/*.pt binary
 reports/simulator/demo/*.npz binary
 reports/simulator/failure_diagnostics/figures/** -text
+
+reports/simulator/adaptive_dynamics/** -text
+docs/assets/adaptive_dynamics/** -text
