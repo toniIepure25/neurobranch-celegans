@@ -1,7 +1,7 @@
 {
   "schema": "neurobranch.kato_interactions.manifest.v1",
-  "generated_utc": "2026-11-02T20:33:33.817536+00:00",
-  "git_head": "86e0e2223f9f1f89ac6b69dd00d30df7d4841e1a",
+  "generated_utc": "2026-11-02T20:35:26.715328+00:00",
+  "git_head": "f29b3d56aa96410f1423161c0a4d1b2feffc7192",
   "dataset": "Kato et al. (2015) WT_NoStim only",
   "protocol": "docs/KATO_INTERACTIONS_PROTOCOL.md",
   "n_files": 36,
@@ -173,8 +173,8 @@
     },
     {
       "path": "mkdocs.yml",
-      "bytes": 8608,
-      "sha256": "4e8808bbca8804314330a7b52b5ae926bcb0ccb96c6cbe522dbfc330e0e75891"
+      "bytes": 8419,
+      "sha256": "8fe00d6491c387448e4e101c947f35e7bedaea7ce5e9cbb4376a273fb8ec80d0"
     },
     {
       "path": "reports/simulator/joint_dynamics/scores_by_landmark.csv",

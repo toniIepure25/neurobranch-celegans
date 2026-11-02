@@ -1,5 +1,11 @@
 reports/** text eol=lf
 
+# Kato interaction figures, tables and manifests are byte-hashed; keep exact bytes.
+reports/simulator/kato_interactions/** -text
+
+# The docs nav is hashed in the interaction manifest; keep a stable LF checkout.
+mkdocs.yml text eol=lf
+
 # Context-dynamics reports include raw-byte manifests, PNG figures and NPZ trajectories.
 # Preserve their exact bytes so the declared raw SHA256 values remain verifiable.
 reports/simulator/context_dynamics/** -text
