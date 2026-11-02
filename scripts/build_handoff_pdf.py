@@ -34,6 +34,10 @@ CHROME_CANDIDATES = [
 ]
 
 WARNING = "MODEL-DEPENDENT VIRTUAL PERTURBATION \u2014 NOT CAUSALLY VALIDATED."
+TITLE = (
+    "NeuroBranch: Evaluating Generative Neural Population Dynamics and "
+    "Model-Dependent Perturbations in C. elegans"
+)
 
 
 def chrome() -> Path:
@@ -137,7 +141,7 @@ def build_memo() -> int:
         for scale in [1.00, 0.97, 0.94, 0.91, 0.88, 0.85, 0.82, 0.79, 0.76]:
             html = f"""<!doctype html>
 <html lang="en"><head><meta charset="utf-8">
-<title>NeuroBranch research memo</title>
+<title>{TITLE}</title>
 <style>{MEMO_CSS}
 body {{ font-size: {8.55 * scale:.3f}pt; }}
 h1 {{ font-size: {15.2 * scale:.3f}pt; }}
@@ -269,6 +273,7 @@ def build_talk() -> None:
     text = TALK_MD.read_text(encoding="utf-8")
     title, slides = split_slides(text)
     title_html = re.sub(r"^<p>|</p>$", "", md_to_html(title))
+    title_plain = title.replace("*C. elegans*", "C. elegans")
     figures = {
         5: ("fig02_central_result.png", "Paired H20 contrasts in the fixed 10-D PCA."),
         7: ("fig03_calibration.png", "Full-neuron and 10-D PCA coverage; the 50% level fails."),
@@ -326,7 +331,7 @@ def build_talk() -> None:
     html = f"""<!doctype html>
 <html lang="en"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>{title}</title>
+<title>{title_plain}</title>
 <style>{TALK_CSS}</style>
 </head><body>
 <div class="progress" id="progress"></div>
