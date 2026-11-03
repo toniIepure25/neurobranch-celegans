@@ -149,8 +149,9 @@ def render(snapshot: StudioSnapshot, store: TrajectoryStore, *, light: bool = Fa
         )
         figure_caption(
             "The same comparison in 3D. PC1–PC3 explain "
-            f"{case['explained_3d']*100:.1f}% of training variance in this recording; "
-            "the remaining seven components are not shown."
+            f"{case['explained_3d']*100:.1f}% of total training variance in this recording "
+            f"({case['explained_3d_of_10d']*100:.1f}% of the retained PCA-10 variance). "
+            f"The other {case['remaining_10d_of_10d']*100:.1f}% of PCA-10 is not shown."
         )
 
     with tabs[2]:
@@ -197,16 +198,22 @@ def render(snapshot: StudioSnapshot, store: TrajectoryStore, *, light: bool = Fa
             st.markdown(
                 f"<div class='nb-caption'>Recording-resampling interval "
                 f"[{primary['recording_ci']['ci_low']:+.3f}, {primary['recording_ci']['ci_high']:+.3f}]. "
-                "Four of five recording means are positive; the sign test is not significant.</div>",
+                f"{primary['sessions_positive']} of {primary['n_sessions']} recording means "
+                "are positive; the sign test is not significant.</div>",
                 unsafe_allow_html=True,
             )
         st.markdown("---")
+        capacity = snapshot.capacity
+        ordered = capacity["ordered_shares"]["baseline_B4m"]
+        common_pct = round(100 * ordered["common"])
+        residual_pct = 100 - common_pct
         warning(
-            "Capacity is not held constant in the primary contrast. B3 has 7.96–9.95× "
+            "Capacity is not held constant in the primary contrast. B3 has "
+            f"{capacity['ratio_min']:.2f}–{capacity['ratio_max']:.2f}× "
             "the nominal coefficients of B5-10 and can represent arbitrary residual "
             "cross-neuron coordinates that B5 cannot. The residual advantage is therefore "
             "not identifiable as cross-neuron information from this design. The ordered "
-            "51/49 decomposition is arithmetic, not a structural partition."
+            f"{common_pct}/{residual_pct} decomposition is arithmetic, not a structural partition."
         )
         st.markdown("#### Refit protocol")
         st.markdown(

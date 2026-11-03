@@ -174,3 +174,22 @@ The release is ready for handoff only when:
 - screenshots exist and the manifest hashes match;
 - the Git worktree is clean;
 - the final report states the exact HEAD.
+
+## 10. Final audit (2026-11-04)
+
+The final quality audit adds:
+
+- `scripts/master_review/independent_model_check.py --extended` and the
+  machine-readable root-cause control;
+- `tests/test_innovation_horizon_contract.py`;
+- `scripts/studio_final_audit.py` for metrics, alignment, deterministic mean,
+  and perturbation checks;
+- `scripts/studio_browser_qa.py` for 28 full-page captures at 1920×1080,
+  1366×768, and 1280×800;
+- `scripts/studio_contact_sheet.py` for human-review contact sheets;
+- six `STUDIO_FINAL_*.md` documents.
+
+Evidence lives in `reports/scientific_studio/final_audit/`. The browser capture
+pass is automated geometry evidence only; the agent could not ingest images, so
+visual QA is explicitly `INCOMPLETE` until a human inspection is recorded in
+`STUDIO_FINAL_VISUAL_QA.md`.

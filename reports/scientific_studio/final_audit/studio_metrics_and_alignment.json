@@ -1,0 +1,870 @@
+{
+  "generated_utc": "2026-11-03T23:24:22.373672+00:00",
+  "git_head": "ec27dd87a816cbce10dab70491c31f13dc59e3e2",
+  "git_branch": "research/neurobranch-final-quality-audit",
+  "dataset": {
+    "generated_at_utc": "2026-11-03T18:19:38.486635+00:00",
+    "archive": {
+      "path": "data\\raw\\kato2015\\WT_NoStim.mat",
+      "actual_size_bytes": 56390975,
+      "documented_size_bytes": 128511040,
+      "osf_size_bytes": 56390975,
+      "actual_sha256": "7531811c1718e26a0455f59cb2f8188cf25809278cfea85770dfe03315a0098a",
+      "expected_sha256": "7531811c1718e26a0455f59cb2f8188cf25809278cfea85770dfe03315a0098a",
+      "osf_sha256": "7531811c1718e26a0455f59cb2f8188cf25809278cfea85770dfe03315a0098a",
+      "checksum_matches_expected": true,
+      "checksum_matches_osf": true,
+      "size_matches_documentation": false,
+      "size_matches_osf": true,
+      "osf_url": "https://osf.io/2395t/",
+      "osf_file_api": "https://api.osf.io/v2/nodes/2395t/files/osfstorage/",
+      "readme_present": true,
+      "readme_sha256": "9fbc04b06a5c59d13a7ce6a90a428bc49e2d4ef5a2ff21bd2efa6f67655bc3d6",
+      "readme_chars": 1355
+    },
+    "identity": {
+      "question": "Do the five WT_NoStim entries correspond to five distinct animals?",
+      "answer": "YES_WITH_HIGH_CONFIDENCE_FOR_FIVE_DISTINCT_PREPARATIONS; NO_EXPLICIT_ANIMAL_ID_IN_ARCHIVE",
+      "confidence": {
+        "five_distinct_acquisition_preparations": "HIGH",
+        "one_to_one_publication_animal_mapping": "MODERATE"
+      },
+      "evidence_for": [
+        "The publication reports a five-animal WT_NoStim cohort (Kato et al. 2015, Cell 163:656-669; DOI 10.1016/j.cell.2015.09.034).",
+        "The archive contains exactly five distinct dataset strings, each with a distinct acquisition timestamp/ID.",
+        "Four acquisition dates are distinct; the two 2014-07-15 records have different acquisition suffixes (e/f), different egg counts (2 vs 3), and different trace counts (109 vs 135), so they are not the same processed trace matrix.",
+        "Each recording has its own 1,080 s time axis, neuron panel, state vector, and frame count."
+      ],
+      "evidence_against_or_unresolved": [
+        "The OSF readme has no animal identifier, worm ID, or mapping table.",
+        "The MAT file has no explicit animal metadata field; worm_id=0..4 is an array index, not a biological key.",
+        "The publication's methods were not directly readable in this environment (publisher CAPTCHA); the n=5 cohort statement is taken from the published record and is consistent with the five acquisitions.",
+        "Same-animal re-imaging cannot be excluded from the OSF metadata alone, although the differing egg counts and trace panels make it unlikely for the 2014-07-15 pair."
+      ],
+      "mapping": [
+        {
+          "session_index": 0,
+          "inferred_animal_label": "KatoAnimal_1",
+          "acquisition_id": "TS20140715e",
+          "acquisition_date": "2014-07-15",
+          "egg_count_in_name": 2,
+          "basis": "distinct acquisition ID; publication n=5; one recording per acquisition"
+        },
+        {
+          "session_index": 1,
+          "inferred_animal_label": "KatoAnimal_2",
+          "acquisition_id": "TS20140715f",
+          "acquisition_date": "2014-07-15",
+          "egg_count_in_name": 3,
+          "basis": "distinct acquisition ID; publication n=5; one recording per acquisition"
+        },
+        {
+          "session_index": 2,
+          "inferred_animal_label": "KatoAnimal_3",
+          "acquisition_id": "TS20140905c",
+          "acquisition_date": "2014-09-05",
+          "egg_count_in_name": 0,
+          "basis": "distinct acquisition ID; publication n=5; one recording per acquisition"
+        },
+        {
+          "session_index": 3,
+          "inferred_animal_label": "KatoAnimal_4",
+          "acquisition_id": "TS20140926d",
+          "acquisition_date": "2014-09-26",
+          "egg_count_in_name": 2,
+          "basis": "distinct acquisition ID; publication n=5; one recording per acquisition"
+        },
+        {
+          "session_index": 4,
+          "inferred_animal_label": "KatoAnimal_5",
+          "acquisition_id": "TS20141221b",
+          "acquisition_date": "2014-12-21",
+          "egg_count_in_name": 6,
+          "basis": "distinct acquisition ID; publication n=5; one recording per acquisition"
+        }
+      ],
+      "recommended_wording": "Five Kato WT_NoStim recordings from five distinct acquisition preparations, consistent with the publication's five animals. The OSF archive does not expose an explicit animal identifier, so the animal-level mapping is inferred rather than documented by a primary key. The five recordings are still one laboratory/preparation and are not an independent cohort.",
+      "correction_required": "Replace categorical statements that the five recordings are 'not five animals' with the more precise statement that they are five animals (inferred) but not an independent cohort. Keep the independent-unit caveat for all inference."
+    },
+    "recordings": [
+      {
+        "session_index": 0,
+        "worm_id_field": 0,
+        "dataset_name": "TS20140715e_lite-1_punc-31_NLS3_2eggs_56um_1mMTet_basal_1080s",
+        "acquisition_id": "TS20140715e",
+        "acquisition_date": "2014-07-15",
+        "egg_count_in_name": 2,
+        "n_frames": 3137,
+        "n_neurons_traces": 109,
+        "n_identified_named": 38,
+        "n_unidentified_numeric": 71,
+        "identified_fraction": 0.3486238532110092,
+        "predictor_dimension_after_label_exclusion": 103,
+        "behavior_label_neurons_present": [
+          "AVAL",
+          "AVAR",
+          "SMDDR",
+          "SMDVR",
+          "SMDVL",
+          "RIBL"
+        ],
+        "behavior_label_neurons_missing": [
+          "SMDDL",
+          "RIBR"
+        ],
+        "n_behavior_label_neurons_present": 6,
+        "fps_stored": 2.9046296296296297,
+        "fps_from_time_axis": 2.9046296296296297,
+        "duration_seconds_from_time_axis": 1079.6557220274146,
+        "time_start": 0.0,
+        "time_end": 1079.6557220274146,
+        "dt_min": 0.3442779725851324,
+        "dt_median": 0.34427797258524606,
+        "dt_max": 0.34427797258535975,
+        "time_axis_strictly_increasing": true,
+        "time_axis_regular": true,
+        "state_onehot_rows_ok": true,
+        "state_counts": {
+          "dt": 172,
+          "fwd": 681,
+          "nostate": 22,
+          "rev1": 107,
+          "rev2": 143,
+          "revsus": 1053,
+          "slow": 625,
+          "vt": 334
+        },
+        "split_bounds": {
+          "train": [
+            0,
+            2195
+          ],
+          "val": [
+            2207,
+            2677
+          ],
+          "test": [
+            2689,
+            3137
+          ]
+        },
+        "train_frames": 2195,
+        "val_frames": 470,
+        "test_frames": 448,
+        "overlap_train_test": 0,
+        "overlap_train_val": 0,
+        "overlap_val_test": 0,
+        "nan_fraction_traces": 0.0,
+        "nan_fraction_raw": 0.0,
+        "identity_confidence": "NAMED_SUBSET_ONLY__NUMERIC_TRACES_ARE_NOT_CELL_IDS"
+      },
+      {
+        "session_index": 1,
+        "worm_id_field": 1,
+        "dataset_name": "TS20140715f_lite-1_punc-31_NLS3_3eggs_56um_1mMTet_basal_1080s",
+        "acquisition_id": "TS20140715f",
+        "acquisition_date": "2014-07-15",
+        "egg_count_in_name": 3,
+        "n_frames": 3134,
+        "n_neurons_traces": 135,
+        "n_identified_named": 44,
+        "n_unidentified_numeric": 91,
+        "identified_fraction": 0.32592592592592595,
+        "predictor_dimension_after_label_exclusion": 127,
+        "behavior_label_neurons_present": [
+          "AVAL",
+          "AVAR",
+          "SMDDR",
+          "SMDDL",
+          "SMDVR",
+          "SMDVL",
+          "RIBR",
+          "RIBL"
+        ],
+        "behavior_label_neurons_missing": [],
+        "n_behavior_label_neurons_present": 8,
+        "fps_stored": 2.901851851851852,
+        "fps_from_time_axis": 2.901851851851852,
+        "duration_seconds_from_time_axis": 1079.6553924696873,
+        "time_start": 0.0,
+        "time_end": 1079.6553924696873,
+        "dt_min": 0.34460753031248714,
+        "dt_median": 0.3446075303127145,
+        "dt_max": 0.3446075303128282,
+        "time_axis_strictly_increasing": true,
+        "time_axis_regular": true,
+        "state_onehot_rows_ok": true,
+        "state_counts": {
+          "dt": 88,
+          "fwd": 232,
+          "nostate": 22,
+          "rev1": 81,
+          "rev2": 169,
+          "revsus": 1018,
+          "slow": 1110,
+          "vt": 414
+        },
+        "split_bounds": {
+          "train": [
+            0,
+            2193
+          ],
+          "val": [
+            2205,
+            2675
+          ],
+          "test": [
+            2687,
+            3134
+          ]
+        },
+        "train_frames": 2193,
+        "val_frames": 470,
+        "test_frames": 447,
+        "overlap_train_test": 0,
+        "overlap_train_val": 0,
+        "overlap_val_test": 0,
+        "nan_fraction_traces": 0.0,
+        "nan_fraction_raw": 0.0,
+        "identity_confidence": "NAMED_SUBSET_ONLY__NUMERIC_TRACES_ARE_NOT_CELL_IDS"
+      },
+      {
+        "session_index": 2,
+        "worm_id_field": 2,
+        "dataset_name": "TS20140905c_lite-1_punc-31_NLS3_AVHJ_0eggs_1mMTet_basal_1080s",
+        "acquisition_id": "TS20140905c",
+        "acquisition_date": "2014-09-05",
+        "egg_count_in_name": 0,
+        "n_frames": 3059,
+        "n_neurons_traces": 131,
+        "n_identified_named": 32,
+        "n_unidentified_numeric": 99,
+        "identified_fraction": 0.24427480916030533,
+        "predictor_dimension_after_label_exclusion": 123,
+        "behavior_label_neurons_present": [
+          "AVAL",
+          "AVAR",
+          "SMDDR",
+          "SMDDL",
+          "SMDVR",
+          "SMDVL",
+          "RIBR",
+          "RIBL"
+        ],
+        "behavior_label_neurons_missing": [],
+        "n_behavior_label_neurons_present": 8,
+        "fps_stored": 2.8324074074074073,
+        "fps_from_time_axis": 2.8324074074074073,
+        "duration_seconds_from_time_axis": 1079.6469434455705,
+        "time_start": 0.0,
+        "time_end": 1079.6469434455705,
+        "dt_min": 0.3530565544294859,
+        "dt_median": 0.35305655442954276,
+        "dt_max": 0.3530565544297133,
+        "time_axis_strictly_increasing": true,
+        "time_axis_regular": true,
+        "state_onehot_rows_ok": true,
+        "state_counts": {
+          "dt": 184,
+          "fwd": 106,
+          "nostate": 76,
+          "rev1": 189,
+          "rev2": 130,
+          "revsus": 1156,
+          "slow": 951,
+          "vt": 267
+        },
+        "split_bounds": {
+          "train": [
+            0,
+            2141
+          ],
+          "val": [
+            2153,
+            2611
+          ],
+          "test": [
+            2623,
+            3059
+          ]
+        },
+        "train_frames": 2141,
+        "val_frames": 458,
+        "test_frames": 436,
+        "overlap_train_test": 0,
+        "overlap_train_val": 0,
+        "overlap_val_test": 0,
+        "nan_fraction_traces": 0.0,
+        "nan_fraction_raw": 0.0,
+        "identity_confidence": "NAMED_SUBSET_ONLY__NUMERIC_TRACES_ARE_NOT_CELL_IDS"
+      },
+      {
+        "session_index": 3,
+        "worm_id_field": 3,
+        "dataset_name": "TS20140926d_lite-1_punc-31_NLS3_RIV_2eggs_1mMTet_basal_1080s",
+        "acquisition_id": "TS20140926d",
+        "acquisition_date": "2014-09-26",
+        "egg_count_in_name": 2,
+        "n_frames": 3311,
+        "n_neurons_traces": 125,
+        "n_identified_named": 47,
+        "n_unidentified_numeric": 78,
+        "identified_fraction": 0.376,
+        "predictor_dimension_after_label_exclusion": 118,
+        "behavior_label_neurons_present": [
+          "AVAL",
+          "AVAR",
+          "SMDDR",
+          "SMDDL",
+          "SMDVR",
+          "RIBR",
+          "RIBL"
+        ],
+        "behavior_label_neurons_missing": [
+          "SMDVL"
+        ],
+        "n_behavior_label_neurons_present": 7,
+        "fps_stored": 3.0657407407407407,
+        "fps_from_time_axis": 3.0657407407407407,
+        "duration_seconds_from_time_axis": 1079.6738145575355,
+        "time_start": 0.0,
+        "time_end": 1079.6738145575355,
+        "dt_min": 0.3261854424642934,
+        "dt_median": 0.32618544246452075,
+        "dt_max": 0.32618544246463443,
+        "time_axis_strictly_increasing": true,
+        "time_axis_regular": true,
+        "state_onehot_rows_ok": true,
+        "state_counts": {
+          "dt": 134,
+          "fwd": 64,
+          "nostate": 38,
+          "rev1": 83,
+          "rev2": 83,
+          "revsus": 1007,
+          "slow": 1525,
+          "vt": 377
+        },
+        "split_bounds": {
+          "train": [
+            0,
+            2317
+          ],
+          "val": [
+            2329,
+            2825
+          ],
+          "test": [
+            2837,
+            3311
+          ]
+        },
+        "train_frames": 2317,
+        "val_frames": 496,
+        "test_frames": 474,
+        "overlap_train_test": 0,
+        "overlap_train_val": 0,
+        "overlap_val_test": 0,
+        "nan_fraction_traces": 0.0,
+        "nan_fraction_raw": 0.0,
+        "identity_confidence": "NAMED_SUBSET_ONLY__NUMERIC_TRACES_ARE_NOT_CELL_IDS"
+      },
+      {
+        "session_index": 4,
+        "worm_id_field": 4,
+        "dataset_name": "TS20141221b_THK178_lite-1_punc-31_NLS3_6eggs_1mMTet_basal_1080s",
+        "acquisition_id": "TS20141221b",
+        "acquisition_date": "2014-12-21",
+        "egg_count_in_name": 6,
+        "n_frames": 3021,
+        "n_neurons_traces": 129,
+        "n_identified_named": 31,
+        "n_unidentified_numeric": 98,
+        "identified_fraction": 0.24031007751937986,
+        "predictor_dimension_after_label_exclusion": 121,
+        "behavior_label_neurons_present": [
+          "AVAL",
+          "AVAR",
+          "SMDDR",
+          "SMDDL",
+          "SMDVR",
+          "SMDVL",
+          "RIBR",
+          "RIBL"
+        ],
+        "behavior_label_neurons_missing": [],
+        "n_behavior_label_neurons_present": 8,
+        "fps_stored": 2.797222222222222,
+        "fps_from_time_axis": 2.797222222222222,
+        "duration_seconds_from_time_axis": 1079.6425024826217,
+        "time_start": 0.0,
+        "time_end": 1079.6425024826217,
+        "dt_min": 0.35749751737830593,
+        "dt_median": 0.3574975173783521,
+        "dt_max": 0.3574975173785333,
+        "time_axis_strictly_increasing": true,
+        "time_axis_regular": true,
+        "state_onehot_rows_ok": true,
+        "state_counts": {
+          "dt": 224,
+          "fwd": 365,
+          "nostate": 18,
+          "rev1": 77,
+          "rev2": 94,
+          "revsus": 1089,
+          "slow": 989,
+          "vt": 165
+        },
+        "split_bounds": {
+          "train": [
+            0,
+            2114
+          ],
+          "val": [
+            2126,
+            2579
+          ],
+          "test": [
+            2591,
+            3021
+          ]
+        },
+        "train_frames": 2114,
+        "val_frames": 453,
+        "test_frames": 430,
+        "overlap_train_test": 0,
+        "overlap_train_val": 0,
+        "overlap_val_test": 0,
+        "nan_fraction_traces": 0.0,
+        "nan_fraction_raw": 0.0,
+        "identity_confidence": "NAMED_SUBSET_ONLY__NUMERIC_TRACES_ARE_NOT_CELL_IDS"
+      }
+    ],
+    "behavior_label_provenance": {
+      "state_source": "Kato et al. 2015 WT_NoStim States field; eight mutually exclusive labels",
+      "readme_definition": "FWD, SLOW, DT, VT, REV1, REV2, REVSUS, NOSTATE",
+      "derivation": "Project documentation states labels were inferred from calcium activity in command interneurons/motor circuits (notably AVA, SMD, RIB) combined with behavioural scoring.",
+      "independent_behavior_measurement_in_archive": false,
+      "labels_are_independent_of_predictors": false,
+      "label_neuron_exclusion": "The eight named label-defining neurons are removed from predictors where present; this reduces but does not eliminate circularity."
+    },
+    "neuron_identity": {
+      "named_cells_per_session": [
+        38,
+        44,
+        32,
+        47,
+        31
+      ],
+      "numeric_traces_per_session": [
+        71,
+        91,
+        99,
+        78,
+        98
+      ],
+      "total_traces": 629,
+      "total_named_trace_occurrences": 192,
+      "cross_session_registration": "NONE",
+      "interpretation": "Numeric traces are segmented ROIs without verified cell identity; named traces are cell-type labels, not a cross-session one-to-one registration."
+    }
+  },
+  "primary": {
+    "n": 175,
+    "b3_mean": 2.700149750441149,
+    "b5_mean": 2.9645877431095045,
+    "difference": 0.2644379926683563,
+    "relative_to_b3": 0.0979345655273944,
+    "equal_session_mean": 0.261657745193526,
+    "conditional_ci": {
+      "block": 5,
+      "n_landmarks": 175,
+      "mean_advantage": 0.2644379926683563,
+      "ci_low": 0.07499291957903519,
+      "ci_high": 0.40311649156808815,
+      "positive": true
+    },
+    "session_t_ci": [
+      -0.06405868286353422,
+      0.5873741732505863
+    ],
+    "recording_ci": {
+      "block": 5,
+      "mean": 0.23518011171888062,
+      "ci_low": -0.040800908320236015,
+      "ci_high": 0.47929660629420506,
+      "fraction_le_zero": 0.0438,
+      "n_boot": 5000,
+      "resamples_recordings": true
+    },
+    "sessions_positive": 4,
+    "n_sessions": 5,
+    "fraction_positive": 0.64,
+    "dz": 0.2704639171749704,
+    "mse_difference": 0.05450430994656875,
+    "mse_ci": [
+      -0.15742619068429753,
+      0.24090408563595608
+    ],
+    "sign_test_one_sided_p": 0.1875
+  },
+  "recomputed_primary": {
+    "n": 175,
+    "b3_mean": 2.700149750441149,
+    "b5_mean": 2.9645877431095045,
+    "difference": 0.2644379926683563,
+    "relative_to_b3": 0.0979345655273944
+  },
+  "primary_matches_within_1e-12": true,
+  "displayed_metrics": {
+    "primary_difference": 0.2644379926683563,
+    "relative_to_b3": 0.0979345655273944,
+    "b3_mean": 2.700149750441149,
+    "b5_mean": 2.9645877431095045,
+    "conditional_ci": {
+      "block": 5,
+      "n_landmarks": 175,
+      "mean_advantage": 0.2644379926683563,
+      "ci_low": 0.07499291957903519,
+      "ci_high": 0.40311649156808815,
+      "positive": true
+    },
+    "recording_ci": {
+      "block": 5,
+      "mean": 0.23518011171888062,
+      "ci_low": -0.040800908320236015,
+      "ci_high": 0.47929660629420506,
+      "fraction_le_zero": 0.0438,
+      "n_boot": 5000,
+      "resamples_recordings": true
+    },
+    "session_t_ci": [
+      -0.06405868286353422,
+      0.5873741732505863
+    ],
+    "sessions_positive": 4,
+    "n_sessions": 5,
+    "mse_difference": 0.05450430994656875,
+    "mse_ci": [
+      -0.15742619068429753,
+      0.24090408563595608
+    ],
+    "coverage_b3": 0.9382857142857142,
+    "coverage_b5": 0.7245714285714285,
+    "capacity_ratio_min": 7.958395245170877,
+    "capacity_ratio_max": 9.94859241126071,
+    "b5_training_variance_min": 0.5467131733894348,
+    "b5_training_variance_max": 0.7098613381385803,
+    "ordered_share_b4m_common": 0.5098619652652594,
+    "ordered_share_b4m_residual": 0.49013803473474066,
+    "verdict": "READY_FOR_METHODOLOGICAL_SUPERVISOR_REVIEW; NOT_READY_FOR_CONFIRMATORY_OR_BIOLOGICAL_CLAIMS"
+  },
+  "trajectory_alignment": [
+    {
+      "session": 0,
+      "landmark": 2690,
+      "truth_matches_observed": true,
+      "scores_match_frozen_rows": true,
+      "origin_time": 926.1077462543832,
+      "first_future_time": 926.4520242269684,
+      "means_shape": {
+        "B0_persistence": [
+          20,
+          10
+        ],
+        "B1_matched_own": [
+          20,
+          10
+        ],
+        "B3_population": [
+          20,
+          10
+        ],
+        "B5_common_k10": [
+          20,
+          10
+        ]
+      }
+    },
+    {
+      "session": 0,
+      "landmark": 2750,
+      "truth_matches_observed": true,
+      "scores_match_frozen_rows": true,
+      "origin_time": 946.7644246094995,
+      "first_future_time": 947.1087025820848,
+      "means_shape": {
+        "B0_persistence": [
+          20,
+          10
+        ],
+        "B1_matched_own": [
+          20,
+          10
+        ],
+        "B3_population": [
+          20,
+          10
+        ],
+        "B5_common_k10": [
+          20,
+          10
+        ]
+      }
+    },
+    {
+      "session": 1,
+      "landmark": 2688,
+      "truth_matches_observed": true,
+      "scores_match_frozen_rows": true,
+      "origin_time": 926.305041480536,
+      "first_future_time": 926.6496490108487,
+      "means_shape": {
+        "B0_persistence": [
+          20,
+          10
+        ],
+        "B1_matched_own": [
+          20,
+          10
+        ],
+        "B3_population": [
+          20,
+          10
+        ],
+        "B5_common_k10": [
+          20,
+          10
+        ]
+      }
+    },
+    {
+      "session": 1,
+      "landmark": 2748,
+      "truth_matches_observed": true,
+      "scores_match_frozen_rows": true,
+      "origin_time": 946.981493299298,
+      "first_future_time": 947.3261008296107,
+      "means_shape": {
+        "B0_persistence": [
+          20,
+          10
+        ],
+        "B1_matched_own": [
+          20,
+          10
+        ],
+        "B3_population": [
+          20,
+          10
+        ],
+        "B5_common_k10": [
+          20,
+          10
+        ]
+      }
+    },
+    {
+      "session": 2,
+      "landmark": 2624,
+      "truth_matches_observed": true,
+      "scores_match_frozen_rows": true,
+      "origin_time": 926.4203988231449,
+      "first_future_time": 926.7734553775745,
+      "means_shape": {
+        "B0_persistence": [
+          20,
+          10
+        ],
+        "B1_matched_own": [
+          20,
+          10
+        ],
+        "B3_population": [
+          20,
+          10
+        ],
+        "B5_common_k10": [
+          20,
+          10
+        ]
+      }
+    },
+    {
+      "session": 2,
+      "landmark": 2684,
+      "truth_matches_observed": true,
+      "scores_match_frozen_rows": true,
+      "origin_time": 947.603792088918,
+      "first_future_time": 947.9568486433476,
+      "means_shape": {
+        "B0_persistence": [
+          20,
+          10
+        ],
+        "B1_matched_own": [
+          20,
+          10
+        ],
+        "B3_population": [
+          20,
+          10
+        ],
+        "B5_common_k10": [
+          20,
+          10
+        ]
+      }
+    },
+    {
+      "session": 3,
+      "landmark": 2838,
+      "truth_matches_observed": true,
+      "scores_match_frozen_rows": true,
+      "origin_time": 925.7142857142858,
+      "first_future_time": 926.0404711567503,
+      "means_shape": {
+        "B0_persistence": [
+          20,
+          10
+        ],
+        "B1_matched_own": [
+          20,
+          10
+        ],
+        "B3_population": [
+          20,
+          10
+        ],
+        "B5_common_k10": [
+          20,
+          10
+        ]
+      }
+    },
+    {
+      "session": 3,
+      "landmark": 2908,
+      "truth_matches_observed": true,
+      "scores_match_frozen_rows": true,
+      "origin_time": 948.5472666868015,
+      "first_future_time": 948.8734521292661,
+      "means_shape": {
+        "B0_persistence": [
+          20,
+          10
+        ],
+        "B1_matched_own": [
+          20,
+          10
+        ],
+        "B3_population": [
+          20,
+          10
+        ],
+        "B5_common_k10": [
+          20,
+          10
+        ]
+      }
+    },
+    {
+      "session": 4,
+      "landmark": 2592,
+      "truth_matches_observed": true,
+      "scores_match_frozen_rows": true,
+      "origin_time": 926.6335650446872,
+      "first_future_time": 926.9910625620656,
+      "means_shape": {
+        "B0_persistence": [
+          20,
+          10
+        ],
+        "B1_matched_own": [
+          20,
+          10
+        ],
+        "B3_population": [
+          20,
+          10
+        ],
+        "B5_common_k10": [
+          20,
+          10
+        ]
+      }
+    },
+    {
+      "session": 4,
+      "landmark": 2652,
+      "truth_matches_observed": true,
+      "scores_match_frozen_rows": true,
+      "origin_time": 948.0834160873883,
+      "first_future_time": 948.4409136047667,
+      "means_shape": {
+        "B0_persistence": [
+          20,
+          10
+        ],
+        "B1_matched_own": [
+          20,
+          10
+        ],
+        "B3_population": [
+          20,
+          10
+        ],
+        "B5_common_k10": [
+          20,
+          10
+        ]
+      }
+    }
+  ],
+  "all_alignment_checks_pass": true,
+  "deterministic_mean_check": {
+    "session": 0,
+    "landmark": 2690,
+    "b3_max_abs_difference": 1.1840839642118794e-07,
+    "b5_max_abs_difference": 1.1574053404572737e-07,
+    "b3_fit_last_transition": 2689,
+    "origin": 2690,
+    "no_future_transition_used": true,
+    "zero_innovation": true,
+    "passes": true
+  },
+  "perturbation": {
+    "train_mean_abs_max": 8.503777166879445e-07,
+    "train_std_min": 0.9999990463256836,
+    "train_std_max": 1.0000007152557373,
+    "tested": true,
+    "neuron": "OLQVR",
+    "delta_z": 1.0,
+    "first_step_neuron_response": 0.36780528025472614,
+    "first_step_population_response": 1.115644553000671,
+    "expected_first_step_neuron_response": 0.3678052802547261,
+    "expected_first_step_population_response": 1.115644553000671,
+    "first_step_matches_A_column": true,
+    "h20_model_disagreement": 0.3491925968779753,
+    "ood": false,
+    "b3_radius": 0.9950000000000021,
+    "b5_factor_radius": 0.9927329318516898
+  },
+  "artifacts": {
+    "trajectory_npz": {
+      "bytes": 5282051,
+      "sha256": "ba7a3a440b6266e5f2364e40a84709ce64de4243f8289e25b82a43c7ea1fff35"
+    },
+    "trajectory_json": {
+      "bytes": 57663,
+      "sha256": "b98dec015d69514d019f89d0712918f96ce505c91e0b8f2416ceb0f18b32bcf4"
+    },
+    "manifest_sha256": "d4987b5954e8ee2c2bd99020b69128df3756b451f27857d0ceb7462dc9272231"
+  },
+  "frozen_rows": {
+    "rows": 2275,
+    "models": 13,
+    "landmarks": 175,
+    "all_energy_finite": true
+  }
+}

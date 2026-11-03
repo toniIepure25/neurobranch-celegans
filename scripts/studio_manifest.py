@@ -45,9 +45,22 @@ def main() -> None:
     trajectory_json = json.loads((STUDIO / "kato_trajectories.json").read_text(encoding="utf-8"))
     docs = sorted(DOCS.glob("STUDIO_*.md"))
     code = sorted((ROOT / "src" / "neurobranch" / "studio").rglob("*.py"))
-    code += [ROOT / "app" / "neurobranch_studio.py", ROOT / "scripts" / "studio_build_trajectories.py"]
+    code += [
+        ROOT / "app" / "neurobranch_studio.py",
+        ROOT / "scripts" / "studio_build_trajectories.py",
+        ROOT / "scripts" / "studio_browser_qa.py",
+        ROOT / "scripts" / "studio_contact_sheet.py",
+        ROOT / "scripts" / "studio_final_audit.py",
+        ROOT / "scripts" / "master_review" / "independent_model_check.py",
+    ]
     code += sorted((ROOT / "tests").glob("test_studio*.py"))
+    code += [ROOT / "tests" / "test_innovation_horizon_contract.py"]
     screenshots = sorted((STUDIO / "screenshots").glob("*.png"))
+    final_audit = sorted(
+        path
+        for path in (STUDIO / "final_audit").glob("*")
+        if path.is_file() and path.suffix.lower() in {".json", ".png", ".md", ".log", ".txt"}
+    )
     status_lines = [line for line in git("status", "--porcelain").splitlines() if line]
     manifest_rel = "reports/scientific_studio/manifest.json"
     other_changes = [line for line in status_lines if line[3:].strip() != manifest_rel]
@@ -90,6 +103,7 @@ def main() -> None:
         "code": [entry(path, "studio implementation") for path in code],
         "docs": [entry(path, "studio documentation") for path in docs],
         "screenshots": [entry(path, "browser QA capture") for path in screenshots],
+        "final_audit": [entry(path, "final audit evidence") for path in final_audit],
         "source_of_truth": [
             "reports/master_review/dataset_identity_audit.json",
             "reports/master_review/statistical_audit.json",
@@ -111,6 +125,13 @@ def main() -> None:
             "lint": "python -X utf8 -m ruff check src/neurobranch/studio app/neurobranch_studio.py",
             "docs": "python -X utf8 -m mkdocs build --strict",
             "manifest": "python -X utf8 scripts/studio_manifest.py",
+            "independent_check": (
+                "python -X utf8 scripts/master_review/independent_model_check.py "
+                "--extended --out reports/scientific_studio/final_audit/independent_model_check.json"
+            ),
+            "final_audit": "python -X utf8 scripts/studio_final_audit.py",
+            "browser_qa": "python -X utf8 scripts/studio_browser_qa.py",
+            "contact_sheet": "python -X utf8 scripts/studio_contact_sheet.py",
         },
         "verdict": (
             "READY_FOR_METHODOLOGICAL_SUPERVISOR_REVIEW; "
@@ -121,6 +142,8 @@ def main() -> None:
             "The 3D projection is PCA, not anatomy.",
             "The perturbation lab is a model counterfactual, not stimulation.",
             "The test tail was reused; the result is exploratory.",
+            "The historical 20-step innovation discrepancy is resolved and covered by a negative control.",
+            "Browser capture passed geometry/console checks; human visual inspection remains pending.",
         ],
     }
     out = STUDIO / "manifest.json"

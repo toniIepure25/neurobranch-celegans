@@ -18,12 +18,27 @@ For each recording:
 
 Recording 0's training variance fractions are:
 
-| Axis | Fraction |
+| Axis | Fraction of total training variance |
 | --- | ---: |
 | PC1 | 0.25950035 |
 | PC2 | 0.17802279 |
 | PC3 | 0.08242325 |
 | Cumulative PC1–PC3 | 0.51994640 |
+| Cumulative PC1–PC10 (retained) | 0.70986110 |
+| PC4–PC10 (retained, not shown) | 0.18991494 |
+| Outside the 10-D PCA | 0.29013872 |
+
+The denominator matters. `PCA.explained_variance_ratio_` divides by the
+**total training feature variance** (sum of per-feature variances, `ddof=1`),
+not by the variance retained in ten components. For recording 0 the total is
+103.04697 and the ten-component PCA retains 73.14903 (0.70986110 of total).
+The 3D view shows 0.51994640 of total variance, which is
+**0.73246199 of the retained PCA-10 variance**. The other 0.26753810 of PCA-10
+(0.18991494 of total) is not visible, and 0.29013872 of total is outside PCA-10
+entirely. A statement that "48% is outside the visible axes" is a fraction of
+total variance, not a fraction of PCA-10; the correct PCA-10 remainder is
+26.75%. All five recordings are tabulated in
+`reports/scientific_studio/final_audit/pca_variance_audit.json`.
 
 The axis labels in the UI are computed from the artifact, not typed. A point is
 a population state summary; distance in this space is distance under the

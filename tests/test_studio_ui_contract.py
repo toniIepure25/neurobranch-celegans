@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import pytest
 
+from neurobranch.adaptive.var import WARNING as PERTURBATION_WARNING
 from neurobranch.studio import load_snapshot, load_trajectory_store
 from neurobranch.studio.components import badge
 from neurobranch.studio.course import load_chapters
@@ -34,6 +35,12 @@ def test_no_confirmed_tier_in_studio_copy() -> None:
     snapshot = load_snapshot()
     assert "CONFIRMED" not in snapshot.claims_payload["tier_definitions"]
     assert snapshot.claims_payload["no_confirmed_tier"] is True
+
+
+def test_perturbation_banner_is_exact() -> None:
+    assert PERTURBATION_WARNING == (
+        "MODEL-DEPENDENT VIRTUAL PERTURBATION — NOT CAUSALLY VALIDATED."
+    )
 
 
 def test_badge_is_escaped() -> None:

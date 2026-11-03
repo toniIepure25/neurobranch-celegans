@@ -85,14 +85,18 @@ def render(snapshot: StudioSnapshot, store: TrajectoryStore, *, light: bool = Fa
         )
     elif index == 1:
         identity = snapshot.dataset_identity
+        total_frames = sum(int(s["n_frames"]) for s in snapshot.sessions.values())
+        total_predictors = sum(int(s["n_predictors"]) for s in snapshot.sessions.values())
+        n_sessions = len(snapshot.sessions)
         st.markdown(
-            """
+            f"""
             <div class="body">
-              <p><b>Five recordings, 15,662 frames, 592 predictors.</b> The archive is
+              <p><b>{n_sessions} recordings, {total_frames:,} frames,
+              {total_predictors} predictors.</b> The archive is
               verified against the OSF object by size and SHA256. The documentation is
               not the source of truth: its historical size and field names were wrong.</p>
-              <p>The five acquisition preparations are consistent with the publication's
-              five animals, but the archive exposes <b>no animal key</b>. The mapping is
+              <p>The {n_sessions} acquisition preparations are consistent with the publication's
+              {n_sessions} animals, but the archive exposes <b>no animal key</b>. The mapping is
               inferred. They are one laboratory/preparation, not an independent cohort.</p>
             </div>
             """,
@@ -100,8 +104,8 @@ def render(snapshot: StudioSnapshot, store: TrajectoryStore, *, light: bool = Fa
         )
         c1, c2, c3 = st.columns(3)
         c1.metric("SHA256 verified", "yes")
-        c2.metric("Frames", "15,662")
-        c3.metric("Distinct preparations", "5")
+        c2.metric("Frames", f"{total_frames:,}")
+        c3.metric("Distinct preparations", str(n_sessions))
         note(
             f"Archive: {identity['archive']['actual_size_bytes']:,} bytes; "
             f"SHA256 {identity['archive']['actual_sha256'][:12]}… . "
@@ -168,8 +172,9 @@ def render(snapshot: StudioSnapshot, store: TrajectoryStore, *, light: bool = Fa
             f"""
             <div class="body">
               <p><b>{signed(primary["difference"])}</b> weighted paired mean over
-              175 overlapping landmarks; <b>{percent(primary["relative_to_b3"])}</b>
-              of the B3 mean. Four of five recording means are positive.</p>
+              {primary["n"]} overlapping landmarks; <b>{percent(primary["relative_to_b3"])}</b>
+              of the B3 mean. {primary["sessions_positive"]} of {primary["n_sessions"]}
+              recording means are positive.</p>
               <p>Conditional block-5 interval
               <b>{interval(primary["conditional_ci"]["ci_low"], primary["conditional_ci"]["ci_high"])}</b>.
               Recording-resampling interval
@@ -206,6 +211,7 @@ def render(snapshot: StudioSnapshot, store: TrajectoryStore, *, light: bool = Fa
             "the MSE null are not footnotes; they constrain the claim."
         )
     elif index == 6:
+        common_pct = round(100 * snapshot.capacity["ordered_shares"]["baseline_B4m"]["common"])
         st.markdown(
             f"""
             <div class="body">
@@ -216,7 +222,8 @@ def render(snapshot: StudioSnapshot, store: TrajectoryStore, *, light: bool = Fa
               <p><b>Capacity is not matched.</b> B3 has
               {snapshot.capacity["ratio_min"]:.2f}–{snapshot.capacity["ratio_max"]:.2f}×
               the nominal coefficients of B5-10 and arbitrary residual coordinates. The
-              51/49 ordered decomposition is arithmetic, not a structural partition.</p>
+              {common_pct}/{100 - common_pct} ordered decomposition is arithmetic,
+              not a structural partition.</p>
             </div>
             """,
             unsafe_allow_html=True,

@@ -133,10 +133,11 @@ def render(
               </div>
               <div class="nb-divider"></div>
               <div style="font-size:0.82rem;line-height:1.7">
-                <div><b>PC1</b> {case["origin"][0]:+.3f} <span style="opacity:.55">({evr[0]*100:.1f}% train variance)</span></div>
+                <div><b>PC1</b> {case["origin"][0]:+.3f} <span style="opacity:.55">({evr[0]*100:.1f}% of total training variance)</span></div>
                 <div><b>PC2</b> {case["origin"][1]:+.3f} <span style="opacity:.55">({evr[1]*100:.1f}%)</span></div>
                 <div><b>PC3</b> {case["origin"][2]:+.3f} <span style="opacity:.55">({evr[2]*100:.1f}%)</span></div>
-                <div style="opacity:.65;margin-top:.5rem">3-D cumulative {case["explained_3d"]*100:.1f}% of training variance</div>
+                <div style="opacity:.65;margin-top:.5rem">3-D cumulative {case["explained_3d"]*100:.1f}% of total training variance<br>
+                {case["explained_3d_of_10d"]*100:.1f}% of the retained PCA-10 variance; {case["remaining_10d_of_10d"]*100:.1f}% of PCA-10 is not shown</div>
               </div>
             </div>
             """,

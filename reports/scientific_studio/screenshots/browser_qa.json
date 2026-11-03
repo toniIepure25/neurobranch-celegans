@@ -1,0 +1,426 @@
+{
+  "generated_utc": "2026-11-03T23:24:36.076287+00:00",
+  "url": "http://127.0.0.1:8505",
+  "chrome": "C:\\Users\\ComputaCenter\\AppData\\Local\\ms-playwright\\chromium-1234\\chrome-win64\\chrome.exe",
+  "viewports": [
+    {
+      "width": 1920,
+      "height": 1080
+    },
+    {
+      "width": 1366,
+      "height": 768
+    },
+    {
+      "width": 1280,
+      "height": 800
+    }
+  ],
+  "sections": [
+    "Overview",
+    "3D Neural Dynamics",
+    "Neural Activity",
+    "Models & Forecasting",
+    "Uncertainty & Evidence",
+    "Virtual Perturbations",
+    "Research Notebook"
+  ],
+  "captures": [
+    {
+      "section": "Overview",
+      "width": 1920,
+      "height": 1080,
+      "file": "overview_1920.png",
+      "overflow": {
+        "scrollWidth": 1920,
+        "clientWidth": 1920,
+        "bodyScrollWidth": 1920,
+        "bodyClientWidth": 1920
+      },
+      "horizontal_overflow": false,
+      "console_errors": []
+    },
+    {
+      "section": "3D Neural Dynamics",
+      "width": 1920,
+      "height": 1080,
+      "file": "3d_neural_dynamics_1920.png",
+      "overflow": {
+        "scrollWidth": 1920,
+        "clientWidth": 1920,
+        "bodyScrollWidth": 1920,
+        "bodyClientWidth": 1920
+      },
+      "horizontal_overflow": false,
+      "console_errors": []
+    },
+    {
+      "section": "Neural Activity",
+      "width": 1920,
+      "height": 1080,
+      "file": "neural_activity_1920.png",
+      "overflow": {
+        "scrollWidth": 1920,
+        "clientWidth": 1920,
+        "bodyScrollWidth": 1920,
+        "bodyClientWidth": 1920
+      },
+      "horizontal_overflow": false,
+      "console_errors": []
+    },
+    {
+      "section": "Models & Forecasting",
+      "width": 1920,
+      "height": 1080,
+      "file": "models_forecasting_1920.png",
+      "overflow": {
+        "scrollWidth": 1920,
+        "clientWidth": 1920,
+        "bodyScrollWidth": 1920,
+        "bodyClientWidth": 1920
+      },
+      "horizontal_overflow": false,
+      "console_errors": []
+    },
+    {
+      "section": "Uncertainty & Evidence",
+      "width": 1920,
+      "height": 1080,
+      "file": "uncertainty_evidence_1920.png",
+      "overflow": {
+        "scrollWidth": 1920,
+        "clientWidth": 1920,
+        "bodyScrollWidth": 1920,
+        "bodyClientWidth": 1920
+      },
+      "horizontal_overflow": false,
+      "console_errors": []
+    },
+    {
+      "section": "Virtual Perturbations",
+      "width": 1920,
+      "height": 1080,
+      "file": "virtual_perturbations_1920.png",
+      "overflow": {
+        "scrollWidth": 1920,
+        "clientWidth": 1920,
+        "bodyScrollWidth": 1920,
+        "bodyClientWidth": 1920
+      },
+      "horizontal_overflow": false,
+      "console_errors": []
+    },
+    {
+      "section": "Research Notebook",
+      "width": 1920,
+      "height": 1080,
+      "file": "research_notebook_1920.png",
+      "overflow": {
+        "scrollWidth": 1920,
+        "clientWidth": 1920,
+        "bodyScrollWidth": 1920,
+        "bodyClientWidth": 1920
+      },
+      "horizontal_overflow": false,
+      "console_errors": []
+    },
+    {
+      "section": "Presentation slide 1",
+      "width": 1920,
+      "height": 1080,
+      "file": "presentation_slide1_1920.png",
+      "overflow": {
+        "scrollWidth": 1920,
+        "clientWidth": 1920,
+        "bodyScrollWidth": 1920,
+        "bodyClientWidth": 1920
+      },
+      "horizontal_overflow": false,
+      "console_errors": []
+    },
+    {
+      "section": "Presentation slide 6",
+      "width": 1920,
+      "height": 1080,
+      "file": "presentation_slide6_1920.png",
+      "overflow": {
+        "scrollWidth": 1920,
+        "clientWidth": 1920,
+        "bodyScrollWidth": 1920,
+        "bodyClientWidth": 1920
+      },
+      "horizontal_overflow": false,
+      "console_errors": []
+    },
+    {
+      "section": "Overview",
+      "width": 1366,
+      "height": 768,
+      "file": "overview_1366.png",
+      "overflow": {
+        "scrollWidth": 1366,
+        "clientWidth": 1366,
+        "bodyScrollWidth": 1366,
+        "bodyClientWidth": 1366
+      },
+      "horizontal_overflow": false,
+      "console_errors": []
+    },
+    {
+      "section": "3D Neural Dynamics",
+      "width": 1366,
+      "height": 768,
+      "file": "3d_neural_dynamics_1366.png",
+      "overflow": {
+        "scrollWidth": 1366,
+        "clientWidth": 1366,
+        "bodyScrollWidth": 1366,
+        "bodyClientWidth": 1366
+      },
+      "horizontal_overflow": false,
+      "console_errors": []
+    },
+    {
+      "section": "Neural Activity",
+      "width": 1366,
+      "height": 768,
+      "file": "neural_activity_1366.png",
+      "overflow": {
+        "scrollWidth": 1366,
+        "clientWidth": 1366,
+        "bodyScrollWidth": 1366,
+        "bodyClientWidth": 1366
+      },
+      "horizontal_overflow": false,
+      "console_errors": []
+    },
+    {
+      "section": "Models & Forecasting",
+      "width": 1366,
+      "height": 768,
+      "file": "models_forecasting_1366.png",
+      "overflow": {
+        "scrollWidth": 1366,
+        "clientWidth": 1366,
+        "bodyScrollWidth": 1366,
+        "bodyClientWidth": 1366
+      },
+      "horizontal_overflow": false,
+      "console_errors": []
+    },
+    {
+      "section": "Uncertainty & Evidence",
+      "width": 1366,
+      "height": 768,
+      "file": "uncertainty_evidence_1366.png",
+      "overflow": {
+        "scrollWidth": 1366,
+        "clientWidth": 1366,
+        "bodyScrollWidth": 1366,
+        "bodyClientWidth": 1366
+      },
+      "horizontal_overflow": false,
+      "console_errors": []
+    },
+    {
+      "section": "Virtual Perturbations",
+      "width": 1366,
+      "height": 768,
+      "file": "virtual_perturbations_1366.png",
+      "overflow": {
+        "scrollWidth": 1366,
+        "clientWidth": 1366,
+        "bodyScrollWidth": 1366,
+        "bodyClientWidth": 1366
+      },
+      "horizontal_overflow": false,
+      "console_errors": []
+    },
+    {
+      "section": "Research Notebook",
+      "width": 1366,
+      "height": 768,
+      "file": "research_notebook_1366.png",
+      "overflow": {
+        "scrollWidth": 1366,
+        "clientWidth": 1366,
+        "bodyScrollWidth": 1366,
+        "bodyClientWidth": 1366
+      },
+      "horizontal_overflow": false,
+      "console_errors": []
+    },
+    {
+      "section": "Presentation slide 1",
+      "width": 1366,
+      "height": 768,
+      "file": "presentation_slide1_1366.png",
+      "overflow": {
+        "scrollWidth": 1366,
+        "clientWidth": 1366,
+        "bodyScrollWidth": 1366,
+        "bodyClientWidth": 1366
+      },
+      "horizontal_overflow": false,
+      "console_errors": []
+    },
+    {
+      "section": "Presentation slide 6",
+      "width": 1366,
+      "height": 768,
+      "file": "presentation_slide6_1366.png",
+      "overflow": {
+        "scrollWidth": 1366,
+        "clientWidth": 1366,
+        "bodyScrollWidth": 1366,
+        "bodyClientWidth": 1366
+      },
+      "horizontal_overflow": false,
+      "console_errors": []
+    },
+    {
+      "section": "Overview",
+      "width": 1280,
+      "height": 800,
+      "file": "overview_1280.png",
+      "overflow": {
+        "scrollWidth": 1280,
+        "clientWidth": 1280,
+        "bodyScrollWidth": 1280,
+        "bodyClientWidth": 1280
+      },
+      "horizontal_overflow": false,
+      "console_errors": []
+    },
+    {
+      "section": "3D Neural Dynamics",
+      "width": 1280,
+      "height": 800,
+      "file": "3d_neural_dynamics_1280.png",
+      "overflow": {
+        "scrollWidth": 1280,
+        "clientWidth": 1280,
+        "bodyScrollWidth": 1280,
+        "bodyClientWidth": 1280
+      },
+      "horizontal_overflow": false,
+      "console_errors": []
+    },
+    {
+      "section": "Neural Activity",
+      "width": 1280,
+      "height": 800,
+      "file": "neural_activity_1280.png",
+      "overflow": {
+        "scrollWidth": 1280,
+        "clientWidth": 1280,
+        "bodyScrollWidth": 1280,
+        "bodyClientWidth": 1280
+      },
+      "horizontal_overflow": false,
+      "console_errors": []
+    },
+    {
+      "section": "Models & Forecasting",
+      "width": 1280,
+      "height": 800,
+      "file": "models_forecasting_1280.png",
+      "overflow": {
+        "scrollWidth": 1280,
+        "clientWidth": 1280,
+        "bodyScrollWidth": 1280,
+        "bodyClientWidth": 1280
+      },
+      "horizontal_overflow": false,
+      "console_errors": []
+    },
+    {
+      "section": "Uncertainty & Evidence",
+      "width": 1280,
+      "height": 800,
+      "file": "uncertainty_evidence_1280.png",
+      "overflow": {
+        "scrollWidth": 1280,
+        "clientWidth": 1280,
+        "bodyScrollWidth": 1280,
+        "bodyClientWidth": 1280
+      },
+      "horizontal_overflow": false,
+      "console_errors": []
+    },
+    {
+      "section": "Virtual Perturbations",
+      "width": 1280,
+      "height": 800,
+      "file": "virtual_perturbations_1280.png",
+      "overflow": {
+        "scrollWidth": 1280,
+        "clientWidth": 1280,
+        "bodyScrollWidth": 1280,
+        "bodyClientWidth": 1280
+      },
+      "horizontal_overflow": false,
+      "console_errors": []
+    },
+    {
+      "section": "Research Notebook",
+      "width": 1280,
+      "height": 800,
+      "file": "research_notebook_1280.png",
+      "overflow": {
+        "scrollWidth": 1280,
+        "clientWidth": 1280,
+        "bodyScrollWidth": 1280,
+        "bodyClientWidth": 1280
+      },
+      "horizontal_overflow": false,
+      "console_errors": []
+    },
+    {
+      "section": "Presentation slide 1",
+      "width": 1280,
+      "height": 800,
+      "file": "presentation_slide1_1280.png",
+      "overflow": {
+        "scrollWidth": 1280,
+        "clientWidth": 1280,
+        "bodyScrollWidth": 1280,
+        "bodyClientWidth": 1280
+      },
+      "horizontal_overflow": false,
+      "console_errors": []
+    },
+    {
+      "section": "Presentation slide 6",
+      "width": 1280,
+      "height": 800,
+      "file": "presentation_slide6_1280.png",
+      "overflow": {
+        "scrollWidth": 1280,
+        "clientWidth": 1280,
+        "bodyScrollWidth": 1280,
+        "bodyClientWidth": 1280
+      },
+      "horizontal_overflow": false,
+      "console_errors": []
+    },
+    {
+      "section": "3D Neural Dynamics (light)",
+      "width": 1920,
+      "height": 1080,
+      "file": "dynamics_light_1920.png",
+      "overflow": {
+        "scrollWidth": 1920,
+        "clientWidth": 1920,
+        "bodyScrollWidth": 1920,
+        "bodyClientWidth": 1920
+      },
+      "horizontal_overflow": false,
+      "console_errors": []
+    }
+  ],
+  "console_errors": [],
+  "note": "Geometry and console checks only. Visual inspection of the PNGs is required and is recorded separately.",
+  "console_error_count": 0,
+  "horizontal_overflow_count": 0
+}

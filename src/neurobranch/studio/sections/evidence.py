@@ -29,7 +29,8 @@ def render(snapshot: StudioSnapshot, *, light: bool = False) -> None:
     section_header(
         "05 · UNCERTAINTY & EVIDENCE",
         "Every interval names the unit it resamples.",
-        "The 175 landmarks are overlapping forecast windows from five recordings. "
+        f"The {snapshot.primary['n']} landmarks are overlapping forecast windows from "
+        f"{snapshot.primary['n_sessions']} recordings. "
         "Conditional intervals resample landmarks within recordings; the recording "
         "bootstrap resamples the five recordings. They answer different questions and "
         "must not be collapsed into one.",
@@ -45,7 +46,7 @@ def render(snapshot: StudioSnapshot, *, light: bool = False) -> None:
 
     c1, c2, c3 = st.columns(3, gap="small")
     with c1:
-        stat_block(signed(primary["difference"], 4), "weighted paired mean · 175 landmarks")
+        stat_block(signed(primary["difference"], 4), f"weighted paired mean · {primary['n']} landmarks")
     with c2:
         stat_block(interval(primary["conditional_ci"]["ci_low"], primary["conditional_ci"]["ci_high"]), "conditional landmark block-5 interval")
     with c3:
@@ -99,7 +100,7 @@ def render(snapshot: StudioSnapshot, *, light: bool = False) -> None:
             )
         st.plotly_chart(paired_histogram(snapshot, light=light), use_container_width=True, key="evidence_hist")
         figure_caption(
-            "Paired Δ energy for all 175 landmarks. The distribution is wide; the mean "
+            f"Paired Δ energy for all {primary['n']} landmarks. The distribution is wide; the mean "
             "is not a description of a typical landmark."
         )
         with st.expander("Bootstrap and effective-unit details", expanded=False):
@@ -107,7 +108,7 @@ def render(snapshot: StudioSnapshot, *, light: bool = False) -> None:
             st.markdown(
                 f"Non-overlapping H100 proxies: **{snapshot.statistical['overall_nonoverlapping_proxy']}**; "
                 f"landmark inflation factor: **{snapshot.statistical['landmark_inflation_factor']:.1f}×**. "
-                "The 175 count is a compute grid, not an effective sample size."
+                f"The {primary['n']} count is a compute grid, not an effective sample size."
             )
             loo = snapshot.uncertainty.get("leave_one_session_out_positive")
             st.markdown(
@@ -212,8 +213,12 @@ def render(snapshot: StudioSnapshot, *, light: bool = False) -> None:
                 """,
                 unsafe_allow_html=True,
             )
+            ordered = cap["ordered_shares"]["baseline_B4m"]
+            common_pct = round(100 * ordered["common"])
+            residual_pct = 100 - common_pct
             warning(
-                "The 51/49 split depends on the ordering and baseline. It is arithmetic, "
+                f"The {common_pct}/{residual_pct} split depends on the ordering and baseline. "
+                "It is arithmetic, "
                 "not a structural partition. B3's extra parameters and arbitrary residual "
                 "coordinates mean the residual advantage is not identifiable as "
                 "cross-neuron information. No VAR coefficient is a synaptic weight or a "

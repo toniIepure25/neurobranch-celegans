@@ -177,11 +177,19 @@ Examples of invalidated/unsupported wording:
 ## 10. Virtual perturbation boundary
 
 The perturbation lab edits a standardized ΔF/F coordinate in a fitted B3 model
-and rolls forward under zero innovation. It is a **model-dependent virtual
-perturbation**, not optogenetics, electrophysiology, chemogenetics, behaviour,
-or a therapeutic effect. It does not rank targets. The B3/B5 disagreement
-quantifies model dependence; it does not validate the perturbation. An edit
-outside the training marginal is flagged as OOD.
+and rolls forward under zero innovation. It displays the exact banner
+**MODEL-DEPENDENT VIRTUAL PERTURBATION — NOT CAUSALLY VALIDATED.** It is not
+optogenetics, electrophysiology, chemogenetics, behaviour, or a therapeutic
+effect. It does not rank targets. The B3/B5 disagreement quantifies model
+dependence; it does not validate the perturbation. An edit outside the training
+marginal is flagged as OOD.
+
+The input matrix is already train-standardized per recording (training mean 0,
+training SD 1). Adding one unit to one native coordinate is therefore one
+training z unit at the origin; the model refits its own within-window
+standardization internally. No cross-session cell registration exists, so a
+label identifies a cell-type label in one recording, not the same identified
+cell across recordings.
 
 ## 11. What would change the conclusion
 

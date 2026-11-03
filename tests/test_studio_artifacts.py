@@ -53,9 +53,15 @@ def test_trajectory_horizon_contract() -> None:
     showcase_case = store.case(0, store.session(0)["showcase_landmarks"][0])
     for model, ensemble in showcase_case["ensembles"].items():
         assert ensemble.shape == (100, 20, 10), model
-    assert case["explained_3d"] == pytest.approx(
-        float(np.sum(case["explained_variance_ratio"][:3])), abs=1e-6
-    )
+    evr = np.asarray(case["explained_variance_ratio"])
+    retained = float(evr.sum())
+    assert case["explained_3d"] == pytest.approx(float(evr[:3].sum()), abs=1e-6)
+    assert case["explained_10d"] == pytest.approx(retained, abs=1e-12)
+    assert case["explained_3d_of_10d"] == pytest.approx(case["explained_3d"] / retained, abs=1e-12)
+    assert case["remaining_10d_of_10d"] == pytest.approx(1.0 - case["explained_3d"] / retained, abs=1e-12)
+    assert case["remaining_10d_of_total"] == pytest.approx(retained - case["explained_3d"], abs=1e-12)
+    assert case["outside_10d_of_total"] == pytest.approx(1.0 - retained, abs=1e-12)
+    assert case["variance_definition"] == "fractions of total training feature variance"
 
 
 def test_observed_and_forecast_are_aligned() -> None:

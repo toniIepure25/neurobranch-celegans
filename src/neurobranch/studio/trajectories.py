@@ -92,6 +92,9 @@ class TrajectoryStore:
                 ensembles[model] = np.asarray(self.arrays[key], dtype=np.float64)[
                     :, :horizon
                 ]
+        evr = np.asarray(meta["explained_variance_ratio"], dtype=np.float64)
+        retained_10d = float(evr.sum())
+        explained_3d = float(meta["explained_variance_3d"])
         return {
             "session": sid,
             "landmark": t,
@@ -104,8 +107,16 @@ class TrajectoryStore:
             "truth": truth,
             "means": means,
             "ensembles": ensembles,
-            "explained_variance_ratio": np.asarray(meta["explained_variance_ratio"]),
-            "explained_3d": float(meta["explained_variance_3d"]),
+            "explained_variance_ratio": evr,
+            "explained_3d": explained_3d,
+            # sklearn's explained_variance_ratio_ denominator is the total
+            # training feature variance, not the retained 10-D variance.
+            "variance_definition": "fractions of total training feature variance",
+            "explained_10d": retained_10d,
+            "explained_3d_of_10d": explained_3d / retained_10d,
+            "remaining_10d_of_10d": 1.0 - explained_3d / retained_10d,
+            "remaining_10d_of_total": retained_10d - explained_3d,
+            "outside_10d_of_total": 1.0 - retained_10d,
             "dataset_name": meta["dataset_name"],
             "model_labels": self.model_labels,
             "fps": float(meta["fps"]),

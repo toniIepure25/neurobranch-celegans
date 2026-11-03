@@ -44,6 +44,13 @@ nav:
       - Reproducibility: STUDIO_REPRODUCIBILITY.md
       - Supervisor demo: STUDIO_SUPERVISOR_DEMO.md
       - Testing and QA: STUDIO_TESTING_AND_QA.md
+      - Final audit 2026-11-04:
+          - Numerical audit: STUDIO_FINAL_NUMERICAL_AUDIT.md
+          - PCA audit: STUDIO_FINAL_PCA_AUDIT.md
+          - Scientific QA: STUDIO_FINAL_SCIENTIFIC_QA.md
+          - Visual QA: STUDIO_FINAL_VISUAL_QA.md
+          - User guide: STUDIO_FINAL_USER_GUIDE.md
+          - Supervisor checklist: STUDIO_FINAL_SUPERVISOR_CHECKLIST.md
   - Core dynamics simulator:
       - Objective (provisional): ORIGINAL_RESEARCH_OBJECTIVE.md
       - Gap analysis: SIMULATOR_GAP_ANALYSIS.md

@@ -1,13 +1,16 @@
 """Independent reference calculation for B3 and B5 at selected landmarks.
 
-The project functions are not used for the mean models, PCA, rollouts, or energy
-score.  Only the historical J5 innovation sampler is reused, because the exact
-random innovation path must match the frozen comparison.  This is a code/math
+The project functions are not used for the reference mean models, PCA,
+rollouts, or energy score.  Only the historical J5 innovation sampler is reused,
+because the exact random innovation path must match the frozen comparison.  The
+official B3 fit is imported solely to report a stage-by-stage operator
+difference; it does not contribute to the reference score.  This is a code/math
 cross-check, not a new experiment.
 """
 
 from __future__ import annotations
 
+import argparse
 import json
 import sys
 from pathlib import Path
@@ -21,6 +24,7 @@ sys.path.insert(0, str(ROOT / "scripts"))
 import jd_evaluate as JD  # noqa: E402
 
 from neurobranch.diagnostics.common import load_nostim  # noqa: E402
+from neurobranch.kato_interactions.models import fit_window as official_fit_window  # noqa: E402
 
 OUT = ROOT / "reports" / "master_review"
 WINDOW = 500
@@ -29,7 +33,21 @@ CAP = 0.995
 K = 10
 MEMBERS = 100
 HORIZON = 100
+SCORE_STEP = 19
+# The original three fixed cases are retained for the historical claims ledger.
 CASES = ((0, 2690), (2, 2624), (4, 2592))
+# Extended, predeclared boundary rule: every recording's first and last frozen
+# H100 landmark, plus the landmark named in the Studio errata.  No tuning or
+# model selection was used to choose these cases.
+EXTENDED_CASES = (
+    (0, 2690), (1, 2688), (2, 2624), (3, 2838), (4, 2592),
+    (0, 3030), (1, 3028), (2, 2954), (3, 3208), (4, 2912),
+    (0, 2750),
+)
+H20_CONTROLS = {
+    (0, 2750): 1.4738989874959576,
+    (0, 2690): 2.4108195346662167,
+}
 
 
 def ridge_var(X: np.ndarray, starts: np.ndarray, ridge: float = RIDGE, cap: float | None = CAP):
@@ -79,9 +97,14 @@ def energy(ensemble: np.ndarray, observation: np.ndarray) -> float:
     return float(term1 - term2)
 
 
-def b3_reference(X: np.ndarray, t: int, eps: np.ndarray):
+def b3_operator_reference(X: np.ndarray, t: int):
     starts = np.arange(max(1, t - WINDOW + 1), t, dtype=np.int64)
     A, b, diag = ridge_var(X, starts)
+    return A, b, diag, starts
+
+
+def b3_reference(X: np.ndarray, t: int, eps: np.ndarray):
+    A, b, diag, _ = b3_operator_reference(X, t)
     x = np.repeat(X[t].astype(np.float64)[None, :], eps.shape[0], axis=0)
     out = np.empty((eps.shape[0], eps.shape[1], X.shape[1]), dtype=np.float64)
     for step in range(eps.shape[1]):
@@ -127,22 +150,62 @@ def b5_reference(X: np.ndarray, mean: np.ndarray, components: np.ndarray, t: int
 
 
 def main() -> None:
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument(
+        "--extended",
+        action="store_true",
+        help="Run the predeclared first/last-landmark boundary set plus landmark 2750.",
+    )
+    parser.add_argument(
+        "--out",
+        type=Path,
+        default=OUT / "independent_model_check.json",
+        help="Output JSON path; the historical default is preserved.",
+    )
+    args = parser.parse_args()
+    cases = EXTENDED_CASES if args.extended else CASES
+    out = args.out.resolve()
+    out.parent.mkdir(parents=True, exist_ok=True)
+
     cfg, data, recordings = load_nostim()
     frozen = pd.read_csv(ROOT / "reports" / "simulator" / "kato_common_state" / "model_per_landmark.csv")
     results = []
-    for sid, t in CASES:
+    for sid, t in cases:
         d = data[sid]
         truth16 = d.X[t + 1 : t + HORIZON + 1]
         _, series, _ = JD.prepare(d)
         spec = JD.Spec("J5_population_lead1_boot", "var", "population", "block", 10)
+        rng = np.random.default_rng(7000 + sid * 10000 + t)
         eps = JD.make_innovation(spec, series["population"], t, {}).sample(
-            MEMBERS, HORIZON, np.random.default_rng(7000 + sid * 10000 + t)
+            MEMBERS, HORIZON, rng
+        )
+        # Negative control: the historical checker drew only 20 innovations.
+        # The moving-block sampler consumes a different number of random starts
+        # for a 20-step request, so the first 20 innovations are not a prefix of
+        # the 100-step draw.
+        eps20 = JD.make_innovation(spec, series["population"], t, {}).sample(
+            MEMBERS, 20, np.random.default_rng(7000 + sid * 10000 + t)
         )
         mean, components = pca_reference(d.X[d.masks["train"]], K)
         # The saved run uses sklearn PCA; compare transformed training variance.
         train_scores = scores(d.X[d.masks["train"]], mean, components)
+        ref_A, ref_b, b3_diag, starts = b3_operator_reference(d.X, t)
+        official = official_fit_window(d.X, t, window=WINDOW, ridge=RIDGE, spectral_cap=CAP)
+        stage = {
+            "n_transitions": int(len(starts)),
+            "first_transition": int(starts.min()),
+            "last_transition": int(starts.max()),
+            "max_abs_A_difference": float(np.max(np.abs(ref_A - official.A))),
+            "max_abs_b_difference": float(np.max(np.abs(ref_b - official.b))),
+            "reference_radius": float(b3_diag["radius"]),
+            "official_radius": float(official.fit_record["realized_radius"]),
+            "first_divergent_stage": (
+                "innovation_horizon" if not np.allclose(eps20, eps[:, :20]) else "none"
+            ),
+        }
         b3_ens, b3_diag = b3_reference(d.X, t, eps)
         b5_ens, b5_diag = b5_reference(d.X, mean, components, t, eps)
+        b3_h20_ens, _ = b3_reference(d.X, t, eps20)
 
         def project(arr, pca_mean=mean, pca_components=components):
             return (arr.astype(np.float64) - pca_mean) @ pca_components.T
@@ -150,14 +213,28 @@ def main() -> None:
         truth_proj = project(truth16)
         b3_proj = project(b3_ens)
         b5_proj = project(b5_ens)
-        b3_energy = energy(b3_proj[:, 19], truth_proj[19])
-        b5_energy = energy(b5_proj[:, 19], truth_proj[19])
-        b3_mse = float(np.mean((b3_proj[:, 19].mean(axis=0) - truth_proj[19]) ** 2))
-        b5_mse = float(np.mean((b5_proj[:, 19].mean(axis=0) - truth_proj[19]) ** 2))
+        b3_h20_proj = project(b3_h20_ens)
+        b3_energy = energy(b3_proj[:, SCORE_STEP], truth_proj[SCORE_STEP])
+        b5_energy = energy(b5_proj[:, SCORE_STEP], truth_proj[SCORE_STEP])
+        b3_mse = float(np.mean((b3_proj[:, SCORE_STEP].mean(axis=0) - truth_proj[SCORE_STEP]) ** 2))
+        b5_mse = float(np.mean((b5_proj[:, SCORE_STEP].mean(axis=0) - truth_proj[SCORE_STEP]) ** 2))
+        b3_h20_energy = energy(b3_h20_proj[:, SCORE_STEP], truth_proj[SCORE_STEP])
 
         frozen_rows = frozen[(frozen["session"] == sid) & (frozen["landmark"] == t)]
         frozen_b3 = frozen_rows[frozen_rows["model"] == "B3_population"].iloc[0]
         frozen_b5 = frozen_rows[frozen_rows["model"] == "B5_common_k10"].iloc[0]
+        control = {
+            "B3_energy_h20_if_only_20_innovations": b3_h20_energy,
+            "B3_difference_vs_frozen": abs(b3_h20_energy - float(frozen_b3["pca10_energy_h20"])),
+            "max_abs_first20_innovation_difference": float(
+                np.max(np.abs(eps20 - eps[:, :20]))
+            ),
+        }
+        if (sid, t) in H20_CONTROLS:
+            control["documented_anomaly"] = H20_CONTROLS[(sid, t)]
+            control["reproduced_documented_anomaly"] = bool(
+                abs(b3_h20_energy - H20_CONTROLS[(sid, t)]) < 1e-6
+            )
         results.append(
             {
                 "session": sid,
@@ -185,16 +262,42 @@ def main() -> None:
                     "B3_mse": abs(b3_mse - float(frozen_b3["pca10_mse_mean_h20"])),
                     "B5_mse": abs(b5_mse - float(frozen_b5["pca10_mse_mean_h20"])),
                 },
+                "stage_comparison": stage,
+                "h20_innovation_control": control,
             }
         )
+    anomaly_controls = [
+        r["h20_innovation_control"]
+        for r in results
+        if "reproduced_documented_anomaly" in r["h20_innovation_control"]
+    ]
     payload = {
         "status": "PASS" if all(max(r["absolute_difference"].values()) < 2e-5 for r in results) else "FAIL",
         "tolerance": 2e-5,
         "reason_for_tolerance": "PCA sign/rounding and float32-to-float64 reference path; not a reproduction tolerance.",
+        "case_rule": (
+            "Extended: every recording's first and last frozen H100 landmark plus "
+            "(session 0, landmark 2750); no tuning."
+            if args.extended
+            else "Historical three fixed cases."
+        ),
+        "rollout_horizon": HORIZON,
+        "score_step": SCORE_STEP,
         "cases": results,
+        "root_cause_control": {
+            "status": "PASS" if anomaly_controls and all(
+                c.get("reproduced_documented_anomaly") for c in anomaly_controls
+            ) else "NOT_CHECKED",
+            "explanation": (
+                "The documented anomalies are reproduced when the moving-block sampler "
+                "is asked for 20 innovations instead of 100. The sampler's random-start "
+                "draw count depends on horizon; a 20-step draw is not a prefix of the "
+                "100-step draw. Official scoring uses a 100-step rollout and step 20."
+            ),
+        },
         "note": "Only the J5 innovation sampler is reused to keep the common random path fixed; models, PCA, rollouts and energy are independent reference implementations.",
     }
-    (OUT / "independent_model_check.json").write_text(json.dumps(payload, indent=2), encoding="utf-8")
+    out.write_text(json.dumps(payload, indent=2) + "\n", encoding="utf-8")
     print(json.dumps(payload, indent=2))
 
 

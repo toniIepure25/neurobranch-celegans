@@ -203,17 +203,17 @@ def trajectory_3d(
     fig.update_layout(
         scene=dict(
             xaxis=dict(
-                title=f"PC1 · {evr[0] * 100:.1f}%",
+                title=f"PC1 · {evr[0] * 100:.1f}% total",
                 range=[lo[0] - pad[0], hi[0] + pad[0]],
                 **common,
             ),
             yaxis=dict(
-                title=f"PC2 · {evr[1] * 100:.1f}%",
+                title=f"PC2 · {evr[1] * 100:.1f}% total",
                 range=[lo[1] - pad[1], hi[1] + pad[1]],
                 **common,
             ),
             zaxis=dict(
-                title=f"PC3 · {evr[2] * 100:.1f}%",
+                title=f"PC3 · {evr[2] * 100:.1f}% total",
                 range=[lo[2] - pad[2], hi[2] + pad[2]],
                 **common,
             ),
@@ -380,8 +380,9 @@ def trajectory_2d(
             marker=dict(color=p["observed"], size=10, symbol="diamond"),
         )
     )
-    fig.update_xaxes(title="PC1")
-    fig.update_yaxes(title="PC2")
+    evr = np.asarray(case["explained_variance_ratio"])
+    fig.update_xaxes(title=f"PC1 · {evr[0] * 100:.1f}% total")
+    fig.update_yaxes(title=f"PC2 · {evr[1] * 100:.1f}% total")
     style(fig, height=470, light=light, title="2D fallback · PC1–PC2 neural-state projection")
     return fig
 

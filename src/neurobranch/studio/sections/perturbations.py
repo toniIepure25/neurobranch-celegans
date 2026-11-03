@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import streamlit as st
 
+from neurobranch.adaptive.var import WARNING as PERTURBATION_WARNING
 from neurobranch.studio.activity import load_activity
 from neurobranch.studio.components import (
     badge,
@@ -33,6 +34,7 @@ def render(
         "model dependence. It does not stimulate a neuron, predict behaviour, or "
         "establish a cause.",
     )
+    warning(PERTURBATION_WARNING)
     warning(
         "This is not optogenetics, electrophysiology, chemogenetics, or behaviour. The "
         "perturbed quantity is a standardized ΔF/F coordinate at one frame in a fitted "

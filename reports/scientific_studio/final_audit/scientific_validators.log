@@ -1,0 +1,21 @@
+===== validate_kato_common_state.py =====
+PASS: 26 hashed artifacts; G4=PASS; G5=PASS
+exit=0
+===== validate_kato_final_audit.py =====
+FAIL: manifest size mismatch: .gitattributes
+FAIL: manifest hash mismatch: .gitattributes
+exit=1
+===== validate_kato_interactions.py =====
+{
+  "status": "FAIL",
+  "errors": [
+    "manifest hash mismatches: ['app/handoff_demo.py', 'mkdocs.yml']"
+  ]
+}
+exit=1
+===== validate_reports.py --strict =====
+ok: reliability_summary.json (schema v2)
+ok: claims.json (schema v2)
+ok: reliability_by_target.csv (169 rows)
+ok: ceiling_curve.csv (7 rows)
+exit=0

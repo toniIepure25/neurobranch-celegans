@@ -1,0 +1,481 @@
+{
+  "status": "PASS",
+  "tolerance": 2e-05,
+  "reason_for_tolerance": "PCA sign/rounding and float32-to-float64 reference path; not a reproduction tolerance.",
+  "case_rule": "Extended: every recording's first and last frozen H100 landmark plus (session 0, landmark 2750); no tuning.",
+  "rollout_horizon": 100,
+  "score_step": 19,
+  "cases": [
+    {
+      "session": 0,
+      "landmark": 2690,
+      "reference": {
+        "B3_energy_h20": 2.498643590923475,
+        "B5_energy_h20": 3.909356494026139,
+        "B3_mse_h20": 1.3017313487899531,
+        "B5_mse_h20": 2.421940459016746,
+        "B3_parameters": 10712,
+        "B5_parameters": 1346,
+        "B3_spectral_radius": 0.9950000000000014,
+        "B5_factor_radius": 0.9927329330014147,
+        "train_pc1_variance_reference": 26.74071469297476
+      },
+      "frozen": {
+        "B3_energy_h20": 2.4986440082288306,
+        "B5_energy_h20": 3.909356815454288,
+        "B3_mse_h20": 1.3017317712732557,
+        "B5_mse_h20": 2.42194080060518
+      },
+      "absolute_difference": {
+        "B3_energy": 4.1730535560446924e-07,
+        "B5_energy": 3.214281489860582e-07,
+        "B3_mse": 4.22483302564558e-07,
+        "B5_mse": 3.4158843398301997e-07
+      },
+      "stage_comparison": {
+        "n_transitions": 499,
+        "first_transition": 2191,
+        "last_transition": 2689,
+        "max_abs_A_difference": 3.2487901258093643e-13,
+        "max_abs_b_difference": 3.8402614421784165e-13,
+        "reference_radius": 0.9950000000000014,
+        "official_radius": 0.9950000000000021,
+        "first_divergent_stage": "innovation_horizon"
+      },
+      "h20_innovation_control": {
+        "B3_energy_h20_if_only_20_innovations": 2.41081893172891,
+        "B3_difference_vs_frozen": 0.08782507649992066,
+        "max_abs_first20_innovation_difference": 11.832458642720415,
+        "documented_anomaly": 2.4108195346662167,
+        "reproduced_documented_anomaly": true
+      }
+    },
+    {
+      "session": 1,
+      "landmark": 2688,
+      "reference": {
+        "B3_energy_h20": 2.3694714983433967,
+        "B5_energy_h20": 2.555487546686817,
+        "B3_mse_h20": 1.14094518905582,
+        "B5_mse_h20": 1.2260277334406777,
+        "B3_parameters": 16256,
+        "B5_parameters": 1634,
+        "B3_spectral_radius": 0.9949999999999963,
+        "B5_factor_radius": 0.9666556579073633,
+        "train_pc1_variance_reference": 27.784435494188383
+      },
+      "frozen": {
+        "B3_energy_h20": 2.36947157543765,
+        "B5_energy_h20": 2.555487348929147,
+        "B3_mse_h20": 1.140945272643345,
+        "B5_mse_h20": 1.2260275714588356
+      },
+      "absolute_difference": {
+        "B3_energy": 7.7094253203569e-08,
+        "B5_energy": 1.9775766979535092e-07,
+        "B3_mse": 8.358752512371836e-08,
+        "B5_mse": 1.6198184216165146e-07
+      },
+      "stage_comparison": {
+        "n_transitions": 499,
+        "first_transition": 2189,
+        "last_transition": 2687,
+        "max_abs_A_difference": 2.7509244882040207e-13,
+        "max_abs_b_difference": 9.781064846947629e-14,
+        "reference_radius": 0.9949999999999963,
+        "official_radius": 0.9950000000000002,
+        "first_divergent_stage": "innovation_horizon"
+      },
+      "h20_innovation_control": {
+        "B3_energy_h20_if_only_20_innovations": 2.3823637474203316,
+        "B3_difference_vs_frozen": 0.012892171982681777,
+        "max_abs_first20_innovation_difference": 5.953312314000407
+      }
+    },
+    {
+      "session": 2,
+      "landmark": 2624,
+      "reference": {
+        "B3_energy_h20": 7.065337840675779,
+        "B5_energy_h20": 4.453972489484115,
+        "B3_mse_h20": 9.054695797930826,
+        "B5_mse_h20": 3.3197240896064715,
+        "B3_parameters": 15252,
+        "B5_parameters": 1586,
+        "B3_spectral_radius": 0.9950000000000001,
+        "B5_factor_radius": 0.9882876011466887,
+        "train_pc1_variance_reference": 28.025441903036814
+      },
+      "frozen": {
+        "B3_energy_h20": 7.065337726543106,
+        "B5_energy_h20": 4.453971911759197,
+        "B3_mse_h20": 9.05469551808694,
+        "B5_mse_h20": 3.3197233434653475
+      },
+      "absolute_difference": {
+        "B3_energy": 1.1413267309023922e-07,
+        "B5_energy": 5.777249176830423e-07,
+        "B3_mse": 2.798438867301911e-07,
+        "B5_mse": 7.461411239972904e-07
+      },
+      "stage_comparison": {
+        "n_transitions": 499,
+        "first_transition": 2125,
+        "last_transition": 2623,
+        "max_abs_A_difference": 2.5462965069777965e-13,
+        "max_abs_b_difference": 6.727951529228449e-14,
+        "reference_radius": 0.9950000000000001,
+        "official_radius": 0.9950000000000018,
+        "first_divergent_stage": "innovation_horizon"
+      },
+      "h20_innovation_control": {
+        "B3_energy_h20_if_only_20_innovations": 6.764924873589157,
+        "B3_difference_vs_frozen": 0.30041285295394893,
+        "max_abs_first20_innovation_difference": 6.634322678752392
+      }
+    },
+    {
+      "session": 3,
+      "landmark": 2838,
+      "reference": {
+        "B3_energy_h20": 1.4848315614034733,
+        "B5_energy_h20": 4.295305257437993,
+        "B3_mse_h20": 0.3374323549803363,
+        "B5_mse_h20": 2.8522622580878068,
+        "B3_parameters": 14042,
+        "B5_parameters": 1526,
+        "B3_spectral_radius": 0.9942976897080079,
+        "B5_factor_radius": 0.9917443585394953,
+        "train_pc1_variance_reference": 28.24324867189866
+      },
+      "frozen": {
+        "B3_energy_h20": 1.4848314631815729,
+        "B5_energy_h20": 4.295305143852289,
+        "B3_mse_h20": 0.3374322759901547,
+        "B5_mse_h20": 2.852262122909564
+      },
+      "absolute_difference": {
+        "B3_energy": 9.822190039088241e-08,
+        "B5_energy": 1.1358570350950004e-07,
+        "B3_mse": 7.899018161783289e-08,
+        "B5_mse": 1.3517824282160973e-07
+      },
+      "stage_comparison": {
+        "n_transitions": 499,
+        "first_transition": 2339,
+        "last_transition": 2837,
+        "max_abs_A_difference": 7.19979631469414e-13,
+        "max_abs_b_difference": 1.772054725179828e-13,
+        "reference_radius": 0.9942976897080079,
+        "official_radius": 0.9942976897080058,
+        "first_divergent_stage": "innovation_horizon"
+      },
+      "h20_innovation_control": {
+        "B3_energy_h20_if_only_20_innovations": 1.5867326894998808,
+        "B3_difference_vs_frozen": 0.10190122631830789,
+        "max_abs_first20_innovation_difference": 7.847670940357012
+      }
+    },
+    {
+      "session": 4,
+      "landmark": 2592,
+      "reference": {
+        "B3_energy_h20": 3.05604665205902,
+        "B5_energy_h20": 1.9832813582491162,
+        "B3_mse_h20": 2.129720348298825,
+        "B5_mse_h20": 0.7842955868264397,
+        "B3_parameters": 14762,
+        "B5_parameters": 1562,
+        "B3_spectral_radius": 0.9891513769508854,
+        "B5_factor_radius": 0.9813224706130278,
+        "train_pc1_variance_reference": 22.704428817098684
+      },
+      "frozen": {
+        "B3_energy_h20": 3.056046586435431,
+        "B5_energy_h20": 1.9832813751738732,
+        "B3_mse_h20": 2.129720245647288,
+        "B5_mse_h20": 0.7842955984022633
+      },
+      "absolute_difference": {
+        "B3_energy": 6.562358878525743e-08,
+        "B5_energy": 1.6924756929270757e-08,
+        "B3_mse": 1.0265153704835939e-07,
+        "B5_mse": 1.1575823521958739e-08
+      },
+      "stage_comparison": {
+        "n_transitions": 499,
+        "first_transition": 2093,
+        "last_transition": 2591,
+        "max_abs_A_difference": 2.389199948993337e-13,
+        "max_abs_b_difference": 7.915890165577366e-14,
+        "reference_radius": 0.9891513769508854,
+        "official_radius": 0.9891513769508814,
+        "first_divergent_stage": "innovation_horizon"
+      },
+      "h20_innovation_control": {
+        "B3_energy_h20_if_only_20_innovations": 3.116472107438799,
+        "B3_difference_vs_frozen": 0.060425521003367955,
+        "max_abs_first20_innovation_difference": 8.45506429471983
+      }
+    },
+    {
+      "session": 0,
+      "landmark": 3030,
+      "reference": {
+        "B3_energy_h20": 1.4085647779236954,
+        "B5_energy_h20": 1.6566261036808523,
+        "B3_mse_h20": 0.3616152878059903,
+        "B5_mse_h20": 0.5825711693684736,
+        "B3_parameters": 10712,
+        "B5_parameters": 1346,
+        "B3_spectral_radius": 0.9841648154241915,
+        "B5_factor_radius": 0.9802612717708351,
+        "train_pc1_variance_reference": 26.74071469297476
+      },
+      "frozen": {
+        "B3_energy_h20": 1.408564759986358,
+        "B5_energy_h20": 1.6566261041274366,
+        "B3_mse_h20": 0.361615264554723,
+        "B5_mse_h20": 0.5825711776205381
+      },
+      "absolute_difference": {
+        "B3_energy": 1.7937337393192365e-08,
+        "B5_energy": 4.465843250756052e-10,
+        "B3_mse": 2.3251267300405942e-08,
+        "B5_mse": 8.252064476188536e-09
+      },
+      "stage_comparison": {
+        "n_transitions": 499,
+        "first_transition": 2531,
+        "last_transition": 3029,
+        "max_abs_A_difference": 1.0812704898111036e-13,
+        "max_abs_b_difference": 7.016609515630989e-14,
+        "reference_radius": 0.9841648154241915,
+        "official_radius": 0.9841648154241978,
+        "first_divergent_stage": "innovation_horizon"
+      },
+      "h20_innovation_control": {
+        "B3_energy_h20_if_only_20_innovations": 1.3852961777470139,
+        "B3_difference_vs_frozen": 0.023268582239344138,
+        "max_abs_first20_innovation_difference": 11.957234807780884
+      }
+    },
+    {
+      "session": 1,
+      "landmark": 3028,
+      "reference": {
+        "B3_energy_h20": 1.4754989879906697,
+        "B5_energy_h20": 1.7636783311234672,
+        "B3_mse_h20": 0.3586565758105681,
+        "B5_mse_h20": 0.6420500140601786,
+        "B3_parameters": 16256,
+        "B5_parameters": 1634,
+        "B3_spectral_radius": 0.9927848885476556,
+        "B5_factor_radius": 0.9763563388656444,
+        "train_pc1_variance_reference": 27.784435494188383
+      },
+      "frozen": {
+        "B3_energy_h20": 1.4754988750423617,
+        "B5_energy_h20": 1.763678195460647,
+        "B3_mse_h20": 0.3586564657971276,
+        "B5_mse_h20": 0.6420499286912674
+      },
+      "absolute_difference": {
+        "B3_energy": 1.1294830803976197e-07,
+        "B5_energy": 1.3566282008881103e-07,
+        "B3_mse": 1.1001344046857042e-07,
+        "B5_mse": 8.536891116239786e-08
+      },
+      "stage_comparison": {
+        "n_transitions": 499,
+        "first_transition": 2529,
+        "last_transition": 3027,
+        "max_abs_A_difference": 9.660050537263487e-13,
+        "max_abs_b_difference": 1.6253665080512292e-13,
+        "reference_radius": 0.9927848885476556,
+        "official_radius": 0.9927848885476549,
+        "first_divergent_stage": "innovation_horizon"
+      },
+      "h20_innovation_control": {
+        "B3_energy_h20_if_only_20_innovations": 1.5179304182469826,
+        "B3_difference_vs_frozen": 0.04243154320462095,
+        "max_abs_first20_innovation_difference": 5.447864577654036
+      }
+    },
+    {
+      "session": 2,
+      "landmark": 2954,
+      "reference": {
+        "B3_energy_h20": 2.121219243694859,
+        "B5_energy_h20": 3.150134028597952,
+        "B3_mse_h20": 0.8398106454842317,
+        "B5_mse_h20": 1.8137168711599294,
+        "B3_parameters": 15252,
+        "B5_parameters": 1586,
+        "B3_spectral_radius": 0.9903901529514593,
+        "B5_factor_radius": 0.9867562426644175,
+        "train_pc1_variance_reference": 28.025441903036814
+      },
+      "frozen": {
+        "B3_energy_h20": 2.1212191450365925,
+        "B5_energy_h20": 3.15013400925669,
+        "B3_mse_h20": 0.839810561300818,
+        "B5_mse_h20": 1.813716849221024
+      },
+      "absolute_difference": {
+        "B3_energy": 9.865826644528397e-08,
+        "B5_energy": 1.934126192537633e-08,
+        "B3_mse": 8.418341368443549e-08,
+        "B5_mse": 2.193890535906462e-08
+      },
+      "stage_comparison": {
+        "n_transitions": 499,
+        "first_transition": 2455,
+        "last_transition": 2953,
+        "max_abs_A_difference": 3.1086244689504383e-13,
+        "max_abs_b_difference": 1.0835776720341528e-13,
+        "reference_radius": 0.9903901529514593,
+        "official_radius": 0.9903901529514615,
+        "first_divergent_stage": "innovation_horizon"
+      },
+      "h20_innovation_control": {
+        "B3_energy_h20_if_only_20_innovations": 2.066506919537002,
+        "B3_difference_vs_frozen": 0.05471222549959043,
+        "max_abs_first20_innovation_difference": 10.921794388811142
+      }
+    },
+    {
+      "session": 3,
+      "landmark": 3208,
+      "reference": {
+        "B3_energy_h20": 1.4033050508352853,
+        "B5_energy_h20": 4.682373728195689,
+        "B3_mse_h20": 0.33107689456122164,
+        "B5_mse_h20": 3.3266194453262536,
+        "B3_parameters": 14042,
+        "B5_parameters": 1526,
+        "B3_spectral_radius": 0.995000000000005,
+        "B5_factor_radius": 0.9888289305188762,
+        "train_pc1_variance_reference": 28.24324867189866
+      },
+      "frozen": {
+        "B3_energy_h20": 1.4033050469332724,
+        "B5_energy_h20": 4.682373765256241,
+        "B3_mse_h20": 0.3310768909691553,
+        "B5_mse_h20": 3.326619497653269
+      },
+      "absolute_difference": {
+        "B3_energy": 3.902012934986487e-09,
+        "B5_energy": 3.7060551960621524e-08,
+        "B3_mse": 3.592066311064457e-09,
+        "B5_mse": 5.2327015165332114e-08
+      },
+      "stage_comparison": {
+        "n_transitions": 499,
+        "first_transition": 2709,
+        "last_transition": 3207,
+        "max_abs_A_difference": 4.604094883120524e-13,
+        "max_abs_b_difference": 1.821875983409882e-13,
+        "reference_radius": 0.995000000000005,
+        "official_radius": 0.9949999999999934,
+        "first_divergent_stage": "innovation_horizon"
+      },
+      "h20_innovation_control": {
+        "B3_energy_h20_if_only_20_innovations": 1.5161179499940545,
+        "B3_difference_vs_frozen": 0.11281290306078207,
+        "max_abs_first20_innovation_difference": 6.961160109456936
+      }
+    },
+    {
+      "session": 4,
+      "landmark": 2912,
+      "reference": {
+        "B3_energy_h20": 2.0443611870019884,
+        "B5_energy_h20": 2.140033178736786,
+        "B3_mse_h20": 0.5985795283408611,
+        "B5_mse_h20": 0.8970151484662023,
+        "B3_parameters": 14762,
+        "B5_parameters": 1562,
+        "B3_spectral_radius": 0.988235970112516,
+        "B5_factor_radius": 0.9724082697016037,
+        "train_pc1_variance_reference": 22.704428817098684
+      },
+      "frozen": {
+        "B3_energy_h20": 2.0443610542621737,
+        "B5_energy_h20": 2.140033298753588,
+        "B3_mse_h20": 0.5985793831491092,
+        "B5_mse_h20": 0.8970152354624726
+      },
+      "absolute_difference": {
+        "B3_energy": 1.327398146955261e-07,
+        "B5_energy": 1.2001680183004737e-07,
+        "B3_mse": 1.4519175195459866e-07,
+        "B5_mse": 8.699627029873369e-08
+      },
+      "stage_comparison": {
+        "n_transitions": 499,
+        "first_transition": 2413,
+        "last_transition": 2911,
+        "max_abs_A_difference": 1.521421877370699e-13,
+        "max_abs_b_difference": 9.281464485866309e-14,
+        "reference_radius": 0.988235970112516,
+        "official_radius": 0.9882359701125168,
+        "first_divergent_stage": "innovation_horizon"
+      },
+      "h20_innovation_control": {
+        "B3_energy_h20_if_only_20_innovations": 2.101774617876805,
+        "B3_difference_vs_frozen": 0.05741356361463135,
+        "max_abs_first20_innovation_difference": 8.478924839584938
+      }
+    },
+    {
+      "session": 0,
+      "landmark": 2750,
+      "reference": {
+        "B3_energy_h20": 1.3607536539106797,
+        "B5_energy_h20": 2.2748887471448023,
+        "B3_mse_h20": 0.2870534562743866,
+        "B5_mse_h20": 0.9663780767337886,
+        "B3_parameters": 10712,
+        "B5_parameters": 1346,
+        "B3_spectral_radius": 0.9903156266660077,
+        "B5_factor_radius": 0.9872240760428523,
+        "train_pc1_variance_reference": 26.74071469297476
+      },
+      "frozen": {
+        "B3_energy_h20": 1.3607533310963125,
+        "B5_energy_h20": 2.274888394604703,
+        "B3_mse_h20": 0.2870531962258403,
+        "B5_mse_h20": 0.9663778121994726
+      },
+      "absolute_difference": {
+        "B3_energy": 3.2281436723735624e-07,
+        "B5_energy": 3.5254009933538555e-07,
+        "B3_mse": 2.600485463077895e-07,
+        "B5_mse": 2.64534316007925e-07
+      },
+      "stage_comparison": {
+        "n_transitions": 499,
+        "first_transition": 2251,
+        "last_transition": 2749,
+        "max_abs_A_difference": 2.5193735986306365e-13,
+        "max_abs_b_difference": 1.199040866595169e-13,
+        "reference_radius": 0.9903156266660077,
+        "official_radius": 0.990315626666007,
+        "first_divergent_stage": "innovation_horizon"
+      },
+      "h20_innovation_control": {
+        "B3_energy_h20_if_only_20_innovations": 1.4738993527333282,
+        "B3_difference_vs_frozen": 0.1131460216370157,
+        "max_abs_first20_innovation_difference": 12.30042560337366,
+        "documented_anomaly": 1.4738989874959576,
+        "reproduced_documented_anomaly": true
+      }
+    }
+  ],
+  "root_cause_control": {
+    "status": "PASS",
+    "explanation": "The documented anomalies are reproduced when the moving-block sampler is asked for 20 innovations instead of 100. The sampler's random-start draw count depends on horizon; a 20-step draw is not a prefix of the 100-step draw. Official scoring uses a 100-step rollout and step 20."
+  },
+  "note": "Only the J5 innovation sampler is reused to keep the common random path fixed; models, PCA, rollouts and energy are independent reference implementations."
+}

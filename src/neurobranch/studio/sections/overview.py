@@ -55,12 +55,14 @@ def render(snapshot: StudioSnapshot, *, light: bool = False) -> None:
             <div class="nb-panel">
               <h4>The result in one sentence</h4>
               <div style="font-size:1.1rem;line-height:1.55;color:inherit">
-                Across <b>175 overlapping test landmarks</b> in <b>five recordings</b>,
-                B3 had lower H20 energy than B5-10 by a weighted mean of
+                Across <b>{primary["n"]} overlapping test landmarks</b> in
+                <b>{primary["n_sessions"]} recordings</b>, B3 had lower H20 energy than
+                B5-10 by a weighted mean of
                 <b style="color:inherit">{signed(primary["difference"])}</b>
                 ({percent(primary["relative_to_b3"])} of the B3 mean).
-                Four of five recordings were positive, but the recording-level
-                interval includes zero and the sign test is not significant.
+                {primary["sessions_positive"]} of {primary["n_sessions"]} recordings were
+                positive, but the recording-level interval includes zero and the sign test
+                is not significant.
               </div>
             </div>
             """,
@@ -105,8 +107,8 @@ def render(snapshot: StudioSnapshot, *, light: bool = False) -> None:
                 <div><b>H1 reverses</b> · B3 is worse than B5 at the shortest horizon.</div>
                 <div><b>MSE is null</b> · mean difference {signed(primary["mse_difference"])}, interval crosses zero.</div>
                 <div><b>Calibration is not established</b> · B5 95% marginal coverage {percent(snapshot.statistical["paired_effect"]["coverage_at_nominal_95"]["B5_common_k10"]["95"], 1)}.</div>
-                <div><b>Capacity differs</b> · B3 has 7.96–9.95× the nominal coefficients.</div>
-                <div><b>Unit is not 175 animals</b> · 175 overlapping landmarks from five recordings.</div>
+                <div><b>Capacity differs</b> · B3 has {snapshot.capacity["ratio_min"]:.2f}–{snapshot.capacity["ratio_max"]:.2f}× the nominal coefficients.</div>
+                <div><b>Unit is not {primary["n"]} animals</b> · {primary["n"]} overlapping landmarks from {primary["n_sessions"]} recordings.</div>
               </div>
             </div>
             """,

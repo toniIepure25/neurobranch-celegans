@@ -47,7 +47,9 @@ Do not open with the 3D plot. Open with the unit.
 Open the 3D explorer. Rotate once; press Play briefly; stop.
 
 > "These axes are PC1–PC3 of a training-only 10-component PCA. The first three
-> explain about 52% of training variance. A point is a population state summary.
+> explain about 52% of total training variance, which is about 73% of the
+> variance retained by PCA-10; the other 27% of PCA-10 is not shown. A point is
+> a population state summary.
 > It is not a worm brain, a connectome, or a physical space. Cyan is measured;
 > dotted cyan after the diamond is held-out measurement shown only for
 > evaluation; amber and violet are model forecasts from the same origin."

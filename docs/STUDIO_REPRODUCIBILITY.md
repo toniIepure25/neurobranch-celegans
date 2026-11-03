@@ -115,17 +115,46 @@ screenshots and geometry checks are recorded in
 The presentation deck and all route content are deterministic from artifacts.
 Plotly playback is client-side and deterministic in frame order.
 
-## 8. Known audit inconsistency (do not hide)
+## 8. Historical audit inconsistency (root cause established)
 
-`scripts/master_review/independent_model_check.py` reconstructs a reference B3
-value that did not match the frozen row at the inspected indices
-(e.g. landmark 2750: `1.473899` vs frozen `1.360753`; landmark 2690:
-`2.410819` vs frozen `2.498644`). A full common-state rerun reproduced the
-frozen values exactly, and the Studio artifact matches `model_per_landmark.csv`
-within `1.27e-6`. The independent-check code path therefore has an unresolved
-reconstruction discrepancy; it must not be used as a second source of truth
-until that discrepancy is explained. The Studio uses the frozen paired rows and
-the full rerun, not the independent-check reconstruction.
+This section preserves the original unresolved report and records its
+resolution on 2026-11-04.
+
+**Historical report.** `scripts/master_review/independent_model_check.py`
+reconstructed a reference B3 value that did not match the frozen row at the
+inspected indices (e.g. landmark 2750: `1.473899` vs frozen `1.360753`;
+landmark 2690: `2.410819` vs frozen `2.498644`). A full common-state rerun
+reproduced the frozen values exactly, and the Studio artifact matches
+`model_per_landmark.csv` within `1.27e-6`. The historical reconstruction was
+therefore treated as unresolved and was not used as a second source of truth.
+
+**Root cause.** The anomalous values are reproduced only when the moving-block
+innovation sampler is asked for **20** steps instead of the official **100**.
+The sampler draws a horizon-dependent number of block starts per member
+(`ceil(horizon / block)`); a 20-step draw is not a prefix of the 100-step draw,
+so even steps 1–20 receive different innovations. Scoring step 20 from a
+20-step draw yields `1.47389935` at landmark 2750 and `2.41081953` at landmark
+2690 (six-decimal values `1.473899` and `2.410819`), matching the historical
+report. With the official 100-step draw the independent reference agrees with
+the frozen rows to `4.2e-7` (B3) and `5.8e-7` (B5) across the extended boundary
+set. The official model, PCA, rollout, and scoring were not the source of the
+discrepancy.
+
+**Current status.** `scripts/master_review/independent_model_check.py` now
+records the 100-step reference and an explicit 20-step negative control. Run:
+
+```powershell
+python -X utf8 scripts/master_review/independent_model_check.py --extended `
+  --out reports/scientific_studio/final_audit/independent_model_check.json
+```
+
+The extended set is the predeclared rule "first and last frozen H100 landmark
+of every recording plus the errata landmark 2750" (11 cases, no tuning). The
+historical default three-case output remains at
+`reports/master_review/independent_model_check.json` and is not overwritten.
+The Studio uses the frozen paired rows and the full rerun; the corrected
+independent check is an additional reconstruction, not a replacement for the
+frozen evidence.
 
 ## 9. Version-control policy
 
