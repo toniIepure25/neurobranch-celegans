@@ -11,7 +11,7 @@ READY_FOR_METHODOLOGICAL_SUPERVISOR_REVIEW
 NOT_READY_FOR_CONFIRMATORY_OR_BIOLOGICAL_CLAIMS
 ```
 
-This is not an automatic “ready for Denis.” It is a statement about **what kind of conversation the work can support**.
+This is not an automatic “ready for Denis Kovačević.” It is a statement about **what kind of conversation the work can support**.
 
 ---
 
@@ -271,11 +271,21 @@ These are real limits. They are why the verdict is “methodological review,” 
 
 ---
 
-## 12. Final disposition
+## 12. Answer for Denis Kovačević
 
-**If “ready for Denis” means ready for a methodological conversation about a reproducible, honestly labelled exploratory result:** yes. The student can now explain the result, the uncertainty, the confounds and the next experiment.
+**Direct answer:** **yes, the project is ready to discuss with Denis Kovačević as a methodological supervisor; no, it is not ready for his final scientific sign-off, a confirmatory claim, or a biological interpretation.**
 
-**If “ready for Denis” means ready for final scientific sign-off, a confirmatory claim, a biological mechanism, or a publication abstract:** no. The animal-level interval includes zero, the capacity and calibration confounds are unresolved, the test block was reused, and there is no intervention.
+If the purpose of the meeting is to review the evidence, the uncertainty and the next experiment, the student is prepared. The 30-second and 2-minute summaries in the [oral-defense document](MASTER_REVIEW_ORAL_DEFENSE.md) are sufficient to open that conversation, and the claims ledger gives the exact wording that is allowed.
+
+If the purpose of the meeting is to approve the result as final, the answer is no. The animal-level interval includes zero, the capacity and calibration confounds are unresolved, the test block was reused, and there is no intervention.
+
+The meeting should ask Denis Kovačević to decide three things, not to endorse a mechanism:
+
+1. Is the capacity-matched ablation the required next step, or is the current restricted-model contrast sufficient for an MSc?
+2. Is a calibration-matched analysis required before the energy result can be described as predictive information?
+3. Is an independent cohort required for the thesis, or can the current five-animal result stand as an exploratory methods chapter?
+
+Those are evidential-standard questions. They are answerable in a supervision meeting. “Is the mechanism real?” is not answerable with these data.
 
 The honest formulation is:
 

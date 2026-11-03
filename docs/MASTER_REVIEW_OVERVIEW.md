@@ -189,6 +189,8 @@ READY_FOR_METHODOLOGICAL_SUPERVISOR_REVIEW
 NOT_READY_FOR_CONFIRMATORY_OR_BIOLOGICAL_CLAIMS
 ```
 
+**For Denis Kovačević:** yes to a methodological discussion of the evidence and the next experiment; no to final scientific sign-off or a mechanistic claim.
+
 The most useful supervisor question is not “is this significant?” It is:
 
 > For an MSc, is an independent-cohort, animal-level, capacity-matched replication of the B5-controlled H20 energy contrast sufficient, or does the project require matched intervention data before the predictive result is scientifically useful?
