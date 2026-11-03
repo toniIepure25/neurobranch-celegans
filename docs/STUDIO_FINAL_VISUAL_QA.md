@@ -72,7 +72,7 @@ human reviewer:
 - `reports/scientific_studio/final_audit/contact_sheet_sections_1920.png`
 - `reports/scientific_studio/final_audit/contact_sheet_presentation.png`
 
-They show the top of each full-page capture, labelled by route and viewport.
+They show the top of each viewport capture, labelled by route and viewport.
 They are navigation aids, not evidence of visual quality.
 
 ## 4. Visual defects found by code inspection and fixed
