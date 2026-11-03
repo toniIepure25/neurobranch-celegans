@@ -1,0 +1,7 @@
+model,window,parameters_per_neuron_or_total,penalty,intercept,innovation,role
+B1_matched_own,200.0,2,ridge 1.0,unpenalized,common_J5,own lag only
+B2_own_trend,200.0,3,ridge 1.0,unpenalized,common_J5,own lag + target-frame time
+B4_matched_own_500,500.0,2,ridge 1.0,unpenalized,common_J5,"own lag only, matched window"
+B5_common_k10,500.0,12,ridge 1.0,unpenalized,common_J5,"factor VAR + own lag, primary control"
+B3_population,500.0,n*(n+1),ridge 1.0,unpenalized,common_J5,full lag-one population operator
+B6_coefficient_ablation,500.0,n diagonal + n intercept,inherited,unpenalized,common_J5,"coefficient ablation, not refit"

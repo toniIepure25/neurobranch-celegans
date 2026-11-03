@@ -1,0 +1,34 @@
+{
+  "schema": "neurobranch.kato_final_audit.sign_convention.v1",
+  "question": "Was the original success direction a harmless notation error or a genuine ambiguity in the decision rule?",
+  "decision": "B_GENUINE_RULE_AMBIGUITY_NOT_FULLY_PRESPECIFIED",
+  "original_frozen_protocol_available_in_git": false,
+  "earlier_protocol_commit": null,
+  "protocol_added_in_commit": "358107a7a55470d48f8092b2a2dc7f704dbd37c1",
+  "protocol_commit_timestamp": "2026-11-03T01:04:34+02:00",
+  "results_added_in_same_commit": true,
+  "prior_working_record_states": "The earlier draft described the residual contrast as B3 - B5. That text is reported in the prior phase record but is not recoverable from Git and cannot be independently timestamped.",
+  "committed_protocol_evidence": {
+    "line_97": "Energy is lower-is-better, so the positive advantage is defined as B5 energy - B3 energy; positive means B3 is better.",
+    "lines_100_101": "This is a sign-convention clarification; the target quantity (whether B3 has lower energy than B5) is unchanged.",
+    "line_159": "G4 is defined as B5-10 - B3 H20 energy mean > 0, block-5 95% CI low > 0, fraction better > 0.5."
+  },
+  "numerical_result_retained": {
+    "b3_energy_h20": 2.7001497504411485,
+    "b5_k10_energy_h20": 2.9645877431095045,
+    "positive_b3_advantage": 0.264437992668356,
+    "block5_ci": [0.07499291957903519, 0.40311649156808815],
+    "fraction_b3_better": 0.64
+  },
+  "g4_numerical_status": "PASS_UNDER_CORRECTED_SIGN",
+  "g4_confirmatory_status": "NOT_ESTABLISHED",
+  "reasoning": [
+    "The committed protocol defines a physically unambiguous target: lower energy is better and B3 must have lower energy.",
+    "However, the only committed protocol was added in the same commit as the results; there is no independently timestamped pre-evaluation protocol commit.",
+    "The protocol itself records that the sign was clarified, so the written decision rule was not frozen unambiguously before the observed contrast was interpreted.",
+    "The numerical contrast is unchanged by the notation, but it cannot be called a fully prespecified confirmatory PASS."
+  ],
+  "claim_label": "SUPPORTED_EXPLORATORY",
+  "do_not_change_scores_or_thresholds": true,
+  "note": "This decision downgrades evidential status only. It does not alter the computed energies, interval, win rate, or gate arithmetic."
+}

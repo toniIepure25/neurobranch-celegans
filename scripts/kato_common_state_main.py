@@ -228,7 +228,15 @@ def _main() -> None:
     parser.add_argument("--surrogate-draws", type=int, default=SURROGATE_DRAWS)
     parser.add_argument("--skip-synthetic", action="store_true")
     parser.add_argument("--skip-surrogates", action="store_true")
+    parser.add_argument(
+        "--out-dir",
+        default=None,
+        help="Optional separate output directory for a clean reproduction run.",
+    )
     args = parser.parse_args()
+    global OUT
+    if args.out_dir:
+        OUT = Path(args.out_dir).resolve()
     OUT.mkdir(parents=True, exist_ok=True)
     started = perf_counter()
     cfg, data, recordings = load_nostim()

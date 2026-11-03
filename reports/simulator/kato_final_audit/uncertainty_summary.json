@@ -1,0 +1,168 @@
+{
+  "schema": "neurobranch.kato_final_audit.uncertainty.v1",
+  "source": "committed reports/simulator/kato_common_state/model_per_landmark.csv",
+  "contrast": "B5_common_k10 - B3_population on pca10_energy_h20; positive = B3 better",
+  "blocks": [
+    {
+      "block": 3,
+      "n_landmarks": 175,
+      "mean_advantage": 0.2644379926683563,
+      "ci_low": 0.09715904576640216,
+      "ci_high": 0.40176855150127205,
+      "positive": true
+    },
+    {
+      "block": 5,
+      "n_landmarks": 175,
+      "mean_advantage": 0.2644379926683563,
+      "ci_low": 0.07499291957903519,
+      "ci_high": 0.40311649156808815,
+      "positive": true
+    },
+    {
+      "block": 10,
+      "n_landmarks": 175,
+      "mean_advantage": 0.2644379926683563,
+      "ci_low": 0.03502452638435514,
+      "ci_high": 0.3993832362764972,
+      "positive": true
+    },
+    {
+      "block": 20,
+      "n_landmarks": 175,
+      "mean_advantage": 0.2644379926683563,
+      "ci_low": 0.09214167148169831,
+      "ci_high": 0.2938703588209781,
+      "positive": true
+    }
+  ],
+  "session_positive_count": 4,
+  "sessions": [
+    {
+      "session": 0,
+      "n_landmarks": 35,
+      "mean_advantage": 0.300256879031383,
+      "median_advantage": 0.2507721362978723,
+      "min_advantage": -1.0362764625403893,
+      "max_advantage": 1.7707272887436218,
+      "fraction_better": 0.6857142857142857,
+      "within_session_block5_low": 0.06798873739135264,
+      "within_session_block5_high": 0.5056498867558566,
+      "positive": true
+    },
+    {
+      "session": 1,
+      "n_landmarks": 35,
+      "mean_advantage": 0.3291675294063597,
+      "median_advantage": 0.24695177166180038,
+      "min_advantage": -1.0882937695081387,
+      "max_advantage": 1.7553954175683804,
+      "fraction_better": 0.6857142857142857,
+      "within_session_block5_low": -0.035307951430495796,
+      "within_session_block5_high": 0.7672446964591935,
+      "positive": true
+    },
+    {
+      "session": 2,
+      "n_landmarks": 34,
+      "mean_advantage": -0.19309764559498263,
+      "median_advantage": 0.010397974814548072,
+      "min_advantage": -2.611365814783909,
+      "max_advantage": 1.428040477873652,
+      "fraction_better": 0.5,
+      "within_session_block5_low": -0.6044727160039961,
+      "within_session_block5_high": 0.21854189337871438,
+      "positive": false
+    },
+    {
+      "session": 3,
+      "n_landmarks": 38,
+      "mean_advantage": 0.40747391775001135,
+      "median_advantage": 0.19921094659199223,
+      "min_advantage": -1.6955428705944389,
+      "max_advantage": 3.4279210580990487,
+      "fraction_better": 0.5789473684210527,
+      "within_session_block5_low": -0.15379311758593336,
+      "within_session_block5_high": 0.6696072643178198,
+      "positive": true
+    },
+    {
+      "session": 4,
+      "n_landmarks": 33,
+      "mean_advantage": 0.4644880453748587,
+      "median_advantage": 0.22550918023937339,
+      "min_advantage": -3.065840911290965,
+      "max_advantage": 2.9936621890873862,
+      "fraction_better": 0.7575757575757576,
+      "within_session_block5_low": 0.1262886102386177,
+      "within_session_block5_high": 0.8581276131595758,
+      "positive": true
+    }
+  ],
+  "leave_one_session_out_positive": true,
+  "landmark_subsample": [
+    {
+      "every_kth_landmark": 1,
+      "n": 175,
+      "mean_advantage": 0.2644379926683563,
+      "fraction_better": 0.64
+    },
+    {
+      "every_kth_landmark": 2,
+      "n": 89,
+      "mean_advantage": 0.2081150363491758,
+      "fraction_better": 0.6292134831460674
+    },
+    {
+      "every_kth_landmark": 3,
+      "n": 60,
+      "mean_advantage": 0.260399383735375,
+      "fraction_better": 0.6333333333333333
+    },
+    {
+      "every_kth_landmark": 5,
+      "n": 36,
+      "mean_advantage": 0.40078334786829156,
+      "fraction_better": 0.6944444444444444
+    }
+  ],
+  "horizon": [
+    {
+      "horizon": 1,
+      "n": 175,
+      "mean_advantage": -0.06366946105472622,
+      "ci_low": -0.09674549205211881,
+      "ci_high": -0.031130479922584355,
+      "fraction_better": 0.38857142857142857,
+      "positive_interval": false
+    },
+    {
+      "horizon": 5,
+      "n": 175,
+      "mean_advantage": 0.08353319334645361,
+      "ci_low": 0.03390275356028293,
+      "ci_high": 0.1144511629631846,
+      "fraction_better": 0.6057142857142858,
+      "positive_interval": true
+    },
+    {
+      "horizon": 10,
+      "n": 175,
+      "mean_advantage": 0.1471216611809082,
+      "ci_low": 0.06293493823610008,
+      "ci_high": 0.2037470377162919,
+      "fraction_better": 0.6171428571428571,
+      "positive_interval": true
+    },
+    {
+      "horizon": 20,
+      "n": 175,
+      "mean_advantage": 0.2644379926683563,
+      "ci_low": 0.07499291957903519,
+      "ci_high": 0.40311649156808815,
+      "fraction_better": 0.64,
+      "positive_interval": true
+    }
+  ],
+  "interpretation": "Intervals resample overlapping forecast landmarks within recordings; they do not represent independent animals or fully independent forecast windows."
+}

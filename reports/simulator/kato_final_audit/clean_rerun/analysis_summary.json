@@ -1,0 +1,24 @@
+{
+  "dataset": "Kato 2015 WT_NoStim only",
+  "sessions": 5,
+  "frames": 15662,
+  "session_neurons": {
+    "0": 103,
+    "1": 127,
+    "2": 123,
+    "3": 118,
+    "4": 121
+  },
+  "landmarks": 175,
+  "members": 100,
+  "horizon": 20,
+  "primary_k": 10,
+  "ks": [
+    1,
+    3,
+    5,
+    10
+  ],
+  "surrogate_draws": 6,
+  "elapsed_seconds": 2005.9128701000009
+}

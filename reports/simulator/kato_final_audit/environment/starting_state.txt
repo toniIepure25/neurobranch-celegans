@@ -1,0 +1,11 @@
+﻿Kato final audit starting state
+Captured: 2026-11-03 (Europe/Bucharest)
+Branch before audit: research/kato-common-state-controls
+Starting HEAD: 358107a7a55470d48f8092b2a2dc7f704dbd37c1
+Starting worktree: clean (git status --porcelain empty)
+New audit branch: research/kato-final-reproducibility-audit
+Python: 3.13.5
+Dataset: data/raw/kato2015/WT_NoStim.mat
+SHA256: 7531811C1718E26A0455F59CB2F8188CF25809278CFEA85770DFE03315A0098A
+Clean rerun output: reports/simulator/kato_final_audit/clean_rerun
+Committed historical output: reports/simulator/kato_common_state (not overwritten)

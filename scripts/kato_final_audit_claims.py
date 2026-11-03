@@ -1,0 +1,322 @@
+"""Build the machine-readable claims ledger and final audit decision."""
+
+from __future__ import annotations
+
+import json
+from pathlib import Path
+
+ROOT = Path(__file__).resolve().parents[1]
+BASE = ROOT / "reports" / "simulator" / "kato_common_state"
+AUDIT = ROOT / "reports" / "simulator" / "kato_final_audit"
+
+
+def load(path: Path) -> dict:
+    return json.loads(path.read_text(encoding="utf-8")) if path.exists() else {}
+
+
+def main() -> None:
+    reproduction = load(AUDIT / "reproduction_comparison.json")
+    repro_status = reproduction.get("status", "FULL_END_TO_END_REPRODUCTION_INCOMPLETE")
+    repro_ok = repro_status.startswith("FULL_END_TO_END_REPRODUCTION_PASSED")
+    key = reproduction.get("key_metrics", {})
+    advantage = key.get("B3_advantage_B5_minus_B3", {}).get("committed", 0.264437992668356)
+    ci_low = key.get("ci_low", {}).get("committed", 0.07499291957903519)
+    ci_high = key.get("ci_high", {}).get("committed", 0.40311649156808815)
+    frac = key.get("fraction_b3_better", {}).get("committed", 0.64)
+    repro_label = "REPRODUCED_WITHIN_STATED_TOLERANCE" if repro_ok else "NOT_INDEPENDENTLY_REPRODUCED"
+    qualitative = "HISTORICAL_SOURCE_ONLY"
+    claims = [
+        {
+            "claim_id": "C01",
+            "claim": "The analysis uses five Kato 2015 WT_NoStim recordings, 15,662 frames and 175 fixed H20 landmarks with native dimensions 103/127/123/118/121.",
+            "model_dataset": "Kato WT_NoStim; descriptive design",
+            "numerical_evidence": {"sessions": 5, "frames": 15662, "landmarks": 175, "dimensions": [103, 127, 123, 118, 121]},
+            "source_report": "reports/simulator/kato_final_audit/preflight.json",
+            "reproduction_status": repro_label,
+            "evidence_tier": "SUPPORTED_EXPLORATORY",
+            "caveats": ["Repeated recordings, not confirmed independent animals.", "Test tails reused across project phases."],
+            "supervisor_presentation": True,
+        },
+        {
+            "claim_id": "C02",
+            "claim": "Historical B1h/B3/B4r/J2/J5 H20 reproduction agrees within the declared 1e-6 energy tolerance.",
+            "model_dataset": "Kato WT_NoStim; historical reproduction",
+            "numerical_evidence": {"max_abs_energy_difference": 9.42922611990582e-07, "max_abs_mse_difference": 1.65e-06},
+            "source_report": "reports/simulator/kato_common_state/reproduction_summary.json",
+            "reproduction_status": repro_label,
+            "evidence_tier": "SUPPORTED_EXPLORATORY",
+            "caveats": ["Reproduction is not fresh independent confirmation.", "MSE discrepancy exceeds the energy tolerance but is disclosed."],
+            "supervisor_presentation": True,
+        },
+        {
+            "claim_id": "C03",
+            "claim": "B3 has lower H20 PCA-10 energy than the matched 200-frame own-history model B1m.",
+            "model_dataset": "Kato WT_NoStim; B3 vs B1m, 175 paired landmarks",
+            "numerical_evidence": {"advantage": 0.3457636844566405, "ci": [0.101845, 0.501307], "fraction_better": 0.594286},
+            "source_report": "reports/simulator/kato_common_state/decomposition.csv",
+            "reproduction_status": repro_label,
+            "evidence_tier": "SUPPORTED_EXPLORATORY",
+            "caveats": ["B3 has much larger capacity.", "Energy only; MSE direction is weaker."],
+            "supervisor_presentation": True,
+        },
+        {
+            "claim_id": "C04",
+            "claim": "B3 has lower H20 PCA-10 energy than the matched-window own-history model B4m.",
+            "model_dataset": "Kato WT_NoStim; B3 vs B4m, 175 paired landmarks",
+            "numerical_evidence": {"advantage": 0.5395173888340823, "ci": [0.34701707652426006, 0.6863100089170878], "fraction_better": 0.725714},
+            "source_report": "reports/simulator/kato_common_state/decomposition.csv",
+            "reproduction_status": repro_label,
+            "evidence_tier": "SUPPORTED_EXPLORATORY",
+            "caveats": ["B4m is a weak own-history baseline; B1m is stronger."],
+            "supervisor_presentation": True,
+        },
+        {
+            "claim_id": "C05",
+            "claim": "B3 retains a positive H20 PCA-10 energy advantage over B5-10 after own history and ten training-only common factors.",
+            "model_dataset": "Kato WT_NoStim; B3 vs B5-10, 175 paired landmarks",
+            "numerical_evidence": {"advantage": advantage, "ci": [ci_low, ci_high], "fraction_better": frac, "n": 175},
+            "source_report": "reports/simulator/kato_common_state/residual_cross_neuron.csv",
+            "reproduction_status": repro_label,
+            "evidence_tier": "SUPPORTED_EXPLORATORY",
+            "caveats": [
+                "Not a confirmatory pass: the sign rule lacks an independent pre-evaluation commit.",
+                "B3 has 7.96-9.95x more parameters and access to other-neuron residual coordinates.",
+                "Session 2 reverses; H1 reverses; MSE/neuron-space intervals include zero.",
+                "Repeated-session block interval, not animal-level.",
+            ],
+            "supervisor_presentation": True,
+        },
+        {
+            "claim_id": "C06",
+            "claim": "In the ordered B4m->B5-10 comparison, the common-factor increment is +0.2751 and the B5-B3 residual increment is +0.2644.",
+            "model_dataset": "Kato WT_NoStim; ordered decomposition",
+            "numerical_evidence": {"common_increment": 0.27507939616572663, "residual_increment": 0.264437992668356, "total": 0.5395173888340823},
+            "source_report": "reports/simulator/kato_common_state/decomposition.csv",
+            "reproduction_status": repro_label,
+            "evidence_tier": "LIMITED",
+            "caveats": ["Successive increments, not unique variance components.", "Depends on baseline order and ten-factor representation."],
+            "supervisor_presentation": True,
+        },
+        {
+            "claim_id": "C07",
+            "claim": "The 51%/49% split is a unique partition of the population advantage into common-input and neuron-specific contributions.",
+            "model_dataset": "Kato WT_NoStim; ordered decomposition",
+            "numerical_evidence": {"reported_common_share": 0.509862, "reported_residual_share": 0.490138, "B1m_baseline_common_share": 0.235206},
+            "source_report": "reports/simulator/kato_final_audit/decomposition_order_sensitivity.csv",
+            "reproduction_status": "ARITHMETIC_REPRODUCED_CLAIM_INVALIDATED",
+            "evidence_tier": "INVALIDATED",
+            "caveats": ["Shares change with the baseline; no causal or unique variance interpretation."],
+            "supervisor_presentation": False,
+        },
+        {
+            "claim_id": "C08",
+            "claim": "The ten-factor control has the same evaluation representation, is training-only, and retains all ten evaluation dimensions.",
+            "model_dataset": "Kato WT_NoStim; training-only PCA",
+            "numerical_evidence": {"pca_variance_10": [0.709861, 0.621639, 0.567138, 0.709508, 0.546713]},
+            "source_report": "reports/simulator/kato_final_audit/ten_factor_summary.json",
+            "reproduction_status": "REPRODUCED_FROM_CODE_AND_DATA",
+            "evidence_tier": "SUPPORTED_EXPLORATORY",
+            "caveats": ["B5 still lacks arbitrary other-neuron residual coordinates.", "Statistical factors are not measured biological inputs."],
+            "supervisor_presentation": True,
+        },
+        {
+            "claim_id": "C09",
+            "claim": "B3 residual-source rows contain structure outside B5's diagonal-own-plus-factor restriction.",
+            "model_dataset": "Kato WT_NoStim; causal-window operator diagnostic",
+            "numerical_evidence": {"median_unexplained_ratio": 0.995913, "range": [0.986377, 0.998645], "b3_cross_over_within_median": 2.289950},
+            "source_report": "reports/simulator/kato_final_audit/ten_factor_summary.json",
+            "reproduction_status": "DESCRIPTIVE_DIAGNOSTIC_NOT_OUTCOME_REPRODUCTION",
+            "evidence_tier": "LIMITED",
+            "caveats": ["Proves access, not causal use or benefit.", "Does not separate residual information from extra parameters."],
+            "supervisor_presentation": True,
+        },
+        {
+            "claim_id": "C10",
+            "claim": "The primary positive interval remains positive at block lengths 3, 5, 10 and 20.",
+            "model_dataset": "Kato WT_NoStim; paired landmark bootstrap",
+            "numerical_evidence": {"block3": [0.097159, 0.401769], "block5": [0.074993, 0.403116], "block10": [0.035025, 0.399383], "block20": [0.092142, 0.293870]},
+            "source_report": "reports/simulator/kato_final_audit/uncertainty_bootstrap.csv",
+            "reproduction_status": repro_label,
+            "evidence_tier": "SUPPORTED_EXPLORATORY",
+            "caveats": ["Block 20 has only two blocks per session.", "Landmarks overlap and are not independent animals."],
+            "supervisor_presentation": True,
+        },
+        {
+            "claim_id": "C11",
+            "claim": "The B3 advantage is positive in four of five repeated sessions; session 2 reverses.",
+            "model_dataset": "Kato WT_NoStim; session-level estimates",
+            "numerical_evidence": {"session_means": [0.300257, 0.329168, -0.193098, 0.407474, 0.464488], "positive_sessions": 4},
+            "source_report": "reports/simulator/kato_final_audit/session_estimates.csv",
+            "reproduction_status": repro_label,
+            "evidence_tier": "LIMITED",
+            "caveats": ["Within-session intervals mostly include zero.", "Repeated recordings are not independent animals."],
+            "supervisor_presentation": True,
+        },
+        {
+            "claim_id": "C12",
+            "claim": "The B3 advantage is positive at H5, H10 and H20 but negative at H1.",
+            "model_dataset": "Kato WT_NoStim; horizon-specific energy",
+            "numerical_evidence": {"H1": -0.063669, "H5": 0.083533, "H10": 0.147122, "H20": advantage},
+            "source_report": "reports/simulator/kato_final_audit/horizon_uncertainty.csv",
+            "reproduction_status": repro_label,
+            "evidence_tier": "SUPPORTED_EXPLORATORY",
+            "caveats": ["Not a general short-horizon improvement.", "Energy is not MSE."],
+            "supervisor_presentation": True,
+        },
+        {
+            "claim_id": "C13",
+            "claim": "The B3-over-B5 result is representation-specific: PCA-10 energy is positive, neuron energy is positive but uncertain, and MSE is mixed.",
+            "model_dataset": "Kato WT_NoStim; representation sensitivity",
+            "numerical_evidence": {"pca_energy": [0.264438, 0.074993, 0.403116], "neuron_energy": [0.161666, -0.138718, 0.465335], "pca_mse": [0.054504, -0.157426, 0.240904]},
+            "source_report": "reports/simulator/kato_common_state/representation_sensitivity.csv",
+            "reproduction_status": repro_label,
+            "evidence_tier": "LIMITED",
+            "caveats": ["The result is an energy result in a fixed PCA space, not a general forecast improvement."],
+            "supervisor_presentation": True,
+        },
+        {
+            "claim_id": "C14",
+            "claim": "The common-preserved residual-shift surrogate is worse than B3 by +0.5573 energy.",
+            "model_dataset": "Kato WT_NoStim; six-draw surrogate",
+            "numerical_evidence": {"advantage": 0.5572535031765835, "ci": [0.316163, 0.767662], "draws": 6},
+            "source_report": "reports/simulator/kato_common_state/surrogate_paired.csv",
+            "reproduction_status": repro_label,
+            "evidence_tier": "LIMITED",
+            "caveats": ["Preservation check, not a formal null p-value.", "Six draws are a sensitivity analysis."],
+            "supervisor_presentation": True,
+        },
+        {
+            "claim_id": "C15",
+            "claim": "Synthetic direct-coupling systems show a positive B3-over-B5(3) MSE separation in all six seed-scenario combinations, while common-only systems do not.",
+            "model_dataset": "Synthetic systems, seeds 11/23/37",
+            "numerical_evidence": {"direct_mean_gain": 0.002004, "common_mean_gain": -0.000684, "direct_seeds_positive": 6},
+            "source_report": "reports/simulator/kato_common_state/synthetic_summary.csv",
+            "reproduction_status": repro_label,
+            "evidence_tier": "LIMITED",
+            "caveats": ["Synthetic specificity depends on the simulator assumptions.", "It does not validate the Kato mechanism."],
+            "supervisor_presentation": True,
+        },
+        {
+            "claim_id": "C16",
+            "claim": "The fitted off-diagonal operator is a stable pairwise interaction graph.",
+            "model_dataset": "Kato WT_NoStim; chronological operator fits",
+            "numerical_evidence": {"offdiagonal_correlation": 0.052, "gate": "FAIL", "threshold": 0.50},
+            "source_report": "docs/KATO_INTERACTIONS_RESULTS.md",
+            "reproduction_status": qualitative,
+            "evidence_tier": "INVALIDATED",
+            "caveats": ["Stable spectral radius does not imply stable coefficients.", "Common input can generate spurious off-diagonal structure."],
+            "supervisor_presentation": True,
+        },
+        {
+            "claim_id": "C17",
+            "claim": "B3 beats the training-only Markov transition null.",
+            "model_dataset": "Kato WT_NoStim; KMeans state transition audit",
+            "numerical_evidence": {"B3_transition_TV": 0.053, "Markov_TV": 0.031, "gate": "FAIL"},
+            "source_report": "docs/KATO_INTERACTIONS_RESULTS.md",
+            "reproduction_status": qualitative,
+            "evidence_tier": "UNSUPPORTED",
+            "caveats": ["The state partition is arbitrary.", "Failure to beat a Markov null does not establish that no state structure exists."],
+            "supervisor_presentation": True,
+        },
+        {
+            "claim_id": "C18",
+            "claim": "The model is a probabilistically calibrated generative simulator.",
+            "model_dataset": "Kato WT_NoStim; joint calibration audit",
+            "numerical_evidence": {"coverage_95_B3": 0.938286, "coverage_95_B5": 0.724571, "standing_label": "PROBABILISTIC CALIBRATION NOT ESTABLISHED"},
+            "source_report": "docs/KATO_COMMON_STATE_LIMITATIONS.md",
+            "reproduction_status": "HISTORICAL_SOURCE_ONLY",
+            "evidence_tier": "UNSUPPORTED",
+            "caveats": ["Energy advantage is not calibration.", "Coverage is marginal and model-specific."],
+            "supervisor_presentation": False,
+        },
+        {
+            "claim_id": "C19",
+            "claim": "Mathematical perturbation of a fitted operator predicts a biological stimulation outcome.",
+            "model_dataset": "Kato WT_NoStim; virtual perturbation audit",
+            "numerical_evidence": {"median_response_cosine": 0.556, "biological_validation": "NOT_EVALUABLE"},
+            "source_report": "docs/KATO_INTERACTIONS_RESULTS.md",
+            "reproduction_status": qualitative,
+            "evidence_tier": "NOT_EVALUABLE",
+            "caveats": ["No matched sham-controlled intervention data.", "Cross-fit response directions are unstable."],
+            "supervisor_presentation": False,
+        },
+        {
+            "claim_id": "C20",
+            "claim": "The fitted operator represents biological neuron-neuron connectivity or synaptic coupling.",
+            "model_dataset": "Kato WT_NoStim; observational prediction",
+            "numerical_evidence": {"structural_gate": "G7 FAIL", "intervention_gate": "G8 NOT_EVALUABLE"},
+            "source_report": "reports/simulator/kato_common_state/gates.json",
+            "reproduction_status": "UNSUPPORTED_BY_DESIGN",
+            "evidence_tier": "UNSUPPORTED",
+            "caveats": ["Observational prediction cannot identify direct coupling.", "Selected neuron panel, slow calcium imaging."],
+            "supervisor_presentation": False,
+        },
+        {
+            "claim_id": "C21",
+            "claim": "The five Kato sessions are five confirmed independent animals.",
+            "model_dataset": "Kato WT_NoStim metadata",
+            "numerical_evidence": {"sessions": 5, "documented_independent_animals": "not established"},
+            "source_report": "docs/KATO_COMMON_STATE_LIMITATIONS.md",
+            "reproduction_status": "UNSUPPORTED_BY_METADATA",
+            "evidence_tier": "UNSUPPORTED",
+            "caveats": ["Repeated recording sessions; independence is undocumented."],
+            "supervisor_presentation": False,
+        },
+        {
+            "claim_id": "C22",
+            "claim": "G4 is a fully prespecified confirmatory PASS.",
+            "model_dataset": "Kato WT_NoStim; sign provenance",
+            "numerical_evidence": {"numerical_g4": "PASS_UNDER_CORRECTED_SIGN", "confirmatory_status": "NOT_ESTABLISHED"},
+            "source_report": "reports/simulator/kato_final_audit/sign_convention_decision.json",
+            "reproduction_status": "PROTOCOL_PROVENANCE_AUDITED",
+            "evidence_tier": "INVALIDATED",
+            "caveats": ["The sign rule was clarified during analysis.", "No independent pre-evaluation protocol commit exists."],
+            "supervisor_presentation": False,
+        },
+    ]
+    ledger = {
+        "schema": "neurobranch.kato_final_audit.claims_ledger.v1",
+        "dataset_scope": "Kato 2015 WT_NoStim only",
+        "status_vocabulary": ["SUPPORTED_EXPLORATORY", "LIMITED", "UNSUPPORTED", "INVALIDATED", "NOT_EVALUABLE"],
+        "no_confirmed_label": True,
+        "reproduction_status": repro_status,
+        "claims": claims,
+        "counts": {
+            tier: sum(1 for claim in claims if claim["evidence_tier"] == tier)
+            for tier in ["SUPPORTED_EXPLORATORY", "LIMITED", "UNSUPPORTED", "INVALIDATED", "NOT_EVALUABLE"]
+        },
+    }
+    (AUDIT / "claims_ledger.json").write_text(json.dumps(ledger, indent=2), encoding="utf-8")
+
+    decision = "READY_FOR_SUPERVISOR_REVIEW" if repro_ok else "SUPERVISOR_REVIEW_WITH_REPRODUCIBILITY_CAVEATS"
+    decision_record = {
+        "schema": "neurobranch.kato_final_audit.decision.v1",
+        "decision": decision,
+        "reproduction_status": repro_status,
+        "full_rerun_completed": repro_ok,
+        "scientific_result": "SUPPORTED_EXPLORATORY",
+        "g4_numerical": "PASS_UNDER_CORRECTED_SIGN",
+        "g4_confirmatory": "NOT_ESTABLISHED",
+        "structural_identifiability": "FAIL",
+        "biological_intervention_validity": "NOT_EVALUABLE",
+        "ready_for_supervisor_review": repro_ok,
+        "conditions": [
+            "All compared deterministic outputs agree within the stated tolerance." if repro_ok else "Clean full rerun did not complete or did not agree.",
+            "Claims are labelled exploratory or lower; no CONFIRMED label is used.",
+            "Sign provenance is disclosed: numerical pass retained, confirmatory status not established.",
+            "Uncertainty is described as repeated-session/overlapping-landmark, not animal-level.",
+            "No biological coupling or perturbation claim is made.",
+        ],
+        "not_ready_reasons": [] if repro_ok else ["Full end-to-end reproduction is not established."],
+        "next_action": (
+            "Supervisor review of the exploratory predictive result and the bounded MSc replication/intervention-design options."
+            if repro_ok
+            else "Resolve the clean rerun failure before supervisor review."
+        ),
+    }
+    (AUDIT / "decision_record.json").write_text(json.dumps(decision_record, indent=2), encoding="utf-8")
+    print(json.dumps({"ledger": ledger["counts"], "decision": decision, "reproduction": repro_status}, indent=2))
+
+
+if __name__ == "__main__":
+    main()

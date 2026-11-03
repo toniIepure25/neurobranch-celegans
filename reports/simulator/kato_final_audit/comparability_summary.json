@@ -1,0 +1,101 @@
+{
+  "schema": "neurobranch.kato_final_audit.comparability.v1",
+  "energies": {
+    "B0": 3.656957831057772,
+    "B1m": 3.045913434897789,
+    "B3": 2.7001497504411485,
+    "B4m": 3.2396671392752308,
+    "B5_k10": 2.9645877431095045
+  },
+  "reported_decomposition": {
+    "total_B4m_minus_B3": 0.5395173888340823,
+    "common_B4m_minus_B5": 0.2750793961657263,
+    "residual_B5_minus_B3": 0.264437992668356,
+    "common_share": 0.5098619652652594,
+    "residual_share": 0.49013803473474066
+  },
+  "order_sensitivity": [
+    {
+      "baseline": "B4m (reported)",
+      "baseline_energy": 3.2396671392752308,
+      "total_advantage": 0.5395173888340823,
+      "common_increment": 0.2750793961657263,
+      "residual_increment": 0.264437992668356,
+      "common_share": 0.5098619652652594,
+      "residual_share": 0.49013803473474066
+    },
+    {
+      "baseline": "B1m",
+      "baseline_energy": 3.045913434897789,
+      "total_advantage": 0.3457636844566405,
+      "common_increment": 0.08132569178828453,
+      "residual_increment": 0.264437992668356,
+      "common_share": 0.23520599601454945,
+      "residual_share": 0.7647940039854505
+    },
+    {
+      "baseline": "B0 persistence",
+      "baseline_energy": 3.656957831057772,
+      "total_advantage": 0.9568080806166237,
+      "common_increment": 0.6923700879482677,
+      "residual_increment": 0.264437992668356,
+      "common_share": 0.723624833417025,
+      "residual_share": 0.27637516658297506
+    }
+  ],
+  "percentages_are": "successive increments in one ordered model sequence, not unique variance components",
+  "matched": [
+    "same 175 held-out landmarks and targets",
+    "same J5 common innovations",
+    "500-frame causal window for B3/B4m/B5",
+    "ridge 1.0 on standardized features",
+    "unpenalized intercept",
+    "forecast initialized at the same current frame",
+    "same ten-dimensional PCA evaluation space"
+  ],
+  "not_matched": [
+    "B3 has n*(n+1) parameters; B5-k10 has 12*n+110",
+    "B3 has full cross-neuron current state; B5 has target own value plus ten shared factor scores",
+    "B5 is a restricted diagonal-plus-factor model, not a refit of B3",
+    "B4m is a deliberately weak own-history baseline; B1m is a stronger own-history baseline",
+    "the ten-factor representation is fixed at k=10 and is not selected afresh"
+  ],
+  "parameter_counts": [
+    {
+      "n_neurons": 103,
+      "B3_parameters": 10712,
+      "B5_k10_parameters": 1346,
+      "B3_to_B5_ratio": 7.958395245170877,
+      "B3_extra_parameters": 9366
+    },
+    {
+      "n_neurons": 127,
+      "B3_parameters": 16256,
+      "B5_k10_parameters": 1634,
+      "B3_to_B5_ratio": 9.94859241126071,
+      "B3_extra_parameters": 14622
+    },
+    {
+      "n_neurons": 123,
+      "B3_parameters": 15252,
+      "B5_k10_parameters": 1586,
+      "B3_to_B5_ratio": 9.616645649432535,
+      "B3_extra_parameters": 13666
+    },
+    {
+      "n_neurons": 118,
+      "B3_parameters": 14042,
+      "B5_k10_parameters": 1526,
+      "B3_to_B5_ratio": 9.20183486238532,
+      "B3_extra_parameters": 12516
+    },
+    {
+      "n_neurons": 121,
+      "B3_parameters": 14762,
+      "B5_k10_parameters": 1562,
+      "B3_to_B5_ratio": 9.450704225352112,
+      "B3_extra_parameters": 13200
+    }
+  ],
+  "interpretation": "Arithmetic is correct. The 51/49 split is an ordering artifact: changing the baseline to B1m changes the reported shares to roughly 24/76, and B0 to 72/28. The split does not identify physiological common input or neuron-specific coupling."
+}

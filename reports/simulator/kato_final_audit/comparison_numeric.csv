@@ -1,0 +1,18 @@
+file,status,rows,numeric_columns,max_abs_difference,max_relative_difference_at_worst,worst_column,values_over_1e-8,gate_statuses,mismatched_gates
+model_per_landmark.csv,IDENTICAL_WITHIN_1E-8,2275.0,29.0,0.0,0.0,,0.0,,
+model_summary.csv,IDENTICAL_WITHIN_1E-8,7.0,13.0,1.1102230246251565e-16,6.21181913376607e-16,autocorr_error,0.0,,
+paired_contrasts.csv,IDENTICAL_WITHIN_1E-8,30.0,5.0,4.440892098500626e-16,9.836223125787553e-16,ci_low,0.0,,
+decomposition.csv,IDENTICAL_WITHIN_1E-8,6.0,6.0,1.1102230246251565e-16,3.038459717639944e-16,ci_low,0.0,,
+session_effects.csv,IDENTICAL_WITHIN_1E-8,5.0,2.0,1.1102230246251565e-16,2.7246480725823717e-16,mean_energy_improvement,0.0,,
+horizon_profile.csv,IDENTICAL_WITHIN_1E-8,24.0,2.0,4.440892098500626e-16,3.4356195217597735e-16,mean_mse,0.0,,
+factor_variance.csv,IDENTICAL_WITHIN_1E-8,20.0,2.0,0.0,0.0,,0.0,,
+representation_sensitivity.csv,IDENTICAL_WITHIN_1E-8,4.0,6.0,8.326672684688674e-17,6.002568692638161e-16,ci_low,0.0,,
+stage_a_comparison.csv,IDENTICAL_WITHIN_1E-8,15.0,3.0,0.0,0.0,,0.0,,
+surrogate_draws.csv,IDENTICAL_WITHIN_1E-8,4200.0,4.0,0.0,0.0,,0.0,,
+surrogate_paired.csv,IDENTICAL_WITHIN_1E-8,12.0,5.0,4.440892098500626e-16,2.919438555077421e-16,ci_high,0.0,,
+surrogate_summary.csv,IDENTICAL_WITHIN_1E-8,4.0,4.0,0.0,0.0,,0.0,,
+synthetic_audit.csv,IDENTICAL_WITHIN_1E-8,15.0,12.0,0.0,0.0,,0.0,,
+synthetic_summary.csv,IDENTICAL_WITHIN_1E-8,5.0,7.0,0.0,0.0,,0.0,,
+gates.json,GATE_STATUS_MATCH,,,,,,,"{'G1_historical_reproduction': 'PASS', 'G2_fair_matched_baselines': 'PASS', 'G3_common_factor_explanation': 'PASS', 'G4_residual_cross_neuron_information': 'PASS', 'G5_synthetic_specificity': 'PASS', 'G6_robustness': 'PASS', 'G7_structural_identifiability': 'FAIL', 'G8_biological_intervention_validity': 'NOT_EVALUABLE'}",[]
+synthetic_verification.json,EXACT_JSON_MATCH,,,,,,,,
+reproduction_summary.json,EXACT_JSON_MATCH,,,,,,,,

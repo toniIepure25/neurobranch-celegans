@@ -1,0 +1,635 @@
+{
+  "schema": "neurobranch.kato_final_audit.manifest.v1",
+  "generated_at": "2026-11-03T17:25:34+02:00",
+  "audit_branch": "research/kato-final-reproducibility-audit",
+  "head_at_manifest_generation": "358107a7a55470d48f8092b2a2dc7f704dbd37c1",
+  "starting_head": "358107a7a55470d48f8092b2a2dc7f704dbd37c1",
+  "git_status_porcelain_at_generation": [
+    "M scripts/kato_common_state_main.py",
+    "?? docs/KATO_FINAL_AUDIT_COMPARABILITY.md",
+    "?? docs/KATO_FINAL_AUDIT_PROTOCOL.md",
+    "?? docs/KATO_FINAL_AUDIT_REPRODUCTION.md",
+    "?? docs/KATO_FINAL_AUDIT_RESULTS.md",
+    "?? docs/KATO_FINAL_AUDIT_SCIENTIFIC_CLAIMS.md",
+    "?? docs/KATO_FINAL_AUDIT_SIGN_CONVENTION.md",
+    "?? docs/KATO_FINAL_AUDIT_SUPERVISOR_BRIEF.md",
+    "?? docs/KATO_FINAL_AUDIT_UNCERTAINTY.md",
+    "?? reports/simulator/kato_final_audit/",
+    "?? scripts/kato_final_audit_claims.py",
+    "?? scripts/kato_final_audit_comparability.py",
+    "?? scripts/kato_final_audit_compare.py",
+    "?? scripts/kato_final_audit_figures.py",
+    "?? scripts/kato_final_audit_manifest.py",
+    "?? scripts/kato_final_audit_memo.py",
+    "?? scripts/kato_final_audit_preflight.py",
+    "?? scripts/kato_final_audit_ten_factor.py",
+    "?? scripts/kato_final_audit_uncertainty.py",
+    "?? scripts/validate_kato_final_audit.py",
+    "?? tests/test_kato_final_audit.py"
+  ],
+  "dataset": {
+    "name": "Kato et al. 2015 WT_NoStim",
+    "path": "data/raw/kato2015/WT_NoStim.mat",
+    "sha256": "7531811c1718e26a0455f59cb2f8188cf25809278cfea85770dfe03315a0098a",
+    "bytes": 56390975,
+    "scope": "WT_NoStim only; no WT_Stim or other datasets"
+  },
+  "environment": {
+    "python": "3.13.5 (tags/v3.13.5:6cb20a2, Jun 11 2025, 16:15:46) [MSC v.1943 64 bit (AMD64)]",
+    "platform": "Windows-10-10.0.19045-SP0",
+    "packages": {
+      "numpy": "2.3.1",
+      "pandas": "2.3.3",
+      "scipy": "1.16.0",
+      "scikit-learn": "1.9.1",
+      "matplotlib": "3.11.0",
+      "streamlit": "1.66.1",
+      "plotly": "7.1.0",
+      "pytest": "8.4.1",
+      "ruff": "0.15.21"
+    },
+    "pip_freeze": "reports/simulator/kato_final_audit/environment/pip_freeze.txt"
+  },
+  "design": {
+    "sessions": 5,
+    "frames": 15662,
+    "native_dimensions": [
+      103,
+      127,
+      123,
+      118,
+      121
+    ],
+    "landmarks_h20": 175,
+    "landmarks_by_session": [
+      35,
+      35,
+      34,
+      38,
+      33
+    ],
+    "split_bounds": {
+      "0": {
+        "train": [
+          0,
+          2195
+        ],
+        "val": [
+          2207,
+          2677
+        ],
+        "test": [
+          2689,
+          3137
+        ]
+      },
+      "1": {
+        "train": [
+          0,
+          2193
+        ],
+        "val": [
+          2205,
+          2675
+        ],
+        "test": [
+          2687,
+          3134
+        ]
+      },
+      "2": {
+        "train": [
+          0,
+          2141
+        ],
+        "val": [
+          2153,
+          2611
+        ],
+        "test": [
+          2623,
+          3059
+        ]
+      },
+      "3": {
+        "train": [
+          0,
+          2317
+        ],
+        "val": [
+          2329,
+          2825
+        ],
+        "test": [
+          2837,
+          3311
+        ]
+      },
+      "4": {
+        "train": [
+          0,
+          2114
+        ],
+        "val": [
+          2126,
+          2579
+        ],
+        "test": [
+          2591,
+          3021
+        ]
+      }
+    },
+    "seeds": {
+      "historical_innovation": "7000 + session*10000 + landmark",
+      "surrogate": "91000 + session*1000 + landmark*11 + draw",
+      "bootstrap": "session_block_ci defaults seed=17, n_boot=1000",
+      "pca": 17,
+      "synthetic": [
+        11,
+        23,
+        37
+      ],
+      "audit_bootstrap_primary": "1700 + block; block 5 primary"
+    },
+    "config": {
+      "name": "forward_stress",
+      "dataset": "kato2015",
+      "path": "data/raw/kato2015/WT_NoStim.mat",
+      "exclude_behavior_neurons": true,
+      "split": {
+        "mode": "temporal",
+        "train_fraction": 0.7,
+        "val_fraction": 0.15,
+        "test_fraction": 0.15,
+        "purge_frames": 12,
+        "seed": 17
+      }
+    }
+  },
+  "commands": {
+    "clean_rerun": "python -X utf8 scripts/kato_common_state_main.py --out-dir reports/simulator/kato_final_audit/clean_rerun",
+    "preflight": "python -X utf8 scripts/kato_final_audit_preflight.py",
+    "comparison": "python -X utf8 scripts/kato_final_audit_compare.py",
+    "uncertainty": "python -X utf8 scripts/kato_final_audit_uncertainty.py",
+    "ten_factor": "python -X utf8 scripts/kato_final_audit_ten_factor.py",
+    "comparability": "python -X utf8 scripts/kato_final_audit_comparability.py",
+    "claims": "python -X utf8 scripts/kato_final_audit_claims.py",
+    "figures": "python -X utf8 scripts/kato_final_audit_figures.py",
+    "validator": "python -X utf8 scripts/validate_kato_final_audit.py",
+    "tests": "python -X utf8 -m pytest tests/test_kato_final_audit.py -q"
+  },
+  "clean_rerun_status": "FULL_END_TO_END_REPRODUCTION_PASSED",
+  "clean_rerun": {
+    "status": true,
+    "status_label": "FULL_END_TO_END_REPRODUCTION_PASSED",
+    "pid": 28552,
+    "started": "started pid=28552 at 2026-11-03T16:41:55.5149540+02:00",
+    "reported_elapsed_seconds": 2005.9128701000009,
+    "stdout_bytes": 36,
+    "stderr_bytes": 0,
+    "out_dir": "reports/simulator/kato_final_audit/clean_rerun",
+    "missing_comparison_files": [],
+    "maximum_absolute_difference": 4.440892098500626e-16,
+    "all_numeric_within_1e-8": true,
+    "gate_status_match": "GATE_STATUS_MATCH"
+  },
+  "evidence": {
+    "claims_counts": {
+      "SUPPORTED_EXPLORATORY": 8,
+      "LIMITED": 6,
+      "UNSUPPORTED": 4,
+      "INVALIDATED": 3,
+      "NOT_EVALUABLE": 1
+    },
+    "no_confirmed_label": true,
+    "decision": "READY_FOR_SUPERVISOR_REVIEW",
+    "g4_numerical": "PASS_UNDER_CORRECTED_SIGN",
+    "g4_confirmatory": "NOT_ESTABLISHED",
+    "structural_identifiability": "FAIL",
+    "biological_intervention_validity": "NOT_EVALUABLE"
+  },
+  "files": [
+    {
+      "path": "docs/KATO_FINAL_AUDIT_COMPARABILITY.md",
+      "bytes": 4652,
+      "sha256": "bd6aafb1d99ed21c639d09f7b0f8cf32d11df203b970e09b45a655fe92a2f7f2"
+    },
+    {
+      "path": "docs/KATO_FINAL_AUDIT_PROTOCOL.md",
+      "bytes": 6393,
+      "sha256": "58201554d0e779993dfa25dc2155d3bdc1cd8dbad16ee09ee98786647c5b23fb"
+    },
+    {
+      "path": "docs/KATO_FINAL_AUDIT_REPRODUCTION.md",
+      "bytes": 5967,
+      "sha256": "67440fc4e336b7c51bb8b0e02f1f0f03ca16c5189d3f88f972754139b1766216"
+    },
+    {
+      "path": "docs/KATO_FINAL_AUDIT_RESULTS.md",
+      "bytes": 10224,
+      "sha256": "7d95060d9bf6e3623fca45cb3f321595ed36f98fc953ae0a7cad7c9b4b44b456"
+    },
+    {
+      "path": "docs/KATO_FINAL_AUDIT_SCIENTIFIC_CLAIMS.md",
+      "bytes": 5138,
+      "sha256": "d44bbaadae35ff0f3ed5bfdc3c501fe7de36133a73f4f30e1d0730618fe84278"
+    },
+    {
+      "path": "docs/KATO_FINAL_AUDIT_SIGN_CONVENTION.md",
+      "bytes": 3939,
+      "sha256": "68ce748c23beb913226a6479de23ff2fab2332f96f3973acbdd9745e8c70c71b"
+    },
+    {
+      "path": "docs/KATO_FINAL_AUDIT_SUPERVISOR_BRIEF.md",
+      "bytes": 6948,
+      "sha256": "286b1c2041ade1eefc90672fb0cabb8880947189d1beebbef55fea27d6ef5318"
+    },
+    {
+      "path": "docs/KATO_FINAL_AUDIT_UNCERTAINTY.md",
+      "bytes": 4563,
+      "sha256": "ae026f068a10bcad8f1acd9bf3629371a2c19c94f5db90a0657cc1a3d657f8b7"
+    },
+    {
+      "path": "reports/simulator/kato_final_audit/KATO_FINAL_AUDIT_MEMO.pdf",
+      "bytes": 45223,
+      "sha256": "676b1722470f6758c2e0048a1d3401c71d9d42ad1638a8a95c3abdf52a6c5603"
+    },
+    {
+      "path": "reports/simulator/kato_final_audit/README.md",
+      "bytes": 2749,
+      "sha256": "6371f9e9ab7d5568baf9e167aa4d8f973ae9def23ba5064a50fbf10f50ba7bd7"
+    },
+    {
+      "path": "reports/simulator/kato_final_audit/claims_ledger.json",
+      "bytes": 17818,
+      "sha256": "168bc7ec92f8e4eabc425a5ebd7033da7a3674639558ef6c943acff7fcf4f480"
+    },
+    {
+      "path": "reports/simulator/kato_final_audit/clean_rerun/analysis_summary.json",
+      "bytes": 381,
+      "sha256": "9cde663857fc9158447683b68789c3eb0c63814afa98c4ac1e139cab79d3954e"
+    },
+    {
+      "path": "reports/simulator/kato_final_audit/clean_rerun/decomposition.csv",
+      "bytes": 1186,
+      "sha256": "71cc54d85eec124933af35d9c349fb4deb5caf0d474759e1114718d6ffd12bf9"
+    },
+    {
+      "path": "reports/simulator/kato_final_audit/clean_rerun/factor_variance.csv",
+      "bytes": 965,
+      "sha256": "51b0f8f9510dae994ea3a822bdc33c689dd30c513ff80e2225d6d0d542122535"
+    },
+    {
+      "path": "reports/simulator/kato_final_audit/clean_rerun/gates.json",
+      "bytes": 1681,
+      "sha256": "dd0193229a8d1953a62afc4c59f6c673fd86aeccd327a57b49eec63757baf484"
+    },
+    {
+      "path": "reports/simulator/kato_final_audit/clean_rerun/horizon_profile.csv",
+      "bytes": 1381,
+      "sha256": "a806c502988d76c2a9ca62b18525386cfdcf565228cf04b528eec7bde06234a1"
+    },
+    {
+      "path": "reports/simulator/kato_final_audit/clean_rerun/model_config.csv",
+      "bytes": 1605,
+      "sha256": "9d74ec025ff218ff67ccb98954b9bb0429801a87a85bf3616ced2b6d7df16175"
+    },
+    {
+      "path": "reports/simulator/kato_final_audit/clean_rerun/model_per_landmark.csv",
+      "bytes": 918797,
+      "sha256": "faa430f1a69350dcc135b83ef72d944fd9fa53a3dd222adfecca33573aac862d"
+    },
+    {
+      "path": "reports/simulator/kato_final_audit/clean_rerun/model_summary.csv",
+      "bytes": 2038,
+      "sha256": "e283a961c68ee4c380e705c5e2864d7661da583a5c99218d0e91932fb827028f"
+    },
+    {
+      "path": "reports/simulator/kato_final_audit/clean_rerun/paired_contrasts.csv",
+      "bytes": 5243,
+      "sha256": "f4ea8a29b322b8eb338fc2e5e2027717593729813df21c73c3dc3d69055fb968"
+    },
+    {
+      "path": "reports/simulator/kato_final_audit/clean_rerun/representation_sensitivity.csv",
+      "bytes": 652,
+      "sha256": "95d2988556bcdc3ee5f2ac2d6b4caee2baea62b614475ca3cb3af108e1ab042c"
+    },
+    {
+      "path": "reports/simulator/kato_final_audit/clean_rerun/reproduction_summary.json",
+      "bytes": 656,
+      "sha256": "4e56a225825ef137a54957bedcf101a2ea8505082be43c92280a5175e6dc740f"
+    },
+    {
+      "path": "reports/simulator/kato_final_audit/clean_rerun/residual_cross_neuron.csv",
+      "bytes": 594,
+      "sha256": "db33dc2c8f70abfc1ae6a3fa9f1f7b11efa0c32146850717cc32754460f52707"
+    },
+    {
+      "path": "reports/simulator/kato_final_audit/clean_rerun/session_effects.csv",
+      "bytes": 174,
+      "sha256": "8d0eef8b255b0f2f6755b69726f0daa920e467f73090657b2b2d500bb0fd3234"
+    },
+    {
+      "path": "reports/simulator/kato_final_audit/clean_rerun/stage_a_comparison.csv",
+      "bytes": 1450,
+      "sha256": "a7ca03c3ed5ec482e2f9e38acf741bec2f4a07f3385654c6762c8535bc3d7d0a"
+    },
+    {
+      "path": "reports/simulator/kato_final_audit/clean_rerun/surrogate_diagnostics.csv",
+      "bytes": 337155,
+      "sha256": "b7c78d16bd377a7569834a8347892df122fd3c311539a7ca5dc47205477c1330"
+    },
+    {
+      "path": "reports/simulator/kato_final_audit/clean_rerun/surrogate_draws.csv",
+      "bytes": 406393,
+      "sha256": "7e30654224ce47c6fbf20c26544add8f0304a9aac722497eca7f8a44a3012460"
+    },
+    {
+      "path": "reports/simulator/kato_final_audit/clean_rerun/surrogate_paired.csv",
+      "bytes": 2402,
+      "sha256": "9f2abc6ea596a447f5f86767bd30f8de05d3b48589762fabe176b14385e20546"
+    },
+    {
+      "path": "reports/simulator/kato_final_audit/clean_rerun/surrogate_summary.csv",
+      "bytes": 378,
+      "sha256": "88c5cbe4168c2fcaf42010163891d949dcbe396b3a3b4e1ef60b72947d334bcf"
+    },
+    {
+      "path": "reports/simulator/kato_final_audit/clean_rerun/synthetic_audit.csv",
+      "bytes": 3715,
+      "sha256": "8eb5e818059e244f0ed8c6b36c9ae349caad8d33f69245ca2e4dd0b58ff9cb06"
+    },
+    {
+      "path": "reports/simulator/kato_final_audit/clean_rerun/synthetic_summary.csv",
+      "bytes": 799,
+      "sha256": "69ca14b55a354e22433bb862596d32fc1900b692bafea90c17fa0fbd1d28de2d"
+    },
+    {
+      "path": "reports/simulator/kato_final_audit/clean_rerun/synthetic_verification.json",
+      "bytes": 200,
+      "sha256": "7c7760ad34442c426b30fa9c37ad55976701b940f3f0f8a2f492cb3660b10fcb"
+    },
+    {
+      "path": "reports/simulator/kato_final_audit/comparability_summary.json",
+      "bytes": 3595,
+      "sha256": "7a909780f9901d41e85bb2405ad97ac2bb4aa6d209d1abd79d82dbd269281f8e"
+    },
+    {
+      "path": "reports/simulator/kato_final_audit/comparison_numeric.csv",
+      "bytes": 1900,
+      "sha256": "93c406982e15de27c3b39908a4dd18cab2244f7f4dd3657cdbf8ef15c93e56c3"
+    },
+    {
+      "path": "reports/simulator/kato_final_audit/decision_record.json",
+      "bytes": 1079,
+      "sha256": "bcaac211af4409af9a5a6af9786c1f01b9b33e02b2f802c89e7295cff7348a22"
+    },
+    {
+      "path": "reports/simulator/kato_final_audit/decomposition_order_sensitivity.csv",
+      "bytes": 483,
+      "sha256": "9a3879b1136bee0e7c74d444db7fdbf34ad878d7378979ae81e097f608814795"
+    },
+    {
+      "path": "reports/simulator/kato_final_audit/energy_strata_exploratory.csv",
+      "bytes": 226,
+      "sha256": "ebe60df7bcf48b3064ba74d87ec527a2ffa7d318904d4a6a9ac46a01b5b1cb9a"
+    },
+    {
+      "path": "reports/simulator/kato_final_audit/environment/pip_freeze.txt",
+      "bytes": 12486,
+      "sha256": "ccb84d891f12d27da19af02e233259141c1e1fce7d9adbae5171686d6f1d66ac"
+    },
+    {
+      "path": "reports/simulator/kato_final_audit/environment/starting_state.txt",
+      "bytes": 584,
+      "sha256": "6ba7f19230e64196cdb4185e6b1577df390945ac872838f80337fcec629a9de6"
+    },
+    {
+      "path": "reports/simulator/kato_final_audit/figures/kato_final_audit_decomposition.png",
+      "bytes": 106925,
+      "sha256": "4ef81ed0569534e3d0510f9bc87d2cc656c678ed668fceaef236577055a4886e"
+    },
+    {
+      "path": "reports/simulator/kato_final_audit/figures/kato_final_audit_summary.png",
+      "bytes": 92719,
+      "sha256": "4230dccadbac2d4f128f33a4f1969da4a995cd2e0a7f62f50597067f3640e5c2"
+    },
+    {
+      "path": "reports/simulator/kato_final_audit/figures/kato_final_audit_uncertainty.png",
+      "bytes": 104898,
+      "sha256": "cc79462d7ae4c70e697f214d4aac550b080591e499f669acc91d307eb156c1e0"
+    },
+    {
+      "path": "reports/simulator/kato_final_audit/full_rerun_status.json",
+      "bytes": 925,
+      "sha256": "56fbce5bacef4e45dee4abec12537976b464b241f739c305a5932aa217258976"
+    },
+    {
+      "path": "reports/simulator/kato_final_audit/horizon_uncertainty.csv",
+      "bytes": 429,
+      "sha256": "f4288530e6690917c67dcd885fd99e663d42ac88e7dbe005e05f86c8c45bd549"
+    },
+    {
+      "path": "reports/simulator/kato_final_audit/landmark_subsample_sensitivity.csv",
+      "bytes": 216,
+      "sha256": "72ea43aa5a920478a0539a45dfff32cc95d0216759c4c1c53f436453b05d92ce"
+    },
+    {
+      "path": "reports/simulator/kato_final_audit/leave_one_session_out.csv",
+      "bytes": 201,
+      "sha256": "39d3ae58be7ca72df3de0eec4fbc2759572bc2caf55e5d865672490c7d462767"
+    },
+    {
+      "path": "reports/simulator/kato_final_audit/logs/clean_rerun.pid",
+      "bytes": 7,
+      "sha256": "9adcf94e96a44033570ad2af8cd010ec074aa9d333e7a9a89221a54ef4b36729"
+    },
+    {
+      "path": "reports/simulator/kato_final_audit/logs/clean_rerun.start.txt",
+      "bytes": 114,
+      "sha256": "08872f0350e350fb5d81ed0b1a278de73734d1b29409d6637754b7ebbec97ea2"
+    },
+    {
+      "path": "reports/simulator/kato_final_audit/logs/clean_rerun.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "reports/simulator/kato_final_audit/logs/clean_rerun.stdout.log",
+      "bytes": 36,
+      "sha256": "ed934e15c90c6a84a9acd5beac28bad40eafe854dcf8597873be65fc333477f3"
+    },
+    {
+      "path": "reports/simulator/kato_final_audit/model_comparability.csv",
+      "bytes": 633,
+      "sha256": "d0c77832639b09d13a56608f12e3782ea9db17edbfecaf33d4ca201d7f20838f"
+    },
+    {
+      "path": "reports/simulator/kato_final_audit/paired_serial_dependence.csv",
+      "bytes": 670,
+      "sha256": "c59667161009fdad0aaa2b7fd96c810e02a6692d82e9d73b106621718690a107"
+    },
+    {
+      "path": "reports/simulator/kato_final_audit/parameter_counts.csv",
+      "bytes": 275,
+      "sha256": "5c131aa83ea88da271c0faa483d4e80d8b2004987dc5cd6abfa72a765da11e65"
+    },
+    {
+      "path": "reports/simulator/kato_final_audit/preflight.json",
+      "bytes": 5684,
+      "sha256": "4867f8784e69be7f43ce1fd9885f36a1cc2fbb94a9cea29d482c7964c180e168"
+    },
+    {
+      "path": "reports/simulator/kato_final_audit/reproduction_comparison.json",
+      "bytes": 6537,
+      "sha256": "a933cae69cbc28b97a896a4077c8c23dae2a19f3df793d61d890505fd8826861"
+    },
+    {
+      "path": "reports/simulator/kato_final_audit/session_estimates.csv",
+      "bytes": 882,
+      "sha256": "3d4b726dcf1c949f3d522f110db86f3412b0a0cfb5cf3dbfbcd4413101379600"
+    },
+    {
+      "path": "reports/simulator/kato_final_audit/sign_convention_decision.json",
+      "bytes": 2357,
+      "sha256": "0940c065f4a895e4b21f69ff004d01336ddbbf80e9f168c714b6283965fa956b"
+    },
+    {
+      "path": "reports/simulator/kato_final_audit/ten_factor_operators.csv",
+      "bytes": 17658,
+      "sha256": "7dc53d790c6b3e24503104e951626acfb596fa73db6d81da63b9d609b043702e"
+    },
+    {
+      "path": "reports/simulator/kato_final_audit/ten_factor_sessions.csv",
+      "bytes": 652,
+      "sha256": "c06c5d5979f445e2dedd8e51aa1645c4484246ca2c49eafd54fdb935e08dc6ed"
+    },
+    {
+      "path": "reports/simulator/kato_final_audit/ten_factor_summary.json",
+      "bytes": 1757,
+      "sha256": "268fb596b066741aad257f2b6099b755ad31d2a8b73142f9286ee82f45275421"
+    },
+    {
+      "path": "reports/simulator/kato_final_audit/uncertainty_bootstrap.csv",
+      "bytes": 342,
+      "sha256": "f4f394e026b062c8f226b589de424b4784347fce6e96c028238547844894d21a"
+    },
+    {
+      "path": "reports/simulator/kato_final_audit/uncertainty_summary.json",
+      "bytes": 5147,
+      "sha256": "a71d299678cb32984abfff5c73e521728c93316a5dec22b5401b0e3855769ce9"
+    },
+    {
+      "path": "scripts/kato_common_state_main.py",
+      "bytes": 35129,
+      "sha256": "f5e0a9287184b165671dc00af0b7c2ae23a12623991df9cbe58051f6224f2962"
+    },
+    {
+      "path": "scripts/kato_common_state_postprocess.py",
+      "bytes": 14252,
+      "sha256": "ecf20e63b58d9e12c016673a59c478c69a90f66aaf2909abc852565e09e11c24"
+    },
+    {
+      "path": "scripts/kato_final_audit_claims.py",
+      "bytes": 19877,
+      "sha256": "309307c25cb41a3308c18eaf17c327a03903d95d8338e9fcc607d60cd897dabc"
+    },
+    {
+      "path": "scripts/kato_final_audit_comparability.py",
+      "bytes": 4710,
+      "sha256": "5bcadb26b86f1f1c2bf0b8120b975468ee1e616c0fa1df3a79530365bd068523"
+    },
+    {
+      "path": "scripts/kato_final_audit_compare.py",
+      "bytes": 7656,
+      "sha256": "dd3e5c156993d69860d0ad7ea9545bd18e5c19c64d3a75017f97e676add4945b"
+    },
+    {
+      "path": "scripts/kato_final_audit_figures.py",
+      "bytes": 6237,
+      "sha256": "f8976aa647c523183b6bcd6119069b4b4ce7b07a241c9099310ebb8feac2dabe"
+    },
+    {
+      "path": "scripts/kato_final_audit_manifest.py",
+      "bytes": 7665,
+      "sha256": "5215e40a69e302f3a20b932cf1cc6f54a53d0df8d8cb16890d68d7b47097786c"
+    },
+    {
+      "path": "scripts/kato_final_audit_memo.py",
+      "bytes": 5222,
+      "sha256": "c1b61ea3f32b4f6b19548d5150f9b78b4e252cbcc7963960edf8613d95d44566"
+    },
+    {
+      "path": "scripts/kato_final_audit_preflight.py",
+      "bytes": 4657,
+      "sha256": "1d75e3a5c5a4b508529bf1fa851fa167f8a6227d2ffa626b1ac5b6e1a0b0128c"
+    },
+    {
+      "path": "scripts/kato_final_audit_ten_factor.py",
+      "bytes": 5943,
+      "sha256": "d1c4bb21074cd90d91e300f63b8327fc7fb59141c3701906415228d7eabad002"
+    },
+    {
+      "path": "scripts/kato_final_audit_uncertainty.py",
+      "bytes": 7015,
+      "sha256": "56f59d9210989fc8420896950ec61b1a3e44e0c707cec4d8f981f1811ff8aa45"
+    },
+    {
+      "path": "scripts/validate_kato_final_audit.py",
+      "bytes": 9225,
+      "sha256": "f2454c9359f0d592ed8cda56e3ff9bee8819743dfaaa98357c7821bb17faf2b9"
+    },
+    {
+      "path": "src/neurobranch/kato_common_state/__init__.py",
+      "bytes": 853,
+      "sha256": "633537529770a0756557d88654cf70a483ef5e36d7e8e5b9699c5d2bc3287686"
+    },
+    {
+      "path": "src/neurobranch/kato_common_state/evaluation.py",
+      "bytes": 3154,
+      "sha256": "44eaf8f3616e4b20af65e1c0eaa3284de151a285c5863f963c80aee48497bd1c"
+    },
+    {
+      "path": "src/neurobranch/kato_common_state/factors.py",
+      "bytes": 2201,
+      "sha256": "23afe33f7fa329576c5b4e63ad6443e82f6c9631074220941673ecea3c07f77f"
+    },
+    {
+      "path": "src/neurobranch/kato_common_state/models.py",
+      "bytes": 12363,
+      "sha256": "dc30e697dcb6573b0723a41ab5fd321069e06bec0c5efb6efd956e33afac3e8d"
+    },
+    {
+      "path": "src/neurobranch/kato_common_state/surrogates.py",
+      "bytes": 4624,
+      "sha256": "4bb3758a2e83ee693b235612f11ac96a43bad8518477225ba057c549f3c4ebed"
+    },
+    {
+      "path": "src/neurobranch/kato_common_state/synthetic.py",
+      "bytes": 5389,
+      "sha256": "11e282119bc438c920da03b43d3765367c590090131be66a5403db77ff10821b"
+    },
+    {
+      "path": "src/neurobranch/kato_interactions/metrics.py",
+      "bytes": 4699,
+      "sha256": "f9466f869bc88863cc23fc8b22c8469145696aaf91fb9631b3df46aae6586ad9"
+    },
+    {
+      "path": "tests/test_kato_final_audit.py",
+      "bytes": 5931,
+      "sha256": "578a5357e264fe8a2218b38689b4c482becd124f83f58223b2ff9d3087297088"
+    }
+  ],
+  "file_count": 82,
+  "total_bytes": 2337678,
+  "known_omissions": [
+    "Per-landmark metric rows are preserved, but raw ensemble trajectory arrays were not emitted by the official pipeline.",
+    "The five sessions are repeated recordings; animal identity/independence is not documented.",
+    "The historical run was interrupted and post-processed; the clean rerun is the reproduction evidence."
+  ],
+  "frozen_artifacts": {
+    "path": "reports/simulator/kato_common_state",
+    "overwritten": false
+  }
+}

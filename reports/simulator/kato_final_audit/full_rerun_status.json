@@ -1,0 +1,18 @@
+{
+  "schema": "neurobranch.kato_final_audit.full_rerun.v1",
+  "command": "python -X utf8 scripts/kato_common_state_main.py --out-dir reports/simulator/kato_final_audit/clean_rerun",
+  "entry_point": "scripts/kato_common_state_main.py",
+  "out_dir": "reports/simulator/kato_final_audit/clean_rerun",
+  "pid": 28552,
+  "started": "started pid=28552 at 2026-11-03T16:41:55.5149540+02:00",
+  "completed_normally": true,
+  "completion_line": "kato common-state complete 2005.9s",
+  "reported_elapsed_seconds": 2005.9128701000009,
+  "stdout_bytes": 36,
+  "stderr_bytes": 0,
+  "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "stdout_sha256": "ed934e15c90c6a84a9acd5beac28bad40eafe854dcf8597873be65fc333477f3",
+  "artifact_files": 21,
+  "artifact_bytes": 1687845,
+  "note": "The process exited and wrote the final completion line; stderr is empty. No resume script was used."
+}

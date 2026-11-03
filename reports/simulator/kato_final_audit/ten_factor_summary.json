@@ -1,0 +1,33 @@
+{
+  "schema": "neurobranch.kato_final_audit.ten_factor.v1",
+  "evaluation_pca_is_common_factor_pca": true,
+  "pca_fit": "training frames only; random_state=17; n_components=10",
+  "b5_uses": "target own current value + all ten training-PCA factor scores; factor VAR rollout",
+  "b3_uses": "full current population state; full lag-one VAR",
+  "pca_variance_10_by_session": {
+    "0": 0.7098612785339355,
+    "1": 0.6216390132904053,
+    "2": 0.5671378374099731,
+    "3": 0.7095081210136414,
+    "4": 0.5467131733894348
+  },
+  "b3_cross_over_within_median_by_session": {
+    "0": 2.035829926416014,
+    "1": 2.7456279790255578,
+    "2": 2.044932295041087,
+    "3": 2.7851311768651623,
+    "4": 2.2568760293407624
+  },
+  "b3_cross_over_within": {
+    "median": 2.2899500532190573,
+    "min": 1.8719944516531153,
+    "max": 3.2591357920885207
+  },
+  "b3_residual_unexplained_ratio": {
+    "median": 0.9959130816795615,
+    "min": 0.9863774879502781,
+    "max": 0.9986449640507132
+  },
+  "interpretation": "B5 and the evaluation metric use the same training-only ten-PC transform. B5 therefore retains all ten evaluation dimensions, but its residual-source operator has the restricted form diag(own_scale) @ Q, i.e. one own-row direction per output neuron. B3's residual-source rows are almost entirely outside that one-dimensional pattern. This proves B3 has access to cross-neuron residual information that B5 cannot represent; it does not prove that this access causes the observed score advantage.",
+  "unresolved": "Separating residual-coordinate information from B3's much larger parameter count would require a prespecified restricted model or new data; no such model is fitted or selected on the reused test tails here."
+}

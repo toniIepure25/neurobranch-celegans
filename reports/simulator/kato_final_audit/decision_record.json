@@ -1,0 +1,21 @@
+{
+  "schema": "neurobranch.kato_final_audit.decision.v1",
+  "decision": "READY_FOR_SUPERVISOR_REVIEW",
+  "reproduction_status": "FULL_END_TO_END_REPRODUCTION_PASSED",
+  "full_rerun_completed": true,
+  "scientific_result": "SUPPORTED_EXPLORATORY",
+  "g4_numerical": "PASS_UNDER_CORRECTED_SIGN",
+  "g4_confirmatory": "NOT_ESTABLISHED",
+  "structural_identifiability": "FAIL",
+  "biological_intervention_validity": "NOT_EVALUABLE",
+  "ready_for_supervisor_review": true,
+  "conditions": [
+    "All compared deterministic outputs agree within the stated tolerance.",
+    "Claims are labelled exploratory or lower; no CONFIRMED label is used.",
+    "Sign provenance is disclosed: numerical pass retained, confirmatory status not established.",
+    "Uncertainty is described as repeated-session/overlapping-landmark, not animal-level.",
+    "No biological coupling or perturbation claim is made."
+  ],
+  "not_ready_reasons": [],
+  "next_action": "Supervisor review of the exploratory predictive result and the bounded MSc replication/intervention-design options."
+}

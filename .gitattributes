@@ -30,6 +30,9 @@ reports/simulator/joint_dynamics/** -text
 # Common-state control artifacts are byte-hashed.
 reports/simulator/kato_common_state/** -text
 
+# Final audit includes PNG/PDF, UTF-16 logs and a SHA256 manifest; keep exact bytes.
+reports/simulator/kato_final_audit/** -text
+
 # Supervisor-handoff figures, PDFs and manifests are byte-hashed.
 reports/simulator/supervisor_handoff/** -text
 

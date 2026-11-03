@@ -1,0 +1,215 @@
+{
+  "schema": "neurobranch.kato_final_audit.reproduction.v1",
+  "status": "FULL_END_TO_END_REPRODUCTION_PASSED",
+  "tolerance": {
+    "deterministic_abs": 1e-08,
+    "close_abs": 1e-06,
+    "rationale": "same code, data, seeds and float64/CPU environment; 1e-8 is a conservative deterministic tolerance, 1e-6 is the historical G1 tolerance"
+  },
+  "committed_directory": "reports\\simulator\\kato_common_state",
+  "rerun_directory": "reports\\simulator\\kato_final_audit\\clean_rerun",
+  "missing_files": [],
+  "comparisons": [
+    {
+      "file": "model_per_landmark.csv",
+      "status": "IDENTICAL_WITHIN_1E-8",
+      "rows": 2275,
+      "numeric_columns": 29,
+      "max_abs_difference": 0.0,
+      "max_relative_difference_at_worst": 0.0,
+      "worst_column": null,
+      "values_over_1e-8": 0
+    },
+    {
+      "file": "model_summary.csv",
+      "status": "IDENTICAL_WITHIN_1E-8",
+      "rows": 7,
+      "numeric_columns": 13,
+      "max_abs_difference": 1.1102230246251565e-16,
+      "max_relative_difference_at_worst": 6.21181913376607e-16,
+      "worst_column": "autocorr_error",
+      "values_over_1e-8": 0
+    },
+    {
+      "file": "paired_contrasts.csv",
+      "status": "IDENTICAL_WITHIN_1E-8",
+      "rows": 30,
+      "numeric_columns": 5,
+      "max_abs_difference": 4.440892098500626e-16,
+      "max_relative_difference_at_worst": 9.836223125787553e-16,
+      "worst_column": "ci_low",
+      "values_over_1e-8": 0
+    },
+    {
+      "file": "decomposition.csv",
+      "status": "IDENTICAL_WITHIN_1E-8",
+      "rows": 6,
+      "numeric_columns": 6,
+      "max_abs_difference": 1.1102230246251565e-16,
+      "max_relative_difference_at_worst": 3.038459717639944e-16,
+      "worst_column": "ci_low",
+      "values_over_1e-8": 0
+    },
+    {
+      "file": "session_effects.csv",
+      "status": "IDENTICAL_WITHIN_1E-8",
+      "rows": 5,
+      "numeric_columns": 2,
+      "max_abs_difference": 1.1102230246251565e-16,
+      "max_relative_difference_at_worst": 2.7246480725823717e-16,
+      "worst_column": "mean_energy_improvement",
+      "values_over_1e-8": 0
+    },
+    {
+      "file": "horizon_profile.csv",
+      "status": "IDENTICAL_WITHIN_1E-8",
+      "rows": 24,
+      "numeric_columns": 2,
+      "max_abs_difference": 4.440892098500626e-16,
+      "max_relative_difference_at_worst": 3.4356195217597735e-16,
+      "worst_column": "mean_mse",
+      "values_over_1e-8": 0
+    },
+    {
+      "file": "factor_variance.csv",
+      "status": "IDENTICAL_WITHIN_1E-8",
+      "rows": 20,
+      "numeric_columns": 2,
+      "max_abs_difference": 0.0,
+      "max_relative_difference_at_worst": 0.0,
+      "worst_column": null,
+      "values_over_1e-8": 0
+    },
+    {
+      "file": "representation_sensitivity.csv",
+      "status": "IDENTICAL_WITHIN_1E-8",
+      "rows": 4,
+      "numeric_columns": 6,
+      "max_abs_difference": 8.326672684688674e-17,
+      "max_relative_difference_at_worst": 6.002568692638161e-16,
+      "worst_column": "ci_low",
+      "values_over_1e-8": 0
+    },
+    {
+      "file": "stage_a_comparison.csv",
+      "status": "IDENTICAL_WITHIN_1E-8",
+      "rows": 15,
+      "numeric_columns": 3,
+      "max_abs_difference": 0.0,
+      "max_relative_difference_at_worst": 0.0,
+      "worst_column": null,
+      "values_over_1e-8": 0
+    },
+    {
+      "file": "surrogate_draws.csv",
+      "status": "IDENTICAL_WITHIN_1E-8",
+      "rows": 4200,
+      "numeric_columns": 4,
+      "max_abs_difference": 0.0,
+      "max_relative_difference_at_worst": 0.0,
+      "worst_column": null,
+      "values_over_1e-8": 0
+    },
+    {
+      "file": "surrogate_paired.csv",
+      "status": "IDENTICAL_WITHIN_1E-8",
+      "rows": 12,
+      "numeric_columns": 5,
+      "max_abs_difference": 4.440892098500626e-16,
+      "max_relative_difference_at_worst": 2.919438555077421e-16,
+      "worst_column": "ci_high",
+      "values_over_1e-8": 0
+    },
+    {
+      "file": "surrogate_summary.csv",
+      "status": "IDENTICAL_WITHIN_1E-8",
+      "rows": 4,
+      "numeric_columns": 4,
+      "max_abs_difference": 0.0,
+      "max_relative_difference_at_worst": 0.0,
+      "worst_column": null,
+      "values_over_1e-8": 0
+    },
+    {
+      "file": "synthetic_audit.csv",
+      "status": "IDENTICAL_WITHIN_1E-8",
+      "rows": 15,
+      "numeric_columns": 12,
+      "max_abs_difference": 0.0,
+      "max_relative_difference_at_worst": 0.0,
+      "worst_column": null,
+      "values_over_1e-8": 0
+    },
+    {
+      "file": "synthetic_summary.csv",
+      "status": "IDENTICAL_WITHIN_1E-8",
+      "rows": 5,
+      "numeric_columns": 7,
+      "max_abs_difference": 0.0,
+      "max_relative_difference_at_worst": 0.0,
+      "worst_column": null,
+      "values_over_1e-8": 0
+    },
+    {
+      "file": "gates.json",
+      "status": "GATE_STATUS_MATCH",
+      "gate_statuses": {
+        "G1_historical_reproduction": "PASS",
+        "G2_fair_matched_baselines": "PASS",
+        "G3_common_factor_explanation": "PASS",
+        "G4_residual_cross_neuron_information": "PASS",
+        "G5_synthetic_specificity": "PASS",
+        "G6_robustness": "PASS",
+        "G7_structural_identifiability": "FAIL",
+        "G8_biological_intervention_validity": "NOT_EVALUABLE"
+      },
+      "mismatched_gates": []
+    },
+    {
+      "file": "synthetic_verification.json",
+      "status": "EXACT_JSON_MATCH"
+    },
+    {
+      "file": "reproduction_summary.json",
+      "status": "EXACT_JSON_MATCH"
+    }
+  ],
+  "key_metrics": {
+    "B3_energy": {
+      "committed": 2.7001497504411485,
+      "rerun": 2.7001497504411485,
+      "abs_difference": 0.0
+    },
+    "B5_energy": {
+      "committed": 2.9645877431095045,
+      "rerun": 2.9645877431095045,
+      "abs_difference": 0.0
+    },
+    "B3_advantage_B5_minus_B3": {
+      "committed": 0.2644379926683563,
+      "rerun": 0.2644379926683563,
+      "abs_difference": 0.0
+    },
+    "ci_low": {
+      "committed": 0.0749929195790352,
+      "rerun": 0.0749929195790351,
+      "abs_difference": 9.71445146547012e-17
+    },
+    "ci_high": {
+      "committed": 0.4031164915680882,
+      "rerun": 0.4031164915680882,
+      "abs_difference": 0.0
+    },
+    "fraction_b3_better": {
+      "committed": 0.64,
+      "rerun": 0.64,
+      "abs_difference": 0.0
+    },
+    "n_pairs": {
+      "committed": 175,
+      "rerun": 175,
+      "abs_difference": 0
+    }
+  },
+  "all_numeric_within_1e-8": true
+}

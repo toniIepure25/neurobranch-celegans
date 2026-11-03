@@ -1,0 +1,63 @@
+{
+  "G1_historical_reproduction": {
+    "status": "PASS",
+    "max_abs_difference": 9.42922611990582e-07,
+    "j2_j5_equivalent_mean": true
+  },
+  "G2_fair_matched_baselines": {
+    "status": "PASS",
+    "counts": {
+      "B3_population": 175,
+      "B4_matched_own_500": 175,
+      "B5_common_k10": 175,
+      "B1_matched_own": 175
+    },
+    "common_innovation": "J5 sampled once per landmark and reused",
+    "windows": {
+      "B3": 500,
+      "B4m": 500,
+      "B5-primary": 500
+    }
+  },
+  "G3_common_factor_explanation": {
+    "status": "PASS",
+    "factor_rows": 20,
+    "ks": [
+      1,
+      3,
+      5,
+      10
+    ]
+  },
+  "G4_residual_cross_neuron_information": {
+    "status": "PASS",
+    "model": "B3_population",
+    "reference": "B5_common_k10",
+    "metric": "pca10_energy_h20",
+    "n_pairs": 175,
+    "mean_improvement": 0.2644379926683563,
+    "ci_low": 0.07499291957903516,
+    "ci_high": 0.40311649156808815,
+    "fraction_better": 0.64,
+    "block": 5,
+    "sign_convention": "B5 minus B3; positive means B3 has lower energy"
+  },
+  "G5_synthetic_specificity": {
+    "status": "PASS"
+  },
+  "G6_robustness": {
+    "status": "PASS",
+    "positive_sessions": 4,
+    "n_sessions": 5,
+    "pca10_energy_improvement": 0.2644379926683563,
+    "neuron_energy_improvement": 0.1616661572020045
+  },
+  "G7_structural_identifiability": {
+    "status": "FAIL",
+    "reason": "observational prediction cannot identify direct coupling or common-input structure"
+  },
+  "G8_biological_intervention_validity": {
+    "status": "NOT_EVALUABLE",
+    "reason": "no matched sham-controlled perturbation data"
+  }
+}

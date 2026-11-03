@@ -1,0 +1,217 @@
+{
+  "schema": "neurobranch.kato_final_audit.preflight.v1",
+  "git": {
+    "branch": "research/kato-final-reproducibility-audit",
+    "head": "358107a7a55470d48f8092b2a2dc7f704dbd37c1",
+    "dirty_porcelain": "M scripts/kato_common_state_main.py\n?? reports/simulator/kato_final_audit/\n?? scripts/kato_final_audit_preflight.py",
+    "recent": [
+      "358107a7a55470d48f8092b2a2dc7f704dbd37c1 feat(kato): add common-state predictive controls",
+      "4896ab13fb939d4617fd80dfd3f2021b1ff27c90 fix(kato): preserve binary figure bytes and refresh manifest",
+      "f29b3d56aa96410f1423161c0a4d1b2feffc7192 data(kato): add interaction audit artifacts and reproducibility manifest",
+      "96dd3fdc6c62611c9852ff9a6c234bc139d4a47a docs(kato): document interaction, mode, state and perturbation audit",
+      "23b0ed126b91bad1144d060fbe4d8efbacf249ff feat(kato): add neural interaction and sensitivity audit",
+      "86e0e2223f9f1f89ac6b69dd00d30df7d4841e1a fix(handoff): clean PDF title metadata"
+    ]
+  },
+  "environment": {
+    "python": "3.13.5 (tags/v3.13.5:6cb20a2, Jun 11 2025, 16:15:46) [MSC v.1943 64 bit (AMD64)]",
+    "platform": "Windows-10-10.0.19045-SP0",
+    "packages": {
+      "numpy": "2.3.1",
+      "pandas": "2.3.3",
+      "scipy": "1.16.0",
+      "scikit-learn": "1.9.1",
+      "matplotlib": "3.11.0",
+      "streamlit": "1.66.1",
+      "plotly": "7.1.0",
+      "pytest": "8.4.1",
+      "ruff": "0.15.21"
+    }
+  },
+  "dataset": {
+    "path": "data\\raw\\kato2015\\WT_NoStim.mat",
+    "sha256": "7531811c1718e26a0455f59cb2f8188cf25809278cfea85770dfe03315a0098a",
+    "bytes": 56390975,
+    "sessions": 5,
+    "frames_total": 15662,
+    "recording_names": [
+      "TS20140715e_lite-1_punc-31_NLS3_2eggs_56um_1mMTet_basal_1080s",
+      "TS20140715f_lite-1_punc-31_NLS3_3eggs_56um_1mMTet_basal_1080s",
+      "TS20140905c_lite-1_punc-31_NLS3_AVHJ_0eggs_1mMTet_basal_1080s",
+      "TS20140926d_lite-1_punc-31_NLS3_RIV_2eggs_1mMTet_basal_1080s",
+      "TS20141221b_THK178_lite-1_punc-31_NLS3_6eggs_1mMTet_basal_1080s"
+    ]
+  },
+  "config": {
+    "name": "forward_stress",
+    "dataset": "kato2015",
+    "path": "data/raw/kato2015/WT_NoStim.mat",
+    "exclude_behavior_neurons": true,
+    "split": {
+      "mode": "temporal",
+      "train_fraction": 0.7,
+      "val_fraction": 0.15,
+      "test_fraction": 0.15,
+      "purge_frames": 12,
+      "seed": 17
+    }
+  },
+  "sessions": [
+    {
+      "session": 0,
+      "frames": 3137,
+      "neurons": 103,
+      "split_bounds": {
+        "train": [
+          0,
+          2195
+        ],
+        "val": [
+          2207,
+          2677
+        ],
+        "test": [
+          2689,
+          3137
+        ]
+      },
+      "train_frames_h20": 2174,
+      "landmarks": 35,
+      "landmark_first": 2690,
+      "landmark_last": 3030,
+      "pca_components": 10,
+      "pca_explained_variance_10": 0.7098612785339355
+    },
+    {
+      "session": 1,
+      "frames": 3134,
+      "neurons": 127,
+      "split_bounds": {
+        "train": [
+          0,
+          2193
+        ],
+        "val": [
+          2205,
+          2675
+        ],
+        "test": [
+          2687,
+          3134
+        ]
+      },
+      "train_frames_h20": 2172,
+      "landmarks": 35,
+      "landmark_first": 2688,
+      "landmark_last": 3028,
+      "pca_components": 10,
+      "pca_explained_variance_10": 0.6216390132904053
+    },
+    {
+      "session": 2,
+      "frames": 3059,
+      "neurons": 123,
+      "split_bounds": {
+        "train": [
+          0,
+          2141
+        ],
+        "val": [
+          2153,
+          2611
+        ],
+        "test": [
+          2623,
+          3059
+        ]
+      },
+      "train_frames_h20": 2120,
+      "landmarks": 34,
+      "landmark_first": 2624,
+      "landmark_last": 2954,
+      "pca_components": 10,
+      "pca_explained_variance_10": 0.5671378374099731
+    },
+    {
+      "session": 3,
+      "frames": 3311,
+      "neurons": 118,
+      "split_bounds": {
+        "train": [
+          0,
+          2317
+        ],
+        "val": [
+          2329,
+          2825
+        ],
+        "test": [
+          2837,
+          3311
+        ]
+      },
+      "train_frames_h20": 2296,
+      "landmarks": 38,
+      "landmark_first": 2838,
+      "landmark_last": 3208,
+      "pca_components": 10,
+      "pca_explained_variance_10": 0.7095081210136414
+    },
+    {
+      "session": 4,
+      "frames": 3021,
+      "neurons": 121,
+      "split_bounds": {
+        "train": [
+          0,
+          2114
+        ],
+        "val": [
+          2126,
+          2579
+        ],
+        "test": [
+          2591,
+          3021
+        ]
+      },
+      "train_frames_h20": 2093,
+      "landmarks": 33,
+      "landmark_first": 2592,
+      "landmark_last": 2912,
+      "pca_components": 10,
+      "pca_explained_variance_10": 0.5467131733894348
+    }
+  ],
+  "seeds": {
+    "historical_innovation": "7000 + session*10000 + landmark",
+    "surrogate": "91000 + session*1000 + landmark*11 + draw",
+    "bootstrap": "session_block_ci defaults seed=17, n_boot=1000",
+    "pca": 17,
+    "synthetic": [
+      11,
+      23,
+      37
+    ]
+  },
+  "experiment": {
+    "members": 100,
+    "rollout_horizon": 100,
+    "primary_horizon": 20,
+    "stride": 10,
+    "factor_ks": [
+      1,
+      3,
+      5,
+      10
+    ],
+    "primary_k": 10,
+    "surrogate_draws": 6,
+    "surrogate_methods": [
+      "circular_full",
+      "block_full",
+      "common_preserved_residual_shift",
+      "residual_preserved_factor_shift"
+    ]
+  }
+}

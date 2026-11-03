@@ -1,0 +1,16 @@
+model,prior_model,metric,n,max_abs_diff,mean_abs_diff
+B1_historical,J1_independent_diag,energy,175,9.269841365622256e-07,1.7108732425314648e-07
+B1_historical,J1_independent_diag,trajectory,175,5.142692334203502e-07,4.742179159578086e-08
+B1_historical,J1_independent_diag,mse,175,1.554385840485395e-06,1.676975757759967e-07
+J2_population_diag,J2_population_diag,energy,175,9.282074096006454e-07,1.3222577350242252e-07
+J2_population_diag,J2_population_diag,trajectory,175,4.292022159901876e-07,3.815688736530376e-08
+J2_population_diag,J2_population_diag,mse,175,1.6504589313015572e-06,1.6032756385810285e-07
+J5_population_lead1_boot,J5_population_lead1_boot,energy,175,8.717506219113602e-07,1.3254741370641705e-07
+J5_population_lead1_boot,J5_population_lead1_boot,trajectory,175,4.277287821707887e-07,3.685689769510654e-08
+J5_population_lead1_boot,J5_population_lead1_boot,mse,175,1.6046973421168786e-06,1.6344157141547275e-07
+B3_population,B3_population,energy,175,8.717506219113602e-07,1.3254741370641705e-07
+B3_population,B3_population,trajectory,175,4.277287821707887e-07,3.685689769510654e-08
+B3_population,B3_population,mse,175,1.6046973421168786e-06,1.6344157141547275e-07
+B4r_historical,B4r_historical,energy,175,9.42922611990582e-07,1.66350613379456e-07
+B4r_historical,B4r_historical,trajectory,175,4.948905623081146e-07,4.611994914226005e-08
+B4r_historical,B4r_historical,mse,175,1.5210318933256417e-06,1.8727548195350355e-07

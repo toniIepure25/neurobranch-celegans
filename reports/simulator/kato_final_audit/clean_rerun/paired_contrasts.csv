@@ -1,0 +1,31 @@
+model,reference,metric,n_pairs,mean_improvement,ci_low,ci_high,fraction_better,block,sign_convention
+B0_persistence,B3_population,pca10_energy_h20,175,-0.9568080806166238,-1.1187525354890306,-0.7884327138944488,0.13714285714285715,3,reference minus model; positive means the model has lower energy
+B1_matched_own,B3_population,pca10_energy_h20,175,-0.345763684456641,-0.5079225447482131,-0.12047766019705365,0.4057142857142857,3,reference minus model; positive means the model has lower energy
+B2_own_trend,B3_population,pca10_energy_h20,175,-0.8683732625395724,-1.1033871761146157,-0.5548976315077107,0.26285714285714284,3,reference minus model; positive means the model has lower energy
+B4_matched_own_500,B3_population,pca10_energy_h20,175,-0.539517388834083,-0.6853009777678641,-0.3672434204947462,0.2742857142857143,3,reference minus model; positive means the model has lower energy
+B5_common_k10,B3_population,pca10_energy_h20,175,-0.2644379926683563,-0.401768551501272,-0.09715904576640218,0.36,3,reference minus model; positive means the model has lower energy
+B6_coefficient_ablation,B3_population,pca10_energy_h20,175,-1.8674530019227404,-2.2008632048225296,-1.4867247420528,0.14285714285714285,3,reference minus model; positive means the model has lower energy
+B0_persistence,B3_population,pca10_energy_h20,175,-0.9568080806166238,-1.11847656725853,-0.7688499709537746,0.13714285714285715,5,reference minus model; positive means the model has lower energy
+B1_matched_own,B3_population,pca10_energy_h20,175,-0.345763684456641,-0.5013074707710607,-0.10184502802981503,0.4057142857142857,5,reference minus model; positive means the model has lower energy
+B2_own_trend,B3_population,pca10_energy_h20,175,-0.8683732625395724,-1.0780072646155927,-0.5063324262580812,0.26285714285714284,5,reference minus model; positive means the model has lower energy
+B4_matched_own_500,B3_population,pca10_energy_h20,175,-0.539517388834083,-0.6863100089170878,-0.34701707652426006,0.2742857142857143,5,reference minus model; positive means the model has lower energy
+B5_common_k10,B3_population,pca10_energy_h20,175,-0.2644379926683563,-0.4031164915680882,-0.07499291957903517,0.36,5,reference minus model; positive means the model has lower energy
+B6_coefficient_ablation,B3_population,pca10_energy_h20,175,-1.8674530019227404,-2.270517825636837,-1.4082525936605454,0.14285714285714285,5,reference minus model; positive means the model has lower energy
+B0_persistence,B3_population,pca10_energy_h20,175,-0.9568080806166238,-1.1070757703152487,-0.7899546650513206,0.13714285714285715,10,reference minus model; positive means the model has lower energy
+B1_matched_own,B3_population,pca10_energy_h20,175,-0.345763684456641,-0.4498244673575611,-0.08356600571087637,0.4057142857142857,10,reference minus model; positive means the model has lower energy
+B2_own_trend,B3_population,pca10_energy_h20,175,-0.8683732625395724,-1.008688410350631,-0.4793988336476483,0.26285714285714284,10,reference minus model; positive means the model has lower energy
+B4_matched_own_500,B3_population,pca10_energy_h20,175,-0.539517388834083,-0.6629948046083504,-0.31329785975534197,0.2742857142857143,10,reference minus model; positive means the model has lower energy
+B5_common_k10,B3_population,pca10_energy_h20,175,-0.2644379926683563,-0.3993832362764972,-0.035024526384355166,0.36,10,reference minus model; positive means the model has lower energy
+B6_coefficient_ablation,B3_population,pca10_energy_h20,175,-1.8674530019227404,-2.2334227811858494,-1.3298607802934286,0.14285714285714285,10,reference minus model; positive means the model has lower energy
+B3_population,B5_common_k10,pca10_mse_mean_h20,175,0.05450430994656873,-0.13650620372784023,0.21904885503681004,0.6,3,
+B3_population,B5_common_k10,pca10_mse_mean_h20,175,0.05450430994656873,-0.15742619068429753,0.24090408563595608,0.6,5,
+B3_population,B5_common_k10,pca10_mse_mean_h20,175,0.05450430994656873,-0.21437754798885242,0.2097244856831566,0.6,10,
+B3_population,B5_common_k10,pca10_trajectory_energy_h20,175,0.1482532145288919,0.06850578578792424,0.21175789230976813,0.6171428571428571,3,
+B3_population,B5_common_k10,pca10_trajectory_energy_h20,175,0.1482532145288919,0.0611214349953723,0.21132925171380004,0.6171428571428571,5,
+B3_population,B5_common_k10,pca10_trajectory_energy_h20,175,0.1482532145288919,0.04299267989904525,0.20694156978676864,0.6171428571428571,10,
+B3_population,B5_common_k10,neuron_energy_h20,175,0.16166615720200453,-0.0987620079500008,0.4089196852185117,0.5885714285714285,3,
+B3_population,B5_common_k10,neuron_energy_h20,175,0.16166615720200453,-0.13871849055056887,0.4653352911241251,0.5885714285714285,5,
+B3_population,B5_common_k10,neuron_energy_h20,175,0.16166615720200453,-0.16694604645427136,0.4938843829967612,0.5885714285714285,10,
+B3_population,B5_common_k10,neuron_mse_mean_h20,175,-0.03542764846436424,-0.14958022952175398,0.06372138555084585,0.6057142857142858,3,
+B3_population,B5_common_k10,neuron_mse_mean_h20,175,-0.03542764846436424,-0.16816767398845886,0.07052197726266068,0.6057142857142858,5,
+B3_population,B5_common_k10,neuron_mse_mean_h20,175,-0.03542764846436424,-0.16830171697910035,0.07019314028960136,0.6057142857142858,10,

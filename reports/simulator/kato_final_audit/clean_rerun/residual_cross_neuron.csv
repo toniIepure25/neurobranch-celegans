@@ -1,0 +1,4 @@
+model,reference,metric,n_pairs,mean_improvement,ci_low,ci_high,fraction_better,block,sign_convention
+B3_population,B5_common_k10,pca10_energy_h20,175,0.2644379926683563,0.09715904576640212,0.401768551501272,0.64,3,B5 minus B3; positive means B3 has lower energy
+B3_population,B5_common_k10,pca10_energy_h20,175,0.2644379926683563,0.07499291957903516,0.40311649156808815,0.64,5,B5 minus B3; positive means B3 has lower energy
+B3_population,B5_common_k10,pca10_energy_h20,175,0.2644379926683563,0.035024526384355055,0.39938323627649713,0.64,10,B5 minus B3; positive means B3 has lower energy
