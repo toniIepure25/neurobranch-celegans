@@ -1,9 +1,9 @@
 {
   "schema": "neurobranch.scientific_studio.manifest.v1",
-  "generated_utc": "2026-11-03T22:20:13+00:00",
+  "generated_utc": "2026-11-03T22:21:12+00:00",
   "git": {
     "branch": "research/neurobranch-scientific-studio",
-    "source_head": "a44d2f40ae97eabfc351246b24a7659bb6724cf6",
+    "source_head": "278b47627a05d3604de36feb07086e4cbd528869",
     "manifest_commit_note": "The manifest is committed after this source HEAD; the final repository HEAD therefore adds only this generated file.",
     "worktree_clean_excluding_manifest": true
   },
@@ -71,8 +71,8 @@
     },
     {
       "path": "src/neurobranch/studio/errata.py",
-      "bytes": 5032,
-      "sha256": "5194a74f4e08688e183ede43d32384eaa08a47c8d74e02f9f134e7b616f1fb3c",
+      "bytes": 5034,
+      "sha256": "761e05b7e52153dbcb93565416cef56a1925d657db0e2840bd8fc6b8ce033f0f",
       "role": "studio implementation"
     },
     {
