@@ -197,6 +197,14 @@ publication as a confirmed mechanism.
 This asks him to choose the evidential standard and scope, rather than asking him
 to endorse a mechanism the data cannot identify.
 
+## Standing labels
+
+```text
+PROBABILISTIC CALIBRATION NOT ESTABLISHED
+MODEL-DEPENDENT VIRTUAL PERTURBATION — NOT CAUSALLY VALIDATED.
+Biological intervention validation: NOT_EVALUABLE.
+```
+
 ## Status
 
 - Starting HEAD: `358107a7a55470d48f8092b2a2dc7f704dbd37c1`.

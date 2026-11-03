@@ -1,11 +1,11 @@
 {
   "schema": "neurobranch.kato_final_audit.manifest.v1",
-  "generated_at": "2026-11-03T17:26:23+02:00",
+  "generated_at": "2026-11-03T17:28:37+02:00",
   "audit_branch": "research/kato-final-reproducibility-audit",
-  "head_at_manifest_generation": "9f4f833782d9f59a162ff84d28e255a7e7dad525",
+  "head_at_manifest_generation": "e60470f05740f47271b937febcaa19bc3b9c2d3e",
   "starting_head": "358107a7a55470d48f8092b2a2dc7f704dbd37c1",
   "git_status_porcelain_at_generation": [
-    "M scripts/kato_final_audit_manifest.py"
+    "M docs/KATO_FINAL_AUDIT_RESULTS.md"
   ],
   "dataset": {
     "name": "Kato et al. 2015 WT_NoStim",
@@ -212,8 +212,8 @@
     },
     {
       "path": "docs/KATO_FINAL_AUDIT_RESULTS.md",
-      "bytes": 10224,
-      "sha256": "7d95060d9bf6e3623fca45cb3f321595ed36f98fc953ae0a7cad7c9b4b44b456"
+      "bytes": 10415,
+      "sha256": "1081a24c3a70bf5a7a9af25c773b58dee3eb2cc191eb7f6e7bf08621245951ea"
     },
     {
       "path": "docs/KATO_FINAL_AUDIT_SCIENTIFIC_CLAIMS.md",
@@ -612,7 +612,7 @@
     }
   ],
   "file_count": 84,
-  "total_bytes": 2341425,
+  "total_bytes": 2341616,
   "known_omissions": [
     "Per-landmark metric rows are preserved, but raw ensemble trajectory arrays were not emitted by the official pipeline.",
     "The five sessions are repeated recordings; animal identity/independence is not documented.",
