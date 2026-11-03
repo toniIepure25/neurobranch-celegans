@@ -18,7 +18,7 @@ RESOLUTIONS: dict[str, dict[str, str]] = {
     "X02": {
         "surface": "Overview · provenance; handoff demo",
         "status": "CORRECTED_WITH_INFERRED_LINKAGE",
-        "note": "Five recordings are treated as five inferred animals from one preparation; OSF exposes no animal key.",
+        "note": "Five recordings are analyzed separately as distinct preparations; OSF exposes no one-to-one animal key.",
     },
     "X03": {
         "surface": "3D dynamics · landmark selector; tests",
