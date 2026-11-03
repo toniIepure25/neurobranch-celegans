@@ -200,7 +200,7 @@ difference    +0.0545
 95% interval  [-0.1574, +0.2409]
 ```
 
-The mean difference is about 3.1% of B3’s MSE, and the interval includes zero. The energy difference is about 8.9% of B3’s energy, with an interval excluding zero conditional on the five recordings. The energy result is larger than the MSE result and has a different uncertainty pattern.
+The mean difference is about 3.1% of B3’s MSE, and the interval includes zero. The energy difference is about 9.8% of B3’s energy, with an interval excluding zero conditional on the five recordings. The energy result is larger than the MSE result and has a different uncertainty pattern.
 
 This does not prove that B5’s undercoverage **causes** the energy gap. It shows that the current analysis does not separate calibration from conditional-mean accuracy. A spread-matched or calibration-matched comparison is required.
 
