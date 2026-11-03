@@ -124,7 +124,9 @@ def main() -> None:
         ],
     }
     out = STUDIO / "manifest.json"
-    out.write_text(json.dumps(manifest, indent=2, sort_keys=False) + "\n", encoding="utf-8")
+    out.write_text(
+        json.dumps(manifest, indent=2, sort_keys=False) + "\n", encoding="utf-8", newline="\n"
+    )
     print(f"wrote {out.relative_to(ROOT)}")
     print(
         f"source_head={manifest['git']['source_head']} "
