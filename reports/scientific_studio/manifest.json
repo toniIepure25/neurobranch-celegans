@@ -1,9 +1,9 @@
 {
   "schema": "neurobranch.scientific_studio.manifest.v1",
-  "generated_utc": "2026-11-03T23:33:59+00:00",
+  "generated_utc": "2026-11-03T23:34:44+00:00",
   "git": {
     "branch": "research/neurobranch-final-quality-audit",
-    "source_head": "813d33b4859162ca4bec9c501ba06fc46960764d",
+    "source_head": "fafaa4066300e2fe5630cc3bdaf3a7f159d2db1d",
     "manifest_commit_note": "The manifest is committed after this source HEAD; the final repository HEAD therefore adds only this generated file.",
     "worktree_clean_excluding_manifest": true
   },
@@ -295,8 +295,8 @@
     },
     {
       "path": "docs/STUDIO_FINAL_VISUAL_QA.md",
-      "bytes": 4788,
-      "sha256": "2245cb8895d9a98b2f8ea32ee71c063f5d096209937afe468074e666b282763e",
+      "bytes": 4787,
+      "sha256": "1c267cd1fa059c95462f6a3916df53be9dc6bf8be8fb5aafac17acacd0a089ff",
       "role": "studio documentation"
     },
     {
