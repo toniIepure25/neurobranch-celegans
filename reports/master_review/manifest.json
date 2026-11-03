@@ -1,0 +1,77 @@
+{
+  "schema": "neurobranch.master_review.manifest.v1",
+  "branch": "research/kato-final-reproducibility-audit",
+  "head": "96a8dd333643de0564247e2c01c98a85511dac82",
+  "raw_archive_sha256": "7531811c1718e26a0455f59cb2f8188cf25809278cfea85770dfe03315a0098a",
+  "raw_archive_size": 56390975,
+  "files": {
+    "capacity_audit.json": {
+      "sha256": "a87aaf384a844f09d3d9a6987fa62b4505cfb438ebb8c69c53cfddc41db8ff2e",
+      "bytes": 2614
+    },
+    "claims_ledger.json": {
+      "sha256": "9b8f0735c73807cda6cd1fb9e44d613deaceaf15ec46b5230d4d7ad3788518b3",
+      "bytes": 12120
+    },
+    "cluster_bootstrap.csv": {
+      "sha256": "9a956f21baaf73167efe6e3c102978d41ced71fecd90638b0de58abf564f5791",
+      "bytes": 315
+    },
+    "code_audit.json": {
+      "sha256": "4a1dd317729e6604fc465461f2cbc751f5ea58b0de15f40090664a46bef8837e",
+      "bytes": 3456
+    },
+    "corrections.json": {
+      "sha256": "b68f1deeefeece01b223b0839a0540b7c854afead622030741be2dd72425a042",
+      "bytes": 6986
+    },
+    "dataset_identity_audit.json": {
+      "sha256": "715cd29c8fb1c4f5659d575ab0a6dc991d0cb59088dbb3de478819da0cc174ff",
+      "bytes": 15927
+    },
+    "effective_units.csv": {
+      "sha256": "f6355b4444b9914ea584050b51f2693bf58aea77e70a70350f76f79d8356c104",
+      "bytes": 178
+    },
+    "frame_landmark_bounds.csv": {
+      "sha256": "46181ece9bd91f3bd0e63d22331668d387d51696e49b27ff555794f0ce0d788d",
+      "bytes": 823
+    },
+    "frame_landmark_bounds.json": {
+      "sha256": "0353499b0484bc775af609aeb300e756a8a80d57f37d11cf28e10892b36b52ec",
+      "bytes": 35819
+    },
+    "history_timeline.csv": {
+      "sha256": "dd35c6d49815e67a2be124868cd81b17fd725888d54ffd0e56b1ee7bc87e0065",
+      "bytes": 4557
+    },
+    "horizon_session_estimates.csv": {
+      "sha256": "06bf7d3e4b83ca499061a37d51e949ec60783ea18ce42d8a2342f4cf1c58811f",
+      "bytes": 1169
+    },
+    "independent_model_check.json": {
+      "sha256": "50c98696ffa8f4f1ef7c3e0a6744f43339127596e3ae946e975a4896e297ba1d",
+      "bytes": 3086
+    },
+    "landmark_bounds_by_horizon.csv": {
+      "sha256": "a11bf5dee7fe14b57821259ddd49041b1a9f2d34a16b233b068654991c8fcacc",
+      "bytes": 4370
+    },
+    "provenance_checks.json": {
+      "sha256": "5c1a8c49fc2c873bab21a9eb564f4bb69bfadf28693e8c537e271bc51a55ede4",
+      "bytes": 2816
+    },
+    "quality_gate.json": {
+      "sha256": "a89152e47ccc972b9c6ca65a75c860aa76ed8132981bbebde26fa5d04bfd6c97",
+      "bytes": 2108
+    },
+    "session_level_estimates.csv": {
+      "sha256": "167dde26dd31301ce1631cdc75ab5ae09abcef4039c63216879cd668608c49aa",
+      "bytes": 357
+    },
+    "statistical_audit.json": {
+      "sha256": "5b4cce4de7712b6827e59ad6d492de9bb50f0dc7256668d125ba9018f8ea59cc",
+      "bytes": 12918
+    }
+  }
+}

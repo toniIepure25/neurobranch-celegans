@@ -1,0 +1,313 @@
+{
+  "schema": "neurobranch.master_review.claims.v1",
+  "tier_definitions": {
+    "SUPPORTED_EXPLORATORY": "Numerically supported in this dataset; not confirmatory and not generalized.",
+    "LIMITED": "Supported only under stated constraints, or a descriptive/archive fact bounded to this material.",
+    "UNSUPPORTED": "The available evidence does not establish the claim.",
+    "INVALIDATED": "The claim is contradicted by the audit evidence.",
+    "NOT_EVALUABLE": "The required data or design is absent."
+  },
+  "no_confirmed_tier": true,
+  "effect_size_context": {
+    "n_pairs": 175,
+    "energy": {
+      "mean": 0.2644379926683563,
+      "sd": 0.9777200427711185,
+      "median": 0.18601577349149734,
+      "iqr": [
+        -0.18908488700864545,
+        0.8044222544855777
+      ],
+      "standardized_mean_dz_descriptive": 0.2704639171749704,
+      "fraction_positive": 0.64
+    },
+    "mse": {
+      "mean": 0.05450430994656875,
+      "sd": 1.2306741048331054,
+      "median": 0.1390567856851436,
+      "standardized_mean_dz_descriptive": 0.044288174856787293,
+      "fraction_positive": 0.6
+    },
+    "energy_by_b3_energy_quartile": [
+      {
+        "quartile": 0,
+        "n": 44,
+        "mean_advantage": 0.4725446495873346
+      },
+      {
+        "quartile": 1,
+        "n": 44,
+        "mean_advantage": 0.3918511379597312
+      },
+      {
+        "quartile": 2,
+        "n": 43,
+        "mean_advantage": 0.3161039499513623
+      },
+      {
+        "quartile": 3,
+        "n": 44,
+        "mean_advantage": -0.12157354052311621
+      }
+    ],
+    "corr_advantage_with_b3_energy": -0.3329737253201534,
+    "coverage_at_nominal_95": {
+      "B3_population": {
+        "50": 0.5462857142857143,
+        "80": 0.8297142857142856,
+        "95": 0.9382857142857142
+      },
+      "B5_common_k10": {
+        "50": 0.34914285714285714,
+        "80": 0.5628571428571428,
+        "95": 0.7245714285714285
+      }
+    },
+    "note": "The energy effect is small (dz 0.27); the mean-MSE effect is negligible (dz 0.04). B5's 95% coverage is 0.725 versus B3's 0.938, so the energy contrast is partly a spread/calibration contrast."
+  },
+  "claims": [
+    {
+      "id": "D01",
+      "claim": "The analysed file is Kato WT_NoStim with SHA256 matching the OSF object.",
+      "status": "LIMITED",
+      "claim_type": "archive fact",
+      "evidence": [
+        "reports/master_review/dataset_identity_audit.json",
+        "https://api.osf.io/v2/nodes/2395t/files/osfstorage/"
+      ],
+      "why": "Direct hash and byte-size verification; tier vocabulary has no VERIFIED label, so LIMITED means bounded to the archive, not uncertain."
+    },
+    {
+      "id": "D02",
+      "claim": "Five recordings contain 15,662 frames and 592 behaviour-label-excluded predictors in total.",
+      "status": "LIMITED",
+      "claim_type": "descriptive",
+      "evidence": [
+        "reports/master_review/dataset_identity_audit.json"
+      ],
+      "why": "Direct HDF5 count; predictor count excludes eight label-defining neuron names."
+    },
+    {
+      "id": "D03",
+      "claim": "The five entries are five distinct animals, not five repeated sessions of one preparation.",
+      "status": "LIMITED",
+      "claim_type": "identity inference",
+      "evidence": [
+        "reports/master_review/dataset_identity_audit.json",
+        "https://doi.org/10.1016/j.cell.2015.09.034",
+        "https://doi.org/10.1371/journal.pcbi.1012674"
+      ],
+      "why": "Publication and secondary descriptions report five worms; OSF has no animal key. One acquisition per animal is inferred, not keyed. They are one laboratory cohort, not independent replication."
+    },
+    {
+      "id": "D04",
+      "claim": "The eight behaviour labels are independent external measurements.",
+      "status": "INVALIDATED",
+      "claim_type": "circularity",
+      "evidence": [
+        "docs/DATA_PROVENANCE.md",
+        "data/raw/kato2015/readme_Kato2015.txt"
+      ],
+      "why": "Labels derive from command/interneuron calcium and behaviour; they are not independent of the recorded brain."
+    },
+    {
+      "id": "D05",
+      "claim": "There are 35 H100 test landmarks in every recording.",
+      "status": "INVALIDATED",
+      "claim_type": "documentation",
+      "evidence": [
+        "reports/master_review/frame_landmark_bounds.json",
+        "docs/ADAPTIVE_DYNAMICS_MODELS.md"
+      ],
+      "why": "Actual counts are 35, 35, 34, 38, 33 (175 total)."
+    },
+    {
+      "id": "D06",
+      "claim": "All recordings share the test boundary 2689:3137.",
+      "status": "INVALIDATED",
+      "claim_type": "documentation",
+      "evidence": [
+        "reports/master_review/frame_landmark_bounds.json",
+        "docs/HANDOFF_METHODS_AND_LIMITATIONS.md"
+      ],
+      "why": "2689:3137 is session 0 only; the code uses per-recording boundaries."
+    },
+    {
+      "id": "D07",
+      "claim": "Every reported forecast target lies inside its recording and inside the test mask, with no padding or interpolation.",
+      "status": "SUPPORTED_EXPLORATORY",
+      "claim_type": "technical audit",
+      "evidence": [
+        "reports/master_review/frame_landmark_bounds.json",
+        "tests/master_review/test_kato_bounds.py"
+      ],
+      "why": "Verified for H1-H100; H=5 session 1 reaches the last observed frame with zero margin but is valid."
+    },
+    {
+      "id": "S01",
+      "claim": "B3 has lower H20 PCA-10 energy than B5-10 in the frozen 175-landmark sample.",
+      "status": "SUPPORTED_EXPLORATORY",
+      "claim_type": "predictive association",
+      "evidence": [
+        "reports/master_review/statistical_audit.json",
+        "reports/master_review/independent_model_check.json"
+      ],
+      "why": "Mean +0.2644, block-5 conditional interval [+0.0750, +0.4031], 64% of landmarks positive; numerical reproduction passes."
+    },
+    {
+      "id": "S02",
+      "claim": "B3 is better in four of five recordings.",
+      "status": "SUPPORTED_EXPLORATORY",
+      "claim_type": "heterogeneity",
+      "evidence": [
+        "reports/master_review/statistical_audit.json"
+      ],
+      "why": "Session means +0.300, +0.329, -0.193, +0.407, +0.465; session 2 reverses."
+    },
+    {
+      "id": "S03",
+      "claim": "The B3 advantage generalizes across animals.",
+      "status": "UNSUPPORTED",
+      "claim_type": "population inference",
+      "evidence": [
+        "reports/master_review/statistical_audit.json"
+      ],
+      "why": "Recording-level t interval [-0.064, +0.587] includes zero; one-sided sign test p=0.1875; five units."
+    },
+    {
+      "id": "S04",
+      "claim": "B3 improves the conditional mean forecast.",
+      "status": "UNSUPPORTED",
+      "claim_type": "mean accuracy",
+      "evidence": [
+        "reports/master_review/statistical_audit.json",
+        "reports/master_review/capacity_audit.json"
+      ],
+      "why": "PCA-10 MSE +0.0545 with block-5 interval [-0.157, +0.241]; neuron MSE -0.0354 with interval crossing zero."
+    },
+    {
+      "id": "S05",
+      "claim": "The B3 advantage is uniform across horizons and recordings.",
+      "status": "INVALIDATED",
+      "claim_type": "uniformity",
+      "evidence": [
+        "reports/master_review/statistical_audit.json"
+      ],
+      "why": "H1 reverses (-0.0637; B5 better), H5/H10/H20 are positive, session 2 reverses."
+    },
+    {
+      "id": "S06",
+      "claim": "The 51% common / 49% residual split is a unique structural partition.",
+      "status": "INVALIDATED",
+      "claim_type": "decomposition",
+      "evidence": [
+        "reports/master_review/capacity_audit.json"
+      ],
+      "why": "It is an ordered B4m->B5->B3 decomposition; B1m gives 23.5/76.5 and B0 gives 72.4/27.6."
+    },
+    {
+      "id": "S07",
+      "claim": "The fitted off-diagonal operator identifies stable direct neuron-neuron interactions.",
+      "status": "UNSUPPORTED",
+      "claim_type": "mechanism",
+      "evidence": [
+        "docs/KATO_INTERACTIONS_RESULTS.md",
+        "docs/KATO_INTERACTIONS_IDENTIFIABILITY.md"
+      ],
+      "why": "Off-diagonal cross-segment correlation 0.052; G3 fails; common-input synthetic confound."
+    },
+    {
+      "id": "S08",
+      "claim": "A named-neuron virtual perturbation predicts a biological intervention.",
+      "status": "NOT_EVALUABLE",
+      "claim_type": "causal",
+      "evidence": [
+        "docs/KATO_FINAL_AUDIT_RESULTS.md"
+      ],
+      "why": "Model-dependent +1 SD displacement; cross-fit response cosine 0.556; no matched intervention data."
+    },
+    {
+      "id": "S09",
+      "claim": "The ensemble is probabilistically calibrated.",
+      "status": "UNSUPPORTED",
+      "claim_type": "calibration",
+      "evidence": [
+        "reports/master_review/statistical_audit.json"
+      ],
+      "why": "B5 95% coverage is 0.725; B3 is 0.938 but calibration was not established in prior calibration audits."
+    },
+    {
+      "id": "S10",
+      "claim": "G4 is a fully prespecified confirmatory PASS.",
+      "status": "INVALIDATED",
+      "claim_type": "protocol",
+      "evidence": [
+        "docs/KATO_FINAL_AUDIT_SIGN_CONVENTION.md",
+        "docs/KATO_FINAL_AUDIT_RESULTS.md"
+      ],
+      "why": "The sign rule was clarified in the same commit as the results; numerical pass under corrected sign, confirmatory status NOT_ESTABLISHED."
+    },
+    {
+      "id": "S11",
+      "claim": "The residual B3 advantage is information rather than estimator capacity.",
+      "status": "NOT_EVALUABLE",
+      "claim_type": "capacity",
+      "evidence": [
+        "reports/master_review/capacity_audit.json"
+      ],
+      "why": "B3 has 7.96-9.95x more parameters and arbitrary residual coordinates; no capacity-matched restricted model was prespecified."
+    },
+    {
+      "id": "S12",
+      "claim": "B5 undercoverage is a sufficient explanation of the energy advantage.",
+      "status": "UNSUPPORTED",
+      "claim_type": "alternative explanation",
+      "evidence": [
+        "reports/master_review/statistical_audit.json"
+      ],
+      "why": "Coverage 0.725 vs 0.938 and negligible MSE effect make it plausible, but no decomposition of energy into calibration and resolution establishes sufficiency."
+    },
+    {
+      "id": "S13",
+      "claim": "The Kato test tails were untouched before the final audit.",
+      "status": "INVALIDATED",
+      "claim_type": "protocol",
+      "evidence": [
+        "docs/KATO_FINAL_AUDIT_SIGN_CONVENTION.md",
+        "docs/KATO_FINAL_AUDIT_RESULTS.md"
+      ],
+      "why": "Earlier phases inspected the same test block; the final audit is an exploratory reanalysis."
+    },
+    {
+      "id": "S14",
+      "claim": "Test frames are touched once, only for final metrics.",
+      "status": "INVALIDATED",
+      "claim_type": "protocol",
+      "evidence": [
+        "docs/METHODOLOGY.md",
+        "src/neurobranch/kato_common_state/models.py:338-396"
+      ],
+      "why": "B3/B5 are refit at every landmark on all transitions before t, including validation and earlier test frames. No future leakage, but the estimand is online-refit forecasting."
+    },
+    {
+      "id": "S15",
+      "claim": "The reported 95% coverage is joint 10-D calibration.",
+      "status": "INVALIDATED",
+      "claim_type": "calibration",
+      "evidence": [
+        "src/neurobranch/probabilistic/metrics.py:109-120"
+      ],
+      "why": "coverage_95 is the average of marginal per-dimension interval coverage, not joint ellipsoid coverage."
+    },
+    {
+      "id": "S16",
+      "claim": "The result is ready for confirmatory publication or biological interpretation.",
+      "status": "UNSUPPORTED",
+      "claim_type": "readiness",
+      "evidence": [
+        "reports/master_review/quality_gate.json"
+      ],
+      "why": "Exploratory, one reused cohort, animal-level interval includes zero, calibration/capacity confounds, no intervention."
+    }
+  ]
+}

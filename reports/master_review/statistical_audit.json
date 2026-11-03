@@ -1,0 +1,421 @@
+{
+  "schema": "neurobranch.master_review.statistics.v1",
+  "source": "reports\\simulator\\kato_common_state\\model_per_landmark.csv",
+  "contrast": "B5_common_k10 - B3_population on pca10_energy_h20; positive = B3 lower energy",
+  "n_landmarks": 175,
+  "n_sessions": 5,
+  "weighted_landmark_mean": 0.2644379926683563,
+  "equal_session_mean": 0.261657745193526,
+  "session_means": {
+    "0": 0.300256879031383,
+    "1": 0.3291675294063597,
+    "2": -0.19309764559498263,
+    "3": 0.40747391775001135,
+    "4": 0.4644880453748587
+  },
+  "session_sd": 0.2623225192389026,
+  "session_t_interval_95": [
+    -0.06405868286353422,
+    0.5873741732505863
+  ],
+  "session_t_interval_note": "t interval across five recordings; treats recordings as the independent units and ignores within-session landmark precision.",
+  "sessions_positive": 4,
+  "sign_test_one_sided_p": 0.1875,
+  "sign_test_two_sided_p": 0.375,
+  "cluster_bootstrap": {
+    "5": {
+      "block": 5,
+      "mean": 0.23518011171888062,
+      "ci_low": -0.040800908320236015,
+      "ci_high": 0.47929660629420506,
+      "fraction_le_zero": 0.0438,
+      "n_boot": 5000,
+      "resamples_recordings": true
+    },
+    "20": {
+      "block": 20,
+      "mean": 0.1896934452860898,
+      "ci_low": -0.13074662445744367,
+      "ci_high": 0.44028468115245056,
+      "fraction_le_zero": 0.111,
+      "n_boot": 5000,
+      "resamples_recordings": true
+    },
+    "100": {
+      "block": 100,
+      "mean": 0.25905373437572526,
+      "ci_low": 0.02568757199928929,
+      "ci_high": 0.4188767432749808,
+      "fraction_le_zero": 0.0074,
+      "n_boot": 5000,
+      "resamples_recordings": true
+    }
+  },
+  "horizon": [
+    {
+      "horizon": 1,
+      "session": 0,
+      "n": 35,
+      "mean_advantage": 0.0054232506585544585,
+      "fraction_better": 0.5428571428571428
+    },
+    {
+      "horizon": 1,
+      "session": 1,
+      "n": 35,
+      "mean_advantage": -0.09757457918000347,
+      "fraction_better": 0.4
+    },
+    {
+      "horizon": 1,
+      "session": 2,
+      "n": 34,
+      "mean_advantage": -0.09342983468807829,
+      "fraction_better": 0.29411764705882354
+    },
+    {
+      "horizon": 1,
+      "session": 3,
+      "n": 38,
+      "mean_advantage": -0.032746805873557217,
+      "fraction_better": 0.39473684210526316
+    },
+    {
+      "horizon": 1,
+      "session": 4,
+      "n": 33,
+      "mean_advantage": -0.10593533890110723,
+      "fraction_better": 0.30303030303030304
+    },
+    {
+      "horizon": 1,
+      "session": "all",
+      "n": 175,
+      "mean_advantage": -0.06366946105472622,
+      "fraction_better": 0.38857142857142857
+    },
+    {
+      "horizon": 5,
+      "session": 0,
+      "n": 35,
+      "mean_advantage": 0.07573734622395878,
+      "fraction_better": 0.7428571428571429
+    },
+    {
+      "horizon": 5,
+      "session": 1,
+      "n": 35,
+      "mean_advantage": -0.010296920082105537,
+      "fraction_better": 0.4857142857142857
+    },
+    {
+      "horizon": 5,
+      "session": 2,
+      "n": 34,
+      "mean_advantage": 0.13603088758438361,
+      "fraction_better": 0.6470588235294118
+    },
+    {
+      "horizon": 5,
+      "session": 3,
+      "n": 38,
+      "mean_advantage": 0.11076921659513496,
+      "fraction_better": 0.6052631578947368
+    },
+    {
+      "horizon": 5,
+      "session": 4,
+      "n": 33,
+      "mean_advantage": 0.10586707612667721,
+      "fraction_better": 0.5454545454545454
+    },
+    {
+      "horizon": 5,
+      "session": "all",
+      "n": 175,
+      "mean_advantage": 0.08353319334645361,
+      "fraction_better": 0.6057142857142858
+    },
+    {
+      "horizon": 10,
+      "session": 0,
+      "n": 35,
+      "mean_advantage": 0.13027725633112683,
+      "fraction_better": 0.6285714285714286
+    },
+    {
+      "horizon": 10,
+      "session": 1,
+      "n": 35,
+      "mean_advantage": 0.12834086641930578,
+      "fraction_better": 0.6285714285714286
+    },
+    {
+      "horizon": 10,
+      "session": 2,
+      "n": 34,
+      "mean_advantage": -0.019777610052740976,
+      "fraction_better": 0.5294117647058824
+    },
+    {
+      "horizon": 10,
+      "session": 3,
+      "n": 38,
+      "mean_advantage": 0.23745658450417773,
+      "fraction_better": 0.7105263157894737
+    },
+    {
+      "horizon": 10,
+      "session": 4,
+      "n": 33,
+      "mean_advantage": 0.25284075578873416,
+      "fraction_better": 0.5757575757575758
+    },
+    {
+      "horizon": 10,
+      "session": "all",
+      "n": 175,
+      "mean_advantage": 0.1471216611809082,
+      "fraction_better": 0.6171428571428571
+    },
+    {
+      "horizon": 20,
+      "session": 0,
+      "n": 35,
+      "mean_advantage": 0.300256879031383,
+      "fraction_better": 0.6857142857142857
+    },
+    {
+      "horizon": 20,
+      "session": 1,
+      "n": 35,
+      "mean_advantage": 0.3291675294063597,
+      "fraction_better": 0.6857142857142857
+    },
+    {
+      "horizon": 20,
+      "session": 2,
+      "n": 34,
+      "mean_advantage": -0.19309764559498263,
+      "fraction_better": 0.5
+    },
+    {
+      "horizon": 20,
+      "session": 3,
+      "n": 38,
+      "mean_advantage": 0.40747391775001135,
+      "fraction_better": 0.5789473684210527
+    },
+    {
+      "horizon": 20,
+      "session": 4,
+      "n": 33,
+      "mean_advantage": 0.4644880453748587,
+      "fraction_better": 0.7575757575757576
+    },
+    {
+      "horizon": 20,
+      "session": "all",
+      "n": 175,
+      "mean_advantage": 0.2644379926683563,
+      "fraction_better": 0.64
+    }
+  ],
+  "effective_units": [
+    {
+      "session": 0,
+      "n_landmarks": 35,
+      "test_frames_span": 440,
+      "nonoverlapping_h100_windows_approx": 5,
+      "landmark_to_window_ratio": 7.0
+    },
+    {
+      "session": 1,
+      "n_landmarks": 35,
+      "test_frames_span": 440,
+      "nonoverlapping_h100_windows_approx": 5,
+      "landmark_to_window_ratio": 7.0
+    },
+    {
+      "session": 2,
+      "n_landmarks": 34,
+      "test_frames_span": 430,
+      "nonoverlapping_h100_windows_approx": 5,
+      "landmark_to_window_ratio": 6.8
+    },
+    {
+      "session": 3,
+      "n_landmarks": 38,
+      "test_frames_span": 470,
+      "nonoverlapping_h100_windows_approx": 5,
+      "landmark_to_window_ratio": 7.6
+    },
+    {
+      "session": 4,
+      "n_landmarks": 33,
+      "test_frames_span": 420,
+      "nonoverlapping_h100_windows_approx": 5,
+      "landmark_to_window_ratio": 6.6
+    }
+  ],
+  "overall_nonoverlapping_proxy": 25,
+  "landmark_inflation_factor": 7.0,
+  "multiplicity": {
+    "primary_horizon": 20,
+    "secondary_horizons_tested": [
+      1,
+      5,
+      10
+    ],
+    "horizon_results_are_descriptive": true,
+    "bonferroni_95_percent_threshold_if_4_tests": 0.0125,
+    "note": "The committed analysis reports four horizons; H20 was primary, but H1 is negative and the horizon profile is part of the result. No family-wise confirmatory claim is made."
+  },
+  "interpretation": {
+    "unit_of_inference": "The 175 landmarks are overlapping windows from five recordings. The within-session moving-block interval is conditional on these five recordings. The cluster bootstrap is the appropriate uncertainty check for recording-level generalization, but five units give very low power.",
+    "strongest_defensible_statement": "In these five recordings, B3 had lower H20 PCA-10 energy than B5-10 in four of five sessions (equal-session mean +0.26); the recording-level t interval includes zero and the sign test is not significant. The result is exploratory and horizon-dependent.",
+    "h1_crossover": "At H1 the contrast reverses: B3 is worse than B5-10 by 0.064 energy units. Any claim of a general predictive advantage must be restricted to multi-step horizons and cannot be described as uniform."
+  },
+  "paired_effect": {
+    "n_pairs": 175,
+    "energy": {
+      "mean": 0.2644379926683563,
+      "sd": 0.9777200427711185,
+      "median": 0.18601577349149734,
+      "iqr": [
+        -0.18908488700864545,
+        0.8044222544855777
+      ],
+      "standardized_mean_dz_descriptive": 0.2704639171749704,
+      "fraction_positive": 0.64
+    },
+    "mse": {
+      "mean": 0.05450430994656875,
+      "sd": 1.2306741048331054,
+      "median": 0.1390567856851436,
+      "standardized_mean_dz_descriptive": 0.044288174856787293,
+      "fraction_positive": 0.6
+    },
+    "energy_by_b3_energy_quartile": [
+      {
+        "quartile": 0,
+        "n": 44,
+        "mean_advantage": 0.4725446495873346
+      },
+      {
+        "quartile": 1,
+        "n": 44,
+        "mean_advantage": 0.3918511379597312
+      },
+      {
+        "quartile": 2,
+        "n": 43,
+        "mean_advantage": 0.3161039499513623
+      },
+      {
+        "quartile": 3,
+        "n": 44,
+        "mean_advantage": -0.12157354052311621
+      }
+    ],
+    "corr_advantage_with_b3_energy": -0.3329737253201534,
+    "coverage_at_nominal_95": {
+      "B3_population": {
+        "50": 0.5462857142857143,
+        "80": 0.8297142857142856,
+        "95": 0.9382857142857142
+      },
+      "B5_common_k10": {
+        "50": 0.34914285714285714,
+        "80": 0.5628571428571428,
+        "95": 0.7245714285714285
+      }
+    },
+    "note": "The energy effect is small (dz 0.27); the mean-MSE effect is negligible (dz 0.04). B5's 95% coverage is 0.725 versus B3's 0.938, so the energy contrast is partly a spread/calibration contrast."
+  },
+  "calibration_confound": {
+    "b3_95_coverage": 0.9382857142857142,
+    "b5_95_coverage": 0.7245714285714285,
+    "b3_mean_mse": 1.706676973971411,
+    "b5_mean_mse": 1.7611812839179795,
+    "mse_difference": 0.05450430994656875,
+    "mse_interval_block5": [
+      -0.15742619068429753,
+      0.24090408563595608
+    ],
+    "interpretation": "B5 is severely undercovered at nominal 95%, while its mean MSE is only 3.1% worse. The energy gap can therefore reflect ensemble spread and calibration rather than better conditional means."
+  },
+  "capacity": {
+    "definition": "B3: n(n+1) coefficients including unpenalized intercept. B5-10: 12n (own lag, ten loadings, intercept) + 10x11 factor-VAR coefficients.",
+    "per_session": [
+      {
+        "session": 0,
+        "native_predictors": 103,
+        "b3_parameters": 10712,
+        "b5_k10_parameters": 1346,
+        "b3_over_b5_ratio": 7.958395245170877,
+        "b5_k10_training_variance_fraction": 0.7098613381385803,
+        "b5_k10_residual_variance_fraction": 0.2901386618614197
+      },
+      {
+        "session": 1,
+        "native_predictors": 127,
+        "b3_parameters": 16256,
+        "b5_k10_parameters": 1634,
+        "b3_over_b5_ratio": 9.94859241126071,
+        "b5_k10_training_variance_fraction": 0.6216390132904053,
+        "b5_k10_residual_variance_fraction": 0.3783609867095947
+      },
+      {
+        "session": 2,
+        "native_predictors": 123,
+        "b3_parameters": 15252,
+        "b5_k10_parameters": 1586,
+        "b3_over_b5_ratio": 9.616645649432535,
+        "b5_k10_training_variance_fraction": 0.5671378374099731,
+        "b5_k10_residual_variance_fraction": 0.43286216259002686
+      },
+      {
+        "session": 3,
+        "native_predictors": 118,
+        "b3_parameters": 14042,
+        "b5_k10_parameters": 1526,
+        "b3_over_b5_ratio": 9.20183486238532,
+        "b5_k10_training_variance_fraction": 0.7095081210136414,
+        "b5_k10_residual_variance_fraction": 0.29049187898635864
+      },
+      {
+        "session": 4,
+        "native_predictors": 121,
+        "b3_parameters": 14762,
+        "b5_k10_parameters": 1562,
+        "b3_over_b5_ratio": 9.450704225352112,
+        "b5_k10_training_variance_fraction": 0.5467131733894348,
+        "b5_k10_residual_variance_fraction": 0.4532868266105652
+      }
+    ],
+    "ratio_min": 7.958395245170877,
+    "ratio_max": 9.94859241126071,
+    "b5_training_variance_fraction_min": 0.5467131733894348,
+    "b5_training_variance_fraction_max": 0.7098613381385803,
+    "b5_residual_variance_fraction_max": 0.4532868266105652,
+    "b3_vs_b4m_energy_gain": 0.539517388834083,
+    "common_factor_increment": 0.27507939616572663,
+    "residual_increment": 0.2644379926683563,
+    "ordered_shares": {
+      "baseline_B4m": {
+        "common": 0.5098619652652594,
+        "residual": 0.49013803473474066
+      },
+      "baseline_B1m": {
+        "common": 0.235,
+        "residual": 0.765
+      },
+      "baseline_B0": {
+        "common": 0.724,
+        "residual": 0.276
+      }
+    },
+    "conclusion": "B3 has 7.96-9.95x more parameters than B5-10 and arbitrary residual coordinates that B5 cannot represent. The ordered 51/49 split is arithmetic, not a structural or biological partition."
+  }
+}

@@ -1,0 +1,80 @@
+{
+  "schema": "neurobranch.master_review.code_audit.v1",
+  "status": "ARITHMETIC_PASS__INFERENTIAL_CAVEATS",
+  "equations": [
+    {
+      "name": "B3 ridge VAR",
+      "source": "src/neurobranch/kato_interactions/models.py:91",
+      "equation": "x_{t+1} = b + A x_t + eps_t; ridge 1.0 on standardized features; spectral cap 0.995",
+      "verified": true
+    },
+    {
+      "name": "B5 common-factor AR",
+      "source": "src/neurobranch/kato_common_state/models.py:224",
+      "equation": "x_{t+1,j} = b_j + a_j x_{t,j} + beta_j^T f_t + eps; f_{t+1}=A_f f_t+b_f",
+      "verified": true
+    },
+    {
+      "name": "energy score",
+      "source": "src/neurobranch/probabilistic/metrics.py:24",
+      "equation": "E||X-y|| - 0.5 E||X-X'||, distinct pairs",
+      "verified": true
+    },
+    {
+      "name": "moving-block interval",
+      "source": "src/neurobranch/kato_interactions/metrics.py:36",
+      "equation": "resample contiguous blocks within each session; equal-session pooling; no between-session resampling",
+      "verified": true
+    }
+  ],
+  "findings": [
+    {
+      "id": "C01",
+      "severity": "HIGH",
+      "location": "src/neurobranch/kato_interactions/metrics.py:36-76",
+      "finding": "The primary interval conditions on the five recordings; it does not resample recordings. A recording-level bootstrap gives a wider interval that includes zero.",
+      "impact": "The reported interval is not an animal-level generalization interval."
+    },
+    {
+      "id": "C02",
+      "severity": "HIGH",
+      "location": "src/neurobranch/kato_common_state/models.py:224-292",
+      "finding": "B5 uses a globally fixed 10-D PCA basis and a diagonal-plus-rank-10 residual operator; B3 uses a local 500-frame full operator with arbitrary residual rows.",
+      "impact": "The contrast confounds residual information with adaptivity and capacity."
+    },
+    {
+      "id": "C03",
+      "severity": "MEDIUM",
+      "location": "src/neurobranch/kato_common_state/models.py:399",
+      "finding": "B6 is a coefficient ablation with inherited coefficients, not a refitted restricted model.",
+      "impact": "B6 is diagnostic only; B4m/B5 are the clean restrictions."
+    },
+    {
+      "id": "C04",
+      "severity": "LOW",
+      "location": "src/neurobranch/data/kato.py:184-240",
+      "finding": "The loader preserves numeric trace labels as predictors; these are not cell identities and cannot be aligned across recordings.",
+      "impact": "All analyses are within-recording; no cross-animal neuron alignment."
+    },
+    {
+      "id": "C05",
+      "severity": "LOW",
+      "location": "data/raw/kato2015/WT_NoStim.mat",
+      "finding": "stateParams rows do not match trace rows in sessions 1 and 3; the field is unused.",
+      "impact": "No effect on the model, but archive tables are not row-aligned."
+    },
+    {
+      "id": "C06",
+      "severity": "MEDIUM",
+      "location": "reports/simulator/kato_common_state/model_per_landmark.csv",
+      "finding": "The B5 energy deficit coincides with 95% coverage 0.725 versus B3 0.938, while the MSE contrast is negligible.",
+      "impact": "Energy advantage is partly a spread/calibration contrast, not a mean-accuracy result."
+    }
+  ],
+  "independent_check": {
+    "status": "PASS",
+    "max_abs_error": 7.46e-07,
+    "cases": 3,
+    "source": "reports/master_review/independent_model_check.json"
+  }
+}

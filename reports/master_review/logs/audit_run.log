@@ -1,0 +1,24 @@
+Master review audit run
+Branch: research/kato-final-reproducibility-audit
+HEAD: 96a8dd333643de0564247e2c01c98a85511dac82
+Date: 2026-11-03
+
+Commands executed:
+  python -X utf8 scripts/master_review/build_audit_ledgers.py
+  python -X utf8 -m pytest -q tests/master_review/test_kato_bounds.py
+  python -X utf8 -m pytest -q
+  python -X utf8 -m ruff check scripts/master_review tests/master_review
+
+Results:
+  focused bounds tests: 6 passed
+  full test suite: 457 passed in 50.65s
+  ruff: All checks passed
+  claims ledger: 23 claims
+  corrections register: 17 items
+  quality gate: READY_FOR_METHODOLOGICAL_SUPERVISOR_REVIEW; NOT_READY_FOR_CONFIRMATORY_OR_BIOLOGICAL_CLAIMS
+
+Scope notes:
+  The full 175-landmark analysis was not refit. Three landmarks were
+  reimplemented independently; the remaining values were recomputed from
+  the frozen per-landmark table. No raw data, frozen artifact, or Git
+  history was modified.

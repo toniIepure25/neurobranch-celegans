@@ -1,0 +1,73 @@
+{
+  "definition": "B3: n(n+1) coefficients including unpenalized intercept. B5-10: 12n (own lag, ten loadings, intercept) + 10x11 factor-VAR coefficients.",
+  "per_session": [
+    {
+      "session": 0,
+      "native_predictors": 103,
+      "b3_parameters": 10712,
+      "b5_k10_parameters": 1346,
+      "b3_over_b5_ratio": 7.958395245170877,
+      "b5_k10_training_variance_fraction": 0.7098613381385803,
+      "b5_k10_residual_variance_fraction": 0.2901386618614197
+    },
+    {
+      "session": 1,
+      "native_predictors": 127,
+      "b3_parameters": 16256,
+      "b5_k10_parameters": 1634,
+      "b3_over_b5_ratio": 9.94859241126071,
+      "b5_k10_training_variance_fraction": 0.6216390132904053,
+      "b5_k10_residual_variance_fraction": 0.3783609867095947
+    },
+    {
+      "session": 2,
+      "native_predictors": 123,
+      "b3_parameters": 15252,
+      "b5_k10_parameters": 1586,
+      "b3_over_b5_ratio": 9.616645649432535,
+      "b5_k10_training_variance_fraction": 0.5671378374099731,
+      "b5_k10_residual_variance_fraction": 0.43286216259002686
+    },
+    {
+      "session": 3,
+      "native_predictors": 118,
+      "b3_parameters": 14042,
+      "b5_k10_parameters": 1526,
+      "b3_over_b5_ratio": 9.20183486238532,
+      "b5_k10_training_variance_fraction": 0.7095081210136414,
+      "b5_k10_residual_variance_fraction": 0.29049187898635864
+    },
+    {
+      "session": 4,
+      "native_predictors": 121,
+      "b3_parameters": 14762,
+      "b5_k10_parameters": 1562,
+      "b3_over_b5_ratio": 9.450704225352112,
+      "b5_k10_training_variance_fraction": 0.5467131733894348,
+      "b5_k10_residual_variance_fraction": 0.4532868266105652
+    }
+  ],
+  "ratio_min": 7.958395245170877,
+  "ratio_max": 9.94859241126071,
+  "b5_training_variance_fraction_min": 0.5467131733894348,
+  "b5_training_variance_fraction_max": 0.7098613381385803,
+  "b5_residual_variance_fraction_max": 0.4532868266105652,
+  "b3_vs_b4m_energy_gain": 0.539517388834083,
+  "common_factor_increment": 0.27507939616572663,
+  "residual_increment": 0.2644379926683563,
+  "ordered_shares": {
+    "baseline_B4m": {
+      "common": 0.5098619652652594,
+      "residual": 0.49013803473474066
+    },
+    "baseline_B1m": {
+      "common": 0.235,
+      "residual": 0.765
+    },
+    "baseline_B0": {
+      "common": 0.724,
+      "residual": 0.276
+    }
+  },
+  "conclusion": "B3 has 7.96-9.95x more parameters than B5-10 and arbitrary residual coordinates that B5 cannot represent. The ordered 51/49 split is arithmetic, not a structural or biological partition."
+}

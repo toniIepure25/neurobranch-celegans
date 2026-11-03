@@ -1,0 +1,158 @@
+{
+  "schema": "neurobranch.master_review.corrections.v1",
+  "items": [
+    {
+      "id": "X01",
+      "was": "DATA_PROVENANCE.md size 128,511,040 bytes",
+      "correct": "56,390,975 bytes",
+      "evidence": "Actual file and OSF API agree; SHA256 still matches.",
+      "severity": "HIGH",
+      "category": "Documentation",
+      "action": "Documented in master review; frozen historical artifact not rewritten."
+    },
+    {
+      "id": "X02",
+      "was": "Five recordings are 'repeated sessions, not five animals'",
+      "correct": "Five animals inferred from the publication's n=5 and five distinct acquisition IDs; OSF has no animal key.",
+      "evidence": "Distinct dates/IDs/trace panels; secondary papers describe five worms. They are not an independent cohort.",
+      "severity": "HIGH",
+      "category": "Interpretation",
+      "action": "Documented in master review; frozen historical artifact not rewritten."
+    },
+    {
+      "id": "X03",
+      "was": "'175 test landmarks (35 per session)'",
+      "correct": "35, 35, 34, 38, 33; total 175.",
+      "evidence": "Computed from per-recording test masks.",
+      "severity": "MEDIUM",
+      "category": "Documentation",
+      "action": "Documented in master review; frozen historical artifact not rewritten."
+    },
+    {
+      "id": "X04",
+      "was": "Common test boundary 2689:3137",
+      "correct": "Session 0 only; code uses per-recording test starts.",
+      "evidence": "Exact split bounds; no out-of-bounds target.",
+      "severity": "MEDIUM",
+      "category": "Documentation",
+      "action": "Documented in master review; frozen historical artifact not rewritten."
+    },
+    {
+      "id": "X05",
+      "was": "G4 fully prespecified confirmatory PASS",
+      "correct": "Numerical pass under corrected sign; confirmatory NOT_ESTABLISHED.",
+      "evidence": "Protocol added with results; sign clarification in same commit.",
+      "severity": "HIGH",
+      "category": "Claims",
+      "action": "Documented in master review; frozen historical artifact not rewritten."
+    },
+    {
+      "id": "X06",
+      "was": "51% common / 49% residual as a unique partition",
+      "correct": "Ordered B4m->B5->B3 decomposition; 23.5/76.5 vs B1m and 72.4/27.6 vs B0.",
+      "evidence": "Arithmetic recomputed.",
+      "severity": "MEDIUM",
+      "category": "Interpretation",
+      "action": "Documented in master review; frozen historical artifact not rewritten."
+    },
+    {
+      "id": "X07",
+      "was": "B3 advantage as a general forecast improvement",
+      "correct": "H20 PCA-10 energy only; H1 reverses and MSE intervals cross zero.",
+      "evidence": "Horizon and representation tables.",
+      "severity": "HIGH",
+      "category": "Claims",
+      "action": "Documented in master review; frozen historical artifact not rewritten."
+    },
+    {
+      "id": "X08",
+      "was": "175 landmarks treated as independent replicates",
+      "correct": "Overlapping windows; ~25 non-overlapping H100 proxies; inflation ~7x.",
+      "evidence": "Landmark stride and horizon.",
+      "severity": "HIGH",
+      "category": "Statistics",
+      "action": "Documented in master review; frozen historical artifact not rewritten."
+    },
+    {
+      "id": "X09",
+      "was": "Test tails untouched",
+      "correct": "Reused across earlier phases; final audit exploratory.",
+      "evidence": "Final audit's own scope statement.",
+      "severity": "HIGH",
+      "category": "Protocol",
+      "action": "Documented in master review; frozen historical artifact not rewritten."
+    },
+    {
+      "id": "X10",
+      "was": "Probabilistic calibration established",
+      "correct": "Not established; B5 95% coverage 0.725, B3 0.938.",
+      "evidence": "Per-landmark coverage.",
+      "severity": "HIGH",
+      "category": "Claims",
+      "action": "Documented in master review; frozen historical artifact not rewritten."
+    },
+    {
+      "id": "X11",
+      "was": "Block-20 interval [+0.092, +0.294] as robust precision",
+      "correct": "Conditional within-session interval; recording-resampling interval is [-0.131, +0.440].",
+      "evidence": "Master-review cluster bootstrap.",
+      "severity": "HIGH",
+      "category": "Statistics",
+      "action": "Documented in master review; frozen historical artifact not rewritten."
+    },
+    {
+      "id": "X12",
+      "was": "B3 residual advantage isolates cross-neuron information",
+      "correct": "Not identifiable from capacity; B3 has 7.96-9.95x parameters.",
+      "evidence": "Parameter counts and B5 residual restriction.",
+      "severity": "HIGH",
+      "category": "Mechanism",
+      "action": "Documented in master review; frozen historical artifact not rewritten."
+    },
+    {
+      "id": "X13",
+      "was": "stateParams rows align with trace rows",
+      "correct": "They do not: traces/stateParams rows are 109/109, 135/107, 131/131, 125/126, 129/129; stateParams is unused by the model.",
+      "evidence": "HDF5 shape audit.",
+      "severity": "LOW",
+      "category": "Metadata",
+      "action": "Documented in master review; frozen historical artifact not rewritten."
+    },
+    {
+      "id": "X14",
+      "was": "DATA_PROVENANCE field names `IDs`, `timeVectorSeconds`",
+      "correct": "HDF5 fields are `NeuronNames`, `tv`; the readme uses conceptual MATLAB names.",
+      "evidence": "Direct HDF5 field listing.",
+      "severity": "LOW",
+      "category": "Documentation",
+      "action": "Documented in master review; frozen historical artifact not rewritten."
+    },
+    {
+      "id": "X15",
+      "was": "Five recordings are an independent cohort",
+      "correct": "They are five animals from one laboratory/preparation; no independent cohort.",
+      "evidence": "Acquisition IDs and publication context.",
+      "severity": "MEDIUM",
+      "category": "Inference",
+      "action": "Documented in master review; frozen historical artifact not rewritten."
+    },
+    {
+      "id": "X16",
+      "was": "Test frames are touched once, only for final metrics",
+      "correct": "B3/B5 are refit at every landmark on all observed frames before t, including validation and earlier test frames. No future leakage, but online-refit estimand.",
+      "evidence": "Rolling fit starts in `kato_common_state/models.py:338-396`.",
+      "severity": "HIGH",
+      "category": "Protocol",
+      "action": "Documented in master review; frozen historical artifact not rewritten."
+    },
+    {
+      "id": "X17",
+      "was": "95% coverage means joint 10-D calibration",
+      "correct": "It is the average of marginal per-dimension interval coverage.",
+      "evidence": "`coverage_summary` calls `interval_coverage` per dimension.",
+      "severity": "MEDIUM",
+      "category": "Statistics",
+      "action": "Documented in master review; frozen historical artifact not rewritten."
+    }
+  ]
+}

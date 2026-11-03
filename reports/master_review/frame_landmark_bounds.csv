@@ -1,0 +1,6 @@
+session_index,dataset_name,original_frame_count,processed_frame_count,train_start,train_end_exclusive,val_start,val_end_exclusive,test_start,test_end_exclusive,purge_frames,interpolation,padding,resampling
+0,TS20140715e_lite-1_punc-31_NLS3_2eggs_56um_1mMTet_basal_1080s,3137,3137,0,2195,2207,2677,2689,3137,12,False,False,False
+1,TS20140715f_lite-1_punc-31_NLS3_3eggs_56um_1mMTet_basal_1080s,3134,3134,0,2193,2205,2675,2687,3134,12,False,False,False
+2,TS20140905c_lite-1_punc-31_NLS3_AVHJ_0eggs_1mMTet_basal_1080s,3059,3059,0,2141,2153,2611,2623,3059,12,False,False,False
+3,TS20140926d_lite-1_punc-31_NLS3_RIV_2eggs_1mMTet_basal_1080s,3311,3311,0,2317,2329,2825,2837,3311,12,False,False,False
+4,TS20141221b_THK178_lite-1_punc-31_NLS3_6eggs_1mMTet_basal_1080s,3021,3021,0,2114,2126,2579,2591,3021,12,False,False,False

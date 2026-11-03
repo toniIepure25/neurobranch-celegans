@@ -1,0 +1,89 @@
+{
+  "status": "PASS",
+  "tolerance": 2e-05,
+  "reason_for_tolerance": "PCA sign/rounding and float32-to-float64 reference path; not a reproduction tolerance.",
+  "cases": [
+    {
+      "session": 0,
+      "landmark": 2690,
+      "reference": {
+        "B3_energy_h20": 2.498643590923475,
+        "B5_energy_h20": 3.909356494026139,
+        "B3_mse_h20": 1.3017313487899531,
+        "B5_mse_h20": 2.421940459016746,
+        "B3_parameters": 10712,
+        "B5_parameters": 1346,
+        "B3_spectral_radius": 0.9950000000000014,
+        "B5_factor_radius": 0.9927329330014147,
+        "train_pc1_variance_reference": 26.74071469297476
+      },
+      "frozen": {
+        "B3_energy_h20": 2.4986440082288306,
+        "B5_energy_h20": 3.909356815454288,
+        "B3_mse_h20": 1.3017317712732557,
+        "B5_mse_h20": 2.42194080060518
+      },
+      "absolute_difference": {
+        "B3_energy": 4.1730535560446924e-07,
+        "B5_energy": 3.214281489860582e-07,
+        "B3_mse": 4.22483302564558e-07,
+        "B5_mse": 3.4158843398301997e-07
+      }
+    },
+    {
+      "session": 2,
+      "landmark": 2624,
+      "reference": {
+        "B3_energy_h20": 7.065337840675779,
+        "B5_energy_h20": 4.453972489484115,
+        "B3_mse_h20": 9.054695797930826,
+        "B5_mse_h20": 3.3197240896064715,
+        "B3_parameters": 15252,
+        "B5_parameters": 1586,
+        "B3_spectral_radius": 0.9950000000000001,
+        "B5_factor_radius": 0.9882876011466887,
+        "train_pc1_variance_reference": 28.025441903036814
+      },
+      "frozen": {
+        "B3_energy_h20": 7.065337726543106,
+        "B5_energy_h20": 4.453971911759197,
+        "B3_mse_h20": 9.05469551808694,
+        "B5_mse_h20": 3.3197233434653475
+      },
+      "absolute_difference": {
+        "B3_energy": 1.1413267309023922e-07,
+        "B5_energy": 5.777249176830423e-07,
+        "B3_mse": 2.798438867301911e-07,
+        "B5_mse": 7.461411239972904e-07
+      }
+    },
+    {
+      "session": 4,
+      "landmark": 2592,
+      "reference": {
+        "B3_energy_h20": 3.05604665205902,
+        "B5_energy_h20": 1.9832813582491162,
+        "B3_mse_h20": 2.129720348298825,
+        "B5_mse_h20": 0.7842955868264397,
+        "B3_parameters": 14762,
+        "B5_parameters": 1562,
+        "B3_spectral_radius": 0.9891513769508854,
+        "B5_factor_radius": 0.9813224706130278,
+        "train_pc1_variance_reference": 22.704428817098684
+      },
+      "frozen": {
+        "B3_energy_h20": 3.056046586435431,
+        "B5_energy_h20": 1.9832813751738732,
+        "B3_mse_h20": 2.129720245647288,
+        "B5_mse_h20": 0.7842955984022633
+      },
+      "absolute_difference": {
+        "B3_energy": 6.562358878525743e-08,
+        "B5_energy": 1.6924756929270757e-08,
+        "B3_mse": 1.0265153704835939e-07,
+        "B5_mse": 1.1575823521958739e-08
+      }
+    }
+  ],
+  "note": "Only the J5 innovation sampler is reused to keep the common random path fixed; models, PCA, rollouts and energy are independent reference implementations."
+}

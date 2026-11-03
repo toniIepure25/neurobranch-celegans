@@ -1,0 +1,99 @@
+{
+  "archive": {
+    "path": "data\\raw\\kato2015\\WT_NoStim.mat",
+    "actual_size_bytes": 56390975,
+    "documented_size_bytes": 128511040,
+    "osf_size_bytes": 56390975,
+    "actual_sha256": "7531811c1718e26a0455f59cb2f8188cf25809278cfea85770dfe03315a0098a",
+    "expected_sha256": "7531811c1718e26a0455f59cb2f8188cf25809278cfea85770dfe03315a0098a",
+    "osf_sha256": "7531811c1718e26a0455f59cb2f8188cf25809278cfea85770dfe03315a0098a",
+    "checksum_matches_expected": true,
+    "checksum_matches_osf": true,
+    "size_matches_documentation": false,
+    "size_matches_osf": true,
+    "osf_url": "https://osf.io/2395t/",
+    "osf_file_api": "https://api.osf.io/v2/nodes/2395t/files/osfstorage/",
+    "readme_present": true,
+    "readme_sha256": "9fbc04b06a5c59d13a7ce6a90a428bc49e2d4ef5a2ff21bd2efa6f67655bc3d6",
+    "readme_chars": 1355
+  },
+  "doc_claims_checked": {
+    "five_sessions": {
+      "reported": 5,
+      "observed": 5,
+      "status": "MATCH"
+    },
+    "frames_15662": {
+      "reported": 15662,
+      "observed": 15662,
+      "status": "MATCH"
+    },
+    "native_dimensions_103_127_123_118_121": {
+      "reported": [
+        103,
+        127,
+        123,
+        118,
+        121
+      ],
+      "observed": [
+        103,
+        127,
+        123,
+        118,
+        121
+      ],
+      "status": "MATCH",
+      "note": "These are predictor dimensions after excluding label-defining neurons, not total trace counts."
+    },
+    "thirty_five_landmarks_per_session": {
+      "reported": "35 per session",
+      "observed": {
+        "0": 35,
+        "1": 35,
+        "2": 34,
+        "3": 38,
+        "4": 33
+      },
+      "status": "MISMATCH",
+      "note": "The total is 175, but the per-session counts are 35, 35, 34, 38, 33."
+    },
+    "shared_test_boundary_2689_3137": {
+      "reported": "0:2195, 2207:2677, 2689:3137",
+      "observed": {
+        "0": [
+          2689,
+          3137
+        ],
+        "1": [
+          2687,
+          3134
+        ],
+        "2": [
+          2623,
+          3059
+        ],
+        "3": [
+          2837,
+          3311
+        ],
+        "4": [
+          2591,
+          3021
+        ]
+      },
+      "status": "MISLEADING_IF_PRESENTED_AS_COMMON",
+      "note": "The quoted boundary is session 0's. Each session has its own 70/15/15 boundary."
+    },
+    "provenance_file_size": {
+      "reported": 128511040,
+      "observed": 56390975,
+      "osf": 56390975,
+      "status": "MISMATCH_DOCUMENTATION",
+      "note": "Hash matches OSF; only the size field is wrong."
+    }
+  },
+  "osf_project": "https://osf.io/2395t/",
+  "osf_file_api": "https://api.osf.io/v2/nodes/2395t/files/osfstorage/",
+  "retrieved_at_utc": "2026-11-03T18:19:38.487965+00:00"
+}

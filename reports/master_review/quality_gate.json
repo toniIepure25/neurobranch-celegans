@@ -1,0 +1,66 @@
+{
+  "schema": "neurobranch.master_review.quality_gate.v1",
+  "overall": "READY_FOR_METHODOLOGICAL_SUPERVISOR_REVIEW; NOT_READY_FOR_CONFIRMATORY_OR_BIOLOGICAL_CLAIMS",
+  "gates": [
+    {
+      "id": "G-DATA",
+      "question": "Archive identity and hash",
+      "status": "PASS_WITH_CAVEAT",
+      "note": "Hash matches OSF; documented size wrong."
+    },
+    {
+      "id": "G-SPLIT",
+      "question": "Per-recording split and purge",
+      "status": "PASS",
+      "note": "No overlap; exact bounds."
+    },
+    {
+      "id": "G-LANDMARK",
+      "question": "Forecast targets inside recording/test mask",
+      "status": "PASS",
+      "note": "H1-H100 verified; H5 session 1 reaches last frame with zero margin."
+    },
+    {
+      "id": "G-NUMERIC",
+      "question": "Independent arithmetic reproduction",
+      "status": "PASS",
+      "note": "Three landmarks, max abs error 7.46e-7."
+    },
+    {
+      "id": "G-DOCS",
+      "question": "Documentation consistency",
+      "status": "FAIL",
+      "note": "Size, 35/session, shared boundary, five-sessions wording, G4 label, test-touched-once, joint-coverage wording."
+    },
+    {
+      "id": "G-INFERENCE",
+      "question": "Animal-level generalization",
+      "status": "FAIL",
+      "note": "Recording bootstrap and sign test do not exclude zero."
+    },
+    {
+      "id": "G-CALIBRATION",
+      "question": "Probabilistic calibration",
+      "status": "FAIL",
+      "note": "B5 95% coverage 0.725; B3 0.938; not established."
+    },
+    {
+      "id": "G-CAPACITY",
+      "question": "Capacity-matched residual information",
+      "status": "NOT_EVALUABLE",
+      "note": "7.96-9.95x parameter ratio; no capacity-matched model."
+    },
+    {
+      "id": "G-BIO",
+      "question": "Biological intervention validity",
+      "status": "NOT_EVALUABLE",
+      "note": "No matched perturbation data."
+    },
+    {
+      "id": "G-CONFIRM",
+      "question": "Confirmatory status",
+      "status": "NOT_ESTABLISHED",
+      "note": "Sign rule clarified with results; test reused."
+    }
+  ]
+}

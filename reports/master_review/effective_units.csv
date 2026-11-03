@@ -1,0 +1,6 @@
+session,n_landmarks,test_frames_span,nonoverlapping_h100_windows_approx,landmark_to_window_ratio
+0,35,440,5,7.0
+1,35,440,5,7.0
+2,34,430,5,6.8
+3,38,470,5,7.6
+4,33,420,5,6.6
