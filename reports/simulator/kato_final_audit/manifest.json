@@ -1,31 +1,11 @@
 {
   "schema": "neurobranch.kato_final_audit.manifest.v1",
-  "generated_at": "2026-11-03T17:25:34+02:00",
+  "generated_at": "2026-11-03T17:26:23+02:00",
   "audit_branch": "research/kato-final-reproducibility-audit",
-  "head_at_manifest_generation": "358107a7a55470d48f8092b2a2dc7f704dbd37c1",
+  "head_at_manifest_generation": "9f4f833782d9f59a162ff84d28e255a7e7dad525",
   "starting_head": "358107a7a55470d48f8092b2a2dc7f704dbd37c1",
   "git_status_porcelain_at_generation": [
-    "M scripts/kato_common_state_main.py",
-    "?? docs/KATO_FINAL_AUDIT_COMPARABILITY.md",
-    "?? docs/KATO_FINAL_AUDIT_PROTOCOL.md",
-    "?? docs/KATO_FINAL_AUDIT_REPRODUCTION.md",
-    "?? docs/KATO_FINAL_AUDIT_RESULTS.md",
-    "?? docs/KATO_FINAL_AUDIT_SCIENTIFIC_CLAIMS.md",
-    "?? docs/KATO_FINAL_AUDIT_SIGN_CONVENTION.md",
-    "?? docs/KATO_FINAL_AUDIT_SUPERVISOR_BRIEF.md",
-    "?? docs/KATO_FINAL_AUDIT_UNCERTAINTY.md",
-    "?? reports/simulator/kato_final_audit/",
-    "?? scripts/kato_final_audit_claims.py",
-    "?? scripts/kato_final_audit_comparability.py",
-    "?? scripts/kato_final_audit_compare.py",
-    "?? scripts/kato_final_audit_figures.py",
-    "?? scripts/kato_final_audit_manifest.py",
-    "?? scripts/kato_final_audit_memo.py",
-    "?? scripts/kato_final_audit_preflight.py",
-    "?? scripts/kato_final_audit_ten_factor.py",
-    "?? scripts/kato_final_audit_uncertainty.py",
-    "?? scripts/validate_kato_final_audit.py",
-    "?? tests/test_kato_final_audit.py"
+    "M scripts/kato_final_audit_manifest.py"
   ],
   "dataset": {
     "name": "Kato et al. 2015 WT_NoStim",
@@ -211,6 +191,11 @@
   },
   "files": [
     {
+      "path": ".gitattributes",
+      "bytes": 1602,
+      "sha256": "e5608358d5eb456e3cfb9e1985c4d48c43b9ab9912881d550ef941b1f1898a33"
+    },
+    {
       "path": "docs/KATO_FINAL_AUDIT_COMPARABILITY.md",
       "bytes": 4652,
       "sha256": "bd6aafb1d99ed21c639d09f7b0f8cf32d11df203b970e09b45a655fe92a2f7f2"
@@ -249,6 +234,11 @@
       "path": "docs/KATO_FINAL_AUDIT_UNCERTAINTY.md",
       "bytes": 4563,
       "sha256": "ae026f068a10bcad8f1acd9bf3629371a2c19c94f5db90a0657cc1a3d657f8b7"
+    },
+    {
+      "path": "pyproject.toml",
+      "bytes": 2063,
+      "sha256": "49b9a0f1703925933ee467a1281558391d3b78dc8642ec99ebd3e92d64e966ac"
     },
     {
       "path": "reports/simulator/kato_final_audit/KATO_FINAL_AUDIT_MEMO.pdf",
@@ -552,8 +542,8 @@
     },
     {
       "path": "scripts/kato_final_audit_manifest.py",
-      "bytes": 7665,
-      "sha256": "5215e40a69e302f3a20b932cf1cc6f54a53d0df8d8cb16890d68d7b47097786c"
+      "bytes": 7747,
+      "sha256": "100440539414a878690fda2e0ce61ae1f997481f6822df48ed3817e15f13c902"
     },
     {
       "path": "scripts/kato_final_audit_memo.py",
@@ -621,8 +611,8 @@
       "sha256": "578a5357e264fe8a2218b38689b4c482becd124f83f58223b2ff9d3087297088"
     }
   ],
-  "file_count": 82,
-  "total_bytes": 2337678,
+  "file_count": 84,
+  "total_bytes": 2341425,
   "known_omissions": [
     "Per-landmark metric rows are preserved, but raw ensemble trajectory arrays were not emitted by the official pipeline.",
     "The five sessions are repeated recordings; animal identity/independence is not documented.",

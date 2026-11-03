@@ -59,6 +59,8 @@ def main() -> int:
         "KATO_FINAL_AUDIT_SUPERVISOR_BRIEF.md",
     ):
         add(files, ROOT / "docs" / name)
+    add(files, ROOT / ".gitattributes")
+    add(files, ROOT / "pyproject.toml")
     for pattern in (
         "scripts/kato_common_state_main.py",
         "scripts/kato_common_state_postprocess.py",
