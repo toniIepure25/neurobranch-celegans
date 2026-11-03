@@ -21,8 +21,9 @@ test-set selection.
 
 ## Evaluation
 
-- 175 test landmarks (35 per session, every 10 frames), identical for every
-  model.
+- 175 test landmarks (35, 35, 34, 38, 33 by recording; every 10 frames),
+  identical for every model. The earlier "35 per session" wording was a
+  documentation error (X03); it did not change the analysis.
 - Horizons 1, 5, 10, 20, 50, 100 frames. At 3 fps this is approximately
   0.3–34 s.
 - Forecasts are fully autonomous after the landmark.

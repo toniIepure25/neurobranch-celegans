@@ -2,7 +2,25 @@
 
 Start here if you are reading the project for the first time.
 
-## Simulator research branch
+## Current surface: Scientific Studio
+
+The audited Kato 2015 reanalysis is presented by the seven-section Scientific
+Studio. Start with:
+
+- [STUDIO_USER_GUIDE.md](STUDIO_USER_GUIDE.md) — launch and controls.
+- [STUDIO_SCIENTIFIC_EVIDENCE.md](STUDIO_SCIENTIFIC_EVIDENCE.md) — the result,
+  intervals, and boundaries.
+- [STUDIO_DOCUMENTATION_ERRATA.md](STUDIO_DOCUMENTATION_ERRATA.md) — all 17
+  corrections.
+- [STUDIO_SUPERVISOR_DEMO.md](STUDIO_SUPERVISOR_DEMO.md) — the eight-minute
+  walkthrough.
+- [STUDIO_ARCHITECTURE.md](STUDIO_ARCHITECTURE.md),
+  [STUDIO_DESIGN_SYSTEM.md](STUDIO_DESIGN_SYSTEM.md),
+  [STUDIO_3D_SCIENTIFIC_MAPPING.md](STUDIO_3D_SCIENTIFIC_MAPPING.md),
+  [STUDIO_REPRODUCIBILITY.md](STUDIO_REPRODUCIBILITY.md), and
+  [STUDIO_TESTING_AND_QA.md](STUDIO_TESTING_AND_QA.md).
+
+## Historical: simulator research branch
 
 - [ORIGINAL_RESEARCH_OBJECTIVE.md](ORIGINAL_RESEARCH_OBJECTIVE.md) - provisional
   reconstruction of the neural-branch brief; not confirmed requirements.

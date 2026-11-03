@@ -1,0 +1,137 @@
+"""Write the Scientific Studio handoff manifest with hashes.
+
+The manifest is intentionally generated, not hand-edited. It records the exact
+Git revision, the evidence/artifact hashes, the Studio documents, and the
+commands needed to verify the handoff.
+"""
+
+from __future__ import annotations
+
+import hashlib
+import json
+import subprocess
+from datetime import UTC, datetime
+from pathlib import Path
+
+ROOT = Path(__file__).resolve().parents[1]
+STUDIO = ROOT / "reports" / "scientific_studio"
+DOCS = ROOT / "docs"
+
+
+def sha256(path: Path) -> str:
+    digest = hashlib.sha256()
+    with path.open("rb") as handle:
+        for chunk in iter(lambda: handle.read(1024 * 1024), b""):
+            digest.update(chunk)
+    return digest.hexdigest()
+
+
+def entry(path: Path, role: str) -> dict[str, object]:
+    return {
+        "path": path.relative_to(ROOT).as_posix(),
+        "bytes": path.stat().st_size,
+        "sha256": sha256(path),
+        "role": role,
+    }
+
+
+def git(*args: str) -> str:
+    return subprocess.run(
+        ["git", *args], cwd=ROOT, check=True, capture_output=True, text=True
+    ).stdout.strip()
+
+
+def main() -> None:
+    trajectory_json = json.loads((STUDIO / "kato_trajectories.json").read_text(encoding="utf-8"))
+    docs = sorted(DOCS.glob("STUDIO_*.md"))
+    code = sorted((ROOT / "src" / "neurobranch" / "studio").rglob("*.py"))
+    code += [ROOT / "app" / "neurobranch_studio.py", ROOT / "scripts" / "studio_build_trajectories.py"]
+    code += sorted((ROOT / "tests").glob("test_studio*.py"))
+    screenshots = sorted((STUDIO / "screenshots").glob("*.png"))
+    status_lines = [line for line in git("status", "--porcelain").splitlines() if line]
+    manifest_rel = "reports/scientific_studio/manifest.json"
+    other_changes = [line for line in status_lines if line[3:].strip() != manifest_rel]
+
+    manifest = {
+        "schema": "neurobranch.scientific_studio.manifest.v1",
+        "generated_utc": datetime.now(UTC).isoformat(timespec="seconds"),
+        "git": {
+            "branch": git("rev-parse", "--abbrev-ref", "HEAD"),
+            "source_head": git("rev-parse", "HEAD"),
+            "manifest_commit_note": (
+                "The manifest is committed after this source HEAD; the final repository "
+                "HEAD therefore adds only this generated file."
+            ),
+            "worktree_clean_excluding_manifest": not other_changes,
+        },
+        "dataset": {
+            "path": "data/raw/kato2015/WT_NoStim.mat",
+            "bytes": 56_390_975,
+            "sha256": "7531811c1718e26a0455f59cb2f8188cf25809278cfea85770dfe03315a0098a",
+            "source": "https://osf.io/2395t/",
+            "doi": "10.1016/j.cell.2015.09.034",
+        },
+        "artifact": {
+            "trajectory_npz": entry(STUDIO / "kato_trajectories.npz", "compact trajectories"),
+            "trajectory_json": entry(STUDIO / "kato_trajectories.json", "manifest and validation"),
+            "rollout_horizon": trajectory_json["rollout_horizon"],
+            "evaluation_horizon": trajectory_json["evaluation_horizon"],
+            "sessions": len(trajectory_json["sessions"]),
+            "landmarks": sum(len(s["landmarks"]) for s in trajectory_json["sessions"]),
+            "showcase_landmarks": sum(
+                len(s["showcase_landmarks"]) for s in trajectory_json["sessions"]
+            ),
+            "score_validation": {
+                "max_abs_difference": trajectory_json["score_validation"]["max_abs_difference"],
+                "tolerance": trajectory_json["score_validation"]["tolerance"],
+                "n_showcase_checks": trajectory_json["score_validation"]["n_showcase_checks"],
+            },
+        },
+        "code": [entry(path, "studio implementation") for path in code],
+        "docs": [entry(path, "studio documentation") for path in docs],
+        "screenshots": [entry(path, "browser QA capture") for path in screenshots],
+        "source_of_truth": [
+            "reports/master_review/dataset_identity_audit.json",
+            "reports/master_review/statistical_audit.json",
+            "reports/master_review/quality_gate.json",
+            "reports/master_review/claims_ledger.json",
+            "reports/master_review/corrections.json",
+            "reports/simulator/kato_common_state/model_per_landmark.csv",
+            "reports/simulator/kato_final_audit/uncertainty_summary.json",
+            "reports/scientific_studio/kato_trajectories.npz",
+        ],
+        "commands": {
+            "launch": "python -X utf8 -m streamlit run app/neurobranch_studio.py",
+            "rebuild_artifact": "python -X utf8 scripts/studio_build_trajectories.py",
+            "studio_tests": (
+                "python -X utf8 -m pytest -q tests/test_studio_artifacts.py "
+                "tests/test_studio_ui_contract.py tests/test_studio_app_smoke.py"
+            ),
+            "full_tests": "python -X utf8 -m pytest -q",
+            "lint": "python -X utf8 -m ruff check src/neurobranch/studio app/neurobranch_studio.py",
+            "docs": "python -X utf8 -m mkdocs build --strict",
+            "manifest": "python -X utf8 scripts/studio_manifest.py",
+        },
+        "verdict": (
+            "READY_FOR_METHODOLOGICAL_SUPERVISOR_REVIEW; "
+            "NOT_READY_FOR_CONFIRMATORY_OR_BIOLOGICAL_CLAIMS"
+        ),
+        "notes": [
+            "The manifest is generated after the last content change.",
+            "The 3D projection is PCA, not anatomy.",
+            "The perturbation lab is a model counterfactual, not stimulation.",
+            "The test tail was reused; the result is exploratory.",
+        ],
+    }
+    out = STUDIO / "manifest.json"
+    out.write_text(json.dumps(manifest, indent=2, sort_keys=False) + "\n", encoding="utf-8")
+    print(f"wrote {out.relative_to(ROOT)}")
+    print(
+        f"source_head={manifest['git']['source_head']} "
+        f"clean_excluding_manifest={manifest['git']['worktree_clean_excluding_manifest']}"
+    )
+    print(f"docs={len(docs)} code={len(code)} screenshots={len(screenshots)}")
+
+
+if __name__ == "__main__":
+    main()

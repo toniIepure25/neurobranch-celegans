@@ -1,5 +1,12 @@
 # NeuroBranch handoff: executive summary
 
+> **Historical J5/J1 handoff.** The current audited result is the B3-vs-B5
+> Scientific Studio: paired H20 energy **+0.2644**, conditional interval
+> `[+0.0750, +0.4031]`, recording interval `[−0.0408, +0.4793]`, exploratory.
+> See [`STUDIO_SCIENTIFIC_EVIDENCE.md`](STUDIO_SCIENTIFIC_EVIDENCE.md). The J5
+> coverage values below (including 0.947) belong to that earlier model family
+> and must not be presented as the current B3/B5 calibration.
+
 **Purpose.** This is an internal scientific handoff for an MSc discussion with
 Denis Kovačević (Neuroinformatics Research Group, University of Vienna). It is
 not a thesis and not a systematic review. It is also not a confirmed statement

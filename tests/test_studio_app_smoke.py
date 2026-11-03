@@ -1,0 +1,65 @@
+"""Streamlit app smoke tests using the supported test harness."""
+
+from __future__ import annotations
+
+from pathlib import Path
+
+import pytest
+from streamlit.testing.v1 import AppTest
+
+pytestmark = pytest.mark.requires_data
+
+APP = Path(__file__).resolve().parents[1] / "app" / "neurobranch_studio.py"
+
+
+def _app() -> AppTest:
+    return AppTest.from_file(APP, default_timeout=120)
+
+
+def test_overview_renders_without_exception() -> None:
+    at = _app().run()
+    assert not at.exception, at.exception
+    assert "NeuroBranch Scientific Studio" in " ".join(
+        str(m.value) for m in at.markdown
+    ) or at.title
+
+
+def test_dynamics_route_renders_without_exception() -> None:
+    at = _app().run()
+    at.session_state["studio_section"] = "dynamics"
+    at.run()
+    assert not at.exception, at.exception
+    assert any("state space" in str(m.value).lower() for m in at.markdown)
+
+
+def test_models_route_renders_without_exception() -> None:
+    at = _app().run()
+    at.session_state["studio_section"] = "models"
+    at.run()
+    assert not at.exception, at.exception
+
+
+@pytest.mark.parametrize(
+    "section", ["activity", "evidence", "perturbations", "notebook"]
+)
+def test_remaining_routes_render_without_exception(section: str) -> None:
+    at = _app().run()
+    at.session_state["studio_section"] = section
+    at.run()
+    assert not at.exception, at.exception
+
+
+def test_light_mode_renders_without_exception() -> None:
+    at = _app().run()
+    at.session_state["studio_light"] = True
+    at.run()
+    assert not at.exception, at.exception
+
+
+def test_presentation_route_renders_without_exception() -> None:
+    at = _app().run()
+    at.session_state["studio_present"] = True
+    at.session_state["studio_present_index"] = 0
+    at.run()
+    assert not at.exception, at.exception
+    assert any("bounded result" in str(m.value).lower() for m in at.markdown)

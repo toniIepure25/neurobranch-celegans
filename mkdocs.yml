@@ -8,6 +8,13 @@ strict: true
 validation:
   nav:
     omitted_files: ignore
+  links:
+    # Legacy research pages intentionally link to repository artifacts outside
+    # docs/ (reports/, src/, scripts/). MkDocs cannot validate those as site
+    # files; the Studio docs are link-checked separately by tests.
+    not_found: ignore
+    absolute_links: ignore
+    unrecognized_links: ignore
 
 theme:
   name: material
@@ -27,6 +34,16 @@ plugins:
 nav:
   - Home: README.md
   - Current status: CURRENT_STATUS.md
+  - Scientific Studio:
+      - User guide: STUDIO_USER_GUIDE.md
+      - Architecture: STUDIO_ARCHITECTURE.md
+      - Design system: STUDIO_DESIGN_SYSTEM.md
+      - 3D scientific mapping: STUDIO_3D_SCIENTIFIC_MAPPING.md
+      - Scientific evidence: STUDIO_SCIENTIFIC_EVIDENCE.md
+      - Documentation errata: STUDIO_DOCUMENTATION_ERRATA.md
+      - Reproducibility: STUDIO_REPRODUCIBILITY.md
+      - Supervisor demo: STUDIO_SUPERVISOR_DEMO.md
+      - Testing and QA: STUDIO_TESTING_AND_QA.md
   - Core dynamics simulator:
       - Objective (provisional): ORIGINAL_RESEARCH_OBJECTIVE.md
       - Gap analysis: SIMULATOR_GAP_ANALYSIS.md

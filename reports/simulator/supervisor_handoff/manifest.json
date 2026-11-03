@@ -54,8 +54,8 @@
   },
   "documents": {
     "HANDOFF_EXECUTIVE_SUMMARY.md": {
-      "bytes": 6340,
-      "sha256": "ca4a4876123a56a8f09dd13ba11c6baa45f0c802afdfb1c8d89b75223fcf4445"
+      "bytes": 6788,
+      "sha256": "89a9173bc65cda057ab57c9136191a0c3c09b4367a40fe994439fcb8a2af7a7e"
     },
     "HANDOFF_RESEARCH_MEMO.md": {
       "bytes": 8458,
@@ -82,8 +82,8 @@
       "sha256": "9bce421207173f4a0800619e78566376f81636d3bd517915d296bb7698127d01"
     },
     "HANDOFF_DEMO_GUIDE.md": {
-      "bytes": 6725,
-      "sha256": "3e00593112b16f7c34f9d06ec6490d8b091681003234483a3ed7890e71ef72ad"
+      "bytes": 7226,
+      "sha256": "8f889bfdebf54e6188f30a61f06d9894195bb52c1182be24af6fa2d6b3a94753"
     },
     "HANDOFF_REPRODUCIBILITY.md": {
       "bytes": 8346,

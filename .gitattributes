@@ -1,5 +1,9 @@
 reports/** text eol=lf
 
+# Scientific Studio NPZ, JSON and PNG artifacts are byte-hashed in the manifest;
+# keep exact bytes and never line-normalise them.
+reports/scientific_studio/** -text -eol
+
 # Kato interaction figures, tables and manifests are byte-hashed; keep exact bytes.
 reports/simulator/kato_interactions/** -text
 

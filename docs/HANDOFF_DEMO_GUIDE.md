@@ -1,5 +1,12 @@
 # Focused supervisor demo guide
 
+> **Historical J5 demo.** This guide documents the earlier focused J5/J1 demo,
+> which is preserved in `app/handoff_demo.py`. It is **not** the current B3/B5
+> result and is not the primary supervisor surface. Use
+> [`STUDIO_SUPERVISOR_DEMO.md`](STUDIO_SUPERVISOR_DEMO.md) for the current
+> eight-minute walkthrough. The J5 numbers below are retained as a historical
+> reproduction.
+
 The demo is a **single-page, read-only Streamlit entry point** for the supervisor
 discussion. It is separate from the main dashboard so that the existing tabs and
 the historical views are not disturbed. It reads only compact CSV/JSON/NPZ
@@ -69,7 +76,9 @@ talk, not to exhaust the interface.
   intervention, branching, simulator, external pilot, adaptive/probabilistic
   calibration, joint dynamics.
 - Point out that the negative results are connected, not independent failures.
-- Say explicitly: “five sessions are not five animals.”
+- Say explicitly: “the five recordings are distinct preparations; the OSF file
+  has no primary animal key, so the one-to-one animal mapping is inferred, not
+  documented.”
 
 ### 2:30–4:15 — Central result
 

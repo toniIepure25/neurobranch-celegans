@@ -9,7 +9,7 @@
 | Repository | OSF project `2395t`, <https://osf.io/2395t/> |
 | File used | `WT_NoStim.mat` |
 | Format | MATLAB v7.3 / HDF5 |
-| Size | 128,511,040 bytes (checkout) |
+| Size | 56,390,975 bytes (verified 2026-11-03) |
 | SHA256 | `7531811c1718e26a0455f59cb2f8188cf25809278cfea85770dfe03315a0098a` |
 | Local path | `data/raw/kato2015/WT_NoStim.mat` |
 | Readme | `data/raw/kato2015/readme_Kato2015.txt` |
@@ -19,14 +19,22 @@ Derived arrays live under `artifacts/` and carry the source hash.
 
 ### 1.1 What the file contains
 
-Five wild-type, unstimulated, immobilised worms recorded with whole-brain
-two-photon calcium imaging. Fields used:
+Five wild-type, unstimulated, immobilised preparations recorded with whole-brain
+two-photon calcium imaging. The publication reports five animals; the OSF
+archive exposes no primary animal key, so the one-to-one animal mapping is
+inferred from the publication and acquisition IDs, not documented in the file.
+This is one preparation/cohort, not five independent cohorts.
+
+Fields used (actual HDF5 names):
 
 - `traces`: bleaching-corrected ΔF/F, `T × N`, float.
 - `traces_raw`: uncorrected traces (kept for audit; not modelled).
-- `IDs`: cell identifiers for a subset of traces.
+- `NeuronNames`: cell identifiers for a subset of traces.
 - `States`: one of eight integer codes per frame.
-- `fps`, `timeVectorSeconds`, `dataset`.
+- `fps`, `tv`, `dataset`.
+
+Historical notes used `IDs` and `timeVectorSeconds`; those names are aliases,
+not the fields in this archive.
 
 Frame counts and identified counts are in
 [`RESULTS.md`](RESULTS.md#1-dataset) and `reports/recording_summary.csv`.

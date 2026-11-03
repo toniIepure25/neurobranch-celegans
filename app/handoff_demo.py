@@ -99,7 +99,7 @@ def header(summary: dict) -> None:
         unsafe_allow_html=True,
     )
     st.markdown(
-        chip("5 Kato sessions, not 5 animals", GRAY)
+        chip("5 Kato preparations; animal key not documented", GRAY)
         + chip("Fixed 10-D PCA", "#1f618d")
         + chip("Calibration not established", AMBER)
         + chip("Biological validation NOT_EVALUABLE", RED)
@@ -119,6 +119,12 @@ def footer(summary: dict) -> None:
 
 def section_start(summary: dict) -> None:
     st.subheader("What this is")
+    st.warning(
+        "Legacy focused demo: this page preserves the earlier J5/J1 handoff. "
+        "The current audited result is the B3-vs-B5 Scientific Studio "
+        "(+0.2644 H20 energy; exploratory). Do not read the J5 numbers below as "
+        "the current B3/B5 result."
+    )
     st.markdown(
         "A bounded test of whether a generative model can roll forward from a measured "
         "*C. elegans* population state, and whether a modelled perturbation of a named "
@@ -126,7 +132,7 @@ def section_start(summary: dict) -> None:
         "is still provisional."
     )
     col1, col2, col3, col4 = st.columns(4)
-    col1.metric("Sessions", "5", "not 5 animals")
+    col1.metric("Sessions", "5", "distinct preparations")
     col2.metric("H20 landmarks", "175", "overlapping")
     col3.metric("Representation", "10-D", "train-only PCA")
     col4.metric("Ensemble", "100", "members")
@@ -309,8 +315,8 @@ def section_central(summary: dict) -> None:
         st.caption("Lower energy/trajectory is better. J2 and J5 are effectively tied.")
     st.warning(
         "Exploratory: the test split was reused, the 175 landmarks overlap, and the "
-        "five sessions are repeated recordings, not documented independent animals. "
-        "The bootstrap resamples landmarks, not animals."
+        "five recordings are distinct preparations whose one-to-one animal key is not "
+        "documented. The bootstrap resamples landmarks, not animals."
     )
     st.markdown("### J2 is an internal replication, not a second headline")
     st.markdown(
@@ -510,16 +516,19 @@ def section_calibration(summary: dict) -> None:
     )
     st.plotly_chart(fig, width="stretch")
     col1, col2, col3 = st.columns(3)
-    col1.metric("J5 50% coverage", "0.588", "nominal 0.50")
-    col2.metric("J5 covariance error", "0.604", "gate ≤ 0.50", delta_color="inverse")
-    col3.metric("J5 95% coverage", "0.947", "nominal 0.95")
+    col1.metric("J5 50% coverage (historical)", "0.588", "nominal 0.50")
+    col2.metric("J5 covariance error (historical)", "0.604", "gate ≤ 0.50", delta_color="inverse")
+    col3.metric("Current B3 / B5 95% marginal", "0.938 / 0.725", "not joint")
     st.error(
-        "Stop label: PROBABILISTIC CALIBRATION NOT ESTABLISHED. Student-t and "
-        "parameter-uncertainty corrections are both worse than J5."
+        "Historical J5 calibration is retained for reproduction and is NOT the "
+        "current B3/B5 result. Current verdict: calibration is not established; "
+        "95% coverage is an average of marginal per-dimension coverage, not a "
+        "probability that a whole 10-D vector lies in a joint region."
     )
     st.caption(
-        "10-D PCA 50% coverage is 0.546. Full-neuron and PCA coverage are different "
-        "estimands; both fail the 50% level."
+        "The old 0.947 figure belonged to a different J5 full-neuron estimand and is "
+        "withdrawn as a current claim. Current B3/B5 marginal coverage is shown in the "
+        "Scientific Studio; B5 is severely undercovered."
     )
 
 

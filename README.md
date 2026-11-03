@@ -12,6 +12,38 @@ perturbation** on real calcium imaging and optogenetic atlases.
 > `interventions/safety.py` refuses to label any output as empirically
 > validated without a matched, provenance-checked intervention dataset.
 
+## NeuroBranch Scientific Studio (current surface)
+
+The active Kato reanalysis is presented by a read-only, seven-section Studio:
+
+```powershell
+python -X utf8 -m streamlit run app/neurobranch_studio.py
+```
+
+It asks whether a full population VAR (B3) retains predictive structure beyond
+a ten-factor common-state control (B5-10) at the H20 PCA-10 energy endpoint.
+
+| Item | Value |
+| --- | --- |
+| Dataset | 5 Kato `WT_NoStim` recordings, 15,662 frames, 592 predictors |
+| Paired landmarks | 175, overlapping |
+| Primary contrast | B5 − B3 = **+0.2644** H20 energy (9.79%) |
+| Conditional interval | `[+0.0750, +0.4031]` |
+| Recording interval | `[−0.0408, +0.4793]` |
+| H1 | reverses (−0.0637) |
+| MSE | null (`[−0.1574, +0.2409]`) |
+| Calibration | not established |
+| Verdict | `READY_FOR_METHODOLOGICAL_SUPERVISOR_REVIEW; NOT_READY_FOR_CONFIRMATORY_OR_BIOLOGICAL_CLAIMS` |
+
+The 3D view is a training-only PCA state space, **not anatomy**. Virtual
+perturbations are model counterfactuals, **not stimulation**. Start with
+[`docs/STUDIO_USER_GUIDE.md`](docs/STUDIO_USER_GUIDE.md),
+[`docs/STUDIO_SCIENTIFIC_EVIDENCE.md`](docs/STUDIO_SCIENTIFIC_EVIDENCE.md), and
+[`docs/STUDIO_SUPERVISOR_DEMO.md`](docs/STUDIO_SUPERVISOR_DEMO.md).
+
+The sections below document earlier research branches and are retained as
+historical context; they are not pooled with the Kato Studio result.
+
 ## Core dynamics simulator (research branch)
 
 The `research/core-dynamics-simulator` branch implements a free-running

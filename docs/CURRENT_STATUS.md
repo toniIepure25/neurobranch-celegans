@@ -1,9 +1,45 @@
 # Current status
 
-**As of the Phase 15 reliability audit (2026-11-01).** This page is the concise
-entry point; detailed records are linked at the bottom.
+## Current active surface: NeuroBranch Scientific Studio
 
-## Headline
+**As of the Kato 2015 Master Review and Scientific Studio (2026-11-04).**
+
+The active research surface is the **NeuroBranch Scientific Studio**
+(`app/neurobranch_studio.py`), a read-only presentation of the audited Kato
+`WT_NoStim` reanalysis. It asks whether a full population VAR (B3) retains
+predictive structure beyond a ten-factor common-state control (B5-10) at the
+H20 PCA-10 energy endpoint.
+
+| Item | Current value |
+| --- | --- |
+| Verdict | `READY_FOR_METHODOLOGICAL_SUPERVISOR_REVIEW; NOT_READY_FOR_CONFIRMATORY_OR_BIOLOGICAL_CLAIMS` |
+| Dataset | 5 recordings, 15,662 frames, 592 predictors, one preparation |
+| Archive | 56,390,975 bytes, SHA256 `7531811c…a0098a` |
+| Paired landmarks | 175 (35, 35, 34, 38, 33) |
+| Primary contrast | B5 − B3 = **+0.2644** H20 energy (9.79% of B3) |
+| Conditional interval | `[+0.0750, +0.4031]` |
+| Recording interval | `[−0.0408, +0.4793]` |
+| Horizon | H1 reverses (−0.0637); H20 positive |
+| MSE | null (`[−0.1574, +0.2409]`) |
+| Calibration | not established (B5 95% marginal 0.725) |
+| Claims | 9 INVALIDATED, 6 UNSUPPORTED, 3 LIMITED, 3 SUPPORTED_EXPLORATORY, 2 NOT_EVALUABLE |
+
+Start at [STUDIO_USER_GUIDE.md](STUDIO_USER_GUIDE.md),
+[STUDIO_SCIENTIFIC_EVIDENCE.md](STUDIO_SCIENTIFIC_EVIDENCE.md), and
+[STUDIO_SUPERVISOR_DEMO.md](STUDIO_SUPERVISOR_DEMO.md). The 17 documentation
+corrections are in [STUDIO_DOCUMENTATION_ERRATA.md](STUDIO_DOCUMENTATION_ERRATA.md).
+
+**Do not read the older Phase 15 headline below as the current Kato result.**
+The Phase 15 section is a historical measurement-audit branch; it uses a
+different estimand and must not be pooled with the Kato reanalysis. Its 0.560
+headline is withdrawn, as stated there.
+
+## Historical: Phase 15 reliability audit (2026-11-01)
+
+This page is retained as the historical entry point for that branch; detailed
+records are linked at the bottom.
+
+### Headline
 
 The Phase 11 **0.560** headline is withdrawn as a bound. It was
 `sqrt(R(22))` with `R(22) = 0.3136`; only **39 of 126** targets have at least 22
