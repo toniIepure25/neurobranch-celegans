@@ -9,6 +9,7 @@ import matplotlib
 
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
+import matplotlib.text as mtext
 import numpy as np
 import pandas as pd
 
@@ -41,6 +42,49 @@ def forest(ax, labels, means, lows, highs, xlabel, title, colors=None):
     ax.set_yticks(y, labels)
     ax.set_xlabel(xlabel)
     ax.set_title(title, loc="left", fontweight="bold")
+
+
+def check_layout(fig, name: str) -> dict:
+    """Record text extents outside the canvas and pairwise text overlaps."""
+    fig.canvas.draw()
+    renderer = fig.canvas.get_renderer()
+    width, height = fig.canvas.get_width_height()
+    texts = []
+    outside = []
+    for text in fig.findobj(mtext.Text):
+        label = text.get_text().strip()
+        if not text.get_visible() or not label:
+            continue
+        box = text.get_window_extent(renderer)
+        if box.x0 < -1 or box.y0 < -1 or box.x1 > width + 1 or box.y1 > height + 1:
+            outside.append(label[:80])
+        axes_index = fig.axes.index(text.axes) if text.axes in fig.axes else -1
+        texts.append((label[:80], box, axes_index))
+    overlaps = []
+    for i, (label_a, box_a, axes_a) in enumerate(texts):
+        for label_b, box_b, axes_b in texts[i + 1 :]:
+            x_overlap = max(0.0, min(box_a.x1, box_b.x1) - max(box_a.x0, box_b.x0))
+            y_overlap = max(0.0, min(box_a.y1, box_b.y1) - max(box_a.y0, box_b.y0))
+            if x_overlap * y_overlap > 4.0:
+                overlaps.append(
+                    [
+                        label_a,
+                        label_b,
+                        axes_a,
+                        axes_b,
+                        round(x_overlap * y_overlap, 1),
+                        [round(v, 1) for v in (box_a.x0, box_a.y0, box_a.x1, box_a.y1)],
+                        [round(v, 1) for v in (box_b.x0, box_b.y0, box_b.x1, box_b.y1)],
+                    ]
+                )
+    return {
+        "figure": name,
+        "canvas_px": [width, height],
+        "texts_checked": len(texts),
+        "outside_canvas": outside,
+        "overlaps": overlaps[:20],
+        "overlap_count": len(overlaps),
+    }
 
 
 # Figure 1: uncertainty across blocks, sessions and horizons.
@@ -77,7 +121,12 @@ forest(
     "C. Horizon dependence",
     ["#b23a48" if v < 0 else "#1f6f8b" for v in horizons["mean_advantage"]],
 )
-axes[0].set_xlim(-0.02, 0.46)
+axes[0].set_xlim(-0.05, 0.50)
+axes[0].set_xticks([0.0, 0.1, 0.2, 0.3, 0.4])
+axes[1].set_xlim(-0.85, 0.90)
+axes[1].set_xticks([-0.75, -0.50, -0.25, 0.0, 0.25, 0.50, 0.75])
+axes[2].set_xlim(-0.30, 0.60)
+axes[2].set_xticks([-0.2, -0.1, 0.0, 0.1, 0.2, 0.3, 0.4, 0.5])
 fig.suptitle(
     "Kato WT_NoStim audit: exploratory energy advantage is block-robust but heterogeneous",
     x=0.01,
@@ -85,6 +134,7 @@ fig.suptitle(
     fontsize=11,
     fontweight="bold",
 )
+layout = [check_layout(fig, "kato_final_audit_uncertainty")]
 fig.savefig(OUT / "kato_final_audit_uncertainty.png", bbox_inches="tight")
 plt.close(fig)
 
@@ -126,15 +176,7 @@ axes[1].set_xticks(x, decomp["baseline"], rotation=12)
 axes[1].set_ylabel("energy increment")
 axes[1].set_title("B. Ordered decomposition depends on baseline", loc="left", fontweight="bold")
 axes[1].legend(frameon=False, fontsize=7.5, loc="upper left")
-for xi, share in zip(x, decomp["common_share"], strict=True):
-    axes[1].text(
-        xi,
-        max(decomp["common_increment"]) * 1.08,
-        f"{share:.0%} common",
-        ha="center",
-        fontsize=7.5,
-        color="#333333",
-    )
+axes[1].set_ylim(0, 1.0)
 fig.suptitle(
     "The 51/49 split is ordered, representation-specific, and not a unique variance partition",
     x=0.01,
@@ -142,6 +184,7 @@ fig.suptitle(
     fontsize=11,
     fontweight="bold",
 )
+layout.append(check_layout(fig, "kato_final_audit_decomposition"))
 fig.savefig(OUT / "kato_final_audit_decomposition.png", bbox_inches="tight")
 plt.close(fig)
 
@@ -171,6 +214,8 @@ vals = [counts.get(k, 0) for k in order]
 colors = ["#1f6f8b", "#7fa7b8", "#9a9a9a", "#b23a48", "#6b4c9a"]
 axes[1].barh(order[::-1], vals[::-1], color=colors[::-1], height=0.55)
 axes[1].set_xlabel("number of claims")
+axes[1].set_xlim(0, 10.8)
+axes[1].set_xticks([0, 2, 4, 6, 8, 10])
 axes[1].set_title("B. Final claims ledger (no CONFIRMED)", loc="left", fontweight="bold")
 for i, value in enumerate(vals[::-1]):
     axes[1].text(value + 0.1, i, str(value), va="center", fontsize=8)
@@ -181,7 +226,10 @@ fig.suptitle(
     fontsize=11,
     fontweight="bold",
 )
+layout.append(check_layout(fig, "kato_final_audit_summary"))
 fig.savefig(OUT / "kato_final_audit_summary.png", bbox_inches="tight")
 plt.close(fig)
 
+(OUT / "layout_report.json").write_text(json.dumps(layout, indent=2), encoding="utf-8")
 print("wrote", [p.name for p in sorted(OUT.glob("*.png"))])
+print(json.dumps(layout, indent=2))

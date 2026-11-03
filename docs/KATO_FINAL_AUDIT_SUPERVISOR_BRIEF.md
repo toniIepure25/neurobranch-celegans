@@ -139,4 +139,6 @@ not uniform across sessions or representations and does not identify coupling.
 Two-page memo: [KATO_FINAL_AUDIT_MEMO.pdf](../reports/simulator/kato_final_audit/KATO_FINAL_AUDIT_MEMO.pdf)
 
 Every figure is a descriptive visualization of the frozen tables, not a new test.
-The error bars are repeated-session/overlapping-landmark intervals.
+The error bars are repeated-session/overlapping-landmark intervals. Layout was
+checked programmatically: zero text extents outside the canvas and zero pairwise
+text overlaps in all three figures (`figures/layout_report.json`).

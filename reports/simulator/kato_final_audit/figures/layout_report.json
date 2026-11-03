@@ -1,0 +1,35 @@
+[
+  {
+    "figure": "kato_final_audit_uncertainty",
+    "canvas_px": [
+      1952,
+      608
+    ],
+    "texts_checked": 40,
+    "outside_canvas": [],
+    "overlaps": [],
+    "overlap_count": 0
+  },
+  {
+    "figure": "kato_final_audit_decomposition",
+    "canvas_px": [
+      1664,
+      624
+    ],
+    "texts_checked": 30,
+    "outside_canvas": [],
+    "overlaps": [],
+    "overlap_count": 0
+  },
+  {
+    "figure": "kato_final_audit_summary",
+    "canvas_px": [
+      1472,
+      560
+    ],
+    "texts_checked": 33,
+    "outside_canvas": [],
+    "overlaps": [],
+    "overlap_count": 0
+  }
+]

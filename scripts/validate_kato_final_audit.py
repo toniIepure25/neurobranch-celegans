@@ -212,6 +212,18 @@ def main() -> int:
             fail(errors, f"not a PNG: {name}")
         if path.stat().st_size < 10_000:
             fail(errors, f"figure is implausibly small: {name}")
+    layout_path = AUDIT / "figures" / "layout_report.json"
+    if not layout_path.exists():
+        fail(errors, "missing figure layout_report.json")
+    else:
+        layout = load(layout_path)
+        if len(layout) != 3:
+            fail(errors, "figure layout report does not cover three figures")
+        for figure in layout:
+            if figure.get("outside_canvas"):
+                fail(errors, f"figure text outside canvas: {figure['figure']}")
+            if figure.get("overlap_count", 0) != 0:
+                fail(errors, f"figure text overlap: {figure['figure']}")
 
     validate_manifest(errors)
     if errors:

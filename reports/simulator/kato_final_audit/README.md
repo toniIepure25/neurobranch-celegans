@@ -45,6 +45,7 @@ Status: `FULL_END_TO_END_REPRODUCTION_PASSED`; decision
 | `figures/kato_final_audit_summary.png` | Primary result and claims-tier count |
 | `figures/kato_final_audit_uncertainty.png` | Blocks, sessions and horizons |
 | `figures/kato_final_audit_decomposition.png` | Representation and ordered decomposition |
+| `figures/layout_report.json` | Programmatic text-extent/overlap check for all three figures |
 | `KATO_FINAL_AUDIT_MEMO.pdf` | Two-page supervisor memo |
 
 ## Standing labels

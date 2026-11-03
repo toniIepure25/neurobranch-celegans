@@ -138,3 +138,13 @@ def test_figures_are_real_pngs() -> None:
         path = AUDIT / "figures" / name
         assert path.read_bytes()[:8] == b"\x89PNG\r\n\x1a\n"
         assert path.stat().st_size > 10_000
+
+
+def test_figure_layout_report_is_clean() -> None:
+    report = load("figures/layout_report.json")
+    assert len(report) == 3
+    for figure in report:
+        assert figure["texts_checked"] > 0
+        assert figure["outside_canvas"] == []
+        assert figure["overlap_count"] == 0
+
