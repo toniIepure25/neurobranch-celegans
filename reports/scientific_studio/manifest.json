@@ -1,0 +1,415 @@
+{
+  "schema": "neurobranch.scientific_studio.manifest.v1",
+  "generated_utc": "2026-11-03T22:20:13+00:00",
+  "git": {
+    "branch": "research/neurobranch-scientific-studio",
+    "source_head": "a44d2f40ae97eabfc351246b24a7659bb6724cf6",
+    "manifest_commit_note": "The manifest is committed after this source HEAD; the final repository HEAD therefore adds only this generated file.",
+    "worktree_clean_excluding_manifest": true
+  },
+  "dataset": {
+    "path": "data/raw/kato2015/WT_NoStim.mat",
+    "bytes": 56390975,
+    "sha256": "7531811c1718e26a0455f59cb2f8188cf25809278cfea85770dfe03315a0098a",
+    "source": "https://osf.io/2395t/",
+    "doi": "10.1016/j.cell.2015.09.034"
+  },
+  "artifact": {
+    "trajectory_npz": {
+      "path": "reports/scientific_studio/kato_trajectories.npz",
+      "bytes": 5282051,
+      "sha256": "ba7a3a440b6266e5f2364e40a84709ce64de4243f8289e25b82a43c7ea1fff35",
+      "role": "compact trajectories"
+    },
+    "trajectory_json": {
+      "path": "reports/scientific_studio/kato_trajectories.json",
+      "bytes": 57663,
+      "sha256": "b98dec015d69514d019f89d0712918f96ce505c91e0b8f2416ceb0f18b32bcf4",
+      "role": "manifest and validation"
+    },
+    "rollout_horizon": 100,
+    "evaluation_horizon": 20,
+    "sessions": 5,
+    "landmarks": 175,
+    "showcase_landmarks": 15,
+    "score_validation": {
+      "max_abs_difference": 1.2678296599233363e-06,
+      "tolerance": 2e-05,
+      "n_showcase_checks": 30
+    }
+  },
+  "code": [
+    {
+      "path": "src/neurobranch/studio/__init__.py",
+      "bytes": 568,
+      "sha256": "d67d57201941fadc67e5a91ca704997ea5bda08f477a7fde9dfb4b60ad001b59",
+      "role": "studio implementation"
+    },
+    {
+      "path": "src/neurobranch/studio/activity.py",
+      "bytes": 2625,
+      "sha256": "526af22cf90892bd9eb0af01383f92dd911ccf054317edb274f52d489f6d04ee",
+      "role": "studio implementation"
+    },
+    {
+      "path": "src/neurobranch/studio/components.py",
+      "bytes": 3352,
+      "sha256": "44dc746379374de8b28e06e171b26f5c09f7333e1f7e4ff8574117f2a4940d3b",
+      "role": "studio implementation"
+    },
+    {
+      "path": "src/neurobranch/studio/controls.py",
+      "bytes": 3306,
+      "sha256": "aac772f8b934895fdd7a962e13282ffeb1497670d2186fdb03d29b58e82f736a",
+      "role": "studio implementation"
+    },
+    {
+      "path": "src/neurobranch/studio/course.py",
+      "bytes": 1193,
+      "sha256": "ef617cc6f1b8b18e06ae77ef664bb8152b5e22653a1007439644cfa40d38c8ae",
+      "role": "studio implementation"
+    },
+    {
+      "path": "src/neurobranch/studio/errata.py",
+      "bytes": 5032,
+      "sha256": "5194a74f4e08688e183ede43d32384eaa08a47c8d74e02f9f134e7b616f1fb3c",
+      "role": "studio implementation"
+    },
+    {
+      "path": "src/neurobranch/studio/figures.py",
+      "bytes": 27270,
+      "sha256": "9bd414f85676e193c6c9c86b11c95b5c9410cfe6cf4af06143b877e46b902239",
+      "role": "studio implementation"
+    },
+    {
+      "path": "src/neurobranch/studio/formatting.py",
+      "bytes": 878,
+      "sha256": "af975ccf71b93ceec74edc720f44c63abf4cadca248381e1be22c1f180399095",
+      "role": "studio implementation"
+    },
+    {
+      "path": "src/neurobranch/studio/metadata.py",
+      "bytes": 10053,
+      "sha256": "b7e372dac599e3c0bfe9b8f2fe52ee5a1e2e72f895d11a94912480b661c191d0",
+      "role": "studio implementation"
+    },
+    {
+      "path": "src/neurobranch/studio/paths.py",
+      "bytes": 2218,
+      "sha256": "1a7a2dd3e54541f8df296960f9d8ad6f1ff157aaef5b940cae67bfebbc0d9a48",
+      "role": "studio implementation"
+    },
+    {
+      "path": "src/neurobranch/studio/perturbations.py",
+      "bytes": 4856,
+      "sha256": "85f1c8eb9ea227b1c7d7c416d75896066a9af68ccdee6f379df0a86ff3e8e0ec",
+      "role": "studio implementation"
+    },
+    {
+      "path": "src/neurobranch/studio/sections/__init__.py",
+      "bytes": 51,
+      "sha256": "1f89dc3cf084fe9a22dc40802437e560009a450a79b558b2d16cc1d185c6d263",
+      "role": "studio implementation"
+    },
+    {
+      "path": "src/neurobranch/studio/sections/activity.py",
+      "bytes": 7937,
+      "sha256": "a41a2d8d2a70bdcb7552a1176045e76e6096c3b014c28e768bc1f1db7ae49264",
+      "role": "studio implementation"
+    },
+    {
+      "path": "src/neurobranch/studio/sections/dynamics.py",
+      "bytes": 8498,
+      "sha256": "1176e791c1a00ae8e643d2a7e80cce7c8317c6bfcc1c07b0609ba373203f4aab",
+      "role": "studio implementation"
+    },
+    {
+      "path": "src/neurobranch/studio/sections/evidence.py",
+      "bytes": 13013,
+      "sha256": "2e5e8d9630259f7cf369a2ed44aac3cb7ecdcd6dd9503ae4ab416994ab4e2be7",
+      "role": "studio implementation"
+    },
+    {
+      "path": "src/neurobranch/studio/sections/models.py",
+      "bytes": 10829,
+      "sha256": "702eee7ce9c796e5f070c4fe774e56bb5ab827ef9a8499fccad8bafbd99d9958",
+      "role": "studio implementation"
+    },
+    {
+      "path": "src/neurobranch/studio/sections/notebook.py",
+      "bytes": 10790,
+      "sha256": "a556a7aecbc8af59bfac55b30cff6094c37d6b0de26e23b1a729b65a8345c383",
+      "role": "studio implementation"
+    },
+    {
+      "path": "src/neurobranch/studio/sections/overview.py",
+      "bytes": 9154,
+      "sha256": "f994153e22b6e3722c2924e78ef78e6d4fa9ead4fe0199c223d4d91e750c5394",
+      "role": "studio implementation"
+    },
+    {
+      "path": "src/neurobranch/studio/sections/perturbations.py",
+      "bytes": 7384,
+      "sha256": "da2f85fb2c79d048797738bfc4802f0653f62ee02c203083f66d6c26dc9d1037",
+      "role": "studio implementation"
+    },
+    {
+      "path": "src/neurobranch/studio/sections/present.py",
+      "bytes": 12989,
+      "sha256": "c8f68019f2dc63fe89a761b38a838cc2f451871c2e9f18aaa11e7409e71ad6f2",
+      "role": "studio implementation"
+    },
+    {
+      "path": "src/neurobranch/studio/theme.py",
+      "bytes": 8333,
+      "sha256": "09666bcfa30c1aa1c6c9fc91a23b3cded9af2d320baf6badfe2917e18a0f1100",
+      "role": "studio implementation"
+    },
+    {
+      "path": "src/neurobranch/studio/trajectories.py",
+      "bytes": 6040,
+      "sha256": "4faf30a200301b83000ea410e60ab45103686ead825d4d41517e73c6f3b2afac",
+      "role": "studio implementation"
+    },
+    {
+      "path": "app/neurobranch_studio.py",
+      "bytes": 6595,
+      "sha256": "902e12c1e46089bab720fbf297ba851bc07e04bcaa698de36029f369e56bad71",
+      "role": "studio implementation"
+    },
+    {
+      "path": "scripts/studio_build_trajectories.py",
+      "bytes": 12227,
+      "sha256": "e82d28c16a50f79c8ca27f0eec1bf19888364e72d807a83bfbd3726148708134",
+      "role": "studio implementation"
+    },
+    {
+      "path": "tests/test_studio_app_smoke.py",
+      "bytes": 1869,
+      "sha256": "d13a4b9b4b39c388fb6401961ef2c50cab55d19af123e33fcbc1d8bd47c23b40",
+      "role": "studio implementation"
+    },
+    {
+      "path": "tests/test_studio_artifacts.py",
+      "bytes": 3822,
+      "sha256": "9dfa2d9a06dd7647d2a8d6dcf43655465e44a5fa195be95099cbb2b02e2fc18e",
+      "role": "studio implementation"
+    },
+    {
+      "path": "tests/test_studio_docs.py",
+      "bytes": 2125,
+      "sha256": "c55ca050dba10eea1d7b8c1337a982ead26d9132f816b3e6dd8e529aa3fcf948",
+      "role": "studio implementation"
+    },
+    {
+      "path": "tests/test_studio_ui_contract.py",
+      "bytes": 2017,
+      "sha256": "a7584138140ad526af05e765d8543cd88c06f096760c6fc9263a1108ac5facb4",
+      "role": "studio implementation"
+    }
+  ],
+  "docs": [
+    {
+      "path": "docs/STUDIO_3D_SCIENTIFIC_MAPPING.md",
+      "bytes": 6241,
+      "sha256": "cf33de6427fe4a77e99fb427a00928a845022df0b319dba2f2401f14cb7b99ca",
+      "role": "studio documentation"
+    },
+    {
+      "path": "docs/STUDIO_ARCHITECTURE.md",
+      "bytes": 7122,
+      "sha256": "f3ad463e76f9160b7c8c2e2a077f5e0375f0e11f700baf1f13b7a37c855b1c03",
+      "role": "studio documentation"
+    },
+    {
+      "path": "docs/STUDIO_DESIGN_SYSTEM.md",
+      "bytes": 5141,
+      "sha256": "0735e5d73f5168dfd063a4ffa18a0be9b72ad59387c3f39985836458737d39c8",
+      "role": "studio documentation"
+    },
+    {
+      "path": "docs/STUDIO_DOCUMENTATION_ERRATA.md",
+      "bytes": 5246,
+      "sha256": "4c1afb6c6007007dbaf09b68ad2e01c0f5c0c5910ed320e91eb9873a9797ffd3",
+      "role": "studio documentation"
+    },
+    {
+      "path": "docs/STUDIO_REPRODUCIBILITY.md",
+      "bytes": 5614,
+      "sha256": "d80f056486eb6a083086ad9c4178e6e860931a35fd95f144ea5bd51fb74d8b97",
+      "role": "studio documentation"
+    },
+    {
+      "path": "docs/STUDIO_SCIENTIFIC_EVIDENCE.md",
+      "bytes": 8935,
+      "sha256": "9d892d1c075d90e2a849f10b94c4479f29b4991873aeafea15ff8c063eaac61a",
+      "role": "studio documentation"
+    },
+    {
+      "path": "docs/STUDIO_SUPERVISOR_DEMO.md",
+      "bytes": 6238,
+      "sha256": "fe8d79f7db8ebeb11b102a157526a0bfd2c6c6579618e5e8d6001358cd842c4f",
+      "role": "studio documentation"
+    },
+    {
+      "path": "docs/STUDIO_TESTING_AND_QA.md",
+      "bytes": 6868,
+      "sha256": "19420f036990ecec83f1425f86f746a959ef157f7fddc0a2ceaaa00c7c8126d5",
+      "role": "studio documentation"
+    },
+    {
+      "path": "docs/STUDIO_USER_GUIDE.md",
+      "bytes": 6944,
+      "sha256": "9cc2fb2683ce3efdc3b8d14cc441dfc534ca55b5b1e0d63845e4f4c23cd317d4",
+      "role": "studio documentation"
+    }
+  ],
+  "screenshots": [
+    {
+      "path": "reports/scientific_studio/screenshots/activity_1920_bottom.png",
+      "bytes": 347000,
+      "sha256": "4c56c89f947d85e7582e128ab46612187ba853952bf56523800855357e798282",
+      "role": "browser QA capture"
+    },
+    {
+      "path": "reports/scientific_studio/screenshots/activity_1920_top.png",
+      "bytes": 537414,
+      "sha256": "a4769020a2637034604068eed67bc5dc08136fcf551b515d6d37253e7976f136",
+      "role": "browser QA capture"
+    },
+    {
+      "path": "reports/scientific_studio/screenshots/dynamics_1366.png",
+      "bytes": 268805,
+      "sha256": "8efdbed79fc469d1c655a92c369d7fa012b39e4b0452b5e4eac3461af5c23ffd",
+      "role": "browser QA capture"
+    },
+    {
+      "path": "reports/scientific_studio/screenshots/dynamics_1920_bottom.png",
+      "bytes": 339069,
+      "sha256": "0beade1b376b7be2932a85e37ebbf7f00ac24db781d67f905d987cabd8a8d638",
+      "role": "browser QA capture"
+    },
+    {
+      "path": "reports/scientific_studio/screenshots/dynamics_1920_top.png",
+      "bytes": 363017,
+      "sha256": "3a9646242bed935b9bddfffb9ef0b9c0e8e20331da00067ac22d64eb59e72c8e",
+      "role": "browser QA capture"
+    },
+    {
+      "path": "reports/scientific_studio/screenshots/dynamics_light_1920.png",
+      "bytes": 342291,
+      "sha256": "afbcc9efe5a5a36ba4be2e019152f42b318e1e263fa79bb279de3ee9012c0d1a",
+      "role": "browser QA capture"
+    },
+    {
+      "path": "reports/scientific_studio/screenshots/evidence_1920_bottom.png",
+      "bytes": 257154,
+      "sha256": "2f308de4bd5bafe87af8ecaa5c2def00a03a9d81959a34bde3b2ed97c4bf9f7b",
+      "role": "browser QA capture"
+    },
+    {
+      "path": "reports/scientific_studio/screenshots/evidence_1920_top.png",
+      "bytes": 320793,
+      "sha256": "3c0b71cea83d750a9d4b3ec73fea10b541c6e60ec6264dd27e45b3c5d9aa0bd3",
+      "role": "browser QA capture"
+    },
+    {
+      "path": "reports/scientific_studio/screenshots/models_1920_bottom.png",
+      "bytes": 294293,
+      "sha256": "f399f68f4551b6b1dca5e30f5f9fd35ed6d621ebcd66c5d2e0afb061c877ad89",
+      "role": "browser QA capture"
+    },
+    {
+      "path": "reports/scientific_studio/screenshots/models_1920_top.png",
+      "bytes": 328468,
+      "sha256": "e29f4e0f6d24b1c18a9a33b83b80690275621b36d8423dacaffa112a6a705c1d",
+      "role": "browser QA capture"
+    },
+    {
+      "path": "reports/scientific_studio/screenshots/notebook_1920_bottom.png",
+      "bytes": 252631,
+      "sha256": "81d6ab92209f877a35f55da81f4dbfe0983a2fa7fd12f112485a5da39e93d9a1",
+      "role": "browser QA capture"
+    },
+    {
+      "path": "reports/scientific_studio/screenshots/notebook_1920_top.png",
+      "bytes": 320783,
+      "sha256": "83dd55de68fa5575aba56a969a709431a5aa4c6c47adb994e3952b215c22302d",
+      "role": "browser QA capture"
+    },
+    {
+      "path": "reports/scientific_studio/screenshots/overview_1280.png",
+      "bytes": 289308,
+      "sha256": "8790cb1a904cb4b339ec7dda78fa9c345e40df5593198931aa188edd3ba623c9",
+      "role": "browser QA capture"
+    },
+    {
+      "path": "reports/scientific_studio/screenshots/overview_1920_bottom.png",
+      "bytes": 328004,
+      "sha256": "03492ae5fd825ce9b4702147393738c778b18558d925ca39b43fd6c451209afa",
+      "role": "browser QA capture"
+    },
+    {
+      "path": "reports/scientific_studio/screenshots/overview_1920_top.png",
+      "bytes": 389466,
+      "sha256": "64229c3cef313f6a1757d843a3576345aecaa89fc8638f4ee0303dc9820cc307",
+      "role": "browser QA capture"
+    },
+    {
+      "path": "reports/scientific_studio/screenshots/overview_light_1920.png",
+      "bytes": 397801,
+      "sha256": "04d147393890dfcd56465665a7a0dac518449a36fdc0f061238b042793f788b4",
+      "role": "browser QA capture"
+    },
+    {
+      "path": "reports/scientific_studio/screenshots/perturbations_1920_bottom.png",
+      "bytes": 375802,
+      "sha256": "2c850317efb8511a7f5fce0e6b4e857669f35b4cd14f7f4b9cd8f5d9298cd341",
+      "role": "browser QA capture"
+    },
+    {
+      "path": "reports/scientific_studio/screenshots/perturbations_1920_top.png",
+      "bytes": 384799,
+      "sha256": "e978bddfe66f6adf68d9d6198df1bd1ca8a1a822999838e9f4070e7eebe7c141",
+      "role": "browser QA capture"
+    },
+    {
+      "path": "reports/scientific_studio/screenshots/presentation_slide1_1920.png",
+      "bytes": 153125,
+      "sha256": "af239a4ead7be797c38c9a3794a2d34f83a40014a8c9e9a41a15a2346d353034",
+      "role": "browser QA capture"
+    },
+    {
+      "path": "reports/scientific_studio/screenshots/presentation_slide3_1920.png",
+      "bytes": 183625,
+      "sha256": "b17884bbe7b89665d2d763bca13b560786c4ba48988768bccc36b81ba6d8f71d",
+      "role": "browser QA capture"
+    }
+  ],
+  "source_of_truth": [
+    "reports/master_review/dataset_identity_audit.json",
+    "reports/master_review/statistical_audit.json",
+    "reports/master_review/quality_gate.json",
+    "reports/master_review/claims_ledger.json",
+    "reports/master_review/corrections.json",
+    "reports/simulator/kato_common_state/model_per_landmark.csv",
+    "reports/simulator/kato_final_audit/uncertainty_summary.json",
+    "reports/scientific_studio/kato_trajectories.npz"
+  ],
+  "commands": {
+    "launch": "python -X utf8 -m streamlit run app/neurobranch_studio.py",
+    "rebuild_artifact": "python -X utf8 scripts/studio_build_trajectories.py",
+    "studio_tests": "python -X utf8 -m pytest -q tests/test_studio_artifacts.py tests/test_studio_ui_contract.py tests/test_studio_app_smoke.py",
+    "full_tests": "python -X utf8 -m pytest -q",
+    "lint": "python -X utf8 -m ruff check src/neurobranch/studio app/neurobranch_studio.py",
+    "docs": "python -X utf8 -m mkdocs build --strict",
+    "manifest": "python -X utf8 scripts/studio_manifest.py"
+  },
+  "verdict": "READY_FOR_METHODOLOGICAL_SUPERVISOR_REVIEW; NOT_READY_FOR_CONFIRMATORY_OR_BIOLOGICAL_CLAIMS",
+  "notes": [
+    "The manifest is generated after the last content change.",
+    "The 3D projection is PCA, not anatomy.",
+    "The perturbation lab is a model counterfactual, not stimulation.",
+    "The test tail was reused; the result is exploratory."
+  ]
+}
