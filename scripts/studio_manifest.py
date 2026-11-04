@@ -85,7 +85,12 @@ def main() -> None:
         "reports/scientific_studio/manifest.json",
         "reports/scientific_studio/release_candidate/integrity_report.json",
     }
-    other_changes = [line for line in status_lines if line[3:].strip() not in generated]
+    def _status_path(line: str) -> str:
+        # Porcelain normally uses "XY path"; tolerate a single-character status
+        # from staged-only entries so generated files never mark the tree dirty.
+        return line[3:].strip() if line[2:3] == " " else line[2:].strip()
+
+    other_changes = [line for line in status_lines if _status_path(line) not in generated]
 
     manifest = {
         "schema": "neurobranch.scientific_studio.manifest.v1",
