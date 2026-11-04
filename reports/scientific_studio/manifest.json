@@ -1,10 +1,10 @@
 {
   "schema": "neurobranch.scientific_studio.manifest.v1",
-  "generated_utc": "2026-11-04T10:40:42+00:00",
+  "generated_utc": "2026-11-04T10:41:40+00:00",
   "git": {
     "branch": "research/neurobranch-release-candidate",
-    "source_head": "93c3c99b078e87df09916c722f242153dac52276",
-    "manifest_commit_note": "The manifest is committed after this source HEAD; the final repository HEAD therefore adds only this generated file.",
+    "source_head": "65e9b0fa536dacc094a49e779bd01822b76ef65f",
+    "manifest_commit_note": "The manifest is committed after this source HEAD. The final repository HEAD also adds the separately committed integrity report, which is excluded here to avoid a self-hash cycle.",
     "worktree_clean_excluding_manifest": true
   },
   "dataset": {
