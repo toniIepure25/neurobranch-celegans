@@ -1,9 +1,9 @@
 {
   "schema": "neurobranch.scientific_studio.manifest.v1",
-  "generated_utc": "2026-11-04T10:37:45+00:00",
+  "generated_utc": "2026-11-04T10:38:19+00:00",
   "git": {
     "branch": "research/neurobranch-release-candidate",
-    "source_head": "63ed4858a34086a3e92a6c536ab7f8f4e6e9369f",
+    "source_head": "25f9990639da97b3cd98ba804464c6135645cf62",
     "manifest_commit_note": "The manifest is committed after this source HEAD; the final repository HEAD therefore adds only this generated file.",
     "worktree_clean_excluding_manifest": true
   },
@@ -325,8 +325,8 @@
     },
     {
       "path": "docs/STUDIO_HISTORICAL_PROVENANCE_VALIDATION.md",
-      "bytes": 5878,
-      "sha256": "c275623aa10edd53d810c8db4563c3bdd9464a5a382117f79ca456beed27df2e",
+      "bytes": 6155,
+      "sha256": "8b0388b4a5aa8a7501254377e325a59ea9333642231566766e375a4f1d0e1783",
       "role": "studio documentation"
     },
     {
