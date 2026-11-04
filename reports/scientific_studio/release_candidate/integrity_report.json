@@ -1,7 +1,7 @@
 {
   "schema": "neurobranch.studio.provenance_audit.v1",
   "repository": "D:\\ComputaCenter\\NeuroBranch\\neurobranch-celegans",
-  "head": "bbfb5404e134f0ce53fda0d02b05a0511b99a66f",
+  "head": "b9af4ede2cd96c156df1eea9066fc94b244aa84f",
   "branch": "research/neurobranch-release-candidate",
   "status": "INCOMPLETE",
   "historical": [
@@ -2281,7 +2281,7 @@
   ],
   "current_studio_manifest": {
     "manifest": "reports\\scientific_studio\\manifest.json",
-    "source_head": "25f9990639da97b3cd98ba804464c6135645cf62",
+    "source_head": "93c3c99b078e87df09916c722f242153dac52276",
     "status": "PASS",
     "counts": {
       "PASS": 124
