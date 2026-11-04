@@ -1,0 +1,41 @@
+{
+  "schema": "neurobranch.studio.release_candidate.browser_qa.v1",
+  "generated_utc": "2026-11-04T00:18:51.082773+00:00",
+  "source_report": "reports/scientific_studio/screenshots/browser_qa.json",
+  "captures": 31,
+  "viewports": [
+    {
+      "width": 1920,
+      "height": 1080
+    },
+    {
+      "width": 1366,
+      "height": 768
+    },
+    {
+      "width": 1280,
+      "height": 800
+    }
+  ],
+  "sections": [
+    "Overview",
+    "3D Neural Dynamics",
+    "Neural Activity",
+    "Models & Forecasting",
+    "Uncertainty & Evidence",
+    "Virtual Perturbations",
+    "Research Notebook"
+  ],
+  "presentation_slides": [
+    1,
+    2,
+    6
+  ],
+  "console_error_count": 0,
+  "horizontal_overflow_count": 0,
+  "presentation_navigation": "slide 01 -> 02 -> 06",
+  "light_mode_captures": 1,
+  "automated_only": true,
+  "human_visual_signoff": "PENDING",
+  "note": "Geometry and console checks only. This is not image-based aesthetic or readability review."
+}

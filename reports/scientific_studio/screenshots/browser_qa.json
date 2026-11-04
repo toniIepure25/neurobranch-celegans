@@ -1,6 +1,6 @@
 {
-  "generated_utc": "2026-11-03T23:24:36.076287+00:00",
-  "url": "http://127.0.0.1:8505",
+  "generated_utc": "2026-11-04T00:18:51.082773+00:00",
+  "url": "http://127.0.0.1:8506",
   "chrome": "C:\\Users\\ComputaCenter\\AppData\\Local\\ms-playwright\\chromium-1234\\chrome-win64\\chrome.exe",
   "viewports": [
     {
@@ -139,6 +139,20 @@
       "console_errors": []
     },
     {
+      "section": "Presentation slide 2",
+      "width": 1920,
+      "height": 1080,
+      "file": "presentation_slide2_1920.png",
+      "overflow": {
+        "scrollWidth": 1920,
+        "clientWidth": 1920,
+        "bodyScrollWidth": 1920,
+        "bodyClientWidth": 1920
+      },
+      "horizontal_overflow": false,
+      "console_errors": []
+    },
+    {
       "section": "Presentation slide 6",
       "width": 1920,
       "height": 1080,
@@ -265,6 +279,20 @@
       "console_errors": []
     },
     {
+      "section": "Presentation slide 2",
+      "width": 1366,
+      "height": 768,
+      "file": "presentation_slide2_1366.png",
+      "overflow": {
+        "scrollWidth": 1366,
+        "clientWidth": 1366,
+        "bodyScrollWidth": 1366,
+        "bodyClientWidth": 1366
+      },
+      "horizontal_overflow": false,
+      "console_errors": []
+    },
+    {
       "section": "Presentation slide 6",
       "width": 1366,
       "height": 768,
@@ -381,6 +409,20 @@
       "width": 1280,
       "height": 800,
       "file": "presentation_slide1_1280.png",
+      "overflow": {
+        "scrollWidth": 1280,
+        "clientWidth": 1280,
+        "bodyScrollWidth": 1280,
+        "bodyClientWidth": 1280
+      },
+      "horizontal_overflow": false,
+      "console_errors": []
+    },
+    {
+      "section": "Presentation slide 2",
+      "width": 1280,
+      "height": 800,
+      "file": "presentation_slide2_1280.png",
       "overflow": {
         "scrollWidth": 1280,
         "clientWidth": 1280,

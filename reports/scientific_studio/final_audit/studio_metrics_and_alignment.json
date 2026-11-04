@@ -1,7 +1,7 @@
 {
-  "generated_utc": "2026-11-03T23:24:22.373672+00:00",
-  "git_head": "ec27dd87a816cbce10dab70491c31f13dc59e3e2",
-  "git_branch": "research/neurobranch-final-quality-audit",
+  "generated_utc": "2026-11-04T10:33:55.066849+00:00",
+  "git_head": "1989b5a2cc5d7739d6e43604255ad1e5dc5203b1",
+  "git_branch": "research/neurobranch-release-candidate",
   "dataset": {
     "generated_at_utc": "2026-11-03T18:19:38.486635+00:00",
     "archive": {
@@ -859,7 +859,7 @@
       "bytes": 57663,
       "sha256": "b98dec015d69514d019f89d0712918f96ce505c91e0b8f2416ceb0f18b32bcf4"
     },
-    "manifest_sha256": "d4987b5954e8ee2c2bd99020b69128df3756b451f27857d0ceb7462dc9272231"
+    "manifest_sha256": "ef448faeaef7f69ab13dddca7170f95b2aa02620700ee84d774394d30f342ad7"
   },
   "frozen_rows": {
     "rows": 2275,

@@ -1,0 +1,36 @@
+NeuroBranch Scientific Studio — release-candidate reproduction commands
+Repository: D:\ComputaCenter\NeuroBranch\neurobranch-celegans
+Branch: research/neurobranch-release-candidate
+
+1. Frozen numerical and framing checks
+   python -X utf8 scripts/studio_release_checks.py
+   Expected: status=PASS, exit 0, writes release_candidate/scientific_checks.json.
+
+2. Historical snapshot and current-manifest audit
+   python -X utf8 scripts/studio_provenance_audit.py --pretty
+   Expected: status=INCOMPLETE, exit 1, because two final-audit script
+   worktree snapshots have no surviving Git bytes. No unexplained scientific
+   artifact is expected. Writes release_candidate/integrity_report.json.
+
+3. Static checks
+   python -X utf8 -m ruff check src/neurobranch/studio app/neurobranch_studio.py scripts tests
+   python -X utf8 -m pytest -q
+   python -X utf8 -m mkdocs build --strict
+
+4. Browser and presentation capture
+   Start the app:
+     python -X utf8 -m streamlit run app/neurobranch_studio.py --server.headless true --server.port 8506
+   In another shell:
+     python -X utf8 scripts/studio_browser_qa.py --url http://127.0.0.1:8506
+   Expected: console_error_count=0, horizontal_overflow_count=0, 31 captures,
+   presentation slides 01, 02, 06 at 1920, 1366, 1280, one light-mode capture.
+
+5. Contact sheets
+   python -X utf8 scripts/studio_contact_sheet.py --out reports/scientific_studio/release_candidate
+
+6. Handoff manifest
+   python -X utf8 scripts/studio_manifest.py
+   Expected: 104+ entries, release_evidence count > 0, clean excluding manifest.
+
+Note: scripts/studio_final_audit.py regenerates final_audit/studio_metrics_and_alignment.json
+with current HEAD metadata; it is a verification pass, not a model refit.

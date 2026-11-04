@@ -1,9 +1,10 @@
 """Headless browser QA for the seven-section Scientific Studio.
 
 This is a visual/geometry smoke test, not an image-understanding system. It
-captures full-page screenshots, checks horizontal overflow, and records console
-errors. A human must still inspect the PNGs for typography, contrast, and
-scientific legibility. See docs/STUDIO_FINAL_VISUAL_QA.md.
+captures viewport screenshots (Streamlit scrolls long sections in its own
+container), checks horizontal overflow, and records console errors. A human
+must still inspect the PNGs for typography, contrast, and scientific
+legibility. See docs/STUDIO_FINAL_VISUAL_QA.md.
 """
 
 from __future__ import annotations
@@ -132,11 +133,19 @@ def main() -> int:
 
             if not args.skip_presentation:
                 page.get_by_role("button", name="Presentation mode").first.click()
-                page.wait_for_timeout(1_500)
-                for slide in (1, 6):
-                    for _ in range(slide - 1):
-                        page.get_by_role("button", name="Next →").first.click()
-                        page.wait_for_timeout(900)
+                page.wait_for_selector("text=SLIDE 01 / 10", timeout=30_000)
+                page.wait_for_timeout(1_000)
+                current_slide = 1
+                for slide in (1, 2, 6):
+                    while current_slide < slide:
+                        page.get_by_role(
+                            "button", name=re.compile(r"Next")
+                        ).first.click()
+                        current_slide += 1
+                        page.wait_for_selector(
+                            f"text=SLIDE {current_slide:02d} / 10", timeout=30_000
+                        )
+                        page.wait_for_timeout(800)
                     path = args.out / f"presentation_slide{slide}_{width}.png"
                     page.screenshot(path=str(path), full_page=True)
                     report["captures"].append(

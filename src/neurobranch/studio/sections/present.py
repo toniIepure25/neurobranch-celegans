@@ -85,8 +85,8 @@ def render(snapshot: StudioSnapshot, store: TrajectoryStore, *, light: bool = Fa
         )
     elif index == 1:
         identity = snapshot.dataset_identity
-        total_frames = sum(int(s["n_frames"]) for s in snapshot.sessions.values())
-        total_predictors = sum(int(s["n_predictors"]) for s in snapshot.sessions.values())
+        total_frames = sum(int(s["n_frames"]) for s in snapshot.sessions)
+        total_predictors = sum(int(s["n_predictors"]) for s in snapshot.sessions)
         n_sessions = len(snapshot.sessions)
         st.markdown(
             f"""

@@ -44,6 +44,11 @@ nav:
       - Reproducibility: STUDIO_REPRODUCIBILITY.md
       - Supervisor demo: STUDIO_SUPERVISOR_DEMO.md
       - Testing and QA: STUDIO_TESTING_AND_QA.md
+      - Release candidate:
+          - Overview: STUDIO_RELEASE_CANDIDATE.md
+          - Historical provenance: STUDIO_HISTORICAL_PROVENANCE_VALIDATION.md
+          - Human visual review: STUDIO_HUMAN_VISUAL_REVIEW_CHECKLIST.md
+          - Final demo script: STUDIO_FINAL_DEMO_SCRIPT.md
       - Final audit 2026-11-04:
           - Numerical audit: STUDIO_FINAL_NUMERICAL_AUDIT.md
           - PCA audit: STUDIO_FINAL_PCA_AUDIT.md

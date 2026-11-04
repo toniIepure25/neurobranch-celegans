@@ -6,6 +6,7 @@ automated visual-quality judgment and must not be cited as one.
 
 from __future__ import annotations
 
+import argparse
 import json
 from pathlib import Path
 
@@ -46,20 +47,24 @@ def _grid(files: list[tuple[str, Path]], *, columns: int, crop_h: int, out: Path
 
 
 def main() -> None:
-    OUT.mkdir(parents=True, exist_ok=True)
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--out", type=Path, default=OUT)
+    args = parser.parse_args()
+    args.out = args.out.resolve()
+    args.out.mkdir(parents=True, exist_ok=True)
     report = json.loads((SHOTS / "browser_qa.json").read_text(encoding="utf-8"))
     sections = [
         (f"{c['section']} · {c['width']}", SHOTS / c["file"])
         for c in report["captures"]
         if c["width"] == 1920 and not c["section"].startswith("Presentation")
     ]
-    _grid(sections, columns=2, crop_h=720, out=OUT / "contact_sheet_sections_1920.png")
+    _grid(sections, columns=2, crop_h=720, out=args.out / "contact_sheet_sections_1920.png")
     presentations = [
         (f"{c['section']} · {c['width']}", SHOTS / c["file"])
         for c in report["captures"]
         if c["section"].startswith("Presentation")
     ]
-    _grid(presentations, columns=2, crop_h=620, out=OUT / "contact_sheet_presentation.png")
+    _grid(presentations, columns=2, crop_h=620, out=args.out / "contact_sheet_presentation.png")
 
 
 if __name__ == "__main__":

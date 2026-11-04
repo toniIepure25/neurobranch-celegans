@@ -1,0 +1,38 @@
+{
+  "schema": "neurobranch.studio.release_candidate.decision.v1",
+  "generated_utc": "2026-11-04T10:36:28+00:00",
+  "branch": "research/neurobranch-release-candidate",
+  "starting_head": "1989b5a2cc5d7739d6e43604255ad1e5dc5203b1",
+  "statuses": {
+    "NUMERICAL_VALIDATION": "PASS",
+    "SCIENTIFIC_CLAIMS": "PASS",
+    "HISTORICAL_PROVENANCE": "INCOMPLETE",
+    "CURRENT_ARTIFACT_INTEGRITY": "PASS",
+    "3D_VISUALIZATION_INTEGRITY": "PASS",
+    "BROWSER_AUTOMATED_QA": "PASS",
+    "HUMAN_VISUAL_SIGNOFF": "PENDING",
+    "SUPERVISOR_DEMO_READINESS": "READY_WITH_CAVEATS"
+  },
+  "reasons": {
+    "NUMERICAL_VALIDATION": "11 extended cases pass at 2e-5; H100/H20 innovation-horizon negative control reproduces both historical anomalies; frozen primary unchanged.",
+    "SCIENTIFIC_CLAIMS": "Primary +0.2644 is shown with conditional and recording intervals; recording interval includes zero; H1 reverses; MSE null; capacity and calibration caveats preserved.",
+    "HISTORICAL_PROVENANCE": "Two final-audit script worktree snapshots (scripts/kato_final_audit_figures.py, scripts/validate_kato_final_audit.py) have no surviving Git bytes. No scientific artifact is unexplained.",
+    "CURRENT_ARTIFACT_INTEGRITY": "All current Studio manifest entries match; final count is recorded in the manifest and integrity report.",
+    "3D_VISUALIZATION_INTEGRITY": "PC1-PC3 use the train-fitted 10-D PCA; axes state percent of total training variance; 26.75% of PCA-10 unshown; no anatomy, test refit, or future actual input.",
+    "BROWSER_AUTOMATED_QA": "31 captures across three viewports plus light mode; 0 console errors; 0 horizontal overflow; presentation 01, 02, 06 navigates.",
+    "HUMAN_VISUAL_SIGNOFF": "No image ingestion or genuine aesthetic/readability review was performed.",
+    "SUPERVISOR_DEMO_READINESS": "Demo is viable with explicit historical-provenance and visual-signoff caveats."
+  },
+  "fixed_this_pass": [
+    "Presentation slide 02 crashed on snapshot.sessions.values(); now iterates the tuple and all ten slides have AppTest coverage.",
+    "Browser QA now waits for slide markers and captures slide 02 at every viewport.",
+    "Version-aware historical provenance audit distinguishes Git-verifiable snapshots from unverifiable dirty worktree snapshots."
+  ],
+  "residual_issues": [
+    "Historical provenance remains INCOMPLETE for two audit-script snapshots.",
+    "Human visual signoff remains PENDING.",
+    "The recording-resampling interval includes zero; the test tail was reused; capacity is 7.96-9.95x mismatched.",
+    "No causal, biological, animal-level, or digital-twin claim."
+  ],
+  "release_verdict": "READY_WITH_CAVEATS"
+}

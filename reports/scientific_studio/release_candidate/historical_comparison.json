@@ -1,0 +1,42 @@
+{
+  "schema": "neurobranch.studio.release_candidate.historical_comparison.v1",
+  "status": "ROOT_CAUSE_RESOLVED_WITH_NEGATIVE_CONTROL",
+  "historical_anomaly": {
+    "location": "session 0, landmark 2750, B3 H20 PCA-10 energy",
+    "reported_a": 1.473899,
+    "reported_b": 2.410819
+  },
+  "official_protocol": {
+    "rollout_horizon": 100,
+    "evaluation_step": 20,
+    "innovation_draws": 100,
+    "frozen_B3_energy_h20": 1.3607533310963125,
+    "independent_B3_energy_h20": 1.3607536539106797,
+    "absolute_difference": 3.2281436723735624e-07,
+    "tolerance": 2e-05
+  },
+  "root_cause": {
+    "mechanism": "The moving-block sampler consumes a horizon-dependent number of random-start draws. A 20-innovation rollout is not a prefix of the 100-innovation rollout used for official scoring.",
+    "H20_control_B3_energy": 1.4738993527333282,
+    "H20_control_documented": 1.4738989874959576,
+    "H20_control_reproduced": true,
+    "max_abs_first20_innovation_difference": 12.30042560337366,
+    "first_divergent_stage": "innovation_horizon"
+  },
+  "stage_evidence": {
+    "max_abs_A_difference": 2.5193735986306365e-13,
+    "max_abs_b_difference": 1.199040866595169e-13,
+    "reference_radius": 0.9903156266660077,
+    "official_radius": 0.990315626666007
+  },
+  "second_control": {
+    "location": "session 0, landmark 2690",
+    "frozen_B3_energy_h20": 2.4986440082288306,
+    "independent_B3_energy_h20": 2.498643590923475,
+    "absolute_difference": 4.1730535560446924e-07,
+    "H20_control_B3_energy": 2.41081893172891,
+    "H20_control_documented": 2.41081893172891
+  },
+  "evidence": "reports/scientific_studio/final_audit/independent_model_check.json",
+  "reproduction_command": "python -X utf8 scripts/master_review/independent_model_check.py --extended --out reports/scientific_studio/final_audit/independent_model_check.json"
+}

@@ -1,0 +1,43 @@
+{
+  "schema": "neurobranch.studio.release_candidate.visual_issues.v1",
+  "automated_visual_inspection": false,
+  "human_visual_signoff": "PENDING",
+  "issues": [
+    {
+      "id": "RC-VIS-001",
+      "severity": "high",
+      "section": "Presentation slide 02 · What was measured",
+      "symptom": "The slide raised AttributeError: 'tuple' object has no attribute 'values', so the slide body and Previous/Next controls disappeared.",
+      "found_by": "headless browser interaction while advancing from slide 01 to slide 06",
+      "root_cause": "src/neurobranch/studio/sections/present.py iterated snapshot.sessions.values(); StudioSnapshot.sessions returns tuple[dict, ...].",
+      "fix": "Iterate snapshot.sessions directly.",
+      "regression_test": "tests/test_studio_app_smoke.py::test_presentation_slide_renders_without_exception[1] (all ten indices parametrized)",
+      "status": "FIXED_PENDING_COMMIT",
+      "evidence": [
+        "reports/scientific_studio/release_candidate/presentation_slide2_failure_before_fix.png",
+        "reports/scientific_studio/screenshots/presentation_slide2_1920.png"
+      ]
+    },
+    {
+      "id": "RC-VIS-002",
+      "severity": "medium",
+      "section": "All screenshots",
+      "symptom": "No genuine image-based review of typography, contrast, clipping, chart legibility, or aesthetic composition has been performed by the release agent.",
+      "found_by": "limitation disclosure",
+      "root_cause": "The release agent cannot ingest images.",
+      "fix": "Human reviewer must use docs/STUDIO_HUMAN_VISUAL_REVIEW_CHECKLIST.md and the contact sheets.",
+      "regression_test": "none; this is a human gate",
+      "status": "PENDING_HUMAN_SIGNOFF",
+      "evidence": [
+        "reports/scientific_studio/release_candidate/contact_sheet_sections_1920.png",
+        "reports/scientific_studio/release_candidate/contact_sheet_presentation.png"
+      ]
+    }
+  ],
+  "automated_checks": {
+    "console_errors": "see browser_qa.json",
+    "horizontal_overflow": "see browser_qa.json",
+    "presentation_navigation": "slide 01 -> 02 -> 06 with Next control",
+    "light_mode": "one 1920x1080 3D capture"
+  }
+}

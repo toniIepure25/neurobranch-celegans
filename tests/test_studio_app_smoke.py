@@ -56,10 +56,14 @@ def test_light_mode_renders_without_exception() -> None:
     assert not at.exception, at.exception
 
 
-def test_presentation_route_renders_without_exception() -> None:
+@pytest.mark.parametrize("index", range(10))
+def test_presentation_slide_renders_without_exception(index: int) -> None:
     at = _app().run()
     at.session_state["studio_present"] = True
-    at.session_state["studio_present_index"] = 0
+    at.session_state["studio_present_index"] = index
     at.run()
     assert not at.exception, at.exception
-    assert any("bounded result" in str(m.value).lower() for m in at.markdown)
+    if index == 0:
+        assert any("bounded result" in str(m.value).lower() for m in at.markdown)
+    if index == 1:
+        assert any("recordings" in str(m.value).lower() for m in at.markdown)

@@ -1,0 +1,45 @@
+{
+  "schema": "neurobranch.studio.release_candidate.3d_semantics.v1",
+  "status": "PASS",
+  "projection": {
+    "type": "PCA",
+    "components_fitted": 10,
+    "components_displayed": 3,
+    "fit_split": "train",
+    "random_state": 17,
+    "implementation": "sklearn.decomposition.PCA",
+    "test_refit": false,
+    "future_actuals_are_model_inputs": false,
+    "future_actuals_role": "display-only held-out continuation"
+  },
+  "session0": {
+    "original_feature_variance_sum": 103.04696655273438,
+    "pca10_explained_variance_sum": 73.14903259277344,
+    "pc1_pc3_fraction_of_original": 0.5199463963508606,
+    "pc1_pc3_fraction_of_pca10": 0.7324619889259338,
+    "pc4_pc10_fraction_of_pca10": 0.2675381004810333,
+    "outside_pca10_fraction_of_original": 0.29013872146606445,
+    "axis_labels": [
+      "PC1 · 26.0% total",
+      "PC2 · 17.8% total",
+      "PC3 · 8.2% total"
+    ]
+  },
+  "semantics": {
+    "axis_titles_include_percent_of_total": true,
+    "explained_variance_denominator_is_total_training_variance": true,
+    "pc1_pc3_denominator_is_total_training_variance": true,
+    "unshown_pca10_fraction_is_disclosed": true,
+    "no_anatomical_localization": true,
+    "no_shared_synapse_claim": true,
+    "no_physical_proximity_claim": true,
+    "coordinate_identity_between_3d_and_2d_fallback": true
+  },
+  "evidence": [
+    "reports/scientific_studio/final_audit/pca_variance_audit.json",
+    "reports/scientific_studio/kato_trajectories.json",
+    "src/neurobranch/studio/figures.py",
+    "src/neurobranch/studio/sections/dynamics.py"
+  ],
+  "verification_command": "python -X utf8 scripts/studio_release_checks.py"
+}

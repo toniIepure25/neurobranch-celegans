@@ -51,6 +51,8 @@ def main() -> None:
         ROOT / "scripts" / "studio_browser_qa.py",
         ROOT / "scripts" / "studio_contact_sheet.py",
         ROOT / "scripts" / "studio_final_audit.py",
+        ROOT / "scripts" / "studio_provenance_audit.py",
+        ROOT / "scripts" / "studio_release_checks.py",
         ROOT / "scripts" / "master_review" / "independent_model_check.py",
     ]
     code += sorted((ROOT / "tests").glob("test_studio*.py"))
@@ -60,6 +62,13 @@ def main() -> None:
         path
         for path in (STUDIO / "final_audit").glob("*")
         if path.is_file() and path.suffix.lower() in {".json", ".png", ".md", ".log", ".txt"}
+    )
+    release_evidence = sorted(
+        path
+        for path in (STUDIO / "release_candidate").glob("*")
+        if path.is_file()
+        and path.suffix.lower() in {".json", ".png", ".md", ".txt"}
+        and path.name != "integrity_report.json"
     )
     status_lines = [line for line in git("status", "--porcelain").splitlines() if line]
     manifest_rel = "reports/scientific_studio/manifest.json"
@@ -104,6 +113,9 @@ def main() -> None:
         "docs": [entry(path, "studio documentation") for path in docs],
         "screenshots": [entry(path, "browser QA capture") for path in screenshots],
         "final_audit": [entry(path, "final audit evidence") for path in final_audit],
+        "release_candidate": [
+            entry(path, "release-candidate evidence") for path in release_evidence
+        ],
         "source_of_truth": [
             "reports/master_review/dataset_identity_audit.json",
             "reports/master_review/statistical_audit.json",
@@ -132,6 +144,8 @@ def main() -> None:
             "final_audit": "python -X utf8 scripts/studio_final_audit.py",
             "browser_qa": "python -X utf8 scripts/studio_browser_qa.py",
             "contact_sheet": "python -X utf8 scripts/studio_contact_sheet.py",
+            "provenance": "python -X utf8 scripts/studio_provenance_audit.py --pretty",
+            "release_checks": "python -X utf8 scripts/studio_release_checks.py",
         },
         "verdict": (
             "READY_FOR_METHODOLOGICAL_SUPERVISOR_REVIEW; "
@@ -155,7 +169,10 @@ def main() -> None:
         f"source_head={manifest['git']['source_head']} "
         f"clean_excluding_manifest={manifest['git']['worktree_clean_excluding_manifest']}"
     )
-    print(f"docs={len(docs)} code={len(code)} screenshots={len(screenshots)}")
+    print(
+        f"docs={len(docs)} code={len(code)} screenshots={len(screenshots)} "
+        f"release_evidence={len(release_evidence)}"
+    )
 
 
 if __name__ == "__main__":
