@@ -83,10 +83,12 @@ modification.
 
 ## 4. Current Studio manifest
 
-`reports/scientific_studio/manifest.json` has **104 entries**, all matching
-current bytes, including 15 docs, 33 code files, 45 screenshots, and 11 final
-audit evidence files. The manifest records source head `fafaa40` and explicitly
-notes that the final commit adds only the generated manifest.
+`reports/scientific_studio/manifest.json` has **124 entries**, all matching
+current bytes, including 19 docs, 36 code files, 48 screenshots, 11 final-audit
+evidence files, and 10 release-candidate evidence files. The manifest records its exact
+source head. Its final commit adds the generated manifest; the
+separately committed integrity report is generated verification output and is
+deliberately excluded from the manifest to avoid a self-hash cycle.
 
 **CURRENT_ARTIFACT_INTEGRITY: PASS.**
 
