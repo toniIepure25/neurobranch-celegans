@@ -1,8 +1,8 @@
 {
   "schema": "neurobranch.studio.provenance_audit.v1",
   "repository": "D:\\ComputaCenter\\NeuroBranch\\neurobranch-celegans",
-  "head": "40ef18f9ea36d3d49150bd0071303f70c20440fd",
-  "branch": "research/neurobranch-release-candidate",
+  "head": "92165ad7d15e89548962df723d73d4d73d78f2ee",
+  "branch": "research/neurobranch-presentation-polish",
   "status": "INCOMPLETE",
   "historical": [
     {
@@ -2203,8 +2203,8 @@
           "historical_detail": "recorded bytes occur at a later/earlier Git commit than the manifest's recorded head; manifest metadata is stale",
           "matching_commit": "358107a7a55470d48f8092b2a2dc7f704dbd37c1",
           "recorded_worktree_deviation": false,
-          "current_bytes": 10230,
-          "current_sha256": "fb43e0eac75e4d4b4062808b29c57a783a5e526bf3c05b60240bcaa86c6e668a",
+          "current_bytes": 10422,
+          "current_sha256": "8b575f91a4b4697e809cd937ef867db6df4de97c60aa2d62bb69a2dcb16ca50c",
           "current_worktree_integrity": "EXPECTED_VERSION_DIFFERENCE",
           "scientific_artifact": false
         },
@@ -2271,8 +2271,8 @@
           "historical_detail": "recorded bytes occur at a later/earlier Git commit than the manifest's recorded head; manifest metadata is stale",
           "matching_commit": "358107a7a55470d48f8092b2a2dc7f704dbd37c1",
           "recorded_worktree_deviation": false,
-          "current_bytes": 10230,
-          "current_sha256": "fb43e0eac75e4d4b4062808b29c57a783a5e526bf3c05b60240bcaa86c6e668a",
+          "current_bytes": 10422,
+          "current_sha256": "8b575f91a4b4697e809cd937ef867db6df4de97c60aa2d62bb69a2dcb16ca50c",
           "current_worktree_integrity": "EXPECTED_VERSION_DIFFERENCE",
           "scientific_artifact": false
         }
@@ -2281,10 +2281,10 @@
   ],
   "current_studio_manifest": {
     "manifest": "reports\\scientific_studio\\manifest.json",
-    "source_head": "65e9b0fa536dacc094a49e779bd01822b76ef65f",
+    "source_head": "92165ad7d15e89548962df723d73d4d73d78f2ee",
     "status": "PASS",
     "counts": {
-      "PASS": 124
+      "PASS": 211
     },
     "bad": []
   },
