@@ -1,9 +1,9 @@
 {
   "schema": "neurobranch.scientific_studio.manifest.v1",
-  "generated_utc": "2026-11-03T23:34:44+00:00",
+  "generated_utc": "2026-11-04T10:37:45+00:00",
   "git": {
-    "branch": "research/neurobranch-final-quality-audit",
-    "source_head": "fafaa4066300e2fe5630cc3bdaf3a7f159d2db1d",
+    "branch": "research/neurobranch-release-candidate",
+    "source_head": "63ed4858a34086a3e92a6c536ab7f8f4e6e9369f",
     "manifest_commit_note": "The manifest is committed after this source HEAD; the final repository HEAD therefore adds only this generated file.",
     "worktree_clean_excluding_manifest": true
   },
@@ -155,8 +155,8 @@
     },
     {
       "path": "src/neurobranch/studio/sections/present.py",
-      "bytes": 13500,
-      "sha256": "ed60affd6d7da1353677ba2b7bf74a028a038801dac38d55783dd7c783f3a677",
+      "bytes": 13482,
+      "sha256": "6136323ae07cfc775a1aec1d90be69b25bea4f8226aa5dad6c88de69063882ca",
       "role": "studio implementation"
     },
     {
@@ -185,20 +185,32 @@
     },
     {
       "path": "scripts/studio_browser_qa.py",
-      "bytes": 7321,
-      "sha256": "a1f92289c1bae9c6c10beaed4870b3cb7a1ebb93f2e15fbae8f103f982a5e143",
+      "bytes": 7962,
+      "sha256": "fab5ef87966d62f3ebc234aadb5d9a672516320432ca0f3699cb6363fbb41737",
       "role": "studio implementation"
     },
     {
       "path": "scripts/studio_contact_sheet.py",
-      "bytes": 2363,
-      "sha256": "ff1acbc307aabb3c504e3c925188b6f5e8fc04f0ef9ae621f8e741bde5c32b06",
+      "bytes": 2645,
+      "sha256": "b2b2f8f4fc8f9f8286e1d81111398f8b8846e97a687be1a9eba1f84f97611278",
       "role": "studio implementation"
     },
     {
       "path": "scripts/studio_final_audit.py",
       "bytes": 10109,
       "sha256": "f9ed977d2ce0560992ab9036b3366b5fcf112eb16486c48ee2b35edce33ea4f0",
+      "role": "studio implementation"
+    },
+    {
+      "path": "scripts/studio_provenance_audit.py",
+      "bytes": 12683,
+      "sha256": "e2bd15fafdf4ae2e9f9078de574123fa68afc2fd406c5d5c7c0af8ef1af6cee8",
+      "role": "studio implementation"
+    },
+    {
+      "path": "scripts/studio_release_checks.py",
+      "bytes": 5334,
+      "sha256": "5cbf78a30d03ad1dba52a5049f4aee616829260f35a8ecd665e6a756efc4b283",
       "role": "studio implementation"
     },
     {
@@ -209,8 +221,8 @@
     },
     {
       "path": "tests/test_studio_app_smoke.py",
-      "bytes": 1869,
-      "sha256": "d13a4b9b4b39c388fb6401961ef2c50cab55d19af123e33fcbc1d8bd47c23b40",
+      "bytes": 2048,
+      "sha256": "406d9ab3f74c297ff8e8bfaa9f2273c91a0f0c40000fec96e414bda303646b30",
       "role": "studio implementation"
     },
     {
@@ -221,8 +233,14 @@
     },
     {
       "path": "tests/test_studio_docs.py",
-      "bytes": 2345,
-      "sha256": "9846fa709cd0a35e6ef6fee864c8cfe41c32020597208e1d63b6ea1af2b97e54",
+      "bytes": 2512,
+      "sha256": "68bafe3ca287fa37b922eb5b0e87e856b5498e13e02808b1f4416d646bf9350a",
+      "role": "studio implementation"
+    },
+    {
+      "path": "tests/test_studio_provenance.py",
+      "bytes": 1942,
+      "sha256": "d85279113393acf55b88eb43e9af8e6b6bd09b41cfe7f342216ea267635e07b7",
       "role": "studio implementation"
     },
     {
@@ -264,6 +282,12 @@
       "role": "studio documentation"
     },
     {
+      "path": "docs/STUDIO_FINAL_DEMO_SCRIPT.md",
+      "bytes": 5975,
+      "sha256": "d2768a2886ba00a53522a010b1c44ab51e078509aa56d7afedc8799fb5e064ba",
+      "role": "studio documentation"
+    },
+    {
       "path": "docs/STUDIO_FINAL_NUMERICAL_AUDIT.md",
       "bytes": 4752,
       "sha256": "0a42e09951abf3c64dfc5c2447419f22122a8be2e47d4dbee61f6ae66eefd061",
@@ -300,6 +324,24 @@
       "role": "studio documentation"
     },
     {
+      "path": "docs/STUDIO_HISTORICAL_PROVENANCE_VALIDATION.md",
+      "bytes": 5878,
+      "sha256": "c275623aa10edd53d810c8db4563c3bdd9464a5a382117f79ca456beed27df2e",
+      "role": "studio documentation"
+    },
+    {
+      "path": "docs/STUDIO_HUMAN_VISUAL_REVIEW_CHECKLIST.md",
+      "bytes": 5403,
+      "sha256": "31b3e334193ee76967463e55751cab8f356cb1e2986e1d512da5d8baf4f1ebf5",
+      "role": "studio documentation"
+    },
+    {
+      "path": "docs/STUDIO_RELEASE_CANDIDATE.md",
+      "bytes": 5101,
+      "sha256": "c25c75dcbbf1934a59e4e4a348746dd54e03e58d69670d8bc8a2f6b74c5abf81",
+      "role": "studio documentation"
+    },
+    {
       "path": "docs/STUDIO_REPRODUCIBILITY.md",
       "bytes": 7152,
       "sha256": "74d1eacfa9e3be1e74265939f16d04d3daeebb88375b9d94c16f235270021e42",
@@ -333,20 +375,20 @@
   "screenshots": [
     {
       "path": "reports/scientific_studio/screenshots/3d_neural_dynamics_1280.png",
-      "bytes": 305551,
-      "sha256": "87ab0621d20712a0d0dec5e5b1787d908e35d26029e77e0033b8d635d096d82a",
+      "bytes": 305418,
+      "sha256": "b7862009960a7484cbb801fa84ef06d532ee42d64c278e9800c887aa1e50f106",
       "role": "browser QA capture"
     },
     {
       "path": "reports/scientific_studio/screenshots/3d_neural_dynamics_1366.png",
-      "bytes": 296457,
-      "sha256": "c37e7ce6ddf5d38f0618239647e0e1cca3616bb5967c4a3ab6c33cd6061107d7",
+      "bytes": 296777,
+      "sha256": "3558ce1786583eb83d58b63af0f257c8df7a3f580d64466e84e8cc1506b2f025",
       "role": "browser QA capture"
     },
     {
       "path": "reports/scientific_studio/screenshots/3d_neural_dynamics_1920.png",
-      "bytes": 393504,
-      "sha256": "aea2a829742dfc0b5970490c5a0c78681647289f21778e06561851ddd4605443",
+      "bytes": 395787,
+      "sha256": "7c097a92255f2e13269928a51c3c8b9a6c017938e8a4b6db77cd57ea38dc806a",
       "role": "browser QA capture"
     },
     {
@@ -381,8 +423,8 @@
     },
     {
       "path": "reports/scientific_studio/screenshots/dynamics_light_1920.png",
-      "bytes": 367790,
-      "sha256": "7b951801b9e2adfb02b81301faa69860d0556af038c421dd83170320b702e833",
+      "bytes": 369849,
+      "sha256": "ae6bad0203082f3a29dfcc5011eac9e495cf79a216a04f30d20d29f40728e2a2",
       "role": "browser QA capture"
     },
     {
@@ -411,14 +453,14 @@
     },
     {
       "path": "reports/scientific_studio/screenshots/models_forecasting_1280.png",
-      "bytes": 270422,
-      "sha256": "f67bafe424c369b7c244f726e01e96e442ff4b01412a941e3c6ac717d6b55061",
+      "bytes": 270432,
+      "sha256": "dd4ac07c2a69ba5c3e662b178125883f510290d5a909311d6097c7cf238aafd6",
       "role": "browser QA capture"
     },
     {
       "path": "reports/scientific_studio/screenshots/models_forecasting_1366.png",
-      "bytes": 269563,
-      "sha256": "5193c1ff78983f1f0b67290b1c44f1071725128e54fb092419dca80d43a63ce9",
+      "bytes": 269564,
+      "sha256": "e5a370e1a605b5ff267b9e59fb089e7bf53180f90a3edf68a453a98c611cb339",
       "role": "browser QA capture"
     },
     {
@@ -430,19 +472,19 @@
     {
       "path": "reports/scientific_studio/screenshots/neural_activity_1280.png",
       "bytes": 367860,
-      "sha256": "92e616c16d2abed154dcee459c6f81b64184ef3275fffa96708111b77b56e031",
+      "sha256": "52ecd925c5ea0be0e58895a683ec2a8607c8caa5aaf1e77061b2ed6a9f794c39",
       "role": "browser QA capture"
     },
     {
       "path": "reports/scientific_studio/screenshots/neural_activity_1366.png",
-      "bytes": 365105,
-      "sha256": "6c507e0bff006478c63f7390b63ddd952822dc3f833cddce9717a009bd17b9fa",
+      "bytes": 365101,
+      "sha256": "4c2e0ed6a12ac23e8d3983bdf429408b3a79d49aeaaffeaf06102d7f6d08253f",
       "role": "browser QA capture"
     },
     {
       "path": "reports/scientific_studio/screenshots/neural_activity_1920.png",
       "bytes": 562250,
-      "sha256": "a9c9b1a6aa1a57feb2fcb9e15a4d7fd31ac9d4f4b7dfcce2b4cdccf697cf64f3",
+      "sha256": "61de618f1c106c96172a768fad6b2b60bf92525d4ad16f12aeaaedeef6b4d2b3",
       "role": "browser QA capture"
     },
     {
@@ -524,6 +566,24 @@
       "role": "browser QA capture"
     },
     {
+      "path": "reports/scientific_studio/screenshots/presentation_slide2_1280.png",
+      "bytes": 92691,
+      "sha256": "0e1ca3dfcf6cf42bba411947e80676f8716bc4bf1b2473c1dce082896d4ec15c",
+      "role": "browser QA capture"
+    },
+    {
+      "path": "reports/scientific_studio/screenshots/presentation_slide2_1366.png",
+      "bytes": 98949,
+      "sha256": "cb7e3faf92957d176d0271e6281270dda08e7e520359e24c65e58576f03ef344",
+      "role": "browser QA capture"
+    },
+    {
+      "path": "reports/scientific_studio/screenshots/presentation_slide2_1920.png",
+      "bytes": 204556,
+      "sha256": "bb0e86ebc9acbc63070e8dfa03c00dd9f35ad81092449b4bd0d8a8093c761d09",
+      "role": "browser QA capture"
+    },
+    {
       "path": "reports/scientific_studio/screenshots/presentation_slide3_1920.png",
       "bytes": 183625,
       "sha256": "b17884bbe7b89665d2d763bca13b560786c4ba48988768bccc36b81ba6d8f71d",
@@ -531,8 +591,8 @@
     },
     {
       "path": "reports/scientific_studio/screenshots/presentation_slide6_1280.png",
-      "bytes": 97091,
-      "sha256": "f854b060049a4b3018d9af9155b926ffbf67176cbd341e4af4adabfbf7c6cbe0",
+      "bytes": 97088,
+      "sha256": "1fbd926b839d91f675c338dfe7c644c56e79df0d66c09bdc760774df394d03dc",
       "role": "browser QA capture"
     },
     {
@@ -543,8 +603,8 @@
     },
     {
       "path": "reports/scientific_studio/screenshots/presentation_slide6_1920.png",
-      "bytes": 183246,
-      "sha256": "8b3bc487d6f60fdb161791d2f769d955cc4390174e799ac92615c537fb7434a3",
+      "bytes": 183228,
+      "sha256": "bb71284b544eb0ebcb1191e313abb6309b7b304f9ec4314311f49c90b59bd06a",
       "role": "browser QA capture"
     },
     {
@@ -555,8 +615,8 @@
     },
     {
       "path": "reports/scientific_studio/screenshots/research_notebook_1366.png",
-      "bytes": 267447,
-      "sha256": "05711411818ef2b13f0ce2a783875ad80b3ce2c7cdffa8400edc660789b080a5",
+      "bytes": 267455,
+      "sha256": "6ef39aeffe8b7d0402617a0155de5a7820b69446204a217944d2175934d00f52",
       "role": "browser QA capture"
     },
     {
@@ -568,19 +628,19 @@
     {
       "path": "reports/scientific_studio/screenshots/uncertainty_evidence_1280.png",
       "bytes": 287529,
-      "sha256": "c45b66600558621f234f3d813c7fa7fd27c8cb57d5fffe48fa31ea30cc1a3a2b",
+      "sha256": "45276b24fbb236aeeae3066956be009dccea881c17465d4a6a70ba717ead7320",
       "role": "browser QA capture"
     },
     {
       "path": "reports/scientific_studio/screenshots/uncertainty_evidence_1366.png",
-      "bytes": 280859,
-      "sha256": "53fe9fbdaf97d4a79dc80d726677b01e834e1feb087e00f24da673e72c83ee06",
+      "bytes": 280861,
+      "sha256": "c757b174f54bf21096b54a2b1a5053d3b954c95aad600cf8b528862d0b7017ed",
       "role": "browser QA capture"
     },
     {
       "path": "reports/scientific_studio/screenshots/uncertainty_evidence_1920.png",
-      "bytes": 340797,
-      "sha256": "81c642d20e6699744dab31371ee5b375a49580c02b7513c148a01bd067885493",
+      "bytes": 340796,
+      "sha256": "b553e43dc6f7cf9a2e4b5049a2acb4403eb4c5198bb132857238a7356d7c0925",
       "role": "browser QA capture"
     },
     {
@@ -665,9 +725,71 @@
     },
     {
       "path": "reports/scientific_studio/final_audit/studio_metrics_and_alignment.json",
-      "bytes": 26792,
-      "sha256": "8ade2ebe512726c695580cb8c3831a04e6f67b2661381e71448f84b39922f7ea",
+      "bytes": 26790,
+      "sha256": "1d21b270de3c673d6e41829849a9bb42ef14fc1926420e6f7b9781fe9622658d",
       "role": "final audit evidence"
+    }
+  ],
+  "release_candidate": [
+    {
+      "path": "reports/scientific_studio/release_candidate/3d_semantics_check.json",
+      "bytes": 1640,
+      "sha256": "1e7afe07ce0b4e25dc1326b182719f50b563fe6a0d815a008c585d9f238ab8d4",
+      "role": "release-candidate evidence"
+    },
+    {
+      "path": "reports/scientific_studio/release_candidate/browser_qa_summary.json",
+      "bytes": 1002,
+      "sha256": "663193caf0e2f603beba9ef2d44137a2541984422e7002c67d45131727cb80b1",
+      "role": "release-candidate evidence"
+    },
+    {
+      "path": "reports/scientific_studio/release_candidate/contact_sheet_presentation.png",
+      "bytes": 435569,
+      "sha256": "66d9ae7726b7c99ddba11ae5b3598432b3a5429eec1fb8ebfeafad2afebc699a",
+      "role": "release-candidate evidence"
+    },
+    {
+      "path": "reports/scientific_studio/release_candidate/contact_sheet_sections_1920.png",
+      "bytes": 769047,
+      "sha256": "3b8348067e460e7f2f21223929f280c0a4ba656ce1ece9544b5b01ec93687209",
+      "role": "release-candidate evidence"
+    },
+    {
+      "path": "reports/scientific_studio/release_candidate/historical_comparison.json",
+      "bytes": 1843,
+      "sha256": "81a0d258c486e856e165772a70fc5de7f87cd6e2c2276bb0c93318a8ccadad24",
+      "role": "release-candidate evidence"
+    },
+    {
+      "path": "reports/scientific_studio/release_candidate/presentation_slide2_failure_before_fix.png",
+      "bytes": 70799,
+      "sha256": "8ccd3e2bbcd80575dafc5f6d40bd636d6502e89325ec9ceb2b12c11a1e03912c",
+      "role": "release-candidate evidence"
+    },
+    {
+      "path": "reports/scientific_studio/release_candidate/release_decision.json",
+      "bytes": 2697,
+      "sha256": "27a2f97d7a2164139cdc6a75a3f878616c3295919df81ffe9ac0a2f0b3721408",
+      "role": "release-candidate evidence"
+    },
+    {
+      "path": "reports/scientific_studio/release_candidate/reproduction_commands.txt",
+      "bytes": 1728,
+      "sha256": "64af2ba39a57b2379af037fba349448847cf6917778096722909b9a5702397e8",
+      "role": "release-candidate evidence"
+    },
+    {
+      "path": "reports/scientific_studio/release_candidate/scientific_checks.json",
+      "bytes": 1550,
+      "sha256": "2385c6bf7af79cc9336fd9add254b0cc170efe89c27bc716f1ffd91823c56ff8",
+      "role": "release-candidate evidence"
+    },
+    {
+      "path": "reports/scientific_studio/release_candidate/visual_issues_and_dispositions.json",
+      "bytes": 2157,
+      "sha256": "6fba90b6f3092e6c00f153ac2bd73b4bab6db06f24887f944c964df9ebcf1950",
+      "role": "release-candidate evidence"
     }
   ],
   "source_of_truth": [
@@ -691,7 +813,9 @@
     "independent_check": "python -X utf8 scripts/master_review/independent_model_check.py --extended --out reports/scientific_studio/final_audit/independent_model_check.json",
     "final_audit": "python -X utf8 scripts/studio_final_audit.py",
     "browser_qa": "python -X utf8 scripts/studio_browser_qa.py",
-    "contact_sheet": "python -X utf8 scripts/studio_contact_sheet.py"
+    "contact_sheet": "python -X utf8 scripts/studio_contact_sheet.py",
+    "provenance": "python -X utf8 scripts/studio_provenance_audit.py --pretty",
+    "release_checks": "python -X utf8 scripts/studio_release_checks.py"
   },
   "verdict": "READY_FOR_METHODOLOGICAL_SUPERVISOR_REVIEW; NOT_READY_FOR_CONFIRMATORY_OR_BIOLOGICAL_CLAIMS",
   "notes": [
