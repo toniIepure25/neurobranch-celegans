@@ -84,8 +84,9 @@ def main() -> None:
             "branch": git("rev-parse", "--abbrev-ref", "HEAD"),
             "source_head": git("rev-parse", "HEAD"),
             "manifest_commit_note": (
-                "The manifest is committed after this source HEAD; the final repository "
-                "HEAD therefore adds only this generated file."
+                "The manifest is committed after this source HEAD. The final "
+                "repository HEAD also adds the separately committed integrity report, "
+                "which is excluded here to avoid a self-hash cycle."
             ),
             "worktree_clean_excluding_manifest": not other_changes,
         },
