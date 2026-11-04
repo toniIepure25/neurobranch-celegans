@@ -48,7 +48,7 @@ The application remains a read-only presentation layer over frozen Kato 2015
 | Final-audit manifest, recorded head `2b42ec3` | 71 exact, 5 line-ending representations, 7 at `96a8dd3`, 2 unverifiable audit-script worktree snapshots |
 | Interaction manifest, recorded head `4896ab1` | 34 exact; `app/handoff_demo.py` and `mkdocs.yml` match pre-commit `358107a` |
 | Unexplained scientific-artifact modification | **none** |
-| Current Studio manifest | **104/104 entries pass** |
+| Current Studio manifest | **124/124 entries pass** |
 | Historical provenance | **INCOMPLETE** — two historical audit-script blobs are not recoverable from Git |
 
 The old validators still fail by design because they compare historical
