@@ -51,6 +51,9 @@ def main() -> None:
         ROOT / "scripts" / "studio_browser_qa.py",
         ROOT / "scripts" / "studio_contact_sheet.py",
         ROOT / "scripts" / "studio_final_audit.py",
+        ROOT / "scripts" / "studio_interaction_qa.py",
+        ROOT / "scripts" / "studio_polish_contact_sheet.py",
+        ROOT / "scripts" / "studio_presentation_polish_qa.py",
         ROOT / "scripts" / "studio_provenance_audit.py",
         ROOT / "scripts" / "studio_release_checks.py",
         ROOT / "scripts" / "master_review" / "independent_model_check.py",
@@ -69,6 +72,13 @@ def main() -> None:
         if path.is_file()
         and path.suffix.lower() in {".json", ".png", ".md", ".txt"}
         and path.name != "integrity_report.json"
+    )
+    presentation_polish = sorted(
+        path
+        for path in (STUDIO / "presentation_polish").rglob("*")
+        if path.is_file()
+        and path.suffix.lower() in {".json", ".png", ".md"}
+        and path.name not in {"server.out.log", "server.err.log"}
     )
     status_lines = [line for line in git("status", "--porcelain").splitlines() if line]
     generated = {
@@ -120,6 +130,9 @@ def main() -> None:
         "release_candidate": [
             entry(path, "release-candidate evidence") for path in release_evidence
         ],
+        "presentation_polish": [
+            entry(path, "presentation-polish evidence") for path in presentation_polish
+        ],
         "source_of_truth": [
             "reports/master_review/dataset_identity_audit.json",
             "reports/master_review/statistical_audit.json",
@@ -148,6 +161,15 @@ def main() -> None:
             "final_audit": "python -X utf8 scripts/studio_final_audit.py",
             "browser_qa": "python -X utf8 scripts/studio_browser_qa.py",
             "contact_sheet": "python -X utf8 scripts/studio_contact_sheet.py",
+            "presentation_polish_qa": (
+                "python -X utf8 scripts/studio_presentation_polish_qa.py "
+                "--url http://127.0.0.1:8501"
+            ),
+            "interaction_qa": (
+                "python -X utf8 scripts/studio_interaction_qa.py "
+                "--url http://127.0.0.1:8501"
+            ),
+            "polish_contact_sheet": "python -X utf8 scripts/studio_polish_contact_sheet.py",
             "provenance": "python -X utf8 scripts/studio_provenance_audit.py --pretty",
             "release_checks": "python -X utf8 scripts/studio_release_checks.py",
         },

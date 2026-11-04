@@ -49,6 +49,9 @@ nav:
           - Historical provenance: STUDIO_HISTORICAL_PROVENANCE_VALIDATION.md
           - Human visual review: STUDIO_HUMAN_VISUAL_REVIEW_CHECKLIST.md
           - Final demo script: STUDIO_FINAL_DEMO_SCRIPT.md
+          - Presentation polish: STUDIO_PRESENTATION_POLISH.md
+          - Scientific wording review: STUDIO_SCIENTIFIC_WORDING_REVIEW.md
+          - Visual sign-off: STUDIO_VISUAL_SIGNOFF.md
       - Final audit 2026-11-04:
           - Numerical audit: STUDIO_FINAL_NUMERICAL_AUDIT.md
           - PCA audit: STUDIO_FINAL_PCA_AUDIT.md

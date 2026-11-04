@@ -1,0 +1,23 @@
+{
+  "generated_utc": "2026-11-04T12:29:18.216948+00:00",
+  "checks": {
+    "canvas_count": 1,
+    "plotly_count": 3,
+    "selected_recording": "Recording 2 \u00b7 TS20140905c_lite-1_punc-31_NLS3_AVHJ_0eggs_1mMTet_basal_1080s \u00b7 3,059 frames",
+    "selected_landmark": "t = 2,674  \u00b7  944.1s",
+    "history_length_before": "160",
+    "history_length_after": "180",
+    "activity_recording": "Recording 2 \u00b7 TS20140905c_lite-1_punc-31_NLS3_AVHJ_0eggs_1mMTet_basal_1080s \u00b7 3,059 frames",
+    "activity_landmark": "t = 2,674  \u00b7  944.1s",
+    "dark_background": "#071117",
+    "light_background": "#f5f7f6",
+    "presentation_enter_exit": true,
+    "recording_shared": true,
+    "landmark_shared": true,
+    "slider_changed": true,
+    "theme_changed": true,
+    "canvas_rendered": true
+  },
+  "console_errors": [],
+  "status": "PASS"
+}

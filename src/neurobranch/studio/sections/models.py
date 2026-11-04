@@ -61,7 +61,7 @@ def render(snapshot: StudioSnapshot, store: TrajectoryStore, *, light: bool = Fa
         "04 · MODELS & FORECASTING",
         "Four fitted forecasters, one matched comparison.",
         "The workbench exposes equations, parameter budgets, refit windows, and matched "
-        "trajectories. It is a frozen reanalysis of prespecified models, not an "
+        "trajectories. It is a frozen reanalysis of the fitted model family, not an "
         "architecture search.",
     )
     c1, c2, c3 = st.columns([1.2, 1.5, 1.1], gap="small")
@@ -112,7 +112,8 @@ def render(snapshot: StudioSnapshot, store: TrajectoryStore, *, light: bool = Fa
         note(
             "B4m is the independent AR comparator with the window matched to B3/B5. "
             "B4m is not a second population model and is not a substitute for the "
-            "primary contrast. The prespecified contrast remains B5 − B3."
+            "reported contrast. The reported contrast remains B5 − B3; positive values "
+            "favor B3."
         )
 
     with tabs[1]:

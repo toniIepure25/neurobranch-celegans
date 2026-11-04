@@ -1,0 +1,2711 @@
+{
+  "generated_utc": "2026-11-04T12:26:37.783523+00:00",
+  "url": "http://127.0.0.1:8525",
+  "viewports": [
+    {
+      "width": 1920,
+      "height": 1080
+    },
+    {
+      "width": 1366,
+      "height": 768
+    },
+    {
+      "width": 1280,
+      "height": 800
+    }
+  ],
+  "slides": [
+    {
+      "slide": 1,
+      "width": 1920,
+      "height": 1080,
+      "file": "slide_01_1920.png",
+      "shell": {
+        "top": 114,
+        "bottom": 783,
+        "left": 355,
+        "right": 1565,
+        "width": 1210,
+        "height": 668,
+        "scrollHeight": 666,
+        "clientHeight": 666,
+        "scrollWidth": 1208,
+        "clientWidth": 1208
+      },
+      "shell_class": "stVerticalBlock st-key-nb_slide st-emotion-cache-q25c8l e1a2occc3",
+      "content_inside_shell": true,
+      "nav": [
+        {
+          "top": 710,
+          "bottom": 750,
+          "left": 395,
+          "right": 641,
+          "width": 246,
+          "height": 40,
+          "scrollHeight": 38,
+          "clientHeight": 38,
+          "scrollWidth": 244,
+          "clientWidth": 244
+        },
+        {
+          "top": 710,
+          "bottom": 750,
+          "left": 1279,
+          "right": 1525,
+          "width": 246,
+          "height": 40,
+          "scrollHeight": 38,
+          "clientHeight": 38,
+          "scrollWidth": 244,
+          "clientWidth": 244
+        }
+      ],
+      "nav_in_viewport": true,
+      "clipped": [],
+      "fonts": {
+        "title": "36px",
+        "message": "19.2px",
+        "body": "16.96px"
+      },
+      "doc_scroll_width": 1920,
+      "doc_client_width": 1920,
+      "main_scroll_width": 1920,
+      "main_client_width": 1920,
+      "viewport": {
+        "width": 1920,
+        "height": 1080
+      },
+      "console_errors": []
+    },
+    {
+      "slide": 2,
+      "width": 1920,
+      "height": 1080,
+      "file": "slide_02_1920.png",
+      "shell": {
+        "top": 114,
+        "bottom": 786,
+        "left": 355,
+        "right": 1565,
+        "width": 1210,
+        "height": 671,
+        "scrollHeight": 669,
+        "clientHeight": 669,
+        "scrollWidth": 1208,
+        "clientWidth": 1208
+      },
+      "shell_class": "stVerticalBlock st-key-nb_slide st-emotion-cache-q25c8l e1a2occc3",
+      "content_inside_shell": true,
+      "nav": [
+        {
+          "top": 713,
+          "bottom": 753,
+          "left": 395,
+          "right": 641,
+          "width": 246,
+          "height": 40,
+          "scrollHeight": 38,
+          "clientHeight": 38,
+          "scrollWidth": 244,
+          "clientWidth": 244
+        },
+        {
+          "top": 713,
+          "bottom": 753,
+          "left": 1279,
+          "right": 1525,
+          "width": 246,
+          "height": 40,
+          "scrollHeight": 38,
+          "clientHeight": 38,
+          "scrollWidth": 244,
+          "clientWidth": 244
+        }
+      ],
+      "nav_in_viewport": true,
+      "clipped": [],
+      "fonts": {
+        "title": "36px",
+        "message": "19.2px",
+        "body": "16.96px"
+      },
+      "doc_scroll_width": 1920,
+      "doc_client_width": 1920,
+      "main_scroll_width": 1920,
+      "main_client_width": 1920,
+      "viewport": {
+        "width": 1920,
+        "height": 1080
+      },
+      "console_errors": []
+    },
+    {
+      "slide": 3,
+      "width": 1920,
+      "height": 1080,
+      "file": "slide_03_1920.png",
+      "shell": {
+        "top": 114,
+        "bottom": 833,
+        "left": 355,
+        "right": 1565,
+        "width": 1210,
+        "height": 719,
+        "scrollHeight": 717,
+        "clientHeight": 717,
+        "scrollWidth": 1208,
+        "clientWidth": 1208
+      },
+      "shell_class": "stVerticalBlock st-key-nb_slide st-emotion-cache-q25c8l e1a2occc3",
+      "content_inside_shell": true,
+      "nav": [
+        {
+          "top": 760,
+          "bottom": 800,
+          "left": 395,
+          "right": 641,
+          "width": 246,
+          "height": 40,
+          "scrollHeight": 38,
+          "clientHeight": 38,
+          "scrollWidth": 244,
+          "clientWidth": 244
+        },
+        {
+          "top": 760,
+          "bottom": 800,
+          "left": 1279,
+          "right": 1525,
+          "width": 246,
+          "height": 40,
+          "scrollHeight": 38,
+          "clientHeight": 38,
+          "scrollWidth": 244,
+          "clientWidth": 244
+        }
+      ],
+      "nav_in_viewport": true,
+      "clipped": [],
+      "fonts": {
+        "title": "36px",
+        "message": "19.2px",
+        "body": "16.96px"
+      },
+      "doc_scroll_width": 1920,
+      "doc_client_width": 1920,
+      "main_scroll_width": 1920,
+      "main_client_width": 1920,
+      "viewport": {
+        "width": 1920,
+        "height": 1080
+      },
+      "console_errors": []
+    },
+    {
+      "slide": 4,
+      "width": 1920,
+      "height": 1080,
+      "file": "slide_04_1920.png",
+      "shell": {
+        "top": 114,
+        "bottom": 826,
+        "left": 355,
+        "right": 1565,
+        "width": 1210,
+        "height": 712,
+        "scrollHeight": 710,
+        "clientHeight": 710,
+        "scrollWidth": 1208,
+        "clientWidth": 1208
+      },
+      "shell_class": "stVerticalBlock st-key-nb_slide st-emotion-cache-q25c8l e1a2occc3",
+      "content_inside_shell": true,
+      "nav": [
+        {
+          "top": 753,
+          "bottom": 793,
+          "left": 395,
+          "right": 641,
+          "width": 246,
+          "height": 40,
+          "scrollHeight": 38,
+          "clientHeight": 38,
+          "scrollWidth": 244,
+          "clientWidth": 244
+        },
+        {
+          "top": 753,
+          "bottom": 793,
+          "left": 1279,
+          "right": 1525,
+          "width": 246,
+          "height": 40,
+          "scrollHeight": 38,
+          "clientHeight": 38,
+          "scrollWidth": 244,
+          "clientWidth": 244
+        }
+      ],
+      "nav_in_viewport": true,
+      "clipped": [],
+      "fonts": {
+        "title": "36px",
+        "message": "19.2px",
+        "body": "16.96px"
+      },
+      "doc_scroll_width": 1920,
+      "doc_client_width": 1920,
+      "main_scroll_width": 1920,
+      "main_client_width": 1920,
+      "viewport": {
+        "width": 1920,
+        "height": 1080
+      },
+      "console_errors": []
+    },
+    {
+      "slide": 5,
+      "width": 1920,
+      "height": 1080,
+      "file": "slide_05_1920.png",
+      "shell": {
+        "top": 114,
+        "bottom": 801,
+        "left": 355,
+        "right": 1565,
+        "width": 1210,
+        "height": 687,
+        "scrollHeight": 685,
+        "clientHeight": 685,
+        "scrollWidth": 1208,
+        "clientWidth": 1208
+      },
+      "shell_class": "stVerticalBlock st-key-nb_slide st-emotion-cache-q25c8l e1a2occc3",
+      "content_inside_shell": true,
+      "nav": [
+        {
+          "top": 728,
+          "bottom": 768,
+          "left": 395,
+          "right": 641,
+          "width": 246,
+          "height": 40,
+          "scrollHeight": 38,
+          "clientHeight": 38,
+          "scrollWidth": 244,
+          "clientWidth": 244
+        },
+        {
+          "top": 728,
+          "bottom": 768,
+          "left": 1279,
+          "right": 1525,
+          "width": 246,
+          "height": 40,
+          "scrollHeight": 38,
+          "clientHeight": 38,
+          "scrollWidth": 244,
+          "clientWidth": 244
+        }
+      ],
+      "nav_in_viewport": true,
+      "clipped": [],
+      "fonts": {
+        "title": "36px",
+        "message": "19.2px",
+        "body": null
+      },
+      "doc_scroll_width": 1920,
+      "doc_client_width": 1920,
+      "main_scroll_width": 1920,
+      "main_client_width": 1920,
+      "viewport": {
+        "width": 1920,
+        "height": 1080
+      },
+      "console_errors": []
+    },
+    {
+      "slide": 6,
+      "width": 1920,
+      "height": 1080,
+      "file": "slide_06_1920.png",
+      "shell": {
+        "top": 114,
+        "bottom": 582,
+        "left": 355,
+        "right": 1565,
+        "width": 1210,
+        "height": 467,
+        "scrollHeight": 465,
+        "clientHeight": 465,
+        "scrollWidth": 1208,
+        "clientWidth": 1208
+      },
+      "shell_class": "stVerticalBlock st-key-nb_slide st-emotion-cache-q25c8l e1a2occc3",
+      "content_inside_shell": true,
+      "nav": [
+        {
+          "top": 509,
+          "bottom": 549,
+          "left": 395,
+          "right": 641,
+          "width": 246,
+          "height": 40,
+          "scrollHeight": 38,
+          "clientHeight": 38,
+          "scrollWidth": 244,
+          "clientWidth": 244
+        },
+        {
+          "top": 509,
+          "bottom": 549,
+          "left": 1279,
+          "right": 1525,
+          "width": 246,
+          "height": 40,
+          "scrollHeight": 38,
+          "clientHeight": 38,
+          "scrollWidth": 244,
+          "clientWidth": 244
+        }
+      ],
+      "nav_in_viewport": true,
+      "clipped": [],
+      "fonts": {
+        "title": "36px",
+        "message": "19.2px",
+        "body": "16.96px"
+      },
+      "doc_scroll_width": 1920,
+      "doc_client_width": 1920,
+      "main_scroll_width": 1920,
+      "main_client_width": 1920,
+      "viewport": {
+        "width": 1920,
+        "height": 1080
+      },
+      "console_errors": []
+    },
+    {
+      "slide": 7,
+      "width": 1920,
+      "height": 1080,
+      "file": "slide_07_1920.png",
+      "shell": {
+        "top": 114,
+        "bottom": 765,
+        "left": 355,
+        "right": 1565,
+        "width": 1210,
+        "height": 650,
+        "scrollHeight": 648,
+        "clientHeight": 648,
+        "scrollWidth": 1208,
+        "clientWidth": 1208
+      },
+      "shell_class": "stVerticalBlock st-key-nb_slide st-emotion-cache-q25c8l e1a2occc3",
+      "content_inside_shell": true,
+      "nav": [
+        {
+          "top": 692,
+          "bottom": 732,
+          "left": 395,
+          "right": 641,
+          "width": 246,
+          "height": 40,
+          "scrollHeight": 38,
+          "clientHeight": 38,
+          "scrollWidth": 244,
+          "clientWidth": 244
+        },
+        {
+          "top": 692,
+          "bottom": 732,
+          "left": 1279,
+          "right": 1525,
+          "width": 246,
+          "height": 40,
+          "scrollHeight": 38,
+          "clientHeight": 38,
+          "scrollWidth": 244,
+          "clientWidth": 244
+        }
+      ],
+      "nav_in_viewport": true,
+      "clipped": [],
+      "fonts": {
+        "title": "36px",
+        "message": "19.2px",
+        "body": "16.96px"
+      },
+      "doc_scroll_width": 1920,
+      "doc_client_width": 1920,
+      "main_scroll_width": 1920,
+      "main_client_width": 1920,
+      "viewport": {
+        "width": 1920,
+        "height": 1080
+      },
+      "console_errors": []
+    },
+    {
+      "slide": 8,
+      "width": 1920,
+      "height": 1080,
+      "file": "slide_08_1920.png",
+      "shell": {
+        "top": 114,
+        "bottom": 756,
+        "left": 355,
+        "right": 1565,
+        "width": 1210,
+        "height": 641,
+        "scrollHeight": 639,
+        "clientHeight": 639,
+        "scrollWidth": 1208,
+        "clientWidth": 1208
+      },
+      "shell_class": "stVerticalBlock st-key-nb_slide st-emotion-cache-q25c8l e1a2occc3",
+      "content_inside_shell": true,
+      "nav": [
+        {
+          "top": 683,
+          "bottom": 723,
+          "left": 395,
+          "right": 641,
+          "width": 246,
+          "height": 40,
+          "scrollHeight": 38,
+          "clientHeight": 38,
+          "scrollWidth": 244,
+          "clientWidth": 244
+        },
+        {
+          "top": 683,
+          "bottom": 723,
+          "left": 1279,
+          "right": 1525,
+          "width": 246,
+          "height": 40,
+          "scrollHeight": 38,
+          "clientHeight": 38,
+          "scrollWidth": 244,
+          "clientWidth": 244
+        }
+      ],
+      "nav_in_viewport": true,
+      "clipped": [],
+      "fonts": {
+        "title": "36px",
+        "message": "19.2px",
+        "body": "16.96px"
+      },
+      "doc_scroll_width": 1920,
+      "doc_client_width": 1920,
+      "main_scroll_width": 1920,
+      "main_client_width": 1920,
+      "viewport": {
+        "width": 1920,
+        "height": 1080
+      },
+      "console_errors": []
+    },
+    {
+      "slide": 9,
+      "width": 1920,
+      "height": 1080,
+      "file": "slide_09_1920.png",
+      "shell": {
+        "top": 114,
+        "bottom": 824,
+        "left": 355,
+        "right": 1565,
+        "width": 1210,
+        "height": 709,
+        "scrollHeight": 707,
+        "clientHeight": 707,
+        "scrollWidth": 1208,
+        "clientWidth": 1208
+      },
+      "shell_class": "stVerticalBlock st-key-nb_slide st-emotion-cache-q25c8l e1a2occc3",
+      "content_inside_shell": true,
+      "nav": [
+        {
+          "top": 751,
+          "bottom": 791,
+          "left": 395,
+          "right": 641,
+          "width": 246,
+          "height": 40,
+          "scrollHeight": 38,
+          "clientHeight": 38,
+          "scrollWidth": 244,
+          "clientWidth": 244
+        },
+        {
+          "top": 751,
+          "bottom": 791,
+          "left": 1279,
+          "right": 1525,
+          "width": 246,
+          "height": 40,
+          "scrollHeight": 38,
+          "clientHeight": 38,
+          "scrollWidth": 244,
+          "clientWidth": 244
+        }
+      ],
+      "nav_in_viewport": true,
+      "clipped": [],
+      "fonts": {
+        "title": "36px",
+        "message": "19.2px",
+        "body": "16.96px"
+      },
+      "doc_scroll_width": 1920,
+      "doc_client_width": 1920,
+      "main_scroll_width": 1920,
+      "main_client_width": 1920,
+      "viewport": {
+        "width": 1920,
+        "height": 1080
+      },
+      "console_errors": []
+    },
+    {
+      "slide": 10,
+      "width": 1920,
+      "height": 1080,
+      "file": "slide_10_1920.png",
+      "shell": {
+        "top": 114,
+        "bottom": 666,
+        "left": 355,
+        "right": 1565,
+        "width": 1210,
+        "height": 552,
+        "scrollHeight": 550,
+        "clientHeight": 550,
+        "scrollWidth": 1208,
+        "clientWidth": 1208
+      },
+      "shell_class": "stVerticalBlock st-key-nb_slide st-emotion-cache-q25c8l e1a2occc3",
+      "content_inside_shell": true,
+      "nav": [
+        {
+          "top": 593,
+          "bottom": 633,
+          "left": 395,
+          "right": 641,
+          "width": 246,
+          "height": 40,
+          "scrollHeight": 38,
+          "clientHeight": 38,
+          "scrollWidth": 244,
+          "clientWidth": 244
+        },
+        {
+          "top": 593,
+          "bottom": 633,
+          "left": 1279,
+          "right": 1525,
+          "width": 246,
+          "height": 40,
+          "scrollHeight": 38,
+          "clientHeight": 38,
+          "scrollWidth": 244,
+          "clientWidth": 244
+        }
+      ],
+      "nav_in_viewport": true,
+      "clipped": [],
+      "fonts": {
+        "title": "36px",
+        "message": "19.2px",
+        "body": "16.96px"
+      },
+      "doc_scroll_width": 1920,
+      "doc_client_width": 1920,
+      "main_scroll_width": 1920,
+      "main_client_width": 1920,
+      "viewport": {
+        "width": 1920,
+        "height": 1080
+      },
+      "console_errors": []
+    },
+    {
+      "slide": 1,
+      "width": 1366,
+      "height": 768,
+      "file": "slide_01_1366.png",
+      "shell": {
+        "top": 114,
+        "bottom": 701,
+        "left": 78,
+        "right": 1288,
+        "width": 1210,
+        "height": 587,
+        "scrollHeight": 585,
+        "clientHeight": 585,
+        "scrollWidth": 1208,
+        "clientWidth": 1208
+      },
+      "shell_class": "stVerticalBlock st-key-nb_slide st-emotion-cache-q25c8l e1a2occc3",
+      "content_inside_shell": true,
+      "nav": [
+        {
+          "top": 647,
+          "bottom": 687,
+          "left": 100,
+          "right": 354,
+          "width": 254,
+          "height": 40,
+          "scrollHeight": 38,
+          "clientHeight": 38,
+          "scrollWidth": 252,
+          "clientWidth": 252
+        },
+        {
+          "top": 647,
+          "bottom": 687,
+          "left": 1012,
+          "right": 1266,
+          "width": 254,
+          "height": 40,
+          "scrollHeight": 38,
+          "clientHeight": 38,
+          "scrollWidth": 252,
+          "clientWidth": 252
+        }
+      ],
+      "nav_in_viewport": true,
+      "clipped": [],
+      "fonts": {
+        "title": "29.6px",
+        "message": "17px",
+        "body": "17px"
+      },
+      "doc_scroll_width": 1366,
+      "doc_client_width": 1366,
+      "main_scroll_width": 1366,
+      "main_client_width": 1366,
+      "viewport": {
+        "width": 1366,
+        "height": 768
+      },
+      "console_errors": []
+    },
+    {
+      "slide": 2,
+      "width": 1366,
+      "height": 768,
+      "file": "slide_02_1366.png",
+      "shell": {
+        "top": 114,
+        "bottom": 731,
+        "left": 78,
+        "right": 1288,
+        "width": 1210,
+        "height": 617,
+        "scrollHeight": 615,
+        "clientHeight": 615,
+        "scrollWidth": 1208,
+        "clientWidth": 1208
+      },
+      "shell_class": "stVerticalBlock st-key-nb_slide st-emotion-cache-q25c8l e1a2occc3",
+      "content_inside_shell": true,
+      "nav": [
+        {
+          "top": 678,
+          "bottom": 718,
+          "left": 100,
+          "right": 354,
+          "width": 254,
+          "height": 40,
+          "scrollHeight": 38,
+          "clientHeight": 38,
+          "scrollWidth": 252,
+          "clientWidth": 252
+        },
+        {
+          "top": 678,
+          "bottom": 718,
+          "left": 1012,
+          "right": 1266,
+          "width": 254,
+          "height": 40,
+          "scrollHeight": 38,
+          "clientHeight": 38,
+          "scrollWidth": 252,
+          "clientWidth": 252
+        }
+      ],
+      "nav_in_viewport": true,
+      "clipped": [],
+      "fonts": {
+        "title": "29.6px",
+        "message": "17px",
+        "body": "17px"
+      },
+      "doc_scroll_width": 1366,
+      "doc_client_width": 1366,
+      "main_scroll_width": 1366,
+      "main_client_width": 1366,
+      "viewport": {
+        "width": 1366,
+        "height": 768
+      },
+      "console_errors": []
+    },
+    {
+      "slide": 3,
+      "width": 1366,
+      "height": 768,
+      "file": "slide_03_1366.png",
+      "shell": {
+        "top": 114,
+        "bottom": 777,
+        "left": 78,
+        "right": 1288,
+        "width": 1210,
+        "height": 662,
+        "scrollHeight": 660,
+        "clientHeight": 660,
+        "scrollWidth": 1208,
+        "clientWidth": 1208
+      },
+      "shell_class": "stVerticalBlock st-key-nb_slide st-emotion-cache-q25c8l e1a2occc3",
+      "content_inside_shell": true,
+      "nav": [
+        {
+          "top": 723,
+          "bottom": 763,
+          "left": 100,
+          "right": 354,
+          "width": 254,
+          "height": 40,
+          "scrollHeight": 38,
+          "clientHeight": 38,
+          "scrollWidth": 252,
+          "clientWidth": 252
+        },
+        {
+          "top": 723,
+          "bottom": 763,
+          "left": 1012,
+          "right": 1266,
+          "width": 254,
+          "height": 40,
+          "scrollHeight": 38,
+          "clientHeight": 38,
+          "scrollWidth": 252,
+          "clientWidth": 252
+        }
+      ],
+      "nav_in_viewport": true,
+      "clipped": [],
+      "fonts": {
+        "title": "29.6px",
+        "message": "17px",
+        "body": "17px"
+      },
+      "doc_scroll_width": 1366,
+      "doc_client_width": 1366,
+      "main_scroll_width": 1366,
+      "main_client_width": 1366,
+      "viewport": {
+        "width": 1366,
+        "height": 768
+      },
+      "console_errors": []
+    },
+    {
+      "slide": 4,
+      "width": 1366,
+      "height": 768,
+      "file": "slide_04_1366.png",
+      "shell": {
+        "top": 114,
+        "bottom": 771,
+        "left": 78,
+        "right": 1288,
+        "width": 1210,
+        "height": 657,
+        "scrollHeight": 655,
+        "clientHeight": 655,
+        "scrollWidth": 1208,
+        "clientWidth": 1208
+      },
+      "shell_class": "stVerticalBlock st-key-nb_slide st-emotion-cache-q25c8l e1a2occc3",
+      "content_inside_shell": true,
+      "nav": [
+        {
+          "top": 717,
+          "bottom": 757,
+          "left": 100,
+          "right": 354,
+          "width": 254,
+          "height": 40,
+          "scrollHeight": 38,
+          "clientHeight": 38,
+          "scrollWidth": 252,
+          "clientWidth": 252
+        },
+        {
+          "top": 717,
+          "bottom": 757,
+          "left": 1012,
+          "right": 1266,
+          "width": 254,
+          "height": 40,
+          "scrollHeight": 38,
+          "clientHeight": 38,
+          "scrollWidth": 252,
+          "clientWidth": 252
+        }
+      ],
+      "nav_in_viewport": true,
+      "clipped": [],
+      "fonts": {
+        "title": "29.6px",
+        "message": "17px",
+        "body": "17px"
+      },
+      "doc_scroll_width": 1366,
+      "doc_client_width": 1366,
+      "main_scroll_width": 1366,
+      "main_client_width": 1366,
+      "viewport": {
+        "width": 1366,
+        "height": 768
+      },
+      "console_errors": []
+    },
+    {
+      "slide": 5,
+      "width": 1366,
+      "height": 768,
+      "file": "slide_05_1366.png",
+      "shell": {
+        "top": 114,
+        "bottom": 742,
+        "left": 78,
+        "right": 1288,
+        "width": 1210,
+        "height": 628,
+        "scrollHeight": 626,
+        "clientHeight": 626,
+        "scrollWidth": 1208,
+        "clientWidth": 1208
+      },
+      "shell_class": "stVerticalBlock st-key-nb_slide st-emotion-cache-q25c8l e1a2occc3",
+      "content_inside_shell": true,
+      "nav": [
+        {
+          "top": 688,
+          "bottom": 728,
+          "left": 100,
+          "right": 354,
+          "width": 254,
+          "height": 40,
+          "scrollHeight": 38,
+          "clientHeight": 38,
+          "scrollWidth": 252,
+          "clientWidth": 252
+        },
+        {
+          "top": 688,
+          "bottom": 728,
+          "left": 1012,
+          "right": 1266,
+          "width": 254,
+          "height": 40,
+          "scrollHeight": 38,
+          "clientHeight": 38,
+          "scrollWidth": 252,
+          "clientWidth": 252
+        }
+      ],
+      "nav_in_viewport": true,
+      "clipped": [],
+      "fonts": {
+        "title": "29.6px",
+        "message": "17px",
+        "body": null
+      },
+      "doc_scroll_width": 1366,
+      "doc_client_width": 1366,
+      "main_scroll_width": 1366,
+      "main_client_width": 1366,
+      "viewport": {
+        "width": 1366,
+        "height": 768
+      },
+      "console_errors": []
+    },
+    {
+      "slide": 6,
+      "width": 1366,
+      "height": 768,
+      "file": "slide_06_1366.png",
+      "shell": {
+        "top": 114,
+        "bottom": 529,
+        "left": 78,
+        "right": 1288,
+        "width": 1210,
+        "height": 415,
+        "scrollHeight": 413,
+        "clientHeight": 413,
+        "scrollWidth": 1208,
+        "clientWidth": 1208
+      },
+      "shell_class": "stVerticalBlock st-key-nb_slide st-emotion-cache-q25c8l e1a2occc3",
+      "content_inside_shell": true,
+      "nav": [
+        {
+          "top": 475,
+          "bottom": 515,
+          "left": 100,
+          "right": 354,
+          "width": 254,
+          "height": 40,
+          "scrollHeight": 38,
+          "clientHeight": 38,
+          "scrollWidth": 252,
+          "clientWidth": 252
+        },
+        {
+          "top": 475,
+          "bottom": 515,
+          "left": 1012,
+          "right": 1266,
+          "width": 254,
+          "height": 40,
+          "scrollHeight": 38,
+          "clientHeight": 38,
+          "scrollWidth": 252,
+          "clientWidth": 252
+        }
+      ],
+      "nav_in_viewport": true,
+      "clipped": [],
+      "fonts": {
+        "title": "29.6px",
+        "message": "17px",
+        "body": "17px"
+      },
+      "doc_scroll_width": 1366,
+      "doc_client_width": 1366,
+      "main_scroll_width": 1366,
+      "main_client_width": 1366,
+      "viewport": {
+        "width": 1366,
+        "height": 768
+      },
+      "console_errors": []
+    },
+    {
+      "slide": 7,
+      "width": 1366,
+      "height": 768,
+      "file": "slide_07_1366.png",
+      "shell": {
+        "top": 114,
+        "bottom": 710,
+        "left": 78,
+        "right": 1288,
+        "width": 1210,
+        "height": 596,
+        "scrollHeight": 594,
+        "clientHeight": 594,
+        "scrollWidth": 1208,
+        "clientWidth": 1208
+      },
+      "shell_class": "stVerticalBlock st-key-nb_slide st-emotion-cache-q25c8l e1a2occc3",
+      "content_inside_shell": true,
+      "nav": [
+        {
+          "top": 657,
+          "bottom": 697,
+          "left": 100,
+          "right": 354,
+          "width": 254,
+          "height": 40,
+          "scrollHeight": 38,
+          "clientHeight": 38,
+          "scrollWidth": 252,
+          "clientWidth": 252
+        },
+        {
+          "top": 657,
+          "bottom": 697,
+          "left": 1012,
+          "right": 1266,
+          "width": 254,
+          "height": 40,
+          "scrollHeight": 38,
+          "clientHeight": 38,
+          "scrollWidth": 252,
+          "clientWidth": 252
+        }
+      ],
+      "nav_in_viewport": true,
+      "clipped": [],
+      "fonts": {
+        "title": "29.6px",
+        "message": "17px",
+        "body": "17px"
+      },
+      "doc_scroll_width": 1366,
+      "doc_client_width": 1366,
+      "main_scroll_width": 1366,
+      "main_client_width": 1366,
+      "viewport": {
+        "width": 1366,
+        "height": 768
+      },
+      "console_errors": []
+    },
+    {
+      "slide": 8,
+      "width": 1366,
+      "height": 768,
+      "file": "slide_08_1366.png",
+      "shell": {
+        "top": 114,
+        "bottom": 703,
+        "left": 78,
+        "right": 1288,
+        "width": 1210,
+        "height": 589,
+        "scrollHeight": 587,
+        "clientHeight": 587,
+        "scrollWidth": 1208,
+        "clientWidth": 1208
+      },
+      "shell_class": "stVerticalBlock st-key-nb_slide st-emotion-cache-q25c8l e1a2occc3",
+      "content_inside_shell": true,
+      "nav": [
+        {
+          "top": 649,
+          "bottom": 689,
+          "left": 100,
+          "right": 354,
+          "width": 254,
+          "height": 40,
+          "scrollHeight": 38,
+          "clientHeight": 38,
+          "scrollWidth": 252,
+          "clientWidth": 252
+        },
+        {
+          "top": 649,
+          "bottom": 689,
+          "left": 1012,
+          "right": 1266,
+          "width": 254,
+          "height": 40,
+          "scrollHeight": 38,
+          "clientHeight": 38,
+          "scrollWidth": 252,
+          "clientWidth": 252
+        }
+      ],
+      "nav_in_viewport": true,
+      "clipped": [],
+      "fonts": {
+        "title": "29.6px",
+        "message": "17px",
+        "body": "17px"
+      },
+      "doc_scroll_width": 1366,
+      "doc_client_width": 1366,
+      "main_scroll_width": 1366,
+      "main_client_width": 1366,
+      "viewport": {
+        "width": 1366,
+        "height": 768
+      },
+      "console_errors": []
+    },
+    {
+      "slide": 9,
+      "width": 1366,
+      "height": 768,
+      "file": "slide_09_1366.png",
+      "shell": {
+        "top": 114,
+        "bottom": 771,
+        "left": 78,
+        "right": 1288,
+        "width": 1210,
+        "height": 657,
+        "scrollHeight": 655,
+        "clientHeight": 655,
+        "scrollWidth": 1208,
+        "clientWidth": 1208
+      },
+      "shell_class": "stVerticalBlock st-key-nb_slide st-emotion-cache-q25c8l e1a2occc3",
+      "content_inside_shell": true,
+      "nav": [
+        {
+          "top": 717,
+          "bottom": 757,
+          "left": 100,
+          "right": 354,
+          "width": 254,
+          "height": 40,
+          "scrollHeight": 38,
+          "clientHeight": 38,
+          "scrollWidth": 252,
+          "clientWidth": 252
+        },
+        {
+          "top": 717,
+          "bottom": 757,
+          "left": 1012,
+          "right": 1266,
+          "width": 254,
+          "height": 40,
+          "scrollHeight": 38,
+          "clientHeight": 38,
+          "scrollWidth": 252,
+          "clientWidth": 252
+        }
+      ],
+      "nav_in_viewport": true,
+      "clipped": [],
+      "fonts": {
+        "title": "29.6px",
+        "message": "17px",
+        "body": "17px"
+      },
+      "doc_scroll_width": 1366,
+      "doc_client_width": 1366,
+      "main_scroll_width": 1366,
+      "main_client_width": 1366,
+      "viewport": {
+        "width": 1366,
+        "height": 768
+      },
+      "console_errors": []
+    },
+    {
+      "slide": 10,
+      "width": 1366,
+      "height": 768,
+      "file": "slide_10_1366.png",
+      "shell": {
+        "top": 114,
+        "bottom": 613,
+        "left": 78,
+        "right": 1288,
+        "width": 1210,
+        "height": 499,
+        "scrollHeight": 497,
+        "clientHeight": 497,
+        "scrollWidth": 1208,
+        "clientWidth": 1208
+      },
+      "shell_class": "stVerticalBlock st-key-nb_slide st-emotion-cache-q25c8l e1a2occc3",
+      "content_inside_shell": true,
+      "nav": [
+        {
+          "top": 559,
+          "bottom": 599,
+          "left": 100,
+          "right": 354,
+          "width": 254,
+          "height": 40,
+          "scrollHeight": 38,
+          "clientHeight": 38,
+          "scrollWidth": 252,
+          "clientWidth": 252
+        },
+        {
+          "top": 559,
+          "bottom": 599,
+          "left": 1012,
+          "right": 1266,
+          "width": 254,
+          "height": 40,
+          "scrollHeight": 38,
+          "clientHeight": 38,
+          "scrollWidth": 252,
+          "clientWidth": 252
+        }
+      ],
+      "nav_in_viewport": true,
+      "clipped": [],
+      "fonts": {
+        "title": "29.6px",
+        "message": "17px",
+        "body": "17px"
+      },
+      "doc_scroll_width": 1366,
+      "doc_client_width": 1366,
+      "main_scroll_width": 1366,
+      "main_client_width": 1366,
+      "viewport": {
+        "width": 1366,
+        "height": 768
+      },
+      "console_errors": []
+    },
+    {
+      "slide": 1,
+      "width": 1280,
+      "height": 800,
+      "file": "slide_01_1280.png",
+      "shell": {
+        "top": 114,
+        "bottom": 701,
+        "left": 35,
+        "right": 1245,
+        "width": 1210,
+        "height": 587,
+        "scrollHeight": 585,
+        "clientHeight": 585,
+        "scrollWidth": 1208,
+        "clientWidth": 1208
+      },
+      "shell_class": "stVerticalBlock st-key-nb_slide st-emotion-cache-q25c8l e1a2occc3",
+      "content_inside_shell": true,
+      "nav": [
+        {
+          "top": 647,
+          "bottom": 687,
+          "left": 57,
+          "right": 311,
+          "width": 254,
+          "height": 40,
+          "scrollHeight": 38,
+          "clientHeight": 38,
+          "scrollWidth": 252,
+          "clientWidth": 252
+        },
+        {
+          "top": 647,
+          "bottom": 687,
+          "left": 969,
+          "right": 1223,
+          "width": 254,
+          "height": 40,
+          "scrollHeight": 38,
+          "clientHeight": 38,
+          "scrollWidth": 252,
+          "clientWidth": 252
+        }
+      ],
+      "nav_in_viewport": true,
+      "clipped": [],
+      "fonts": {
+        "title": "29.6px",
+        "message": "17px",
+        "body": "17px"
+      },
+      "doc_scroll_width": 1280,
+      "doc_client_width": 1280,
+      "main_scroll_width": 1280,
+      "main_client_width": 1280,
+      "viewport": {
+        "width": 1280,
+        "height": 800
+      },
+      "console_errors": []
+    },
+    {
+      "slide": 2,
+      "width": 1280,
+      "height": 800,
+      "file": "slide_02_1280.png",
+      "shell": {
+        "top": 114,
+        "bottom": 731,
+        "left": 35,
+        "right": 1245,
+        "width": 1210,
+        "height": 617,
+        "scrollHeight": 615,
+        "clientHeight": 615,
+        "scrollWidth": 1208,
+        "clientWidth": 1208
+      },
+      "shell_class": "stVerticalBlock st-key-nb_slide st-emotion-cache-q25c8l e1a2occc3",
+      "content_inside_shell": true,
+      "nav": [
+        {
+          "top": 678,
+          "bottom": 718,
+          "left": 57,
+          "right": 311,
+          "width": 254,
+          "height": 40,
+          "scrollHeight": 38,
+          "clientHeight": 38,
+          "scrollWidth": 252,
+          "clientWidth": 252
+        },
+        {
+          "top": 678,
+          "bottom": 718,
+          "left": 969,
+          "right": 1223,
+          "width": 254,
+          "height": 40,
+          "scrollHeight": 38,
+          "clientHeight": 38,
+          "scrollWidth": 252,
+          "clientWidth": 252
+        }
+      ],
+      "nav_in_viewport": true,
+      "clipped": [],
+      "fonts": {
+        "title": "29.6px",
+        "message": "17px",
+        "body": "17px"
+      },
+      "doc_scroll_width": 1280,
+      "doc_client_width": 1280,
+      "main_scroll_width": 1280,
+      "main_client_width": 1280,
+      "viewport": {
+        "width": 1280,
+        "height": 800
+      },
+      "console_errors": []
+    },
+    {
+      "slide": 3,
+      "width": 1280,
+      "height": 800,
+      "file": "slide_03_1280.png",
+      "shell": {
+        "top": 114,
+        "bottom": 777,
+        "left": 35,
+        "right": 1245,
+        "width": 1210,
+        "height": 662,
+        "scrollHeight": 660,
+        "clientHeight": 660,
+        "scrollWidth": 1208,
+        "clientWidth": 1208
+      },
+      "shell_class": "stVerticalBlock st-key-nb_slide st-emotion-cache-q25c8l e1a2occc3",
+      "content_inside_shell": true,
+      "nav": [
+        {
+          "top": 723,
+          "bottom": 763,
+          "left": 57,
+          "right": 311,
+          "width": 254,
+          "height": 40,
+          "scrollHeight": 38,
+          "clientHeight": 38,
+          "scrollWidth": 252,
+          "clientWidth": 252
+        },
+        {
+          "top": 723,
+          "bottom": 763,
+          "left": 969,
+          "right": 1223,
+          "width": 254,
+          "height": 40,
+          "scrollHeight": 38,
+          "clientHeight": 38,
+          "scrollWidth": 252,
+          "clientWidth": 252
+        }
+      ],
+      "nav_in_viewport": true,
+      "clipped": [],
+      "fonts": {
+        "title": "29.6px",
+        "message": "17px",
+        "body": "17px"
+      },
+      "doc_scroll_width": 1280,
+      "doc_client_width": 1280,
+      "main_scroll_width": 1280,
+      "main_client_width": 1280,
+      "viewport": {
+        "width": 1280,
+        "height": 800
+      },
+      "console_errors": []
+    },
+    {
+      "slide": 4,
+      "width": 1280,
+      "height": 800,
+      "file": "slide_04_1280.png",
+      "shell": {
+        "top": 114,
+        "bottom": 771,
+        "left": 35,
+        "right": 1245,
+        "width": 1210,
+        "height": 657,
+        "scrollHeight": 655,
+        "clientHeight": 655,
+        "scrollWidth": 1208,
+        "clientWidth": 1208
+      },
+      "shell_class": "stVerticalBlock st-key-nb_slide st-emotion-cache-q25c8l e1a2occc3",
+      "content_inside_shell": true,
+      "nav": [
+        {
+          "top": 717,
+          "bottom": 757,
+          "left": 57,
+          "right": 311,
+          "width": 254,
+          "height": 40,
+          "scrollHeight": 38,
+          "clientHeight": 38,
+          "scrollWidth": 252,
+          "clientWidth": 252
+        },
+        {
+          "top": 717,
+          "bottom": 757,
+          "left": 969,
+          "right": 1223,
+          "width": 254,
+          "height": 40,
+          "scrollHeight": 38,
+          "clientHeight": 38,
+          "scrollWidth": 252,
+          "clientWidth": 252
+        }
+      ],
+      "nav_in_viewport": true,
+      "clipped": [],
+      "fonts": {
+        "title": "29.6px",
+        "message": "17px",
+        "body": "17px"
+      },
+      "doc_scroll_width": 1280,
+      "doc_client_width": 1280,
+      "main_scroll_width": 1280,
+      "main_client_width": 1280,
+      "viewport": {
+        "width": 1280,
+        "height": 800
+      },
+      "console_errors": []
+    },
+    {
+      "slide": 5,
+      "width": 1280,
+      "height": 800,
+      "file": "slide_05_1280.png",
+      "shell": {
+        "top": 114,
+        "bottom": 742,
+        "left": 35,
+        "right": 1245,
+        "width": 1210,
+        "height": 628,
+        "scrollHeight": 626,
+        "clientHeight": 626,
+        "scrollWidth": 1208,
+        "clientWidth": 1208
+      },
+      "shell_class": "stVerticalBlock st-key-nb_slide st-emotion-cache-q25c8l e1a2occc3",
+      "content_inside_shell": true,
+      "nav": [
+        {
+          "top": 688,
+          "bottom": 728,
+          "left": 57,
+          "right": 311,
+          "width": 254,
+          "height": 40,
+          "scrollHeight": 38,
+          "clientHeight": 38,
+          "scrollWidth": 252,
+          "clientWidth": 252
+        },
+        {
+          "top": 688,
+          "bottom": 728,
+          "left": 969,
+          "right": 1223,
+          "width": 254,
+          "height": 40,
+          "scrollHeight": 38,
+          "clientHeight": 38,
+          "scrollWidth": 252,
+          "clientWidth": 252
+        }
+      ],
+      "nav_in_viewport": true,
+      "clipped": [],
+      "fonts": {
+        "title": "29.6px",
+        "message": "17px",
+        "body": null
+      },
+      "doc_scroll_width": 1280,
+      "doc_client_width": 1280,
+      "main_scroll_width": 1280,
+      "main_client_width": 1280,
+      "viewport": {
+        "width": 1280,
+        "height": 800
+      },
+      "console_errors": []
+    },
+    {
+      "slide": 6,
+      "width": 1280,
+      "height": 800,
+      "file": "slide_06_1280.png",
+      "shell": {
+        "top": 114,
+        "bottom": 529,
+        "left": 35,
+        "right": 1245,
+        "width": 1210,
+        "height": 415,
+        "scrollHeight": 413,
+        "clientHeight": 413,
+        "scrollWidth": 1208,
+        "clientWidth": 1208
+      },
+      "shell_class": "stVerticalBlock st-key-nb_slide st-emotion-cache-q25c8l e1a2occc3",
+      "content_inside_shell": true,
+      "nav": [
+        {
+          "top": 475,
+          "bottom": 515,
+          "left": 57,
+          "right": 311,
+          "width": 254,
+          "height": 40,
+          "scrollHeight": 38,
+          "clientHeight": 38,
+          "scrollWidth": 252,
+          "clientWidth": 252
+        },
+        {
+          "top": 475,
+          "bottom": 515,
+          "left": 969,
+          "right": 1223,
+          "width": 254,
+          "height": 40,
+          "scrollHeight": 38,
+          "clientHeight": 38,
+          "scrollWidth": 252,
+          "clientWidth": 252
+        }
+      ],
+      "nav_in_viewport": true,
+      "clipped": [],
+      "fonts": {
+        "title": "29.6px",
+        "message": "17px",
+        "body": "17px"
+      },
+      "doc_scroll_width": 1280,
+      "doc_client_width": 1280,
+      "main_scroll_width": 1280,
+      "main_client_width": 1280,
+      "viewport": {
+        "width": 1280,
+        "height": 800
+      },
+      "console_errors": []
+    },
+    {
+      "slide": 7,
+      "width": 1280,
+      "height": 800,
+      "file": "slide_07_1280.png",
+      "shell": {
+        "top": 114,
+        "bottom": 710,
+        "left": 35,
+        "right": 1245,
+        "width": 1210,
+        "height": 596,
+        "scrollHeight": 594,
+        "clientHeight": 594,
+        "scrollWidth": 1208,
+        "clientWidth": 1208
+      },
+      "shell_class": "stVerticalBlock st-key-nb_slide st-emotion-cache-q25c8l e1a2occc3",
+      "content_inside_shell": true,
+      "nav": [
+        {
+          "top": 657,
+          "bottom": 697,
+          "left": 57,
+          "right": 311,
+          "width": 254,
+          "height": 40,
+          "scrollHeight": 38,
+          "clientHeight": 38,
+          "scrollWidth": 252,
+          "clientWidth": 252
+        },
+        {
+          "top": 657,
+          "bottom": 697,
+          "left": 969,
+          "right": 1223,
+          "width": 254,
+          "height": 40,
+          "scrollHeight": 38,
+          "clientHeight": 38,
+          "scrollWidth": 252,
+          "clientWidth": 252
+        }
+      ],
+      "nav_in_viewport": true,
+      "clipped": [],
+      "fonts": {
+        "title": "29.6px",
+        "message": "17px",
+        "body": "17px"
+      },
+      "doc_scroll_width": 1280,
+      "doc_client_width": 1280,
+      "main_scroll_width": 1280,
+      "main_client_width": 1280,
+      "viewport": {
+        "width": 1280,
+        "height": 800
+      },
+      "console_errors": []
+    },
+    {
+      "slide": 8,
+      "width": 1280,
+      "height": 800,
+      "file": "slide_08_1280.png",
+      "shell": {
+        "top": 114,
+        "bottom": 703,
+        "left": 35,
+        "right": 1245,
+        "width": 1210,
+        "height": 589,
+        "scrollHeight": 587,
+        "clientHeight": 587,
+        "scrollWidth": 1208,
+        "clientWidth": 1208
+      },
+      "shell_class": "stVerticalBlock st-key-nb_slide st-emotion-cache-q25c8l e1a2occc3",
+      "content_inside_shell": true,
+      "nav": [
+        {
+          "top": 649,
+          "bottom": 689,
+          "left": 57,
+          "right": 311,
+          "width": 254,
+          "height": 40,
+          "scrollHeight": 38,
+          "clientHeight": 38,
+          "scrollWidth": 252,
+          "clientWidth": 252
+        },
+        {
+          "top": 649,
+          "bottom": 689,
+          "left": 969,
+          "right": 1223,
+          "width": 254,
+          "height": 40,
+          "scrollHeight": 38,
+          "clientHeight": 38,
+          "scrollWidth": 252,
+          "clientWidth": 252
+        }
+      ],
+      "nav_in_viewport": true,
+      "clipped": [],
+      "fonts": {
+        "title": "29.6px",
+        "message": "17px",
+        "body": "17px"
+      },
+      "doc_scroll_width": 1280,
+      "doc_client_width": 1280,
+      "main_scroll_width": 1280,
+      "main_client_width": 1280,
+      "viewport": {
+        "width": 1280,
+        "height": 800
+      },
+      "console_errors": []
+    },
+    {
+      "slide": 9,
+      "width": 1280,
+      "height": 800,
+      "file": "slide_09_1280.png",
+      "shell": {
+        "top": 114,
+        "bottom": 771,
+        "left": 35,
+        "right": 1245,
+        "width": 1210,
+        "height": 657,
+        "scrollHeight": 655,
+        "clientHeight": 655,
+        "scrollWidth": 1208,
+        "clientWidth": 1208
+      },
+      "shell_class": "stVerticalBlock st-key-nb_slide st-emotion-cache-q25c8l e1a2occc3",
+      "content_inside_shell": true,
+      "nav": [
+        {
+          "top": 717,
+          "bottom": 757,
+          "left": 57,
+          "right": 311,
+          "width": 254,
+          "height": 40,
+          "scrollHeight": 38,
+          "clientHeight": 38,
+          "scrollWidth": 252,
+          "clientWidth": 252
+        },
+        {
+          "top": 717,
+          "bottom": 757,
+          "left": 969,
+          "right": 1223,
+          "width": 254,
+          "height": 40,
+          "scrollHeight": 38,
+          "clientHeight": 38,
+          "scrollWidth": 252,
+          "clientWidth": 252
+        }
+      ],
+      "nav_in_viewport": true,
+      "clipped": [],
+      "fonts": {
+        "title": "29.6px",
+        "message": "17px",
+        "body": "17px"
+      },
+      "doc_scroll_width": 1280,
+      "doc_client_width": 1280,
+      "main_scroll_width": 1280,
+      "main_client_width": 1280,
+      "viewport": {
+        "width": 1280,
+        "height": 800
+      },
+      "console_errors": []
+    },
+    {
+      "slide": 10,
+      "width": 1280,
+      "height": 800,
+      "file": "slide_10_1280.png",
+      "shell": {
+        "top": 114,
+        "bottom": 613,
+        "left": 35,
+        "right": 1245,
+        "width": 1210,
+        "height": 499,
+        "scrollHeight": 497,
+        "clientHeight": 497,
+        "scrollWidth": 1208,
+        "clientWidth": 1208
+      },
+      "shell_class": "stVerticalBlock st-key-nb_slide st-emotion-cache-q25c8l e1a2occc3",
+      "content_inside_shell": true,
+      "nav": [
+        {
+          "top": 559,
+          "bottom": 599,
+          "left": 57,
+          "right": 311,
+          "width": 254,
+          "height": 40,
+          "scrollHeight": 38,
+          "clientHeight": 38,
+          "scrollWidth": 252,
+          "clientWidth": 252
+        },
+        {
+          "top": 559,
+          "bottom": 599,
+          "left": 969,
+          "right": 1223,
+          "width": 254,
+          "height": 40,
+          "scrollHeight": 38,
+          "clientHeight": 38,
+          "scrollWidth": 252,
+          "clientWidth": 252
+        }
+      ],
+      "nav_in_viewport": true,
+      "clipped": [],
+      "fonts": {
+        "title": "29.6px",
+        "message": "17px",
+        "body": "17px"
+      },
+      "doc_scroll_width": 1280,
+      "doc_client_width": 1280,
+      "main_scroll_width": 1280,
+      "main_client_width": 1280,
+      "viewport": {
+        "width": 1280,
+        "height": 800
+      },
+      "console_errors": []
+    },
+    {
+      "slide": 1,
+      "width": 1920,
+      "height": 1080,
+      "theme": "light",
+      "file": "slide_01_light_1920.png",
+      "shell": {
+        "top": 114,
+        "bottom": 783,
+        "left": 355,
+        "right": 1565,
+        "width": 1210,
+        "height": 668,
+        "scrollHeight": 666,
+        "clientHeight": 666,
+        "scrollWidth": 1208,
+        "clientWidth": 1208
+      },
+      "shell_class": "stVerticalBlock st-key-nb_slide st-emotion-cache-q25c8l e1a2occc3",
+      "content_inside_shell": true,
+      "nav": [
+        {
+          "top": 710,
+          "bottom": 750,
+          "left": 395,
+          "right": 641,
+          "width": 246,
+          "height": 40,
+          "scrollHeight": 38,
+          "clientHeight": 38,
+          "scrollWidth": 244,
+          "clientWidth": 244
+        },
+        {
+          "top": 710,
+          "bottom": 750,
+          "left": 1279,
+          "right": 1525,
+          "width": 246,
+          "height": 40,
+          "scrollHeight": 38,
+          "clientHeight": 38,
+          "scrollWidth": 244,
+          "clientWidth": 244
+        }
+      ],
+      "nav_in_viewport": true,
+      "clipped": [],
+      "fonts": {
+        "title": "36px",
+        "message": "19.2px",
+        "body": "16.96px"
+      },
+      "doc_scroll_width": 1920,
+      "doc_client_width": 1920,
+      "main_scroll_width": 1920,
+      "main_client_width": 1920,
+      "viewport": {
+        "width": 1920,
+        "height": 1080
+      },
+      "console_errors": []
+    },
+    {
+      "slide": 2,
+      "width": 1920,
+      "height": 1080,
+      "theme": "light",
+      "file": "slide_02_light_1920.png",
+      "shell": {
+        "top": 114,
+        "bottom": 786,
+        "left": 355,
+        "right": 1565,
+        "width": 1210,
+        "height": 671,
+        "scrollHeight": 669,
+        "clientHeight": 669,
+        "scrollWidth": 1208,
+        "clientWidth": 1208
+      },
+      "shell_class": "stVerticalBlock st-key-nb_slide st-emotion-cache-q25c8l e1a2occc3",
+      "content_inside_shell": true,
+      "nav": [
+        {
+          "top": 713,
+          "bottom": 753,
+          "left": 395,
+          "right": 641,
+          "width": 246,
+          "height": 40,
+          "scrollHeight": 38,
+          "clientHeight": 38,
+          "scrollWidth": 244,
+          "clientWidth": 244
+        },
+        {
+          "top": 713,
+          "bottom": 753,
+          "left": 1279,
+          "right": 1525,
+          "width": 246,
+          "height": 40,
+          "scrollHeight": 38,
+          "clientHeight": 38,
+          "scrollWidth": 244,
+          "clientWidth": 244
+        }
+      ],
+      "nav_in_viewport": true,
+      "clipped": [],
+      "fonts": {
+        "title": "36px",
+        "message": "19.2px",
+        "body": "16.96px"
+      },
+      "doc_scroll_width": 1920,
+      "doc_client_width": 1920,
+      "main_scroll_width": 1920,
+      "main_client_width": 1920,
+      "viewport": {
+        "width": 1920,
+        "height": 1080
+      },
+      "console_errors": []
+    },
+    {
+      "slide": 3,
+      "width": 1920,
+      "height": 1080,
+      "theme": "light",
+      "file": "slide_03_light_1920.png",
+      "shell": {
+        "top": 114,
+        "bottom": 833,
+        "left": 355,
+        "right": 1565,
+        "width": 1210,
+        "height": 719,
+        "scrollHeight": 717,
+        "clientHeight": 717,
+        "scrollWidth": 1208,
+        "clientWidth": 1208
+      },
+      "shell_class": "stVerticalBlock st-key-nb_slide st-emotion-cache-q25c8l e1a2occc3",
+      "content_inside_shell": true,
+      "nav": [
+        {
+          "top": 760,
+          "bottom": 800,
+          "left": 395,
+          "right": 641,
+          "width": 246,
+          "height": 40,
+          "scrollHeight": 38,
+          "clientHeight": 38,
+          "scrollWidth": 244,
+          "clientWidth": 244
+        },
+        {
+          "top": 760,
+          "bottom": 800,
+          "left": 1279,
+          "right": 1525,
+          "width": 246,
+          "height": 40,
+          "scrollHeight": 38,
+          "clientHeight": 38,
+          "scrollWidth": 244,
+          "clientWidth": 244
+        }
+      ],
+      "nav_in_viewport": true,
+      "clipped": [],
+      "fonts": {
+        "title": "36px",
+        "message": "19.2px",
+        "body": "16.96px"
+      },
+      "doc_scroll_width": 1920,
+      "doc_client_width": 1920,
+      "main_scroll_width": 1920,
+      "main_client_width": 1920,
+      "viewport": {
+        "width": 1920,
+        "height": 1080
+      },
+      "console_errors": []
+    },
+    {
+      "slide": 4,
+      "width": 1920,
+      "height": 1080,
+      "theme": "light",
+      "file": "slide_04_light_1920.png",
+      "shell": {
+        "top": 114,
+        "bottom": 826,
+        "left": 355,
+        "right": 1565,
+        "width": 1210,
+        "height": 712,
+        "scrollHeight": 710,
+        "clientHeight": 710,
+        "scrollWidth": 1208,
+        "clientWidth": 1208
+      },
+      "shell_class": "stVerticalBlock st-key-nb_slide st-emotion-cache-q25c8l e1a2occc3",
+      "content_inside_shell": true,
+      "nav": [
+        {
+          "top": 753,
+          "bottom": 793,
+          "left": 395,
+          "right": 641,
+          "width": 246,
+          "height": 40,
+          "scrollHeight": 38,
+          "clientHeight": 38,
+          "scrollWidth": 244,
+          "clientWidth": 244
+        },
+        {
+          "top": 753,
+          "bottom": 793,
+          "left": 1279,
+          "right": 1525,
+          "width": 246,
+          "height": 40,
+          "scrollHeight": 38,
+          "clientHeight": 38,
+          "scrollWidth": 244,
+          "clientWidth": 244
+        }
+      ],
+      "nav_in_viewport": true,
+      "clipped": [],
+      "fonts": {
+        "title": "36px",
+        "message": "19.2px",
+        "body": "16.96px"
+      },
+      "doc_scroll_width": 1920,
+      "doc_client_width": 1920,
+      "main_scroll_width": 1920,
+      "main_client_width": 1920,
+      "viewport": {
+        "width": 1920,
+        "height": 1080
+      },
+      "console_errors": []
+    },
+    {
+      "slide": 5,
+      "width": 1920,
+      "height": 1080,
+      "theme": "light",
+      "file": "slide_05_light_1920.png",
+      "shell": {
+        "top": 114,
+        "bottom": 801,
+        "left": 355,
+        "right": 1565,
+        "width": 1210,
+        "height": 687,
+        "scrollHeight": 685,
+        "clientHeight": 685,
+        "scrollWidth": 1208,
+        "clientWidth": 1208
+      },
+      "shell_class": "stVerticalBlock st-key-nb_slide st-emotion-cache-q25c8l e1a2occc3",
+      "content_inside_shell": true,
+      "nav": [
+        {
+          "top": 728,
+          "bottom": 768,
+          "left": 395,
+          "right": 641,
+          "width": 246,
+          "height": 40,
+          "scrollHeight": 38,
+          "clientHeight": 38,
+          "scrollWidth": 244,
+          "clientWidth": 244
+        },
+        {
+          "top": 728,
+          "bottom": 768,
+          "left": 1279,
+          "right": 1525,
+          "width": 246,
+          "height": 40,
+          "scrollHeight": 38,
+          "clientHeight": 38,
+          "scrollWidth": 244,
+          "clientWidth": 244
+        }
+      ],
+      "nav_in_viewport": true,
+      "clipped": [],
+      "fonts": {
+        "title": "36px",
+        "message": "19.2px",
+        "body": null
+      },
+      "doc_scroll_width": 1920,
+      "doc_client_width": 1920,
+      "main_scroll_width": 1920,
+      "main_client_width": 1920,
+      "viewport": {
+        "width": 1920,
+        "height": 1080
+      },
+      "console_errors": []
+    },
+    {
+      "slide": 6,
+      "width": 1920,
+      "height": 1080,
+      "theme": "light",
+      "file": "slide_06_light_1920.png",
+      "shell": {
+        "top": 114,
+        "bottom": 582,
+        "left": 355,
+        "right": 1565,
+        "width": 1210,
+        "height": 467,
+        "scrollHeight": 465,
+        "clientHeight": 465,
+        "scrollWidth": 1208,
+        "clientWidth": 1208
+      },
+      "shell_class": "stVerticalBlock st-key-nb_slide st-emotion-cache-q25c8l e1a2occc3",
+      "content_inside_shell": true,
+      "nav": [
+        {
+          "top": 509,
+          "bottom": 549,
+          "left": 395,
+          "right": 641,
+          "width": 246,
+          "height": 40,
+          "scrollHeight": 38,
+          "clientHeight": 38,
+          "scrollWidth": 244,
+          "clientWidth": 244
+        },
+        {
+          "top": 509,
+          "bottom": 549,
+          "left": 1279,
+          "right": 1525,
+          "width": 246,
+          "height": 40,
+          "scrollHeight": 38,
+          "clientHeight": 38,
+          "scrollWidth": 244,
+          "clientWidth": 244
+        }
+      ],
+      "nav_in_viewport": true,
+      "clipped": [],
+      "fonts": {
+        "title": "36px",
+        "message": "19.2px",
+        "body": "16.96px"
+      },
+      "doc_scroll_width": 1920,
+      "doc_client_width": 1920,
+      "main_scroll_width": 1920,
+      "main_client_width": 1920,
+      "viewport": {
+        "width": 1920,
+        "height": 1080
+      },
+      "console_errors": []
+    },
+    {
+      "slide": 7,
+      "width": 1920,
+      "height": 1080,
+      "theme": "light",
+      "file": "slide_07_light_1920.png",
+      "shell": {
+        "top": 114,
+        "bottom": 765,
+        "left": 355,
+        "right": 1565,
+        "width": 1210,
+        "height": 650,
+        "scrollHeight": 648,
+        "clientHeight": 648,
+        "scrollWidth": 1208,
+        "clientWidth": 1208
+      },
+      "shell_class": "stVerticalBlock st-key-nb_slide st-emotion-cache-q25c8l e1a2occc3",
+      "content_inside_shell": true,
+      "nav": [
+        {
+          "top": 692,
+          "bottom": 732,
+          "left": 395,
+          "right": 641,
+          "width": 246,
+          "height": 40,
+          "scrollHeight": 38,
+          "clientHeight": 38,
+          "scrollWidth": 244,
+          "clientWidth": 244
+        },
+        {
+          "top": 692,
+          "bottom": 732,
+          "left": 1279,
+          "right": 1525,
+          "width": 246,
+          "height": 40,
+          "scrollHeight": 38,
+          "clientHeight": 38,
+          "scrollWidth": 244,
+          "clientWidth": 244
+        }
+      ],
+      "nav_in_viewport": true,
+      "clipped": [],
+      "fonts": {
+        "title": "36px",
+        "message": "19.2px",
+        "body": "16.96px"
+      },
+      "doc_scroll_width": 1920,
+      "doc_client_width": 1920,
+      "main_scroll_width": 1920,
+      "main_client_width": 1920,
+      "viewport": {
+        "width": 1920,
+        "height": 1080
+      },
+      "console_errors": []
+    },
+    {
+      "slide": 8,
+      "width": 1920,
+      "height": 1080,
+      "theme": "light",
+      "file": "slide_08_light_1920.png",
+      "shell": {
+        "top": 114,
+        "bottom": 756,
+        "left": 355,
+        "right": 1565,
+        "width": 1210,
+        "height": 641,
+        "scrollHeight": 639,
+        "clientHeight": 639,
+        "scrollWidth": 1208,
+        "clientWidth": 1208
+      },
+      "shell_class": "stVerticalBlock st-key-nb_slide st-emotion-cache-q25c8l e1a2occc3",
+      "content_inside_shell": true,
+      "nav": [
+        {
+          "top": 683,
+          "bottom": 723,
+          "left": 395,
+          "right": 641,
+          "width": 246,
+          "height": 40,
+          "scrollHeight": 38,
+          "clientHeight": 38,
+          "scrollWidth": 244,
+          "clientWidth": 244
+        },
+        {
+          "top": 683,
+          "bottom": 723,
+          "left": 1279,
+          "right": 1525,
+          "width": 246,
+          "height": 40,
+          "scrollHeight": 38,
+          "clientHeight": 38,
+          "scrollWidth": 244,
+          "clientWidth": 244
+        }
+      ],
+      "nav_in_viewport": true,
+      "clipped": [],
+      "fonts": {
+        "title": "36px",
+        "message": "19.2px",
+        "body": "16.96px"
+      },
+      "doc_scroll_width": 1920,
+      "doc_client_width": 1920,
+      "main_scroll_width": 1920,
+      "main_client_width": 1920,
+      "viewport": {
+        "width": 1920,
+        "height": 1080
+      },
+      "console_errors": []
+    },
+    {
+      "slide": 9,
+      "width": 1920,
+      "height": 1080,
+      "theme": "light",
+      "file": "slide_09_light_1920.png",
+      "shell": {
+        "top": 114,
+        "bottom": 824,
+        "left": 355,
+        "right": 1565,
+        "width": 1210,
+        "height": 709,
+        "scrollHeight": 707,
+        "clientHeight": 707,
+        "scrollWidth": 1208,
+        "clientWidth": 1208
+      },
+      "shell_class": "stVerticalBlock st-key-nb_slide st-emotion-cache-q25c8l e1a2occc3",
+      "content_inside_shell": true,
+      "nav": [
+        {
+          "top": 751,
+          "bottom": 791,
+          "left": 395,
+          "right": 641,
+          "width": 246,
+          "height": 40,
+          "scrollHeight": 38,
+          "clientHeight": 38,
+          "scrollWidth": 244,
+          "clientWidth": 244
+        },
+        {
+          "top": 751,
+          "bottom": 791,
+          "left": 1279,
+          "right": 1525,
+          "width": 246,
+          "height": 40,
+          "scrollHeight": 38,
+          "clientHeight": 38,
+          "scrollWidth": 244,
+          "clientWidth": 244
+        }
+      ],
+      "nav_in_viewport": true,
+      "clipped": [],
+      "fonts": {
+        "title": "36px",
+        "message": "19.2px",
+        "body": "16.96px"
+      },
+      "doc_scroll_width": 1920,
+      "doc_client_width": 1920,
+      "main_scroll_width": 1920,
+      "main_client_width": 1920,
+      "viewport": {
+        "width": 1920,
+        "height": 1080
+      },
+      "console_errors": []
+    },
+    {
+      "slide": 10,
+      "width": 1920,
+      "height": 1080,
+      "theme": "light",
+      "file": "slide_10_light_1920.png",
+      "shell": {
+        "top": 114,
+        "bottom": 666,
+        "left": 355,
+        "right": 1565,
+        "width": 1210,
+        "height": 552,
+        "scrollHeight": 550,
+        "clientHeight": 550,
+        "scrollWidth": 1208,
+        "clientWidth": 1208
+      },
+      "shell_class": "stVerticalBlock st-key-nb_slide st-emotion-cache-q25c8l e1a2occc3",
+      "content_inside_shell": true,
+      "nav": [
+        {
+          "top": 593,
+          "bottom": 633,
+          "left": 395,
+          "right": 641,
+          "width": 246,
+          "height": 40,
+          "scrollHeight": 38,
+          "clientHeight": 38,
+          "scrollWidth": 244,
+          "clientWidth": 244
+        },
+        {
+          "top": 593,
+          "bottom": 633,
+          "left": 1279,
+          "right": 1525,
+          "width": 246,
+          "height": 40,
+          "scrollHeight": 38,
+          "clientHeight": 38,
+          "scrollWidth": 244,
+          "clientWidth": 244
+        }
+      ],
+      "nav_in_viewport": true,
+      "clipped": [],
+      "fonts": {
+        "title": "36px",
+        "message": "19.2px",
+        "body": "16.96px"
+      },
+      "doc_scroll_width": 1920,
+      "doc_client_width": 1920,
+      "main_scroll_width": 1920,
+      "main_client_width": 1920,
+      "viewport": {
+        "width": 1920,
+        "height": 1080
+      },
+      "console_errors": []
+    }
+  ],
+  "sections": [
+    {
+      "section": "Overview",
+      "width": 1920,
+      "height": 1080,
+      "file": "sections\\overview_1920.png",
+      "horizontal_overflow": false,
+      "console_errors": []
+    },
+    {
+      "section": "3D Neural Dynamics",
+      "width": 1920,
+      "height": 1080,
+      "file": "sections\\3d_neural_dynamics_1920.png",
+      "horizontal_overflow": false,
+      "console_errors": []
+    },
+    {
+      "section": "Neural Activity",
+      "width": 1920,
+      "height": 1080,
+      "file": "sections\\neural_activity_1920.png",
+      "horizontal_overflow": false,
+      "console_errors": []
+    },
+    {
+      "section": "Models & Forecasting",
+      "width": 1920,
+      "height": 1080,
+      "file": "sections\\models_forecasting_1920.png",
+      "horizontal_overflow": false,
+      "console_errors": []
+    },
+    {
+      "section": "Uncertainty & Evidence",
+      "width": 1920,
+      "height": 1080,
+      "file": "sections\\uncertainty_evidence_1920.png",
+      "horizontal_overflow": false,
+      "console_errors": []
+    },
+    {
+      "section": "Virtual Perturbations",
+      "width": 1920,
+      "height": 1080,
+      "file": "sections\\virtual_perturbations_1920.png",
+      "horizontal_overflow": false,
+      "console_errors": []
+    },
+    {
+      "section": "Research Notebook",
+      "width": 1920,
+      "height": 1080,
+      "file": "sections\\research_notebook_1920.png",
+      "horizontal_overflow": false,
+      "console_errors": []
+    },
+    {
+      "section": "Presentation exit",
+      "width": 1920,
+      "height": 1080,
+      "file": null,
+      "horizontal_overflow": false,
+      "console_errors": []
+    },
+    {
+      "section": "Overview",
+      "width": 1366,
+      "height": 768,
+      "file": "sections\\overview_1366.png",
+      "horizontal_overflow": false,
+      "console_errors": []
+    },
+    {
+      "section": "3D Neural Dynamics",
+      "width": 1366,
+      "height": 768,
+      "file": "sections\\3d_neural_dynamics_1366.png",
+      "horizontal_overflow": false,
+      "console_errors": []
+    },
+    {
+      "section": "Neural Activity",
+      "width": 1366,
+      "height": 768,
+      "file": "sections\\neural_activity_1366.png",
+      "horizontal_overflow": false,
+      "console_errors": []
+    },
+    {
+      "section": "Models & Forecasting",
+      "width": 1366,
+      "height": 768,
+      "file": "sections\\models_forecasting_1366.png",
+      "horizontal_overflow": false,
+      "console_errors": []
+    },
+    {
+      "section": "Uncertainty & Evidence",
+      "width": 1366,
+      "height": 768,
+      "file": "sections\\uncertainty_evidence_1366.png",
+      "horizontal_overflow": false,
+      "console_errors": []
+    },
+    {
+      "section": "Virtual Perturbations",
+      "width": 1366,
+      "height": 768,
+      "file": "sections\\virtual_perturbations_1366.png",
+      "horizontal_overflow": false,
+      "console_errors": []
+    },
+    {
+      "section": "Research Notebook",
+      "width": 1366,
+      "height": 768,
+      "file": "sections\\research_notebook_1366.png",
+      "horizontal_overflow": false,
+      "console_errors": []
+    },
+    {
+      "section": "Presentation exit",
+      "width": 1366,
+      "height": 768,
+      "file": null,
+      "horizontal_overflow": false,
+      "console_errors": []
+    },
+    {
+      "section": "Overview",
+      "width": 1280,
+      "height": 800,
+      "file": "sections\\overview_1280.png",
+      "horizontal_overflow": false,
+      "console_errors": []
+    },
+    {
+      "section": "3D Neural Dynamics",
+      "width": 1280,
+      "height": 800,
+      "file": "sections\\3d_neural_dynamics_1280.png",
+      "horizontal_overflow": false,
+      "console_errors": []
+    },
+    {
+      "section": "Neural Activity",
+      "width": 1280,
+      "height": 800,
+      "file": "sections\\neural_activity_1280.png",
+      "horizontal_overflow": false,
+      "console_errors": []
+    },
+    {
+      "section": "Models & Forecasting",
+      "width": 1280,
+      "height": 800,
+      "file": "sections\\models_forecasting_1280.png",
+      "horizontal_overflow": false,
+      "console_errors": []
+    },
+    {
+      "section": "Uncertainty & Evidence",
+      "width": 1280,
+      "height": 800,
+      "file": "sections\\uncertainty_evidence_1280.png",
+      "horizontal_overflow": false,
+      "console_errors": []
+    },
+    {
+      "section": "Virtual Perturbations",
+      "width": 1280,
+      "height": 800,
+      "file": "sections\\virtual_perturbations_1280.png",
+      "horizontal_overflow": false,
+      "console_errors": []
+    },
+    {
+      "section": "Research Notebook",
+      "width": 1280,
+      "height": 800,
+      "file": "sections\\research_notebook_1280.png",
+      "horizontal_overflow": false,
+      "console_errors": []
+    },
+    {
+      "section": "Presentation exit",
+      "width": 1280,
+      "height": 800,
+      "file": null,
+      "horizontal_overflow": false,
+      "console_errors": []
+    }
+  ],
+  "console_errors": [],
+  "note": "Geometry, navigation, and console evidence only; human sign-off remains required.",
+  "console_error_count": 0,
+  "horizontal_overflow_count": 0,
+  "content_outside_shell_count": 0,
+  "nav_offscreen_count": 0,
+  "clipped_count": 0
+}

@@ -77,7 +77,7 @@ class StudioSnapshot:
 
     @property
     def primary(self) -> dict[str, Any]:
-        """The prespecified B3 vs B5-10 H20 contrast, computed from paired rows."""
+        """The reported B3 vs B5-10 H20 contrast, computed from paired rows."""
         pivot = self.per_landmark.pivot_table(
             index=["session", "landmark"],
             columns="model",

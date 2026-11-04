@@ -31,11 +31,9 @@ def render(snapshot: StudioSnapshot, *, light: bool = False) -> None:
         "This is a methodological reanalysis, not a digital twin and not a new "
         "biological experiment.",
         [
-            ("EXPLORATORY", "prediction"),
             ("5 recordings · 15,662 frames", "observed"),
-            ("1 laboratory / preparation", "neutral"),
+            ("1 experimental cohort", "neutral"),
             ("H20 PCA-10 energy", "control"),
-            ("test tail reused", "danger"),
         ],
     )
 
@@ -43,12 +41,12 @@ def render(snapshot: StudioSnapshot, *, light: bool = False) -> None:
     with left:
         section_header(
             "01 · THE QUESTION",
-            "Does a population model retain predictive structure beyond a "
-            "ten-factor common-state control?",
-            "The prespecified contrast is B5 − B3: positive values mean the full "
-            "population VAR has lower H20 energy than the ten-factor model. Energy is "
-            "a proper score for a probabilistic forecast; it is not a biological "
-            "effect size.",
+            "Does a full population model retain predictive structure beyond a "
+            "ten-factor common-state control at H20?",
+            "The reported contrast is energy(B5) − energy(B3); positive values favor "
+            "B3. The sign convention was clarified during the exploratory analysis. "
+            "Energy is a proper score for a probabilistic forecast; it is not a "
+            "biological effect size.",
         )
         st.markdown(
             f"""
@@ -88,7 +86,7 @@ def render(snapshot: StudioSnapshot, *, light: bool = False) -> None:
         note(
             "The conditional interval describes landmarks within these recordings. "
             "The recording-resampling interval is the appropriate check for extending "
-            "to other animals from this preparation, and with five units it is weak. "
+            "to other recordings from this cohort, and with five units it is weak. "
             "Neither interval is an animal-level generalization guarantee."
         )
 
@@ -98,17 +96,18 @@ def render(snapshot: StudioSnapshot, *, light: bool = False) -> None:
             <div class="nb-panel">
               <h4>Evidence status</h4>
               <div style="font-size:1.9rem;font-weight:720;letter-spacing:-0.03em">EXPLORATORY</div>
-              <div style="color:inherit;opacity:0.75;font-size:0.82rem;line-height:1.5">
+              <div style="color:inherit;opacity:0.8;font-size:0.84rem;line-height:1.5">
                 Ready for methodological review.<br>
-                Not ready for confirmatory or biological claims.
+                Not confirmatory, animal-level, or biological.
               </div>
               <div class="nb-divider"></div>
               <div style="font-size:0.82rem;line-height:1.7">
+                <div><b>Unit</b> · {primary["n"]} overlapping H20 landmarks from {primary["n_sessions"]} recordings; not {primary["n"]} animals.</div>
                 <div><b>H1 reverses</b> · B3 is worse than B5 at the shortest horizon.</div>
-                <div><b>MSE is null</b> · mean difference {signed(primary["mse_difference"])}, interval crosses zero.</div>
-                <div><b>Calibration is not established</b> · B5 95% marginal coverage {percent(snapshot.statistical["paired_effect"]["coverage_at_nominal_95"]["B5_common_k10"]["95"], 1)}.</div>
-                <div><b>Capacity differs</b> · B3 has {snapshot.capacity["ratio_min"]:.2f}–{snapshot.capacity["ratio_max"]:.2f}× the nominal coefficients.</div>
-                <div><b>Unit is not {primary["n"]} animals</b> · {primary["n"]} overlapping landmarks from {primary["n_sessions"]} recordings.</div>
+                <div><b>MSE is null</b> · difference {signed(primary["mse_difference"])}; interval crosses zero.</div>
+                <div><b>Calibration</b> · B5 95% marginal coverage {percent(snapshot.statistical["paired_effect"]["coverage_at_nominal_95"]["B5_common_k10"]["95"], 1)}.</div>
+                <div><b>Capacity</b> · B3 has {snapshot.capacity["ratio_min"]:.2f}–{snapshot.capacity["ratio_max"]:.2f}× the nominal coefficients.</div>
+                <div><b>Release scope</b> · no additional test-tail optimization; earlier phases reused the tails.</div>
               </div>
             </div>
             """,
@@ -140,7 +139,7 @@ def render(snapshot: StudioSnapshot, *, light: bool = False) -> None:
         panel(
             "Limited",
             "The recording-level interval is compatible with zero. The five recordings "
-            "are one laboratory/preparation, not an independent cohort. The fitted "
+            "come from one experimental cohort, not an independent cohort. The fitted "
             "state is a calcium-imaging transition model, not a synaptic wiring diagram.",
         )
         st.markdown(evidence_badge("LIMITED"), unsafe_allow_html=True)
@@ -171,17 +170,23 @@ def render(snapshot: StudioSnapshot, *, light: bool = False) -> None:
             f"path      {archive['path']}\n"
             f"sha256    {archive['actual_sha256']}\n"
             f"OSF       {archive['osf_url']}\n"
-            f"identity  {identity['identity']['answer']}",
+            "identity  FIVE_RECORDINGS_FROM_ONE_EXPERIMENTAL_COHORT; "
+            "NO_AUTHORITATIVE_ANIMAL_KEY",
             language="text",
         )
         st.markdown(
-            f"**Recommended wording.** {identity['identity']['recommended_wording']}"
+            "**Recommended wording.** Five Kato `WT_NoStim` recordings from one "
+            "experimental cohort, consistent with the publication's five animals. The "
+            "OSF archive exposes no authoritative animal identifier, so the one-to-one "
+            "mapping is inferred rather than documented. The five recordings are not "
+            "five verified distinct animals and not an independent cohort."
         )
         warning(
-            "The OSF archive exposes no explicit animal key. The five distinct "
-            "acquisition preparations are consistent with the publication's five "
-            "animals; the one-to-one mapping is inferred, not documented by a primary "
-            "key. They are still one laboratory/preparation and not an independent cohort."
+            "The OSF archive exposes no authoritative one-to-one animal key. The five "
+            "recordings are consistent with the publication's five animals, but that "
+            "mapping is inferred, not documented. They are five recordings from one "
+            "experimental cohort, not five verified distinct animals and not an "
+            "independent cohort."
         )
         st.markdown(
             "The `stateParams` field is unused by the model and does not align with all "

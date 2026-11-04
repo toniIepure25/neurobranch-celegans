@@ -18,7 +18,7 @@ RESOLUTIONS: dict[str, dict[str, str]] = {
     "X02": {
         "surface": "Overview · provenance; handoff demo",
         "status": "CORRECTED_WITH_INFERRED_LINKAGE",
-        "note": "Five recordings are analyzed separately as distinct preparations; OSF exposes no one-to-one animal key.",
+        "note": "Five recordings from one experimental cohort are analyzed separately; OSF exposes no authoritative one-to-one animal key.",
     },
     "X03": {
         "surface": "3D dynamics · landmark selector; tests",
@@ -83,7 +83,7 @@ RESOLUTIONS: dict[str, dict[str, str]] = {
     "X15": {
         "surface": "Overview; Studio footer",
         "status": "CORRECTED_IN_ACTIVE_SURFACE",
-        "note": "One laboratory/preparation; no independent cohort.",
+        "note": "Five recordings from one experimental cohort; no independent cohort.",
     },
     "X16": {
         "surface": "Models · refit protocol; STUDIO_REPRODUCIBILITY.md",

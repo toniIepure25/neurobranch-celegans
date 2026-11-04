@@ -67,3 +67,17 @@ def test_presentation_slide_renders_without_exception(index: int) -> None:
         assert any("bounded result" in str(m.value).lower() for m in at.markdown)
     if index == 1:
         assert any("recordings" in str(m.value).lower() for m in at.markdown)
+
+
+def test_slide_two_metrics_and_cohort_wording() -> None:
+    at = _app().run()
+    at.session_state["studio_present"] = True
+    at.session_state["studio_present_index"] = 1
+    at.run()
+    assert not at.exception, at.exception
+    labels = [str(metric.label) for metric in at.metric]
+    assert labels == ["Neural recordings", "Frames", "Included predictors"]
+    text = " ".join(str(m.value) for m in at.markdown).lower()
+    assert "one experimental cohort" in text
+    assert "distinct preparations" not in text
+    assert "one preparation" not in text

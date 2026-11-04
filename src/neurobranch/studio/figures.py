@@ -88,6 +88,7 @@ def trajectory_3d(
     light: bool = False,
     frame_duration: int = 140,
     camera: dict[str, Any] | None = None,
+    height: int = 650,
 ) -> go.Figure:
     p = _p(light)
     context = np.asarray(case["context"])[-int(context_tail) :]
@@ -224,7 +225,7 @@ def trajectory_3d(
         ),
         uirevision="studio-3d",
     )
-    style(fig, height=650, light=light, legend=True, margin=(0, 0, 40, 0))
+    style(fig, height=int(height), light=light, legend=True, margin=(0, 0, 40, 0))
     fig.update_layout(
         scene_camera=dict(
             eye=dict(x=1.55, y=1.35, z=1.05),
@@ -521,7 +522,7 @@ def activity_traces(
     return fig
 
 
-def evidence_forest(snapshot, *, light: bool = False) -> go.Figure:
+def evidence_forest(snapshot, *, light: bool = False, height: int = 410) -> go.Figure:
     p = _p(light)
     rows = []
     for row in snapshot.session_rows:
@@ -580,7 +581,7 @@ def evidence_forest(snapshot, *, light: bool = False) -> go.Figure:
     )
     fig.add_vline(x=0, line_color=p["danger"], line_dash="dash", opacity=0.8)
     fig.update_xaxes(title="B5 − B3 H20 PCA-10 energy  ·  positive = B3 lower")
-    style(fig, height=410, light=light, legend=False, margin=(10, 30, 25, 10))
+    style(fig, height=int(height), light=light, legend=False, margin=(10, 30, 25, 10))
     return fig
 
 

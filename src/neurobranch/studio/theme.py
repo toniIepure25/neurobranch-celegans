@@ -207,17 +207,80 @@ hr {{ border-color: {p["line"]}; }}
 }}
 .nb-side-brand .name {{ font-weight: 720; font-size: 1.03rem; color: {p["ink"]}; }}
 .nb-side-brand .tag {{ color: {p["muted"]}; font-size: 0.7rem; letter-spacing: 0.08em; }}
-.nb-slide {{
-  min-height: 520px;
+/* Presentation shell: one real container, sized by its content. The previous
+   implementation opened a div in one st.markdown call and closed it in another;
+   Streamlit closed the first block, leaving a 520px empty card above the slide. */
+.st-key-nb_slide, [class*="st-key-nb_slide"] {{
+  min-height: 0;
   border: 1px solid {p["line"]};
   border-radius: 18px;
   background: {p["panel"]};
-  padding: 2rem 2.3rem;
-  margin: 0.5rem 0 0.9rem;
+  padding: clamp(1.15rem, 2.1vw, 2rem) clamp(1.25rem, 2.5vw, 2.4rem);
+  margin: 0.35rem 0 0.9rem;
 }}
-.nb-slide .num {{ color: {p["faint"]}; font-size: 0.72rem; letter-spacing: 0.14em; }}
-.nb-slide h2 {{ font-size: 2rem; margin: 0.3rem 0 0.7rem; }}
-.nb-slide .body {{ color: {p["muted"]}; font-size: 1rem; line-height: 1.6; max-width: 900px; }}
+.st-key-nb_slide [data-testid="stVerticalBlock"] {{ gap: 0.55rem; }}
+.nb-slide-head {{ margin: 0 0 0.35rem; }}
+.nb-slide-head .num {{
+  color: {p["faint"]};
+  font-size: 0.72rem;
+  letter-spacing: 0.14em;
+}}
+.nb-slide-head h2 {{
+  color: {p["ink"]};
+  font-size: clamp(1.75rem, 2.55vw, 2.25rem);
+  line-height: 1.12;
+  margin: 0.18rem 0 0.4rem;
+}}
+.nb-slide-message {{
+  color: {p["ink"]};
+  font-size: clamp(1.0rem, 1.3vw, 1.2rem);
+  line-height: 1.45;
+  max-width: 1100px;
+  margin: 0 0 0.35rem;
+}}
+.nb-slide-body {{
+  color: {p["muted"]};
+  font-size: clamp(0.97rem, 1.05vw, 1.06rem);
+  line-height: 1.55;
+  max-width: 1080px;
+}}
+.nb-slide-body p {{ margin: 0 0 0.5rem; }}
+.nb-slide-body b {{ color: {p["ink"]}; }}
+.st-key-nb_slide .nb-caption, [class*="st-key-nb_slide"] .nb-caption {{
+  font-size: 0.875rem;
+  line-height: 1.45;
+}}
+.nb-slide-rule {{ height: 1px; background: {p["line"]}; margin: 0.35rem 0 0.25rem; }}
+.nb-equation {{
+  border-left: 3px solid {p["observed"]};
+  background: {p["panel2"]};
+  padding: 0.65rem 0.85rem;
+  border-radius: 0 10px 10px 0;
+  color: {p["ink"]};
+  font-size: clamp(0.95rem, 1.05vw, 1.05rem);
+  line-height: 1.45;
+}}
+.nb-status-strip {{
+  border: 1px solid {p["line"]};
+  border-radius: 12px;
+  background: {p["panel2"]};
+  padding: 0.6rem 0.8rem;
+  color: {p["muted"]};
+  font-size: 0.9rem;
+  line-height: 1.5;
+}}
+@media (max-width: 1400px) {{
+  .st-key-nb_slide, [class*="st-key-nb_slide"] {{ padding: 1.15rem 1.4rem; }}
+  .nb-slide-head h2 {{ font-size: clamp(1.6rem, 2.8vw, 2.0rem); }}
+  .nb-slide-message {{ font-size: 1.0rem; }}
+}}
+@media (max-height: 820px) {{
+  .st-key-nb_slide, [class*="st-key-nb_slide"] {{ padding: 0.8rem 1.3rem; }}
+  .st-key-nb_slide [data-testid="stVerticalBlock"] {{ gap: 0.22rem; }}
+  .nb-slide-head h2 {{ font-size: 1.85rem; margin-bottom: 0.25rem; }}
+  .nb-slide-message {{ font-size: 1.0625rem; }}
+  .nb-slide-body {{ font-size: 1.0625rem; line-height: 1.45; }}
+}}
 
 div[data-testid="stMetric"] {{
   border: 1px solid {p["line"]};

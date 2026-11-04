@@ -37,11 +37,13 @@ def render(snapshot: StudioSnapshot, *, light: bool = False) -> None:
     )
     primary = snapshot.primary
     warning(
-        "The five recordings are consistent with five inferred animals from one "
-        "laboratory/preparation. They are not an independent cohort. With five "
+        "The five recordings come from one experimental cohort and are consistent with "
+        "the publication's five animals, but the archive exposes no authoritative "
+        "one-to-one animal key. They are not an independent cohort. With five "
         "recording-level units, the recording bootstrap has very low power; a wide "
         "interval is not evidence of no effect, and a narrow conditional interval is "
-        "not animal-level precision."
+        "not animal-level precision. No additional test-tail optimization was performed "
+        "for this release; earlier phases reused the evaluation tails."
     )
 
     c1, c2, c3 = st.columns(3, gap="small")

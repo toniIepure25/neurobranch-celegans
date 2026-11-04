@@ -90,8 +90,8 @@ with st.sidebar:
     light = st.toggle("Light mode", value=bool(st.session_state.get("studio_light", False)))
     st.session_state["studio_light"] = light
     st.markdown(
-        badge("FIVE RECORDINGS", "observed")
-        + badge("ONE PREPARATION", "neutral")
+        badge("5 RECORDINGS", "observed")
+        + badge("1 EXPERIMENTAL COHORT", "neutral")
         + badge("EXPLORATORY", "prediction"),
         unsafe_allow_html=True,
     )
@@ -155,7 +155,9 @@ with st.sidebar:
     st.markdown("---")
     st.caption(
         "Prepared for methodological review. Not for confirmatory or biological "
-        "claims. No data were collected, and no test-tail performance was optimized."
+        "claims. No data were collected. No additional test-tail model optimization "
+        "was performed for this release; earlier research phases reused the evaluation "
+        "tails, so the findings remain exploratory."
     )
 
 inject_css(light)
