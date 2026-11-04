@@ -71,8 +71,11 @@ def main() -> None:
         and path.name != "integrity_report.json"
     )
     status_lines = [line for line in git("status", "--porcelain").splitlines() if line]
-    manifest_rel = "reports/scientific_studio/manifest.json"
-    other_changes = [line for line in status_lines if line[3:].strip() != manifest_rel]
+    generated = {
+        "reports/scientific_studio/manifest.json",
+        "reports/scientific_studio/release_candidate/integrity_report.json",
+    }
+    other_changes = [line for line in status_lines if line[3:].strip() not in generated]
 
     manifest = {
         "schema": "neurobranch.scientific_studio.manifest.v1",
