@@ -1,7 +1,7 @@
 {
   "schema": "neurobranch.studio.provenance_audit.v1",
   "repository": "D:\\ComputaCenter\\NeuroBranch\\neurobranch-celegans",
-  "head": "92165ad7d15e89548962df723d73d4d73d78f2ee",
+  "head": "b19843ed1213db9225267ec4870396344d1255cf",
   "branch": "research/neurobranch-presentation-polish",
   "status": "INCOMPLETE",
   "historical": [
