@@ -1,0 +1,88 @@
+{
+  "alpha": 1.0,
+  "n_worms": 5,
+  "n_behaviors": 8,
+  "folds": [
+    {
+      "worm_id": 0,
+      "n_frames": 3121,
+      "one_step_r2": 0.9981119182400024,
+      "free_run_mse": 1.6462038488888804,
+      "persistence_mse": 2.612252686340689,
+      "free_run_skill_vs_persistence": 0.3698144679889581,
+      "behavior_accuracy_on_true_latent": 0.9637820512820513,
+      "behavior_balanced_accuracy_on_true_latent": 0.980237356476647,
+      "behavior_macro_f1_on_true_latent": 0.944577891079277,
+      "behavior_accuracy_on_simulated_latent": 0.3416666666666667,
+      "behavior_majority_accuracy": 0.19487179487179487
+    },
+    {
+      "worm_id": 1,
+      "n_frames": 3118,
+      "one_step_r2": 0.9980725676200184,
+      "free_run_mse": 1.831639017233623,
+      "persistence_mse": 2.303274505215212,
+      "free_run_skill_vs_persistence": 0.20476738092384716,
+      "behavior_accuracy_on_true_latent": 0.9598973371831889,
+      "behavior_balanced_accuracy_on_true_latent": 0.9767757154920408,
+      "behavior_macro_f1_on_true_latent": 0.9459873803938599,
+      "behavior_accuracy_on_simulated_latent": 0.3217837664420918,
+      "behavior_majority_accuracy": 0.3217837664420918
+    },
+    {
+      "worm_id": 2,
+      "n_frames": 3043,
+      "one_step_r2": 0.9973470382673056,
+      "free_run_mse": 1.2784575636546656,
+      "persistence_mse": 0.960605822242759,
+      "free_run_skill_vs_persistence": -0.3308867529761659,
+      "behavior_accuracy_on_true_latent": 0.9608809993425378,
+      "behavior_balanced_accuracy_on_true_latent": 0.9447680217114869,
+      "behavior_macro_f1_on_true_latent": 0.9290852887446972,
+      "behavior_accuracy_on_simulated_latent": 0.3826429980276134,
+      "behavior_majority_accuracy": 0.31196581196581197
+    },
+    {
+      "worm_id": 3,
+      "n_frames": 3295,
+      "one_step_r2": 0.9980260907415229,
+      "free_run_mse": 1.7762697220492107,
+      "persistence_mse": 3.557982302771991,
+      "free_run_skill_vs_persistence": 0.5007648799530746,
+      "behavior_accuracy_on_true_latent": 0.9699453551912568,
+      "behavior_balanced_accuracy_on_true_latent": 0.9637965676726732,
+      "behavior_macro_f1_on_true_latent": 0.9282038716989695,
+      "behavior_accuracy_on_simulated_latent": 0.2686703096539162,
+      "behavior_majority_accuracy": 0.30115361262902246
+    },
+    {
+      "worm_id": 4,
+      "n_frames": 3005,
+      "one_step_r2": 0.9967028831477308,
+      "free_run_mse": 1.8516079687590412,
+      "persistence_mse": 1.9929488423159893,
+      "free_run_skill_vs_persistence": 0.07092047249577016,
+      "behavior_accuracy_on_true_latent": 0.9444074567243675,
+      "behavior_balanced_accuracy_on_true_latent": 0.9415410880031263,
+      "behavior_macro_f1_on_true_latent": 0.8798218717979521,
+      "behavior_accuracy_on_simulated_latent": 0.35785619174434086,
+      "behavior_majority_accuracy": 0.36051930758988016
+    }
+  ],
+  "mean_one_step_r2": 0.997652099603316,
+  "mean_free_run_skill": 0.16307608967709683,
+  "mean_behavior_accuracy_true": 0.9597826399446806,
+  "mean_behavior_accuracy_simulated": 0.3345239865069258,
+  "mean_behavior_majority_accuracy": 0.29805885869972026,
+  "behavior_names": [
+    "Dorsal turn",
+    "Forward",
+    "No state",
+    "Reverse-1",
+    "Reverse-2",
+    "Sustained reversal",
+    "Slowing",
+    "Ventral turn"
+  ],
+  "scope": "Held-out-worm evaluation of a quadratic latent dynamics model and a logistic behaviour read-out fitted to published BunDLe-Net embeddings. This validates latent predictability, not mechanism or causality."
+}

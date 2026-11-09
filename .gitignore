@@ -21,6 +21,11 @@ venv/
 data/raw/*
 !data/raw/.gitkeep
 references/external/
+# Vienna workbench uses third-party artifacts with different licenses (GPL-3.0,
+# MIT, unspecified). Restore them with scripts/fetch_vienna_artifacts.py.
+data/processed/bundlenet_sim/
+data/processed/ncmcm/
+data/processed/premotor/
 artifacts/checkpoints/*.pt
 artifacts/checkpoints/*.pth
 artifacts/cache/

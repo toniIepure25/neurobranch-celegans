@@ -1,0 +1,95 @@
+{
+  "generated_at_utc": "2026-11-09T18:04:57+00:00",
+  "repo_root": ".",
+  "note": "Third-party artifacts; not committed. Re-run this script to restore them.",
+  "artifacts": [
+    {
+      "tier": "tier1_bundlenet",
+      "destination": "data/processed/bundlenet_sim/bundlenet_consistent_embedding_worm_0.npz",
+      "source": "references/external/nc-mcm/precomputed_results/bundlenet_consistent_embedding_worm_0.npz",
+      "sha256": "d1b1a96d5ebc7917d2889e8176e363f26101493ca8aeca90fa2e71d60433dc74",
+      "bytes": 100362,
+      "license": "NC-MCM repository: GPL-3.0 (precomputed embedding)"
+    },
+    {
+      "tier": "tier1_bundlenet",
+      "destination": "data/processed/bundlenet_sim/bundlenet_consistent_embedding_worm_1.npz",
+      "source": "references/external/nc-mcm/precomputed_results/bundlenet_consistent_embedding_worm_1.npz",
+      "sha256": "0ea9f02707a09efd349cbf661dacc7e4885b5697d70115362719d04d64cc829d",
+      "bytes": 100266,
+      "license": "NC-MCM repository: GPL-3.0 (precomputed embedding)"
+    },
+    {
+      "tier": "tier1_bundlenet",
+      "destination": "data/processed/bundlenet_sim/bundlenet_consistent_embedding_worm_2.npz",
+      "source": "references/external/nc-mcm/precomputed_results/bundlenet_consistent_embedding_worm_2.npz",
+      "sha256": "17f83020fedd47b1a8735f33425116c1c7779df6e8b63beceaa2d3602a61e721",
+      "bytes": 97866,
+      "license": "NC-MCM repository: GPL-3.0 (precomputed embedding)"
+    },
+    {
+      "tier": "tier1_bundlenet",
+      "destination": "data/processed/bundlenet_sim/bundlenet_consistent_embedding_worm_3.npz",
+      "source": "references/external/nc-mcm/precomputed_results/bundlenet_consistent_embedding_worm_3.npz",
+      "sha256": "975c32cca2529146b5c9b85afc3eb7b6033e9bd0bdacd734dbcbe53d41c893cc",
+      "bytes": 105930,
+      "license": "NC-MCM repository: GPL-3.0 (precomputed embedding)"
+    },
+    {
+      "tier": "tier1_bundlenet",
+      "destination": "data/processed/bundlenet_sim/bundlenet_consistent_embedding_worm_4.npz",
+      "source": "references/external/nc-mcm/precomputed_results/bundlenet_consistent_embedding_worm_4.npz",
+      "sha256": "3e3908eefbff71b981608289987a629532876838953c7273102886548084d243",
+      "bytes": 96650,
+      "license": "NC-MCM repository: GPL-3.0 (precomputed embedding)"
+    },
+    {
+      "tier": "tier2_ncmcm",
+      "destination": "data/processed/ncmcm/nc_mcm_model_worm_1.npz",
+      "source": "references/external/nc-mcm/precomputed_results/nc_mcm_model_worm_1.npz",
+      "sha256": "9d56d72125c019b0107154d7f4b6113759157301e991862d81709e2dcf292d1f",
+      "bytes": 3816450,
+      "license": "NC-MCM repository: GPL-3.0"
+    },
+    {
+      "tier": "tier2_ncmcm",
+      "destination": "data/processed/ncmcm/nc_mcm_model_worm_2.npz",
+      "source": "references/external/nc-mcm/precomputed_results/nc_mcm_model_worm_2.npz",
+      "sha256": "34e5befbc890e727ccf44de68450eff5e8b2990d672051593b8162db8aa91c7a",
+      "bytes": 4414530,
+      "license": "NC-MCM repository: GPL-3.0"
+    },
+    {
+      "tier": "tier2_ncmcm",
+      "destination": "data/processed/ncmcm/nc_mcm_model_worm_3.npz",
+      "source": "references/external/nc-mcm/precomputed_results/nc_mcm_model_worm_3.npz",
+      "sha256": "dfa0d21561c289654cf84a65db1235ccccfa13838253d21296febccd8c48ecaa",
+      "bytes": 4211042,
+      "license": "NC-MCM repository: GPL-3.0"
+    },
+    {
+      "tier": "tier2_ncmcm",
+      "destination": "data/processed/ncmcm/nc_mcm_model_worm_4.npz",
+      "source": "references/external/nc-mcm/precomputed_results/nc_mcm_model_worm_4.npz",
+      "sha256": "c8c09eaee8c123e39cf55c965634cf0b1074b8e136280e7e348e85fd06e4f13b",
+      "bytes": 4425354,
+      "license": "NC-MCM repository: GPL-3.0"
+    },
+    {
+      "tier": "tier2_ncmcm",
+      "destination": "data/processed/ncmcm/nc_mcm_model_worm_5.npz",
+      "source": "references/external/nc-mcm/precomputed_results/nc_mcm_model_worm_5.npz",
+      "sha256": "1860617423db5ff409aa16bd8054e2a9784a06d3f58fc55346b6a00522226288",
+      "bytes": 4110418,
+      "license": "NC-MCM repository: GPL-3.0"
+    },
+    {
+      "tier": "tier3_premotor",
+      "destination": "data/processed/premotor/avg_model_weights.jld2",
+      "source": "references/external/Celegans_premotor/data/model_weights/avg_model_weights.jld2",
+      "sha256": "fb6844eff3f19b67da297253f139782a90ebb9d285966fe5f254094fb4f76d9a",
+      "bytes": 7735214,
+      "license": "Celegans_premotor repository: MIT"
+    }
+  ]
+}

@@ -44,6 +44,28 @@ perturbations are model counterfactuals, **not stimulation**. Start with
 The sections below document earlier research branches and are retained as
 historical context; they are not pooled with the Kato Studio result.
 
+## Vienna Neuroinformatics Workbench (new prototype)
+
+A separate, three-tier prototype for the University of Vienna Neuroinformatics
+group lives in `src/neurobranch/bundlenet_sim/`:
+
+```powershell
+python scripts/fetch_vienna_artifacts.py
+python -m streamlit run src/neurobranch/bundlenet_sim/app.py
+```
+
+- **Tier 1:** published BunDLe-Net 3-D latent manifold; held-out-worm metrics and
+  a stable observed-transition walk (not a mechanistic simulator).
+- **Tier 2:** precomputed NC-MCM cognitive states, transition matrices and Markov
+  p-values; `do()`-style panels are explicitly observational.
+- **Tier 3:** published 205-node premotor `A`/`d` fitted weights integrated with
+  the paper's rate ODE; gap-junction `W` and neuron names are missing from the
+  public export, so this is a sandbox, not a digital twin.
+
+Start with [`docs/VIENNA_WORKBENCH.md`](docs/VIENNA_WORKBENCH.md) and the
+source-to-claim ledger in
+[`docs/VIENNA_WORKBENCH_EVIDENCE.md`](docs/VIENNA_WORKBENCH_EVIDENCE.md).
+
 ## Core dynamics simulator (research branch)
 
 The `research/core-dynamics-simulator` branch implements a free-running

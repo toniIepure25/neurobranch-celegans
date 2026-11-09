@@ -1,0 +1,45 @@
+{
+  "format": "neurobranch-bundlenet-sim-run-v2",
+  "generated_at_utc": "2026-11-09T18:07:45+00:00",
+  "command": "python -m neurobranch.bundlenet_sim.train --alpha 1.0",
+  "git": {
+    "sha": "42500722c3b38c7989c8108aa47574c9533873c1",
+    "dirty": true
+  },
+  "environment": {
+    "python": "3.13.5",
+    "platform": "Windows-10-10.0.19045-SP0",
+    "numpy": "2.3.1",
+    "scikit_learn": "1.9.1"
+  },
+  "alpha": 1.0,
+  "n_worms": 5,
+  "worm_ids": [
+    0,
+    1,
+    2,
+    3,
+    4
+  ],
+  "frames_per_worm": {
+    "0": 3121,
+    "1": 3118,
+    "2": 3043,
+    "3": 3295,
+    "4": 3005
+  },
+  "files": {
+    "model": {
+      "path": "artifacts/bundlenet_sim/model.npz",
+      "sha256": "14a2f2e1713e0e05f89d3cfc5078299461ff6d2cb20e0199e3c4b82833122d4f",
+      "bytes": 3584
+    },
+    "metrics": {
+      "path": "artifacts/bundlenet_sim/metrics.json",
+      "sha256": "20644db5af35927e129686e4df74cfaea904a2a2758c9291f75b765117cb789a",
+      "bytes": 3610
+    }
+  },
+  "source": "published BunDLe-Net consistent embeddings (NC-MCM release)",
+  "scope": "Held-out-worm evaluation of a quadratic latent dynamics model and a logistic behaviour read-out fitted to published BunDLe-Net embeddings. This validates latent predictability, not mechanism or causality."
+}
