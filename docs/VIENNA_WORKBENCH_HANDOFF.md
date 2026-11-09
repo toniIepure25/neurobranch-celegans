@@ -39,16 +39,21 @@ Seven tabs:
 - NC-MCM audit at K=6: behaviour transport, state–behaviour MI and K sensitivity pass; **strict
   first-order Markov and stationarity fail**. `do(state)` is therefore not an identified effect.
 - Premotor canonical recording maps to **84 core / 15 intrinsic / 69 signal**; clamped β=10 run is
-  stable (max |u| 10.43). Mean behaviour-state agreement across three recordings is **28.9%**, so
-  fidelity is approximate, not a digital-twin claim.
-- All **913/913** non-zero `A` entries lie inside the chemical-synapse support.
+  stable (max |u| 3.337). A fresh Julia reference run matches the Python port at mean trace
+  **r=0.9999997**, max |Δ|=**0.0133**; canonical behaviour agreement is **60.3%** (JS 0.0011), and
+  mean agreement across three recordings is **58.3%** (JS 0.0113). Implementation-faithful replay;
+  still not a digital-twin claim.
+- All **913/913** non-zero `A` entries lie inside the transposed chemical-synapse support.
+- Correcting the port required three fixes: 1-based Julia label indexing, a one-frame (not two-frame)
+  crop per edge, and `A`/gap-sign orientation. Tests 23/23 pass.
 
 ## What is still missing
 
-1. **Reference Julia fidelity check.** The clamped configuration is implemented, but the authors'
-   notebook was not run here; pointwise fidelity remains approximate.
+1. **Reference comparison on the other recordings.** The canonical `2023-01-23-15` is checked
+   against Julia; the 85- and 86-neuron validation recordings use the same code but were not run
+   separately through Julia.
 2. **Intervention data.** Without matched stimulation/ablation recordings, NC-MCM `do()` remains a
-   Markov counterfactual.
+   Markov counterfactual and the clamped pulse panel remains a simulation.
 3. **A sixth worm / external cohort.** n=5 is enough for a prototype, not a generalization claim.
 4. **A prioritised scientific question** from you: behaviour switching, individual variability, or a
    specific perturbation.
@@ -70,8 +75,8 @@ select on the test set. A negative result is informative.
 - BunDLe-Net is a **bioRxiv preprint** (`10.1101/2023.08.08.551978`), not a peer-reviewed article.
 - NC-MCM (`10.1371/journal.pcbi.1012674`) is peer-reviewed; its causal claims depend on assumptions
   and are not established by the precomputed artifact.
-- The premotor paper (`10.1371/journal.pcbi.1013818`) is peer-reviewed; our clamped mode reproduces
-  the configuration, not a validated pointwise replay.
+- The premotor paper (`10.1371/journal.pcbi.1013818`) is peer-reviewed; our clamped mode matches the
+  authors' Julia implementation, not an independently validated pointwise replay of the biology.
 - No tier establishes whole-brain mechanism, a digital twin, or causality.
 
 ## Files to read next

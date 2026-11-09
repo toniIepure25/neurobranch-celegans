@@ -203,7 +203,9 @@ def _rhs_factory(
         if len(ablated_core):
             ut[ablated_core] = 0.0
         chemical = A @ np.maximum(ut, 0.0)
-        gap = W.sum(axis=1) * ut - W @ ut
+        # The notebook's diag(W * (repeat(u, 1, N) - repeat(u, 1, N)')) expands
+        # to sum_j W[i, j] * (u_j - u_i), not the opposite sign.
+        gap = W @ ut - W.sum(axis=1) * ut
         du = (
             parameters.a
             * (ut - parameters.fp1)

@@ -26,12 +26,13 @@ NC-MCM to Denis.
 | C5 | NC-MCM exposes multilevel cognitive states and Markov tests | Published method + released `c`, `p`, `bprob` arrays; schema mapped from Julia source | Published method + our reader | Supported descriptively |
 | C6 | The UI can estimate `do(state)` effects | It propagates a forced state through the fitted transition matrix; no experimental intervention; audit rejects strict first-order Markov and stationarity | Our implementation + audit | **Not supported as causal**; labelled Markov counterfactual |
 | C7 | The premotor model is a 205-node fitted synaptic rate model | Published paper + `A_10takes_avg`, `d_10takes_avg`; recovered `W` and names | Published model + our loader/builder | Supported for `A`, `d`, `W`, ODE form |
-| C8 | Tier 3 reproduces the published 15-intrinsic + 69-clamped-signal configuration | Canonical `2023-01-23-15`: 84 core / 15 intrinsic / 69 signal; β=10 clamped run is stable (max |u| 10.43) | Our computation | **Configuration supported; pointwise fidelity not established**; no Julia reference run |
+| C8 | Tier 3 reproduces the published 15-intrinsic + 69-clamped-signal configuration | Canonical `2023-01-23-15`: 84 core / 15 intrinsic / 69 signal; β=10 run stable (max |u| 3.337). Fresh Julia 1.11.2 reference: mean trace r 0.9999997, min 0.9999995, max |Python−Julia| 0.0133; canonical behaviour agreement 60.3%, distribution JS 0.0011 | Our computation + authors' Julia code | **Configuration and port supported**; biological/Digital-twin claim still rejected |
 | C9 | Any tier establishes whole-brain mechanism or causality | None does; Tier 1 is latent, Tier 2 is assumption-dependent and fails strict Markov/stationarity, Tier 3 is a reduced replay/sandbox | Inference from above | **Rejected** |
 
 ## 3. Reproducibility artifacts
 
-- Git branch: `feature/bundlenet-simulator` (base `4250072`).
+- Git branch: `feature/vienna-v2-clamped-audit` (base `4250072`); commit SHA is recorded in the
+  generated reference report.
 - Artifact manifest: `data/processed/vienna_artifacts_manifest.json` (SHA-256, bytes, license,
   source path for 13 files, including derived `W.npy` and `neuron_names.txt`).
 - Tier 1 model/metrics: `artifacts/bundlenet_sim/model.npz`, `metrics.json`, `manifest.json`.
@@ -45,22 +46,27 @@ PYTHONPATH=src python -m neurobranch.bundlenet_sim.train --alpha 1.0
 PYTHONPATH=src python -m neurobranch.bundlenet_sim.benchmark --horizon 25 --stride 75 --seeds 16
 PYTHONPATH=src python -m neurobranch.bundlenet_sim.causal_audit --k 6
 PYTHONPATH=src python scripts/build_tier3_validation.py
+PYTHONPATH=src python scripts/compare_tier3_reference.py
 PYTHONPATH=src python -m pytest tests/test_bundlenet_clamped.py tests/test_causal_audit.py tests/test_bundlenet_workbench.py -q
 python -m streamlit run src/neurobranch/bundlenet_sim/app.py
 ```
 
+- Julia reference: Julia 1.11.2, `OrdinaryDiffEq` `Tsit5`, 84/15/69, canonical recording; the
+  standalone script is `scripts/reference/run_julia_reference.jl`. Input and output SHA-256 hashes
+  are in `reports/vienna_workbench/tier3_julia_reference.json`.
 - Environment used locally: Python 3.13, NumPy/SciPy/scikit-learn/h5py/Streamlit 1.66.1/Plotly 7.1.
-  The workbench code does not require TensorFlow or Julia.
+  The workbench code does not require TensorFlow; Julia is only needed to regenerate the reference.
 - Pod environment: Python 3.12.3, Streamlit 1.66.1, Plotly 7.1.0, h5py 3.16.0, scikit-learn 1.6.1,
   NumPy 1.26.4, NVIDIA H100 NVL. Tests and reports are rerun on the pod after deployment.
 
 ## 4. What was not done
 
 - No fresh independent reproduction of the BunDLe-Net training (we used released embeddings).
-- No Julia execution of NC-MCM or the premotor model. `W` and names were recovered from the
-  release's own CSV/notebook output, not by running the original Julia environment.
-- **No reference Julia fidelity check for the clamped core.** The 84/15/69 configuration is
-  implemented and stable, but the comparison with the authors' figure remains approximate.
+- No independent Julia execution of NC-MCM; its arrays were read from the released NPZ. The
+  premotor model **was** executed in Julia for the canonical reference comparison.
+- **Reference comparison is one recording, not a full parameter sweep.** It checks the port on
+  `2023-01-23-15`; the other two validation recordings use the same code but were not separately
+  run through Julia.
 - No experimental intervention data, so no identified causal effect estimate.
 - No external validation on a sixth worm or another lab's recordings.
 - No full historical test-suite green claim; the Vienna contract tests are run explicitly.
@@ -78,7 +84,8 @@ python -m streamlit run src/neurobranch/bundlenet_sim/app.py
 - Premotor name/W recovery: parsed the 205-neuron loop from
   `code/computer_avg_weights.ipynb` cell 16 output, rebuilt `EJ_mat`/`S_mat` from
   `data/White_data_processed/df5.csv`, and accepted only the order for which every non-zero `A`
-  entry lies inside the chemical-synapse support (913/913). A wrong order gives ~3% support overlap;
-  this one gives 100% containment.
+  entry lies inside the transposed chemical-synapse support (913/913). A wrong order gives ~3%
+  support overlap; this one gives 100% containment. The h5py/JLD2 layout is transposed relative
+  to Julia's in-memory matrix, so `load_premotor` transposes it back.
 - Pod reproduction: extracted the 19 MB deployment bundle to `/workspace/vienna-studio`, ran
   `pytest` 7/7 and the benchmark; values matched local to floating-point tolerance.

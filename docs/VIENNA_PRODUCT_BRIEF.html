@@ -65,7 +65,7 @@
     <td><b>Tier 3</b><br>Premotor</td>
     <td>Published A/d, recovered W/names, and Atanas recordings</td>
     <td>Run the <b>published clamped core</b> (15 intrinsic + 69 clamped signals); add signal pulses; inspect intrinsic residual and behaviour readout; separately run the exploratory 205-node free-run</td>
-    <td>Clamped replay/sandbox; configuration reproduced, <b>fidelity approximate</b></td>
+    <td>Clamped replay/sandbox; configuration and Python port verified against the authors' Julia code; <b>not a digital twin</b></td>
   </tr>
 </table>
 
@@ -77,8 +77,9 @@
   <tr><td>Open-loop behaviour accuracy, 25 frames</td><td class="num"><b>83.8%</b> manifold walk<br>82.8% quadratic<br>66.8% switching</td><td>Manifold walk wins because it samples observed transitions; it cannot extrapolate</td></tr>
   <tr><td>Latent MSE / CRPS at 10 frames</td><td class="num"><b>0.0445 / 0.0969</b> manifold walk<br>0.0539 / 0.1150 quadratic<br>0.0628 / 0.1210 switching</td><td>Proper scores; intervals under-cover nominal 90%, so bands are descriptive</td></tr>
   <tr><td>NC-MCM assumption audit (K=6)</td><td class="num"><b>2 fail / 3 pass</b></td><td>Strict first-order Markov and stationarity fail; <code>do()</code> is not identified</td></tr>
-  <tr><td>Clamped canonical core</td><td class="num"><b>84 / 15 / 69</b></td><td>Exact published split on <code>2023-01-23-15</code>; mean state agreement 28.9%</td></tr>
-  <tr><td>Premotor name/order verification</td><td class="num"><b>913 / 913</b></td><td>Every non-zero fitted chemical weight lies inside the chemical-synapse support</td></tr>
+  <tr><td>Clamped canonical core</td><td class="num"><b>84 / 15 / 69</b></td><td>Exact published split on <code>2023-01-23-15</code>; behaviour agreement 60.3%, distribution JS 0.0011</td></tr>
+  <tr><td>Python vs Julia clamped traces</td><td class="num"><b>r = 0.9999997</b><br>max |Δ| = 0.0133</td><td>Fresh Julia 1.11.2 reference run; validates the port, not the biology</td></tr>
+  <tr><td>Premotor name/order verification</td><td class="num"><b>913 / 913</b></td><td>Every non-zero fitted chemical weight lies inside the transposed chemical-synapse support</td></tr>
 </table>
 <p class="small">Benchmark protocol: four training worms → one held-out worm; 25-frame horizon; starts every 75 frames; 16 seeds; 95% normal intervals over five folds. Full design record: <code>docs/VIENNA_BENCHMARK_DESIGN.md</code>. Results: <code>reports/vienna_workbench/tier1_benchmark.json</code>.</p>
 
@@ -88,7 +89,7 @@
   <li><b>Not a digital twin.</b> A digital twin requires a validated, individually calibrated, causally predictive replica. None of the three tiers meets that bar.</li>
   <li><b>Tier 1 is not a circuit model.</b> The 3-D latent is a behaviourally relevant compression; it does not contain identified neurons or synapses.</li>
   <li><b>Tier 2 is not an identified causal effect.</b> The intervention panel propagates a forced state through a fitted Markov matrix. The current audit rejects strict first-order Markov and stationarity, so <code>do()</code> remains descriptive.</li>
-  <li><b>Tier 3 fidelity is approximate.</b> The published 84/15/69 clamped configuration is implemented, but W/names are independently recovered, the Julia reference was not run, and the mean behaviour-state agreement is 28.9%. It is not a validated digital twin.</li>
+  <li><b>Tier 3 is implementation-faithful, not a digital twin.</b> The published 84/15/69 clamped configuration is implemented and the Python port matches a fresh Julia reference run (mean trace r = 0.9999997, max |Δ| = 0.0133). But W/names are independently recovered and 40–42% of canonical behaviour frames disagree; implementation parity is not biological or causal validation.</li>
   <li><b>BunDLe-Net is a preprint.</b> Cite it as bioRxiv <code>10.1101/2023.08.08.551978</code>, not as a peer-reviewed journal article.</li>
   <li><b>Five worms.</b> Worm-level splits are correct, but n = 5 limits generalization claims.</li>
 </ul>
@@ -123,8 +124,8 @@
 <table>
   <tr><th style="width:32%">Decision</th><th>Why it matters</th></tr>
   <tr><td><b>First scientific target</b></td><td>Behaviour switching, individual variability, or a specific perturbation. The product supports all three, but the next experiment should be chosen before more engineering.</td></tr>
-  <tr><td><b>Reference fidelity check</b></td><td>Run the authors' Julia notebook on the canonical recording and compare intrinsic traces/behaviour statistics with the Python port.</td></tr>
-  <tr><td><b>Intervention dataset</b></td><td>Matched stimulation/ablation recordings turn the Tier 2 counterfactual into a testable effect estimate.</td></tr>
+  <tr><td><b>Perturbation test</b></td><td>Matched stimulation/ablation recordings are now the main missing piece: they can test whether the implementation-faithful clamped replay predicts an independent intervention.</td></tr>
+  <tr><td><b>Reference parity on other recordings</b></td><td>The canonical recording is checked against Julia; the 85- and 86-neuron recordings should be added to the same parity harness.</td></tr>
   <tr><td><b>Sixth worm / external cohort</b></td><td>Tests whether the Tier 1 manifold walk generalizes beyond the five released embeddings.</td></tr>
 </table>
 

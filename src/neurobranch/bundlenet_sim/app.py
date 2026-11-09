@@ -681,6 +681,16 @@ def tier3_clamped_tab(wb: ViennaWorkbench) -> None:
             st.caption(report.get("claim_level", ""))
         else:
             st.caption("Run `python scripts/build_tier3_validation.py` to create the report.")
+        if recording_id == "2023-01-23-15":
+            reference = wb.tier3_reference()
+            if reference:
+                summary = reference.get("summary", {})
+                st.caption(
+                    "Julia reference: mean trace r = "
+                    f"{summary.get('mean_pearson_r', float('nan')):.7f}, "
+                    f"max |Δ| = {summary.get('max_abs_difference', float('nan')):.4f}. "
+                    "This checks the port, not the biology."
+                )
 
     buffer = io.StringIO()
     np.savetxt(
@@ -705,8 +715,9 @@ def tier3_clamped_tab(wb: ViennaWorkbench) -> None:
         )
     st.warning(
         "This is a published-parameter replay/sandbox with independently recovered weights. "
-        "A low agreement with the recording is evidence against a pointwise digital-twin claim, "
-        "not evidence for a mechanism. It is not causally validated."
+        "The remaining disagreement with the recording (~40% of canonical frames) is evidence "
+        "against a pointwise digital-twin claim, not evidence for a mechanism. It is not causally "
+        "validated."
     )
 
 
@@ -964,9 +975,11 @@ def provenance_tab(wb: ViennaWorkbench) -> None:
 - Tier 2: descriptive causal-state model; `do()` is not identified by the precomputed artifact.
   The current assumption audit rejects strict first-order Markov and stationarity.
 - Tier 3: the published 84/15/69 clamped-core configuration is implemented; the canonical
-  recording has 84 core / 15 intrinsic / 69 signal neurons. Fidelity to the paper figure is
-  approximate because the Julia reference was not run and W/names are independently recovered.
-  The 205-node free-run remains exploratory. This is not a validated digital twin.
+  recording has 84 core / 15 intrinsic / 69 signal neurons. A fresh Julia 1.11.2 reference run
+  matches the Python port at mean trace r=0.9999997 and max |Δ|=0.0133; canonical behaviour
+  agreement is 60.3%. This validates the implementation, not the biology or causality; W/names are
+  independently recovered. The 205-node free-run remains exploratory. This is not a validated
+  digital twin.
 """
     )
 
@@ -1098,7 +1111,8 @@ def report_tab(wb: ViennaWorkbench) -> None:
         "## Tier 3 — Premotor",
         "Published clamped-core mode: 15 intrinsic neurons integrated, 69 signal neurons "
         "clamped to an Atanas recording. The canonical 2023-01-23-15 recording has 84/15/69 "
-        "counts. The 205-node free-run remains an exploratory sandbox.",
+        "counts and matches a fresh Julia reference run at mean r=0.9999997. The 205-node "
+        "free-run remains an exploratory sandbox.",
     ]
     if clamped:
         agg = clamped.get("aggregate", {})
@@ -1160,8 +1174,8 @@ def lab_tab(wb: ViennaWorkbench) -> None:
             {
                 "claim": "published 84/15/69 clamped core is reproduced",
                 "tier": "Tier 3",
-                "status": "configuration reproduced; fidelity approximate",
-                "evidence": "tier3_clamped_validation.json",
+                "status": "implementation-faithful; 60.3% canonical behaviour agreement; not a digital twin",
+                "evidence": "tier3_clamped_validation.json; tier3_julia_reference.json",
             },
             {
                 "claim": "whole-brain digital twin / mechanistic validation",
@@ -1210,7 +1224,7 @@ def lab_tab(wb: ViennaWorkbench) -> None:
         "3-D latent manifold forecasting,Tier 1,supported descriptively,held-out benchmark\n"
         "NC-MCM first-order Markov and stationary,Tier 2,rejected by current audit,tier2 audit\n"
         "do(state) identified causal effect,Tier 2,not claimed,observational clusters\n"
-        "published 84/15/69 clamped core,Tier 3,configuration reproduced; fidelity approximate,tier3 validation\n"
+        "published 84/15/69 clamped core,Tier 3,implementation-faithful; 60.3% behaviour agreement,tier3 validation + Julia reference\n"
         "whole-brain digital twin,all,not claimed,no reference fidelity or intervention\n",
         file_name="vienna_claim_ledger.csv",
         mime="text/csv",

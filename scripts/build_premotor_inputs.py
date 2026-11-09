@@ -56,10 +56,14 @@ def build(premotor_root: Path, out_dir: Path) -> dict[str, object]:
                 S[i, j] = float(row["Nbr"])
 
     with h5py.File(weights, "r") as handle:
-        A = np.asarray(handle["A_10takes_avg"], dtype=np.float64)
+        # h5py exposes JLD2's column-major array transposed.  Transpose back to
+        # the notebook's orientation before checking the chemical support.
+        A = np.asarray(handle["A_10takes_avg"], dtype=np.float64).T
     if A.shape != W.shape:
         raise ValueError(f"A shape {A.shape} != W shape {W.shape}")
-    outside = int(((A != 0) & (S == 0)).sum())
+    # The notebook uses ``S_mat = S_mat'`` before comparing A with the
+    # chemical support, so the support matrix is transposed here as well.
+    outside = int(((A != 0) & (S.T == 0)).sum())
     if outside:
         raise ValueError(
             f"name order rejected: {outside} non-zero A entries lie outside the chemical support"

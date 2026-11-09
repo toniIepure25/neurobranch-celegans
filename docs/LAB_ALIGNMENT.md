@@ -9,7 +9,7 @@ to Denis Kovačević, and it does not invent an internal Denis paper.
 |---|---|---|---|
 | BunDLe-Net (Kumar, Gilra, Meunier, Grosse-Wentrup; bioRxiv `10.1101/2023.08.08.551978`) | Tier 1 | held-out-worm benchmark, CRPS/coverage/NLL, 32-sample predictive spread, per-worm table | Latent manifold, not mechanism |
 | NC-MCM (Grosse-Wentrup, Kumar, Meunier, Zimmer; PLoS Comput Biol `10.1371/journal.pcbi.1012674`) | Tier 2 | assumption audit, transport test, K sensitivity, explicit `do()` caveat | Observational; strict Markov/stationarity currently fail |
-| Celegans_premotor (Morrison & Young; PLoS Comput Biol `10.1371/journal.pcbi.1013818`) | Tier 3 | published 84/15/69 clamped mode, signal pulses, validation report | Replay/sandbox; approximate fidelity |
+| Celegans_premotor (Morrison & Young; PLoS Comput Biol `10.1371/journal.pcbi.1013818`) | Tier 3 | published 84/15/69 clamped mode, signal pulses, validation report, Julia-reference parity | Replay/sandbox; implementation-faithful, not a digital twin |
 | Causal-mapping project (2024–2028) | Evidence & lab | pre-registered next experiments, held-out sixth worm, intervention request | No new causal claim |
 | BAI/EEGChat, MeDIL | not in v2 | noted as future extensions | Not implemented |
 
@@ -32,4 +32,5 @@ generic "digital twin" label.
 3. Is there an intervention dataset (optogenetic, ablation, microfluidic) that could test a
    pre-registered `do()` claim?
 4. Should the next iteration target a higher-order NC-MCM model, a better calibrated Tier-1
-   generator, or a Julia-reference fidelity check for the clamped core?
+   generator, or a perturbation experiment that can test the now-matched clamped replay? The
+   Julia-reference parity check is already complete for `2023-01-23-15`.

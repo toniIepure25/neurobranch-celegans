@@ -8,7 +8,7 @@
 | 1 | Manifold walk (kNN transition sampler) | same 5 worms | latent trajectory sampled from observed successors | Descriptive; does not extrapolate |
 | 1 | Switching linear dynamics + behaviour Markov chain | same 5 worms | latent trajectory + behaviour sequence | Descriptive; behaviour-conditioned |
 | 2 | NC-MCM cluster transition model | precomputed 5-worm NC-MCM artifacts | state/behaviour distributions under a forced state | Observational; `do()` not identified |
-| 3 | Clamped premotor rate ODE | published A/d + recovered W/names; Atanas recording | 15 intrinsic traces, behaviour readout | Replay/sandbox; fidelity approximate |
+| 3 | Clamped premotor rate ODE | published A/d + recovered W/names; Atanas recording | 15 intrinsic traces, behaviour readout | Implementation-faithful replay/sandbox; not a digital twin |
 | 3 | 205-node free-run premotor ODE | same matrices, no clamping | 205-node activity | Exploratory numerical sandbox |
 
 ## Intended use
@@ -33,16 +33,20 @@
 - Tier 2: Markov-order Monte Carlo test, stationarity block bootstrap, held-out behaviour
   transport, state–behaviour mutual information, K sensitivity.
 - Tier 3: published parameter values, 84/15/69 canonical counts, β=0 and zero-signal controls,
-  intrinsic residual and behaviour readout; **not** a pointwise fidelity claim.
+  intrinsic residual and behaviour readout. A fresh Julia 1.11.2 reference run matches the port at
+  mean trace r=0.9999997 and max |Δ|=0.0133 (canonical); behaviour agreement is 60.3%, so this is
+  **not** a pointwise biological-fidelity claim.
 
 ## Known limitations
 
 - Only five worms; worm-level splits are correct but population claims are limited.
 - Ensemble intervals under-cover nominal 90% in all three Tier-1 models.
 - NC-MCM strict first-order Markov and stationarity are rejected by the current audit.
-- Premotor `W` and neuron names are recovered, not part of the public JLD2 export; the Julia
-  reference was not run, so fidelity is approximate.
-- Clamped recordings other than `2023-01-23-15` have shorter measured cores.
+- Premotor `W` and neuron names are recovered, not part of the public JLD2 export. The Python port
+  matches the authors' Julia code on the canonical recording; this validates the implementation, not
+  the model's biology or causality.
+- Clamped recordings other than `2023-01-23-15` have shorter measured cores (85 and 86 here); the
+  Julia comparison was run only on the canonical recording.
 
 ## Provenance
 

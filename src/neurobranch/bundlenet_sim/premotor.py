@@ -9,7 +9,7 @@ and ``simulations.ipynb``):
         a * (u_j - fp1) * (u_j - fp2) * (u_j - fp3)
         + d_j
         + gamma * sum_i A[j, i] * ReLU(u_i)
-        + beta  * sum_i W[j, i] * (u_i - u_j)
+        + beta  * (W @ u - rowsum(W) * u)_j
     )
 
 The public JLD2 export omits the gap-junction matrix ``W`` and the neuron-name
@@ -66,7 +66,11 @@ def load_premotor(data_dir: Path | str | None = None) -> PremotorModel:
     if not path.exists():
         raise FileNotFoundError(f"missing premotor weights: {path}")
     with h5py.File(path, "r") as handle:
-        A = np.asarray(handle["A_10takes_avg"], dtype=np.float64)
+        # JLD2 stores Julia's column-major matrix in an HDF5 layout that h5py
+        # exposes transposed.  The notebook's ``A = S_approx[ids_core, ids_core]``
+        # is the transpose of the array h5py returns; without this correction
+        # the chemical input is wired backwards.
+        A = np.asarray(handle["A_10takes_avg"], dtype=np.float64).T
         d = np.asarray(handle["d_10takes_avg"], dtype=np.float64).reshape(-1)
     if A.shape[0] != A.shape[1] or A.shape[0] != len(d):
         raise ValueError(f"inconsistent premotor shapes: A={A.shape}, d={d.shape}")
@@ -143,7 +147,10 @@ def simulate(
     def rhs(t: float, u: np.ndarray) -> np.ndarray:
         u_clip = np.clip(u, -8.0, 8.0)
         chemical = A @ np.maximum(u_clip, 0.0)
-        gap = np.zeros_like(u_clip) if W is None else (W.sum(axis=1) * u_clip - W @ u_clip)
+        # Julia's notebook computes diag(W * (repeat(u, 1, N) - repeat(u, 1, N)')),
+        # which expands to sum_j W[i, j] * (u_j - u_i).  Keep this sign; the
+        # opposite convention drives the network away from the published run.
+        gap = np.zeros_like(u_clip) if W is None else (W @ u_clip - W.sum(axis=1) * u_clip)
         drive = d.copy()
         if (
             params.stim_node is not None

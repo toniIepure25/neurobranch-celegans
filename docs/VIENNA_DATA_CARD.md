@@ -17,7 +17,8 @@
   canonical 0-based BunDLe-Net order.
 - Premotor: `A`/`d` used as published. `W` is reconstructed from the release connectome and the
   accepted 205-name order; 913/913 non-zero `A` entries lie inside the chemical support.
-- Atanas: Savitzky–Golay `window=11, polyorder=5`; two edge frames removed on each side; documented
+- Atanas: Savitzky–Golay `window=11, polyorder=5`; first and last smoothed frame removed
+  (`ts_tmp[2:end-1]`); frame interval rounded to three decimals as in the notebook; documented
   AVBR/RIBR/AIB/RID/twin replacements only. No generic nearest-neighbour fill.
 
 ## Splits and leakage

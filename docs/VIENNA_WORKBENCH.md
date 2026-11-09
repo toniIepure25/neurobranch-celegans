@@ -196,29 +196,45 @@ The ODE and default parameters follow `functions/functions_simulation.jl` and
 ```
 du_j/dt = (1/τ) [ a(u_j−fp1)(u_j−fp2)(u_j−fp3) + d_j
                   + γ Σ_i A[j,i] ReLU(u_i)
-                  + β Σ_i W[j,i](u_i−u_j) ]
+                  + β (W u − rowsum(W) ⊙ u)_j ]
 a=−2, fp1=−0.8, fp2=0.1, fp3=1.0, γ=1.4, β=10, τ=0.2
 ```
 
 `A` and `d` are the published fitted values. We recover `W` and the 205-name order from the
 release's own connectome table; the accepted order has all 913 non-zero `A` entries inside the
-chemical-synapse support. This removes the earlier anonymous-node limitation.
+transposed chemical-synapse support. This removes the earlier anonymous-node limitation.
 
-**The paper's configuration is now implemented.** The canonical recording
-`2023-01-23-15` maps to the published **84 core / 15 intrinsic / 69 signal** split. The 15
-intrinsic neurons are integrated; the 69 signals are linearly interpolated from the recording
-and clamped. Signal pulses can be added to any clamped neuron. The remaining recordings have
-shorter measured cores (49–86 neurons) and are reported with their actual counts; only the
-canonical recording has the exact 84/15/69 split. Missing AVBR/RIBR are filled with the
-release's documented donor rules; no generic nearest-neighbour fill is used.
+**The paper's configuration is implemented and checked against the authors' Julia code.** The
+canonical recording `2023-01-23-15` maps to the published **84 core / 15 intrinsic / 69 signal**
+split. The 15 intrinsic neurons are integrated; the 69 signals are linearly interpolated from the
+recording and clamped. Signal pulses can be added to any clamped neuron. The other two validation
+recordings have measured cores of 85 and 86 neurons and are reported with their actual counts; only
+the canonical recording has the exact 84/15/69 split. Missing neurons are filled with the release's
+documented donor rules; no generic nearest-neighbour fill is used.
+
+The Python port was compared with a fresh Julia 1.11.2 run of the authors' notebook cells on
+`2023-01-23-15`:
+
+| Check | Result |
+|---|---|
+| Intrinsic-trace Pearson r, mean / minimum over 15 neurons | **0.99999972 / 0.99999954** |
+| Maximum absolute Python−Julia trace difference | **0.0133** (range of activity ≈ 3.34) |
+| Julia / Python peak |u| | 3.3364 / 3.3369 |
+| Canonical behaviour-state agreement / distribution JS | **60.3% / 0.0011** |
+| Three-recording mean agreement / mean JS | **58.3% / 0.0113** |
+
+The comparison caught three port defects that a unit test had not: labels were shifted by one
+relative to Julia's 1-based indices, smoothing removed four edge frames instead of two, and the
+gap-junction term had both a transposed `A` and the opposite sign. The corrected port is an
+implementation-faithful replay. It is **not** a validated digital twin: 40–42% of canonical
+behaviour frames still disagree, and agreement is not causal identification.
 
 `python scripts/build_tier3_validation.py` writes
 `reports/vienna_workbench/tier3_clamped_validation.json` for the canonical and two additional
-recordings, with β=0 and zero-signal controls for the canonical case. **Fidelity is approximate:**
-the Julia reference notebook was not run in this environment, the gap-junction `W` and neuron
-names are independently recovered, and the current state agreement is low. The UI shows the
-intrinsic residual and the behaviour readout rather than hiding the mismatch. This is a
-replay/sandbox, **not** a validated digital twin.
+recordings, with β=0 and zero-signal controls for the canonical case. The controls move the result
+substantially (β=0: 38.3% agreement, JS 0.137; zero signals: 49.6% agreement, JS 0.218), so the
+trace is not a trivial constant. The UI shows the intrinsic residual and the behaviour readout
+rather than hiding the mismatch. This is a replay/sandbox, **not** a validated digital twin.
 
 The separate 205-node free-run remains exploratory. At `β=10` it leaves the stable regime; the
 sandbox defaults to `β=0` and warns when `|activity| > 20`. The UI still exposes top nodes by
@@ -269,6 +285,8 @@ t, y = wb.tier3_simulate(PremotorParameters(duration=12.0, beta=0.0))
 | `scripts/fetch_vienna_artifacts.py` | copy + SHA-256 manifest + premotor builder |
 | `scripts/build_premotor_inputs.py` | recover W/names; verify A support |
 | `scripts/build_tier3_validation.py` | clamped-core validation report |
+| `scripts/reference/run_julia_reference.jl` | authors' notebook cells, standalone Julia reference |
+| `scripts/compare_tier3_reference.py` | Python↔Julia comparison + input hashes |
 | `tests/test_bundlenet_clamped.py` | clamped-core contract tests |
 | `tests/test_causal_audit.py` | synthetic assumption-audit tests |
 | `tests/test_bundlenet_workbench.py` | Tier-1/Tier-2/Tier-3 contract tests |
@@ -281,17 +299,21 @@ t, y = wb.tier3_simulate(PremotorParameters(duration=12.0, beta=0.0))
 2. **No causal identification.** NC-MCM states are fitted descriptions; the current audit rejects
    strict first-order Markov and stationarity. The intervention panel is explicitly a Markov
    counterfactual until an intervention dataset is analysed.
-3. **Premotor clamped mode is implemented, fidelity is approximate.** The canonical recording has
-   the published 84/15/69 split, but `W`/names are recovered and no Julia reference comparison was
-   run. Do not describe it as a validated digital twin.
+3. **Premotor clamped mode is implementation-faithful, not a digital twin.** The canonical
+   recording has the published 84/15/69 split, and the Python port matches a fresh Julia reference
+   run to r=0.9999997 with max |Δ|=0.013. That validates the port, not the biology: 40–42% of
+   canonical behaviour frames still disagree, and `W`/names are independently recovered. Do not
+   describe it as a validated digital twin.
 4. **Preprint status.** BunDLe-Net is a bioRxiv `posted-content` record; do not cite it as a
    peer-reviewed journal article.
 5. **Five worms only.** Worm-level splits are the right unit, but n=5 limits generalization claims.
 
-Recommended next experiment: run the authors' Julia notebook for `2023-01-23-15` and compare the
-intrinsic traces/behaviour statistics with the Python port before any intervention claim. In
-parallel, obtain an experimental perturbation dataset for NC-MCM and pre-register a held-out-worm
-comparison of (a) manifold walk, (b) NC-MCM state model, and (c) clamped premotor ODE.
+Recommended next experiment: use the now-matched clamped replay as a null/implementation control,
+then obtain an experimental perturbation dataset for NC-MCM and pre-register a held-out-worm
+comparison of (a) manifold walk, (b) NC-MCM state model, and (c) clamped premotor ODE. A useful
+intervention test must change a clamped signal and compare the predicted intrinsic response with
+an independent recording; the current pulse panel is still a simulation, not a perturbation
+experiment.
 
 ## Sources
 

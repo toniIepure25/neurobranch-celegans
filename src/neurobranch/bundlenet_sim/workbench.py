@@ -138,6 +138,12 @@ class ViennaWorkbench:
             return {}
         return json.loads(path.read_text(encoding="utf-8"))
 
+    def tier3_reference(self) -> dict[str, object]:
+        path = self.root / "reports" / "vienna_workbench" / "tier3_julia_reference.json"
+        if not path.exists():
+            return {}
+        return json.loads(path.read_text(encoding="utf-8"))
+
     def tier2_audit(self, k: int = 6) -> dict[str, object]:
         if k not in self._audit:
             path = (

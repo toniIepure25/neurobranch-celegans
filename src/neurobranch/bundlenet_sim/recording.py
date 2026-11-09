@@ -9,7 +9,7 @@ This module deliberately reproduces the preprocessing used by the published
 Julia notebook:
 
 * Savitzky-Golay smoothing with window 11 and polynomial order 5;
-* the two edge frames are discarded on each side;
+* the first and last smoothed frame are discarded (``ts_tmp[2:end-1]``);
 * missing neurons are replaced only by the explicit twin/partner rules in
   ``functions_regression.jl``.  No value is invented for a neuron without a
   documented replacement.
@@ -127,10 +127,12 @@ def load_atanas_recording(path: Path | str) -> AtanasRecording:
     for key, meta in payload.get("labeled", {}).items():
         label = meta.get("label") if isinstance(meta, dict) else None
         labels_by_index[int(key)] = str(label) if label else None
-    labels = tuple(labels_by_index.get(i) for i in range(traces.shape[0]))
+    # The release uses Julia's 1-based trace indices.  Mapping them directly
+    # onto a 0-based NumPy row shifts every label by one trace.
+    labels = tuple(labels_by_index.get(i + 1) for i in range(traces.shape[0]))
     return AtanasRecording(
         recording_id=path.stem,
-        dt=float(payload["avg_timestep"]),
+        dt=round(float(payload["avg_timestep"]), 3),
         traces=traces,
         labels=labels,
         source=str(path),
@@ -140,9 +142,9 @@ def load_atanas_recording(path: Path | str) -> AtanasRecording:
 def smooth_traces(traces: np.ndarray, *, window: int = 11, polyorder: int = 5) -> np.ndarray:
     """Apply the published Savitzky-Golay preprocessing.
 
-    The Julia notebook smooths each trace, then removes two frames on each side
-    (``ts_tmp[2:end-1]`` in 1-based Julia).  The result is the same length as the
-    input minus four frames.
+    The Julia notebook smooths each trace, then removes the first and last
+    frame (``ts_tmp[2:end-1]`` in 1-based Julia).  The result is the same length
+    as the input minus two frames.
     """
     if traces.ndim != 2:
         raise ClampedDataError(f"traces must be 2-D, got {traces.shape}")
@@ -154,7 +156,7 @@ def smooth_traces(traces: np.ndarray, *, window: int = 11, polyorder: int = 5) -
         [savgol_filter(row, window_length=window, polyorder=polyorder) for row in traces],
         axis=0,
     )
-    return smoothed[:, 2:-2]
+    return smoothed[:, 1:-1]
 
 
 def paper_replacement(name: str, available: set[str]) -> str | None:
@@ -164,34 +166,37 @@ def paper_replacement(name: str, available: set[str]) -> str | None:
     We intentionally do not apply a generic nearest-neighbour or contralateral
     fill: that would add neurons the published core does not contain and make
     the simulation look more complete than it is.
+
+    Order matters.  ``Data_Replacement`` first substitutes the contralateral
+    twin for a length-4/5 neuron, then applies the AVB/RIB, AIB/RIM and RID
+    fallbacks.  In the canonical recording ``AVBR`` therefore receives
+    ``AVBL`` and ``RIBR`` receives ``RIBL``, not the other way round.
     """
-    if name in {"AVBR", "RIBR", "AVBL", "RIBL"}:
-        partners = {
-            "AVBR": ("RIBR", "AVBL"),
-            "RIBR": ("AVBR", "AVBL"),
-            "AVBL": ("RIBL", "AVBR"),
-            "RIBL": ("AVBL", "AVBR"),
-        }[name]
-        for candidate in partners:
-            if candidate in available:
-                return candidate
-    if name in {"AIBL", "AIBR"}:
-        partners = ("RIML", "RIMR") if name == "AIBL" else ("RIMR", "RIML")
-        for candidate in partners:
-            if candidate in available:
-                return candidate
-    if name == "RID":
-        for candidate in ("AVBR", "AVBL"):
-            if candidate in available:
-                return candidate
-    # The release's length-4/5 twin rule is applied to the ``switchout_list``
-    # of highly correlated neurons.  We only apply it to the 15 intrinsic
-    # neurons, where the twin substitution is explicit and auditable; applying
-    # it to every missing neuron would add dozens of non-core rows.
+    twin: str | None = None
     if name in INTRINSIC_NEURONS and len(name) in {4, 5} and name[-1] in {"L", "R"}:
         twin = name[:-1] + ("R" if name[-1] == "L" else "L")
-        if twin in available:
-            return twin
+    if twin is not None and twin in available:
+        return twin
+
+    if name == "AVBL":
+        partners = ("RIBL", "RIBR")
+    elif name == "AVBR":
+        partners = ("RIBR", "RIBL")
+    elif name == "RIBL":
+        partners = ("AVBL", "AVBR")
+    elif name == "RIBR":
+        partners = ("AVBR", "AVBL")
+    elif name == "AIBL":
+        partners = ("RIML", "RIMR")
+    elif name == "AIBR":
+        partners = ("RIMR", "RIML")
+    elif name == "RID":
+        partners = ("AVBR", "AVBL")
+    else:
+        partners = ()
+    for candidate in partners:
+        if candidate in available:
+            return candidate
     return None
 
 
@@ -216,7 +221,7 @@ def build_clamped_recording(
     model,
     atanas: AtanasRecording,
     *,
-    t_start: int = 5,
+    t_start: int = 4,
     n_steps: int = 1400,
     expected_core: int | None = 84,
     expected_intrinsic: int = 15,
@@ -226,6 +231,9 @@ def build_clamped_recording(
     ``expected_core=None`` accepts a recording whose measured core is not the
     canonical 84-neuron set (the release has one canonical recording and many
     shorter/partial ones).  All 15 intrinsic neurons must still be present.
+
+    ``t_start`` is a 0-based Python index corresponding to the notebook's
+    1-based ``tstart = 5``; both select the same fifth smoothed sample.
     """
     if model.neuron_names is None:
         raise ClampedDataError("premotor model has no neuron-name order")
