@@ -1,53 +1,54 @@
 {
   "aggregate": {
-    "max_abs": 10.427634606347702,
-    "mean_behavior_distribution_js": 0.3537629798127136,
-    "mean_state_agreement": 0.2890792291220557,
+    "max_abs": 3.592454665581657,
+    "mean_behavior_distribution_js": 0.011330363029595121,
+    "mean_state_agreement": 0.5831548893647395,
     "n_recordings": 3
   },
   "caveats": [
     "Only the canonical 2023-01-23-15 recording has the published 84/15/69 counts.",
     "Other recordings are shorter cores; they are reported with their actual counts.",
     "The recovered gap-junction matrix W is not part of the public JLD2 export.",
-    "A low state agreement is evidence against a pointwise replay claim, not evidence for mechanism."
+    "Implementation parity with Julia does not remove the 40-42% canonical behaviour-frame disagreement; that is a model/measurement limitation, not a port bug.",
+    "The Julia comparison covers the canonical recording only."
   ],
   "claim_level": "published-parameter replay/sandbox; not a digital twin",
   "controls": {
     "beta0": {
       "delta_vs_main": {
-        "max_abs_intrinsic": 13.184014663359868,
-        "mean_abs_intrinsic": 5.963614147966378
+        "max_abs_intrinsic": 5.724935266428742,
+        "mean_abs_intrinsic": 2.260502342004316
       },
       "method": "RK45",
       "metrics": {
-        "behavior_distribution_js": 0.2785563111849918,
-        "behavior_transition_js": 0.09813670330477525,
+        "behavior_distribution_js": 0.13666848698381145,
+        "behavior_transition_js": 0.011599969042575788,
         "finite": true,
-        "max_abs": 4.959378189746188,
+        "max_abs": 5.218558846154286,
         "sim_distribution": {
-          "-1": 0.0,
-          "0": 0.0028551034975017845,
-          "1": 0.9971448965024983
+          "-1": 0.1334760885082084,
+          "0": 0.01641684511063526,
+          "1": 0.8501070663811563
         },
         "sim_dwell_s": {
-          "forward": 14.006233034005989,
-          "reverse": NaN
+          "forward": 1.48875,
+          "reverse": 0.3116666666666667
         },
-        "sim_mean": -0.3246392075741319,
-        "sim_std": 2.002189062088879,
+        "sim_mean": 1.1515388302533236,
+        "sim_std": 2.239556397107108,
         "state_agreement": 0.38329764453961457,
         "status": "ok",
         "truth_distribution": {
-          "-1": 0.28551034975017847,
-          "0": 0.3333333333333333,
-          "1": 0.3811563169164882
+          "-1": 0.49607423269093504,
+          "0": 0.145610278372591,
+          "1": 0.35831548893647397
         },
         "truth_dwell_s": {
-          "forward": 0.10295865371068771,
-          "reverse": 0.10025936316396555
+          "forward": 0.15212121212121213,
+          "reverse": 0.21060606060606063
         },
-        "truth_mean": -0.07692495541243308,
-        "truth_std": 0.9141453667697291
+        "truth_mean": -0.009634869202346096,
+        "truth_std": 0.995975713043751
       },
       "parameters": {
         "a": -2.0,
@@ -70,34 +71,34 @@
       },
       "method": "RK45",
       "metrics": {
-        "behavior_distribution_js": 0.28388806681324463,
-        "behavior_transition_js": 0.25429899799990685,
+        "behavior_distribution_js": 0.001107771973685107,
+        "behavior_transition_js": 0.002174810355762143,
         "finite": true,
-        "max_abs": 10.427634606347702,
+        "max_abs": 3.33685513325449,
         "sim_distribution": {
-          "-1": 0.0,
-          "0": 0.0007137758743754461,
-          "1": 0.9992862241256245
+          "-1": 0.46181299072091364,
+          "0": 0.13418986438258387,
+          "1": 0.4039971448965025
         },
         "sim_dwell_s": {
-          "forward": 14.036310842955178,
-          "reverse": NaN
+          "forward": 0.26952380952380955,
+          "reverse": 0.2588
         },
-        "sim_mean": 0.7051607612220877,
-        "sim_std": 7.2679778319505175,
-        "state_agreement": 0.38187009279086365,
+        "sim_mean": 0.02016145649646728,
+        "sim_std": 1.05352708984308,
+        "state_agreement": 0.6031406138472519,
         "status": "ok",
         "truth_distribution": {
-          "-1": 0.28551034975017847,
-          "0": 0.3333333333333333,
-          "1": 0.3811563169164882
+          "-1": 0.49607423269093504,
+          "0": 0.145610278372591,
+          "1": 0.35831548893647397
         },
         "truth_dwell_s": {
-          "forward": 0.10295865371068771,
-          "reverse": 0.10025936316396555
+          "forward": 0.15212121212121213,
+          "reverse": 0.21060606060606063
         },
-        "truth_mean": -0.07692495541243308,
-        "truth_std": 0.9141453667697291
+        "truth_mean": -0.009634869202346096,
+        "truth_std": 0.995975713043751
       },
       "parameters": {
         "a": -2.0,
@@ -115,39 +116,39 @@
     },
     "zero_signals": {
       "delta_vs_main": {
-        "max_abs_intrinsic": 12.754484619071844,
-        "mean_abs_intrinsic": 1.1365778365369437
+        "max_abs_intrinsic": 4.420288578792071,
+        "mean_abs_intrinsic": 1.0621248096402633
       },
       "method": "RK45",
       "metrics": {
-        "behavior_distribution_js": 0.28388806681324463,
-        "behavior_transition_js": 0.25429899799990685,
+        "behavior_distribution_js": 0.21792315766254425,
+        "behavior_transition_js": 0.10561627549762959,
         "finite": true,
-        "max_abs": 9.991919708347897,
+        "max_abs": 2.387261311448083,
         "sim_distribution": {
-          "-1": 0.0,
-          "0": 0.0007137758743754461,
-          "1": 0.9992862241256245
+          "-1": 1.0,
+          "0": 0.0,
+          "1": 0.0
         },
         "sim_dwell_s": {
-          "forward": 14.036310842955178,
-          "reverse": NaN
+          "forward": NaN,
+          "reverse": 14.01
         },
-        "sim_mean": 1.283809931780898,
-        "sim_std": 7.243011064144049,
-        "state_agreement": 0.38187009279086365,
+        "sim_mean": 0.09990971938560096,
+        "sim_std": 0.9306559905038148,
+        "state_agreement": 0.49607423269093504,
         "status": "ok",
         "truth_distribution": {
-          "-1": 0.28551034975017847,
-          "0": 0.3333333333333333,
-          "1": 0.3811563169164882
+          "-1": 0.49607423269093504,
+          "0": 0.145610278372591,
+          "1": 0.35831548893647397
         },
         "truth_dwell_s": {
-          "forward": 0.10295865371068771,
-          "reverse": 0.10025936316396555
+          "forward": 0.15212121212121213,
+          "reverse": 0.21060606060606063
         },
-        "truth_mean": -0.07692495541243308,
-        "truth_std": 0.9141453667697291
+        "truth_mean": -0.009634869202346096,
+        "truth_std": 0.995975713043751
       },
       "parameters": {
         "a": -2.0,
@@ -165,39 +166,50 @@
     }
   },
   "format": "vienna-tier3-clamped-validation-v1",
-  "generated_utc": "2026-11-09T19:34:23.875901+00:00",
+  "generated_utc": "2026-11-09T21:40:36.523316+00:00",
+  "julia_reference": {
+    "julia_version": "1.11.2",
+    "recording": "2023-01-23-15",
+    "solver": "Tsit5",
+    "summary": {
+      "max_abs_difference": 0.013292046085670209,
+      "max_trace_abs": 3.33685513325449,
+      "mean_pearson_r": 0.9999997233016045,
+      "min_pearson_r": 0.9999995376274514
+    }
+  },
   "recordings": [
     {
       "method": "RK45",
       "metrics": {
-        "behavior_distribution_js": 0.28388806681324463,
-        "behavior_transition_js": 0.25429899799990685,
+        "behavior_distribution_js": 0.001107771973685107,
+        "behavior_transition_js": 0.002174810355762143,
         "finite": true,
-        "max_abs": 10.427634606347702,
+        "max_abs": 3.33685513325449,
         "sim_distribution": {
-          "-1": 0.0,
-          "0": 0.0007137758743754461,
-          "1": 0.9992862241256245
+          "-1": 0.46181299072091364,
+          "0": 0.13418986438258387,
+          "1": 0.4039971448965025
         },
         "sim_dwell_s": {
-          "forward": 14.036310842955178,
-          "reverse": NaN
+          "forward": 0.26952380952380955,
+          "reverse": 0.2588
         },
-        "sim_mean": 0.7051607612220877,
-        "sim_std": 7.2679778319505175,
-        "state_agreement": 0.38187009279086365,
+        "sim_mean": 0.02016145649646728,
+        "sim_std": 1.05352708984308,
+        "state_agreement": 0.6031406138472519,
         "status": "ok",
         "truth_distribution": {
-          "-1": 0.28551034975017847,
-          "0": 0.3333333333333333,
-          "1": 0.3811563169164882
+          "-1": 0.49607423269093504,
+          "0": 0.145610278372591,
+          "1": 0.35831548893647397
         },
         "truth_dwell_s": {
-          "forward": 0.10295865371068771,
-          "reverse": 0.10025936316396555
+          "forward": 0.15212121212121213,
+          "reverse": 0.21060606060606063
         },
-        "truth_mean": -0.07692495541243308,
-        "truth_std": 0.9141453667697291
+        "truth_mean": -0.009634869202346096,
+        "truth_std": 0.995975713043751
       },
       "n_core": 84,
       "n_frames": 1401,
@@ -216,7 +228,7 @@
       "recording_id": "2023-01-23-15",
       "replacement_map": {
         "AVBR": "AVBL",
-        "RIBR": "AVBL"
+        "RIBR": "RIBL"
       },
       "source": "D:\\ComputaCenter\\NeuroBranch\\neurobranch-celegans\\references\\external\\Celegans_premotor\\data\\Atanas_data\\2023-01-23-15.json",
       "status": "ok"
@@ -224,39 +236,39 @@
     {
       "method": "RK45",
       "metrics": {
-        "behavior_distribution_js": 0.4399147396169274,
-        "behavior_transition_js": 0.27715011414957214,
+        "behavior_distribution_js": 0.013713834585143088,
+        "behavior_transition_js": 0.0077408500032704886,
         "finite": true,
-        "max_abs": 9.988367666034032,
+        "max_abs": 3.271906953374936,
         "sim_distribution": {
-          "-1": 0.9992862241256245,
-          "0": 0.0007137758743754461,
-          "1": 0.0
+          "-1": 0.2883654532476802,
+          "0": 0.18629550321199143,
+          "1": 0.5253390435403283
         },
         "sim_dwell_s": {
-          "forward": NaN,
-          "reverse": 14.036966681449767
+          "forward": 0.28307692307692306,
+          "reverse": 0.1442857142857143
         },
-        "sim_mean": -0.12658584908111953,
-        "sim_std": 6.98364839794062,
-        "state_agreement": 0.17915774446823698,
+        "sim_mean": 0.23713295734825635,
+        "sim_std": 1.1867863512667127,
+        "state_agreement": 0.5281941470378301,
         "status": "ok",
         "truth_distribution": {
-          "-1": 0.17844396859386152,
-          "0": 0.6188436830835118,
-          "1": 0.2027123483226267
+          "-1": 0.4475374732334047,
+          "0": 0.14132762312633834,
+          "1": 0.41113490364025695
         },
         "truth_dwell_s": {
-          "forward": 0.051772708279632915,
-          "reverse": 0.0491490430022751
+          "forward": 0.1476923076923077,
+          "reverse": 0.165
         },
-        "truth_mean": -0.07482011805570302,
-        "truth_std": 0.8912963130430667
+        "truth_mean": 0.002602053806846594,
+        "truth_std": 0.9734755180947704
       },
-      "n_core": 84,
+      "n_core": 85,
       "n_frames": 1401,
       "n_intrinsic": 15,
-      "n_signal": 69,
+      "n_signal": 70,
       "parameters": {
         "a": -2.0,
         "beta": 10.0,
@@ -269,7 +281,7 @@
       },
       "recording_id": "2023-01-10-07",
       "replacement_map": {
-        "AVBL": "RIBL",
+        "AVBL": "AVBR",
         "RIMR": "RIML"
       },
       "source": "D:\\ComputaCenter\\NeuroBranch\\neurobranch-celegans\\references\\external\\Celegans_premotor\\data\\Atanas_data\\2023-01-10-07.json",
@@ -278,34 +290,34 @@
     {
       "method": "RK45",
       "metrics": {
-        "behavior_distribution_js": 0.33748613300796887,
-        "behavior_transition_js": 0.1315755907467076,
+        "behavior_distribution_js": 0.01916948252995717,
+        "behavior_transition_js": 0.0017762650216651234,
         "finite": true,
-        "max_abs": 9.767798373394172,
+        "max_abs": 3.592454665581657,
         "sim_distribution": {
-          "-1": 0.0,
-          "0": 0.0,
-          "1": 1.0
+          "-1": 0.284796573875803,
+          "0": 0.14061384725196288,
+          "1": 0.5745895788722342
         },
         "sim_dwell_s": {
-          "forward": 14.046700577869801,
-          "reverse": NaN
+          "forward": 0.4025,
+          "reverse": 0.19
         },
-        "sim_mean": 0.5980893970773112,
-        "sim_std": 7.221543195935679,
-        "state_agreement": 0.30620985010706636,
+        "sim_mean": 0.17485896405368664,
+        "sim_std": 1.1869543748426394,
+        "state_agreement": 0.6181299072091363,
         "status": "ok",
         "truth_distribution": {
-          "-1": 0.25267665952890794,
-          "0": 0.4411134903640257,
-          "1": 0.30620985010706636
+          "-1": 0.47109207708779444,
+          "0": 0.12276945039257674,
+          "1": 0.4061384725196288
         },
         "truth_dwell_s": {
-          "forward": 0.08960912663434072,
-          "reverse": 0.0825412413818354
+          "forward": 0.2370833333333333,
+          "reverse": 0.275
         },
-        "truth_mean": -0.08914217298201166,
-        "truth_std": 0.9163015822032976
+        "truth_mean": 0.008257575919432733,
+        "truth_std": 0.982520830256814
       },
       "n_core": 86,
       "n_frames": 1401,
@@ -331,5 +343,5 @@
       "status": "ok"
     }
   ],
-  "reference_status": "Julia reference notebook was not run in this environment; the recovered A/d/W and neuron order are validated by support checks and contract tests, but pointwise fidelity to the paper figure is not established."
+  "reference_status": "The Python port was compared with a fresh Julia 1.11.2 run of the authors' notebook cells on 2023-01-23-15: mean intrinsic-trace r=0.9999997, max |Python-Julia|=0.0133. This validates the implementation, not the biology or causality; the other two recordings were not run through Julia."
 }

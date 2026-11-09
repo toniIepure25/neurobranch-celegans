@@ -1,0 +1,158 @@
+{
+  "schema": "vienna-tier3-julia-reference-v1",
+  "recording": "2023-01-23-15",
+  "julia_reference": {
+    "source": "scripts/reference/run_julia_reference.jl",
+    "julia_version": "1.11.2",
+    "solver": "Tsit5",
+    "max_abs": 3.3363744580658348
+  },
+  "python": {
+    "solver": "RK45",
+    "max_abs": 3.33685513325449,
+    "status": "ok",
+    "state_agreement": 0.6031406138472519,
+    "behavior_distribution_js": 0.001107771973685107
+  },
+  "summary": {
+    "mean_pearson_r": 0.9999997233016045,
+    "min_pearson_r": 0.9999995376274514,
+    "max_abs_difference": 0.013292046085670209,
+    "max_trace_abs": 3.33685513325449
+  },
+  "per_neuron": {
+    "AVBL": {
+      "pearson_r": 0.9999995960225816,
+      "max_abs_difference": 0.013292046085670209,
+      "rmse": 0.0009955663494316369,
+      "python_truth_pearson_r": 0.30713348076599606,
+      "julia_truth_pearson_r": 0.30713148526782974
+    },
+    "AVBR": {
+      "pearson_r": 0.9999995965418307,
+      "max_abs_difference": 0.012851277671368774,
+      "rmse": 0.0010139531207019692,
+      "python_truth_pearson_r": 0.30313187156945476,
+      "julia_truth_pearson_r": 0.30312695425077507
+    },
+    "RIBL": {
+      "pearson_r": 0.9999997575090956,
+      "max_abs_difference": 0.008260625420333637,
+      "rmse": 0.0008044300387224507,
+      "python_truth_pearson_r": 0.3696447187623606,
+      "julia_truth_pearson_r": 0.3696896735368677
+    },
+    "RIBR": {
+      "pearson_r": 0.9999996913468414,
+      "max_abs_difference": 0.007888771068619299,
+      "rmse": 0.0007888829968663702,
+      "python_truth_pearson_r": 0.4764334436006887,
+      "julia_truth_pearson_r": 0.47649274645691725
+    },
+    "RID": {
+      "pearson_r": 0.999999626566097,
+      "max_abs_difference": 0.011592710373535153,
+      "rmse": 0.0009474121559217097,
+      "python_truth_pearson_r": 0.24560770279361552,
+      "julia_truth_pearson_r": 0.24560133598468264
+    },
+    "AVDL": {
+      "pearson_r": 0.9999998838011798,
+      "max_abs_difference": 0.0033880133048431738,
+      "rmse": 0.0003403709999264407,
+      "python_truth_pearson_r": 0.48809453391267904,
+      "julia_truth_pearson_r": 0.48810042052964003
+    },
+    "AVDR": {
+      "pearson_r": 0.9999997672506445,
+      "max_abs_difference": 0.006086291502333863,
+      "rmse": 0.0005201431249917715,
+      "python_truth_pearson_r": 0.4942748245968716,
+      "julia_truth_pearson_r": 0.4942418036840342
+    },
+    "AVAL": {
+      "pearson_r": 0.9999995376274514,
+      "max_abs_difference": 0.010949445798158153,
+      "rmse": 0.001082431143889354,
+      "python_truth_pearson_r": 0.7335651914730897,
+      "julia_truth_pearson_r": 0.7335154322897969
+    },
+    "AVAR": {
+      "pearson_r": 0.9999997409295899,
+      "max_abs_difference": 0.009556855522634966,
+      "rmse": 0.0007557898407485745,
+      "python_truth_pearson_r": 0.7061074096013844,
+      "julia_truth_pearson_r": 0.7060504789802027
+    },
+    "RIML": {
+      "pearson_r": 0.9999997198986955,
+      "max_abs_difference": 0.01091254487169846,
+      "rmse": 0.0008009772313820086,
+      "python_truth_pearson_r": 0.6904762733424711,
+      "julia_truth_pearson_r": 0.690420271295172
+    },
+    "RIMR": {
+      "pearson_r": 0.999999688393638,
+      "max_abs_difference": 0.01014228944758333,
+      "rmse": 0.0008299193502485592,
+      "python_truth_pearson_r": 0.7024016473045811,
+      "julia_truth_pearson_r": 0.7023442535045605
+    },
+    "AVEL": {
+      "pearson_r": 0.9999997631286677,
+      "max_abs_difference": 0.0119079092105564,
+      "rmse": 0.000838447989884078,
+      "python_truth_pearson_r": 0.7206267715953407,
+      "julia_truth_pearson_r": 0.7205623993023785
+    },
+    "AVER": {
+      "pearson_r": 0.9999997878504137,
+      "max_abs_difference": 0.01087580729509069,
+      "rmse": 0.0007683400682768402,
+      "python_truth_pearson_r": 0.7056963950627365,
+      "julia_truth_pearson_r": 0.7056574939093826
+    },
+    "AIBL": {
+      "pearson_r": 0.9999998501337739,
+      "max_abs_difference": 0.010346094741224943,
+      "rmse": 0.0006396512391836279,
+      "python_truth_pearson_r": 0.7817340659287918,
+      "julia_truth_pearson_r": 0.7817094050228229
+    },
+    "AIBR": {
+      "pearson_r": 0.9999998425235639,
+      "max_abs_difference": 0.005469011734369422,
+      "rmse": 0.0005215958921508419,
+      "python_truth_pearson_r": 0.6446049987996977,
+      "julia_truth_pearson_r": 0.6445396829399276
+    }
+  },
+  "provenance": {
+    "git_sha": "25bc5ab558ca4e306fcb9c583f471419bd89ff15",
+    "dirty": false,
+    "dirty_scope": "src scripts tests",
+    "command": "PYTHONPATH=src python scripts/compare_tier3_reference.py",
+    "inputs_sha256": {
+      "recording_json": "417dd53ee16b0146053264c101f82c0ee4476fc2b506323210805a206eb590bd",
+      "weights_jld2": "fb6844eff3f19b67da297253f139782a90ebb9d285966fe5f254094fb4f76d9a",
+      "connectome_csv": "e28bb1df1beab5fc89fb2423409010802e9271af179041f14e1a4e0fb42e3d8c",
+      "julia_csv": "aee4c224f1f6084967c52f49132c90b657d1bded96ff0f5c0b683a8c1c166948",
+      "W_npy": "5031ab85f581b6bdcd04b297303573a71b3f4a66183f930ed85245c14275d2ba",
+      "neuron_names": "7697bff9bdd647b93645627d2c2ba84365b6dbc78c6bc7f14cd3294055a86666"
+    },
+    "environment": {
+      "python": "3.13.5",
+      "platform": "Windows-10-10.0.19045-SP0",
+      "processor": "AMD64 Family 25 Model 80 Stepping 0, AuthenticAMD",
+      "numpy": "2.3.1",
+      "pandas": "2.3.3",
+      "scipy": "1.16.0",
+      "julia": "1.11.2 (pod)"
+    },
+    "acceptance_tolerance": {
+      "mean_pearson_r_min": 0.999,
+      "max_abs_difference_max": 0.05,
+      "note": "Port parity; not a biological equivalence threshold."
+    }
+  }
+}
