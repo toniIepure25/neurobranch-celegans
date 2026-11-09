@@ -1,0 +1,144 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Vienna Neuroinformatics Studio — Product Brief</title>
+<style>
+  @page { size: A4; margin: 16mm 15mm; }
+  body { font-family: "Segoe UI", Arial, sans-serif; color: #1c2430; font-size: 10.2pt; line-height: 1.42; }
+  h1 { font-size: 23pt; margin: 0 0 2mm; letter-spacing: -0.4px; color: #10243b; }
+  h2 { font-size: 13pt; margin: 7mm 0 2mm; color: #17466b; border-bottom: 1.2px solid #d7e2ea; padding-bottom: 1.5mm; }
+  h3 { font-size: 10.8pt; margin: 4mm 0 1mm; color: #17466b; }
+  p { margin: 0 0 2.2mm; }
+  .sub { font-size: 11.4pt; color: #38566f; margin-bottom: 4mm; }
+  .meta { font-size: 8.6pt; color: #5b6f7f; border-top: 1px solid #d7e2ea; border-bottom: 1px solid #d7e2ea; padding: 2mm 0; margin: 3mm 0 5mm; }
+  .banner { background: #eef4f8; border-left: 4px solid #2b6f9e; padding: 3mm 4mm; margin: 3mm 0 5mm; font-size: 9.8pt; }
+  table { border-collapse: collapse; width: 100%; margin: 2mm 0 4mm; font-size: 9.1pt; }
+  th { background: #17466b; color: #fff; text-align: left; padding: 2mm; font-weight: 600; }
+  td { border-bottom: 1px solid #dce6ed; padding: 1.8mm 2mm; vertical-align: top; }
+  tr:nth-child(even) td { background: #f7fafc; }
+  .num { text-align: right; font-variant-numeric: tabular-nums; }
+  .tag { display: inline-block; font-size: 7.8pt; padding: 0.4mm 1.6mm; border-radius: 2mm; background: #e6eef4; color: #17466b; font-weight: 600; }
+  .warn { background: #fff7e8; border-left: 4px solid #c98a12; padding: 3mm 4mm; margin: 3mm 0; }
+  ul { margin: 1mm 0 3mm 5mm; padding: 0; }
+  li { margin-bottom: 1.1mm; }
+  code { font-family: Consolas, monospace; font-size: 8.8pt; background: #eef2f5; padding: 0.2mm 1mm; }
+  .two { display: flex; gap: 6mm; }
+  .two > div { flex: 1; }
+  .footer { margin-top: 7mm; font-size: 8pt; color: #627585; border-top: 1px solid #d7e2ea; padding-top: 2mm; }
+  .small { font-size: 8.7pt; color: #4f6576; }
+</style>
+</head>
+<body>
+
+<h1>Vienna Neuroinformatics Studio</h1>
+<div class="sub">A three-tier, source-traceable simulator stack for <i>C. elegans</i> whole-brain data</div>
+<div class="meta">
+  <b>Prepared for:</b> Denis Kovačević, Research Group Neuroinformatics, University of Vienna &nbsp;·&nbsp;
+  <b>Prepared by:</b> NeuroBranch &nbsp;·&nbsp; <b>Date:</b> 9 November 2026 &nbsp;·&nbsp;
+  <b>Build:</b> <code>9c8bdf6</code>
+</div>
+
+<div class="banner">
+  <b>What this is.</b> A working research product that runs the group's published models and makes each
+  model's evidential status explicit. It is deliberately not one overclaimed “digital twin”.
+  <b>What it is not.</b> It does not establish whole-brain mechanism, a mechanistic simulation, or
+  experimentally identified causality.
+</div>
+
+<h2>1. The product in one view</h2>
+<table>
+  <tr><th style="width:18%">Tier</th><th style="width:30%">Object</th><th>What Denis can do now</th><th style="width:19%">Claim level</th></tr>
+  <tr>
+    <td><b>Tier 1</b><br>BunDLe-Net</td>
+    <td>3-D behaviourally relevant latent manifold from five released worms</td>
+    <td>Explore the manifold; generate trajectories with three models; compare held-out-worm open-loop forecasts; inspect behaviour probabilities</td>
+    <td>Descriptive latent simulator; <b>not mechanistic</b></td>
+  </tr>
+  <tr>
+    <td><b>Tier 2</b><br>NC-MCM</td>
+    <td>Fitted macroscopic cognitive states and Markov structure</td>
+    <td>Choose K; inspect transitions and behaviour composition; bootstrap transition uncertainty; propagate a forced state; compare behaviour statistics across worms</td>
+    <td>Descriptive causal-state model; intervention is a <b>Markov counterfactual</b></td>
+  </tr>
+  <tr>
+    <td><b>Tier 3</b><br>Premotor</td>
+    <td>205-node fitted chemical matrix, recovered gap-junction matrix W and 205 neuron names</td>
+    <td>Integrate the published cubic rate ODE; stimulate or ablate named neurons; inspect top nodes; export activity; map the β stability boundary</td>
+    <td>Biophysical free-run sandbox; <b>not</b> the paper's clamped-signal simulation</td>
+  </tr>
+</table>
+
+<h2>2. Evidence snapshot</h2>
+<table>
+  <tr><th>Measurement</th><th class="num">Result</th><th>Interpretation</th></tr>
+  <tr><td>Tier 1 one-step latent R², leave-one-worm-out</td><td class="num"><b>0.998</b></td><td>Strong one-step predictability; not a generative validation</td></tr>
+  <tr><td>Behaviour decode from true latent</td><td class="num"><b>96.0%</b></td><td>The read-out is informative when the latent is real</td></tr>
+  <tr><td>Open-loop behaviour accuracy, 25 frames</td><td class="num"><b>70.8%</b> manifold walk<br>64.9% quadratic<br>50.3% switching</td><td>Manifold walk wins because it samples observed transitions; it cannot extrapolate</td></tr>
+  <tr><td>Latent MSE at 10 frames</td><td class="num"><b>0.0517</b> manifold walk<br>0.0532 quadratic<br>0.0666 switching</td><td>Small absolute differences; per-worm spread is reported in the JSON</td></tr>
+  <tr><td>Premotor name/order verification</td><td class="num"><b>913 / 913</b></td><td>Every non-zero fitted chemical weight lies inside the chemical-synapse support</td></tr>
+  <tr><td>Pod reproduction</td><td class="num"><b>&lt; 2e-16</b></td><td>Benchmark means reproduced on the H100 pod; this is reproducibility, not new biology</td></tr>
+</table>
+<p class="small">Benchmark protocol: four training worms → one held-out worm; 25-frame horizon; starts every 75 frames; four seeds; 95% normal intervals over five folds. Full design record: <code>docs/VIENNA_BENCHMARK_DESIGN.md</code>. Results: <code>reports/vienna_workbench/tier1_benchmark.json</code>.</p>
+
+<h2>3. What is deliberately not claimed</h2>
+<div class="warn">
+<ul>
+  <li><b>Not a digital twin.</b> A digital twin requires a validated, individually calibrated, causally predictive replica. None of the three tiers meets that bar.</li>
+  <li><b>Tier 1 is not a circuit model.</b> The 3-D latent is a behaviourally relevant compression; it does not contain identified neurons or synapses.</li>
+  <li><b>Tier 2 is not an identified causal effect.</b> The intervention panel propagates a forced state through a fitted Markov matrix. Real <code>do()</code> claims need experimental perturbation and the NC-MCM assumptions.</li>
+  <li><b>Tier 3 is not the published simulation.</b> The paper simulates about 15 intrinsic neurons and clamps 69 signal neurons to recordings. The product runs all 205 nodes freely; that free-run becomes unstable at the published β = 10, so the default is β = 0 with an explicit warning and stability scan.</li>
+  <li><b>BunDLe-Net is a preprint.</b> Cite it as bioRxiv <code>10.1101/2023.08.08.551978</code>, not as a peer-reviewed journal article.</li>
+  <li><b>Five worms.</b> Worm-level splits are correct, but n = 5 limits generalization claims.</li>
+</ul>
+</div>
+
+<h2>4. How to use it</h2>
+<div class="two">
+<div>
+<h3>Live product</h3>
+<p>The current build is served from the H100 pod and exposed through an SSH tunnel:</p>
+<p><code>http://localhost:8504</code></p>
+<p class="small">The tunnel must remain open. The app is a Streamlit research UI, not a public web service.</p>
+</div>
+<div>
+<h3>Reproduce from source</h3>
+<p><code>python scripts/fetch_vienna_artifacts.py</code><br>
+<code>python -m streamlit run src/neurobranch/bundlenet_sim/app.py</code></p>
+<p class="small">Third-party artifacts are restored and SHA-256 checked; they are not committed because their licenses differ.</p>
+</div>
+</div>
+
+<h3>Suggested first meeting flow</h3>
+<ul>
+  <li><b>Overview</b> — agree on the claim boundaries before looking at numbers.</li>
+  <li><b>Tier 1</b> — compare manifold walk, switching linear, and quadratic on the same held-out worm.</li>
+  <li><b>Tier 2</b> — pick K, inspect the Markov p-value and transition uncertainty, then run a forced-state trajectory.</li>
+  <li><b>Tier 3</b> — run the chemical-only ODE, then use the β scan to see where the free-run leaves the stable regime.</li>
+  <li><b>Evidence report</b> — download the Markdown report; every number and caveat travels with it.</li>
+</ul>
+
+<h2>5. Decision requested</h2>
+<table>
+  <tr><th style="width:32%">Decision</th><th>Why it matters</th></tr>
+  <tr><td><b>First scientific target</b></td><td>Behaviour switching, individual variability, or a specific perturbation. The product supports all three, but the next experiment should be chosen before more engineering.</td></tr>
+  <tr><td><b>Clamped-signal premotor data</b></td><td>One recording with the 69 signal neurons and the intrinsic subset would let us implement the paper's actual simulation instead of the free-run sandbox.</td></tr>
+  <tr><td><b>Intervention dataset</b></td><td>Matched stimulation/ablation recordings turn the Tier 2 counterfactual into a testable effect estimate.</td></tr>
+  <tr><td><b>Sixth worm / external cohort</b></td><td>Tests whether the Tier 1 manifold walk generalizes beyond the five released embeddings.</td></tr>
+</table>
+
+<h2>6. Sources</h2>
+<ul class="small">
+  <li>Kumar, Gilra, Meunier, Grosse-Wentrup. <i>BunDLe-Net: Learning minimal neural manifolds that represent only behaviourally relevant dynamics.</i> bioRxiv 2023. DOI <code>10.1101/2023.08.08.551978</code> (preprint).</li>
+  <li>Grosse-Wentrup, Kumar, Meunier, Zimmer. <i>Neuro-cognitive multilevel causal modeling.</i> PLoS Comput Biol 2024. DOI <code>10.1371/journal.pcbi.1012674</code>; PMID 39680605.</li>
+  <li>Morrison, Young. <i>A data-driven biology-based network model reproduces C. elegans premotor neural dynamics.</i> PLoS Comput Biol 2025. DOI <code>10.1371/journal.pcbi.1013818</code>; PMID 41460929.</li>
+</ul>
+
+<div class="footer">
+  Source-to-claim ledger: <code>docs/VIENNA_WORKBENCH_EVIDENCE.md</code> &nbsp;·&nbsp;
+  Architecture and commands: <code>docs/VIENNA_WORKBENCH.md</code> &nbsp;·&nbsp;
+  Handoff memo: <code>docs/VIENNA_WORKBENCH_HANDOFF.md</code>
+</div>
+
+</body>
+</html>

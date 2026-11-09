@@ -24,6 +24,8 @@ workbench is a scaffold for the group's own next experiments, not a substitute f
 The UI is one Streamlit app with six tabs: Overview, three tiers, Evidence report, and Provenance.
 A Python facade (`ViennaWorkbench`) exposes the same functionality to notebooks.
 
+![Studio overview](assets/vienna_studio_overview.png)
+
 ![Tier 1 latent-manifold explorer](assets/vienna_workbench_tier1.png)
 
 ![Tier 2 NC-MCM transition and behaviour composition](assets/vienna_workbench_tier2.png)
@@ -186,7 +188,10 @@ therefore defaults to `β=0` and warns when `|activity| > 20`. The clamped-signa
 highest-value next implementation, not a completed feature.
 
 The UI also exposes top nodes by fitted input strength, gap degree, named stimulation/ablation,
-and CSV export.
+CSV export, and a **β stability scan** that integrates 11 short runs from β=0 to β=10 and plots peak
+absolute activity on a log scale. The scan is a numerical diagnostic, not a biological claim.
+
+![β stability scan](assets/vienna_studio_beta_scan.png)
 
 ## API
 

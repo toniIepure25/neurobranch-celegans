@@ -71,6 +71,7 @@ select on the test set. A negative result is informative.
 
 ## Files to read next
 
+- [`VIENNA_PRODUCT_BRIEF.pdf`](VIENNA_PRODUCT_BRIEF.pdf) — three-page brief for the first meeting.
 - [`VIENNA_WORKBENCH.md`](VIENNA_WORKBENCH.md) — architecture, commands, measured results.
 - [`VIENNA_BENCHMARK_DESIGN.md`](VIENNA_BENCHMARK_DESIGN.md) — pre-run benchmark protocol.
 - [`VIENNA_WORKBENCH_EVIDENCE.md`](VIENNA_WORKBENCH_EVIDENCE.md) — source-to-claim ledger.
