@@ -74,8 +74,10 @@ data/processed/vienna_artifacts_manifest.json
 The fetch script also runs `scripts/build_premotor_inputs.py`. That builder reconstructs the
 electrical-junction matrix from `White_data_processed/df5.csv` and the 205-name order in
 `data/metadata/premotor_neuron_names.txt`, then **rejects** any order for which a non-zero entry
-of `A` falls outside the chemical-synapse support. The accepted order has 913/913 non-zero `A`
-entries inside that support; this check caught several plausible but wrong orders.
+of `A` falls outside the transposed chemical-synapse support. The accepted order has 913/913
+non-zero `A` entries inside that support; this check caught several plausible but wrong orders.
+The h5py/JLD2 layout is transposed relative to Julia's in-memory matrix, so the loader transposes it
+back before use.
 
 Verify an existing copy:
 
