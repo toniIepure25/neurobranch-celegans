@@ -339,7 +339,16 @@ def tier3_tab(wb: ViennaWorkbench) -> None:
     with c2:
         gamma = st.slider("Synaptic gain γ", 0.0, 3.0, 1.4, 0.1, key="t3_gamma")
     with c3:
-        beta = st.slider("Gap-junction gain β", 0.0, 20.0, 10.0, 0.5, key="t3_beta")
+        beta = st.slider(
+            "Gap-junction gain β (W unavailable: no effect)",
+            0.0,
+            20.0,
+            10.0,
+            0.5,
+            key="t3_beta",
+            disabled=True,
+            help="The public export contains no gap-junction matrix W, so beta is shown for reference only.",
+        )
     with c4:
         tau = st.slider("Time constant τ", 0.05, 1.0, 0.2, 0.05, key="t3_tau")
 
