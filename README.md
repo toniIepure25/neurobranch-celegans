@@ -62,9 +62,10 @@ python -m streamlit run src/neurobranch/bundlenet_sim/app.py
   the paper's rate ODE; gap-junction `W` and neuron names are missing from the
   public export, so this is a sandbox, not a digital twin.
 
-Start with [`docs/VIENNA_WORKBENCH.md`](docs/VIENNA_WORKBENCH.md) and the
+Start with [`docs/VIENNA_WORKBENCH.md`](docs/VIENNA_WORKBENCH.md), the
 source-to-claim ledger in
-[`docs/VIENNA_WORKBENCH_EVIDENCE.md`](docs/VIENNA_WORKBENCH_EVIDENCE.md).
+[`docs/VIENNA_WORKBENCH_EVIDENCE.md`](docs/VIENNA_WORKBENCH_EVIDENCE.md), and the
+one-page [`docs/VIENNA_WORKBENCH_HANDOFF.md`](docs/VIENNA_WORKBENCH_HANDOFF.md).
 
 ## Core dynamics simulator (research branch)
 
