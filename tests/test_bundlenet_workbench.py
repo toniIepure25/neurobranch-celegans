@@ -43,6 +43,18 @@ def test_manifold_walk_stays_finite_and_on_scale() -> None:
     assert sim.max() <= all_latents.max() + 1.0
 
 
+def test_manifold_walk_ensemble_shape_and_finiteness() -> None:
+    trajectories = load_trajectories()
+    walk = ManifoldWalk(n_neighbors=10, noise=0.0).fit(trajectories)
+    latents, labels = walk.rollout_ensemble(
+        trajectories[0].latent[0], n_steps=20, n_samples=8, seed=4
+    )
+    assert latents.shape == (8, 20, 3)
+    assert labels.shape == (8, 20)
+    assert np.isfinite(latents).all()
+    assert len(np.unique(latents[:, 0], axis=0)) > 1
+
+
 def test_model_roundtrip(tmp_path) -> None:
     models = fit_models(load_trajectories(), alpha=1.0)
     path = save_models(models, tmp_path / "model.npz")
@@ -91,7 +103,8 @@ def test_switching_model_is_finite_and_has_behaviour_chain() -> None:
 
 
 def test_tier1_benchmark_returns_comparable_models() -> None:
-    result = benchmark_models(load_trajectories(), horizon=5, stride=300, seeds=1)
+    result = benchmark_models(load_trajectories(), horizon=5, stride=300, seeds=4)
+    assert result["format"] == "vienna-tier1-benchmark-v2"
     assert {item["model"] for item in result["models"]} == {
         "quadratic",
         "switching",
@@ -100,7 +113,11 @@ def test_tier1_benchmark_returns_comparable_models() -> None:
     for item in result["models"]:
         assert item["n_folds"] == 5
         assert np.isfinite(item["latent_mse_h10"]["mean"])
+        assert np.isfinite(item["latent_crps_h10"]["mean"])
         assert 0.0 <= item["behavior_accuracy_h10"]["mean"] <= 1.0
+        assert 0.0 <= item["interval_coverage_50_h10"]["mean"] <= 1.0
+        assert 0.0 <= item["interval_coverage_90_h10"]["mean"] <= 1.0
+        assert np.isfinite(item["behavior_nll_h10"]["mean"])
 
 
 def test_premotor_sandbox_runs_and_responds_to_stimulation() -> None:

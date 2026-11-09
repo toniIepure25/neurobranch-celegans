@@ -22,12 +22,12 @@ NC-MCM to Denis.
 | C1 | BunDLe-Net learns a 3-D latent manifold preserving behaviourally relevant dynamics | Paper + released embeddings; our loader reproduces five 3-D trajectories | Published method + our inspection | Supported for the released five worms; preprint |
 | C2 | A quadratic map on these latents is highly predictable one step ahead | Our leave-one-worm-out run: mean R² 0.998 (0.997–0.998) | Our computation | Strong one-step result; not a generative validation |
 | C3 | The same quadratic map is a reliable free-run simulator | Mean skill +0.163 vs constant initial state, but one worm −0.331; behaviour decoding 33.5% vs 29.8% majority | Our computation | **Not supported** as a validated generator |
-| C4 | A manifold walk gives the strongest short-horizon open-loop forecast among the three tested models | Held-out-worm benchmark, 25-frame horizon, 4 seeds: 70.8% behaviour accuracy, latent MSE 0.0517; quadratic 64.9%/0.0532, switching 50.3%/0.0666 | Our computation | Supported descriptively for these five worms; not mechanism, not extrapolation |
+| C4 | A manifold walk gives the strongest short-horizon open-loop forecast among the three tested models | Held-out-worm benchmark v2, 25-frame horizon, 16 seeds: latent MSE 0.0445, CRPS 0.0969, behaviour accuracy 83.8%, NLL 0.542; quadratic 0.0539/0.1150/82.8%/0.618; switching 0.0628/0.1210/66.8%/0.767 | Our computation | Supported descriptively for these five worms; intervals under-cover; not mechanism, not extrapolation |
 | C5 | NC-MCM exposes multilevel cognitive states and Markov tests | Published method + released `c`, `p`, `bprob` arrays; schema mapped from Julia source | Published method + our reader | Supported descriptively |
-| C6 | The UI can estimate `do(state)` effects | It propagates a forced state through the fitted transition matrix; no experimental intervention | Our implementation | **Not supported as causal**; labelled Markov counterfactual |
+| C6 | The UI can estimate `do(state)` effects | It propagates a forced state through the fitted transition matrix; no experimental intervention; audit rejects strict first-order Markov and stationarity | Our implementation + audit | **Not supported as causal**; labelled Markov counterfactual |
 | C7 | The premotor model is a 205-node fitted synaptic rate model | Published paper + `A_10takes_avg`, `d_10takes_avg`; recovered `W` and names | Published model + our loader/builder | Supported for `A`, `d`, `W`, ODE form |
-| C8 | Tier 3 is the full published premotor model / a digital twin | Full 205-node free-run is not the paper's 15-intrinsic + 69-clamped-signal simulation; free-run is unstable at β=10 | Inspection + our simulation | **Not supported**; free-run sandbox only |
-| C9 | Any tier establishes whole-brain mechanism or causality | None does; Tier 1 is latent, Tier 2 is assumption-dependent, Tier 3 is a reduced model | Inference from above | **Rejected** |
+| C8 | Tier 3 reproduces the published 15-intrinsic + 69-clamped-signal configuration | Canonical `2023-01-23-15`: 84 core / 15 intrinsic / 69 signal; β=10 clamped run is stable (max |u| 10.43) | Our computation | **Configuration supported; pointwise fidelity not established**; no Julia reference run |
+| C9 | Any tier establishes whole-brain mechanism or causality | None does; Tier 1 is latent, Tier 2 is assumption-dependent and fails strict Markov/stationarity, Tier 3 is a reduced replay/sandbox | Inference from above | **Rejected** |
 
 ## 3. Reproducibility artifacts
 
@@ -42,28 +42,28 @@ NC-MCM to Denis.
 ```bash
 python scripts/fetch_vienna_artifacts.py --verify-only
 PYTHONPATH=src python -m neurobranch.bundlenet_sim.train --alpha 1.0
-PYTHONPATH=src python -m neurobranch.bundlenet_sim.benchmark --horizon 25 --stride 75 --seeds 4
-PYTHONPATH=src python -m pytest tests/test_bundlenet_workbench.py -q
+PYTHONPATH=src python -m neurobranch.bundlenet_sim.benchmark --horizon 25 --stride 75 --seeds 16
+PYTHONPATH=src python -m neurobranch.bundlenet_sim.causal_audit --k 6
+PYTHONPATH=src python scripts/build_tier3_validation.py
+PYTHONPATH=src python -m pytest tests/test_bundlenet_clamped.py tests/test_causal_audit.py tests/test_bundlenet_workbench.py -q
 python -m streamlit run src/neurobranch/bundlenet_sim/app.py
 ```
 
 - Environment used locally: Python 3.13, NumPy/SciPy/scikit-learn/h5py/Streamlit 1.66.1/Plotly 7.1.
   The workbench code does not require TensorFlow or Julia.
 - Pod environment: Python 3.12.3, Streamlit 1.66.1, Plotly 7.1.0, h5py 3.16.0, scikit-learn 1.6.1,
-  NumPy 1.26.4, NVIDIA H100 NVL. Tests 7/7 and full benchmark rerun passed. Benchmark means agree
-  with local to `< 2e-16`; JSON hashes differ only from float serialisation.
+  NumPy 1.26.4, NVIDIA H100 NVL. Tests and reports are rerun on the pod after deployment.
 
 ## 4. What was not done
 
 - No fresh independent reproduction of the BunDLe-Net training (we used released embeddings).
 - No Julia execution of NC-MCM or the premotor model. `W` and names were recovered from the
   release's own CSV/notebook output, not by running the original Julia environment.
-- No implementation of the paper's clamped 15-intrinsic / 69-signal premotor simulation.
-  The 205-node free-run is exploratory and unstable at the published β.
+- **No reference Julia fidelity check for the clamped core.** The 84/15/69 configuration is
+  implemented and stable, but the comparison with the authors' figure remains approximate.
 - No experimental intervention data, so no identified causal effect estimate.
 - No external validation on a sixth worm or another lab's recordings.
-- No full test-suite green claim. The repository has pre-existing failing/skipped historical tests;
-  only the workbench tests (7/7) and app smoke test were run for this change.
+- No full historical test-suite green claim; the Vienna contract tests are run explicitly.
 
 ## 5. Search / inspection trail
 

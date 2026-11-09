@@ -1,0 +1,335 @@
+{
+  "aggregate": {
+    "max_abs": 10.427634606347702,
+    "mean_behavior_distribution_js": 0.3537629798127136,
+    "mean_state_agreement": 0.2890792291220557,
+    "n_recordings": 3
+  },
+  "caveats": [
+    "Only the canonical 2023-01-23-15 recording has the published 84/15/69 counts.",
+    "Other recordings are shorter cores; they are reported with their actual counts.",
+    "The recovered gap-junction matrix W is not part of the public JLD2 export.",
+    "A low state agreement is evidence against a pointwise replay claim, not evidence for mechanism."
+  ],
+  "claim_level": "published-parameter replay/sandbox; not a digital twin",
+  "controls": {
+    "beta0": {
+      "delta_vs_main": {
+        "max_abs_intrinsic": 13.184014663359868,
+        "mean_abs_intrinsic": 5.963614147966378
+      },
+      "method": "RK45",
+      "metrics": {
+        "behavior_distribution_js": 0.2785563111849918,
+        "behavior_transition_js": 0.09813670330477525,
+        "finite": true,
+        "max_abs": 4.959378189746188,
+        "sim_distribution": {
+          "-1": 0.0,
+          "0": 0.0028551034975017845,
+          "1": 0.9971448965024983
+        },
+        "sim_dwell_s": {
+          "forward": 14.006233034005989,
+          "reverse": NaN
+        },
+        "sim_mean": -0.3246392075741319,
+        "sim_std": 2.002189062088879,
+        "state_agreement": 0.38329764453961457,
+        "status": "ok",
+        "truth_distribution": {
+          "-1": 0.28551034975017847,
+          "0": 0.3333333333333333,
+          "1": 0.3811563169164882
+        },
+        "truth_dwell_s": {
+          "forward": 0.10295865371068771,
+          "reverse": 0.10025936316396555
+        },
+        "truth_mean": -0.07692495541243308,
+        "truth_std": 0.9141453667697291
+      },
+      "parameters": {
+        "a": -2.0,
+        "beta": 0.0,
+        "clip": 20.0,
+        "fp1": -0.8,
+        "fp2": 0.1,
+        "fp3": 1.0,
+        "gamma": 1.4,
+        "tau": 0.2
+      },
+      "recording_id": "2023-01-23-15",
+      "source": "D:\\ComputaCenter\\NeuroBranch\\neurobranch-celegans\\references\\external\\Celegans_premotor\\data\\Atanas_data\\2023-01-23-15.json",
+      "status": "ok"
+    },
+    "no_pulses": {
+      "delta_vs_main": {
+        "max_abs_intrinsic": 0.0,
+        "mean_abs_intrinsic": 0.0
+      },
+      "method": "RK45",
+      "metrics": {
+        "behavior_distribution_js": 0.28388806681324463,
+        "behavior_transition_js": 0.25429899799990685,
+        "finite": true,
+        "max_abs": 10.427634606347702,
+        "sim_distribution": {
+          "-1": 0.0,
+          "0": 0.0007137758743754461,
+          "1": 0.9992862241256245
+        },
+        "sim_dwell_s": {
+          "forward": 14.036310842955178,
+          "reverse": NaN
+        },
+        "sim_mean": 0.7051607612220877,
+        "sim_std": 7.2679778319505175,
+        "state_agreement": 0.38187009279086365,
+        "status": "ok",
+        "truth_distribution": {
+          "-1": 0.28551034975017847,
+          "0": 0.3333333333333333,
+          "1": 0.3811563169164882
+        },
+        "truth_dwell_s": {
+          "forward": 0.10295865371068771,
+          "reverse": 0.10025936316396555
+        },
+        "truth_mean": -0.07692495541243308,
+        "truth_std": 0.9141453667697291
+      },
+      "parameters": {
+        "a": -2.0,
+        "beta": 10.0,
+        "clip": 20.0,
+        "fp1": -0.8,
+        "fp2": 0.1,
+        "fp3": 1.0,
+        "gamma": 1.4,
+        "tau": 0.2
+      },
+      "recording_id": "2023-01-23-15",
+      "source": "D:\\ComputaCenter\\NeuroBranch\\neurobranch-celegans\\references\\external\\Celegans_premotor\\data\\Atanas_data\\2023-01-23-15.json",
+      "status": "ok"
+    },
+    "zero_signals": {
+      "delta_vs_main": {
+        "max_abs_intrinsic": 12.754484619071844,
+        "mean_abs_intrinsic": 1.1365778365369437
+      },
+      "method": "RK45",
+      "metrics": {
+        "behavior_distribution_js": 0.28388806681324463,
+        "behavior_transition_js": 0.25429899799990685,
+        "finite": true,
+        "max_abs": 9.991919708347897,
+        "sim_distribution": {
+          "-1": 0.0,
+          "0": 0.0007137758743754461,
+          "1": 0.9992862241256245
+        },
+        "sim_dwell_s": {
+          "forward": 14.036310842955178,
+          "reverse": NaN
+        },
+        "sim_mean": 1.283809931780898,
+        "sim_std": 7.243011064144049,
+        "state_agreement": 0.38187009279086365,
+        "status": "ok",
+        "truth_distribution": {
+          "-1": 0.28551034975017847,
+          "0": 0.3333333333333333,
+          "1": 0.3811563169164882
+        },
+        "truth_dwell_s": {
+          "forward": 0.10295865371068771,
+          "reverse": 0.10025936316396555
+        },
+        "truth_mean": -0.07692495541243308,
+        "truth_std": 0.9141453667697291
+      },
+      "parameters": {
+        "a": -2.0,
+        "beta": 10.0,
+        "clip": 20.0,
+        "fp1": -0.8,
+        "fp2": 0.1,
+        "fp3": 1.0,
+        "gamma": 1.4,
+        "tau": 0.2
+      },
+      "recording_id": "2023-01-23-15",
+      "source": "D:\\ComputaCenter\\NeuroBranch\\neurobranch-celegans\\references\\external\\Celegans_premotor\\data\\Atanas_data\\2023-01-23-15.json",
+      "status": "ok"
+    }
+  },
+  "format": "vienna-tier3-clamped-validation-v1",
+  "generated_utc": "2026-11-09T19:34:23.875901+00:00",
+  "recordings": [
+    {
+      "method": "RK45",
+      "metrics": {
+        "behavior_distribution_js": 0.28388806681324463,
+        "behavior_transition_js": 0.25429899799990685,
+        "finite": true,
+        "max_abs": 10.427634606347702,
+        "sim_distribution": {
+          "-1": 0.0,
+          "0": 0.0007137758743754461,
+          "1": 0.9992862241256245
+        },
+        "sim_dwell_s": {
+          "forward": 14.036310842955178,
+          "reverse": NaN
+        },
+        "sim_mean": 0.7051607612220877,
+        "sim_std": 7.2679778319505175,
+        "state_agreement": 0.38187009279086365,
+        "status": "ok",
+        "truth_distribution": {
+          "-1": 0.28551034975017847,
+          "0": 0.3333333333333333,
+          "1": 0.3811563169164882
+        },
+        "truth_dwell_s": {
+          "forward": 0.10295865371068771,
+          "reverse": 0.10025936316396555
+        },
+        "truth_mean": -0.07692495541243308,
+        "truth_std": 0.9141453667697291
+      },
+      "n_core": 84,
+      "n_frames": 1401,
+      "n_intrinsic": 15,
+      "n_signal": 69,
+      "parameters": {
+        "a": -2.0,
+        "beta": 10.0,
+        "clip": 20.0,
+        "fp1": -0.8,
+        "fp2": 0.1,
+        "fp3": 1.0,
+        "gamma": 1.4,
+        "tau": 0.2
+      },
+      "recording_id": "2023-01-23-15",
+      "replacement_map": {
+        "AVBR": "AVBL",
+        "RIBR": "AVBL"
+      },
+      "source": "D:\\ComputaCenter\\NeuroBranch\\neurobranch-celegans\\references\\external\\Celegans_premotor\\data\\Atanas_data\\2023-01-23-15.json",
+      "status": "ok"
+    },
+    {
+      "method": "RK45",
+      "metrics": {
+        "behavior_distribution_js": 0.4399147396169274,
+        "behavior_transition_js": 0.27715011414957214,
+        "finite": true,
+        "max_abs": 9.988367666034032,
+        "sim_distribution": {
+          "-1": 0.9992862241256245,
+          "0": 0.0007137758743754461,
+          "1": 0.0
+        },
+        "sim_dwell_s": {
+          "forward": NaN,
+          "reverse": 14.036966681449767
+        },
+        "sim_mean": -0.12658584908111953,
+        "sim_std": 6.98364839794062,
+        "state_agreement": 0.17915774446823698,
+        "status": "ok",
+        "truth_distribution": {
+          "-1": 0.17844396859386152,
+          "0": 0.6188436830835118,
+          "1": 0.2027123483226267
+        },
+        "truth_dwell_s": {
+          "forward": 0.051772708279632915,
+          "reverse": 0.0491490430022751
+        },
+        "truth_mean": -0.07482011805570302,
+        "truth_std": 0.8912963130430667
+      },
+      "n_core": 84,
+      "n_frames": 1401,
+      "n_intrinsic": 15,
+      "n_signal": 69,
+      "parameters": {
+        "a": -2.0,
+        "beta": 10.0,
+        "clip": 20.0,
+        "fp1": -0.8,
+        "fp2": 0.1,
+        "fp3": 1.0,
+        "gamma": 1.4,
+        "tau": 0.2
+      },
+      "recording_id": "2023-01-10-07",
+      "replacement_map": {
+        "AVBL": "RIBL",
+        "RIMR": "RIML"
+      },
+      "source": "D:\\ComputaCenter\\NeuroBranch\\neurobranch-celegans\\references\\external\\Celegans_premotor\\data\\Atanas_data\\2023-01-10-07.json",
+      "status": "ok"
+    },
+    {
+      "method": "RK45",
+      "metrics": {
+        "behavior_distribution_js": 0.33748613300796887,
+        "behavior_transition_js": 0.1315755907467076,
+        "finite": true,
+        "max_abs": 9.767798373394172,
+        "sim_distribution": {
+          "-1": 0.0,
+          "0": 0.0,
+          "1": 1.0
+        },
+        "sim_dwell_s": {
+          "forward": 14.046700577869801,
+          "reverse": NaN
+        },
+        "sim_mean": 0.5980893970773112,
+        "sim_std": 7.221543195935679,
+        "state_agreement": 0.30620985010706636,
+        "status": "ok",
+        "truth_distribution": {
+          "-1": 0.25267665952890794,
+          "0": 0.4411134903640257,
+          "1": 0.30620985010706636
+        },
+        "truth_dwell_s": {
+          "forward": 0.08960912663434072,
+          "reverse": 0.0825412413818354
+        },
+        "truth_mean": -0.08914217298201166,
+        "truth_std": 0.9163015822032976
+      },
+      "n_core": 86,
+      "n_frames": 1401,
+      "n_intrinsic": 15,
+      "n_signal": 71,
+      "parameters": {
+        "a": -2.0,
+        "beta": 10.0,
+        "clip": 20.0,
+        "fp1": -0.8,
+        "fp2": 0.1,
+        "fp3": 1.0,
+        "gamma": 1.4,
+        "tau": 0.2
+      },
+      "recording_id": "2023-01-09-15",
+      "replacement_map": {
+        "AVBL": "RIBL",
+        "AVBR": "RIBR",
+        "AVEL": "AVER"
+      },
+      "source": "D:\\ComputaCenter\\NeuroBranch\\neurobranch-celegans\\references\\external\\Celegans_premotor\\data\\Atanas_data\\2023-01-09-15.json",
+      "status": "ok"
+    }
+  ],
+  "reference_status": "Julia reference notebook was not run in this environment; the recovered A/d/W and neuron order are validated by support checks and contract tests, but pointwise fidelity to the paper figure is not established."
+}

@@ -1,0 +1,343 @@
+{
+  "caveats": [
+    "Observational audit; not a causal identification proof.",
+    "Cluster indices are not semantically aligned across worms.",
+    "State-level counterfactuals remain model-based even when tests pass.",
+    "Five worms limit population-level transport claims."
+  ],
+  "format": "vienna-tier2-assumption-audit-v1",
+  "generated_utc": "2026-11-09T19:21:17.929033+00:00",
+  "k": 6,
+  "n_worms": 5,
+  "per_worm": [
+    {
+      "k": 6,
+      "markov_order": {
+        "df": 150,
+        "lr": 109.85873297413309,
+        "n_boot": 500,
+        "p_chi2": 0.9942098747112119,
+        "p_monte_carlo": 0.001996007984031936,
+        "sparse_fraction": 0.0,
+        "verdict": "fail"
+      },
+      "n_frames": 3137,
+      "state_behavior_mi": {
+        "mutual_information": 0.8350521387040889,
+        "n_perm": 500,
+        "p_permutation": 0.001996007984031936,
+        "verdict": "pass"
+      },
+      "stationarity": {
+        "js_first_second_half": 0.0036455177538022208,
+        "n_boot": 300,
+        "p_monte_carlo": 0.760797342192691,
+        "verdict": "pass"
+      },
+      "worm_id": 0
+    },
+    {
+      "k": 6,
+      "markov_order": {
+        "df": 150,
+        "lr": 265.3647585301792,
+        "n_boot": 500,
+        "p_chi2": 1.9547438251019594e-08,
+        "p_monte_carlo": 0.001996007984031936,
+        "sparse_fraction": 0.0,
+        "verdict": "fail"
+      },
+      "n_frames": 3134,
+      "state_behavior_mi": {
+        "mutual_information": 0.804967572305704,
+        "n_perm": 500,
+        "p_permutation": 0.001996007984031936,
+        "verdict": "pass"
+      },
+      "stationarity": {
+        "js_first_second_half": 0.06625159357998824,
+        "n_boot": 300,
+        "p_monte_carlo": 0.026578073089700997,
+        "verdict": "fail"
+      },
+      "worm_id": 1
+    },
+    {
+      "k": 6,
+      "markov_order": {
+        "df": 150,
+        "lr": 275.1823665997547,
+        "n_boot": 500,
+        "p_chi2": 2.0363413670294514e-09,
+        "p_monte_carlo": 0.001996007984031936,
+        "sparse_fraction": 0.0,
+        "verdict": "fail"
+      },
+      "n_frames": 3059,
+      "state_behavior_mi": {
+        "mutual_information": 0.8597102478026409,
+        "n_perm": 500,
+        "p_permutation": 0.001996007984031936,
+        "verdict": "pass"
+      },
+      "stationarity": {
+        "js_first_second_half": 0.010896805774297715,
+        "n_boot": 300,
+        "p_monte_carlo": 0.2857142857142857,
+        "verdict": "pass"
+      },
+      "worm_id": 2
+    },
+    {
+      "k": 6,
+      "markov_order": {
+        "df": 150,
+        "lr": 146.87154148318632,
+        "n_boot": 500,
+        "p_chi2": 0.5569825783370635,
+        "p_monte_carlo": 0.001996007984031936,
+        "sparse_fraction": 0.0,
+        "verdict": "fail"
+      },
+      "n_frames": 3311,
+      "state_behavior_mi": {
+        "mutual_information": 0.8528570706973074,
+        "n_perm": 500,
+        "p_permutation": 0.001996007984031936,
+        "verdict": "pass"
+      },
+      "stationarity": {
+        "js_first_second_half": 0.00901150683763837,
+        "n_boot": 300,
+        "p_monte_carlo": 0.2691029900332226,
+        "verdict": "pass"
+      },
+      "worm_id": 3
+    },
+    {
+      "k": 6,
+      "markov_order": {
+        "df": 150,
+        "lr": 225.0481434547046,
+        "n_boot": 500,
+        "p_chi2": 7.093075836534384e-05,
+        "p_monte_carlo": 0.001996007984031936,
+        "sparse_fraction": 0.0,
+        "verdict": "fail"
+      },
+      "n_frames": 3021,
+      "state_behavior_mi": {
+        "mutual_information": 0.7899204135655892,
+        "n_perm": 500,
+        "p_permutation": 0.001996007984031936,
+        "verdict": "pass"
+      },
+      "stationarity": {
+        "js_first_second_half": 0.00532077411124968,
+        "n_boot": 300,
+        "p_monte_carlo": 0.7574750830564784,
+        "verdict": "pass"
+      },
+      "worm_id": 4
+    }
+  ],
+  "tests": {
+    "behavior_transport": {
+      "heldout_js": 0.005524320599043726,
+      "interpretation": "behaviour-transition transport only; state indices are not aligned across worms",
+      "per_worm_heldout_js": [
+        0.005630237480965901,
+        0.00541087153021497,
+        0.004016508648734333,
+        0.005183081622337165,
+        0.007380903712966264
+      ],
+      "split_half_js": 0.03768199200550707,
+      "verdict": "pass"
+    },
+    "k_sensitivity": {
+      "change_by_k": [
+        0.04969225214069921,
+        0.005606776371250219,
+        0.025141335575748956,
+        0.008365755741577231,
+        0.004694417161512876,
+        0.04712273703138203,
+        0.014686215273403861,
+        0.025164803808914605,
+        0.017709742016255563,
+        0.022202147252681943,
+        0.0380631209146535,
+        0.015647527077540024,
+        0.02572377604691081,
+        0.02081753309312715,
+        0.018492737140927213,
+        0.01717637785375161,
+        0.03236618784932278,
+        0.01825827469038313
+      ],
+      "k_values": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20
+      ],
+      "max_tv_vs_reference": 0.04969225214069921,
+      "reference_k": 6,
+      "verdict": "pass"
+    },
+    "markov_order": {
+      "counts": {
+        "fail": 5,
+        "insufficient_data": 0,
+        "pass": 0,
+        "warn": 0
+      },
+      "per_worm": [
+        {
+          "df": 150,
+          "lr": 109.85873297413309,
+          "n_boot": 500,
+          "p_chi2": 0.9942098747112119,
+          "p_monte_carlo": 0.001996007984031936,
+          "sparse_fraction": 0.0,
+          "verdict": "fail"
+        },
+        {
+          "df": 150,
+          "lr": 265.3647585301792,
+          "n_boot": 500,
+          "p_chi2": 1.9547438251019594e-08,
+          "p_monte_carlo": 0.001996007984031936,
+          "sparse_fraction": 0.0,
+          "verdict": "fail"
+        },
+        {
+          "df": 150,
+          "lr": 275.1823665997547,
+          "n_boot": 500,
+          "p_chi2": 2.0363413670294514e-09,
+          "p_monte_carlo": 0.001996007984031936,
+          "sparse_fraction": 0.0,
+          "verdict": "fail"
+        },
+        {
+          "df": 150,
+          "lr": 146.87154148318632,
+          "n_boot": 500,
+          "p_chi2": 0.5569825783370635,
+          "p_monte_carlo": 0.001996007984031936,
+          "sparse_fraction": 0.0,
+          "verdict": "fail"
+        },
+        {
+          "df": 150,
+          "lr": 225.0481434547046,
+          "n_boot": 500,
+          "p_chi2": 7.093075836534384e-05,
+          "p_monte_carlo": 0.001996007984031936,
+          "sparse_fraction": 0.0,
+          "verdict": "fail"
+        }
+      ],
+      "verdict": "fail"
+    },
+    "state_behavior_mi": {
+      "counts": {
+        "fail": 0,
+        "insufficient_data": 0,
+        "pass": 5,
+        "warn": 0
+      },
+      "per_worm": [
+        {
+          "mutual_information": 0.8350521387040889,
+          "n_perm": 500,
+          "p_permutation": 0.001996007984031936,
+          "verdict": "pass"
+        },
+        {
+          "mutual_information": 0.804967572305704,
+          "n_perm": 500,
+          "p_permutation": 0.001996007984031936,
+          "verdict": "pass"
+        },
+        {
+          "mutual_information": 0.8597102478026409,
+          "n_perm": 500,
+          "p_permutation": 0.001996007984031936,
+          "verdict": "pass"
+        },
+        {
+          "mutual_information": 0.8528570706973074,
+          "n_perm": 500,
+          "p_permutation": 0.001996007984031936,
+          "verdict": "pass"
+        },
+        {
+          "mutual_information": 0.7899204135655892,
+          "n_perm": 500,
+          "p_permutation": 0.001996007984031936,
+          "verdict": "pass"
+        }
+      ],
+      "verdict": "pass"
+    },
+    "stationarity": {
+      "counts": {
+        "fail": 1,
+        "insufficient_data": 0,
+        "pass": 4,
+        "warn": 0
+      },
+      "per_worm": [
+        {
+          "js_first_second_half": 0.0036455177538022208,
+          "n_boot": 300,
+          "p_monte_carlo": 0.760797342192691,
+          "verdict": "pass"
+        },
+        {
+          "js_first_second_half": 0.06625159357998824,
+          "n_boot": 300,
+          "p_monte_carlo": 0.026578073089700997,
+          "verdict": "fail"
+        },
+        {
+          "js_first_second_half": 0.010896805774297715,
+          "n_boot": 300,
+          "p_monte_carlo": 0.2857142857142857,
+          "verdict": "pass"
+        },
+        {
+          "js_first_second_half": 0.00901150683763837,
+          "n_boot": 300,
+          "p_monte_carlo": 0.2691029900332226,
+          "verdict": "pass"
+        },
+        {
+          "js_first_second_half": 0.00532077411124968,
+          "n_boot": 300,
+          "p_monte_carlo": 0.7574750830564784,
+          "verdict": "pass"
+        }
+      ],
+      "verdict": "fail"
+    }
+  }
+}

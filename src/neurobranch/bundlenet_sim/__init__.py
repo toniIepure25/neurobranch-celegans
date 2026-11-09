@@ -15,12 +15,34 @@ is a sandbox whose public export lacks gap-junction weights and neuron names.
 
 from .dataset import BEHAVIOR_NAMES, WormTrajectory, load_trajectories
 from .dynamics import BehaviorReadout, PolynomialRidgeDynamics, fit_models
+from .clamped import (
+    ClampedParameters,
+    ClampedResult,
+    ClampedSimulationError,
+    SignalPulse,
+    simulate_clamped,
+)
+from .recording import (
+    ClampedDataError,
+    ClampedRecording,
+    build_clamped_recording,
+    load_atanas_recording,
+)
 
 __all__ = [
     "BEHAVIOR_NAMES",
     "BehaviorReadout",
+    "ClampedDataError",
+    "ClampedParameters",
+    "ClampedRecording",
+    "ClampedResult",
+    "ClampedSimulationError",
     "PolynomialRidgeDynamics",
+    "SignalPulse",
     "WormTrajectory",
+    "build_clamped_recording",
     "fit_models",
+    "load_atanas_recording",
     "load_trajectories",
+    "simulate_clamped",
 ]

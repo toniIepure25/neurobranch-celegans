@@ -85,6 +85,38 @@ class ManifoldWalk:
             labels[t] = label
         return out, labels
 
+    def rollout_ensemble(
+        self,
+        y0: np.ndarray,
+        n_steps: int,
+        n_samples: int = 32,
+        seed: int | None = None,
+        target_behavior: int | None = None,
+        temperature: float = 1.0,
+    ) -> tuple[np.ndarray, np.ndarray]:
+        """Draw ``n_samples`` independent stochastic rollouts.
+
+        Returns ``(latents, labels)`` with shapes ``(n_samples, n_steps, 3)`` and
+        ``(n_samples, n_steps)``.  The ensemble is the basis for the empirical
+        predictive intervals in the Tier-1 benchmark; it is not a posterior over
+        mechanisms.
+        """
+        if n_samples < 1:
+            raise ValueError("n_samples must be positive")
+        root = np.random.SeedSequence(seed)
+        latents = np.empty((n_samples, n_steps, 3), dtype=np.float64)
+        labels = np.empty((n_samples, n_steps), dtype=np.int64)
+        for i, child in enumerate(root.spawn(n_samples)):
+            rng = np.random.default_rng(child)
+            state = np.asarray(y0, dtype=np.float64).reshape(3)
+            for t in range(n_steps):
+                state, label = self.step(
+                    state, rng, target_behavior=target_behavior, temperature=temperature
+                )
+                latents[i, t] = state
+                labels[i, t] = label
+        return latents, labels
+
     def rollout(
         self,
         y0: np.ndarray,

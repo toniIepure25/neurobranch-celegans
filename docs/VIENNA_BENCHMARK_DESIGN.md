@@ -25,16 +25,26 @@ horizons.
 ## Primary metric
 
 Behaviour accuracy over a **25-frame open-loop horizon**, averaged over starts and seeds. Starts
-are every 75 frames, beginning at frame 0; four seeds are used for stochastic models. A start is
+are every 75 frames, beginning at frame 0; **16 seeds** are used for stochastic models. A start is
 used only if the full horizon exists.
 
-## Secondary metrics
+## Secondary metrics (v2 amendment, before final run)
 
 - Latent MSE at horizon 10 and its skill versus a constant-initial-state baseline.
+- **Ensemble CRPS** at horizon 10 (proper score; lower is better).
+- **Marginal 50% and 90% interval coverage** of the ensemble predictive distribution.
 - Behaviour accuracy at horizons 1, 10 and 25.
+- **Behaviour NLL and Brier score** from the ensemble categorical read-out.
 - Jensen–Shannon divergence of generated versus true behaviour distribution and behaviour
   transition matrix at horizon 25.
 - Quadratic one-step latent R², as a sanity check on the fitted map.
+- Horizon curve of latent MSE at 1, 5, 10 and 25 frames.
+- Persistence latent MSE, persistence behaviour accuracy, and marginal-behaviour NLL.
+
+The v2 amendment was made after the v1 run exposed zero-width intervals for the deterministic
+quadratic model. Quadratic and switching rollouts now receive **training-residual noise** (standard
+deviation of the one-step residual on the four training worms), so coverage is defined. This is a
+model-based observation-noise calibration, not a posterior.
 
 ## Baselines and comparators
 
@@ -61,9 +71,11 @@ performance on these five worms.
 
 ## Seeds and uncertainty
 
-Four seeds for switching and manifold walk; quadratic is deterministic. Uncertainty is the
-between-worm standard deviation and a normal 95% interval over five folds. This is a small-n
-interval and is reported as such, not as a population confidence guarantee.
+16 seeds for switching and manifold walk; quadratic uses training-residual noise with 16 seeds.
+Uncertainty is the between-worm standard deviation and a normal 95% interval over five folds.
+Ensemble intervals are **not** calibrated posterior intervals; observed 90% coverage is reported
+and is currently below nominal. This is a small-n interval and is reported as such, not as a
+population confidence guarantee.
 
 ## Known limitations
 

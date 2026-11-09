@@ -18,6 +18,11 @@ ROOT = Path(__file__).resolve().parents[3]
 if str(ROOT / "src") not in sys.path:
     sys.path.insert(0, str(ROOT / "src"))
 
+from neurobranch.bundlenet_sim.clamped import (
+    ClampedParameters,
+    ClampedSimulationError,
+    SignalPulse,
+)  # noqa: E402
 from neurobranch.bundlenet_sim.dataset import BEHAVIOR_NAMES  # noqa: E402
 from neurobranch.bundlenet_sim.premotor import PremotorParameters  # noqa: E402
 from neurobranch.bundlenet_sim.workbench import ViennaWorkbench  # noqa: E402
@@ -228,19 +233,91 @@ def tier1_tab(wb: ViennaWorkbench) -> None:
             st.markdown("**Open-loop benchmark (held-out worm)**")
             rows = []
             for item in benchmark.get("models", []):
+                coverage = item.get("interval_coverage_90_h10", {}).get("mean", float("nan"))
                 rows.append(
                     {
                         "model": item["model"],
                         "latent MSE h10": round(item["latent_mse_h10"]["mean"], 3),
+                        "CRPS h10": round(item.get("latent_crps_h10", {}).get("mean", float("nan")), 3),
+                        "90% coverage": "n/a" if not np.isfinite(coverage) else f"{coverage:.1%}",
                         "behaviour acc h10": f"{item['behavior_accuracy_h10']['mean']:.1%}",
                         "behaviour acc h25": f"{item['behavior_accuracy_h25']['mean']:.1%}",
+                        "behaviour NLL h10": round(item.get("behavior_nll_h10", {}).get("mean", float("nan")), 3),
                         "transition JS h25": round(item["behavior_transition_js"]["mean"], 3),
                     }
                 )
             st.dataframe(rows, hide_index=True, width="stretch")
             st.caption(
-                "Open-loop forecast from 75-frame-spaced starts, 25-frame horizon, 4 seeds. "
-                "Lower JS is better; this is a descriptive forecast comparison, not mechanism."
+                "Open-loop forecast from 75-frame-spaced starts, 25-frame horizon, 16 seeds. "
+                "Coverage is the marginal 90% ensemble interval; CRPS and NLL are proper scores. "
+                "Lower MSE/CRPS/NLL/JS is better. This is a descriptive forecast comparison, not mechanism."
+            )
+            if "horizon_curve" in benchmark:
+                curve = benchmark["horizon_curve"]
+                fig = go.Figure()
+                for model_name, values in curve.items():
+                    xs = [int(h) for h in values]
+                    ys = [values[h] for h in values]
+                    fig.add_trace(go.Scatter(x=xs, y=ys, mode="lines+markers", name=model_name))
+                fig.update_layout(
+                    height=260,
+                    margin={"l": 0, "r": 0, "t": 10, "b": 0},
+                    xaxis_title="forecast horizon (frames)",
+                    yaxis_title="latent MSE",
+                )
+                st.markdown("**Error growth by horizon**")
+                st.plotly_chart(fig, width="stretch")
+
+            st.markdown("**Manifold-walk predictive spread (empirical, not posterior)**")
+            ensemble = wb.tier1_ensemble(
+                worm_id, start, min(horizon, 120), seeds=32, temperature=temperature
+            )
+            mean = ensemble.mean(axis=0)
+            low, high = np.quantile(ensemble, [0.05, 0.95], axis=0)
+            spread = go.Figure()
+            for dim, color in enumerate(("#4C78A8", "#F58518", "#54A24B")):
+                spread.add_trace(
+                    go.Scatter(
+                        x=np.arange(len(mean)),
+                        y=mean[:, dim],
+                        mode="lines",
+                        line={"color": color},
+                        name=f"latent {dim + 1} mean",
+                    )
+                )
+                spread.add_trace(
+                    go.Scatter(
+                        x=np.arange(len(mean)),
+                        y=high[:, dim],
+                        mode="lines",
+                        line={"width": 0},
+                        showlegend=False,
+                        hoverinfo="skip",
+                    )
+                )
+                spread.add_trace(
+                    go.Scatter(
+                        x=np.arange(len(mean)),
+                        y=low[:, dim],
+                        mode="lines",
+                        line={"width": 0},
+                        fill="tonexty",
+                        fillcolor=color,
+                        opacity=0.12,
+                        showlegend=False,
+                        hoverinfo="skip",
+                    )
+                )
+            spread.update_layout(
+                height=280,
+                margin={"l": 0, "r": 0, "t": 10, "b": 0},
+                xaxis_title="steps",
+                yaxis_title="latent value",
+            )
+            st.plotly_chart(spread, width="stretch")
+            st.caption(
+                "32 stochastic manifold-walk samples from the selected start. The band is an "
+                "empirical 5–95% interval, not a posterior over mechanisms."
             )
 
     with st.expander("What this tier does and does not claim"):
@@ -405,14 +482,250 @@ def tier2_tab(wb: ViennaWorkbench) -> None:
             st.dataframe(other_rows, hide_index=True, width="stretch")
             st.caption("Only aligned behaviour labels are compared; cluster IDs are arbitrary.")
 
+    audit = wb.tier2_audit(int(k))
+    with st.expander("Assumption audit: is the Markov counterfactual supported?"):
+        st.caption(
+            "These tests audit the NC-MCM assumptions. A failure does not invalidate the "
+            "descriptive model; it means the model-based `do()` should not be read as an "
+            "identified causal effect."
+        )
+        rows = []
+        for test_name, result in audit.get("tests", {}).items():
+            rows.append(
+                {
+                    "test": test_name.replace("_", " "),
+                    "verdict": result.get("verdict", "n/a"),
+                    "detail": {
+                        "markov_order": lambda r: f"p_MC={r.get('p_monte_carlo', float('nan')):.3f}, LR={r.get('lr', float('nan')):.1f}",
+                        "stationarity": lambda r: f"p_MC={r.get('p_monte_carlo', float('nan')):.3f}, JS={r.get('js_first_second_half', float('nan')):.3f}",
+                        "behavior_transport": lambda r: f"held-out JS={r.get('heldout_js', float('nan')):.3f}, split-half={r.get('split_half_js', float('nan')):.3f}",
+                        "state_behavior_mi": lambda r: f"MI={r.get('mutual_information', float('nan')):.3f}, p={r.get('p_permutation', float('nan')):.3f}",
+                        "k_sensitivity": lambda r: f"max TV={r.get('max_tv_vs_reference', float('nan')):.3f}",
+                    }.get(test_name, lambda r: "")(result),
+                }
+            )
+        st.dataframe(rows, hide_index=True, width="stretch")
+        st.caption(" | ".join(audit.get("caveats", [])))
+
     st.warning(
         "This is a model-based counterfactual, not an identified causal effect. "
         "A real do(state) claim requires the NC-MCM assumptions plus experimental intervention."
     )
 
 
+def tier3_clamped_tab(wb: ViennaWorkbench) -> None:
+    st.subheader("Tier 3 — Published clamped-core simulation")
+    st.caption(
+        "15 intrinsic neurons are integrated with the published cubic rate ODE; 69 signal "
+        "neurons are clamped to an Atanas recording. This is the configuration used in the "
+        "Morrison & Young paper, not the 205-node free-run."
+    )
+    catalog = wb.clamped_catalog()
+    if not catalog:
+        st.info("No Atanas recording with all 15 intrinsic neurons was found.")
+        return
+    ids = [str(item["recording_id"]) for item in catalog]
+    default = "2023-01-23-15" if "2023-01-23-15" in ids else ids[0]
+    recording_id = st.selectbox(
+        "Recording",
+        ids,
+        index=ids.index(default),
+        format_func=lambda r: next(
+            f"{r} — {item['n_core']} core / {item['n_signal']} signals"
+            for item in catalog
+            if item["recording_id"] == r
+        ),
+        key="t3c_recording",
+    )
+    info = next(item for item in catalog if item["recording_id"] == recording_id)
+    st.caption(
+        f"{info['n_core']} core neurons · {info['n_signal']} clamped signals · "
+        f"{info['n_frames']} frames · replacements: {info['replacement_map'] or 'none'}"
+    )
+
+    c1, c2, c3, c4 = st.columns(4)
+    with c1:
+        beta = st.slider("Gap-junction gain β", 0.0, 20.0, 10.0, 0.5, key="t3c_beta")
+    with c2:
+        gamma = st.slider("Synaptic gain γ", 0.0, 3.0, 1.4, 0.1, key="t3c_gamma")
+    with c3:
+        tau = st.slider("Time constant τ", 0.05, 1.0, 0.2, 0.05, key="t3c_tau")
+    with c4:
+        pulse_enabled = st.checkbox("Add signal pulse", value=False, key="t3c_pulse_on")
+
+    pulse = None
+    if pulse_enabled:
+        p1, p2, p3 = st.columns(3)
+        with p1:
+            pulse_neuron = st.selectbox(
+                "Signal neuron", list(wb.clamped_recording(recording_id).signal_names), key="t3c_pulse_neuron"
+            )
+        with p2:
+            pulse_amp = st.slider("Pulse amplitude", -10.0, 10.0, 3.0, 0.5, key="t3c_pulse_amp")
+        with p3:
+            pulse_start = st.slider("Pulse start (s)", 0.0, 10.0, 1.0, 0.1, key="t3c_pulse_start")
+        pulse = SignalPulse(pulse_neuron, float(pulse_amp), float(pulse_start), 2.0)
+
+    if st.button("Run clamped core", type="primary", key="t3c_run"):
+        params = ClampedParameters(
+            beta=float(beta),
+            gamma=float(gamma),
+            tau=float(tau),
+            signal_pulses=(pulse,) if pulse is not None else (),
+        )
+        try:
+            with st.spinner("Integrating 15 intrinsic neurons with 69 clamped signals..."):
+                result = wb.tier3_clamped(recording_id, params)
+        except (ClampedSimulationError, ValueError, FileNotFoundError) as error:
+            st.error(str(error))
+            return
+        st.session_state["t3c_result"] = result
+        st.session_state["t3c_meta"] = recording_id
+
+    result = st.session_state.get("t3c_result")
+    if result is None or st.session_state.get("t3c_meta") != recording_id:
+        st.info("Press **Run clamped core** to integrate the published configuration.")
+        return
+
+    m1, m2, m3, m4, m5 = st.columns(5)
+    m1.metric("Status", result.status)
+    m2.metric("max |u|", f"{result.metrics['max_abs']:.2f}")
+    m3.metric("State agreement", f"{result.metrics['state_agreement']:.1%}")
+    m4.metric("Behaviour JS", f"{result.metrics['behavior_distribution_js']:.3f}")
+    m5.metric("Method", result.method)
+
+    names = result.intrinsic_names
+    selected = st.selectbox(
+        "Intrinsic neuron", list(names), index=names.index("AVBL") if "AVBL" in names else 0,
+        key="t3c_neuron",
+    )
+    idx = names.index(selected)
+    trace = go.Figure()
+    trace.add_trace(
+        go.Scatter(
+            x=result.time,
+            y=result.truth_intrinsic[idx],
+            mode="lines",
+            name="recorded",
+            line={"color": "#4C78A8", "width": 1.5},
+        )
+    )
+    trace.add_trace(
+        go.Scatter(
+            x=result.time,
+            y=result.intrinsic[idx],
+            mode="lines",
+            name="simulated",
+            line={"color": "#E45756", "width": 1.5},
+        )
+    )
+    trace.update_layout(
+        height=330,
+        margin={"l": 0, "r": 0, "t": 10, "b": 0},
+        xaxis_title="time (s)",
+        yaxis_title="activity",
+        legend={"orientation": "h", "y": 1.05},
+    )
+    st.plotly_chart(trace, width="stretch")
+
+    left, right = st.columns([1.2, 1])
+    with left:
+        st.markdown("**Intrinsic residual (simulated − recorded)**")
+        residual = result.intrinsic - result.truth_intrinsic
+        heat = go.Figure(
+            data=go.Heatmap(
+                z=residual,
+                x=np.round(result.time, 2),
+                y=list(names),
+                colorscale="RdBu",
+                zmid=0,
+                colorbar={"title": "Δu"},
+            )
+        )
+        heat.update_layout(height=330, margin={"l": 0, "r": 0, "t": 10, "b": 0}, xaxis_title="time (s)")
+        st.plotly_chart(heat, width="stretch")
+    with right:
+        st.markdown("**Behaviour readout**")
+        beh = go.Figure()
+        beh.add_trace(
+            go.Scatter(
+                x=result.time,
+                y=result.behavior_truth,
+                mode="lines",
+                name="recorded",
+                line={"color": "#4C78A8", "width": 1},
+            )
+        )
+        beh.add_trace(
+            go.Scatter(
+                x=result.time,
+                y=result.behavior_sim,
+                mode="lines",
+                name="simulated",
+                line={"color": "#E45756", "width": 1},
+            )
+        )
+        beh.update_layout(
+            height=180,
+            margin={"l": 0, "r": 0, "t": 10, "b": 0},
+            yaxis={"tickmode": "array", "tickvals": [-1, 0, 1], "ticktext": ["reverse", "quiet", "forward"]},
+            legend={"orientation": "h", "y": -0.5},
+        )
+        st.plotly_chart(beh, width="stretch")
+        st.markdown("**Validation report**")
+        report = wb.tier3_clamped_validation()
+        if report:
+            agg = report.get("aggregate", {})
+            st.metric("Mean state agreement", f"{agg.get('mean_state_agreement', float('nan')):.1%}")
+            st.metric("Mean behaviour JS", f"{agg.get('mean_behavior_distribution_js', float('nan')):.3f}")
+            st.caption(report.get("claim_level", ""))
+        else:
+            st.caption("Run `python scripts/build_tier3_validation.py` to create the report.")
+
+    buffer = io.StringIO()
+    np.savetxt(
+        buffer,
+        np.column_stack([result.time, result.truth_intrinsic.T, result.intrinsic.T]),
+        delimiter=",",
+        header="time_s," + ",".join(f"recorded_{n}" for n in names) + "," + ",".join(f"simulated_{n}" for n in names),
+        comments="",
+    )
+    st.download_button(
+        "Download clamped intrinsic traces (CSV)",
+        data=buffer.getvalue(),
+        file_name=f"vienna_clamped_{recording_id}.csv",
+        mime="text/csv",
+        key="t3c_download",
+    )
+
+    if result.status == "unstable":
+        st.error(
+            "Numerical warning: the clamped integration exceeded the configured clip. "
+            "The trajectory is shown, but it must not be treated as a validated replay."
+        )
+    st.warning(
+        "This is a published-parameter replay/sandbox with independently recovered weights. "
+        "A low agreement with the recording is evidence against a pointwise digital-twin claim, "
+        "not evidence for a mechanism. It is not causally validated."
+    )
+
+
 def tier3_tab(wb: ViennaWorkbench) -> None:
-    st.subheader("Tier 3 — Biophysical premotor sandbox")
+    st.subheader("Tier 3 — Premotor biophysical simulation")
+    mode = st.radio(
+        "Simulation mode",
+        ["Published clamped core (15 intrinsic + 69 signals)", "205-node free-run sandbox"],
+        horizontal=True,
+        key="t3_mode",
+    )
+    if mode.startswith("Published"):
+        tier3_clamped_tab(wb)
+    else:
+        tier3_sandbox_tab(wb)
+
+
+def tier3_sandbox_tab(wb: ViennaWorkbench) -> None:
+    st.subheader("Tier 3 — 205-node free-run sandbox")
     st.caption(
         "205-node fitted synaptic matrix from Celegans_premotor, integrated with the published "
         "cubic rate ODE. Neuron names and gap-junction matrix W were recovered from the release's "
@@ -622,8 +935,8 @@ def tier3_tab(wb: ViennaWorkbench) -> None:
     st.warning(
         "This sandbox uses the published fitted chemical synaptic matrix, recovered W and names, "
         "and the published ODE form. The paper's simulation clamps 69 signal neurons to recorded "
-        "activity; this page does not yet implement that clamped mode. It is not a validated "
-        "digital twin and must not be used for causal claims."
+        "activity; use the **Published clamped core** mode for that configuration. The 205-node "
+        "free-run is exploratory and is not a validated digital twin."
     )
 
 
@@ -647,11 +960,13 @@ def provenance_tab(wb: ViennaWorkbench) -> None:
 **Status language**
 
 - Tier 1: validated on held-out worms for one-step latent prediction and behaviour read-out;
-  free-run generative use is not validated.
+  free-run generative use is not validated. Intervals are ensemble quantiles, not posteriors.
 - Tier 2: descriptive causal-state model; `do()` is not identified by the precomputed artifact.
-- Tier 3: biophysical sandbox with the fitted chemical matrix and recovered gap-junction matrix
-  and neuron names. The 205-node free-run is exploratory; the paper's clamped-signal simulation
-  is not implemented. This is not a validated digital twin.
+  The current assumption audit rejects strict first-order Markov and stationarity.
+- Tier 3: the published 84/15/69 clamped-core configuration is implemented; the canonical
+  recording has 84 core / 15 intrinsic / 69 signal neurons. Fidelity to the paper figure is
+  approximate because the Julia reference was not run and W/names are independently recovered.
+  The 205-node free-run remains exploratory. This is not a validated digital twin.
 """
     )
 
@@ -667,8 +982,8 @@ Denis three different objects, with different claim levels, rather than one over
 1. **Latent manifold** — generate and forecast behaviourally relevant 3-D BunDLe-Net trajectories.
 2. **Causal-state workbench** — inspect NC-MCM cognitive states, Markov structure, uncertainty,
    and model-based intervention trajectories.
-3. **Premotor connectome sandbox** — run the published 205-node rate ODE with recovered neuron
-   names and electrical-junction weights, and export the activity.
+3. **Premotor connectome sandbox** — run the published clamped-core ODE (15 intrinsic neurons
+   integrated, 69 signals clamped to recording) and, separately, the exploratory 205-node free-run.
 """
     )
     metrics = wb.metrics()
@@ -682,10 +997,7 @@ Denis three different objects, with different claim levels, rather than one over
         "Behaviour read-out (true latent)",
         f"{metrics.get('mean_behavior_accuracy_true', 0):.1%}" if metrics else "n/a",
     )
-    c3.metric(
-        "Premotor nodes",
-        f"{wb.premotor.n_nodes}" if (wb.root / "data/processed/premotor/avg_model_weights.jld2").exists() else "n/a",
-    )
+    c3.metric("Clamped-core recordings", f"{len(wb.clamped_catalog())}")
     if benchmark:
         st.markdown("**Open-loop forecast, held-out worm**")
         rows = []
@@ -708,19 +1020,23 @@ Denis three different objects, with different claim levels, rather than one over
     st.markdown("**How to use it in a first meeting**")
     st.markdown(
         """
-1. Open **Tier 1**, pick a held-out worm, and compare *manifold walk* with *switching linear*.
-2. Open **Tier 2**, choose `K`, inspect the Markov p-value and the transition uncertainty.
-3. Open **Tier 3**, run the chemical-only ODE, then increase β only within the stable range.
-4. Download the **Evidence report** before the meeting; it records every number and caveat.
+1. Open **Tier 1**, pick a held-out worm, and compare *manifold walk* with *switching linear*;
+   inspect the 90% ensemble coverage before trusting an interval.
+2. Open **Tier 2**, choose `K`, inspect the Markov p-value, then open **Assumption audit**.
+3. Open **Tier 3**, run the **Published clamped core** at β=10, then compare with β=0 and the
+   205-node free-run.
+4. Download the **Evidence report** and **Evidence & lab** material before the meeting.
+
+**Claim boundaries**
 """
     )
-
-    st.markdown("**Claim boundaries**")
     st.warning(
         "Tier 1 is a latent-manifold model, not a circuit. Tier 2 is descriptive and its do() is "
-        "a Markov counterfactual, not an experimentally identified effect. Tier 3 is a free-run "
-        "sandbox: the published paper clamps 69 signal neurons to recordings, and that clamped "
-        "mode is not implemented here. None of the three is a validated whole-brain digital twin."
+        "a Markov counterfactual; the current audit rejects strict first-order Markov and "
+        "stationarity, so do not present it as an identified effect. Tier 3 now reproduces the "
+        "published clamped-core configuration, but with independently recovered weights and "
+        "without a reference Julia fidelity check. None of the three is a validated whole-brain "
+        "digital twin."
     )
 
 
@@ -756,20 +1072,44 @@ def report_tab(wb: ViennaWorkbench) -> None:
             )
         lines += [
             "",
-            "Benchmark: open-loop forecasts, 25-frame horizon, 4 seeds, held-out worm. "
+            "Benchmark: open-loop forecasts, 25-frame horizon, 16 seeds, held-out worm. "
             "This is a descriptive comparison, not mechanism.",
         ]
+    audit = wb.tier2_audit(6)
+    if audit:
+        lines += [
+            "",
+            "## Tier 2 — NC-MCM assumption audit",
+            "",
+            "| test | verdict |",
+            "|---|---|",
+        ]
+        for name, result in audit.get("tests", {}).items():
+            lines.append(f"| {name.replace('_', ' ')} | {result.get('verdict', 'n/a')} |")
+        lines += [
+            "",
+            "The audit tests first-order Markov structure, stationarity, behaviour transport, "
+            "state-behaviour information, and K sensitivity. A fail means `do()` remains a "
+            "model-based counterfactual, not an identified causal effect.",
+        ]
+    clamped = wb.tier3_clamped_validation()
     lines += [
         "",
-        "## Tier 2 — NC-MCM",
-        "Fitted cognitive-state models for five worms. Markov p-values and transition matrices are "
-        "descriptive; intervention trajectories are model-based counterfactuals under the Markov "
-        "assumption, not identified causal effects.",
-        "",
         "## Tier 3 — Premotor",
-        "205-node fitted chemical matrix and cubic rate ODE. Neuron names and W were recovered from "
-        "the release connectome; all 913 non-zero A entries lie inside the chemical support. "
-        "The full free-run is exploratory; the published clamped-signal simulation is not implemented.",
+        "Published clamped-core mode: 15 intrinsic neurons integrated, 69 signal neurons "
+        "clamped to an Atanas recording. The canonical 2023-01-23-15 recording has 84/15/69 "
+        "counts. The 205-node free-run remains an exploratory sandbox.",
+    ]
+    if clamped:
+        agg = clamped.get("aggregate", {})
+        lines += [
+            f"- Clamped recordings: {agg.get('n_recordings', 'n/a')}",
+            f"- Mean behaviour-state agreement: {agg.get('mean_state_agreement', float('nan')):.1%}",
+            f"- Mean behaviour-distribution JS: {agg.get('mean_behavior_distribution_js', float('nan')):.3f}",
+            f"- Claim level: {clamped.get('claim_level', 'n/a')}",
+            f"- Reference status: {clamped.get('reference_status', 'n/a')}",
+        ]
+    lines += [
         "",
         "## Provenance",
         "BunDLe-Net preprint DOI 10.1101/2023.08.08.551978; NC-MCM DOI 10.1371/journal.pcbi.1012674; "
@@ -787,6 +1127,95 @@ def report_tab(wb: ViennaWorkbench) -> None:
     st.markdown(report)
     st.markdown("**Machine-readable provenance**")
     st.json(wb.provenance())
+
+
+def lab_tab(wb: ViennaWorkbench) -> None:
+    st.subheader("Evidence & lab alignment")
+    st.caption(
+        "What the product claims, what the evidence supports, and how each tier maps to the "
+        "Neuroinformatics group's published work. This is a lab-facing map, not a claim that "
+        "Denis authored these papers."
+    )
+    st.markdown("**Claim ledger**")
+    st.dataframe(
+        [
+            {
+                "claim": "3-D latent manifold supports short-horizon behaviour forecasting",
+                "tier": "Tier 1",
+                "status": "supported descriptively",
+                "evidence": "held-out-worm benchmark; CRPS/coverage reported",
+            },
+            {
+                "claim": "NC-MCM states are first-order Markov and stationary",
+                "tier": "Tier 2",
+                "status": "rejected by current audit",
+                "evidence": "tier2_assumption_audit.json",
+            },
+            {
+                "claim": "do(state) is an identified causal effect",
+                "tier": "Tier 2",
+                "status": "not claimed",
+                "evidence": "observational clusters; audit fails strict assumptions",
+            },
+            {
+                "claim": "published 84/15/69 clamped core is reproduced",
+                "tier": "Tier 3",
+                "status": "configuration reproduced; fidelity approximate",
+                "evidence": "tier3_clamped_validation.json",
+            },
+            {
+                "claim": "whole-brain digital twin / mechanistic validation",
+                "tier": "all",
+                "status": "not claimed",
+                "evidence": "no causal intervention or reference Julia fidelity check",
+            },
+        ],
+        hide_index=True,
+        width="stretch",
+    )
+
+    st.markdown("**Lab map**")
+    st.markdown(
+        """
+- **BunDLe-Net** → Tier 1. Kumar, Gilra, Meunier, Grosse-Wentrup.
+  [bioRxiv preprint](https://doi.org/10.1101/2023.08.08.551978) (preprint, not peer-reviewed).
+- **NC-MCM** → Tier 2. Grosse-Wentrup, Kumar, Meunier, Zimmer.
+  [PLoS Comput Biol 2024](https://doi.org/10.1371/journal.pcbi.1012674).
+- **Celegans_premotor** → Tier 3. Morrison & Young.
+  [PLoS Comput Biol 2025](https://doi.org/10.1371/journal.pcbi.1013818).
+- **Group research direction**: causal inference from observational neural data; neural manifolds;
+  BCI translation. [Projects](https://ni.cs.univie.ac.at/research/projects) ·
+  [Code](https://ni.cs.univie.ac.at/research/code).
+- **Denis Kovacevic** is a member of the group's research team
+  ([team page](https://ni.cs.univie.ac.at/about-us/team/person/unitid/81/denis-kovacevic)).
+  No publications are attributed to him here.
+"""
+    )
+    st.markdown("**Next experiments that would change the claim level**")
+    st.markdown(
+        """
+1. **Reference fidelity gate:** run the authors' Julia notebook on `2023-01-23-15` and compare
+   intrinsic traces and behaviour statistics with the Python port.
+2. **Held-out sixth worm:** test the clamped and latent models on a recording not used to fit
+   either the manifold or the recovered weights.
+3. **Intervention dataset:** use optogenetic or ablation trials with a pre-registered target and
+   a held-out animal; the current Randi atlas is evidence about propagation, not a Tier-1/2 test.
+4. **Markov-order follow-up:** if second-order structure is real, fit an explicit higher-order
+   model and compare held-out behaviour NLL before using `do()`.
+"""
+    )
+    st.download_button(
+        "Download claim ledger (CSV)",
+        data="claim,tier,status,evidence\n"
+        "3-D latent manifold forecasting,Tier 1,supported descriptively,held-out benchmark\n"
+        "NC-MCM first-order Markov and stationary,Tier 2,rejected by current audit,tier2 audit\n"
+        "do(state) identified causal effect,Tier 2,not claimed,observational clusters\n"
+        "published 84/15/69 clamped core,Tier 3,configuration reproduced; fidelity approximate,tier3 validation\n"
+        "whole-brain digital twin,all,not claimed,no reference fidelity or intervention\n",
+        file_name="vienna_claim_ledger.csv",
+        mime="text/csv",
+        key="lab_download",
+    )
 
 
 def main() -> None:
@@ -808,6 +1237,7 @@ def main() -> None:
             "Tier 2 · NC-MCM",
             "Tier 3 · Premotor",
             "Evidence report",
+            "Evidence & lab",
             "Provenance",
         ]
     )
@@ -831,6 +1261,8 @@ def main() -> None:
     with tabs[4]:
         report_tab(wb)
     with tabs[5]:
+        lab_tab(wb)
+    with tabs[6]:
         provenance_tab(wb)
 
 
