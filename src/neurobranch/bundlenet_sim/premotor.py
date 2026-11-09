@@ -12,9 +12,12 @@ and ``simulations.ipynb``):
         + beta  * sum_i W[j, i] * (u_i - u_j)
     )
 
-The public export does not include the gap-junction matrix ``W`` or the
-neuron-name order.  ``W`` therefore defaults to zero and nodes are labelled by
-their internal index.  This is a sandbox, not a validated digital twin.
+The public JLD2 export omits the gap-junction matrix ``W`` and the neuron-name
+order.  We recover both from the release's own ``df5.csv`` and the notebook's
+printed 205-neuron loop order, then verify that every non-zero entry of ``A``
+lies inside the chemical-synapse support (913/913 entries).  If those local
+derivatives are absent, ``W`` defaults to zero and nodes are labelled by index,
+and the UI says so.  This remains a sandbox, not a validated digital twin.
 """
 
 from __future__ import annotations
@@ -36,6 +39,7 @@ class PremotorModel:
     A: np.ndarray
     d: np.ndarray
     W: np.ndarray | None = None
+    neuron_names: tuple[str, ...] | None = None
     source: str = ""
 
     @property
@@ -44,6 +48,16 @@ class PremotorModel:
 
     def node_strength(self) -> np.ndarray:
         return np.abs(self.A).sum(axis=1) + np.abs(self.d)
+
+    def node_label(self, index: int) -> str:
+        if self.neuron_names is not None:
+            return self.neuron_names[index]
+        return f"node {index}"
+
+    def node_index(self, name: str) -> int:
+        if self.neuron_names is None:
+            raise ValueError("neuron names are not available")
+        return self.neuron_names.index(name)
 
 
 def load_premotor(data_dir: Path | str | None = None) -> PremotorModel:
@@ -56,7 +70,19 @@ def load_premotor(data_dir: Path | str | None = None) -> PremotorModel:
         d = np.asarray(handle["d_10takes_avg"], dtype=np.float64).reshape(-1)
     if A.shape[0] != A.shape[1] or A.shape[0] != len(d):
         raise ValueError(f"inconsistent premotor shapes: A={A.shape}, d={d.shape}")
-    return PremotorModel(A=A, d=d, source=str(path))
+    W = None
+    W_path = root / "W.npy"
+    if W_path.exists():
+        W = np.asarray(np.load(W_path), dtype=np.float64)
+        if W.shape != A.shape:
+            raise ValueError(f"W shape {W.shape} does not match A {A.shape}")
+    names: tuple[str, ...] | None = None
+    names_path = root / "neuron_names.txt"
+    if names_path.exists():
+        candidate = tuple(line.strip() for line in names_path.read_text(encoding="utf-8").splitlines() if line.strip())
+        if len(candidate) == A.shape[0]:
+            names = candidate
+    return PremotorModel(A=A, d=d, W=W, neuron_names=names, source=str(path))
 
 
 @dataclass
@@ -66,7 +92,7 @@ class PremotorParameters:
     fp2: float = 0.1
     fp3: float = 1.0
     gamma: float = 1.4
-    beta: float = 10.0
+    beta: float = 0.0
     tau: float = 0.2
     duration: float = 20.0
     n_samples: int = 400
@@ -94,7 +120,7 @@ def simulate(
     params.validate()
     A = model.A.copy()
     d = model.d.copy()
-    W = model.W
+    W = None if model.W is None else model.W.copy()
     for node in params.ablate_nodes:
         if not 0 <= node < model.n_nodes:
             raise ValueError(f"ablate node out of range: {node}")

@@ -22,18 +22,18 @@ NC-MCM to Denis.
 | C1 | BunDLe-Net learns a 3-D latent manifold preserving behaviourally relevant dynamics | Paper + released embeddings; our loader reproduces five 3-D trajectories | Published method + our inspection | Supported for the released five worms; preprint |
 | C2 | A quadratic map on these latents is highly predictable one step ahead | Our leave-one-worm-out run: mean R² 0.998 (0.997–0.998) | Our computation | Strong one-step result; not a generative validation |
 | C3 | The same quadratic map is a reliable free-run simulator | Mean skill +0.163 vs constant initial state, but one worm −0.331; behaviour decoding 33.5% vs 29.8% majority | Our computation | **Not supported** as a validated generator |
-| C4 | A manifold walk gives stable interactive rollouts | Walk samples observed successor states; finite, on-manifold by construction | Our implementation | Stable, but descriptive; no extrapolation |
+| C4 | A manifold walk gives the strongest short-horizon open-loop forecast among the three tested models | Held-out-worm benchmark, 25-frame horizon, 4 seeds: 70.8% behaviour accuracy, latent MSE 0.0517; quadratic 64.9%/0.0532, switching 50.3%/0.0666 | Our computation | Supported descriptively for these five worms; not mechanism, not extrapolation |
 | C5 | NC-MCM exposes multilevel cognitive states and Markov tests | Published method + released `c`, `p`, `bprob` arrays; schema mapped from Julia source | Published method + our reader | Supported descriptively |
-| C6 | The UI can estimate `do(state)` effects | It only re-displays conditional behaviour distributions and outgoing transitions | Our implementation | **Not supported**; explicitly labelled observational |
-| C7 | The premotor model is a 205-node fitted synaptic rate model | Published paper + `A_10takes_avg`, `d_10takes_avg` in `avg_model_weights.jld2` | Published model + our loader | Supported for `A`, `d`, ODE form |
-| C8 | Tier 3 is the full published premotor model / a digital twin | `W` (gap junctions) and neuron-name order are absent from the public export; `W=0`, nodes anonymous | Inspection of export | **Not supported**; sandbox only |
+| C6 | The UI can estimate `do(state)` effects | It propagates a forced state through the fitted transition matrix; no experimental intervention | Our implementation | **Not supported as causal**; labelled Markov counterfactual |
+| C7 | The premotor model is a 205-node fitted synaptic rate model | Published paper + `A_10takes_avg`, `d_10takes_avg`; recovered `W` and names | Published model + our loader/builder | Supported for `A`, `d`, `W`, ODE form |
+| C8 | Tier 3 is the full published premotor model / a digital twin | Full 205-node free-run is not the paper's 15-intrinsic + 69-clamped-signal simulation; free-run is unstable at β=10 | Inspection + our simulation | **Not supported**; free-run sandbox only |
 | C9 | Any tier establishes whole-brain mechanism or causality | None does; Tier 1 is latent, Tier 2 is assumption-dependent, Tier 3 is a reduced model | Inference from above | **Rejected** |
 
 ## 3. Reproducibility artifacts
 
 - Git branch: `feature/bundlenet-simulator` (base `4250072`).
 - Artifact manifest: `data/processed/vienna_artifacts_manifest.json` (SHA-256, bytes, license,
-  source path for 11 files).
+  source path for 13 files, including derived `W.npy` and `neuron_names.txt`).
 - Tier 1 model/metrics: `artifacts/bundlenet_sim/model.npz`, `metrics.json`, `manifest.json`.
 - Evaluation unit: one worm; leave-one-worm-out. No frame-level random split.
 - Seeds: manifold-walk UI seed is user-controlled; training uses deterministic ridge solves.
@@ -42,21 +42,28 @@ NC-MCM to Denis.
 ```bash
 python scripts/fetch_vienna_artifacts.py --verify-only
 PYTHONPATH=src python -m neurobranch.bundlenet_sim.train --alpha 1.0
+PYTHONPATH=src python -m neurobranch.bundlenet_sim.benchmark --horizon 25 --stride 75 --seeds 4
 PYTHONPATH=src python -m pytest tests/test_bundlenet_workbench.py -q
 python -m streamlit run src/neurobranch/bundlenet_sim/app.py
 ```
 
 - Environment used locally: Python 3.13, NumPy/SciPy/scikit-learn/h5py/Streamlit 1.66.1/Plotly 7.1.
   The workbench code does not require TensorFlow or Julia.
+- Pod environment: Python 3.12.3, Streamlit 1.66.1, Plotly 7.1.0, h5py 3.16.0, scikit-learn 1.6.1,
+  NumPy 1.26.4, NVIDIA H100 NVL. Tests 7/7 and full benchmark rerun passed. Benchmark means agree
+  with local to `< 2e-16`; JSON hashes differ only from float serialisation.
 
 ## 4. What was not done
 
 - No fresh independent reproduction of the BunDLe-Net training (we used released embeddings).
-- No Julia execution of NC-MCM or the premotor model; no `W` recovery.
-- No experimental intervention data, so no causal effect estimate.
+- No Julia execution of NC-MCM or the premotor model. `W` and names were recovered from the
+  release's own CSV/notebook output, not by running the original Julia environment.
+- No implementation of the paper's clamped 15-intrinsic / 69-signal premotor simulation.
+  The 205-node free-run is exploratory and unstable at the published β.
+- No experimental intervention data, so no identified causal effect estimate.
 - No external validation on a sixth worm or another lab's recordings.
 - No full test-suite green claim. The repository has pre-existing failing/skipped historical tests;
-  only the new workbench tests (5/5) and app smoke test were run for this change.
+  only the workbench tests (7/7) and app smoke test were run for this change.
 
 ## 5. Search / inspection trail
 
@@ -68,3 +75,10 @@ python -m streamlit run src/neurobranch/bundlenet_sim/app.py
   `Celegans_premotor/code/simulations.ipynb`, `Celegans_premotor/data/White_data_processed/df5.csv`.
 - HDF5 inspection of `avg_model_weights.jld2` (keys `A_10takes`, `A_10takes_avg`,
   `d_10takes_avg`; shapes (22,205,205), (205,205), (205,)).
+- Premotor name/W recovery: parsed the 205-neuron loop from
+  `code/computer_avg_weights.ipynb` cell 16 output, rebuilt `EJ_mat`/`S_mat` from
+  `data/White_data_processed/df5.csv`, and accepted only the order for which every non-zero `A`
+  entry lies inside the chemical-synapse support (913/913). A wrong order gives ~3% support overlap;
+  this one gives 100% containment.
+- Pod reproduction: extracted the 19 MB deployment bundle to `/workspace/vienna-studio`, ran
+  `pytest` 7/7 and the benchmark; values matched local to floating-point tolerance.

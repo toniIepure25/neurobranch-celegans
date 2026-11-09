@@ -54,6 +54,14 @@ ARTIFACTS = [
         "indices": [None],
         "license": "Celegans_premotor repository: MIT",
     },
+    {
+        "tier": "tier3_premotor",
+        "name": "premotor_neuron_names.txt",
+        "source": ROOT / "data" / "metadata" / "premotor_neuron_names.txt",
+        "destination": PROCESSED / "premotor" / "neuron_names.txt",
+        "indices": [None],
+        "license": "Derived metadata (neuron names) from MIT-licensed Celegans_premotor",
+    },
 ]
 
 
@@ -101,6 +109,23 @@ def build_records(force: bool) -> list[dict[str, object]]:
         raise FileNotFoundError(
             "Missing reference artifacts. Clone the upstream repositories into "
             f"references/external/ first:\n{lines}"
+        )
+
+    premotor_root = REFERENCES / "Celegans_premotor"
+    if (premotor_root / "data" / "White_data_processed" / "df5.csv").exists():
+        from build_premotor_inputs import build as build_premotor_inputs
+
+        build_premotor_inputs(premotor_root, PROCESSED / "premotor")
+        w_path = PROCESSED / "premotor" / "W.npy"
+        records.append(
+            {
+                "tier": "tier3_premotor",
+                "destination": w_path.relative_to(ROOT).as_posix(),
+                "source": "derived from references/external/Celegans_premotor/data/White_data_processed/df5.csv",
+                "sha256": sha256(w_path),
+                "bytes": w_path.stat().st_size,
+                "license": "Derived from MIT-licensed Celegans_premotor connectome table",
+            }
         )
     return records
 

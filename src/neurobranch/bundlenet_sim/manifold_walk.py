@@ -65,6 +65,26 @@ class ManifoldWalk:
             nxt += rng.normal(0.0, self.noise, size=3)
         return nxt, int(self.behaviors_[indices[choice]])
 
+    def rollout_with_behavior(
+        self,
+        y0: np.ndarray,
+        n_steps: int,
+        seed: int | None = None,
+        target_behavior: int | None = None,
+        temperature: float = 1.0,
+    ) -> tuple[np.ndarray, np.ndarray]:
+        rng = np.random.default_rng(seed)
+        out = np.empty((n_steps, 3), dtype=np.float64)
+        labels = np.empty(n_steps, dtype=np.int64)
+        state = np.asarray(y0, dtype=np.float64).reshape(3)
+        for t in range(n_steps):
+            state, label = self.step(
+                state, rng, target_behavior=target_behavior, temperature=temperature
+            )
+            out[t] = state
+            labels[t] = label
+        return out, labels
+
     def rollout(
         self,
         y0: np.ndarray,
@@ -73,10 +93,10 @@ class ManifoldWalk:
         target_behavior: int | None = None,
         temperature: float = 1.0,
     ) -> np.ndarray:
-        rng = np.random.default_rng(seed)
-        out = np.empty((n_steps, 3), dtype=np.float64)
-        state = np.asarray(y0, dtype=np.float64).reshape(3)
-        for t in range(n_steps):
-            state, _ = self.step(state, rng, target_behavior=target_behavior, temperature=temperature)
-            out[t] = state
-        return out
+        return self.rollout_with_behavior(
+            y0,
+            n_steps,
+            seed=seed,
+            target_behavior=target_behavior,
+            temperature=temperature,
+        )[0]

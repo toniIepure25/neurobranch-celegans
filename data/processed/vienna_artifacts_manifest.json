@@ -1,5 +1,5 @@
 {
-  "generated_at_utc": "2026-11-09T18:04:57+00:00",
+  "generated_at_utc": "2026-11-09T18:33:14+00:00",
   "repo_root": ".",
   "note": "Third-party artifacts; not committed. Re-run this script to restore them.",
   "artifacts": [
@@ -90,6 +90,22 @@
       "sha256": "fb6844eff3f19b67da297253f139782a90ebb9d285966fe5f254094fb4f76d9a",
       "bytes": 7735214,
       "license": "Celegans_premotor repository: MIT"
+    },
+    {
+      "tier": "tier3_premotor",
+      "destination": "data/processed/premotor/neuron_names.txt",
+      "source": "data/metadata/premotor_neuron_names.txt",
+      "sha256": "7697bff9bdd647b93645627d2c2ba84365b6dbc78c6bc7f14cd3294055a86666",
+      "bytes": 1262,
+      "license": "Derived metadata (neuron names) from MIT-licensed Celegans_premotor"
+    },
+    {
+      "tier": "tier3_premotor",
+      "destination": "data/processed/premotor/W.npy",
+      "source": "derived from references/external/Celegans_premotor/data/White_data_processed/df5.csv",
+      "sha256": "5031ab85f581b6bdcd04b297303573a71b3f4a66183f930ed85245c14275d2ba",
+      "bytes": 336328,
+      "license": "Derived from MIT-licensed Celegans_premotor connectome table"
     }
   ]
 }

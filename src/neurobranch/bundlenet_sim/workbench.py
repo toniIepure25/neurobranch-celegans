@@ -13,6 +13,7 @@ from .manifold_walk import ManifoldWalk
 from .ncmcm import NCMCMWorm, load_ncmcm
 from .persistence import load_models
 from .premotor import PremotorModel, PremotorParameters, load_premotor, simulate
+from .switching import SwitchingFit, fit_switching
 
 
 def repo_root() -> Path:
@@ -26,6 +27,7 @@ class ViennaWorkbench:
         self.root = Path(root) if root is not None else repo_root()
         self._trajectories: list[WormTrajectory] | None = None
         self._models: FittedModels | None = None
+        self._switching: SwitchingFit | None = None
         self._walk: ManifoldWalk | None = None
         self._ncmcm: dict[int, NCMCMWorm] = {}
         self._premotor: PremotorModel | None = None
@@ -46,6 +48,12 @@ class ViennaWorkbench:
                 )
             self._models = load_models(path)
         return self._models
+
+    @property
+    def switching(self) -> SwitchingFit:
+        if self._switching is None:
+            self._switching = fit_switching(self.trajectories)
+        return self._switching
 
     @property
     def manifold_walk(self) -> ManifoldWalk:
@@ -76,6 +84,7 @@ class ViennaWorkbench:
     ) -> tuple[np.ndarray, np.ndarray]:
         traj = next(t for t in self.trajectories if t.worm_id == worm_id)
         y0 = traj.latent[start]
+        b0 = int(traj.behavior[start])
         if mode == "manifold_walk":
             sim = self.manifold_walk.rollout(
                 y0,
@@ -84,6 +93,8 @@ class ViennaWorkbench:
                 target_behavior=target_behavior,
                 temperature=temperature,
             )
+        elif mode == "switching":
+            sim, _, _ = self.switching.simulate(y0, b0, n_steps=horizon, seed=seed)
         elif mode == "quadratic":
             sim = self.models.dynamics.rollout(y0, n_steps=horizon, seed=seed)
         else:
@@ -101,6 +112,12 @@ class ViennaWorkbench:
 
     def metrics(self) -> dict[str, object]:
         path = self.root / "artifacts" / "bundlenet_sim" / "metrics.json"
+        if not path.exists():
+            return {}
+        return json.loads(path.read_text(encoding="utf-8"))
+
+    def tier1_benchmark(self) -> dict[str, object]:
+        path = self.root / "reports" / "vienna_workbench" / "tier1_benchmark.json"
         if not path.exists():
             return {}
         return json.loads(path.read_text(encoding="utf-8"))

@@ -92,6 +92,70 @@ class NCMCMWorm:
     def behavior_name(self, canonical_index: int) -> str:
         return BEHAVIOR_NAMES[canonical_index]
 
+    def bootstrap_transition(
+        self, k: int, n_boot: int = 200, seed: int = 0
+    ) -> dict[str, np.ndarray]:
+        """Dirichlet posterior over rows of the transition matrix.
+
+        This quantifies sampling uncertainty of the *fitted* Markov chain.  It
+        does not turn the chain into a causal model.
+        """
+        counts = self.transition_counts(k).astype(np.float64) + 0.5
+        rng = np.random.default_rng(seed)
+        samples = np.empty((n_boot, k, k), dtype=np.float64)
+        for i in range(k):
+            samples[:, i, :] = rng.dirichlet(counts[i], size=n_boot)
+        return {
+            "mean": samples.mean(axis=0),
+            "low": np.quantile(samples, 0.025, axis=0),
+            "high": np.quantile(samples, 0.975, axis=0),
+        }
+
+    def intervention_horizon(
+        self, k: int, start_state: int, horizon: int = 20
+    ) -> dict[str, np.ndarray]:
+        """Propagate a forced state through the fitted Markov chain.
+
+        ``do(S_t = start_state)`` at t=0, then follow the fitted transition
+        matrix.  This is a model-based counterfactual under the Markov
+        assumption; it is not an experimentally identified causal effect.
+        """
+        if not 1 <= start_state <= k:
+            raise ValueError(f"start_state must be in 1..{k}")
+        P = self.transition_matrix(k)
+        B = self.behavior_distribution_by_cluster(k)
+        state_dist = np.zeros((horizon + 1, k), dtype=np.float64)
+        state_dist[0, start_state - 1] = 1.0
+        for t in range(horizon):
+            state_dist[t + 1] = state_dist[t] @ P
+        behavior_dist = state_dist @ B
+        return {"state_distribution": state_dist, "behavior_distribution": behavior_dist}
+
+    def cross_worm_js(self, other: NCMCMWorm) -> dict[str, float]:
+        """Jensen-Shannon divergence of *behaviour* statistics across worms.
+
+        Cluster indices are not semantically aligned across independently fitted
+        worms, so comparing state labels or state-transition matrices directly
+        would be meaningless.  Behaviour labels are aligned, so only those are
+        compared here.
+        """
+        from .benchmark import js_divergence
+
+        p_beh = np.bincount(self.behavior, minlength=len(BEHAVIOR_NAMES)).astype(float)
+        q_beh = np.bincount(other.behavior, minlength=len(BEHAVIOR_NAMES)).astype(float)
+        p_trans = np.full((len(BEHAVIOR_NAMES), len(BEHAVIOR_NAMES)), 1e-9)
+        q_trans = np.full_like(p_trans, 1e-9)
+        for a, b in zip(self.behavior[:-1], self.behavior[1:]):
+            p_trans[int(a), int(b)] += 1
+        for a, b in zip(other.behavior[:-1], other.behavior[1:]):
+            q_trans[int(a), int(b)] += 1
+        p_trans /= p_trans.sum(axis=1, keepdims=True)
+        q_trans /= q_trans.sum(axis=1, keepdims=True)
+        return {
+            "behavior_js": js_divergence(p_beh, q_beh),
+            "behavior_transition_js": js_divergence(p_trans.reshape(-1), q_trans.reshape(-1)),
+        }
+
 
 def load_ncmcm(worm_id: int, data_dir: Path | str | None = None) -> NCMCMWorm:
     """Load one worm; ``worm_id`` is the 0-based BunDLe-Net id (0..4)."""

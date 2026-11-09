@@ -6,6 +6,7 @@ Run from the repository root:
 
 from __future__ import annotations
 
+import io
 import sys
 from pathlib import Path
 
@@ -21,7 +22,7 @@ from neurobranch.bundlenet_sim.dataset import BEHAVIOR_NAMES  # noqa: E402
 from neurobranch.bundlenet_sim.premotor import PremotorParameters  # noqa: E402
 from neurobranch.bundlenet_sim.workbench import ViennaWorkbench  # noqa: E402
 
-st.set_page_config(page_title="Vienna Neuroinformatics Workbench", page_icon="🧠", layout="wide")
+st.set_page_config(page_title="Vienna Neuroinformatics Studio", page_icon="🧠", layout="wide")
 
 SETUP_COMMAND = "python scripts/fetch_vienna_artifacts.py"
 
@@ -95,8 +96,12 @@ def tier1_tab(wb: ViennaWorkbench) -> None:
     with c3:
         mode = st.selectbox(
             "Dynamics",
-            options=["manifold_walk", "quadratic"],
-            format_func=lambda m: "Manifold walk (stable)" if m == "manifold_walk" else "Quadratic forecast (unstable)",
+            options=["manifold_walk", "switching", "quadratic"],
+            format_func=lambda m: {
+                "manifold_walk": "Manifold walk (descriptive, stable)",
+                "switching": "Switching linear + behaviour Markov",
+                "quadratic": "Quadratic forecast (one-step strong, unstable)",
+            }[m],
             key="t1_mode",
         )
     with c4:
@@ -218,6 +223,26 @@ def tier1_tab(wb: ViennaWorkbench) -> None:
         else:
             st.info("Run `python -m neurobranch.bundlenet_sim.train` to create metrics.")
 
+        benchmark = wb.tier1_benchmark()
+        if benchmark:
+            st.markdown("**Open-loop benchmark (held-out worm)**")
+            rows = []
+            for item in benchmark.get("models", []):
+                rows.append(
+                    {
+                        "model": item["model"],
+                        "latent MSE h10": round(item["latent_mse_h10"]["mean"], 3),
+                        "behaviour acc h10": f"{item['behavior_accuracy_h10']['mean']:.1%}",
+                        "behaviour acc h25": f"{item['behavior_accuracy_h25']['mean']:.1%}",
+                        "transition JS h25": round(item["behavior_transition_js"]["mean"], 3),
+                    }
+                )
+            st.dataframe(rows, hide_index=True, width="stretch")
+            st.caption(
+                "Open-loop forecast from 75-frame-spaced starts, 25-frame horizon, 4 seeds. "
+                "Lower JS is better; this is a descriptive forecast comparison, not mechanism."
+            )
+
     with st.expander("What this tier does and does not claim"):
         st.markdown(
             """
@@ -294,34 +319,94 @@ def tier2_tab(wb: ViennaWorkbench) -> None:
     line.update_layout(height=220, margin={"l": 0, "r": 0, "t": 10, "b": 0}, yaxis_title="state")
     st.plotly_chart(line, width="stretch")
 
-    st.markdown("**Intervention read-out (observational, not identified)**")
-    c1, c2 = st.columns(2)
+    st.markdown("**Model-based intervention trajectory (Markov assumption)**")
+    c1, c2, c3 = st.columns([1, 1, 2])
     with c1:
-        state = st.selectbox("Force state", [f"S{i + 1}" for i in range(k)], key="t2_state")
+        state = st.selectbox("Force state at t=0", [f"S{i + 1}" for i in range(k)], key="t2_state")
         idx = int(state[1:]) - 1
-        st.write("Outgoing transition probabilities:")
-        st.dataframe(
-            {"next": [f"S{j + 1}" for j in range(k)], "p": np.round(P[idx], 3)},
-            width="stretch",
-            hide_index=True,
-        )
     with c2:
+        horizon = st.slider("Horizon", 1, 50, 20, key="t2_horizon")
+    with c3:
+        st.caption(
+            "Propagate the forced state through the fitted transition matrix. "
+            "This is a counterfactual under the Markov assumption, not an experimentally identified effect."
+        )
+
+    trajectory = model.intervention_horizon(k, idx + 1, horizon)
+    left, right = st.columns([1.2, 1])
+    with left:
+        fig = go.Figure()
+        for bi, name in enumerate(BEHAVIOR_NAMES):
+            fig.add_trace(
+                go.Scatter(
+                    x=np.arange(horizon + 1),
+                    y=trajectory["behavior_distribution"][:, bi],
+                    mode="lines",
+                    name=name,
+                    line={"color": COLORS[bi]},
+                )
+            )
+        fig.update_layout(
+            height=330,
+            margin={"l": 0, "r": 0, "t": 10, "b": 0},
+            xaxis_title="steps after do(state)",
+            yaxis_title="p(behaviour)",
+            legend={"orientation": "h", "y": -0.35},
+        )
+        st.plotly_chart(fig, width="stretch")
+    with right:
         fig = go.Figure(
-            go.Bar(
-                x=list(BEHAVIOR_NAMES),
-                y=behavior_dist[idx],
-                marker_color=COLORS,
+            data=go.Heatmap(
+                z=trajectory["state_distribution"].T,
+                x=np.arange(horizon + 1),
+                y=[f"S{i + 1}" for i in range(k)],
+                colorscale="Blues",
+                colorbar={"title": "p(state)"},
             )
         )
         fig.update_layout(
-            height=300,
+            height=330,
             margin={"l": 0, "r": 0, "t": 10, "b": 0},
-            yaxis_title="p(behaviour | state)",
-            xaxis_tickangle=-30,
+            xaxis_title="steps after do(state)",
         )
         st.plotly_chart(fig, width="stretch")
+
+    with st.expander("Transition uncertainty (Dirichlet bootstrap) and cross-worm variability"):
+        c1, c2 = st.columns(2)
+        with c1:
+            boot = model.bootstrap_transition(k, n_boot=200, seed=0)
+            rows = []
+            for a in range(k):
+                for b in range(k):
+                    if P[a, b] > 0.05 or a == idx:
+                        rows.append(
+                            {
+                                "from": f"S{a + 1}",
+                                "to": f"S{b + 1}",
+                                "mean": round(float(boot["mean"][a, b]), 3),
+                                "95% CI": f"{boot['low'][a, b]:.3f}–{boot['high'][a, b]:.3f}",
+                            }
+                        )
+            st.dataframe(rows, hide_index=True, width="stretch")
+        with c2:
+            other_rows = []
+            for other in wb.trajectories:
+                if other.worm_id == worm_id:
+                    continue
+                other_model = wb.ncmcm(other.worm_id)
+                js = model.cross_worm_js(other_model)
+                other_rows.append(
+                    {
+                        "other worm": f"worm {other.worm_id}",
+                        "behaviour JS": round(js["behavior_js"], 3),
+                        "behaviour transition JS": round(js["behavior_transition_js"], 3),
+                    }
+                )
+            st.dataframe(other_rows, hide_index=True, width="stretch")
+            st.caption("Only aligned behaviour labels are compared; cluster IDs are arbitrary.")
+
     st.warning(
-        "This is a conditional read-out from the fitted NC-MCM, not an identified causal effect. "
+        "This is a model-based counterfactual, not an identified causal effect. "
         "A real do(state) claim requires the NC-MCM assumptions plus experimental intervention."
     )
 
@@ -330,7 +415,8 @@ def tier3_tab(wb: ViennaWorkbench) -> None:
     st.subheader("Tier 3 — Biophysical premotor sandbox")
     st.caption(
         "205-node fitted synaptic matrix from Celegans_premotor, integrated with the published "
-        "cubic rate ODE. Gap-junction weights and neuron-name order are not in the public export."
+        "cubic rate ODE. Neuron names and gap-junction matrix W were recovered from the release's "
+        "own connectome and verified against the 913 non-zero A entries."
     )
     model = wb.premotor
     c1, c2, c3, c4 = st.columns(4)
@@ -340,32 +426,49 @@ def tier3_tab(wb: ViennaWorkbench) -> None:
         gamma = st.slider("Synaptic gain γ", 0.0, 3.0, 1.4, 0.1, key="t3_gamma")
     with c3:
         beta = st.slider(
-            "Gap-junction gain β (W unavailable: no effect)",
+            "Gap-junction gain β",
             0.0,
-            20.0,
             10.0,
-            0.5,
+            0.0,
+            0.25,
             key="t3_beta",
-            disabled=True,
-            help="The public export contains no gap-junction matrix W, so beta is shown for reference only.",
+            help=(
+                "W is recovered electrical-junction counts. Full 205-node free-run becomes unstable "
+                "near β≈5; the published simulation clamps 69 signal neurons to recordings."
+            ),
         )
     with c4:
         tau = st.slider("Time constant τ", 0.05, 1.0, 0.2, 0.05, key="t3_tau")
 
     c5, c6, c7 = st.columns(3)
+    node_options = list(range(model.n_nodes))
     with c5:
-        stim_node = st.number_input("Stimulated node", 0, model.n_nodes - 1, 0, key="t3_stim")
+        stim_node = st.selectbox(
+            "Stimulated node",
+            node_options,
+            index=min(len(node_options) - 1, 0),
+            format_func=model.node_label,
+            key="t3_stim",
+        )
     with c6:
         stim_amp = st.slider("Stimulus amplitude", 0.0, 20.0, 5.0, 0.5, key="t3_amp")
     with c7:
-        ablate_text = st.text_input("Ablate nodes (comma-separated)", "", key="t3_ablate")
+        ablate_text = st.text_input(
+            "Ablate nodes (names or indices, comma-separated)", "", key="t3_ablate"
+        )
 
     ablate: tuple[int, ...] = ()
     if ablate_text.strip():
         try:
-            ablate = tuple(int(x.strip()) for x in ablate_text.split(",") if x.strip())
-        except ValueError:
-            st.error("Ablation list must be comma-separated integers.")
+            parsed: list[int] = []
+            for token in ablate_text.split(","):
+                token = token.strip()
+                if not token:
+                    continue
+                parsed.append(int(token) if token.isdigit() else model.node_index(token))
+            ablate = tuple(parsed)
+        except (ValueError, IndexError):
+            st.error("Ablation list must contain valid neuron names or integer indices.")
 
     if st.button("Run ODE", type="primary", key="t3_run"):
         params = PremotorParameters(
@@ -408,7 +511,13 @@ def tier3_tab(wb: ViennaWorkbench) -> None:
         st.plotly_chart(fig, width="stretch")
     with right:
         st.markdown("**Selected node**")
-        node = st.number_input("Node trace", 0, model.n_nodes - 1, 0, key="t3_node")
+        node = st.selectbox(
+            "Node trace",
+            node_options,
+            index=min(len(node_options) - 1, 0),
+            format_func=model.node_label,
+            key="t3_node",
+        )
         trace = go.Figure(
             go.Scatter(x=t, y=y[int(node)], mode="lines", line={"color": "#E45756"})
         )
@@ -420,10 +529,101 @@ def tier3_tab(wb: ViennaWorkbench) -> None:
         mat.update_layout(height=210, margin={"l": 0, "r": 0, "t": 10, "b": 0})
         st.plotly_chart(mat, width="stretch")
 
+    left, right = st.columns([1, 1])
+    with left:
+        st.markdown("**Top nodes by fitted input strength**")
+        order = np.argsort(-model.node_strength())[:12]
+        st.dataframe(
+            [
+                {
+                    "neuron": model.node_label(int(i)),
+                    "|d| + Σ|A|": round(float(model.node_strength()[i]), 2),
+                    "gap degree": int((model.W[i] != 0).sum()) if model.W is not None else 0,
+                }
+                for i in order
+            ],
+            hide_index=True,
+            width="stretch",
+        )
+    with right:
+        st.markdown("**Export current simulation**")
+        buffer = io.StringIO()
+        np.savetxt(
+            buffer,
+            np.column_stack([t, y.T]),
+            delimiter=",",
+            header="time_s," + ",".join(model.node_label(i) for i in range(model.n_nodes)),
+            comments="",
+        )
+        st.download_button(
+            "Download activity CSV",
+            data=buffer.getvalue(),
+            file_name="vienna_premotor_activity.csv",
+            mime="text/csv",
+            key="t3_download",
+        )
+        st.caption(
+            "Rows are time samples; columns are named neurons. The export includes the exact "
+            "parameter values shown above only in the accompanying report, so record them."
+        )
+
+    with st.expander("Stability scan: where does the full 205-node free-run leave the basin?"):
+        st.caption(
+            "Runs a short 4 s simulation at β = 0…10 with the current γ and τ, no stimulus. "
+            "The peak absolute activity is a diagnostic, not a biological measurement."
+        )
+        if st.button("Run β scan", key="t3_scan_run"):
+            betas = np.linspace(0.0, 10.0, 11)
+            peaks = []
+            with st.spinner("Running 11 short integrations..."):
+                for beta_value in betas:
+                    _, scan_y = wb.tier3_simulate(
+                        PremotorParameters(
+                            gamma=float(gamma),
+                            beta=float(beta_value),
+                            tau=float(tau),
+                            duration=4.0,
+                            n_samples=80,
+                        ),
+                        seed=0,
+                    )
+                    peaks.append(float(np.max(np.abs(scan_y))))
+            st.session_state["t3_scan"] = (betas, peaks)
+        scan = st.session_state.get("t3_scan")
+        if scan is not None:
+            scan_betas, scan_peaks = scan
+            fig = go.Figure(
+                go.Scatter(
+                    x=scan_betas,
+                    y=scan_peaks,
+                    mode="lines+markers",
+                    line={"color": "#E45756"},
+                )
+            )
+            fig.update_layout(
+                height=280,
+                margin={"l": 0, "r": 0, "t": 10, "b": 0},
+                xaxis_title="gap-junction gain β",
+                yaxis_title="peak |activity|",
+                yaxis_type="log",
+            )
+            st.plotly_chart(fig, width="stretch")
+            st.caption(
+                "A sharp rise marks the free-run stability boundary at these parameters. "
+                "It is not evidence that the biological network is unstable."
+            )
+
+    peak = float(np.max(np.abs(y)))
+    if peak > 20:
+        st.error(
+            f"Numerical warning: |activity| reached {peak:.1f}. The full 205-node free-run is "
+            "outside the stable regime at this β; this is not the published clamped-signal simulation."
+        )
     st.warning(
-        "This sandbox uses the published fitted chemical synaptic matrix and ODE form, but the "
-        "export omits W (gap junctions) and neuron names. It is not a validated digital twin and "
-        "must not be used for causal claims without the missing mapping and experimental checks."
+        "This sandbox uses the published fitted chemical synaptic matrix, recovered W and names, "
+        "and the published ODE form. The paper's simulation clamps 69 signal neurons to recorded "
+        "activity; this page does not yet implement that clamped mode. It is not a validated "
+        "digital twin and must not be used for causal claims."
     )
 
 
@@ -449,40 +649,188 @@ def provenance_tab(wb: ViennaWorkbench) -> None:
 - Tier 1: validated on held-out worms for one-step latent prediction and behaviour read-out;
   free-run generative use is not validated.
 - Tier 2: descriptive causal-state model; `do()` is not identified by the precomputed artifact.
-- Tier 3: biophysical sandbox with a fitted chemical matrix; gap junctions and neuron identities
-  are missing from the export.
+- Tier 3: biophysical sandbox with the fitted chemical matrix and recovered gap-junction matrix
+  and neuron names. The 205-node free-run is exploratory; the paper's clamped-signal simulation
+  is not implemented. This is not a validated digital twin.
 """
     )
 
 
+def overview_tab(wb: ViennaWorkbench) -> None:
+    st.subheader("What this product is")
+    st.markdown(
+        """
+A lab-facing, source-traceable simulator stack for *C. elegans* whole-brain data. It gives
+Denis three different objects, with different claim levels, rather than one overclaimed
+"digital twin":
+
+1. **Latent manifold** — generate and forecast behaviourally relevant 3-D BunDLe-Net trajectories.
+2. **Causal-state workbench** — inspect NC-MCM cognitive states, Markov structure, uncertainty,
+   and model-based intervention trajectories.
+3. **Premotor connectome sandbox** — run the published 205-node rate ODE with recovered neuron
+   names and electrical-junction weights, and export the activity.
+"""
+    )
+    metrics = wb.metrics()
+    benchmark = wb.tier1_benchmark()
+    c1, c2, c3 = st.columns(3)
+    c1.metric(
+        "Tier 1 one-step R²",
+        f"{metrics.get('mean_one_step_r2', float('nan')):.3f}" if metrics else "n/a",
+    )
+    c2.metric(
+        "Behaviour read-out (true latent)",
+        f"{metrics.get('mean_behavior_accuracy_true', 0):.1%}" if metrics else "n/a",
+    )
+    c3.metric(
+        "Premotor nodes",
+        f"{wb.premotor.n_nodes}" if (wb.root / "data/processed/premotor/avg_model_weights.jld2").exists() else "n/a",
+    )
+    if benchmark:
+        st.markdown("**Open-loop forecast, held-out worm**")
+        rows = []
+        for item in benchmark.get("models", []):
+            rows.append(
+                {
+                    "model": item["model"],
+                    "latent MSE h10": round(item["latent_mse_h10"]["mean"], 3),
+                    "behaviour acc h10": f"{item['behavior_accuracy_h10']['mean']:.1%}",
+                    "behaviour acc h25": f"{item['behavior_accuracy_h25']['mean']:.1%}",
+                    "transition JS h25": round(item["behavior_transition_js"]["mean"], 3),
+                }
+            )
+        st.dataframe(rows, hide_index=True, width="stretch")
+        st.caption(
+            "These are descriptive forecasts from four training worms to a fifth. "
+            "They do not establish mechanism or causality."
+        )
+
+    st.markdown("**How to use it in a first meeting**")
+    st.markdown(
+        """
+1. Open **Tier 1**, pick a held-out worm, and compare *manifold walk* with *switching linear*.
+2. Open **Tier 2**, choose `K`, inspect the Markov p-value and the transition uncertainty.
+3. Open **Tier 3**, run the chemical-only ODE, then increase β only within the stable range.
+4. Download the **Evidence report** before the meeting; it records every number and caveat.
+"""
+    )
+
+    st.markdown("**Claim boundaries**")
+    st.warning(
+        "Tier 1 is a latent-manifold model, not a circuit. Tier 2 is descriptive and its do() is "
+        "a Markov counterfactual, not an experimentally identified effect. Tier 3 is a free-run "
+        "sandbox: the published paper clamps 69 signal neurons to recordings, and that clamped "
+        "mode is not implemented here. None of the three is a validated whole-brain digital twin."
+    )
+
+
+def report_tab(wb: ViennaWorkbench) -> None:
+    st.subheader("Evidence report and run bundle")
+    st.caption("A portable summary for Denis; the numbers come from the committed artifacts.")
+    metrics = wb.metrics()
+    benchmark = wb.tier1_benchmark()
+    lines = [
+        "# Vienna Neuroinformatics Studio — evidence report",
+        "",
+        "## Scope",
+        "Three tiers with separate claim levels: latent manifold, descriptive NC-MCM states, "
+        "and a premotor rate-ODE sandbox. None is a validated digital twin.",
+        "",
+        "## Tier 1 — BunDLe-Net latent manifold",
+    ]
+    if metrics:
+        lines += [
+            f"- Mean one-step latent R² (leave-one-worm-out): {metrics.get('mean_one_step_r2', float('nan')):.4f}",
+            f"- Behaviour read-out on true latent: {metrics.get('mean_behavior_accuracy_true', float('nan')):.3%}",
+            f"- Behaviour read-out on simulated quadratic latent: {metrics.get('mean_behavior_accuracy_simulated', float('nan')):.3%}",
+            f"- Majority baseline: {metrics.get('mean_behavior_majority_accuracy', float('nan')):.3%}",
+        ]
+    if benchmark:
+        lines += ["", "| model | latent MSE h10 | behaviour acc h10 | behaviour acc h25 | transition JS h25 |", "|---|---:|---:|---:|---:|"]
+        for item in benchmark.get("models", []):
+            lines.append(
+                f"| {item['model']} | {item['latent_mse_h10']['mean']:.3f} | "
+                f"{item['behavior_accuracy_h10']['mean']:.3%} | "
+                f"{item['behavior_accuracy_h25']['mean']:.3%} | "
+                f"{item['behavior_transition_js']['mean']:.3f} |"
+            )
+        lines += [
+            "",
+            "Benchmark: open-loop forecasts, 25-frame horizon, 4 seeds, held-out worm. "
+            "This is a descriptive comparison, not mechanism.",
+        ]
+    lines += [
+        "",
+        "## Tier 2 — NC-MCM",
+        "Fitted cognitive-state models for five worms. Markov p-values and transition matrices are "
+        "descriptive; intervention trajectories are model-based counterfactuals under the Markov "
+        "assumption, not identified causal effects.",
+        "",
+        "## Tier 3 — Premotor",
+        "205-node fitted chemical matrix and cubic rate ODE. Neuron names and W were recovered from "
+        "the release connectome; all 913 non-zero A entries lie inside the chemical support. "
+        "The full free-run is exploratory; the published clamped-signal simulation is not implemented.",
+        "",
+        "## Provenance",
+        "BunDLe-Net preprint DOI 10.1101/2023.08.08.551978; NC-MCM DOI 10.1371/journal.pcbi.1012674; "
+        "premotor DOI 10.1371/journal.pcbi.1013818. Artifacts are third-party and restored by "
+        "`python scripts/fetch_vienna_artifacts.py`.",
+    ]
+    report = "\n".join(lines) + "\n"
+    st.download_button(
+        "Download evidence report (Markdown)",
+        data=report,
+        file_name="vienna_neuroinformatics_evidence.md",
+        mime="text/markdown",
+        key="report_download",
+    )
+    st.markdown(report)
+    st.markdown("**Machine-readable provenance**")
+    st.json(wb.provenance())
+
+
 def main() -> None:
     wb = get_workbench()
-    st.title("🧠 Vienna Neuroinformatics Workbench")
+    st.title("🧠 Vienna Neuroinformatics Studio")
     st.caption(
-        "A three-tier, source-traceable workbench for the University of Vienna Neuroinformatics "
-        "group: BunDLe-Net latent manifold · NC-MCM causal states · premotor biophysical sandbox."
+        "A three-tier, source-traceable simulator stack for the University of Vienna "
+        "Neuroinformatics group: BunDLe-Net latent manifold · NC-MCM causal states · premotor "
+        "biophysical sandbox."
     )
     st.info(
-        "Scope: this is a research prototype, not a validated digital twin. Each tab states its "
-        "claim level; no tier establishes whole-brain mechanism or causality."
+        "Scope: research prototype, not a validated digital twin. Each section states its claim "
+        "level; no tier establishes whole-brain mechanism or causality."
     )
-    tabs = st.tabs(["Tier 1 · BunDLe-Net", "Tier 2 · NC-MCM", "Tier 3 · Premotor", "Provenance"])
+    tabs = st.tabs(
+        [
+            "Overview",
+            "Tier 1 · BunDLe-Net",
+            "Tier 2 · NC-MCM",
+            "Tier 3 · Premotor",
+            "Evidence report",
+            "Provenance",
+        ]
+    )
     with tabs[0]:
+        overview_tab(wb)
+    with tabs[1]:
         try:
             tier1_tab(wb)
         except FileNotFoundError as error:
             render_missing_artifact(error)
-    with tabs[1]:
+    with tabs[2]:
         try:
             tier2_tab(wb)
         except FileNotFoundError as error:
             render_missing_artifact(error)
-    with tabs[2]:
+    with tabs[3]:
         try:
             tier3_tab(wb)
         except FileNotFoundError as error:
             render_missing_artifact(error)
-    with tabs[3]:
+    with tabs[4]:
+        report_tab(wb)
+    with tabs[5]:
         provenance_tab(wb)
 
 
