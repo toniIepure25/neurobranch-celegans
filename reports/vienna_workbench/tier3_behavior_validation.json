@@ -1,6 +1,6 @@
 {
   "format": "vienna-tier3-behavior-validation-v1",
-  "generated_utc": "2026-11-10T22:01:23.452659+00:00",
+  "generated_utc": "2026-11-10T22:15:43.403562+00:00",
   "claim_level": "external behavioural sanity check; not causal",
   "alignment": {
     "trace_offset_frames": 5,

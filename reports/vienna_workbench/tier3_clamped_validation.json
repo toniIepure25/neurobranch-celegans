@@ -166,7 +166,7 @@
     }
   },
   "format": "vienna-tier3-clamped-validation-v1",
-  "generated_utc": "2026-11-10T22:07:05.148220+00:00",
+  "generated_utc": "2026-11-10T22:15:07.434608+00:00",
   "julia_reference": {
     "aggregate": {
       "all_trace_parity_at_least_0_999": true,

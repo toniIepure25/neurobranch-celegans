@@ -135,8 +135,8 @@
     }
   },
   "provenance": {
-    "git_sha": "cb26241724a2cc0b717bdb913c1e262489a630fa",
-    "dirty": true,
+    "git_sha": "3703b7ef106adbd0e97e3874112a57cc070d3f68",
+    "dirty": false,
     "dirty_scope": "src scripts tests",
     "command": "PYTHONPATH=src python scripts/compare_tier3_reference.py --recording 2023-01-09-15",
     "inputs_sha256": {
