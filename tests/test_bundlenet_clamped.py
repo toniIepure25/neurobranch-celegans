@@ -120,6 +120,45 @@ def test_rhs_at_t0_matches_julia_reference() -> None:
     np.testing.assert_allclose(du0, expected, rtol=1e-9, atol=1e-9)
 
 
+def test_external_behavior_validation_report_is_consistent() -> None:
+    from neurobranch.bundlenet_sim.workbench import ViennaWorkbench
+
+    report = ViennaWorkbench().tier3_behavior_validation()
+    if not report:
+        pytest.skip("run scripts/build_tier3_behavior_validation.py first")
+    aggregate = report["aggregate"]
+    assert aggregate["n_recordings"] == 3
+    assert aggregate["mean_readout_auc"] > aggregate["mean_model_auc"]
+    assert aggregate["mean_readout_agreement"] > aggregate["mean_model_agreement"]
+
+
+def test_behavior_readout_uses_published_forward_and_reverse_groups() -> None:
+    from neurobranch.bundlenet_sim.recording import INTRINSIC_NEURONS, behavior_readout
+
+    traces = np.zeros((len(INTRINSIC_NEURONS), 3), dtype=float)
+    idx = {name: i for i, name in enumerate(INTRINSIC_NEURONS)}
+    traces[idx["AVBL"]] = 6.0
+    traces[idx["AVAL"]] = 2.0
+    labels = behavior_readout(traces, INTRINSIC_NEURONS)
+    # AVBL drives the forward group; AVAL partially cancels the reverse group.
+    assert labels[0] == 1
+    traces[idx["AVAL"]] = 12.0
+    labels = behavior_readout(traces, INTRINSIC_NEURONS)
+    assert labels[0] == -1
+
+
+def test_aggregate_julia_parity_report_covers_three_recordings() -> None:
+    from neurobranch.bundlenet_sim.workbench import ViennaWorkbench
+
+    parity = ViennaWorkbench().tier3_reference_all()
+    if not parity:
+        pytest.skip("run scripts/compare_tier3_reference.py --all first")
+    aggregate = parity["aggregate"]
+    assert aggregate["n_recordings"] == 3
+    assert aggregate["mean_pearson_r"] > 0.999
+    assert aggregate["mean_behavior_port_agreement"] > 0.999
+
+
 def test_atanas_labels_use_julia_one_based_indices(tmp_path: Path) -> None:
     path = tmp_path / "synthetic.json"
     path.write_text(

@@ -33,9 +33,10 @@
 - Tier 2: Markov-order Monte Carlo test, stationarity block bootstrap, held-out behaviour
   transport, state–behaviour mutual information, K sensitivity.
 - Tier 3: published parameter values, 84/15/69 canonical counts, β=0 and zero-signal controls,
-  intrinsic residual and behaviour readout. A fresh Julia 1.11.2 reference run matches the port at
-  mean trace r=0.9999997 and max |Δ|=0.0133 (canonical); behaviour agreement is 60.3%, so this is
-  **not** a pointwise biological-fidelity claim.
+  intrinsic residual and behaviour readout. Fresh Julia 1.11.2 runs on all three validation
+  recordings match the port at mean trace r=0.9999998 and max |Δ|=0.0133; behaviour-label parity is
+  99.98%. Behaviour agreement with the recorded neural readout is 60.2% canonical, 58.3% mean, so
+  this is **not** a pointwise biological-fidelity claim.
 
 ## Known limitations
 
@@ -43,10 +44,12 @@
 - Ensemble intervals under-cover nominal 90% in all three Tier-1 models.
 - NC-MCM strict first-order Markov and stationarity are rejected by the current audit.
 - Premotor `W` and neuron names are recovered, not part of the public JLD2 export. The Python port
-  matches the authors' Julia code on the canonical recording; this validates the implementation, not
-  the model's biology or causality.
-- Clamped recordings other than `2023-01-23-15` have shorter measured cores (85 and 86 here); the
-  Julia comparison was run only on the canonical recording.
+  matches the authors' Julia code on all three validation recordings; this validates the
+  implementation, not the model's biology or causality. The behaviour target is the paper's
+  neural readout proxy; it tracks independent reversal events at AUC 0.848 / 75.9%, but the
+  clamped model only reaches AUC 0.633 / 55.9% on the same annotation.
+- Clamped recordings other than `2023-01-23-15` have shorter measured cores (85 and 86 here); their
+  counts are reported as measured and are not forced to 84/15/69.
 
 ## Provenance
 

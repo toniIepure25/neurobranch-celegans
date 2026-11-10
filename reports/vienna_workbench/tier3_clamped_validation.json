@@ -1,16 +1,16 @@
 {
   "aggregate": {
     "max_abs": 3.592454665581657,
-    "mean_behavior_distribution_js": 0.011330363029595121,
-    "mean_state_agreement": 0.5831548893647395,
+    "mean_behavior_distribution_js": 0.010964764379603623,
+    "mean_state_agreement": 0.583392814656198,
     "n_recordings": 3
   },
   "caveats": [
     "Only the canonical 2023-01-23-15 recording has the published 84/15/69 counts.",
     "Other recordings are shorter cores; they are reported with their actual counts.",
     "The recovered gap-junction matrix W is not part of the public JLD2 export.",
-    "Implementation parity with Julia does not remove the 40-42% canonical behaviour-frame disagreement; that is a model/measurement limitation, not a port bug.",
-    "The Julia comparison covers the canonical recording only."
+    "Implementation parity with Julia does not remove the 38-46% behaviour-frame disagreement across these recordings; that is a model/measurement limitation, not a port bug.",
+    "The Julia comparison covers the three validation recordings; it does not establish biological or causal validity."
   ],
   "claim_level": "published-parameter replay/sandbox; not a digital twin",
   "controls": {
@@ -21,31 +21,31 @@
       },
       "method": "RK45",
       "metrics": {
-        "behavior_distribution_js": 0.13666848698381145,
-        "behavior_transition_js": 0.011599969042575788,
+        "behavior_distribution_js": 0.12215166879240309,
+        "behavior_transition_js": 0.006180408218659856,
         "finite": true,
         "max_abs": 5.218558846154286,
         "sim_distribution": {
-          "-1": 0.1334760885082084,
-          "0": 0.01641684511063526,
-          "1": 0.8501070663811563
+          "-1": 0.827266238401142,
+          "0": 0.04782298358315489,
+          "1": 0.12491077801570306
         },
         "sim_dwell_s": {
-          "forward": 1.48875,
-          "reverse": 0.3116666666666667
+          "forward": 0.25,
+          "reverse": 1.159
         },
         "sim_mean": 1.1515388302533236,
         "sim_std": 2.239556397107108,
-        "state_agreement": 0.38329764453961457,
+        "state_agreement": 0.377587437544611,
         "status": "ok",
         "truth_distribution": {
-          "-1": 0.49607423269093504,
-          "0": 0.145610278372591,
-          "1": 0.35831548893647397
+          "-1": 0.3533190578158458,
+          "0": 0.15560314061384725,
+          "1": 0.49107780157030695
         },
         "truth_dwell_s": {
-          "forward": 0.15212121212121213,
-          "reverse": 0.21060606060606063
+          "forward": 0.2023529411764706,
+          "reverse": 0.1706896551724138
         },
         "truth_mean": -0.009634869202346096,
         "truth_std": 0.995975713043751
@@ -71,31 +71,31 @@
       },
       "method": "RK45",
       "metrics": {
-        "behavior_distribution_js": 0.001107771973685107,
-        "behavior_transition_js": 0.002174810355762143,
+        "behavior_distribution_js": 0.0012464358082176167,
+        "behavior_transition_js": 0.0013791743159939352,
         "finite": true,
         "max_abs": 3.33685513325449,
         "sim_distribution": {
-          "-1": 0.46181299072091364,
-          "0": 0.13418986438258387,
-          "1": 0.4039971448965025
+          "-1": 0.4011420413990007,
+          "0": 0.139186295503212,
+          "1": 0.4596716630977873
         },
         "sim_dwell_s": {
-          "forward": 0.26952380952380955,
-          "reverse": 0.2588
+          "forward": 0.2576,
+          "reverse": 0.281
         },
         "sim_mean": 0.02016145649646728,
         "sim_std": 1.05352708984308,
-        "state_agreement": 0.6031406138472519,
+        "state_agreement": 0.6017130620985011,
         "status": "ok",
         "truth_distribution": {
-          "-1": 0.49607423269093504,
-          "0": 0.145610278372591,
-          "1": 0.35831548893647397
+          "-1": 0.3533190578158458,
+          "0": 0.15560314061384725,
+          "1": 0.49107780157030695
         },
         "truth_dwell_s": {
-          "forward": 0.15212121212121213,
-          "reverse": 0.21060606060606063
+          "forward": 0.2023529411764706,
+          "reverse": 0.1706896551724138
         },
         "truth_mean": -0.009634869202346096,
         "truth_std": 0.995975713043751
@@ -121,31 +121,31 @@
       },
       "method": "RK45",
       "metrics": {
-        "behavior_distribution_js": 0.21792315766254425,
-        "behavior_transition_js": 0.10561627549762959,
+        "behavior_distribution_js": 0.22068932046880368,
+        "behavior_transition_js": 0.11218631876723287,
         "finite": true,
         "max_abs": 2.387261311448083,
         "sim_distribution": {
-          "-1": 1.0,
+          "-1": 0.0,
           "0": 0.0,
-          "1": 0.0
+          "1": 1.0
         },
         "sim_dwell_s": {
-          "forward": NaN,
-          "reverse": 14.01
+          "forward": 14.01,
+          "reverse": NaN
         },
         "sim_mean": 0.09990971938560096,
         "sim_std": 0.9306559905038148,
-        "state_agreement": 0.49607423269093504,
+        "state_agreement": 0.49107780157030695,
         "status": "ok",
         "truth_distribution": {
-          "-1": 0.49607423269093504,
-          "0": 0.145610278372591,
-          "1": 0.35831548893647397
+          "-1": 0.3533190578158458,
+          "0": 0.15560314061384725,
+          "1": 0.49107780157030695
         },
         "truth_dwell_s": {
-          "forward": 0.15212121212121213,
-          "reverse": 0.21060606060606063
+          "forward": 0.2023529411764706,
+          "reverse": 0.1706896551724138
         },
         "truth_mean": -0.009634869202346096,
         "truth_std": 0.995975713043751
@@ -166,12 +166,118 @@
     }
   },
   "format": "vienna-tier3-clamped-validation-v1",
-  "generated_utc": "2026-11-09T21:40:36.523316+00:00",
+  "generated_utc": "2026-11-10T22:07:05.148220+00:00",
   "julia_reference": {
+    "aggregate": {
+      "all_trace_parity_at_least_0_999": true,
+      "max_abs_difference": 0.013292046085670209,
+      "mean_behavior_agreement": 0.583392814656198,
+      "mean_behavior_port_agreement": 0.9997620747085415,
+      "mean_pearson_r": 0.9999998114339252,
+      "min_behavior_agreement": 0.5381870092790864,
+      "min_behavior_port_agreement": 0.9992862241256245,
+      "min_pearson_r": 0.9999994182583476,
+      "n_recordings": 3
+    },
     "julia_version": "1.11.2",
     "recording": "2023-01-23-15",
+    "recordings": {
+      "2023-01-09-15": {
+        "core_neurons": 86,
+        "julia": {
+          "behavior_agreement": 0.6102783725910065,
+          "core_neurons": 86,
+          "julia_version": "1.11.2",
+          "max_abs": 3.589495734100764,
+          "n_frames": 1401,
+          "solver": "Tsit5",
+          "source": "scripts/reference/run_julia_reference.jl"
+        },
+        "julia_csv_sha256": "317f79463b36bfaf76b7afc8352c01c60d18f8b029687b94731e5945173eda2b",
+        "python": {
+          "behavior_distribution_js": 0.020393885524226274,
+          "core_neurons": 86,
+          "max_abs": 3.592454665581657,
+          "solver": "RK45",
+          "state_agreement": 0.6102783725910065,
+          "status": "ok"
+        },
+        "summary": {
+          "behavior_agreement": 0.6102783725910065,
+          "behavior_agreement_delta_python_minus_julia": 0.0,
+          "behavior_port_agreement": 1.0,
+          "max_abs_difference": 0.008907968196060767,
+          "max_trace_abs": 3.592454665581657,
+          "mean_pearson_r": 0.9999998939323722,
+          "min_pearson_r": 0.9999994182583476
+        }
+      },
+      "2023-01-10-07": {
+        "core_neurons": 85,
+        "julia": {
+          "behavior_agreement": 0.5374732334047109,
+          "core_neurons": 85,
+          "julia_version": "1.11.2",
+          "max_abs": 3.2722490566991618,
+          "n_frames": 1401,
+          "solver": "Tsit5",
+          "source": "scripts/reference/run_julia_reference.jl"
+        },
+        "julia_csv_sha256": "5af97c1c0ee9cc9940771ae4a8eaf8ce87ae1452e9d2c3ea9e7c573179ea0b30",
+        "python": {
+          "behavior_distribution_js": 0.011253971806366982,
+          "core_neurons": 85,
+          "max_abs": 3.271906953374936,
+          "solver": "RK45",
+          "state_agreement": 0.5381870092790864,
+          "status": "ok"
+        },
+        "summary": {
+          "behavior_agreement": 0.5381870092790864,
+          "behavior_agreement_delta_python_minus_julia": 0.0007137758743754885,
+          "behavior_port_agreement": 0.9992862241256245,
+          "max_abs_difference": 0.010036900451824593,
+          "max_trace_abs": 3.271906953374936,
+          "mean_pearson_r": 0.9999998170677988,
+          "min_pearson_r": 0.9999994760865779
+        }
+      },
+      "2023-01-23-15": {
+        "core_neurons": 84,
+        "julia": {
+          "behavior_agreement": 0.6017130620985011,
+          "core_neurons": 84,
+          "julia_version": "1.11.2",
+          "max_abs": 3.3363744580658348,
+          "n_frames": 1401,
+          "solver": "Tsit5",
+          "source": "scripts/reference/run_julia_reference.jl"
+        },
+        "julia_csv_sha256": "976c893007c52c546e01c2ab6dd9e89e167fcec1944f8466b484bbf00c8b933e",
+        "python": {
+          "behavior_distribution_js": 0.0012464358082176167,
+          "core_neurons": 84,
+          "max_abs": 3.33685513325449,
+          "solver": "RK45",
+          "state_agreement": 0.6017130620985011,
+          "status": "ok"
+        },
+        "summary": {
+          "behavior_agreement": 0.6017130620985011,
+          "behavior_agreement_delta_python_minus_julia": 0.0,
+          "behavior_port_agreement": 1.0,
+          "max_abs_difference": 0.013292046085670209,
+          "max_trace_abs": 3.33685513325449,
+          "mean_pearson_r": 0.9999997233016045,
+          "min_pearson_r": 0.9999995376274514
+        }
+      }
+    },
     "solver": "Tsit5",
     "summary": {
+      "behavior_agreement": 0.6017130620985011,
+      "behavior_agreement_delta_python_minus_julia": 0.0,
+      "behavior_port_agreement": 1.0,
       "max_abs_difference": 0.013292046085670209,
       "max_trace_abs": 3.33685513325449,
       "mean_pearson_r": 0.9999997233016045,
@@ -182,31 +288,31 @@
     {
       "method": "RK45",
       "metrics": {
-        "behavior_distribution_js": 0.001107771973685107,
-        "behavior_transition_js": 0.002174810355762143,
+        "behavior_distribution_js": 0.0012464358082176167,
+        "behavior_transition_js": 0.0013791743159939352,
         "finite": true,
         "max_abs": 3.33685513325449,
         "sim_distribution": {
-          "-1": 0.46181299072091364,
-          "0": 0.13418986438258387,
-          "1": 0.4039971448965025
+          "-1": 0.4011420413990007,
+          "0": 0.139186295503212,
+          "1": 0.4596716630977873
         },
         "sim_dwell_s": {
-          "forward": 0.26952380952380955,
-          "reverse": 0.2588
+          "forward": 0.2576,
+          "reverse": 0.281
         },
         "sim_mean": 0.02016145649646728,
         "sim_std": 1.05352708984308,
-        "state_agreement": 0.6031406138472519,
+        "state_agreement": 0.6017130620985011,
         "status": "ok",
         "truth_distribution": {
-          "-1": 0.49607423269093504,
-          "0": 0.145610278372591,
-          "1": 0.35831548893647397
+          "-1": 0.3533190578158458,
+          "0": 0.15560314061384725,
+          "1": 0.49107780157030695
         },
         "truth_dwell_s": {
-          "forward": 0.15212121212121213,
-          "reverse": 0.21060606060606063
+          "forward": 0.2023529411764706,
+          "reverse": 0.1706896551724138
         },
         "truth_mean": -0.009634869202346096,
         "truth_std": 0.995975713043751
@@ -236,31 +342,31 @@
     {
       "method": "RK45",
       "metrics": {
-        "behavior_distribution_js": 0.013713834585143088,
-        "behavior_transition_js": 0.0077408500032704886,
+        "behavior_distribution_js": 0.011253971806366982,
+        "behavior_transition_js": 0.00419880618185443,
         "finite": true,
         "max_abs": 3.271906953374936,
         "sim_distribution": {
-          "-1": 0.2883654532476802,
-          "0": 0.18629550321199143,
-          "1": 0.5253390435403283
+          "-1": 0.5346181299072091,
+          "0": 0.17844396859386152,
+          "1": 0.28693790149892934
         },
         "sim_dwell_s": {
-          "forward": 0.28307692307692306,
-          "reverse": 0.1442857142857143
+          "forward": 0.1488888888888889,
+          "reverse": 0.28807692307692306
         },
         "sim_mean": 0.23713295734825635,
         "sim_std": 1.1867863512667127,
-        "state_agreement": 0.5281941470378301,
+        "state_agreement": 0.5381870092790864,
         "status": "ok",
         "truth_distribution": {
-          "-1": 0.4475374732334047,
-          "0": 0.14132762312633834,
-          "1": 0.41113490364025695
+          "-1": 0.4104211277658815,
+          "0": 0.16202712348322626,
+          "1": 0.42755174875089225
         },
         "truth_dwell_s": {
-          "forward": 0.1476923076923077,
-          "reverse": 0.165
+          "forward": 0.1663888888888889,
+          "reverse": 0.1513157894736842
         },
         "truth_mean": 0.002602053806846594,
         "truth_std": 0.9734755180947704
@@ -290,31 +396,31 @@
     {
       "method": "RK45",
       "metrics": {
-        "behavior_distribution_js": 0.01916948252995717,
-        "behavior_transition_js": 0.0017762650216651234,
+        "behavior_distribution_js": 0.020393885524226274,
+        "behavior_transition_js": 0.001602916927457677,
         "finite": true,
         "max_abs": 3.592454665581657,
         "sim_distribution": {
-          "-1": 0.284796573875803,
-          "0": 0.14061384725196288,
-          "1": 0.5745895788722342
+          "-1": 0.5781584582441114,
+          "0": 0.14632405424696646,
+          "1": 0.2755174875089222
         },
         "sim_dwell_s": {
-          "forward": 0.4025,
-          "reverse": 0.19
+          "forward": 0.17545454545454547,
+          "reverse": 0.405
         },
         "sim_mean": 0.17485896405368664,
         "sim_std": 1.1869543748426394,
-        "state_agreement": 0.6181299072091363,
+        "state_agreement": 0.6102783725910065,
         "status": "ok",
         "truth_distribution": {
-          "-1": 0.47109207708779444,
-          "0": 0.12276945039257674,
-          "1": 0.4061384725196288
+          "-1": 0.4011420413990007,
+          "0": 0.13418986438258387,
+          "1": 0.46466809421841543
         },
         "truth_dwell_s": {
-          "forward": 0.2370833333333333,
-          "reverse": 0.275
+          "forward": 0.28304347826086956,
+          "reverse": 0.2248
         },
         "truth_mean": 0.008257575919432733,
         "truth_std": 0.982520830256814
@@ -343,5 +449,5 @@
       "status": "ok"
     }
   ],
-  "reference_status": "The Python port was compared with a fresh Julia 1.11.2 run of the authors' notebook cells on 2023-01-23-15: mean intrinsic-trace r=0.9999997, max |Python-Julia|=0.0133. This validates the implementation, not the biology or causality; the other two recordings were not run through Julia."
+  "reference_status": "The Python port was compared with fresh Julia 1.11.2 runs of the authors' notebook cells on all 3 validation recordings: mean intrinsic-trace r=0.9999998, max |Python-Julia|=0.0133, behaviour-label parity=99.9762%. Julia itself reaches the same behavioural agreement with the recorded traces, so the remaining disagreement is not a port bug. This validates the implementation, not the biology or causality."
 }

@@ -672,6 +672,10 @@ def tier3_clamped_tab(wb: ViennaWorkbench) -> None:
             legend={"orientation": "h", "y": -0.5},
         )
         st.plotly_chart(beh, width="stretch")
+        st.caption(
+            "Neural proxy readout: mean AVA/AVE minus mean AVB/RIB, threshold 0.5, computed from "
+            "the recorded traces. It is not an independent video behaviour label."
+        )
         st.markdown("**Validation report**")
         report = wb.tier3_clamped_validation()
         if report:
@@ -691,6 +695,62 @@ def tier3_clamped_tab(wb: ViennaWorkbench) -> None:
                     f"max |Δ| = {summary.get('max_abs_difference', float('nan')):.4f}. "
                     "This checks the port, not the biology."
                 )
+        parity = wb.tier3_reference_all()
+        if parity:
+            rows = []
+            for rid, item in parity.get("recordings", {}).items():
+                summary = item.get("summary", {})
+                rows.append(
+                    {
+                        "recording": rid,
+                        "core / signals": f"{item.get('core_neurons', '?')} / "
+                        f"{item.get('core_neurons', 0) - 15}",
+                        "trace r": f"{summary.get('mean_pearson_r', float('nan')):.7f}",
+                        "max |Δ|": f"{summary.get('max_abs_difference', float('nan')):.4f}",
+                        "behaviour vs recording": f"{summary.get('behavior_agreement', float('nan')):.1%}",
+                        "behaviour Python vs Julia": f"{summary.get('behavior_port_agreement', float('nan')):.2%}",
+                    }
+                )
+            st.markdown("**Julia port parity — all validation recordings**")
+            st.dataframe(rows, hide_index=True, width="stretch")
+            agg = parity.get("aggregate", {})
+            st.caption(
+                f"{agg.get('n_recordings', '?')} recordings; mean trace r="
+                f"{agg.get('mean_pearson_r', float('nan')):.7f}, max |Δ|="
+                f"{agg.get('max_abs_difference', float('nan')):.4f}, behaviour-label parity="
+                f"{agg.get('mean_behavior_port_agreement', float('nan')):.2%}. "
+                "Julia reproduces the same behavioural agreement with the recording, so "
+                "the remaining gap is a model/measurement limitation, not a port bug."
+            )
+        behaviour = wb.tier3_behavior_validation()
+        if behaviour:
+            st.markdown("**External reversal-event check**")
+            beh_rows = []
+            for item in behaviour.get("recordings", []):
+                readout = item.get("readout", {})
+                model = item.get("model", {})
+                beh_rows.append(
+                    {
+                        "recording": item.get("recording"),
+                        "readout AUC": f"{readout.get('reversal_auc', float('nan')):.3f}",
+                        "readout agreement": f"{readout.get('binary_agreement', float('nan')):.1%}",
+                        "readout precision / recall": f"{readout.get('reversal_precision', float('nan')):.1%} / "
+                        f"{readout.get('reversal_recall', float('nan')):.1%}",
+                        "model AUC": f"{model.get('reversal_auc', float('nan')):.3f}",
+                        "model agreement": f"{model.get('binary_agreement', float('nan')):.1%}",
+                    }
+                )
+            st.dataframe(beh_rows, hide_index=True, width="stretch")
+            agg_beh = behaviour.get("aggregate", {})
+            st.caption(
+                "Binary reversal intervals from the recording, not the neural readout: "
+                f"readout AUC={agg_beh.get('mean_readout_auc', float('nan')):.3f}, "
+                f"agreement={agg_beh.get('mean_readout_agreement', float('nan')):.1%}; "
+                f"model AUC={agg_beh.get('mean_model_auc', float('nan')):.3f}, "
+                f"agreement={agg_beh.get('mean_model_agreement', float('nan')):.1%}. "
+                "The proxy is externally meaningful, but the clamped replay only modestly "
+                "tracks the annotation. This is not a causal test."
+            )
 
     buffer = io.StringIO()
     np.savetxt(
@@ -975,11 +1035,13 @@ def provenance_tab(wb: ViennaWorkbench) -> None:
 - Tier 2: descriptive causal-state model; `do()` is not identified by the precomputed artifact.
   The current assumption audit rejects strict first-order Markov and stationarity.
 - Tier 3: the published 84/15/69 clamped-core configuration is implemented; the canonical
-  recording has 84 core / 15 intrinsic / 69 signal neurons. A fresh Julia 1.11.2 reference run
-  matches the Python port at mean trace r=0.9999997 and max |Δ|=0.0133; canonical behaviour
-  agreement is 60.3%. This validates the implementation, not the biology or causality; W/names are
-  independently recovered. The 205-node free-run remains exploratory. This is not a validated
-  digital twin.
+  recording has 84 core / 15 intrinsic / 69 signal neurons. Fresh Julia 1.11.2 reference runs
+  on all three validation recordings match the Python port at mean trace r=0.9999998 and
+  max |Δ|=0.0133; behaviour-label parity is 99.98%. Canonical behaviour agreement with the
+  readout proxy is 60.2%. The readout itself reaches AUC 0.848 and 75.9% agreement against
+  independent reversal events, while the clamped model reaches AUC 0.633 / 55.9%. This validates
+  the implementation and the proxy, not the biology or causality; W/names are independently
+  recovered. The 205-node free-run remains exploratory. This is not a validated digital twin.
 """
     )
 
@@ -1046,10 +1108,10 @@ Denis three different objects, with different claim levels, rather than one over
     st.warning(
         "Tier 1 is a latent-manifold model, not a circuit. Tier 2 is descriptive and its do() is "
         "a Markov counterfactual; the current audit rejects strict first-order Markov and "
-        "stationarity, so do not present it as an identified effect. Tier 3 now reproduces the "
-        "published clamped-core configuration, but with independently recovered weights and "
-        "without a reference Julia fidelity check. None of the three is a validated whole-brain "
-        "digital twin."
+        "stationarity, so do not present it as an identified effect. Tier 3 reproduces the "
+        "published clamped-core configuration and is checked against fresh Julia runs on all "
+        "three validation recordings; that is implementation parity, not biological or causal "
+        "validity. None of the three is a validated whole-brain digital twin."
     )
 
 
@@ -1111,8 +1173,9 @@ def report_tab(wb: ViennaWorkbench) -> None:
         "## Tier 3 — Premotor",
         "Published clamped-core mode: 15 intrinsic neurons integrated, 69 signal neurons "
         "clamped to an Atanas recording. The canonical 2023-01-23-15 recording has 84/15/69 "
-        "counts and matches a fresh Julia reference run at mean r=0.9999997. The 205-node "
-        "free-run remains an exploratory sandbox.",
+        "counts; fresh Julia runs on all three validation recordings match the port at mean "
+        "r=0.9999998 and behaviour-label parity 99.98%. The 205-node free-run remains an "
+        "exploratory sandbox.",
     ]
     if clamped:
         agg = clamped.get("aggregate", {})
@@ -1122,6 +1185,16 @@ def report_tab(wb: ViennaWorkbench) -> None:
             f"- Mean behaviour-distribution JS: {agg.get('mean_behavior_distribution_js', float('nan')):.3f}",
             f"- Claim level: {clamped.get('claim_level', 'n/a')}",
             f"- Reference status: {clamped.get('reference_status', 'n/a')}",
+        ]
+    behaviour = wb.tier3_behavior_validation()
+    if behaviour:
+        agg_beh = behaviour.get("aggregate", {})
+        lines += [
+            f"- Neural readout vs independent reversal events: AUC {agg_beh.get('mean_readout_auc', float('nan')):.3f}, "
+            f"agreement {agg_beh.get('mean_readout_agreement', float('nan')):.1%}",
+            f"- Clamped model vs independent reversal events: AUC {agg_beh.get('mean_model_auc', float('nan')):.3f}, "
+            f"agreement {agg_beh.get('mean_model_agreement', float('nan')):.1%}",
+            "- The reversal-event check is a behavioural sanity check, not a causal test.",
         ]
     lines += [
         "",
@@ -1174,14 +1247,26 @@ def lab_tab(wb: ViennaWorkbench) -> None:
             {
                 "claim": "published 84/15/69 clamped core is reproduced",
                 "tier": "Tier 3",
-                "status": "implementation-faithful; 60.3% canonical behaviour agreement; not a digital twin",
-                "evidence": "tier3_clamped_validation.json; tier3_julia_reference.json",
+                "status": "implementation-faithful; 60.2% canonical readout agreement; not a digital twin",
+                "evidence": "tier3_clamped_validation.json; tier3_julia_parity_all.json",
+            },
+            {
+                "claim": "neural readout tracks independent reversal events",
+                "tier": "Tier 3",
+                "status": "supported as a proxy; AUC 0.848, agreement 75.9%",
+                "evidence": "tier3_behavior_validation.json",
+            },
+            {
+                "claim": "clamped model predicts independent reversal events",
+                "tier": "Tier 3",
+                "status": "weak; AUC 0.633, agreement 55.9%",
+                "evidence": "tier3_behavior_validation.json",
             },
             {
                 "claim": "whole-brain digital twin / mechanistic validation",
                 "tier": "all",
                 "status": "not claimed",
-                "evidence": "no causal intervention or reference Julia fidelity check",
+                "evidence": "no causal intervention; implementation parity is not biological validation",
             },
         ],
         hide_index=True,
@@ -1224,8 +1309,10 @@ def lab_tab(wb: ViennaWorkbench) -> None:
         "3-D latent manifold forecasting,Tier 1,supported descriptively,held-out benchmark\n"
         "NC-MCM first-order Markov and stationary,Tier 2,rejected by current audit,tier2 audit\n"
         "do(state) identified causal effect,Tier 2,not claimed,observational clusters\n"
-        "published 84/15/69 clamped core,Tier 3,implementation-faithful; 60.3% behaviour agreement,tier3 validation + Julia reference\n"
-        "whole-brain digital twin,all,not claimed,no reference fidelity or intervention\n",
+        "published 84/15/69 clamped core,Tier 3,implementation-faithful; 60.2% readout agreement,tier3 validation + all-recording Julia parity\n"
+        "neural readout vs independent reversal events,Tier 3,proxy supported; AUC 0.848 / 75.9%,tier3_behavior_validation.json\n"
+        "clamped model vs independent reversal events,Tier 3,weak; AUC 0.633 / 55.9%,tier3_behavior_validation.json\n"
+        "whole-brain digital twin,all,not claimed,no causal intervention\n",
         file_name="vienna_claim_ledger.csv",
         mime="text/csv",
         key="lab_download",

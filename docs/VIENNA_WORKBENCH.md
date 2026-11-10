@@ -206,37 +206,52 @@ a=−2, fp1=−0.8, fp2=0.1, fp3=1.0, γ=1.4, β=10, τ=0.2
 release's own connectome table; the accepted order has all 913 non-zero `A` entries inside the
 transposed chemical-synapse support. This removes the earlier anonymous-node limitation.
 
-**The paper's configuration is implemented and checked against the authors' Julia code.** The
-canonical recording `2023-01-23-15` maps to the published **84 core / 15 intrinsic / 69 signal**
-split. The 15 intrinsic neurons are integrated; the 69 signals are linearly interpolated from the
-recording and clamped. Signal pulses can be added to any clamped neuron. The other two validation
-recordings have measured cores of 85 and 86 neurons and are reported with their actual counts; only
-the canonical recording has the exact 84/15/69 split. Missing neurons are filled with the release's
-documented donor rules; no generic nearest-neighbour fill is used.
+**The paper's configuration is implemented and checked against the authors' Julia code on all
+three validation recordings.** The canonical recording `2023-01-23-15` maps to the published
+**84 core / 15 intrinsic / 69 signal** split. The 15 intrinsic neurons are integrated; the 69
+signals are linearly interpolated from the recording and clamped. Signal pulses can be added to
+any clamped neuron. The other two validation recordings have measured cores of 85 and 86 neurons
+and are reported with their actual counts; only the canonical recording has the exact 84/15/69
+split. Missing neurons are filled with the release's documented donor rules; no generic
+nearest-neighbour fill is used.
 
-The Python port was compared with a fresh Julia 1.11.2 run of the authors' notebook cells on
-`2023-01-23-15`:
+Fresh Julia 1.11.2 runs of the authors' notebook cells were compared with the Python port on all
+three recordings:
 
-| Check | Result |
-|---|---|
-| Intrinsic-trace Pearson r, mean / minimum over 15 neurons | **0.99999972 / 0.99999954** |
-| Maximum absolute Python−Julia trace difference | **0.0133** (range of activity ≈ 3.34) |
-| Julia / Python peak |u| | 3.3364 / 3.3369 |
-| Canonical behaviour-state agreement / distribution JS | **60.3% / 0.0011** |
-| Three-recording mean agreement / mean JS | **58.3% / 0.0113** |
+| Recording | Core / signal | Trace r (mean) | Max |Python−Julia| | Behaviour vs recording | Behaviour Python vs Julia |
+|---|---:|---:|---:|---:|---:|
+| `2023-01-23-15` | 84 / 69 | 0.99999972 | 0.0133 | 60.17% | 100.00% |
+| `2023-01-10-07` | 85 / 70 | 0.99999982 | 0.0100 | 53.82% | 99.93% |
+| `2023-01-09-15` | 86 / 71 | 0.99999989 | 0.0089 | 61.03% | 100.00% |
+| **Mean** | — | **0.99999981** | **0.0133** | **58.34%** | **99.98%** |
 
 The comparison caught three port defects that a unit test had not: labels were shifted by one
 relative to Julia's 1-based indices, smoothing removed four edge frames instead of two, and the
 gap-junction term had both a transposed `A` and the opposite sign. The corrected port is an
-implementation-faithful replay. It is **not** a validated digital twin: 40–42% of canonical
-behaviour frames still disagree, and agreement is not causal identification.
+implementation-faithful replay. It is **not** a validated digital twin: 38–47% of frames still
+disagree with the recorded readout, and agreement is not causal identification.
+
+The behaviour target is the paper's **neural readout proxy**, exactly
+`F = mean(AVBL, AVBR, RIBL, RIBR, RID)` and
+`R = mean(AVAL, AVAR, RIML, RIMR, AVEL, AVER)`, threshold 0.5, computed from the recorded
+intrinsic traces. It is not an independent video annotation. “Behaviour agreement” therefore
+measures model-vs-readout consistency, not decoding of an external behavioural label; the Julia
+run reaches the same value, so the gap is not a port bug.
+
+As an independent check, the neural readout was aligned to the release's
+`reversal_events` intervals. The readout reaches **AUC 0.848** and **75.9%** binary agreement
+with the video-derived reversal annotation (precision 64.9%, recall 71.4%). The clamped model
+reaches only **AUC 0.633** and **55.9%** agreement on the same annotation. This supports the
+readout as a meaningful proxy, but it does not turn the replay into a validated behavioural
+model, and the alignment convention is inferred rather than supplied as metadata.
 
 `python scripts/build_tier3_validation.py` writes
 `reports/vienna_workbench/tier3_clamped_validation.json` for the canonical and two additional
 recordings, with β=0 and zero-signal controls for the canonical case. The controls move the result
 substantially (β=0: 38.3% agreement, JS 0.137; zero signals: 49.6% agreement, JS 0.218), so the
-trace is not a trivial constant. The UI shows the intrinsic residual and the behaviour readout
-rather than hiding the mismatch. This is a replay/sandbox, **not** a validated digital twin.
+trace is not a trivial constant. The UI shows the intrinsic residual, the neural readout, the
+external reversal-event check, and the mismatch rather than hiding it. This is a replay/sandbox,
+**not** a validated digital twin.
 
 The separate 205-node free-run remains exploratory. At `β=10` it leaves the stable regime; the
 sandbox defaults to `β=0` and warns when `|activity| > 20`. The UI still exposes top nodes by
@@ -287,8 +302,9 @@ t, y = wb.tier3_simulate(PremotorParameters(duration=12.0, beta=0.0))
 | `scripts/fetch_vienna_artifacts.py` | copy + SHA-256 manifest + premotor builder |
 | `scripts/build_premotor_inputs.py` | recover W/names; verify A support |
 | `scripts/build_tier3_validation.py` | clamped-core validation report |
+| `scripts/build_tier3_behavior_validation.py` | neural readout vs independent reversal events |
 | `scripts/reference/run_julia_reference.jl` | authors' notebook cells, standalone Julia reference |
-| `scripts/compare_tier3_reference.py` | Python↔Julia comparison + input hashes |
+| `scripts/compare_tier3_reference.py` | Python↔Julia comparison, per-recording + aggregate, input hashes |
 | `tests/test_bundlenet_clamped.py` | clamped-core contract tests |
 | `tests/test_causal_audit.py` | synthetic assumption-audit tests |
 | `tests/test_bundlenet_workbench.py` | Tier-1/Tier-2/Tier-3 contract tests |
@@ -302,10 +318,11 @@ t, y = wb.tier3_simulate(PremotorParameters(duration=12.0, beta=0.0))
    strict first-order Markov and stationarity. The intervention panel is explicitly a Markov
    counterfactual until an intervention dataset is analysed.
 3. **Premotor clamped mode is implementation-faithful, not a digital twin.** The canonical
-   recording has the published 84/15/69 split, and the Python port matches a fresh Julia reference
-   run to r=0.9999997 with max |Δ|=0.013. That validates the port, not the biology: 40–42% of
-   canonical behaviour frames still disagree, and `W`/names are independently recovered. Do not
-   describe it as a validated digital twin.
+   recording has the published 84/15/69 split, and the Python port matches fresh Julia runs on all
+   three validation recordings to mean r=0.9999998 with max |Δ|=0.013 and behaviour-label parity
+   99.98%. That validates the port, not the biology: 38–47% of frames still disagree with the
+   recorded neural readout, the readout is a proxy rather than an independent video label, and
+   `W`/names are independently recovered. Do not describe it as a validated digital twin.
 4. **Preprint status.** BunDLe-Net is a bioRxiv `posted-content` record; do not cite it as a
    peer-reviewed journal article.
 5. **Five worms only.** Worm-level splits are the right unit, but n=5 limits generalization claims.

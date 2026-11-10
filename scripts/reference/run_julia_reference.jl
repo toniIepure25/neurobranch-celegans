@@ -52,12 +52,13 @@ S_mat = Matrix(S_mat)
 
 @load joinpath(REF, "data", "model_weights", "avg_model_weights.jld2") A_10takes_avg d_10takes_avg
 
-# The notebook computes this list from 30 recordings.  For the canonical
-# recording only AVBR and RIBR are missing; both are in the release's
-# switchout list and receive their contralateral twin.  Keeping only these
-# entries avoids copying 250 MB of unrelated recordings while preserving the
-# exact branch taken for this input.
-switchout_list = ["AVBL", "AVBR", "RIBL", "RIBR"]
+intrinsic_neurons = ["AVBL", "AVBR", "RIBL", "RIBR", "RID", "AVDL", "AVDR",
+    "AVAL", "AVAR", "RIML", "RIMR", "AVEL", "AVER", "AIBL", "AIBR"]
+
+# The notebook computes switchout_list from 30 recordings.  For one recording
+# we apply the published twin rule to every intrinsic neuron instead; this is
+# the same branch whenever the twin is present and avoids shipping 250 MB of
+# unrelated recordings.
 
 raw = JSON.parsefile(joinpath(REF, "data", "Atanas_data", "$(RECORDING).json"))
 labs = raw["labeled"]
@@ -88,7 +89,12 @@ for (i, nm) in enumerate(final_neurons)
     if nm in names_have
         ts_myneuros[i, :] = Fts1[Dict_nms[nm]]
         dtsdt_myneuros[i, :] = dFts1dt[Dict_nms[nm]]
-    elseif (length(nm) == 4 || length(nm) == 5) && nm in switchout_list
+    elseif (length(nm) == 4 || length(nm) == 5) && nm in intrinsic_neurons && nm[end] in ('L', 'R')
+        # The notebook only reaches Data_Replacement for neurons in its
+        # switchout list.  That list is built from all 30 recordings, so for a
+        # single recording we apply the same twin rule to every intrinsic
+        # neuron; this is exactly what the published function does whenever the
+        # twin is present.
         twin = nm[1:end-1] * (nm[end] == 'L' ? "R" : "L")
         if twin in names_have
             ts_myneuros[i, :] = Fts1[Dict_nms[twin]]
@@ -104,6 +110,12 @@ for (i, nm) in enumerate(final_neurons)
             donor !== nothing && (ts_myneuros[i, :] = Fts1[Dict_nms[donor]]; dtsdt_myneuros[i, :] = dFts1dt[Dict_nms[donor]])
         elseif nm == "RIBR"
             donor = "AVBR" in names_have ? "AVBR" : ("AVBL" in names_have ? "AVBL" : nothing)
+            donor !== nothing && (ts_myneuros[i, :] = Fts1[Dict_nms[donor]]; dtsdt_myneuros[i, :] = dFts1dt[Dict_nms[donor]])
+        elseif nm == "AIBL"
+            donor = "RIML" in names_have ? "RIML" : ("RIMR" in names_have ? "RIMR" : nothing)
+            donor !== nothing && (ts_myneuros[i, :] = Fts1[Dict_nms[donor]]; dtsdt_myneuros[i, :] = dFts1dt[Dict_nms[donor]])
+        elseif nm == "AIBR"
+            donor = "RIMR" in names_have ? "RIMR" : ("RIML" in names_have ? "RIML" : nothing)
             donor !== nothing && (ts_myneuros[i, :] = Fts1[Dict_nms[donor]]; dtsdt_myneuros[i, :] = dFts1dt[Dict_nms[donor]])
         end
     elseif nm == "RID"
@@ -133,8 +145,6 @@ d = d_approx[ids_core]
 A = S_approx[ids_core, ids_core]
 W = EJ_mat[ids_core, ids_core]
 
-intrinsic_neurons = ["AVBL", "AVBR", "RIBL", "RIBR", "RID", "AVDL", "AVDR",
-    "AVAL", "AVAR", "RIML", "RIMR", "AVEL", "AVER", "AIBL", "AIBR"]
 ids_intrinsic = [core_neurons_dict[name] for name in intrinsic_neurons]
 Nintrinsic = length(ids_intrinsic)
 ids_signal = setdiff(collect(1:Ncore), ids_intrinsic)
@@ -183,8 +193,21 @@ sol = solve(prob, Tsit5(), saveat=t_short)
 sim = Array(sol)
 truth = Dintrinsic[:, 1:num_steps+1]
 corr = [cor(truth[i, :], sim[i, :]) for i in 1:Nintrinsic]
+
+function behavior_readout(matrix)
+    idx = Dict(name => i for (i, name) in enumerate(intrinsic_neurons))
+    # Notebook cell 20: F = mean(Dintrinsic[1:5]), R = mean(Dintrinsic[8:13]).
+    forward = vec(mean(matrix[[idx["AVBL"], idx["AVBR"], idx["RIBL"], idx["RIBR"], idx["RID"]], :], dims=1))
+    backward = vec(mean(matrix[[idx["AVAL"], idx["AVAR"], idx["RIML"], idx["RIMR"], idx["AVEL"], idx["AVER"]], :], dims=1))
+    z = forward .- backward
+    return [z[i] > 0.5 ? 1 : (z[i] < -0.5 ? -1 : 0) for i in eachindex(z)]
+end
+
+behavior_truth = behavior_readout(truth)
+behavior_sim = behavior_readout(sim)
+behavior_agreement = mean(behavior_truth .== behavior_sim)
 println("recording=$(RECORDING) core=$(Ncore) intrinsic=$(Nintrinsic) signals=$(Nsignals) dt=$(dt)")
-println("finite=$(all(isfinite.(sim))) max_abs=$(maximum(abs.(sim))) mean_corr=$(mean(corr))")
+println("finite=$(all(isfinite.(sim))) max_abs=$(maximum(abs.(sim))) mean_corr=$(mean(corr)) behavior_agreement=$(behavior_agreement)")
 for (i, name) in enumerate(intrinsic_neurons)
     println("corr $(name) $(corr[i])")
 end
@@ -196,5 +219,7 @@ end
 for (i, name) in enumerate(intrinsic_neurons)
     out[!, Symbol("sim_$(name)")] = sim[i, :]
 end
+out[!, :behavior_truth] = behavior_truth
+out[!, :behavior_sim] = behavior_sim
 CSV.write(joinpath(OUT, "$(RECORDING)_julia.csv"), out)
 println("wrote $(joinpath(OUT, "$(RECORDING)_julia.csv"))")

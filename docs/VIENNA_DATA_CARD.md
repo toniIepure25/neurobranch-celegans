@@ -20,6 +20,13 @@
 - Atanas: Savitzky–Golay `window=11, polyorder=5`; first and last smoothed frame removed
   (`ts_tmp[2:end-1]`); frame interval rounded to three decimals as in the notebook; documented
   AVBR/RIBR/AIB/RID/twin replacements only. No generic nearest-neighbour fill.
+- Tier-3 behaviour target: neural readout proxy exactly as in notebook cell 20:
+  `F = mean(AVBL, AVBR, RIBL, RIBR, RID)` and
+  `R = mean(AVAL, AVAR, RIML, RIMR, AVEL, AVER)`, threshold 0.5. It is not an independent
+  video annotation; an external check against the release's `reversal_events` is reported
+  separately (readout AUC 0.848, 75.9% binary agreement). Three validation recordings
+  (84, 85, 86 measured core neurons) are used; only the canonical one has the published
+  84/15/69 split.
 
 ## Splits and leakage
 

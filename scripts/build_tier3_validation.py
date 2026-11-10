@@ -97,6 +97,7 @@ def main() -> int:
         / "vienna_workbench"
         / "tier3_julia_reference.json"
     )
+    parity_path = reference_path.parent / "tier3_julia_parity_all.json"
     julia_reference = None
     if reference_path.exists():
         reference = json.loads(reference_path.read_text(encoding="utf-8"))
@@ -106,18 +107,40 @@ def main() -> int:
             "julia_version": reference.get("julia_reference", {}).get("julia_version"),
             "solver": reference.get("julia_reference", {}).get("solver"),
         }
+    parity = None
+    if parity_path.exists():
+        parity = json.loads(parity_path.read_text(encoding="utf-8"))
+        julia_reference = {
+            **(julia_reference or {}),
+            "aggregate": parity.get("aggregate", {}),
+            "recordings": parity.get("recordings", {}),
+        }
+    if parity:
+        aggregate = parity["aggregate"]
+        reference_status = (
+            "The Python port was compared with fresh Julia 1.11.2 runs of the authors' "
+            f"notebook cells on all {aggregate['n_recordings']} validation recordings: "
+            f"mean intrinsic-trace r={aggregate['mean_pearson_r']:.7f}, "
+            f"max |Python-Julia|={aggregate['max_abs_difference']:.4f}, "
+            f"behaviour-label parity={aggregate['mean_behavior_port_agreement']:.4%}. "
+            "Julia itself reaches the same behavioural agreement with the recorded "
+            "traces, so the remaining disagreement is not a port bug. This validates "
+            "the implementation, not the biology or causality."
+        )
+    elif julia_reference:
+        reference_status = (
+            "The Python port was compared with a fresh Julia 1.11.2 run on "
+            f"{julia_reference.get('recording')}: implementation parity only, not biology."
+        )
+    else:
+        reference_status = (
+            "Julia reference comparison not present; run scripts/compare_tier3_reference.py --all."
+        )
     payload = {
         "format": "vienna-tier3-clamped-validation-v1",
         "generated_utc": datetime.now(timezone.utc).isoformat(),
         "claim_level": "published-parameter replay/sandbox; not a digital twin",
-        "reference_status": (
-            "The Python port was compared with a fresh Julia 1.11.2 run of the authors' "
-            "notebook cells on 2023-01-23-15: mean intrinsic-trace r=0.9999997, "
-            "max |Python-Julia|=0.0133. This validates the implementation, not the biology or "
-            "causality; the other two recordings were not run through Julia."
-            if julia_reference
-            else "Julia reference comparison not present; run scripts/compare_tier3_reference.py."
-        ),
+        "reference_status": reference_status,
         "julia_reference": julia_reference,
         "recordings": records,
         "controls": control_records,
@@ -131,8 +154,10 @@ def main() -> int:
             "Only the canonical 2023-01-23-15 recording has the published 84/15/69 counts.",
             "Other recordings are shorter cores; they are reported with their actual counts.",
             "The recovered gap-junction matrix W is not part of the public JLD2 export.",
-            "Implementation parity with Julia does not remove the 40-42% canonical behaviour-frame disagreement; that is a model/measurement limitation, not a port bug.",
-            "The Julia comparison covers the canonical recording only.",
+            "Implementation parity with Julia does not remove the 38-46% behaviour-frame "
+            "disagreement across these recordings; that is a model/measurement limitation, "
+            "not a port bug.",
+            "The Julia comparison covers the three validation recordings; it does not establish biological or causal validity.",
         ],
     }
     args.out.parent.mkdir(parents=True, exist_ok=True)

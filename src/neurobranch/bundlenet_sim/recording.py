@@ -45,8 +45,15 @@ INTRINSIC_NEURONS: tuple[str, ...] = (
     "AIBR",
 )
 
-_FORWARD = ("AVAL", "AVAR", "AVEL", "AVER")
-_BACKWARD = ("AVBL", "AVBR", "RIBL", "RIBR")
+# The notebook's readout is F = mean(Dintrinsic[1:5]) and R =
+# mean(Dintrinsic[8:13]) in 1-based intrinsic order:
+#   1:5   AVBL, AVBR, RIBL, RIBR, RID
+#   8:13  AVAL, AVAR, RIML, RIMR, AVEL, AVER
+# Positive F-R therefore means forward.  Do not silently substitute a
+# four-neuron symmetric readout; that flips the biological sign and drops RID
+# and the RIM neurons.
+_FORWARD = ("AVBL", "AVBR", "RIBL", "RIBR", "RID")
+_BACKWARD = ("AVAL", "AVAR", "RIML", "RIMR", "AVEL", "AVER")
 
 
 class ClampedDataError(ValueError):
@@ -203,9 +210,11 @@ def paper_replacement(name: str, available: set[str]) -> str | None:
 def behavior_readout(traces: np.ndarray, names: tuple[str, ...]) -> np.ndarray:
     """Published forward/backward readout with a 0.5 threshold.
 
-    ``traces`` must be in the same row order as ``names``.  The function is
+    The notebook uses five forward neurons (AVBL, AVBR, RIBL, RIBR, RID) and
+    six reverse neurons (AVAL, AVAR, RIML, RIMR, AVEL, AVER).  ``+1`` is
+    forward, ``-1`` is reverse, ``0`` is the ambiguous band.  The function is
     deliberately explicit about missing readout neurons; silently averaging a
-    different set would change the behavioural target.
+    different set would change both the sign convention and the target.
     """
     index = {name: i for i, name in enumerate(names)}
     missing = [name for name in (*_FORWARD, *_BACKWARD) if name not in index]

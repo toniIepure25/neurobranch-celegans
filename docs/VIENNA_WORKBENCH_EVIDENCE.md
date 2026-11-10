@@ -26,8 +26,9 @@ NC-MCM to Denis.
 | C5 | NC-MCM exposes multilevel cognitive states and Markov tests | Published method + released `c`, `p`, `bprob` arrays; schema mapped from Julia source | Published method + our reader | Supported descriptively |
 | C6 | The UI can estimate `do(state)` effects | It propagates a forced state through the fitted transition matrix; no experimental intervention; audit rejects strict first-order Markov and stationarity | Our implementation + audit | **Not supported as causal**; labelled Markov counterfactual |
 | C7 | The premotor model is a 205-node fitted synaptic rate model | Published paper + `A_10takes_avg`, `d_10takes_avg`; recovered `W` and names | Published model + our loader/builder | Supported for `A`, `d`, `W`, ODE form |
-| C8 | Tier 3 reproduces the published 15-intrinsic + 69-clamped-signal configuration | Canonical `2023-01-23-15`: 84 core / 15 intrinsic / 69 signal; β=10 run stable (max |u| 3.337). Fresh Julia 1.11.2 reference: mean trace r 0.9999997, min 0.9999995, max |Python−Julia| 0.0133; canonical behaviour agreement 60.3%, distribution JS 0.0011 | Our computation + authors' Julia code | **Configuration and port supported**; biological/Digital-twin claim still rejected |
+| C8 | Tier 3 reproduces the published 15-intrinsic + 69-clamped-signal configuration | Canonical `2023-01-23-15`: 84 core / 15 intrinsic / 69 signal; β=10 run stable (max |u| 3.337). Fresh Julia 1.11.2 runs on all three validation recordings: mean trace r 0.9999998, min 0.9999994, max |Python−Julia| 0.0133; behaviour-label parity 99.98% (min 99.93%). Julia and Python both reach 60.2% canonical behaviour agreement with the recorded readout | Our computation + authors' Julia code | **Configuration and port supported across three recordings**; biological/Digital-twin claim still rejected |
 | C9 | Any tier establishes whole-brain mechanism or causality | None does; Tier 1 is latent, Tier 2 is assumption-dependent and fails strict Markov/stationarity, Tier 3 is a reduced replay/sandbox | Inference from above | **Rejected** |
+| C10 | The Tier-3 neural readout is externally meaningful, and the clamped model predicts behaviour | Readout vs release `reversal_events`: mean AUC 0.848, binary agreement 75.9%, precision 64.9%, recall 71.4%. Clamped model vs the same events: AUC 0.633, agreement 55.9% | Our computation + release annotation | Readout proxy supported; model behavioural prediction **weak**; interval/offset convention inferred; not causal |
 
 ## 3. Reproducibility artifacts
 
@@ -46,14 +47,17 @@ PYTHONPATH=src python -m neurobranch.bundlenet_sim.train --alpha 1.0
 PYTHONPATH=src python -m neurobranch.bundlenet_sim.benchmark --horizon 25 --stride 75 --seeds 16
 PYTHONPATH=src python -m neurobranch.bundlenet_sim.causal_audit --k 6
 PYTHONPATH=src python scripts/build_tier3_validation.py
-PYTHONPATH=src python scripts/compare_tier3_reference.py
+PYTHONPATH=src python scripts/build_tier3_behavior_validation.py
+PYTHONPATH=src python scripts/compare_tier3_reference.py --all
 PYTHONPATH=src python -m pytest tests/test_bundlenet_clamped.py tests/test_causal_audit.py tests/test_bundlenet_workbench.py -q
 python -m streamlit run src/neurobranch/bundlenet_sim/app.py
 ```
 
-- Julia reference: Julia 1.11.2, `OrdinaryDiffEq` `Tsit5`, 84/15/69, canonical recording; the
-  standalone script is `scripts/reference/run_julia_reference.jl`. Input and output SHA-256 hashes
-  are in `reports/vienna_workbench/tier3_julia_reference.json`.
+- Julia reference: Julia 1.11.2, `OrdinaryDiffEq` `Tsit5`; canonical 84/15/69 plus the 85- and
+  86-neuron validation recordings; the standalone script is
+  `scripts/reference/run_julia_reference.jl`. Input and output SHA-256 hashes are in each
+  `reports/vienna_workbench/tier3_julia_reference*.json`; aggregate is
+  `tier3_julia_parity_all.json`.
 - Environment used locally: Python 3.13, NumPy/SciPy/scikit-learn/h5py/Streamlit 1.66.1/Plotly 7.1.
   The workbench code does not require TensorFlow; Julia is only needed to regenerate the reference.
 - Pod environment: Python 3.12.3, Streamlit 1.66.1, Plotly 7.1.0, h5py 3.16.0, scikit-learn 1.6.1,
@@ -63,10 +67,12 @@ python -m streamlit run src/neurobranch/bundlenet_sim/app.py
 
 - No fresh independent reproduction of the BunDLe-Net training (we used released embeddings).
 - No independent Julia execution of NC-MCM; its arrays were read from the released NPZ. The
-  premotor model **was** executed in Julia for the canonical reference comparison.
-- **Reference comparison is one recording, not a full parameter sweep.** It checks the port on
-  `2023-01-23-15`; the other two validation recordings use the same code but were not separately
-  run through Julia.
+  premotor model **was** executed in Julia for all three validation recordings.
+- **Reference comparison is three recordings, not a full parameter sweep.** It checks the port on
+  `2023-01-23-15`, `2023-01-10-07` and `2023-01-09-15`; it does not vary `W`, `A`, `d`, or the
+  replacement rules.
+- The behaviour endpoint is the paper's neural readout proxy, not an independent video annotation;
+  no external behavioural validation was performed.
 - No experimental intervention data, so no identified causal effect estimate.
 - No external validation on a sixth worm or another lab's recordings.
 - No full historical test-suite green claim; the Vienna contract tests are run explicitly.

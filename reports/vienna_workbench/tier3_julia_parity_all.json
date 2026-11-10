@@ -1,0 +1,126 @@
+{
+  "schema": "vienna-tier3-julia-parity-v1",
+  "aggregate": {
+    "n_recordings": 3,
+    "mean_pearson_r": 0.9999998114339252,
+    "min_pearson_r": 0.9999994182583476,
+    "max_abs_difference": 0.013292046085670209,
+    "mean_behavior_agreement": 0.583392814656198,
+    "min_behavior_agreement": 0.5381870092790864,
+    "mean_behavior_port_agreement": 0.9997620747085415,
+    "min_behavior_port_agreement": 0.9992862241256245,
+    "all_trace_parity_at_least_0_999": true
+  },
+  "recordings": {
+    "2023-01-09-15": {
+      "core_neurons": 86,
+      "julia": {
+        "source": "scripts/reference/run_julia_reference.jl",
+        "julia_version": "1.11.2",
+        "solver": "Tsit5",
+        "max_abs": 3.589495734100764,
+        "core_neurons": 86,
+        "n_frames": 1401,
+        "behavior_agreement": 0.6102783725910065
+      },
+      "python": {
+        "solver": "RK45",
+        "max_abs": 3.592454665581657,
+        "status": "ok",
+        "state_agreement": 0.6102783725910065,
+        "behavior_distribution_js": 0.020393885524226274,
+        "core_neurons": 86
+      },
+      "summary": {
+        "mean_pearson_r": 0.9999998939323722,
+        "min_pearson_r": 0.9999994182583476,
+        "max_abs_difference": 0.008907968196060767,
+        "max_trace_abs": 3.592454665581657,
+        "behavior_agreement": 0.6102783725910065,
+        "behavior_port_agreement": 1.0,
+        "behavior_agreement_delta_python_minus_julia": 0.0
+      },
+      "julia_csv_sha256": "317f79463b36bfaf76b7afc8352c01c60d18f8b029687b94731e5945173eda2b"
+    },
+    "2023-01-10-07": {
+      "core_neurons": 85,
+      "julia": {
+        "source": "scripts/reference/run_julia_reference.jl",
+        "julia_version": "1.11.2",
+        "solver": "Tsit5",
+        "max_abs": 3.2722490566991618,
+        "core_neurons": 85,
+        "n_frames": 1401,
+        "behavior_agreement": 0.5374732334047109
+      },
+      "python": {
+        "solver": "RK45",
+        "max_abs": 3.271906953374936,
+        "status": "ok",
+        "state_agreement": 0.5381870092790864,
+        "behavior_distribution_js": 0.011253971806366982,
+        "core_neurons": 85
+      },
+      "summary": {
+        "mean_pearson_r": 0.9999998170677988,
+        "min_pearson_r": 0.9999994760865779,
+        "max_abs_difference": 0.010036900451824593,
+        "max_trace_abs": 3.271906953374936,
+        "behavior_agreement": 0.5381870092790864,
+        "behavior_port_agreement": 0.9992862241256245,
+        "behavior_agreement_delta_python_minus_julia": 0.0007137758743754885
+      },
+      "julia_csv_sha256": "5af97c1c0ee9cc9940771ae4a8eaf8ce87ae1452e9d2c3ea9e7c573179ea0b30"
+    },
+    "2023-01-23-15": {
+      "core_neurons": 84,
+      "julia": {
+        "source": "scripts/reference/run_julia_reference.jl",
+        "julia_version": "1.11.2",
+        "solver": "Tsit5",
+        "max_abs": 3.3363744580658348,
+        "core_neurons": 84,
+        "n_frames": 1401,
+        "behavior_agreement": 0.6017130620985011
+      },
+      "python": {
+        "solver": "RK45",
+        "max_abs": 3.33685513325449,
+        "status": "ok",
+        "state_agreement": 0.6017130620985011,
+        "behavior_distribution_js": 0.0012464358082176167,
+        "core_neurons": 84
+      },
+      "summary": {
+        "mean_pearson_r": 0.9999997233016045,
+        "min_pearson_r": 0.9999995376274514,
+        "max_abs_difference": 0.013292046085670209,
+        "max_trace_abs": 3.33685513325449,
+        "behavior_agreement": 0.6017130620985011,
+        "behavior_port_agreement": 1.0,
+        "behavior_agreement_delta_python_minus_julia": 0.0
+      },
+      "julia_csv_sha256": "976c893007c52c546e01c2ab6dd9e89e167fcec1944f8466b484bbf00c8b933e"
+    }
+  },
+  "provenance": {
+    "git_sha": "cb26241724a2cc0b717bdb913c1e262489a630fa",
+    "dirty": true,
+    "dirty_scope": "src scripts tests",
+    "command": "PYTHONPATH=src python scripts/compare_tier3_reference.py --all",
+    "environment": {
+      "python": "3.13.5",
+      "platform": "Windows-10-10.0.19045-SP0",
+      "processor": "AMD64 Family 25 Model 80 Stepping 0, AuthenticAMD",
+      "numpy": "2.3.1",
+      "pandas": "2.3.3",
+      "scipy": "1.16.0",
+      "julia": "1.11.2 (pod)"
+    },
+    "acceptance_tolerance": {
+      "mean_pearson_r_min": 0.999,
+      "max_abs_difference_max": 0.05,
+      "note": "Port parity; not a biological equivalence threshold."
+    }
+  }
+}

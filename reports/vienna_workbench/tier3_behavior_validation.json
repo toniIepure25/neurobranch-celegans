@@ -1,0 +1,179 @@
+{
+  "format": "vienna-tier3-behavior-validation-v1",
+  "generated_utc": "2026-11-10T22:01:23.452659+00:00",
+  "claim_level": "external behavioural sanity check; not causal",
+  "alignment": {
+    "trace_offset_frames": 5,
+    "event_interval": "[start, end) 0-based",
+    "note": "Offset follows the notebook's one-frame crop plus tstart=5."
+  },
+  "aggregate": {
+    "n_recordings": 3,
+    "mean_readout_auc": 0.8483446256028015,
+    "mean_readout_agreement": 0.7589816797525577,
+    "mean_readout_precision": 0.6485564708928472,
+    "mean_readout_recall": 0.7137102471325848,
+    "mean_model_auc": 0.633491731307572,
+    "mean_model_agreement": 0.5593623602188913
+  },
+  "recordings": [
+    {
+      "recording": "2023-01-23-15",
+      "n_core": 84,
+      "n_frames": 1401,
+      "event_interval": "[start, end) 0-based",
+      "trace_offset_frames": 5,
+      "readout": {
+        "n_frames": 1401,
+        "event_prevalence": 0.371163454675232,
+        "predicted_reverse_rate": 0.3533190578158458,
+        "binary_agreement": 0.7737330478229836,
+        "reversal_precision": 0.705050505050505,
+        "reversal_recall": 0.6711538461538461,
+        "reversal_f1": 0.6876847290640393,
+        "cohen_kappa": 0.5104611365552818,
+        "reversal_auc": 0.8718763642713699,
+        "contingency": {
+          "tp": 349,
+          "fp": 146,
+          "fn": 171,
+          "tn": 735
+        }
+      },
+      "model": {
+        "n_frames": 1401,
+        "event_prevalence": 0.371163454675232,
+        "predicted_reverse_rate": 0.4011420413990007,
+        "binary_agreement": 0.6331192005710207,
+        "reversal_precision": 0.505338078291815,
+        "reversal_recall": 0.5461538461538461,
+        "reversal_f1": 0.5249537892791127,
+        "cohen_kappa": 0.22684941625635321,
+        "reversal_auc": 0.6654610145813323,
+        "contingency": {
+          "tp": 284,
+          "fp": 278,
+          "fn": 236,
+          "tn": 603
+        }
+      },
+      "readout_label_counts": {
+        "-1": 495,
+        "0": 218,
+        "1": 688
+      },
+      "model_label_counts": {
+        "-1": 562,
+        "0": 195,
+        "1": 644
+      }
+    },
+    {
+      "recording": "2023-01-10-07",
+      "n_core": 85,
+      "n_frames": 1401,
+      "event_interval": "[start, end) 0-based",
+      "trace_offset_frames": 5,
+      "readout": {
+        "n_frames": 1401,
+        "event_prevalence": 0.403283369022127,
+        "predicted_reverse_rate": 0.4104211277658815,
+        "binary_agreement": 0.7401855817273376,
+        "reversal_precision": 0.6747826086956522,
+        "reversal_recall": 0.6867256637168142,
+        "reversal_f1": 0.6807017543859649,
+        "cohen_kappa": 0.4617169275588723,
+        "reversal_auc": 0.8198268196638016,
+        "contingency": {
+          "tp": 388,
+          "fp": 187,
+          "fn": 177,
+          "tn": 649
+        }
+      },
+      "model": {
+        "n_frames": 1401,
+        "event_prevalence": 0.403283369022127,
+        "predicted_reverse_rate": 0.5346181299072091,
+        "binary_agreement": 0.5017844396859387,
+        "reversal_precision": 0.411214953271028,
+        "reversal_recall": 0.5451327433628319,
+        "reversal_f1": 0.4687975646879756,
+        "cohen_kappa": 0.016737318811435236,
+        "reversal_auc": 0.5749206080365838,
+        "contingency": {
+          "tp": 308,
+          "fp": 441,
+          "fn": 257,
+          "tn": 395
+        }
+      },
+      "readout_label_counts": {
+        "-1": 575,
+        "0": 227,
+        "1": 599
+      },
+      "model_label_counts": {
+        "-1": 749,
+        "0": 250,
+        "1": 402
+      }
+    },
+    {
+      "recording": "2023-01-09-15",
+      "n_core": 86,
+      "n_frames": 1401,
+      "event_interval": "[start, end) 0-based",
+      "trace_offset_frames": 5,
+      "readout": {
+        "n_frames": 1401,
+        "event_prevalence": 0.2897930049964311,
+        "predicted_reverse_rate": 0.4011420413990007,
+        "binary_agreement": 0.7630264097073519,
+        "reversal_precision": 0.5658362989323843,
+        "reversal_recall": 0.7832512315270936,
+        "reversal_f1": 0.6570247933884297,
+        "cohen_kappa": 0.48308558118031975,
+        "reversal_auc": 0.853330692873233,
+        "contingency": {
+          "tp": 318,
+          "fp": 244,
+          "fn": 88,
+          "tn": 751
+        }
+      },
+      "model": {
+        "n_frames": 1401,
+        "event_prevalence": 0.2897930049964311,
+        "predicted_reverse_rate": 0.5781584582441114,
+        "binary_agreement": 0.5431834403997144,
+        "reversal_precision": 0.35555555555555557,
+        "reversal_recall": 0.7093596059113301,
+        "reversal_f1": 0.4736842105263158,
+        "cohen_kappa": 0.14270634938846682,
+        "reversal_auc": 0.6600935713047998,
+        "contingency": {
+          "tp": 288,
+          "fp": 522,
+          "fn": 118,
+          "tn": 473
+        }
+      },
+      "readout_label_counts": {
+        "-1": 562,
+        "0": 188,
+        "1": 651
+      },
+      "model_label_counts": {
+        "-1": 810,
+        "0": 205,
+        "1": 386
+      }
+    }
+  ],
+  "caveats": [
+    "Reversal intervals are an external annotation, but the [start, end) convention and frame offset are inferred from the release, not supplied as metadata.",
+    "This is binary reversal detection, not the full eight-behaviour classification.",
+    "The model comparison is a simulation-to-annotation check, not an intervention or causal effect."
+  ]
+}

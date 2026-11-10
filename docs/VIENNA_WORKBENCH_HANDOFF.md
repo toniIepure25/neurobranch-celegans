@@ -39,23 +39,26 @@ Seven tabs:
 - NC-MCM audit at K=6: behaviour transport, state–behaviour MI and K sensitivity pass; **strict
   first-order Markov and stationarity fail**. `do(state)` is therefore not an identified effect.
 - Premotor canonical recording maps to **84 core / 15 intrinsic / 69 signal**; clamped β=10 run is
-  stable (max |u| 3.337). A fresh Julia reference run matches the Python port at mean trace
-  **r=0.9999997**, max |Δ|=**0.0133**; canonical behaviour agreement is **60.3%** (JS 0.0011), and
-  mean agreement across three recordings is **58.3%** (JS 0.0113). Implementation-faithful replay;
-  still not a digital-twin claim.
+  stable (max |u| 3.337). Fresh Julia runs on **all three validation recordings** match the Python
+  port at mean trace **r=0.9999998**, max |Δ|=**0.0133**, and behaviour-label parity **99.98%**.
+  Behaviour agreement with the recorded readout is **60.2%** canonical, **58.3%** mean across three
+  recordings (JS 0.0110). Implementation-faithful replay; still not a digital-twin claim.
+- **Independent reversal check:** the paper's neural readout reaches **AUC 0.848 / 75.9%**
+  binary agreement against the release's `reversal_events` (precision 64.9%, recall 71.4%).
+  The clamped model reaches **AUC 0.633 / 55.9%**. This validates the readout as a proxy and
+  shows the replay is only a modest behavioural predictor, not a validated behaviour model.
 - All **913/913** non-zero `A` entries lie inside the transposed chemical-synapse support.
-- Correcting the port required three fixes: 1-based Julia label indexing, a one-frame (not two-frame)
-  crop per edge, and `A`/gap-sign orientation. Tests 23/23 pass.
+- Correcting the port required four fixes: 1-based Julia label indexing, a one-frame (not
+  two-frame) crop per edge, `A`/gap-sign orientation, and the exact 5-forward/6-reverse
+  notebook readout (the earlier 4/4 symmetric proxy had the biological sign inverted).
+  Tests 28/28 pass locally and on the pod.
 
 ## What is still missing
 
-1. **Reference comparison on the other recordings.** The canonical `2023-01-23-15` is checked
-   against Julia; the 85- and 86-neuron validation recordings use the same code but were not run
-   separately through Julia.
-2. **Intervention data.** Without matched stimulation/ablation recordings, NC-MCM `do()` remains a
+1. **Intervention data.** Without matched stimulation/ablation recordings, NC-MCM `do()` remains a
    Markov counterfactual and the clamped pulse panel remains a simulation.
-3. **A sixth worm / external cohort.** n=5 is enough for a prototype, not a generalization claim.
-4. **A prioritised scientific question** from you: behaviour switching, individual variability, or a
+2. **A sixth worm / external cohort.** n=5 is enough for a prototype, not a generalization claim.
+3. **A prioritised scientific question** from you: behaviour switching, individual variability, or a
    specific perturbation.
 
 ## Suggested first collaboration experiment
