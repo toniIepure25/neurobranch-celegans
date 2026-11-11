@@ -2010,6 +2010,22 @@ def gap_closure_section(wb: ViennaWorkbench) -> None:
             file_name=power_path.name,
             mime="application/json",
         )
+        try:
+            power = json.loads(power_path.read_text(encoding="utf-8"))
+            designs = power.get("designs", [])
+            if designs:
+                summary = "; ".join(
+                    f"{item['animals_per_arm']}/arm MDE {item['mde']:.2f}"
+                    for item in designs
+                    if "animals_per_arm" in item and "mde" in item
+                )
+                if summary:
+                    st.caption(
+                        f"Simulated design only, at ICC 0.2: {summary}. "
+                        "This is not a lab result or a promise about the assay."
+                    )
+        except (OSError, ValueError, TypeError):
+            st.caption("Power report exists but could not be summarized.")
 
 
 def lab_tab(wb: ViennaWorkbench) -> None:
