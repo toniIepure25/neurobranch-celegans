@@ -17,8 +17,8 @@ workbench is a scaffold for the group's own next experiments, not a substitute f
 
 | Tier | Real artifact | What the UI does | Claim level |
 |---|---|---|---|
-| 1. BunDLe-Net | Five published 3-D consistent embeddings (`3121–3295` frames/worm) | 3-D manifold explorer, held-out-worm metrics, **three-model open-loop benchmark with CRPS, 90% coverage, behaviour NLL and horizon curves**, behaviour probabilities, 32-sample predictive spread | Latent-manifold simulator; **not** mechanistic |
-| 2. NC-MCM | Five precomputed NC-MCM models (`x`, 20 cluster solutions, 8 behaviours, 28 pairwise probabilities, Markov p-values) | Choose K, transition matrix, state sequence, behaviour composition, **bootstrap transition intervals, model-based intervention trajectories, cross-worm behaviour JS, assumption audit** | Descriptive causal-state model; **`do()` not identified**; current audit rejects strict Markov/stationarity |
+| 1. BunDLe-Net | Five published 3-D consistent embeddings (`3121–3295` frames/worm) | 3-D manifold explorer, held-out-worm metrics, **three-model open-loop benchmark with CRPS, raw/calibrated 90% coverage, behaviour NLL and horizon curves**, behaviour probabilities, 32-sample predictive spread | Latent-manifold simulator; **not** mechanistic |
+| 2. NC-MCM | Five precomputed NC-MCM models (`x`, 20 cluster solutions, 8 behaviours, 28 pairwise probabilities, Markov p-values) | Choose K, transition matrix, state sequence, behaviour composition, **bootstrap transition intervals, model-based intervention trajectories, cross-worm behaviour JS, assumption audit, order-2 temporal-holdout follow-up** | Descriptive causal-state model; **`do()` not identified**; strict Markov/stationarity rejected |
 | 3. Premotor | Published 205×205 `A`, drive `d`, **recovered W and 205 neuron names** | **Published clamped core** (15 intrinsic integrated, 69 signals clamped to recording), signal pulses, intrinsic residual, behaviour readout, validation report; separate exploratory 205-node free-run | Clamped replay/sandbox with approximate fidelity; **not** a digital twin |
 
 The UI is one Streamlit app with a sidebar workspace switch: Overview, three tiers, Evidence
@@ -123,18 +123,18 @@ are spaced 75 frames apart; 16 seeds are used. The quadratic and switching model
 training-residual noise so their intervals are not artificially zero-width. This is a descriptive
 forecast comparison, not a mechanism test.
 
-| Model | Latent MSE h10 | CRPS h10 | 90% coverage h10 | Behaviour acc h10 | Behaviour NLL h10 | Transition JS h25 |
-|---|---:|---:|---:|---:|---:|---:|
-| Manifold walk | **0.0445** | **0.0969** | 0.707 | **83.8%** | **0.542** | 0.0361 |
-| Quadratic | 0.0539 | 0.1150 | 0.681 | 82.8% | 0.618 | 0.0703 |
-| Switching linear + behaviour Markov | 0.0628 | 0.1210 | 0.752 | 66.8% | 0.767 | **0.0544** |
+| Model | Latent MSE h10 | CRPS h10 | 90% raw | 90% calibrated | Behaviour acc h10 | Behaviour NLL h10 | Transition JS h25 |
+|---|---:|---:|---:|---:|---:|---:|---:|
+| Manifold walk | **0.0445** | **0.0969** | 0.707 | 0.854 | **83.8%** | **0.542** | **0.0361** |
+| Quadratic | 0.0539 | 0.1150 | 0.681 | 0.870 | 82.8% | 0.618 | 0.0540 |
+| Switching linear + behaviour Markov | 0.0687 | 0.1212 | 0.752 | 0.801 | 66.8% | 0.814 | 0.0441 |
 
-The manifold walk is best on latent MSE, CRPS, behaviour accuracy and NLL at h10, while the
-switching model has the best transition JS at h25. All three intervals are **under-covered**
-(90% nominal; 68–75% observed), so the ensemble bands must not be presented as calibrated
-posterior intervals. **No model is validated for mechanism or for a new worm beyond these five.**
-Per-worm values, worst-worm values and 95% normal intervals are in
-`reports/vienna_workbench/tier1_benchmark.json`.
+The manifold walk is best on latent MSE, CRPS, behaviour accuracy and NLL at h10; the switching
+model has the best transition JS at h25. Raw 90% intervals under-cover (68–75%). Nested
+training-worm conformal widening raises held-out coverage to 80–87%, still below nominal; the
+bands remain descriptive, not calibrated posterior intervals. **No model is validated for
+mechanism or for a new worm beyond these five.** Per-worm values, worst-worm values and 95%
+normal intervals are in `reports/vienna_workbench/tier1_benchmark.json`.
 
 ### Pod reproduction
 
@@ -178,16 +178,18 @@ and state-transition matrices are never compared across worms.
 
 | Test | What it asks | Current verdict (K=6, 5 worms) |
 |---|---|---|
-| Markov order | Does a second-order chain explain more than first-order? | **fail** |
+| Markov order | Does a second-order chain explain more than first-order? | **fail** (strict first-order rejected) |
+| Order-2 forecast | Does a second-order chain lower held-out state NLL? | **supports in 5/5 worms**; aggregate ΔNLL 0.018, 95% CI [0.005, 0.034]; only 2/5 individually |
 | Stationarity | Are first/second-half transition matrices compatible? | **fail** |
 | Behaviour transport | Does held-out-worm behaviour transport beat a split-half baseline? | pass |
 | State–behaviour MI | Is state label informative about behaviour beyond chance? | pass |
 | K sensitivity | How much does the 20-step behaviour distribution move across K=2..20? | pass |
 
-The two failures are the important result: the precomputed NC-MCM states are descriptive, and a
-strict `do(state)` reading is not supported by the data at this K. The audit uses Monte-Carlo
-p-values and explicit `insufficient_data` verdicts for sparse rows; it is not a causal
-identification proof.
+The strict assumptions still fail, but the order-2 follow-up is a small, consistent predictive
+gain: every worm has a positive point estimate, while only two are individually resolved. This
+is a **predictive** result, not a causal mechanism, and it needs external-worm replication before
+`do()` is treated as identified. The audit uses Monte-Carlo p-values and explicit
+`insufficient_data` verdicts for sparse rows; it is not a causal identification proof.
 
 ## Tier 3 semantics
 
@@ -306,7 +308,7 @@ t, y = wb.tier3_simulate(PremotorParameters(duration=12.0, beta=0.0))
 | `.../dynamics.py` | quadratic ridge dynamics + logistic read-out |
 | `.../switching.py` | behaviour-conditioned linear dynamics + Markov behaviour chain |
 | `.../evaluate.py` | leave-one-worm-out metrics |
-| `.../benchmark.py` | three-model open-loop benchmark v2 (CRPS, coverage, NLL, horizon curve) |
+| `.../benchmark.py` | three-model open-loop benchmark v3 (CRPS, raw/calibrated coverage, NLL, horizon curve) |
 | `.../manifold_walk.py` | stable observed-transition sampler + ensemble rollout |
 | `.../ncmcm.py` | NC-MCM schema, transitions, bootstrap, counterfactual propagation |
 | `.../causal_audit.py` | Markov order, stationarity, transport, MI, K sensitivity |
@@ -329,14 +331,28 @@ t, y = wb.tier3_simulate(PremotorParameters(duration=12.0, beta=0.0))
 | `tests/test_causal_audit.py` | synthetic assumption-audit tests |
 | `tests/test_bundlenet_workbench.py` | Tier-1/Tier-2/Tier-3 contract tests |
 
+## Handoff and design records
+
+| Document | Purpose |
+|---|---|
+| `docs/VIENNA_BENCHMARK_DESIGN.md` | Tier-1 pre-run design, leakage rules, v3 calibration amendment |
+| `docs/VIENNA_CALIBRATION_DESIGN.md` | Nested conformal design and the partial-repair result |
+| `docs/VIENNA_ORDER2_DESIGN.md` | NC-MCM order-2 temporal-holdout design and result |
+| `docs/VIENNA_NEXT_WORM.md` | Sixth-worm ingestion gate and frozen protocol |
+| `docs/VIENNA_LABEL_COVERAGE.md` | What is labelled, what is independent, and what is missing |
+| `docs/VIENNA_INTERVENTION_PROTOCOL.md` | Randomized `do()` request and analysis plan |
+| `docs/VIENNA_SCOPE.md` | Explicit BCI/EEG/fMRI/MeDIL boundary |
+
 ## Limitations and next decisions
 
 1. **No validated generative simulator.** The manifold walk wins the open-loop benchmark, but it
    samples observed transitions; it is not a mechanistic generator and does not extrapolate.
-   All ensemble intervals under-cover their nominal level.
-2. **No causal identification.** NC-MCM states are fitted descriptions; the current audit rejects
-   strict first-order Markov and stationarity. The intervention panel is explicitly a Markov
-   counterfactual until an intervention dataset is analysed.
+   Raw 90% intervals under-cover; nested conformal widening improves but does not reach nominal.
+2. **No causal identification.** NC-MCM states are fitted descriptions; the audit rejects strict
+   first-order Markov and stationarity. A second-order chain lowers temporal-holdout NLL in 5/5
+   worms, but this is predictive, individually resolved in only 2/5, and not yet externally
+   replicated. The intervention panel remains a Markov counterfactual until an intervention
+   dataset is analysed.
 3. **Premotor clamped mode is implementation-faithful, not a digital twin.** The canonical
    recording has the published 84/15/69 split, and the Python port matches fresh Julia runs on all
    three validation recordings to mean r=0.9999998 with max |Δ|=0.013 and behaviour-label parity
@@ -350,6 +366,7 @@ t, y = wb.tier3_simulate(PremotorParameters(duration=12.0, beta=0.0))
 4. **Preprint status.** BunDLe-Net is a bioRxiv `posted-content` record; do not cite it as a
    peer-reviewed journal article.
 5. **Five worms only.** Worm-level splits are the right unit, but n=5 limits generalization claims.
+   The ingestion gate is ready (`scripts/validate_new_worm.py`); no sixth recording is present.
 
 Recommended next experiment: use the now-matched clamped replay as a null/implementation control,
 then obtain an experimental perturbation dataset for NC-MCM and pre-register a held-out-worm

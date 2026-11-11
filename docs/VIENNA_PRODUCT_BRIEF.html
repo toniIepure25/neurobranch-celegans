@@ -75,8 +75,8 @@
   <tr><td>Tier 1 one-step latent R², leave-one-worm-out</td><td class="num"><b>0.998</b></td><td>Strong one-step predictability; not a generative validation</td></tr>
   <tr><td>Behaviour decode from true latent</td><td class="num"><b>96.0%</b></td><td>The read-out is informative when the latent is real</td></tr>
   <tr><td>Open-loop behaviour accuracy, 25 frames</td><td class="num"><b>83.8%</b> manifold walk<br>82.8% quadratic<br>66.8% switching</td><td>Manifold walk wins because it samples observed transitions; it cannot extrapolate</td></tr>
-  <tr><td>Latent MSE / CRPS at 10 frames</td><td class="num"><b>0.0445 / 0.0969</b> manifold walk<br>0.0539 / 0.1150 quadratic<br>0.0628 / 0.1210 switching</td><td>Proper scores; intervals under-cover nominal 90%, so bands are descriptive</td></tr>
-  <tr><td>NC-MCM assumption audit (K=6)</td><td class="num"><b>2 fail / 3 pass</b></td><td>Strict first-order Markov and stationarity fail; <code>do()</code> is not identified</td></tr>
+  <tr><td>Latent MSE / CRPS at 10 frames</td><td class="num"><b>0.0445 / 0.0969</b> manifold walk<br>0.0539 / 0.1150 quadratic<br>0.0687 / 0.1212 switching</td><td>Proper scores; raw 90% intervals under-cover (68–75%), nested conformal widening reaches 80–87%, still descriptive</td></tr>
+  <tr><td>NC-MCM assumption audit (K=6)</td><td class="num"><b>2 fail / 3 pass</b><br>order-2: 5/5 positive</td><td>Strict first-order Markov and stationarity fail; an order-2 temporal holdout lowers NLL in 5/5 worms (aggregate ΔNLL 0.018, 95% CI 0.005–0.034; only 2/5 individually resolved). Predictive only; <code>do()</code> is not identified</td></tr>
   <tr><td>Clamped canonical core</td><td class="num"><b>84 / 15 / 69</b></td><td>Exact published split on <code>2023-01-23-15</code>; behaviour-proxy agreement 60.2%, distribution JS 0.0012</td></tr>
   <tr><td>Python vs Julia clamped traces</td><td class="num"><b>r = 0.9999998</b><br>max |Δ| = 0.0133</td><td>Fresh Julia 1.11.2 runs on all 3 validation recordings; behaviour-label parity 99.98%; validates the port, not the biology</td></tr>
   <tr><td>Readout vs independent reversal events</td><td class="num"><b>AUC 0.848</b><br>75.9% agreement</td><td>The neural proxy is externally meaningful; this is a binary behavioural sanity check, not causality</td></tr>
@@ -130,6 +130,7 @@
   <tr><td><b>Full behavioural decoding</b></td><td>The reversal-event check is binary. Decoding the full eight-behaviour set against independent video annotation, on a held-out worm, is the next validity test.</td></tr>
   <tr><td><b>Sixth worm / external cohort</b></td><td>Tests whether the Tier 1 manifold walk generalizes beyond the five released embeddings.</td></tr>
 </table>
+<p class="small">Ready-to-run handoff gates: <code>docs/VIENNA_NEXT_WORM.md</code> (sixth-worm ingestion and frozen protocol), <code>docs/VIENNA_INTERVENTION_PROTOCOL.md</code> (randomized <code>do()</code> request), <code>docs/VIENNA_SCOPE.md</code> (explicit BCI/EEG/fMRI/MeDIL boundary). No new data are implied by these documents.</p>
 
 <h2>6. Sources</h2>
 <ul class="small">

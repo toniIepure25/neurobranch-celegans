@@ -21,7 +21,7 @@ import numpy as np
 from scipy.integrate import solve_ivp
 
 from .premotor import PremotorModel
-from .recording import ClampedDataError, ClampedRecording, INTRINSIC_NEURONS, behavior_readout
+from .recording import INTRINSIC_NEURONS, ClampedDataError, ClampedRecording, behavior_readout
 
 
 class ClampedSimulationError(RuntimeError):
@@ -245,7 +245,6 @@ def simulate_clamped(
     A = model.A[np.ix_(core, core)].copy()
     d = model.d[core].copy()
     W = model.W[np.ix_(core, core)].copy()
-    intrinsic_index = {name: i for i, name in enumerate(recording.intrinsic_names)}
     for name in parameters.ablate_intrinsic:
         local = core_index[name]
         A[local, :] = 0.0

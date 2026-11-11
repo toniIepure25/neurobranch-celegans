@@ -158,9 +158,7 @@ class NCMCMWorm:
 
 
 def load_ncmcm(worm_id: int, data_dir: Path | str | None = None) -> NCMCMWorm:
-    """Load one worm; ``worm_id`` is the 0-based BunDLe-Net id (0..4)."""
-    if worm_id not in range(5):
-        raise ValueError("worm_id must be 0..4")
+    """Load one worm; ids are release-local and may include a sixth worm."""
     root = Path(data_dir) if data_dir is not None else default_data_dir()
     path = root / f"nc_mcm_model_worm_{worm_id + 1}.npz"
     if not path.exists():

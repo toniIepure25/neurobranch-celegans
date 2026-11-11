@@ -6,7 +6,7 @@
     "Five worms limit population-level transport claims."
   ],
   "format": "vienna-tier2-assumption-audit-v1",
-  "generated_utc": "2026-11-09T19:21:17.929033+00:00",
+  "generated_utc": "2026-11-11T18:56:25.779140+00:00",
   "k": 6,
   "n_worms": 5,
   "per_worm": [
@@ -256,6 +256,94 @@
         }
       ],
       "verdict": "fail"
+    },
+    "markov_order_forecast": {
+      "delta_ci95": [
+        0.005486505845012473,
+        0.03423566235549789
+      ],
+      "interpretation": "temporal holdout within each recording; positive delta means order-2 has lower NLL. This does not identify a causal mechanism.",
+      "mean_delta_nll_order1_minus_order2": 0.018251441116343976,
+      "n_worms": 5,
+      "n_worms_positive": 5,
+      "per_worm": [
+        {
+          "alpha": 0.5,
+          "block": 50,
+          "delta_ci95": [
+            -0.010108458501775917,
+            0.011513462838907222
+          ],
+          "delta_nll_order1_minus_order2": 5.201368572665675e-05,
+          "n_test_frames": 1569,
+          "order1_nll": 0.2791315776412082,
+          "order2_nll": 0.27907956395548156,
+          "split_frame": 1568,
+          "verdict": "no_improvement",
+          "worm_id": 0
+        },
+        {
+          "alpha": 0.5,
+          "block": 50,
+          "delta_ci95": [
+            -0.00045625906410410655,
+            0.05228811022429313
+          ],
+          "delta_nll_order1_minus_order2": 0.024495422232124954,
+          "n_test_frames": 1567,
+          "order1_nll": 0.679646430071121,
+          "order2_nll": 0.6551510078389963,
+          "split_frame": 1567,
+          "verdict": "no_improvement",
+          "worm_id": 1
+        },
+        {
+          "alpha": 0.5,
+          "block": 50,
+          "delta_ci95": [
+            0.030598517128075167,
+            0.07082931018637613
+          ],
+          "delta_nll_order1_minus_order2": 0.04747447769552244,
+          "n_test_frames": 1529,
+          "order1_nll": 0.3950888840085809,
+          "order2_nll": 0.34761440631305845,
+          "split_frame": 1530,
+          "verdict": "supports_order2",
+          "worm_id": 2
+        },
+        {
+          "alpha": 0.5,
+          "block": 50,
+          "delta_ci95": [
+            -0.00492923073021845,
+            0.016079094529073835
+          ],
+          "delta_nll_order1_minus_order2": 0.005597047884404632,
+          "n_test_frames": 1655,
+          "order1_nll": 0.21899444077682648,
+          "order2_nll": 0.21339739289242185,
+          "split_frame": 1656,
+          "verdict": "no_improvement",
+          "worm_id": 3
+        },
+        {
+          "alpha": 0.5,
+          "block": 50,
+          "delta_ci95": [
+            0.0007783836123146555,
+            0.028272003476666904
+          ],
+          "delta_nll_order1_minus_order2": 0.013638244083941198,
+          "n_test_frames": 1511,
+          "order1_nll": 0.29680001193611766,
+          "order2_nll": 0.2831617678521764,
+          "split_frame": 1510,
+          "verdict": "supports_order2",
+          "worm_id": 4
+        }
+      ],
+      "verdict": "supports_order2"
     },
     "state_behavior_mi": {
       "counts": {

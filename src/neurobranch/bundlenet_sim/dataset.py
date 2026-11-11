@@ -33,6 +33,24 @@ BEHAVIOR_NAMES: tuple[str, ...] = (
 WORM_IDS: tuple[int, ...] = (0, 1, 2, 3, 4)
 
 
+def available_worm_ids(data_dir: Path | str | None = None) -> tuple[int, ...]:
+    """Discover released embedding files, including a future sixth worm.
+
+    The five published worms remain the default evidence base; discovery is
+    deliberately pattern-based so a new ``bundlenet_consistent_embedding_worm_5.npz``
+    can be dropped in without editing code.  A missing directory returns an
+    empty tuple; the loader raises rather than silently returning an empty set.
+    """
+    root = Path(data_dir) if data_dir is not None else default_data_dir()
+    pattern = "bundlenet_consistent_embedding_worm_*.npz"
+    found: list[int] = []
+    for path in sorted(root.glob(pattern)):
+        suffix = path.stem.rsplit("_", 1)[-1]
+        if suffix.isdigit():
+            found.append(int(suffix))
+    return tuple(sorted(set(found)))
+
+
 def default_data_dir() -> Path:
     """Return the in-repo directory holding the five embedding files."""
     return Path(__file__).resolve().parents[3] / "data" / "processed" / "bundlenet_sim"
@@ -52,8 +70,7 @@ class WormTrajectory:
             raise ValueError(f"worm {self.worm_id}: latent must be (T, 3), got {self.latent.shape}")
         if self.behavior.shape != (self.latent.shape[0],):
             raise ValueError(
-                f"worm {self.worm_id}: behaviour must be ({self.latent.shape[0]},), "
-                f"got {self.behavior.shape}"
+                f"worm {self.worm_id}: behaviour must be ({self.latent.shape[0]},), got {self.behavior.shape}"
             )
         if not np.isfinite(self.latent).all():
             raise ValueError(f"worm {self.worm_id}: latent contains non-finite values")
@@ -61,18 +78,30 @@ class WormTrajectory:
             raise ValueError(f"worm {self.worm_id}: behaviour label outside 0..{len(BEHAVIOR_NAMES) - 1}")
 
 
-def load_trajectories(data_dir: Path | str | None = None) -> list[WormTrajectory]:
-    """Load all five worms, sorted by worm id.
+def load_trajectories(
+    data_dir: Path | str | None = None,
+    worm_ids: tuple[int, ...] | list[int] | None = None,
+) -> list[WormTrajectory]:
+    """Load released worms, sorted by worm id.
+
+    By default every matching embedding in ``data_dir`` is loaded, so a sixth
+    held-out worm can be added without code changes.  Pass ``worm_ids`` to
+    freeze a subset for a pre-registered comparison.
 
     Raises
     ------
     FileNotFoundError
-        If any of the five expected files is missing.  We prefer a loud failure
-        over silently training on a subset and changing the evaluation unit.
+        If no embedding files exist, or a requested file is missing.  We prefer
+        a loud failure over silently training on a subset.
     """
     root = Path(data_dir) if data_dir is not None else default_data_dir()
+    selected = tuple(worm_ids) if worm_ids is not None else available_worm_ids(root)
+    if not selected:
+        raise FileNotFoundError(
+            f"no BunDLe-Net embeddings found in {root}; run scripts/fetch_vienna_artifacts.py"
+        )
     trajectories: list[WormTrajectory] = []
-    for worm_id in WORM_IDS:
+    for worm_id in selected:
         path = root / f"bundlenet_consistent_embedding_worm_{worm_id}.npz"
         if not path.exists():
             raise FileNotFoundError(f"missing BunDLe-Net embedding: {path}")

@@ -20,9 +20,9 @@ The output is a :class:`ClampedRecording` whose rows follow the model's
 
 from __future__ import annotations
 
+from collections.abc import Iterable
 from dataclasses import dataclass
 from pathlib import Path
-from typing import Iterable
 
 import numpy as np
 from scipy.signal import savgol_filter

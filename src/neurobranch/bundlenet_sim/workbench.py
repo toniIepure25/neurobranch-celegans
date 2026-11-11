@@ -7,6 +7,8 @@ from pathlib import Path
 
 import numpy as np
 
+from .causal_audit import audit_all
+from .clamped import ClampedParameters, ClampedResult, default_recordings_dir, simulate_clamped
 from .dataset import BEHAVIOR_NAMES, WormTrajectory, load_trajectories
 from .dynamics import FittedModels
 from .manifold_walk import ManifoldWalk
@@ -14,8 +16,6 @@ from .ncmcm import NCMCMWorm, load_ncmcm
 from .persistence import load_models
 from .premotor import PremotorModel, PremotorParameters, load_premotor, simulate
 from .recording import ClampedDataError, build_clamped_recording, load_atanas_recording
-from .clamped import ClampedParameters, ClampedResult, default_recordings_dir, simulate_clamped
-from .causal_audit import audit_all
 from .switching import SwitchingFit, fit_switching
 
 

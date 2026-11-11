@@ -8,7 +8,11 @@ import numpy as np
 import pytest
 
 from neurobranch.bundlenet_sim.benchmark import benchmark_models
-from neurobranch.bundlenet_sim.dataset import BEHAVIOR_NAMES, load_trajectories
+from neurobranch.bundlenet_sim.dataset import (
+    BEHAVIOR_NAMES,
+    available_worm_ids,
+    load_trajectories,
+)
 from neurobranch.bundlenet_sim.dynamics import fit_models
 from neurobranch.bundlenet_sim.manifold_walk import ManifoldWalk
 from neurobranch.bundlenet_sim.ncmcm import load_ncmcm
@@ -31,6 +35,19 @@ def test_bundlenet_trajectories_are_aligned() -> None:
         assert set(np.unique(trajectory.behavior)).issubset(set(range(len(BEHAVIOR_NAMES))))
 
 
+def test_loader_discovers_a_sixth_worm(tmp_path: Path) -> None:
+    rng = np.random.default_rng(7)
+    for worm_id in (0, 5):
+        np.savez(
+            tmp_path / f"bundlenet_consistent_embedding_worm_{worm_id}.npz",
+            x=rng.normal(size=(32, 3)),
+            b=rng.integers(0, len(BEHAVIOR_NAMES), size=32),
+        )
+    assert available_worm_ids(tmp_path) == (0, 5)
+    trajectories = load_trajectories(tmp_path)
+    assert [t.worm_id for t in trajectories] == [0, 5]
+
+
 def test_manifold_walk_stays_finite_and_on_scale() -> None:
     trajectories = load_trajectories()
     walk = ManifoldWalk(n_neighbors=10, noise=0.0).fit(trajectories)
@@ -46,9 +63,7 @@ def test_manifold_walk_stays_finite_and_on_scale() -> None:
 def test_manifold_walk_ensemble_shape_and_finiteness() -> None:
     trajectories = load_trajectories()
     walk = ManifoldWalk(n_neighbors=10, noise=0.0).fit(trajectories)
-    latents, labels = walk.rollout_ensemble(
-        trajectories[0].latent[0], n_steps=20, n_samples=8, seed=4
-    )
+    latents, labels = walk.rollout_ensemble(trajectories[0].latent[0], n_steps=20, n_samples=8, seed=4)
     assert latents.shape == (8, 20, 3)
     assert labels.shape == (8, 20)
     assert np.isfinite(latents).all()
@@ -104,7 +119,8 @@ def test_switching_model_is_finite_and_has_behaviour_chain() -> None:
 
 def test_tier1_benchmark_returns_comparable_models() -> None:
     result = benchmark_models(load_trajectories(), horizon=5, stride=300, seeds=4)
-    assert result["format"] == "vienna-tier1-benchmark-v2"
+    assert result["format"] == "vienna-tier1-benchmark-v3"
+    assert result["calibration"]["test_data_used"] is False
     assert {item["model"] for item in result["models"]} == {
         "quadratic",
         "switching",
@@ -117,6 +133,8 @@ def test_tier1_benchmark_returns_comparable_models() -> None:
         assert 0.0 <= item["behavior_accuracy_h10"]["mean"] <= 1.0
         assert 0.0 <= item["interval_coverage_50_h10"]["mean"] <= 1.0
         assert 0.0 <= item["interval_coverage_90_h10"]["mean"] <= 1.0
+        assert 0.0 <= item["interval_coverage_90_h10_calibrated"]["mean"] <= 1.0
+        assert item["interval_scale_90_h10"]["mean"] >= 1.0
         assert np.isfinite(item["behavior_nll_h10"]["mean"])
 
 

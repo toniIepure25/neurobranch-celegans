@@ -33,12 +33,15 @@ delivery snapshot and the product brief is downloadable in the sidebar):
 
 - Tier 1 one-step latent R² = **0.998** leave-one-worm-out; behaviour decode from true latents =
   **96.0%**.
-- Open-loop benchmark v2, 25-frame horizon, 16 seeds: manifold walk **83.8%** behaviour accuracy,
+- Open-loop benchmark v3, 25-frame horizon, 16 seeds: manifold walk **83.8%** behaviour accuracy,
   CRPS **0.0969**, NLL **0.542**, latent MSE h10 **0.0445**. Quadratic 82.8% / 0.1150 / 0.618 /
-  0.0539; switching 66.8% / 0.1210 / 0.767 / 0.0628.
-- **Intervals under-cover:** nominal 90% coverage is 68–75%, so the bands are descriptive.
+  0.0539; switching 66.8% / 0.1212 / 0.814 / 0.0687.
+- **Intervals under-cover:** raw nominal 90% coverage is 68–75%; nested training-worm conformal
+  widening raises it to 80–87%, still below nominal. Bands are descriptive, not calibrated.
 - NC-MCM audit at K=6: behaviour transport, state–behaviour MI and K sensitivity pass; **strict
-  first-order Markov and stationarity fail**. `do(state)` is therefore not an identified effect.
+  first-order Markov and stationarity fail**. An order-2 temporal-holdout follow-up lowers NLL in
+  **5/5** worms (aggregate ΔNLL 0.018, 95% CI 0.005–0.034), but only 2/5 individually and it is
+  predictive, not causal. `do(state)` is therefore not an identified effect.
 - Premotor canonical recording maps to **84 core / 15 intrinsic / 69 signal**; clamped β=10 run is
   stable (max |u| 3.337). Fresh Julia runs on **all three validation recordings** match the Python
   port at mean trace **r=0.9999998**, max |Δ|=**0.0133**, and behaviour-label parity **99.98%**.
@@ -58,15 +61,21 @@ delivery snapshot and the product brief is downloadable in the sidebar):
 - Correcting the port required four fixes: 1-based Julia label indexing, a one-frame (not
   two-frame) crop per edge, `A`/gap-sign orientation, and the exact 5-forward/6-reverse
   notebook readout (the earlier 4/4 symmetric proxy had the biological sign inverted).
-  Tests 37/37 pass locally and on the pod.
+  Tests 40/40 pass locally and on the pod.
 
 ## What is still missing
 
 1. **Intervention data.** Without matched stimulation/ablation recordings, NC-MCM `do()` remains a
-   Markov counterfactual and the clamped pulse panel remains a simulation.
+   Markov counterfactual and the clamped pulse panel remains a simulation. The randomized request
+   and analysis plan are ready in `docs/VIENNA_INTERVENTION_PROTOCOL.md`.
 2. **A sixth worm / external cohort.** n=5 is enough for a prototype, not a generalization claim.
+   The ingestion gate and pre-registration are ready in `docs/VIENNA_NEXT_WORM.md`.
 3. **A prioritised scientific question** from you: behaviour switching, individual variability, or a
    specific perturbation.
+4. **Fully calibrated intervals.** Conformal widening improves 90% coverage to 80–87%, but does not
+   reach nominal and is not worm-conditional.
+5. **Independent eight-behaviour labels and BCI/EEG/MeDIL integration.** Not present; do not claim
+   them (`docs/VIENNA_SCOPE.md`).
 
 ## Suggested first collaboration experiment
 

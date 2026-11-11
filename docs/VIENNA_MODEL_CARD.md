@@ -28,10 +28,11 @@
 ## Evaluation
 
 - Tier 1: leave-one-worm-out; 25-frame open-loop horizon; 16 seeds; latent MSE, CRPS, marginal
-  50/90% ensemble coverage, behaviour accuracy/NLL/Brier, transition JS; persistence and marginal
-  baselines.
+  50/90% ensemble coverage (raw and nested-conformal-calibrated), behaviour accuracy/NLL/Brier,
+  transition JS; persistence and marginal baselines.
 - Tier 2: Markov-order Monte Carlo test, stationarity block bootstrap, held-out behaviour
-  transport, state–behaviour mutual information, K sensitivity.
+  transport, state–behaviour mutual information, K sensitivity, and an order-2 temporal-holdout
+  NLL follow-up.
 - Tier 3: published parameter values, 84/15/69 canonical counts, β=0 and zero-signal controls,
   intrinsic residual and behaviour readout. Fresh Julia 1.11.2 runs on all three validation
   recordings match the port at mean trace r=0.9999998 and max |Δ|=0.0133; behaviour-label parity is
@@ -48,9 +49,14 @@
 
 ## Known limitations
 
-- Only five worms; worm-level splits are correct but population claims are limited.
-- Ensemble intervals under-cover nominal 90% in all three Tier-1 models.
-- NC-MCM strict first-order Markov and stationarity are rejected by the current audit.
+- Only five worms; worm-level splits are correct but population claims are limited. A sixth-worm
+  ingestion gate exists, but no sixth recording is present.
+- Raw Tier-1 intervals under-cover nominal 90% in all three models. Nested training-worm
+  conformal widening improves held-out coverage to 80–87%, still below nominal; the bands are
+  diagnostic, not calibrated posterior intervals.
+- NC-MCM strict first-order Markov and stationarity are rejected by the current audit. A
+  second-order chain lowers temporal-holdout NLL in 5/5 worms (aggregate ΔNLL 0.018, 95% CI
+  0.005–0.034), but only 2/5 are individually resolved and this is predictive, not causal.
 - Premotor `W` and neuron names are recovered, not part of the public JLD2 export. The Python port
   matches the authors' Julia code on all three validation recordings; this validates the
   implementation, not the model's biology or causality. The behaviour target is the paper's

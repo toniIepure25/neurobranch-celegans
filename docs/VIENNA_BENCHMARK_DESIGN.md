@@ -32,7 +32,8 @@ used only if the full horizon exists.
 
 - Latent MSE at horizon 10 and its skill versus a constant-initial-state baseline.
 - **Ensemble CRPS** at horizon 10 (proper score; lower is better).
-- **Marginal 50% and 90% interval coverage** of the ensemble predictive distribution.
+- **Marginal 50% and 90% interval coverage** of the ensemble predictive distribution, raw and
+  after nested training-worm conformal scaling.
 - Behaviour accuracy at horizons 1, 10 and 25.
 - **Behaviour NLL and Brier score** from the ensemble categorical read-out.
 - Jensen–Shannon divergence of generated versus true behaviour distribution and behaviour
@@ -45,6 +46,13 @@ The v2 amendment was made after the v1 run exposed zero-width intervals for the 
 quadratic model. Quadratic and switching rollouts now receive **training-residual noise** (standard
 deviation of the one-step residual on the four training worms), so coverage is defined. This is a
 model-based observation-noise calibration, not a posterior.
+
+The v3 amendment adds a **nested conformal calibration audit**. For each held-out test worm, the
+four training worms are used in a leave-one-training-worm-out loop: fit on three, score the fourth,
+pool the normalised absolute residual of the ensemble median, and take the 50th/90th percentile as
+a scalar widening factor. The test worm never enters this calculation. The audit reports raw and
+calibrated coverage side by side. Calibration is marginal over starts and dimensions, not
+worm-conditional, and it cannot repair distribution shift between worms.
 
 ## Baselines and comparators
 
@@ -62,8 +70,8 @@ performance on these five worms.
 
 ## Leakage and confound checks
 
-- No held-out worm contributes to model fitting, scaler statistics, behaviour transition counts or
-  neighbour library.
+- No held-out worm contributes to model fitting, scaler statistics, behaviour transition counts,
+  neighbour library, or conformal calibration residuals.
 - Starts come from the held-out worm only; the generated trajectory is never teacher-forced.
 - Behaviour labels are observed at training time (switching model) and are not used to fit the
   held-out worm's transition matrix.
@@ -73,9 +81,9 @@ performance on these five worms.
 
 16 seeds for switching and manifold walk; quadratic uses training-residual noise with 16 seeds.
 Uncertainty is the between-worm standard deviation and a normal 95% interval over five folds.
-Ensemble intervals are **not** calibrated posterior intervals; observed 90% coverage is reported
-and is currently below nominal. This is a small-n interval and is reported as such, not as a
-population confidence guarantee.
+Ensemble intervals are **not** calibrated posterior intervals. Raw 90% coverage is 68–75%; nested
+conformal widening raises it to 80–87%, still below nominal. This is a small-n interval and is
+reported as such, not as a population confidence guarantee.
 
 ## Known limitations
 

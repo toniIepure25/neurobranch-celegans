@@ -87,6 +87,9 @@ def _score_predictions(
     horizon: int,
     latents: np.ndarray,
     labels: np.ndarray,
+    *,
+    interval_scale_50: float = 1.0,
+    interval_scale_90: float = 1.0,
 ) -> dict[str, float]:
     """``latents``/``labels`` are (n_starts, seeds, horizon)."""
     true_latents = np.stack([test.latent[s + 1 : s + 1 + horizon] for s in starts])
@@ -105,8 +108,15 @@ def _score_predictions(
 
     low50, high50 = np.quantile(latents, [0.25, 0.75], axis=1)
     low90, high90 = np.quantile(latents, [0.05, 0.95], axis=1)
+    median = np.median(latents, axis=1)
+    low50c = median - interval_scale_50 * (median - low50)
+    high50c = median + interval_scale_50 * (high50 - median)
+    low90c = median - interval_scale_90 * (median - low90)
+    high90c = median + interval_scale_90 * (high90 - median)
     coverage50 = float(np.mean((true_latents >= low50) & (true_latents <= high50)))
     coverage90 = float(np.mean((true_latents >= low90) & (true_latents <= high90)))
+    coverage50c = float(np.mean((true_latents >= low50c) & (true_latents <= high50c)))
+    coverage90c = float(np.mean((true_latents >= low90c) & (true_latents <= high90c)))
 
     # Ensemble categorical probabilities with Laplace smoothing.  For the
     # switching model this is an approximation to its exact behaviour
@@ -118,7 +128,9 @@ def _score_predictions(
             probs[i, t] += np.bincount(labels[i, :, t], minlength=len(BEHAVIOR_NAMES))
     probs /= probs.sum(axis=-1, keepdims=True)
     true_onehot = np.eye(len(BEHAVIOR_NAMES))[true_labels]
-    nll = float(-np.mean(np.log(probs[np.arange(n_starts)[:, None], np.arange(n_steps)[None, :], true_labels])))
+    nll = float(
+        -np.mean(np.log(probs[np.arange(n_starts)[:, None], np.arange(n_steps)[None, :], true_labels]))
+    )
     brier = float(np.mean(np.sum((probs - true_onehot) ** 2, axis=-1)))
 
     acc = float(np.mean(labels == np.repeat(true_labels[:, None, :], labels.shape[1], axis=1)))
@@ -129,15 +141,17 @@ def _score_predictions(
         "latent_crps": crps,
         "interval_coverage_50": coverage50,
         "interval_coverage_90": coverage90,
+        "interval_coverage_50_calibrated": coverage50c,
+        "interval_coverage_90_calibrated": coverage90c,
+        "interval_scale_50": float(interval_scale_50),
+        "interval_scale_90": float(interval_scale_90),
         "behavior_accuracy": acc,
         "behavior_nll": nll,
         "behavior_brier": brier,
         "behavior_distribution_js": js_divergence(
             _distribution(generated), _distribution(true_labels.reshape(-1))
         ),
-        "behavior_transition_js": js_divergence(
-            _transition(generated), _transition(true_labels.reshape(-1))
-        ),
+        "behavior_transition_js": js_divergence(_transition(generated), _transition(true_labels.reshape(-1))),
     }
 
 
@@ -154,6 +168,10 @@ class ModelBenchmark:
             "latent_crps_h10",
             "interval_coverage_50_h10",
             "interval_coverage_90_h10",
+            "interval_coverage_50_h10_calibrated",
+            "interval_coverage_90_h10_calibrated",
+            "interval_scale_50_h10",
+            "interval_scale_90_h10",
             "behavior_accuracy_h1",
             "behavior_accuracy_h10",
             "behavior_accuracy_h25",
@@ -205,23 +223,108 @@ def _forecast(
         b0 = int(test.behavior[start])
         for seed in range(seeds):
             if kind == "quadratic":
-                traj = quadratic.dynamics.rollout(
-                    y0, n_steps=horizon, seed=seed, noise=quadratic_noise
-                )
+                traj = quadratic.dynamics.rollout(y0, n_steps=horizon, seed=seed, noise=quadratic_noise)
                 lab = quadratic.behavior.predict(traj)
             elif kind == "switching":
-                traj, lab, _ = switching.simulate(
-                    y0, b0, n_steps=horizon, noise=switching_noise, seed=seed
-                )
+                traj, lab, _ = switching.simulate(y0, b0, n_steps=horizon, noise=switching_noise, seed=seed)
             elif kind == "manifold_walk":
-                traj, lab = walk.rollout_with_behavior(
-                    y0, n_steps=horizon, seed=seed, temperature=0.6
-                )
+                traj, lab = walk.rollout_with_behavior(y0, n_steps=horizon, seed=seed, temperature=0.6)
             else:
                 raise ValueError(kind)
             latents[si, seed] = traj
             labels[si, seed] = lab
     return latents, labels
+
+
+def _fit_bundle(train: list[WormTrajectory]):
+    """Fit the three forecasters and their train-residual noise scales."""
+    quadratic = fit_models(train)
+    switching = fit_switching(train)
+    walk = ManifoldWalk(n_neighbors=20, noise=0.0).fit(train)
+    train_x, train_y, _ = transition_arrays(train)
+    quadratic_noise = float(np.std(quadratic.dynamics.predict(train_x) - train_y))
+    switching_behavior = np.concatenate([t.behavior[:-1] for t in train])
+    switching_pred = np.stack(
+        [switching.dynamics.predict(train_x[i], int(switching_behavior[i])) for i in range(len(train_x))]
+    )
+    switching_noise = float(np.std(switching_pred - train_y))
+    return quadratic, switching, walk, quadratic_noise, switching_noise
+
+
+def _calibration_scales(
+    train: list[WormTrajectory],
+    *,
+    horizon: int,
+    stride: int,
+    seeds: int,
+    target_50: float = 0.50,
+    target_90: float = 0.90,
+) -> dict[str, dict[str, float]]:
+    """Nested conformal scaling of ensemble intervals, without touching test data.
+
+    For each outer training worm, fit on the remaining training worms and pool
+    the normalised absolute residuals of the ensemble median.  The 90th (and
+    50th) percentile becomes a scalar widening factor applied to the held-out
+    test intervals.  This is a marginal calibration diagnostic; it cannot fix
+    worm-specific miscalibration and it does not turn the intervals into
+    posterior credible intervals.
+    """
+    if len(train) < 3:
+        return {
+            kind: {"scale_50": 1.0, "scale_90": 1.0, "n_calibration_worms": 0}
+            for kind in ("quadratic", "switching", "manifold_walk")
+        }
+    h = min(10, horizon)
+    ratios: dict[str, list[np.ndarray]] = {
+        "quadratic": [],
+        "switching": [],
+        "manifold_walk": [],
+    }
+    for calibration in train:
+        calibration_train = [t for t in train if t.worm_id != calibration.worm_id]
+        if len(calibration_train) < 2:
+            continue
+        quadratic, switching, walk, q_noise, s_noise = _fit_bundle(calibration_train)
+        starts = np.arange(0, max(1, len(calibration.latent) - h - 1), stride, dtype=np.int64)
+        true = np.stack([calibration.latent[s + 1 : s + 1 + h] for s in starts])
+        for kind in ratios:
+            latents, _ = _forecast(
+                kind,
+                calibration,
+                starts,
+                h,
+                quadratic=quadratic,
+                switching=switching,
+                walk=walk,
+                seeds=seeds,
+                quadratic_noise=q_noise,
+                switching_noise=s_noise,
+            )
+            median = np.median(latents, axis=1)
+            q25, q75 = np.quantile(latents, [0.25, 0.75], axis=1)
+            q05, q95 = np.quantile(latents, [0.05, 0.95], axis=1)
+            half50 = np.maximum.reduce([q75 - median, median - q25, np.full_like(median, 1e-12)])
+            half90 = np.maximum.reduce([q95 - median, median - q05, np.full_like(median, 1e-12)])
+            ratios[kind].extend(
+                [
+                    np.abs(true - median) / half50,
+                    np.abs(true - median) / half90,
+                ]
+            )
+    out: dict[str, dict[str, float]] = {}
+    for kind, values in ratios.items():
+        if not values:
+            out[kind] = {"scale_50": 1.0, "scale_90": 1.0, "n_calibration_worms": 0}
+            continue
+        # values[0::2] are 50% ratios, values[1::2] are 90% ratios.
+        r50 = np.concatenate(values[0::2]) if len(values) > 1 else values[0]
+        r90 = np.concatenate(values[1::2]) if len(values) > 1 else values[-1]
+        out[kind] = {
+            "scale_50": float(max(1.0, np.quantile(r50, target_50))),
+            "scale_90": float(max(1.0, np.quantile(r90, target_90))),
+            "n_calibration_worms": int(len(train)),
+        }
+    return out
 
 
 def benchmark_models(
@@ -241,20 +344,13 @@ def benchmark_models(
 
     for test in trajectories:
         train = [t for t in trajectories if t.worm_id != test.worm_id]
-        quadratic = fit_models(train)
-        switching = fit_switching(train)
-        walk = ManifoldWalk(n_neighbors=20, noise=0.0).fit(train)
-        train_x, train_y, _ = transition_arrays(train)
-        train_residual = quadratic.dynamics.predict(train_x) - train_y
-        quadratic_noise = float(np.std(train_residual))
-        switching_behavior = np.concatenate([t.behavior[:-1] for t in train])
-        switching_pred = np.stack(
-            [
-                switching.dynamics.predict(train_x[i], int(switching_behavior[i]))
-                for i in range(len(train_x))
-            ]
+        quadratic, switching, walk, quadratic_noise, switching_noise = _fit_bundle(train)
+        scales = _calibration_scales(
+            train,
+            horizon=horizon,
+            stride=stride,
+            seeds=seeds,
         )
-        switching_noise = float(np.std(switching_pred - train_y))
         starts = np.arange(0, max(1, len(test.latent) - horizon - 1), stride, dtype=np.int64)
 
         # One-step deterministic diagnostics.
@@ -277,7 +373,13 @@ def benchmark_models(
             )
             metrics_h = {
                 h: _score_predictions(
-                    test, starts, h, latents[:, :, :h], labels[:, :, :h]
+                    test,
+                    starts,
+                    h,
+                    latents[:, :, :h],
+                    labels[:, :, :h],
+                    interval_scale_50=scales[kind]["scale_50"],
+                    interval_scale_90=scales[kind]["scale_90"],
                 )
                 for h in curves_by_model[kind]
             }
@@ -306,6 +408,11 @@ def benchmark_models(
                     "latent_crps_h10": metrics10["latent_crps"],
                     "interval_coverage_50_h10": metrics10["interval_coverage_50"],
                     "interval_coverage_90_h10": metrics10["interval_coverage_90"],
+                    "interval_coverage_50_h10_calibrated": metrics10["interval_coverage_50_calibrated"],
+                    "interval_coverage_90_h10_calibrated": metrics10["interval_coverage_90_calibrated"],
+                    "interval_scale_50_h10": metrics10["interval_scale_50"],
+                    "interval_scale_90_h10": metrics10["interval_scale_90"],
+                    "n_calibration_worms": scales[kind]["n_calibration_worms"],
                     "behavior_accuracy_h1": metrics1["behavior_accuracy"],
                     "behavior_accuracy_h10": metrics10["behavior_accuracy"],
                     "behavior_accuracy_h25": metrics25["behavior_accuracy"],
@@ -318,20 +425,26 @@ def benchmark_models(
             )
 
     result = {
-        "format": "vienna-tier1-benchmark-v2",
+        "format": "vienna-tier1-benchmark-v3",
         "horizon": horizon,
         "stride": stride,
         "seeds": seeds,
         "claim": (
             "Held-out-worm open-loop forecast comparison. Not a mechanistic or causal test. "
-            "Intervals are ensemble quantiles, not posterior credible intervals."
+            "Intervals are ensemble quantiles, not posterior credible intervals. Calibrated "
+            "coverage uses nested training-worm conformal scaling; it is marginal, not "
+            "worm-conditional, and does not use the test worm."
         ),
+        "calibration": {
+            "method": "nested leave-one-training-worm-out percentile scaling",
+            "target_50": 0.50,
+            "target_90": 0.90,
+            "test_data_used": False,
+            "scope": "marginal over starts and dimensions; not per-worm coverage",
+        },
         "models": [ModelBenchmark(model, tuple(folds_by_model[model])).aggregate() for model in models],
         "horizon_curve": {
-            model: {
-                str(h): float(np.mean(values)) if values else float("nan")
-                for h, values in curve.items()
-            }
+            model: {str(h): float(np.mean(values)) if values else float("nan") for h, values in curve.items()}
             for model, curve in curves_by_model.items()
         },
     }
@@ -357,15 +470,10 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument(
         "--out",
         type=Path,
-        default=Path(__file__).resolve().parents[3]
-        / "reports"
-        / "vienna_workbench"
-        / "tier1_benchmark.json",
+        default=Path(__file__).resolve().parents[3] / "reports" / "vienna_workbench" / "tier1_benchmark.json",
     )
     args = parser.parse_args(argv)
-    result = benchmark_models(
-        load_trajectories(), horizon=args.horizon, stride=args.stride, seeds=args.seeds
-    )
+    result = benchmark_models(load_trajectories(), horizon=args.horizon, stride=args.stride, seeds=args.seeds)
     path = save_benchmark(result, args.out)
     print(json.dumps(result, indent=2))
     print(f"wrote {path}")

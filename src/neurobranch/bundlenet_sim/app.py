@@ -390,7 +390,7 @@ def render_sidebar() -> str:
             """
 <div class="side-status">
 <b>Prototype v2</b> · lab-facing<br>
-✓ 37 contract tests · local + pod<br>
+✓ 40 contract tests · local + pod<br>
 ✓ Julia trace parity 0.9999998<br>
 ✓ external reversal audit complete<br>
 △ clamped replay is not a validated predictor
@@ -615,12 +615,16 @@ def tier1_tab(wb: ViennaWorkbench) -> None:
             rows = []
             for item in benchmark.get("models", []):
                 coverage = item.get("interval_coverage_90_h10", {}).get("mean", float("nan"))
+                coverage_cal = item.get("interval_coverage_90_h10_calibrated", {}).get("mean", float("nan"))
+                scale90 = item.get("interval_scale_90_h10", {}).get("mean", float("nan"))
                 rows.append(
                     {
                         "model": item["model"],
                         "latent MSE h10": round(item["latent_mse_h10"]["mean"], 3),
                         "CRPS h10": round(item.get("latent_crps_h10", {}).get("mean", float("nan")), 3),
-                        "90% coverage": "n/a" if not np.isfinite(coverage) else f"{coverage:.1%}",
+                        "90% raw": "n/a" if not np.isfinite(coverage) else f"{coverage:.1%}",
+                        "90% calibrated": "n/a" if not np.isfinite(coverage_cal) else f"{coverage_cal:.1%}",
+                        "scale ×": "n/a" if not np.isfinite(scale90) else f"{scale90:.2f}",
                         "behaviour acc h10": f"{item['behavior_accuracy_h10']['mean']:.1%}",
                         "behaviour acc h25": f"{item['behavior_accuracy_h25']['mean']:.1%}",
                         "behaviour NLL h10": round(
@@ -632,8 +636,9 @@ def tier1_tab(wb: ViennaWorkbench) -> None:
             st.dataframe(rows, hide_index=True, width="stretch")
             st.caption(
                 "Open-loop forecast from 75-frame-spaced starts, 25-frame horizon, 16 seeds. "
-                "Coverage is the marginal 90% ensemble interval; CRPS and NLL are proper scores. "
-                "Lower MSE/CRPS/NLL/JS is better. This is a descriptive forecast comparison, not mechanism."
+                "Raw 90% ensemble intervals under-cover (68–75%). Nested training-worm conformal "
+                "widening raises held-out coverage to 80–87%, still below nominal; intervals remain "
+                "diagnostic, not calibrated. CRPS and NLL are proper scores; lower is better."
             )
             if "horizon_curve" in benchmark:
                 curve = benchmark["horizon_curve"]
@@ -883,6 +888,12 @@ def tier2_tab(wb: ViennaWorkbench) -> None:
                         "markov_order": lambda r: (
                             f"p_MC={r.get('p_monte_carlo', float('nan')):.3f}, LR={r.get('lr', float('nan')):.1f}"
                         ),
+                        "markov_order_forecast": lambda r: (
+                            f"ΔNLL={r.get('mean_delta_nll_order1_minus_order2', float('nan')):.3f}, "
+                            f"95% CI [{r.get('delta_ci95', [float('nan'), float('nan')])[0]:.3f}, "
+                            f"{r.get('delta_ci95', [float('nan'), float('nan')])[1]:.3f}], "
+                            f"{r.get('n_worms_positive', 0)}/{r.get('n_worms', 0)} worms positive"
+                        ),
                         "stationarity": lambda r: (
                             f"p_MC={r.get('p_monte_carlo', float('nan')):.3f}, JS={r.get('js_first_second_half', float('nan')):.3f}"
                         ),
@@ -897,6 +908,13 @@ def tier2_tab(wb: ViennaWorkbench) -> None:
                 }
             )
         st.dataframe(rows, hide_index=True, width="stretch")
+        forecast = audit.get("tests", {}).get("markov_order_forecast", {})
+        if forecast:
+            st.info(
+                "Order-2 follow-up: positive ΔNLL means the second-order chain predicts the "
+                "held-out half better. This is a predictive comparison, not a causal test; "
+                "the fitted order-2 chain still needs external validation before any intervention."
+            )
         st.caption(" | ".join(audit.get("caveats", [])))
 
     st.warning(
@@ -1679,8 +1697,8 @@ def overview_tab(wb: ViennaWorkbench) -> None:
     )
     m3.metric(
         "Contract tests",
-        "37",
-        help="Local and pod; includes the new lag, bootstrap and baseline tests.",
+        "40",
+        help="Local and pod; includes calibration, order-2 and lag/bootstrap tests.",
     )
     m4.metric(
         "Reversal AUC: model / persistence",
@@ -1703,12 +1721,12 @@ def overview_tab(wb: ViennaWorkbench) -> None:
         st.markdown(
             """
 - Three working objects with explicit claim levels.
-- Held-out-worm Tier-1 benchmark with CRPS, coverage, NLL and baselines.
-- NC-MCM assumption audit, transport test and K sensitivity.
+- Held-out-worm Tier-1 benchmark with CRPS, coverage, NLL, baselines and nested conformal calibration audit.
+- NC-MCM assumption audit, order-2 forecast follow-up, transport test and K sensitivity.
 - Published 84/15/69 clamped core, β=0 and zero-signal controls.
 - Python ↔ Julia parity on three validation recordings.
 - Baseline-controlled, lag-aware external reversal audit with bootstrap CIs.
-- Reproducible artifacts, 37 contract tests, product brief and claim ledger.
+- Reproducible artifacts, 40 contract tests, product brief and claim ledger.
 """
         )
     with missing, st.container(border=True):
@@ -1718,7 +1736,7 @@ def overview_tab(wb: ViennaWorkbench) -> None:
 - A sixth held-out worm or an external cohort.
 - An intervention dataset (optogenetic, ablation, microfluidic) for a real `do()` test.
 - Independent labels for all eight behaviours, not only binary reversal.
-- Calibrated Tier-1 intervals; current 90% bands under-cover.
+- Fully calibrated Tier-1 intervals; conformal widening helps but still under-covers.
 - A validated behavioural predictor; the clamped replay does not beat persistence.
 - BCI/EEG/fMRI or MeDIL integration; these are not in this release.
 - A causal, individually calibrated whole-brain digital twin.
@@ -1766,7 +1784,8 @@ def overview_tab(wb: ViennaWorkbench) -> None:
 1. Which object is closest to the lab's next grant or paper: latent manifold, NC-MCM, or premotor replay?
 2. Is a sixth held-out worm, or an external recording, available — and with what protocol?
 3. Is there an intervention dataset that could support a pre-registered `do()` or perturbation test?
-4. Should the next iteration prioritise a higher-order NC-MCM, calibrated Tier-1 intervals, or an experimental perturbation of the matched premotor replay?
+4. Should the next iteration prioritise external replication of the order-2 result, worm-conditional
+   interval calibration, or an experimental perturbation of the matched premotor replay?
 """
         )
 
@@ -1934,8 +1953,8 @@ def lab_tab(wb: ViennaWorkbench) -> None:
             {
                 "claim": "NC-MCM states are first-order Markov and stationary",
                 "tier": "Tier 2",
-                "status": "rejected by current audit",
-                "evidence": "tier2_assumption_audit.json",
+                "status": "rejected; order-2 predicts better in 5/5 worms",
+                "evidence": "tier2_assumption_audit.json (order-2 forecast follow-up)",
             },
             {
                 "claim": "do(state) is an identified causal effect",
@@ -1998,14 +2017,17 @@ def lab_tab(wb: ViennaWorkbench) -> None:
     st.markdown("**Next experiments that would change the claim level**")
     st.markdown(
         """
-1. **Reference fidelity gate:** run the authors' Julia notebook on `2023-01-23-15` and compare
-   intrinsic traces and behaviour statistics with the Python port.
-2. **Held-out sixth worm:** test the clamped and latent models on a recording not used to fit
-   either the manifold or the recovered weights.
-3. **Intervention dataset:** use optogenetic or ablation trials with a pre-registered target and
-   a held-out animal; the current Randi atlas is evidence about propagation, not a Tier-1/2 test.
-4. **Markov-order follow-up:** if second-order structure is real, fit an explicit higher-order
-   model and compare held-out behaviour NLL before using `do()`.
+1. **Reference fidelity gate:** completed — fresh Julia 1.11.2 runs match the Python port at
+   mean trace r=0.9999998 on all three validation recordings.
+2. **Sixth worm:** ingestion gate is ready — put the released embedding in
+   `data/processed/bundlenet_sim/` and run `python scripts/validate_new_worm.py --worm-id 5`.
+   No sixth worm exists in this release; the gate prevents accidental reuse of a fifth-worm split.
+3. **Intervention dataset:** the pre-registered request and analysis plan are in
+   `docs/VIENNA_INTERVENTION_PROTOCOL.md`; the current Randi atlas is evidence about
+   propagation, not a Tier-1/2 test.
+4. **Markov-order follow-up:** completed provisionally — an explicit order-2 chain lowers
+   held-out NLL in 5/5 worms, but only 2/5 individually; this is a predictive result, not
+   a causal mechanism. External-worm replication is still required before using `do()`.
 """
     )
     st.markdown("**Delivery snapshot**")
@@ -2014,12 +2036,12 @@ def lab_tab(wb: ViennaWorkbench) -> None:
             {
                 "area": "Tier 1 · latent manifold",
                 "status": "ready descriptively",
-                "what is missing": "external cohort; calibrated intervals",
+                "what is missing": "external cohort; fully calibrated intervals",
             },
             {
                 "area": "Tier 2 · NC-MCM",
-                "status": "audit-ready",
-                "what is missing": "higher-order model; intervention data for do()",
+                "status": "audit-ready; order-2 follow-up positive",
+                "what is missing": "external order-2 replication; intervention data for do()",
             },
             {
                 "area": "Tier 3 · premotor replay",
@@ -2045,11 +2067,75 @@ def lab_tab(wb: ViennaWorkbench) -> None:
         hide_index=True,
         width="stretch",
     )
+    st.markdown("**Behaviour-label coverage**")
+    st.dataframe(
+        [
+            {
+                "source": "BunDLe-Net release",
+                "labels": "8 canonical behaviours",
+                "independent?": "released annotation, not an external re-annotation",
+                "used for": "Tier 1 decode/forecast target",
+            },
+            {
+                "source": "NC-MCM release",
+                "labels": "8 canonical behaviours",
+                "independent?": "same annotation family as BunDLe-Net",
+                "used for": "Tier 2 state–behaviour MI",
+            },
+            {
+                "source": "Tier 3 neural readout",
+                "labels": "binary forward/reverse/quiet",
+                "independent?": "proxy from the paper's neural readout",
+                "used for": "internal agreement only",
+            },
+            {
+                "source": "reversal_events",
+                "labels": "binary reversal intervals",
+                "independent?": "release annotation; interval/offset inferred",
+                "used for": "external binary check",
+            },
+            {
+                "source": "full eight-behaviour video",
+                "labels": "not present",
+                "independent?": "would be independent",
+                "used for": "next external validity test",
+            },
+        ],
+        hide_index=True,
+        width="stretch",
+    )
+    st.caption(
+        "No independent eight-behaviour video labels exist in this release. Tier 1 agreement is with "
+        "released labels; Tier 3 AUC is a binary reversal proxy check. See docs/VIENNA_LABEL_COVERAGE.md."
+    )
+    st.markdown("**Open protocols and scope**")
+    st.caption(
+        "These are prepared handoff documents, not data. The sixth-worm gate fails loudly "
+        "until a real released recording is present."
+    )
+    protocol_paths = [
+        ("Sixth-worm gate (Markdown)", wb.root / "docs" / "VIENNA_NEXT_WORM.md"),
+        ("Intervention protocol (Markdown)", wb.root / "docs" / "VIENNA_INTERVENTION_PROTOCOL.md"),
+        ("BCI / EEG / MeDIL scope (Markdown)", wb.root / "docs" / "VIENNA_SCOPE.md"),
+    ]
+    protocol_cols = st.columns(len(protocol_paths))
+    for column, (label, path) in zip(protocol_cols, protocol_paths, strict=True):
+        with column:
+            if path.exists():
+                st.download_button(
+                    label,
+                    data=path.read_bytes(),
+                    file_name=path.name,
+                    mime="text/markdown",
+                    width="stretch",
+                )
+            else:
+                st.caption(f"missing: {path.name}")
     st.download_button(
         "Download claim ledger (CSV)",
         data="claim,tier,status,evidence\n"
         "3-D latent manifold forecasting,Tier 1,supported descriptively,held-out benchmark\n"
-        "NC-MCM first-order Markov and stationary,Tier 2,rejected by current audit,tier2 audit\n"
+        "NC-MCM first-order Markov and stationary,Tier 2,rejected; order-2 lower held-out NLL in 5/5 worms,tier2 audit + order-2 follow-up\n"
         "do(state) identified causal effect,Tier 2,not claimed,observational clusters\n"
         "published 84/15/69 clamped core,Tier 3,implementation-faithful; 60.2% readout agreement,tier3 validation + all-recording Julia parity\n"
         "neural readout vs independent reversal events,Tier 3,proxy supported; mean AUC 0.848,tier3_behavior_validation.json v2\n"

@@ -34,10 +34,12 @@
 
 ## Splits and leakage
 
-- Tier 1: leave-one-worm-out. Fitting, feature standardisation, behaviour readout, and residual
-  noise calibration use training worms only.
+- Tier 1: leave-one-worm-out. Fitting, feature standardisation, behaviour readout, residual noise
+  calibration, and nested conformal scaling use training worms only; the test worm never enters
+  the calibration residual pool.
 - Tier 2: no supervised train/test split; transport is held-out-worm behaviour statistics only.
-  Cluster IDs are not aligned across worms and are never compared directly.
+  The order-2 follow-up uses a temporal holdout within each recording and does not pool test frames
+  across worms. Cluster IDs are not aligned across worms and are never compared directly.
 - Tier 3: the canonical recording is used as a replay input, not as a training label. The recovered
   `W` is built from the published connectome, not from the recording being simulated.
 

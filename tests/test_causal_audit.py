@@ -6,6 +6,8 @@ import numpy as np
 
 from neurobranch.bundlenet_sim.causal_audit import (
     behavior_transport_test,
+    markov_order_forecast,
+    markov_order_forecast_all,
     markov_order_test,
     state_behavior_information,
     stationarity_test,
@@ -49,13 +51,34 @@ def test_first_order_chain_is_not_rejected() -> None:
 
 def test_second_order_chain_is_rejected() -> None:
     k = 4
-    rng = np.random.default_rng(3)
     seq = np.empty(2000, dtype=np.int64)
     seq[:2] = [1, 2]
     for t in range(2, len(seq)):
         seq[t] = ((seq[t - 1] + seq[t - 2]) % k) + 1
     result = markov_order_test(_worm(seq), k, n_boot=200, seed=4)
     assert result["verdict"] in {"fail", "insufficient_data"}
+
+
+def test_second_order_improves_temporal_holdout_nll() -> None:
+    k = 4
+    seq = np.empty(1200, dtype=np.int64)
+    seq[:2] = [1, 2]
+    for t in range(2, len(seq)):
+        seq[t] = ((seq[t - 1] + seq[t - 2]) % k) + 1
+    worm = _worm(seq)
+    result = markov_order_forecast(worm, k, n_boot=100, seed=5)
+    assert result["verdict"] == "supports_order2"
+    assert result["delta_nll_order1_minus_order2"] > 0
+    assert result["delta_ci95"][0] > 0
+
+
+def test_order_forecast_aggregate_has_uncertainty() -> None:
+    worms = [_worm(_markov_sequence(600, seed=30 + i), worm_id=i) for i in range(3)]
+    result = markov_order_forecast_all(worms, k=6, n_boot=100, seed=9)
+    assert result["n_worms"] == 3
+    assert result["verdict"] in {"supports_order2", "no_improvement", "order1_better"}
+    low, high = result["delta_ci95"]
+    assert np.isfinite(low) and np.isfinite(high) and low <= high
 
 
 def test_stationary_chain_not_rejected() -> None:

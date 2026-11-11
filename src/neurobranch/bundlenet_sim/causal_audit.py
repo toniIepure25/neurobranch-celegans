@@ -83,6 +83,154 @@ def _loglik_order2(seq: np.ndarray, k: int) -> tuple[float, np.ndarray]:
     return float(value), counts2
 
 
+def _context_index(history: np.ndarray, k: int) -> int:
+    index = 0
+    for value in history:
+        index = index * k + (int(value) - 1)
+    return index
+
+
+def _markov_nll(
+    seq: np.ndarray,
+    *,
+    split: int,
+    order: int,
+    k: int,
+    alpha: float = 0.5,
+) -> tuple[float, np.ndarray]:
+    """Temporal holdout NLL for an order-1 or order-2 chain.
+
+    Counts use only frames before ``split``; the first test context may include
+    pre-split history, as it would in an online forecast.  Additive smoothing
+    keeps unseen contexts finite.
+    """
+    if order not in (1, 2):
+        raise ValueError("order must be 1 or 2")
+    if not 0 < split < len(seq):
+        raise ValueError("split must be inside the sequence")
+    counts = np.full((k**order, k), alpha, dtype=np.float64)
+    for t in range(order, split):
+        context = _context_index(seq[t - order : t], k)
+        counts[context, int(seq[t]) - 1] += 1.0
+    probs = counts / counts.sum(axis=1, keepdims=True)
+    values = []
+    for t in range(max(split, order), len(seq)):
+        context = _context_index(seq[t - order : t], k)
+        values.append(-np.log(max(probs[context, int(seq[t]) - 1], 1e-12)))
+    return float(np.mean(values)) if values else float("nan"), np.asarray(values)
+
+
+def _block_bootstrap_ci(
+    values: np.ndarray,
+    *,
+    block: int = 50,
+    n_boot: int = 500,
+    seed: int = 0,
+) -> tuple[float, float, float]:
+    values = np.asarray(values, dtype=np.float64)
+    if len(values) == 0:
+        return float("nan"), float("nan"), float("nan")
+    block = max(1, min(block, len(values)))
+    n_blocks = int(np.ceil(len(values) / block))
+    starts_max = max(1, len(values) - block + 1)
+    rng = np.random.default_rng(seed)
+    means = np.empty(n_boot, dtype=np.float64)
+    for b in range(n_boot):
+        starts = rng.integers(0, starts_max, size=n_blocks)
+        sample = np.concatenate([values[s : s + block] for s in starts])[: len(values)]
+        means[b] = float(sample.mean())
+    return (
+        float(values.mean()),
+        float(np.quantile(means, 0.025)),
+        float(np.quantile(means, 0.975)),
+    )
+
+
+def markov_order_forecast(
+    worm: NCMCMWorm,
+    k: int = 6,
+    *,
+    split: float = 0.5,
+    block: int = 50,
+    n_boot: int = 500,
+    seed: int = 0,
+    alpha: float = 0.5,
+) -> dict[str, object]:
+    """Does a second-order chain beat a first-order chain on a temporal holdout?
+
+    This is a predictive comparison, not a causal test.  It uses the first half
+    of one recording for counts and the second half for scoring, so it answers
+    the narrower question that the assumption audit raises: if extra history is
+    real, does it improve held-out state prediction?
+    """
+    seq = worm.cluster_sequence(k)
+    if len(seq) < 100:
+        return {"verdict": "insufficient_data", "reason": "fewer than 100 frames"}
+    cut = int(np.clip(round(len(seq) * split), 20, len(seq) - 20))
+    nll1, per1 = _markov_nll(seq, split=cut, order=1, k=k, alpha=alpha)
+    nll2, per2 = _markov_nll(seq, split=cut, order=2, k=k, alpha=alpha)
+    # The two scores start at different lags; align on the shared test frames.
+    start = max(cut, 2)
+    per1 = per1[start - cut :]
+    per2 = per2[start - cut :]
+    n = min(len(per1), len(per2))
+    delta = per1[:n] - per2[:n]
+    mean_delta, low, high = _block_bootstrap_ci(delta, block=block, n_boot=n_boot, seed=seed)
+    if np.isfinite(low) and low > 0:
+        verdict = "supports_order2"
+    elif np.isfinite(high) and high < 0:
+        verdict = "order1_better"
+    else:
+        verdict = "no_improvement"
+    return {
+        "verdict": verdict,
+        "n_test_frames": int(n),
+        "split_frame": int(cut),
+        "order1_nll": float(np.mean(per1[:n])) if n else float("nan"),
+        "order2_nll": float(np.mean(per2[:n])) if n else float("nan"),
+        "delta_nll_order1_minus_order2": mean_delta,
+        "delta_ci95": [low, high],
+        "alpha": float(alpha),
+        "block": int(block),
+    }
+
+
+def markov_order_forecast_all(
+    worms: list[NCMCMWorm],
+    *,
+    k: int = 6,
+    n_boot: int = 300,
+    seed: int = 0,
+) -> dict[str, object]:
+    per_worm = [
+        {"worm_id": w.worm_id, **markov_order_forecast(w, k, n_boot=n_boot, seed=seed + i)}
+        for i, w in enumerate(worms)
+    ]
+    usable = [r for r in per_worm if np.isfinite(float(r.get("delta_nll_order1_minus_order2", np.nan)))]
+    if not usable:
+        return {"verdict": "insufficient_data", "per_worm": per_worm}
+    values = np.asarray([float(r["delta_nll_order1_minus_order2"]) for r in usable], dtype=np.float64)
+    mean, low, high = _block_bootstrap_ci(values, block=1, n_boot=n_boot, seed=seed)
+    if low > 0:
+        verdict = "supports_order2"
+    elif high < 0:
+        verdict = "order1_better"
+    else:
+        verdict = "no_improvement"
+    return {
+        "verdict": verdict,
+        "mean_delta_nll_order1_minus_order2": mean,
+        "delta_ci95": [low, high],
+        "n_worms": int(len(usable)),
+        "n_worms_positive": int(np.sum(values > 0)),
+        "per_worm": per_worm,
+        "interpretation": (
+            "temporal holdout within each recording; positive delta means order-2 has lower NLL. "
+            "This does not identify a causal mechanism."
+        ),
+    }
+
+
 def markov_order_test(
     worm: NCMCMWorm,
     k: int,
@@ -168,7 +316,6 @@ def behavior_transport_test(
     """
     if len(worms) < 3:
         return {"verdict": "insufficient_data", "reason": "need at least 3 worms"}
-    rng = np.random.default_rng(seed)
     heldout_js: list[float] = []
     baseline_js: list[float] = []
     for held in range(len(worms)):
@@ -195,9 +342,7 @@ def behavior_transport_test(
         "heldout_js": heldout,
         "split_half_js": baseline,
         "per_worm_heldout_js": [float(v) for v in heldout_js],
-        "interpretation": (
-            "behaviour-transition transport only; state indices are not aligned across worms"
-        ),
+        "interpretation": ("behaviour-transition transport only; state indices are not aligned across worms"),
     }
 
 
@@ -344,6 +489,7 @@ def audit_all(
     per_worm = [audit_model(w, k) for w in worms]
     tests = {
         "markov_order": _aggregate_verdicts([w["markov_order"] for w in per_worm]),
+        "markov_order_forecast": markov_order_forecast_all(worms, k=k, n_boot=n_boot, seed=seed),
         "stationarity": _aggregate_verdicts([w["stationarity"] for w in per_worm]),
         "behavior_transport": behavior_transport_test(worms, n_boot=n_boot, seed=seed),
         "state_behavior_mi": _aggregate_verdicts([w["state_behavior_mi"] for w in per_worm]),

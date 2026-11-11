@@ -13,8 +13,6 @@ whole-brain system.  Tier 2 interventions are observational read-outs.  Tier 3
 is a sandbox whose public export lacks gap-junction weights and neuron names.
 """
 
-from .dataset import BEHAVIOR_NAMES, WormTrajectory, load_trajectories
-from .dynamics import BehaviorReadout, PolynomialRidgeDynamics, fit_models
 from .clamped import (
     ClampedParameters,
     ClampedResult,
@@ -22,6 +20,8 @@ from .clamped import (
     SignalPulse,
     simulate_clamped,
 )
+from .dataset import BEHAVIOR_NAMES, WormTrajectory, load_trajectories
+from .dynamics import BehaviorReadout, PolynomialRidgeDynamics, fit_models
 from .recording import (
     ClampedDataError,
     ClampedRecording,
