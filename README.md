@@ -76,6 +76,7 @@ intervention design report is simulated, not data:
 python scripts/power_intervention.py --reps 300
 python scripts/validate_annotation.py --annotations data/incoming/annotation
 python scripts/validate_intervention_trials.py --trials data/incoming/intervention/trials.csv
+python scripts/analyze_intervention_trials.py --trials data/incoming/intervention/trials_with_outcomes.csv
 ```
 
 ## Core dynamics simulator (research branch)

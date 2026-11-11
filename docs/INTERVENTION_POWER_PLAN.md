@@ -78,6 +78,8 @@ The shape above is illustrative; the actual values are computed by the script an
 - Primary: mixed-effects logistic regression with random intercept per animal, arm as fixed effect,
   pre-specified baseline covariate if available.
 - Fallback: animal-level proportions + cluster bootstrap; randomization test as a check.
+  Implemented in `scripts/analyze_intervention_trials.py`; it requires a binary `outcome` column
+  after unblinding and at least two animals per arm.
 - Report: effect size, 95% CI, number of animals, number of trials, exclusions, ICC estimate.
 - Replication: a confirmatory cohort is required before a causal claim. A single experiment is
   hypothesis-generating even if significant.

@@ -25,6 +25,7 @@ from neurobranch.bundlenet_sim.clamped import (  # noqa: E402
     SignalPulse,
 )
 from neurobranch.bundlenet_sim.dataset import BEHAVIOR_NAMES  # noqa: E402
+from neurobranch.bundlenet_sim.handoff import build_gap_packet  # noqa: E402
 from neurobranch.bundlenet_sim.premotor import PremotorParameters  # noqa: E402
 from neurobranch.bundlenet_sim.workbench import ViennaWorkbench  # noqa: E402
 
@@ -1962,7 +1963,7 @@ def gap_closure_section(wb: ViennaWorkbench) -> None:
                 "gate": "Randomized intervention",
                 "status": "blocked on data",
                 "blocker": "no matched target/sham cohort",
-                "next action": "power + trial gate ready",
+                "next action": "power + QC + analysis ready",
             },
             {
                 "gate": "BCI / EEG / fMRI / MeDIL",
@@ -2026,6 +2027,24 @@ def gap_closure_section(wb: ViennaWorkbench) -> None:
                     )
         except (OSError, ValueError, TypeError):
             st.caption("Power report exists but could not be summarized.")
+
+    st.divider()
+    try:
+        packet = build_gap_packet(wb.root)
+    except (OSError, ValueError) as exc:
+        st.caption(f"Handoff packet unavailable: {exc}")
+    else:
+        st.download_button(
+            "Download all gap documents (ZIP)",
+            data=packet,
+            file_name="vienna-gap-closure-packet.zip",
+            mime="application/zip",
+            width="stretch",
+        )
+        st.caption(
+            "The ZIP contains the brief, contracts and power report plus a SHA-256 manifest. "
+            "It transfers the open questions; it does not close them."
+        )
 
 
 def lab_tab(wb: ViennaWorkbench) -> None:

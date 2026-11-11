@@ -18,4 +18,7 @@ from neurobranch.interventions.safety import (  # noqa: F401
 )
 from neurobranch.interventions.search import random_control, run_sparse_search  # noqa: F401
 from neurobranch.interventions.spec import InterventionSpec, make_perturbation  # noqa: F401
-from neurobranch.interventions.trial_analysis import analyze_trial_outcomes  # noqa: F401
+from neurobranch.interventions.trial_analysis import (  # noqa: F401
+    analyze_trial_outcomes,
+    read_trial_outcomes,
+)

@@ -8,11 +8,47 @@ treats trials or frames as independent observations.
 
 from __future__ import annotations
 
+import csv
 from collections import defaultdict
 from collections.abc import Iterable
+from pathlib import Path
 from typing import Any
 
 import numpy as np
+
+
+def read_trial_outcomes(path: str | Path) -> list[dict[str, Any]]:
+    """Read audited trial outcomes; extra trial metadata columns are ignored."""
+    path = Path(path)
+    with path.open("r", encoding="utf-8-sig", newline="") as handle:
+        reader = csv.DictReader(handle)
+        fields = set(reader.fieldnames or ())
+        missing = sorted({"animal_id", "arm", "outcome"} - fields)
+        if missing:
+            raise ValueError(f"{path}: missing columns: {', '.join(missing)}")
+        rows: list[dict[str, Any]] = []
+        for line_number, row in enumerate(reader, start=2):
+            animal = (row.get("animal_id") or "").strip()
+            arm = (row.get("arm") or "").strip()
+            if not animal:
+                raise ValueError(f"row {line_number}: animal_id is empty")
+            if arm not in {"target", "sham"}:
+                raise ValueError(
+                    f"row {line_number}: arm must be target or sham for analysis, got {arm!r}"
+                )
+            raw_outcome = (row.get("outcome") or "").strip()
+            try:
+                outcome = float(raw_outcome)
+            except ValueError as exc:
+                raise ValueError(
+                    f"row {line_number}: outcome must be binary, got {raw_outcome!r}"
+                ) from exc
+            if outcome not in (0.0, 1.0):
+                raise ValueError(f"row {line_number}: outcome must be binary, got {outcome!r}")
+            rows.append({"animal_id": animal, "arm": arm, "outcome": int(outcome)})
+    if not rows:
+        raise ValueError(f"{path}: no trial rows")
+    return rows
 
 
 def _animal_proportions(

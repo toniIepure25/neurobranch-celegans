@@ -95,6 +95,18 @@ Required design:
 **Acceptance gate:** `python scripts/validate_intervention_trials.py --trials <file>`.
 The trial analysis is frozen before unblinding.
 
+After unblinding, add one binary `outcome` column (0/1) without changing the trial keys, then run:
+
+```text
+python scripts/analyze_intervention_trials.py \
+  --trials data/incoming/intervention/trials_with_outcomes.csv \
+  --out reports/vienna_workbench/intervention_analysis.json
+```
+
+The analysis treats animals, not trials or frames, as the independent unit. It requires at least two
+animals per arm and reports an animal-level risk difference, bootstrap interval and permutation
+p-value.
+
 ## 4. BCI/EEG/fMRI/MeDIL (only if selected by Denis)
 
 A separate request is required: ethics/consent, BIDS-compatible data, session/subject identifiers,

@@ -76,6 +76,7 @@ def test_gap_closure_page_renders_with_documents() -> None:
     labels = [str(button.label) for button in at.get("download_button")]
     assert any("Denis brief" in label for label in labels)
     assert any("Gap matrix" in label for label in labels)
+    assert any("ZIP" in label for label in labels)
     gap_tables = [
         frame
         for frame in at.dataframe
