@@ -43,6 +43,380 @@ COLORS = [
     "#FF9DA6",
 ]
 
+NAV_LABELS = [
+    "Overview",
+    "Tier 1 · BunDLe-Net",
+    "Tier 2 · NC-MCM",
+    "Tier 3 · Premotor",
+    "Evidence report",
+    "Evidence & lab",
+    "Provenance",
+]
+
+STUDIO_CSS = """
+<style>
+:root {
+  --ink: #10233f;
+  --muted: #5b6b82;
+  --line: #dbe3ef;
+  --paper: #ffffff;
+  --canvas: #f4f7fb;
+  --navy: #0d2137;
+  --teal: #0f6b5f;
+  --blue: #1f4e79;
+  --amber: #9a620c;
+}
+html, body, [class*="css"] {
+  font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+.stApp {
+  background:
+    radial-gradient(1100px 420px at 8% -8%, rgba(31, 78, 121, 0.10), transparent 60%),
+    radial-gradient(900px 380px at 96% 0%, rgba(15, 107, 95, 0.08), transparent 55%),
+    var(--canvas);
+  color: var(--ink);
+}
+header[data-testid="stHeader"] {
+  background: rgba(244, 247, 251, 0.78);
+  backdrop-filter: blur(14px);
+  border-bottom: 1px solid rgba(219, 227, 239, 0.75);
+}
+.block-container {
+  padding-top: 1.9rem;
+  padding-bottom: 3.5rem;
+  max-width: 1480px;
+}
+[data-testid="stSidebar"] {
+  background: #edf2f8;
+  border-right: 1px solid var(--line);
+}
+[data-testid="stSidebar"] > div:first-child {
+  padding-top: 1.1rem;
+}
+.brand-card {
+  background: linear-gradient(145deg, #0d2137 0%, #173d5c 62%, #0f5b55 100%);
+  color: #f5f9ff;
+  border-radius: 16px;
+  padding: 1rem 1rem 0.95rem;
+  margin-bottom: 1rem;
+  box-shadow: 0 10px 30px rgba(13, 33, 55, 0.18);
+}
+.brand-mark {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.2rem;
+  height: 2.2rem;
+  border-radius: 10px;
+  border: 1px solid rgba(255,255,255,0.35);
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  font-size: 0.72rem;
+}
+.brand-word {
+  margin-top: 0.6rem;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 1.05rem;
+  line-height: 1.2;
+}
+.brand-word span { color: #9dd8cf; }
+.brand-sub {
+  margin-top: 0.35rem;
+  color: #c8d6e5;
+  font-size: 0.72rem;
+  line-height: 1.35;
+}
+.side-kicker {
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  font-size: 0.66rem;
+  font-weight: 700;
+  margin: 0.6rem 0 0.35rem;
+}
+.hero {
+  background: linear-gradient(135deg, #0d2137 0%, #173d5c 58%, #0f5b55 100%);
+  color: #f7fbff;
+  border-radius: 24px;
+  padding: clamp(1.6rem, 3vw, 2.8rem);
+  margin-bottom: 1.2rem;
+  box-shadow: 0 20px 55px rgba(13, 33, 55, 0.20);
+  position: relative;
+  overflow: hidden;
+}
+.hero:after {
+  content: "";
+  position: absolute;
+  right: -8%;
+  bottom: -55%;
+  width: 55%;
+  height: 150%;
+  border-radius: 50%;
+  border: 1px solid rgba(157, 216, 207, 0.25);
+  box-shadow: 0 0 0 40px rgba(157, 216, 207, 0.05), 0 0 0 90px rgba(157, 216, 207, 0.035);
+}
+.hero-kicker {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+  color: #a9dcd5;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+.hero-kicker:before {
+  content: "";
+  width: 0.45rem;
+  height: 0.45rem;
+  border-radius: 50%;
+  background: #9dd8cf;
+  box-shadow: 0 0 0 5px rgba(157, 216, 207, 0.12);
+}
+.hero h1 {
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(2.05rem, 4.2vw, 3.35rem);
+  line-height: 1.04;
+  letter-spacing: -0.025em;
+  margin: 0.7rem 0 0.7rem;
+  color: #ffffff;
+  max-width: 900px;
+}
+.hero p {
+  color: #d9e6f2;
+  font-size: clamp(0.95rem, 1.4vw, 1.08rem);
+  line-height: 1.55;
+  max-width: 850px;
+  margin: 0;
+}
+.hero-chips { margin-top: 1.1rem; display: flex; flex-wrap: wrap; gap: 0.45rem; }
+.chip {
+  display: inline-block;
+  border: 1px solid rgba(255,255,255,0.24);
+  background: rgba(255,255,255,0.08);
+  color: #e9f4f2;
+  border-radius: 999px;
+  padding: 0.25rem 0.62rem;
+  font-size: 0.7rem;
+  letter-spacing: 0.02em;
+}
+.page-head {
+  border-bottom: 1px solid var(--line);
+  padding-bottom: 1rem;
+  margin-bottom: 1rem;
+}
+.eyebrow {
+  color: var(--teal);
+  font-size: 0.67rem;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+.page-head h2 {
+  font-family: Georgia, "Times New Roman", serif;
+  color: var(--ink);
+  font-size: clamp(1.55rem, 2.6vw, 2.25rem);
+  letter-spacing: -0.02em;
+  margin: 0.25rem 0 0.35rem;
+}
+.page-head p {
+  color: var(--muted);
+  max-width: 980px;
+  margin: 0 0 0.6rem;
+  line-height: 1.5;
+}
+.badge {
+  display: inline-block;
+  border-radius: 999px;
+  padding: 0.22rem 0.6rem;
+  font-size: 0.67rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  border: 1px solid;
+}
+.badge-green { color: #136744; background: #eaf7ef; border-color: #b9e2ca; }
+.badge-blue { color: #184d78; background: #edf5fc; border-color: #c4dced; }
+.badge-amber { color: #84540b; background: #fdf5e5; border-color: #edd5a5; }
+.badge-red { color: #8a2f34; background: #fdf0f1; border-color: #efc4c7; }
+.card-eyebrow {
+  color: var(--teal);
+  font-size: 0.64rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+.section-title {
+  font-family: Georgia, "Times New Roman", serif;
+  color: var(--ink);
+  font-size: 1.3rem;
+  margin: 0.35rem 0 0.2rem;
+}
+.section-copy { color: var(--muted); line-height: 1.5; }
+.stMainBlockContainer div[data-testid="stVerticalBlock"][data-test-wrap="false"] {
+  background: rgba(255,255,255,0.9);
+  border: 1px solid var(--line) !important;
+  border-radius: 16px;
+  box-shadow: 0 8px 24px rgba(16, 35, 63, 0.045);
+}
+div[data-testid="stMetric"] {
+  background: rgba(255,255,255,0.9);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 0.8rem 0.9rem;
+  box-shadow: 0 6px 18px rgba(16, 35, 63, 0.04);
+}
+div[data-testid="stMetricLabel"] p {
+  color: var(--muted);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+div[data-testid="stMetricValue"] {
+  color: var(--ink);
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 1.65rem;
+}
+div[data-testid="stDataFrame"] {
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  overflow: hidden;
+  background: #fff;
+}
+div[data-testid="stExpander"] details {
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: rgba(255,255,255,0.72);
+}
+.stButton > button, .stDownloadButton > button {
+  border-radius: 999px;
+  border: 1px solid #cbd7e5;
+  font-weight: 600;
+  padding: 0.38rem 0.95rem;
+}
+.stButton > button:hover, .stDownloadButton > button:hover {
+  border-color: var(--teal);
+  color: var(--teal);
+}
+button[kind="primary"] {
+  background: linear-gradient(135deg, #0f6b5f, #1f4e79);
+  border: none;
+}
+[data-testid="stSidebar"] [role="radiogroup"] label {
+  border-radius: 10px;
+  padding: 0.38rem 0.55rem;
+  margin-bottom: 0.08rem;
+  transition: background 120ms ease;
+}
+[data-testid="stSidebar"] [role="radiogroup"] label:hover {
+  background: rgba(255,255,255,0.7);
+}
+[data-testid="stSidebar"] [role="radiogroup"] label:has(input:checked) {
+  background: #ffffff;
+  border: 1px solid var(--line);
+}
+[data-testid="stSidebar"] hr { border-color: var(--line); }
+.side-status { color: #31465f; font-size: 0.78rem; line-height: 1.55; }
+.side-status b { color: var(--ink); }
+.side-foot { color: #73839a; font-size: 0.68rem; line-height: 1.45; }
+@media (max-width: 1120px) {
+  .stMainBlockContainer div[data-testid="stHorizontalBlock"]:has(.card-eyebrow) {
+    flex-direction: column;
+  }
+  .stMainBlockContainer div[data-testid="stHorizontalBlock"]:has(.card-eyebrow) > div[data-testid="stColumn"] {
+    width: 100% !important;
+    flex: 1 1 100% !important;
+  }
+}
+@media (max-width: 900px) {
+  .block-container { padding-left: 1rem; padding-right: 1rem; }
+  .hero { border-radius: 18px; }
+  .stMainBlockContainer div[data-testid="stHorizontalBlock"]:has(div[data-testid="stMetric"]) {
+    flex-wrap: wrap;
+  }
+  .stMainBlockContainer div[data-testid="stHorizontalBlock"]:has(div[data-testid="stMetric"]) > div[data-testid="stColumn"] {
+    flex: 1 1 45% !important;
+    width: 45% !important;
+    min-width: 150px;
+  }
+}
+</style>
+"""
+
+
+def inject_styles() -> None:
+    st.markdown(STUDIO_CSS, unsafe_allow_html=True)
+
+
+def page_header(eyebrow: str, title: str, description: str, badge: str, badge_kind: str = "blue") -> None:
+    st.markdown(
+        f"""
+<section class="page-head">
+  <div class="eyebrow">{eyebrow}</div>
+  <h2>{title}</h2>
+  <p>{description}</p>
+  <span class="badge badge-{badge_kind}">{badge}</span>
+</section>
+""",
+        unsafe_allow_html=True,
+    )
+
+
+def _navigate(label: str) -> None:
+    st.session_state["workspace_page"] = label
+
+
+def render_sidebar() -> str:
+    with st.sidebar:
+        st.markdown(
+            """
+<div class="brand-card">
+  <div class="brand-mark">VN</div>
+  <div class="brand-word">Vienna Neuroinformatics<br><span>Studio</span></div>
+  <div class="brand-sub">Research Group Neuroinformatics<br>University of Vienna</div>
+</div>
+""",
+            unsafe_allow_html=True,
+        )
+        page = st.radio(
+            "Workspace",
+            NAV_LABELS,
+            label_visibility="collapsed",
+            key="workspace_page",
+        )
+        st.divider()
+        st.markdown('<div class="side-kicker">Release status</div>', unsafe_allow_html=True)
+        st.markdown(
+            """
+<div class="side-status">
+<b>Prototype v2</b> · lab-facing<br>
+✓ 37 contract tests · local + pod<br>
+✓ Julia trace parity 0.9999998<br>
+✓ external reversal audit complete<br>
+△ clamped replay is not a validated predictor
+</div>
+""",
+            unsafe_allow_html=True,
+        )
+        st.divider()
+        pdf_path = ROOT / "docs" / "VIENNA_PRODUCT_BRIEF.pdf"
+        if pdf_path.exists():
+            st.download_button(
+                "Download product brief (PDF)",
+                data=pdf_path.read_bytes(),
+                file_name="Vienna_Neuroinformatics_Studio_brief.pdf",
+                mime="application/pdf",
+                key="sidebar_pdf",
+                width="stretch",
+            )
+        st.markdown(
+            '<div class="side-foot">Prepared for Denis Kovačević and the '
+            "Neuroinformatics group. Papers remain attributed to their authors; "
+            "no digital-twin claim.</div>",
+            unsafe_allow_html=True,
+        )
+    return page
+
 
 @st.cache_resource
 def get_workbench() -> ViennaWorkbench:
@@ -63,7 +437,9 @@ def render_missing_artifact(error: FileNotFoundError) -> None:
     )
 
 
-def behavior_trace(x: np.ndarray, y: np.ndarray, z: np.ndarray, labels: np.ndarray, name: str) -> go.Scatter3d:
+def behavior_trace(
+    x: np.ndarray, y: np.ndarray, z: np.ndarray, labels: np.ndarray, name: str
+) -> go.Scatter3d:
     return go.Scatter3d(
         x=x,
         y=y,
@@ -80,10 +456,14 @@ def behavior_trace(x: np.ndarray, y: np.ndarray, z: np.ndarray, labels: np.ndarr
 
 
 def tier1_tab(wb: ViennaWorkbench) -> None:
-    st.subheader("Tier 1 — BunDLe-Net latent-manifold simulator")
-    st.caption(
+    page_header(
+        "Tier 1 · latent manifold",
+        "BunDLe-Net simulator",
         "Published 3-D BunDLe-Net embeddings; a data-driven manifold walk and a quadratic "
-        "forecast are shown separately. This is not a biophysical or causal model."
+        "forecast are shown separately. This is a behaviourally relevant compression, not a "
+        "biophysical or causal model.",
+        "Descriptive · held-out-worm benchmark",
+        "green",
     )
 
     worm_id = st.selectbox(
@@ -243,7 +623,9 @@ def tier1_tab(wb: ViennaWorkbench) -> None:
                         "90% coverage": "n/a" if not np.isfinite(coverage) else f"{coverage:.1%}",
                         "behaviour acc h10": f"{item['behavior_accuracy_h10']['mean']:.1%}",
                         "behaviour acc h25": f"{item['behavior_accuracy_h25']['mean']:.1%}",
-                        "behaviour NLL h10": round(item.get("behavior_nll_h10", {}).get("mean", float("nan")), 3),
+                        "behaviour NLL h10": round(
+                            item.get("behavior_nll_h10", {}).get("mean", float("nan")), 3
+                        ),
                         "transition JS h25": round(item["behavior_transition_js"]["mean"], 3),
                     }
                 )
@@ -270,9 +652,7 @@ def tier1_tab(wb: ViennaWorkbench) -> None:
                 st.plotly_chart(fig, width="stretch")
 
             st.markdown("**Manifold-walk predictive spread (empirical, not posterior)**")
-            ensemble = wb.tier1_ensemble(
-                worm_id, start, min(horizon, 120), seeds=32, temperature=temperature
-            )
+            ensemble = wb.tier1_ensemble(worm_id, start, min(horizon, 120), seeds=32, temperature=temperature)
             mean = ensemble.mean(axis=0)
             low, high = np.quantile(ensemble, [0.05, 0.95], axis=0)
             spread = go.Figure()
@@ -334,10 +714,13 @@ def tier1_tab(wb: ViennaWorkbench) -> None:
 
 
 def tier2_tab(wb: ViennaWorkbench) -> None:
-    st.subheader("Tier 2 — NC-MCM causal-state workbench")
-    st.caption(
+    page_header(
+        "Tier 2 · cognitive states",
+        "NC-MCM state workbench",
         "Precomputed NC-MCM models: behaviour probabilities → k-means cognitive states → "
-        "Markov tests. The UI exposes the fitted descriptive model; it does not identify do()."
+        "Markov tests. The UI exposes the fitted descriptive model; it does not identify do().",
+        "Assumption-dependent · strict Markov/stationarity rejected",
+        "amber",
     )
     worm_id = st.selectbox(
         "Worm",
@@ -497,10 +880,18 @@ def tier2_tab(wb: ViennaWorkbench) -> None:
                     "test": test_name.replace("_", " "),
                     "verdict": result.get("verdict", "n/a"),
                     "detail": {
-                        "markov_order": lambda r: f"p_MC={r.get('p_monte_carlo', float('nan')):.3f}, LR={r.get('lr', float('nan')):.1f}",
-                        "stationarity": lambda r: f"p_MC={r.get('p_monte_carlo', float('nan')):.3f}, JS={r.get('js_first_second_half', float('nan')):.3f}",
-                        "behavior_transport": lambda r: f"held-out JS={r.get('heldout_js', float('nan')):.3f}, split-half={r.get('split_half_js', float('nan')):.3f}",
-                        "state_behavior_mi": lambda r: f"MI={r.get('mutual_information', float('nan')):.3f}, p={r.get('p_permutation', float('nan')):.3f}",
+                        "markov_order": lambda r: (
+                            f"p_MC={r.get('p_monte_carlo', float('nan')):.3f}, LR={r.get('lr', float('nan')):.1f}"
+                        ),
+                        "stationarity": lambda r: (
+                            f"p_MC={r.get('p_monte_carlo', float('nan')):.3f}, JS={r.get('js_first_second_half', float('nan')):.3f}"
+                        ),
+                        "behavior_transport": lambda r: (
+                            f"held-out JS={r.get('heldout_js', float('nan')):.3f}, split-half={r.get('split_half_js', float('nan')):.3f}"
+                        ),
+                        "state_behavior_mi": lambda r: (
+                            f"MI={r.get('mutual_information', float('nan')):.3f}, p={r.get('p_permutation', float('nan')):.3f}"
+                        ),
                         "k_sensitivity": lambda r: f"max TV={r.get('max_tv_vs_reference', float('nan')):.3f}",
                     }.get(test_name, lambda r: "")(result),
                 }
@@ -597,7 +988,9 @@ def tier3_clamped_tab(wb: ViennaWorkbench) -> None:
 
     names = result.intrinsic_names
     selected = st.selectbox(
-        "Intrinsic neuron", list(names), index=names.index("AVBL") if "AVBL" in names else 0,
+        "Intrinsic neuron",
+        list(names),
+        index=names.index("AVBL") if "AVBL" in names else 0,
         key="t3c_neuron",
     )
     idx = names.index(selected)
@@ -726,6 +1119,7 @@ def tier3_clamped_tab(wb: ViennaWorkbench) -> None:
             )
         behaviour = wb.tier3_behavior_validation()
         if behaviour:
+
             def _num(value: object, digits: int = 3) -> str:
                 if value is None:
                     return "n/a"
@@ -844,9 +1238,7 @@ def tier3_clamped_tab(wb: ViennaWorkbench) -> None:
                             "readout event recall": _pct(readout_ev.get("event_recall")),
                             "model event recall": _pct(model_ev.get("event_recall")),
                             "persistence event recall": _pct(persistence_ev.get("event_recall")),
-                            "model false alarms / min": _num(
-                                model_ev.get("false_alarm_episodes_per_min"), 2
-                            ),
+                            "model false alarms / min": _num(model_ev.get("false_alarm_episodes_per_min"), 2),
                         }
                     )
                     sensitivity = item.get("alignment_sensitivity", {})
@@ -889,7 +1281,10 @@ def tier3_clamped_tab(wb: ViennaWorkbench) -> None:
         buffer,
         np.column_stack([result.time, result.truth_intrinsic.T, result.intrinsic.T]),
         delimiter=",",
-        header="time_s," + ",".join(f"recorded_{n}" for n in names) + "," + ",".join(f"simulated_{n}" for n in names),
+        header="time_s,"
+        + ",".join(f"recorded_{n}" for n in names)
+        + ","
+        + ",".join(f"simulated_{n}" for n in names),
         comments="",
     )
     st.download_button(
@@ -914,7 +1309,15 @@ def tier3_clamped_tab(wb: ViennaWorkbench) -> None:
 
 
 def tier3_tab(wb: ViennaWorkbench) -> None:
-    st.subheader("Tier 3 — Premotor biophysical simulation")
+    page_header(
+        "Tier 3 · premotor replay",
+        "Clamped-core and free-run sandbox",
+        "The published 15-intrinsic / 69-signal clamped core and a separate 205-node free-run. "
+        "The clamped replay is implementation-faithful; the external audit shows delayed, "
+        "retrospective behavioural information, not a validated forecast.",
+        "Implementation-faithful · not a digital twin",
+        "blue",
+    )
     mode = st.radio(
         "Simulation mode",
         ["Published clamped core (15 intrinsic + 69 signals)", "205-node free-run sandbox"],
@@ -969,9 +1372,7 @@ def tier3_sandbox_tab(wb: ViennaWorkbench) -> None:
     with c6:
         stim_amp = st.slider("Stimulus amplitude", 0.0, 20.0, 5.0, 0.5, key="t3_amp")
     with c7:
-        ablate_text = st.text_input(
-            "Ablate nodes (names or indices, comma-separated)", "", key="t3_ablate"
-        )
+        ablate_text = st.text_input("Ablate nodes (names or indices, comma-separated)", "", key="t3_ablate")
 
     ablate: tuple[int, ...] = ()
     if ablate_text.strip():
@@ -1034,9 +1435,7 @@ def tier3_sandbox_tab(wb: ViennaWorkbench) -> None:
             format_func=model.node_label,
             key="t3_node",
         )
-        trace = go.Figure(
-            go.Scatter(x=t, y=y[int(node)], mode="lines", line={"color": "#E45756"})
-        )
+        trace = go.Figure(go.Scatter(x=t, y=y[int(node)], mode="lines", line={"color": "#E45756"}))
         trace.update_layout(height=210, margin={"l": 0, "r": 0, "t": 10, "b": 0}, yaxis_title="u")
         st.plotly_chart(trace, width="stretch")
         st.markdown("**Synaptic matrix (nonzero support)**")
@@ -1144,7 +1543,14 @@ def tier3_sandbox_tab(wb: ViennaWorkbench) -> None:
 
 
 def provenance_tab(wb: ViennaWorkbench) -> None:
-    st.subheader("Provenance, scope, and limitations")
+    page_header(
+        "Provenance · scope",
+        "Provenance, scope and limitations",
+        "The exact sources, artifact hashes and claim boundaries behind the studio. Use this "
+        "page when a result needs to leave the room.",
+        "Source-traceable",
+        "green",
+    )
     st.json(wb.provenance())
     st.markdown(
         """
@@ -1181,77 +1587,223 @@ def provenance_tab(wb: ViennaWorkbench) -> None:
 
 
 def overview_tab(wb: ViennaWorkbench) -> None:
-    st.subheader("What this product is")
     st.markdown(
         """
-A lab-facing, source-traceable simulator stack for *C. elegans* whole-brain data. It gives
-Denis three different objects, with different claim levels, rather than one overclaimed
-"digital twin":
+<section class="hero">
+  <div class="hero-kicker">Research Group Neuroinformatics · University of Vienna</div>
+  <h1>From neural manifolds toward tested mechanisms.</h1>
+  <p>
+    A lab-facing studio for <i>C. elegans</i> whole-brain data: a latent-manifold simulator,
+    an NC-MCM state-and-assumption workbench, and an implementation-faithful premotor replay.
+    Three objects, three claim levels, one evidence trail.
+  </p>
+  <div class="hero-chips">
+    <span class="chip">Prototype v2</span>
+    <span class="chip">Source-traceable</span>
+    <span class="chip">Not a digital twin</span>
+    <span class="chip">Built for a first lab review</span>
+  </div>
+</section>
+""",
+        unsafe_allow_html=True,
+    )
 
-1. **Latent manifold** — generate and forecast behaviourally relevant 3-D BunDLe-Net trajectories.
-2. **Causal-state workbench** — inspect NC-MCM cognitive states, Markov structure, uncertainty,
-   and model-based intervention trajectories.
-3. **Premotor connectome sandbox** — run the published clamped-core ODE (15 intrinsic neurons
-   integrated, 69 signals clamped to recording) and, separately, the exploratory 205-node free-run.
-"""
+    st.markdown('<div class="section-title">Three objects, three claim levels</div>', unsafe_allow_html=True)
+    st.markdown(
+        '<div class="section-copy">Choose the object that matches the question; do not collapse '
+        "them into a single “model of the worm”.</div>",
+        unsafe_allow_html=True,
     )
-    metrics = wb.metrics()
-    benchmark = wb.tier1_benchmark()
-    c1, c2, c3 = st.columns(3)
-    c1.metric(
-        "Tier 1 one-step R²",
-        f"{metrics.get('mean_one_step_r2', float('nan')):.3f}" if metrics else "n/a",
-    )
-    c2.metric(
-        "Behaviour read-out (true latent)",
-        f"{metrics.get('mean_behavior_accuracy_true', 0):.1%}" if metrics else "n/a",
-    )
-    c3.metric("Clamped-core recordings", f"{len(wb.clamped_catalog())}")
-    if benchmark:
-        st.markdown("**Open-loop forecast, held-out worm**")
-        rows = []
-        for item in benchmark.get("models", []):
-            rows.append(
-                {
-                    "model": item["model"],
-                    "latent MSE h10": round(item["latent_mse_h10"]["mean"], 3),
-                    "behaviour acc h10": f"{item['behavior_accuracy_h10']['mean']:.1%}",
-                    "behaviour acc h25": f"{item['behavior_accuracy_h25']['mean']:.1%}",
-                    "transition JS h25": round(item["behavior_transition_js"]["mean"], 3),
-                }
-            )
-        st.dataframe(rows, hide_index=True, width="stretch")
-        st.caption(
-            "These are descriptive forecasts from four training worms to a fifth. "
-            "They do not establish mechanism or causality."
+    st.write("")
+
+    c1, c2, c3 = st.columns(3, gap="medium")
+    with c1, st.container(border=True):
+        st.markdown('<div class="card-eyebrow">Tier 1 · descriptive</div>', unsafe_allow_html=True)
+        st.markdown('<div class="section-title">Latent manifold</div>', unsafe_allow_html=True)
+        st.markdown(
+            '<div class="section-copy">Generate 3-D BunDLe-Net trajectories and inspect a '
+            "held-out-worm forecast against persistence and switching baselines.</div>",
+            unsafe_allow_html=True,
+        )
+        st.markdown(
+            '<span class="badge badge-green">Behaviourally relevant compression</span>',
+            unsafe_allow_html=True,
+        )
+        st.button(
+            "Open Tier 1", key="ov_t1", on_click=_navigate, args=("Tier 1 · BunDLe-Net",), width="stretch"
+        )
+    with c2, st.container(border=True):
+        st.markdown('<div class="card-eyebrow">Tier 2 · assumption-dependent</div>', unsafe_allow_html=True)
+        st.markdown('<div class="section-title">NC-MCM state workbench</div>', unsafe_allow_html=True)
+        st.markdown(
+            '<div class="section-copy">Inspect cognitive states, Markov tests, transport, '
+            "K sensitivity, and the difference between a counterfactual and an identified effect.</div>",
+            unsafe_allow_html=True,
+        )
+        st.markdown('<span class="badge badge-amber">do() is not identified</span>', unsafe_allow_html=True)
+        st.button("Open Tier 2", key="ov_t2", on_click=_navigate, args=("Tier 2 · NC-MCM",), width="stretch")
+    with c3, st.container(border=True):
+        st.markdown(
+            '<div class="card-eyebrow">Tier 3 · implementation-faithful</div>', unsafe_allow_html=True
+        )
+        st.markdown('<div class="section-title">Premotor replay</div>', unsafe_allow_html=True)
+        st.markdown(
+            '<div class="section-copy">Run the published 84/15/69 clamped core, compare with '
+            "β=0 and zero signals, and inspect the independent reversal-event audit.</div>",
+            unsafe_allow_html=True,
+        )
+        st.markdown(
+            '<span class="badge badge-blue">Julia parity · not a digital twin</span>',
+            unsafe_allow_html=True,
+        )
+        st.button(
+            "Open Tier 3", key="ov_t3", on_click=_navigate, args=("Tier 3 · Premotor",), width="stretch"
         )
 
-    st.markdown("**How to use it in a first meeting**")
-    st.markdown(
-        """
-1. Open **Tier 1**, pick a held-out worm, and compare *manifold walk* with *switching linear*;
-   inspect the 90% ensemble coverage before trusting an interval.
-2. Open **Tier 2**, choose `K`, inspect the Markov p-value, then open **Assumption audit**.
-3. Open **Tier 3**, run the **Published clamped core** at β=10, then compare with β=0 and the
-   205-node free-run.
-4. Download the **Evidence report** and **Evidence & lab** material before the meeting.
+    st.write("")
+    metrics = wb.metrics()
+    parity = wb.tier3_reference_all()
+    behaviour = wb.tier3_behavior_validation()
+    parity_mean = (parity or {}).get("aggregate", {}).get("mean_pearson_r")
+    beh_agg = (behaviour or {}).get("aggregate", {})
+    m1, m2, m3, m4 = st.columns(4, gap="medium")
+    m1.metric(
+        "Tier 1 one-step R²",
+        f"{metrics.get('mean_one_step_r2', float('nan')):.3f}" if metrics else "n/a",
+        help="Leave-one-worm-out; descriptive one-step predictability, not mechanism.",
+    )
+    m2.metric(
+        "Julia trace parity",
+        f"{parity_mean:.7f}" if parity_mean is not None else "n/a",
+        help="Three validation recordings; max |Δ| ≈ 0.013. Validates the port, not the biology.",
+    )
+    m3.metric(
+        "Contract tests",
+        "37",
+        help="Local and pod; includes the new lag, bootstrap and baseline tests.",
+    )
+    m4.metric(
+        "Reversal AUC: model / persistence",
+        f"{beh_agg.get('mean_model_lag0_auc', float('nan')):.3f} / "
+        f"{beh_agg.get('mean_persistence_auc', float('nan')):.3f}",
+        help="The model does not beat a one-frame persistence baseline. See Tier 3 for the retrospective-vs-prospective audit.",
+    )
 
-**Claim boundaries**
+    st.write("")
+    st.markdown('<div class="section-title">Project status at a glance</div>', unsafe_allow_html=True)
+    st.markdown(
+        '<div class="section-copy">A defensible prototype is not the same as a finished scientific '
+        "result. This is the current boundary.</div>",
+        unsafe_allow_html=True,
+    )
+    st.write("")
+    ready, missing = st.columns(2, gap="medium")
+    with ready, st.container(border=True):
+        st.markdown('<div class="card-eyebrow">Ready now</div>', unsafe_allow_html=True)
+        st.markdown(
+            """
+- Three working objects with explicit claim levels.
+- Held-out-worm Tier-1 benchmark with CRPS, coverage, NLL and baselines.
+- NC-MCM assumption audit, transport test and K sensitivity.
+- Published 84/15/69 clamped core, β=0 and zero-signal controls.
+- Python ↔ Julia parity on three validation recordings.
+- Baseline-controlled, lag-aware external reversal audit with bootstrap CIs.
+- Reproducible artifacts, 37 contract tests, product brief and claim ledger.
 """
+        )
+    with missing, st.container(border=True):
+        st.markdown('<div class="card-eyebrow">Still missing</div>', unsafe_allow_html=True)
+        st.markdown(
+            """
+- A sixth held-out worm or an external cohort.
+- An intervention dataset (optogenetic, ablation, microfluidic) for a real `do()` test.
+- Independent labels for all eight behaviours, not only binary reversal.
+- Calibrated Tier-1 intervals; current 90% bands under-cover.
+- A validated behavioural predictor; the clamped replay does not beat persistence.
+- BCI/EEG/fMRI or MeDIL integration; these are not in this release.
+- A causal, individually calibrated whole-brain digital twin.
+"""
+        )
+
+    st.write("")
+    st.markdown('<div class="section-title">A 20-minute first review</div>', unsafe_allow_html=True)
+    st.markdown(
+        '<div class="section-copy">A suggested path that surfaces both the strongest result and '
+        "the most important negative result.</div>",
+        unsafe_allow_html=True,
     )
+    st.write("")
+    s1, s2 = st.columns(2, gap="medium")
+    with s1, st.container(border=True):
+        st.markdown("**1 · Tier 1 — what is predictable?**")
+        st.caption(
+            "Pick a held-out worm; compare manifold walk with switching linear; check the 90% coverage before trusting a band."
+        )
+        st.markdown("**2 · Tier 2 — what survives an assumption audit?**")
+        st.caption(
+            "Choose K; inspect the Markov p-value; then open the assumption audit and the do() caveat."
+        )
+    with s2, st.container(border=True):
+        st.markdown("**3 · Tier 3 — what is faithful, and what is not?**")
+        st.caption(
+            "Run the clamped core at β=10; compare β=0 and zero signals; open the external audit and read the prospective result."
+        )
+        st.markdown("**4 · Evidence — what can leave the room?**")
+        st.caption("Download the evidence report, product brief and claim ledger before the meeting.")
+
+    st.write("")
     st.warning(
-        "Tier 1 is a latent-manifold model, not a circuit. Tier 2 is descriptive and its do() is "
-        "a Markov counterfactual; the current audit rejects strict first-order Markov and "
-        "stationarity, so do not present it as an identified effect. Tier 3 reproduces the "
-        "published clamped-core configuration and is checked against fresh Julia runs on all "
-        "three validation recordings; that is implementation parity, not biological or causal "
-        "validity. None of the three is a validated whole-brain digital twin."
+        "Claim boundaries: Tier 1 is a latent-manifold model, not a circuit. Tier 2 is descriptive; "
+        "its do() is a Markov counterfactual and strict first-order Markov/stationarity are rejected. "
+        "Tier 3 is implementation-faithful, not a digital twin; the readout is a proxy, and the "
+        "clamped replay has retrospective but not validated predictive behavioural information. "
+        "No tier establishes whole-brain mechanism or causality."
     )
+
+    with st.expander("What to ask Denis in the first meeting"):
+        st.markdown(
+            """
+1. Which object is closest to the lab's next grant or paper: latent manifold, NC-MCM, or premotor replay?
+2. Is a sixth held-out worm, or an external recording, available — and with what protocol?
+3. Is there an intervention dataset that could support a pre-registered `do()` or perturbation test?
+4. Should the next iteration prioritise a higher-order NC-MCM, calibrated Tier-1 intervals, or an experimental perturbation of the matched premotor replay?
+"""
+        )
 
 
 def report_tab(wb: ViennaWorkbench) -> None:
-    st.subheader("Evidence report and run bundle")
-    st.caption("A portable summary for Denis; the numbers come from the committed artifacts.")
+    page_header(
+        "Evidence · portable handoff",
+        "Evidence report and run bundle",
+        "A portable summary for Denis; every number comes from a committed artifact and every "
+        "limitation stays attached to the number.",
+        "Audit-ready · v2 schema",
+        "green",
+    )
+    behaviour_preview = wb.tier3_behavior_validation()
+    preview = (behaviour_preview or {}).get("aggregate", {})
+    r1, r2, r3, r4 = st.columns(4, gap="medium")
+    r1.metric(
+        "Readout AUC",
+        f"{preview.get('mean_readout_auc', float('nan')):.3f}",
+        help="Neural proxy against independent reversal intervals.",
+    )
+    r2.metric(
+        "Model lag-0 AUC",
+        f"{preview.get('mean_model_lag0_auc', float('nan')):.3f}",
+        help="Clamped replay at the inferred alignment.",
+    )
+    r3.metric(
+        "Retrospective AUC",
+        f"{preview.get('mean_model_retrospective_auc', float('nan')):.3f}",
+        help="Uses future model output; not a forecast.",
+    )
+    r4.metric(
+        "Persistence AUC",
+        f"{preview.get('mean_persistence_auc', float('nan')):.3f}",
+        help="A one-frame persistence baseline. The model does not beat it.",
+    )
+    st.write("")
     metrics = wb.metrics()
     benchmark = wb.tier1_benchmark()
     lines = [
@@ -1271,7 +1823,11 @@ def report_tab(wb: ViennaWorkbench) -> None:
             f"- Majority baseline: {metrics.get('mean_behavior_majority_accuracy', float('nan')):.3%}",
         ]
     if benchmark:
-        lines += ["", "| model | latent MSE h10 | behaviour acc h10 | behaviour acc h25 | transition JS h25 |", "|---|---:|---:|---:|---:|"]
+        lines += [
+            "",
+            "| model | latent MSE h10 | behaviour acc h10 | behaviour acc h25 | transition JS h25 |",
+            "|---|---:|---:|---:|---:|",
+        ]
         for item in benchmark.get("models", []):
             lines.append(
                 f"| {item['model']} | {item['latent_mse_h10']['mean']:.3f} | "
@@ -1348,18 +1904,23 @@ def report_tab(wb: ViennaWorkbench) -> None:
         file_name="vienna_neuroinformatics_evidence.md",
         mime="text/markdown",
         key="report_download",
+        type="primary",
     )
-    st.markdown(report)
-    st.markdown("**Machine-readable provenance**")
-    st.json(wb.provenance())
+    with st.expander("Preview the full evidence report", expanded=False):
+        st.markdown(report)
+    with st.expander("Machine-readable provenance", expanded=False):
+        st.json(wb.provenance())
 
 
 def lab_tab(wb: ViennaWorkbench) -> None:
-    st.subheader("Evidence & lab alignment")
-    st.caption(
+    page_header(
+        "Lab alignment · University of Vienna",
+        "Evidence and research fit",
         "What the product claims, what the evidence supports, and how each tier maps to the "
         "Neuroinformatics group's published work. This is a lab-facing map, not a claim that "
-        "Denis authored these papers."
+        "Denis authored these papers.",
+        "Lab-facing · attribution preserved",
+        "blue",
     )
     st.markdown("**Claim ledger**")
     st.dataframe(
@@ -1447,6 +2008,43 @@ def lab_tab(wb: ViennaWorkbench) -> None:
    model and compare held-out behaviour NLL before using `do()`.
 """
     )
+    st.markdown("**Delivery snapshot**")
+    st.dataframe(
+        [
+            {
+                "area": "Tier 1 · latent manifold",
+                "status": "ready descriptively",
+                "what is missing": "external cohort; calibrated intervals",
+            },
+            {
+                "area": "Tier 2 · NC-MCM",
+                "status": "audit-ready",
+                "what is missing": "higher-order model; intervention data for do()",
+            },
+            {
+                "area": "Tier 3 · premotor replay",
+                "status": "parity-ready; behavioural validation negative",
+                "what is missing": "perturbation experiment; validated predictor",
+            },
+            {
+                "area": "Product / handoff",
+                "status": "demo-ready",
+                "what is missing": "sixth worm; eight-behaviour labels; lab priority decision",
+            },
+            {
+                "area": "Lab extensions",
+                "status": "not started",
+                "what is missing": "BCI/EEG/fMRI and MeDIL integration",
+            },
+            {
+                "area": "Causal digital twin",
+                "status": "not supported",
+                "what is missing": "intervention-validated mechanism; individual calibration",
+            },
+        ],
+        hide_index=True,
+        width="stretch",
+    )
     st.download_button(
         "Download claim ledger (CSV)",
         data="claim,tier,status,evidence\n"
@@ -1465,50 +2063,32 @@ def lab_tab(wb: ViennaWorkbench) -> None:
 
 
 def main() -> None:
+    inject_styles()
     wb = get_workbench()
-    st.title("🧠 Vienna Neuroinformatics Studio")
-    st.caption(
-        "A three-tier, source-traceable simulator stack for the University of Vienna "
-        "Neuroinformatics group: BunDLe-Net latent manifold · NC-MCM causal states · premotor "
-        "biophysical sandbox."
-    )
-    st.info(
-        "Scope: research prototype, not a validated digital twin. Each section states its claim "
-        "level; no tier establishes whole-brain mechanism or causality."
-    )
-    tabs = st.tabs(
-        [
-            "Overview",
-            "Tier 1 · BunDLe-Net",
-            "Tier 2 · NC-MCM",
-            "Tier 3 · Premotor",
-            "Evidence report",
-            "Evidence & lab",
-            "Provenance",
-        ]
-    )
-    with tabs[0]:
+    page = render_sidebar()
+
+    if page == "Overview":
         overview_tab(wb)
-    with tabs[1]:
+    elif page == "Tier 1 · BunDLe-Net":
         try:
             tier1_tab(wb)
         except FileNotFoundError as error:
             render_missing_artifact(error)
-    with tabs[2]:
+    elif page == "Tier 2 · NC-MCM":
         try:
             tier2_tab(wb)
         except FileNotFoundError as error:
             render_missing_artifact(error)
-    with tabs[3]:
+    elif page == "Tier 3 · Premotor":
         try:
             tier3_tab(wb)
         except FileNotFoundError as error:
             render_missing_artifact(error)
-    with tabs[4]:
+    elif page == "Evidence report":
         report_tab(wb)
-    with tabs[5]:
+    elif page == "Evidence & lab":
         lab_tab(wb)
-    with tabs[6]:
+    elif page == "Provenance":
         provenance_tab(wb)
 
 

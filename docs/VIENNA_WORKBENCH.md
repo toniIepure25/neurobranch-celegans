@@ -21,10 +21,9 @@ workbench is a scaffold for the group's own next experiments, not a substitute f
 | 2. NC-MCM | Five precomputed NC-MCM models (`x`, 20 cluster solutions, 8 behaviours, 28 pairwise probabilities, Markov p-values) | Choose K, transition matrix, state sequence, behaviour composition, **bootstrap transition intervals, model-based intervention trajectories, cross-worm behaviour JS, assumption audit** | Descriptive causal-state model; **`do()` not identified**; current audit rejects strict Markov/stationarity |
 | 3. Premotor | Published 205×205 `A`, drive `d`, **recovered W and 205 neuron names** | **Published clamped core** (15 intrinsic integrated, 69 signals clamped to recording), signal pulses, intrinsic residual, behaviour readout, validation report; separate exploratory 205-node free-run | Clamped replay/sandbox with approximate fidelity; **not** a digital twin |
 
-The UI is one Streamlit app with seven tabs: Overview, three tiers, Evidence report, Evidence & lab,
-and Provenance. A Python facade (`ViennaWorkbench`) exposes the same functionality to notebooks.
-
-![Studio overview](assets/vienna_studio_overview.png)
+The UI is one Streamlit app with a sidebar workspace switch: Overview, three tiers, Evidence
+report, Evidence & lab, and Provenance. A Python facade (`ViennaWorkbench`) exposes the same
+functionality to notebooks.
 
 ![Studio overview](assets/vienna_studio_overview.png)
 
@@ -32,7 +31,7 @@ and Provenance. A Python facade (`ViennaWorkbench`) exposes the same functionali
 
 ![Tier 2 NC-MCM transition and behaviour composition](assets/vienna_workbench_tier2.png)
 
-![Tier 3 premotor ODE sandbox](assets/vienna_workbench_tier3.png)
+![Tier 3 premotor external audit](assets/vienna_workbench_tier3.png)
 
 ## Run
 

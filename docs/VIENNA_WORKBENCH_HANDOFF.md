@@ -2,7 +2,7 @@
 
 **To:** Denis Kovačević, Research Group Neuroinformatics, University of Vienna
 **From:** NeuroBranch engineering
-**Date:** 2026-11-09
+**Date:** 2026-11-11
 **Status:** working research product; not a validated digital twin
 
 ## What you can inspect now
@@ -12,7 +12,8 @@ python scripts/fetch_vienna_artifacts.py
 python -m streamlit run src/neurobranch/bundlenet_sim/app.py
 ```
 
-Seven tabs:
+Sidebar workspace (each section states its own claim level; the overview includes a ready/missing
+delivery snapshot and the product brief is downloadable in the sidebar):
 
 1. **Overview** — product, headline metrics, claim boundaries.
 2. **BunDLe-Net** — five released 3-D embeddings; manifold walk, switching linear and quadratic
