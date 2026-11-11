@@ -1,6 +1,6 @@
 {
   "format": "vienna-tier3-behavior-validation-v2",
-  "generated_utc": "2026-11-11T18:08:35.231989+00:00",
+  "generated_utc": "2026-11-11T18:15:06.243240+00:00",
   "claim_level": "external behavioural sanity check; not causal, not forecasting",
   "alignment": {
     "trace_offset_frames": 5,
@@ -1022,8 +1022,8 @@
     "Controls are simulation interventions (beta=0, zero signals), not experimental causal interventions."
   ],
   "provenance": {
-    "git_sha": "41937fbb8e905ec78608b126bb5adba95292b0ac",
-    "dirty": true,
+    "git_sha": "39ba3d9425a090ccbbe61613109410bb1f10988e",
+    "dirty": false,
     "dirty_scope": "src scripts tests"
   }
 }
