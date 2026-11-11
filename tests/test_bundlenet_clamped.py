@@ -126,10 +126,19 @@ def test_external_behavior_validation_report_is_consistent() -> None:
     report = ViennaWorkbench().tier3_behavior_validation()
     if not report:
         pytest.skip("run scripts/build_tier3_behavior_validation.py first")
+    assert report["format"] == "vienna-tier3-behavior-validation-v2"
     aggregate = report["aggregate"]
     assert aggregate["n_recordings"] == 3
-    assert aggregate["mean_readout_auc"] > aggregate["mean_model_auc"]
-    assert aggregate["mean_readout_agreement"] > aggregate["mean_model_agreement"]
+    assert aggregate["mean_readout_auc"] > aggregate["mean_model_lag0_auc"]
+    assert aggregate["mean_model_retrospective_auc"] > aggregate["mean_model_lag0_auc"]
+    assert aggregate["mean_model_prospective_auc"] < 0.5
+    assert aggregate["mean_persistence_auc"] > aggregate["mean_model_lag0_auc"]
+    assert len(report["folds"]) == 3
+    for item in report["recordings"]:
+        assert item["readout"]["auc_ci"] is not None
+        assert item["model"]["retrospective_auc_ci"] is not None
+        assert item["event_level"]["model_retrospective"]["n_events"] > 0
+        assert item["controls"]["beta0"]["lag0_auc"] is not None
 
 
 def test_behavior_readout_uses_published_forward_and_reverse_groups() -> None:

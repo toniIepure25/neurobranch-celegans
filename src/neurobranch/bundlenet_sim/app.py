@@ -7,6 +7,7 @@ Run from the repository root:
 from __future__ import annotations
 
 import io
+import json
 import sys
 from pathlib import Path
 
@@ -18,11 +19,11 @@ ROOT = Path(__file__).resolve().parents[3]
 if str(ROOT / "src") not in sys.path:
     sys.path.insert(0, str(ROOT / "src"))
 
-from neurobranch.bundlenet_sim.clamped import (
+from neurobranch.bundlenet_sim.clamped import (  # noqa: E402
     ClampedParameters,
     ClampedSimulationError,
     SignalPulse,
-)  # noqa: E402
+)
 from neurobranch.bundlenet_sim.dataset import BEHAVIOR_NAMES  # noqa: E402
 from neurobranch.bundlenet_sim.premotor import PremotorParameters  # noqa: E402
 from neurobranch.bundlenet_sim.workbench import ViennaWorkbench  # noqa: E402
@@ -673,8 +674,9 @@ def tier3_clamped_tab(wb: ViennaWorkbench) -> None:
         )
         st.plotly_chart(beh, width="stretch")
         st.caption(
-            "Neural proxy readout: mean AVA/AVE minus mean AVB/RIB, threshold 0.5, computed from "
-            "the recorded traces. It is not an independent video behaviour label."
+            "Neural proxy readout: mean(AVBL, AVBR, RIBL, RIBR, RID) − "
+            "mean(AVAL, AVAR, RIML, RIMR, AVEL, AVER), threshold ±0.5. It is computed "
+            "from the recorded traces, not from independent video behaviour labels."
         )
         st.markdown("**Validation report**")
         report = wb.tier3_clamped_validation()
@@ -724,33 +726,163 @@ def tier3_clamped_tab(wb: ViennaWorkbench) -> None:
             )
         behaviour = wb.tier3_behavior_validation()
         if behaviour:
-            st.markdown("**External reversal-event check**")
+            def _num(value: object, digits: int = 3) -> str:
+                if value is None:
+                    return "n/a"
+                return f"{float(value):.{digits}f}"
+
+            def _pct(value: object) -> str:
+                if value is None:
+                    return "n/a"
+                return f"{float(value):.1%}"
+
+            def _ci(value: object) -> str:
+                if not value or len(value) < 2:  # type: ignore[arg-type]
+                    return "n/a"
+                return f"{float(value[0]):.3f}–{float(value[1]):.3f}"  # type: ignore[index]
+
+            st.markdown("**External reversal-event check — baseline controlled**")
             beh_rows = []
             for item in behaviour.get("recordings", []):
                 readout = item.get("readout", {})
                 model = item.get("model", {})
+                baselines = item.get("baselines", {})
+                persistence = baselines.get("persistence", {})
                 beh_rows.append(
                     {
                         "recording": item.get("recording"),
-                        "readout AUC": f"{readout.get('reversal_auc', float('nan')):.3f}",
-                        "readout agreement": f"{readout.get('binary_agreement', float('nan')):.1%}",
-                        "readout precision / recall": f"{readout.get('reversal_precision', float('nan')):.1%} / "
-                        f"{readout.get('reversal_recall', float('nan')):.1%}",
-                        "model AUC": f"{model.get('reversal_auc', float('nan')):.3f}",
-                        "model agreement": f"{model.get('binary_agreement', float('nan')):.1%}",
+                        "readout AUC [95% CI]": f"{_num(readout.get('auc'))} [{_ci(readout.get('auc_ci'))}]",
+                        "readout agreement": _pct(readout.get("agreement")),
+                        "model lag-0 AUC": _num(model.get("lag0_auc")),
+                        "model retrospective AUC [95% CI]": f"{_num(model.get('retrospective_auc'))} "
+                        f"[{_ci(model.get('retrospective_auc_ci'))}]",
+                        "selected shift": f"{int(model.get('selected_shift_frames', 0)):+d} fr / "
+                        f"{_num(model.get('selected_shift_ms'), 0)} ms",
+                        "model prospective AUC": _num(model.get("prospective_auc")),
+                        "persistence AUC": _num(persistence.get("auc")),
                     }
                 )
             st.dataframe(beh_rows, hide_index=True, width="stretch")
             agg_beh = behaviour.get("aggregate", {})
             st.caption(
-                "Binary reversal intervals from the recording, not the neural readout: "
-                f"readout AUC={agg_beh.get('mean_readout_auc', float('nan')):.3f}, "
-                f"agreement={agg_beh.get('mean_readout_agreement', float('nan')):.1%}; "
-                f"model AUC={agg_beh.get('mean_model_auc', float('nan')):.3f}, "
-                f"agreement={agg_beh.get('mean_model_agreement', float('nan')):.1%}. "
-                "The proxy is externally meaningful, but the clamped replay only modestly "
-                "tracks the annotation. This is not a causal test."
+                "Neural readout is the paper's 5-forward/6-reverse proxy. "
+                f"Mean readout AUC={_num(agg_beh.get('mean_readout_auc'))}; "
+                f"model lag-0 AUC={_num(agg_beh.get('mean_model_lag0_auc'))}; "
+                f"retrospective AUC={_num(agg_beh.get('mean_model_retrospective_auc'))}; "
+                f"prospective AUC={_num(agg_beh.get('mean_model_prospective_auc'))} "
+                f"(exploratory max over negative lags={_num(agg_beh.get('max_exploratory_prospective_auc'))}); "
+                f"persistence AUC={_num(agg_beh.get('mean_persistence_auc'))}. "
+                "A positive selected shift means the model response follows the event; this is "
+                "retrospective alignment and is not a forecast. The model does not beat the "
+                "one-frame persistence baseline."
             )
+
+            with st.expander("Lag curve, uncertainty, controls and event-level checks"):
+                lag_fig = go.Figure()
+                for item in behaviour.get("recordings", []):
+                    curve = [point for point in item.get("lag_curve", []) if point.get("auc") is not None]
+                    if not curve:
+                        continue
+                    lag_fig.add_trace(
+                        go.Scatter(
+                            x=[point["shift_frames"] for point in curve],
+                            y=[point["auc"] for point in curve],
+                            mode="lines+markers",
+                            name=str(item.get("recording")),
+                        )
+                    )
+                lag_fig.add_vline(x=0, line_dash="dash", line_color="grey")
+                lag_fig.update_layout(
+                    height=330,
+                    margin={"l": 0, "r": 0, "t": 10, "b": 0},
+                    xaxis_title="score shift (frames; negative = model leads, positive = model lags)",
+                    yaxis_title="AUC vs reversal events",
+                )
+                st.plotly_chart(lag_fig, width="stretch")
+
+                ci_rows = []
+                for item in behaviour.get("recordings", []):
+                    readout = item.get("readout", {})
+                    model = item.get("model", {})
+                    ci_rows.append(
+                        {
+                            "recording": item.get("recording"),
+                            "readout AUC [95% CI]": f"{_num(readout.get('auc'))} [{_ci(readout.get('auc_ci'))}]",
+                            "readout agreement [95% CI]": f"{_pct(readout.get('agreement'))} "
+                            f"[{_ci(readout.get('agreement_ci'))}]",
+                            "retrospective AUC [95% CI]": f"{_num(model.get('retrospective_auc'))} "
+                            f"[{_ci(model.get('retrospective_auc_ci'))}]",
+                            "exploratory max negative-lag AUC": _num(
+                                item.get("prospective_max_negative_auc")
+                            ),
+                        }
+                    )
+
+                control_rows = []
+                event_rows = []
+                sensitivity_rows = []
+                for item in behaviour.get("recordings", []):
+                    controls = item.get("controls", {})
+                    beta = controls.get("beta0", {}) if isinstance(controls, dict) else {}
+                    zero = controls.get("zero_signals", {}) if isinstance(controls, dict) else {}
+                    control_rows.append(
+                        {
+                            "recording": item.get("recording"),
+                            "beta=0 lag-0 AUC": _num(beta.get("lag0_auc")),
+                            "beta=0 aligned AUC": _num(beta.get("aligned_auc")),
+                            "zero signals lag-0 AUC": _num(zero.get("lag0_auc")),
+                            "zero signals aligned AUC": _num(zero.get("aligned_auc")),
+                        }
+                    )
+                    event_level = item.get("event_level", {})
+                    readout_ev = event_level.get("readout", {})
+                    model_ev = event_level.get("model_retrospective", {})
+                    persistence_ev = event_level.get("persistence", {})
+                    event_rows.append(
+                        {
+                            "recording": item.get("recording"),
+                            "readout event recall": _pct(readout_ev.get("event_recall")),
+                            "model event recall": _pct(model_ev.get("event_recall")),
+                            "persistence event recall": _pct(persistence_ev.get("event_recall")),
+                            "model false alarms / min": _num(
+                                model_ev.get("false_alarm_episodes_per_min"), 2
+                            ),
+                        }
+                    )
+                    sensitivity = item.get("alignment_sensitivity", {})
+                    sensitivity_rows.append(
+                        {
+                            "recording": item.get("recording"),
+                            "lag-0 AUC range, offset 3–7": "–".join(
+                                _num(v) for v in (sensitivity.get("model_lag0_auc_range") or [])
+                            )
+                            or "n/a",
+                            "closed-interval lag-0 AUC": _num(
+                                sensitivity.get("closed_interval_model_lag0_auc")
+                            ),
+                        }
+                    )
+                st.markdown("**Block-bootstrap uncertainty**")
+                st.dataframe(ci_rows, hide_index=True, width="stretch")
+                st.markdown("**Negative controls**")
+                st.dataframe(control_rows, hide_index=True, width="stretch")
+                st.markdown("**Event-level check**")
+                st.dataframe(event_rows, hide_index=True, width="stretch")
+                st.markdown("**Alignment sensitivity**")
+                st.dataframe(sensitivity_rows, hide_index=True, width="stretch")
+                st.caption(
+                    "Event-level recall uses a ±10-frame tolerance. Controls are simulation "
+                    "manipulations, not experimental interventions. Offset/interval conventions "
+                    "are inferred from the release; the range is shown rather than selecting the "
+                    "best alignment."
+                )
+                st.download_button(
+                    "Download external validation JSON (v2)",
+                    data=json.dumps(behaviour, indent=2),
+                    file_name="vienna_tier3_behavior_validation_v2.json",
+                    mime="application/json",
+                    key="t3b_download_v2",
+                )
 
     buffer = io.StringIO()
     np.savetxt(
@@ -775,9 +907,9 @@ def tier3_clamped_tab(wb: ViennaWorkbench) -> None:
         )
     st.warning(
         "This is a published-parameter replay/sandbox with independently recovered weights. "
-        "The remaining disagreement with the recording (~40% of canonical frames) is evidence "
-        "against a pointwise digital-twin claim, not evidence for a mechanism. It is not causally "
-        "validated."
+        "The remaining disagreement (about 38–46% of frames across the three validation recordings) "
+        "is evidence against a pointwise digital-twin claim, not evidence for a mechanism. It is "
+        "not causally validated."
     )
 
 
@@ -1038,10 +1170,12 @@ def provenance_tab(wb: ViennaWorkbench) -> None:
   recording has 84 core / 15 intrinsic / 69 signal neurons. Fresh Julia 1.11.2 reference runs
   on all three validation recordings match the Python port at mean trace r=0.9999998 and
   max |Δ|=0.0133; behaviour-label parity is 99.98%. Canonical behaviour agreement with the
-  readout proxy is 60.2%. The readout itself reaches AUC 0.848 and 75.9% agreement against
-  independent reversal events, while the clamped model reaches AUC 0.633 / 55.9%. This validates
-  the implementation and the proxy, not the biology or causality; W/names are independently
-  recovered. The 205-node free-run remains exploratory. This is not a validated digital twin.
+  readout proxy is 60.2%. The readout reaches mean AUC 0.848 against independent reversal
+  events. The clamped model reaches lag-0 AUC 0.633 and a retrospective aligned AUC 0.834 at
+  a selected +7.7-frame shift, but prospective AUC is 0.388 and a one-frame persistence
+  baseline reaches 0.939. This validates the implementation and the proxy, not forecasting,
+  biology or causality; W/names are independently recovered. The 205-node free-run remains
+  exploratory. This is not a validated digital twin.
 """
     )
 
@@ -1190,10 +1324,14 @@ def report_tab(wb: ViennaWorkbench) -> None:
     if behaviour:
         agg_beh = behaviour.get("aggregate", {})
         lines += [
-            f"- Neural readout vs independent reversal events: AUC {agg_beh.get('mean_readout_auc', float('nan')):.3f}, "
-            f"agreement {agg_beh.get('mean_readout_agreement', float('nan')):.1%}",
-            f"- Clamped model vs independent reversal events: AUC {agg_beh.get('mean_model_auc', float('nan')):.3f}, "
-            f"agreement {agg_beh.get('mean_model_agreement', float('nan')):.1%}",
+            f"- Neural readout vs independent reversal events: mean AUC "
+            f"{agg_beh.get('mean_readout_auc', float('nan')):.3f}",
+            f"- Clamped model vs events: lag-0 AUC {agg_beh.get('mean_model_lag0_auc', float('nan')):.3f}; "
+            f"retrospective aligned AUC {agg_beh.get('mean_model_retrospective_auc', float('nan')):.3f}; "
+            f"prospective AUC {agg_beh.get('mean_model_prospective_auc', float('nan')):.3f}",
+            f"- One-frame persistence baseline: AUC {agg_beh.get('mean_persistence_auc', float('nan')):.3f}",
+            "- Retrospective alignment uses future model output and is not a forecast. The model "
+            "does not beat persistence; it is not a validated behavioural predictor.",
             "- The reversal-event check is a behavioural sanity check, not a causal test.",
         ]
     lines += [
@@ -1253,14 +1391,20 @@ def lab_tab(wb: ViennaWorkbench) -> None:
             {
                 "claim": "neural readout tracks independent reversal events",
                 "tier": "Tier 3",
-                "status": "supported as a proxy; AUC 0.848, agreement 75.9%",
-                "evidence": "tier3_behavior_validation.json",
+                "status": "supported as a proxy; mean AUC 0.848",
+                "evidence": "tier3_behavior_validation.json (v2, bootstrap CI)",
             },
             {
-                "claim": "clamped model predicts independent reversal events",
+                "claim": "clamped model forecasts reversal events",
                 "tier": "Tier 3",
-                "status": "weak; AUC 0.633, agreement 55.9%",
-                "evidence": "tier3_behavior_validation.json",
+                "status": "not supported; prospective AUC 0.388",
+                "evidence": "tier3_behavior_validation.json (v2)",
+            },
+            {
+                "claim": "clamped model is a validated behavioural predictor",
+                "tier": "Tier 3",
+                "status": "not supported; lag-0 AUC 0.633, retrospective 0.834, persistence 0.939",
+                "evidence": "tier3_behavior_validation.json (v2)",
             },
             {
                 "claim": "whole-brain digital twin / mechanistic validation",
@@ -1310,8 +1454,9 @@ def lab_tab(wb: ViennaWorkbench) -> None:
         "NC-MCM first-order Markov and stationary,Tier 2,rejected by current audit,tier2 audit\n"
         "do(state) identified causal effect,Tier 2,not claimed,observational clusters\n"
         "published 84/15/69 clamped core,Tier 3,implementation-faithful; 60.2% readout agreement,tier3 validation + all-recording Julia parity\n"
-        "neural readout vs independent reversal events,Tier 3,proxy supported; AUC 0.848 / 75.9%,tier3_behavior_validation.json\n"
-        "clamped model vs independent reversal events,Tier 3,weak; AUC 0.633 / 55.9%,tier3_behavior_validation.json\n"
+        "neural readout vs independent reversal events,Tier 3,proxy supported; mean AUC 0.848,tier3_behavior_validation.json v2\n"
+        "clamped model forecasts reversal events,Tier 3,not supported; prospective AUC 0.388,tier3_behavior_validation.json v2\n"
+        "clamped model validated behavioural predictor,Tier 3,not supported; persistence AUC 0.939,tier3_behavior_validation.json v2\n"
         "whole-brain digital twin,all,not claimed,no causal intervention\n",
         file_name="vienna_claim_ledger.csv",
         mime="text/csv",

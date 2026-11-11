@@ -24,9 +24,13 @@
   `F = mean(AVBL, AVBR, RIBL, RIBR, RID)` and
   `R = mean(AVAL, AVAR, RIML, RIMR, AVEL, AVER)`, threshold 0.5. It is not an independent
   video annotation; an external check against the release's `reversal_events` is reported
-  separately (readout AUC 0.848, 75.9% binary agreement). Three validation recordings
-  (84, 85, 86 measured core neurons) are used; only the canonical one has the published
-  84/15/69 split.
+  separately (readout mean AUC 0.848, 75.9% binary agreement; clamped model lag-0 AUC 0.633,
+  retrospective +7.7-frame AUC 0.834, prospective AUC 0.388 (exploratory negative-lag max
+  0.526–0.627), persistence AUC 0.939). The
+  `reversal_events` interval convention and the five-frame trace offset are inferred, not
+  documented, so offset 3–7 and closed/half-open intervals are reported as sensitivity analyses.
+  Three validation recordings (84, 85, 86 measured core neurons) are used; only the canonical one
+  has the published 84/15/69 split.
 
 ## Splits and leakage
 

@@ -239,19 +239,38 @@ measures model-vs-readout consistency, not decoding of an external behavioural l
 run reaches the same value, so the gap is not a port bug.
 
 As an independent check, the neural readout was aligned to the release's
-`reversal_events` intervals. The readout reaches **AUC 0.848** and **75.9%** binary agreement
-with the video-derived reversal annotation (precision 64.9%, recall 71.4%). The clamped model
-reaches only **AUC 0.633** and **55.9%** agreement on the same annotation. This supports the
-readout as a meaningful proxy, but it does not turn the replay into a validated behavioural
-model, and the alignment convention is inferred rather than supplied as metadata.
+`reversal_events` intervals. The readout reaches **mean AUC 0.848** (per-recording range
+0.820–0.872) and **75.9%** binary agreement with the video-derived reversal annotation. The
+clamped model reaches only **lag-0 AUC 0.633** and **55.9%** agreement on the same annotation.
+A leave-one-recording-out search over shifts `[-20, +20]` selects a **+7.7-frame (~77 ms)**
+alignment on the training recordings; on the held-out recording this retrospective alignment
+raises AUC to **0.834** (70.6% agreement). This is retrospective: it compares event `t` with
+model score `t+shift`, so it uses future model output and is **not a forecast**. The mirrored
+prospective AUC is **0.388**; an exploratory maximum over all negative shifts is 0.526–0.627,
+still below persistence and not an out-of-sample endpoint. A one-frame persistence baseline
+reaches **0.939** (94.7% agreement). The model therefore carries delayed behavioural information
+but does not beat persistence and has no validated anticipatory signal. Offset sensitivity over
+frames 3–7 moves lag-0 AUC from 0.480 to 0.758, so the exact value depends on the inferred
+alignment convention.
+
+The external report (`schema v2`) also includes block-bootstrap confidence intervals, event-level
+recall, and negative controls. Zero signals collapse the lag-0 AUC to about 0.50, while `β=0` is
+not consistently worse (lag-0 AUC 0.513–0.671 across recordings); the behavioural readout
+therefore does **not** establish a necessary gap-junction contribution. These controls are
+simulation manipulations, not experimental interventions. This supports the readout as a
+meaningful proxy and the port as faithful, but it does not turn the replay into a validated
+behavioural model or a digital twin.
 
 `python scripts/build_tier3_validation.py` writes
 `reports/vienna_workbench/tier3_clamped_validation.json` for the canonical and two additional
-recordings, with β=0 and zero-signal controls for the canonical case. The controls move the result
-substantially (β=0: 38.3% agreement, JS 0.137; zero signals: 49.6% agreement, JS 0.218), so the
-trace is not a trivial constant. The UI shows the intrinsic residual, the neural readout, the
-external reversal-event check, and the mismatch rather than hiding it. This is a replay/sandbox,
-**not** a validated digital twin.
+recordings, with β=0 and zero-signal controls for the canonical case. At the trace/readout level
+the controls move the result substantially (β=0: 38.3% agreement, JS 0.137; zero signals: 49.6%
+agreement, JS 0.218), so the trace is not a trivial constant. The external report is produced by
+`python scripts/build_tier3_behavior_validation.py`; it does not show a consistent β=0
+degradation in reversal AUC, so the trace-level control should not be described as proof that
+gap junctions are necessary for the behaviour. The UI shows the intrinsic residual, the neural
+readout, the external reversal-event check, and the mismatch rather than hiding it. This is a
+replay/sandbox, **not** a validated digital twin.
 
 The separate 205-node free-run remains exploratory. At `β=10` it leaves the stable regime; the
 sandbox defaults to `β=0` and warns when `|activity| > 20`. The UI still exposes top nodes by
@@ -294,6 +313,7 @@ t, y = wb.tier3_simulate(PremotorParameters(duration=12.0, beta=0.0))
 | `.../causal_audit.py` | Markov order, stationarity, transport, MI, K sensitivity |
 | `.../recording.py` | Atanas JSON loader, published preprocessing, 15/69 split |
 | `.../clamped.py` | published clamped-core ODE + controls + metrics |
+| `.../behavior_metrics.py` | event alignment, lag curves, LOO shift selection, block bootstrap, event-level metrics |
 | `.../premotor.py` | JLD2 loader + recovered W/names + 205-node sandbox |
 | `.../workbench.py` | unified facade |
 | `.../app.py` | seven-tab Streamlit product UI |
@@ -302,9 +322,10 @@ t, y = wb.tier3_simulate(PremotorParameters(duration=12.0, beta=0.0))
 | `scripts/fetch_vienna_artifacts.py` | copy + SHA-256 manifest + premotor builder |
 | `scripts/build_premotor_inputs.py` | recover W/names; verify A support |
 | `scripts/build_tier3_validation.py` | clamped-core validation report |
-| `scripts/build_tier3_behavior_validation.py` | neural readout vs independent reversal events |
+| `scripts/build_tier3_behavior_validation.py` | baseline-controlled, lag-aware external validation report (schema v2) |
 | `scripts/reference/run_julia_reference.jl` | authors' notebook cells, standalone Julia reference |
 | `scripts/compare_tier3_reference.py` | Python↔Julia comparison, per-recording + aggregate, input hashes |
+| `tests/test_behavior_metrics.py` | lag, bootstrap, baseline and event-level unit tests |
 | `tests/test_bundlenet_clamped.py` | clamped-core contract tests |
 | `tests/test_causal_audit.py` | synthetic assumption-audit tests |
 | `tests/test_bundlenet_workbench.py` | Tier-1/Tier-2/Tier-3 contract tests |
@@ -323,6 +344,10 @@ t, y = wb.tier3_simulate(PremotorParameters(duration=12.0, beta=0.0))
    99.98%. That validates the port, not the biology: 38–47% of frames still disagree with the
    recorded neural readout, the readout is a proxy rather than an independent video label, and
    `W`/names are independently recovered. Do not describe it as a validated digital twin.
+   The external reversal check adds a second boundary: lag-0 AUC 0.633, retrospective aligned AUC
+   0.834 at +7.7 frames, prospective AUC 0.388, persistence AUC 0.939. Retrospective alignment uses
+   future model output; it is not forecasting. The clamped replay is not a validated behavioural
+   predictor.
 4. **Preprint status.** BunDLe-Net is a bioRxiv `posted-content` record; do not cite it as a
    peer-reviewed journal article.
 5. **Five worms only.** Worm-level splits are the right unit, but n=5 limits generalization claims.

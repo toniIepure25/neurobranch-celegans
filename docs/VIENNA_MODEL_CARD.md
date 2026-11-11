@@ -37,6 +37,14 @@
   recordings match the port at mean trace r=0.9999998 and max |Δ|=0.0133; behaviour-label parity is
   99.98%. Behaviour agreement with the recorded neural readout is 60.2% canonical, 58.3% mean, so
   this is **not** a pointwise biological-fidelity claim.
+- Tier 3 external behavioural check (schema v2): the paper's neural readout reaches mean AUC 0.848
+  (range 0.820–0.872) against independent reversal intervals. The clamped model reaches lag-0 AUC
+  0.633, and a leave-one-recording-out +7.7-frame retrospective alignment reaches 0.834. The
+  mirrored prospective AUC is 0.388; an exploratory maximum over negative lags is 0.526–0.627,
+  still below persistence and not an out-of-sample endpoint. A one-frame persistence baseline
+  reaches 0.939. Thus the model carries delayed, retrospective behavioural information but does
+  **not** have a validated forecast and does not beat persistence. Alignment across offsets 3–7
+  changes lag-0 AUC from 0.480 to 0.758, so the exact value is alignment-sensitive.
 
 ## Known limitations
 
@@ -46,8 +54,10 @@
 - Premotor `W` and neuron names are recovered, not part of the public JLD2 export. The Python port
   matches the authors' Julia code on all three validation recordings; this validates the
   implementation, not the model's biology or causality. The behaviour target is the paper's
-  neural readout proxy; it tracks independent reversal events at AUC 0.848 / 75.9%, but the
-  clamped model only reaches AUC 0.633 / 55.9% on the same annotation.
+  neural readout proxy; it tracks independent reversal events at mean AUC 0.848, but the clamped
+  model reaches only lag-0 AUC 0.633 and does not beat the 0.939 persistence baseline. A
+  retrospective +7.7-frame alignment raises AUC to 0.834, but the prospective AUC is 0.388;
+  retrospective alignment must not be presented as forecasting.
 - Clamped recordings other than `2023-01-23-15` have shorter measured cores (85 and 86 here); their
   counts are reported as measured and are not forced to 84/15/69.
 

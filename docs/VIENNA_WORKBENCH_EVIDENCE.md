@@ -28,7 +28,7 @@ NC-MCM to Denis.
 | C7 | The premotor model is a 205-node fitted synaptic rate model | Published paper + `A_10takes_avg`, `d_10takes_avg`; recovered `W` and names | Published model + our loader/builder | Supported for `A`, `d`, `W`, ODE form |
 | C8 | Tier 3 reproduces the published 15-intrinsic + 69-clamped-signal configuration | Canonical `2023-01-23-15`: 84 core / 15 intrinsic / 69 signal; β=10 run stable (max |u| 3.337). Fresh Julia 1.11.2 runs on all three validation recordings: mean trace r 0.9999998, min 0.9999994, max |Python−Julia| 0.0133; behaviour-label parity 99.98% (min 99.93%). Julia and Python both reach 60.2% canonical behaviour agreement with the recorded readout | Our computation + authors' Julia code | **Configuration and port supported across three recordings**; biological/Digital-twin claim still rejected |
 | C9 | Any tier establishes whole-brain mechanism or causality | None does; Tier 1 is latent, Tier 2 is assumption-dependent and fails strict Markov/stationarity, Tier 3 is a reduced replay/sandbox | Inference from above | **Rejected** |
-| C10 | The Tier-3 neural readout is externally meaningful, and the clamped model predicts behaviour | Readout vs release `reversal_events`: mean AUC 0.848, binary agreement 75.9%, precision 64.9%, recall 71.4%. Clamped model vs the same events: AUC 0.633, agreement 55.9% | Our computation + release annotation | Readout proxy supported; model behavioural prediction **weak**; interval/offset convention inferred; not causal |
+| C10 | The Tier-3 neural readout is externally meaningful; the clamped replay carries delayed retrospective information but is not a validated behavioural predictor | Readout vs release `reversal_events`: mean AUC 0.848 (range 0.820–0.872), binary agreement 75.9%. Clamped model: lag-0 AUC 0.633; leave-one-recording-out retrospective alignment at +7.7 frames gives AUC 0.834; mirrored prospective AUC 0.388 (exploratory negative-lag maximum 0.526–0.627); one-frame persistence AUC 0.939. Block-bootstrap CIs and an offset 3–7 sensitivity analysis are in the v2 report | Our computation + release annotation | Readout proxy **supported**; validation as a predictor **not supported**; model does not beat persistence; interval/offset convention inferred; not causal |
 
 ## 3. Reproducibility artifacts
 
@@ -49,7 +49,7 @@ PYTHONPATH=src python -m neurobranch.bundlenet_sim.causal_audit --k 6
 PYTHONPATH=src python scripts/build_tier3_validation.py
 PYTHONPATH=src python scripts/build_tier3_behavior_validation.py
 PYTHONPATH=src python scripts/compare_tier3_reference.py --all
-PYTHONPATH=src python -m pytest tests/test_bundlenet_clamped.py tests/test_causal_audit.py tests/test_bundlenet_workbench.py -q
+PYTHONPATH=src python -m pytest tests/test_behavior_metrics.py tests/test_bundlenet_clamped.py tests/test_causal_audit.py tests/test_bundlenet_workbench.py -q
 python -m streamlit run src/neurobranch/bundlenet_sim/app.py
 ```
 
@@ -71,8 +71,9 @@ python -m streamlit run src/neurobranch/bundlenet_sim/app.py
 - **Reference comparison is three recordings, not a full parameter sweep.** It checks the port on
   `2023-01-23-15`, `2023-01-10-07` and `2023-01-09-15`; it does not vary `W`, `A`, `d`, or the
   replacement rules.
-- The behaviour endpoint is the paper's neural readout proxy, not an independent video annotation;
-  no external behavioural validation was performed.
+- The behaviour endpoint is the paper's neural readout proxy, checked against the release's binary
+  `reversal_events` intervals. There is no independent annotation for all eight behaviours, and
+  the interval/offset convention is inferred; the v2 report includes offset/interval sensitivity.
 - No experimental intervention data, so no identified causal effect estimate.
 - No external validation on a sixth worm or another lab's recordings.
 - No full historical test-suite green claim; the Vienna contract tests are run explicitly.
@@ -93,5 +94,6 @@ python -m streamlit run src/neurobranch/bundlenet_sim/app.py
   entry lies inside the transposed chemical-synapse support (913/913). A wrong order gives ~3%
   support overlap; this one gives 100% containment. The h5py/JLD2 layout is transposed relative
   to Julia's in-memory matrix, so `load_premotor` transposes it back.
-- Pod reproduction: extracted the 19 MB deployment bundle to `/workspace/vienna-studio`, ran
-  `pytest` 7/7 and the benchmark; values matched local to floating-point tolerance.
+- Pod reproduction: deployed code and artifacts to `/workspace/vienna-studio`; the v2 test suite
+  passes 37/37 on the pod and the UI loads the external-validation section without an
+  exception. Values match local to floating-point tolerance.
