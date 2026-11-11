@@ -1,0 +1,50 @@
+{
+  "format": "vienna-intervention-power-v1",
+  "seed": 20261111,
+  "assumptions": {
+    "p_sham": 0.3,
+    "design_icc": 0.2,
+    "trials_per_animal": 30,
+    "alpha": 0.05,
+    "target_power": 0.8,
+    "reps": 300,
+    "icc_model": "logit-normal animal effect, sigma=sqrt(ICC/(1-ICC))",
+    "test": "two-sided Welch t-test on animal-level proportions"
+  },
+  "designs": [
+    {
+      "animals_per_arm": 6,
+      "trials_per_animal": 30,
+      "mde": 0.3000000000000001,
+      "power": 0.8833333333333333
+    },
+    {
+      "animals_per_arm": 12,
+      "trials_per_animal": 30,
+      "mde": 0.20000000000000007,
+      "power": 0.8433333333333334
+    }
+  ],
+  "sensitivity": [
+    {
+      "icc": 0.05,
+      "animals_per_arm": 6,
+      "power_at_0.20_effect": 0.8533333333333334
+    },
+    {
+      "icc": 0.1,
+      "animals_per_arm": 6,
+      "power_at_0.20_effect": 0.7233333333333334
+    },
+    {
+      "icc": 0.2,
+      "animals_per_arm": 6,
+      "power_at_0.20_effect": 0.55
+    },
+    {
+      "icc": 0.4,
+      "animals_per_arm": 6,
+      "power_at_0.20_effect": 0.30333333333333334
+    }
+  ]
+}

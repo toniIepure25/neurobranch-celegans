@@ -1,0 +1,48 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://neurobranch.local/schemas/cohort_manifest.schema.json",
+  "title": "NeuroBranch incoming cohort manifest",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "cohort_id",
+    "source",
+    "license",
+    "sha256",
+    "unit",
+    "n_units",
+    "timebase_s",
+    "files"
+  ],
+  "properties": {
+    "cohort_id": {"type": "string", "minLength": 1},
+    "source": {"type": "string", "minLength": 1},
+    "license": {"type": ["string", "null"]},
+    "sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "unit": {"enum": ["animal", "recording", "session", "trial"]},
+    "n_units": {"type": "integer", "minimum": 1},
+    "timebase_s": {"type": "number", "exclusiveMinimum": 0},
+    "files": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "minLength": 1,
+        "pattern": "^(?!/)(?!.*(?:^|/)\\.\\.(?:/|$)).+$"
+      }
+    },
+    "behaviors": {
+      "type": "array",
+      "items": {"type": "string", "minLength": 1}
+    },
+    "intervention": {"type": "boolean"},
+    "allowed_uses": {
+      "type": "array",
+      "items": {"enum": ["train", "eval", "external_only", "demo"]},
+      "minItems": 1
+    },
+    "owner": {"type": "string"},
+    "notes": {"type": "string"}
+  }
+}

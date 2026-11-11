@@ -37,6 +37,7 @@ from neurobranch.bundlenet_sim.dataset import (  # noqa: E402
     load_trajectories,
 )
 from neurobranch.bundlenet_sim.ncmcm import load_ncmcm  # noqa: E402
+from neurobranch.data.validation import validate_new_worm_manifest  # noqa: E402
 
 
 def validate(worm_id: int, data_dir: Path, ncmcm_dir: Path | None) -> dict[str, object]:
@@ -87,6 +88,16 @@ def main(argv: list[str] | None = None) -> int:
         default=ROOT / "data" / "processed" / "ncmcm",
     )
     parser.add_argument("--run-benchmark", action="store_true")
+    parser.add_argument(
+        "--manifest",
+        type=Path,
+        help="optional incoming_manifest.json provenance gate",
+    )
+    parser.add_argument(
+        "--manifest-root",
+        type=Path,
+        help="directory containing the manifest's declared files; defaults to the manifest parent",
+    )
     parser.add_argument("--horizon", type=int, default=25)
     parser.add_argument("--stride", type=int, default=75)
     parser.add_argument("--seeds", type=int, default=16)
@@ -98,6 +109,15 @@ def main(argv: list[str] | None = None) -> int:
     args = parser.parse_args(argv)
 
     summary = validate(args.worm_id, args.data_dir, args.ncmcm_dir)
+    if args.manifest is not None:
+        manifest_report = validate_new_worm_manifest(
+            args.manifest,
+            data_root=args.manifest_root,
+        )
+        summary["manifest"] = manifest_report
+        if not manifest_report["passed"]:
+            print(json.dumps(summary, indent=2))
+            return 1
     print(json.dumps(summary, indent=2))
     if args.run_benchmark:
         trajectories = load_trajectories(args.data_dir)

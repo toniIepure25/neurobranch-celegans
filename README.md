@@ -67,6 +67,17 @@ source-to-claim ledger in
 [`docs/VIENNA_WORKBENCH_EVIDENCE.md`](docs/VIENNA_WORKBENCH_EVIDENCE.md), and the
 one-page [`docs/VIENNA_WORKBENCH_HANDOFF.md`](docs/VIENNA_WORKBENCH_HANDOFF.md).
 
+The gap-closure contracts and incoming-data gates are in
+[`docs/GAP_CLOSURE_MATRIX.md`](docs/GAP_CLOSURE_MATRIX.md) and
+[`docs/DATA_REQUEST_PACKAGE.md`](docs/DATA_REQUEST_PACKAGE.md). The current
+intervention design report is simulated, not data:
+
+```powershell
+python scripts/power_intervention.py --reps 300
+python scripts/validate_annotation.py --annotations data/incoming/annotation
+python scripts/validate_intervention_trials.py --trials data/incoming/intervention/trials.csv
+```
+
 ## Core dynamics simulator (research branch)
 
 The `research/core-dynamics-simulator` branch implements a free-running

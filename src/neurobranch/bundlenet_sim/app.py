@@ -1931,6 +1931,87 @@ def report_tab(wb: ViennaWorkbench) -> None:
         st.json(wb.provenance())
 
 
+def gap_closure_section(wb: ViennaWorkbench) -> None:
+    """Show the four evidence gates without implying that any gap is closed."""
+    st.markdown("**Gap closure**")
+    st.caption(
+        "No row below is a scientific result. A row closes only when its artifact passes the "
+        "validator and a frozen analysis is written. The brief is a draft until Denis confirms it."
+    )
+    st.dataframe(
+        [
+            {
+                "gate": "Written specification",
+                "status": "draft — awaiting Denis",
+                "blocker": "six scope decisions",
+                "next action": "send one-page brief",
+            },
+            {
+                "gate": "Sixth held-out worm",
+                "status": "blocked on data",
+                "blocker": "no public sixth embedding; n=5",
+                "next action": "manifest + shape gate",
+            },
+            {
+                "gate": "Independent 8-state labels",
+                "status": "blocked on data",
+                "blocker": "no independent video annotation",
+                "next action": "two blinded annotators",
+            },
+            {
+                "gate": "Randomized intervention",
+                "status": "blocked on data",
+                "blocker": "no matched target/sham cohort",
+                "next action": "power + trial gate ready",
+            },
+            {
+                "gate": "BCI / EEG / fMRI / MeDIL",
+                "status": "not started — separate lane",
+                "blocker": "no human data or ethics path",
+                "next action": "scope only if chosen",
+            },
+            {
+                "gate": "Digital twin",
+                "status": "not claimed — L0 only",
+                "blocker": "no L2 causal validation",
+                "next action": "readiness levels in brief",
+            },
+        ],
+        hide_index=True,
+        width="stretch",
+    )
+    documents = [
+        ("Denis brief (Markdown)", wb.root / "docs" / "DENIS_REQUIREMENTS_BRIEF.md"),
+        ("Gap matrix (Markdown)", wb.root / "docs" / "GAP_CLOSURE_MATRIX.md"),
+        ("Data request package (Markdown)", wb.root / "docs" / "DATA_REQUEST_PACKAGE.md"),
+        ("Annotation protocol (Markdown)", wb.root / "docs" / "ANNOTATION_PROTOCOL.md"),
+        ("Intervention power plan (Markdown)", wb.root / "docs" / "INTERVENTION_POWER_PLAN.md"),
+        ("Public-data memo (Markdown)", wb.root / "docs" / "PUBLIC_DATA_GAP_MEMO.md"),
+    ]
+    for start in range(0, len(documents), 3):
+        columns = st.columns(3)
+        for column, (label, path) in zip(columns, documents[start : start + 3], strict=False):
+            with column:
+                if path.exists():
+                    st.download_button(
+                        label,
+                        data=path.read_bytes(),
+                        file_name=path.name,
+                        mime="text/markdown",
+                        width="stretch",
+                    )
+                else:
+                    st.caption(f"missing: {path.name}")
+    power_path = wb.root / "reports" / "vienna_workbench" / "intervention_power.json"
+    if power_path.exists():
+        st.download_button(
+            "Intervention power design (JSON)",
+            data=power_path.read_bytes(),
+            file_name=power_path.name,
+            mime="application/json",
+        )
+
+
 def lab_tab(wb: ViennaWorkbench) -> None:
     page_header(
         "Lab alignment · University of Vienna",
@@ -2108,6 +2189,7 @@ def lab_tab(wb: ViennaWorkbench) -> None:
         "No independent eight-behaviour video labels exist in this release. Tier 1 agreement is with "
         "released labels; Tier 3 AUC is a binary reversal proxy check. See docs/VIENNA_LABEL_COVERAGE.md."
     )
+    gap_closure_section(wb)
     st.markdown("**Open protocols and scope**")
     st.caption(
         "These are prepared handoff documents, not data. The sixth-worm gate fails loudly "

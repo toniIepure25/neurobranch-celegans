@@ -1,0 +1,98 @@
+# Denis requirements brief — draft for confirmation
+
+**Status:** draft, not confirmed. This document is a request for a written specification, not a
+reconstruction of Denis Kovačević's requirements. No answer below may be inferred or filled in by
+the project team.
+
+**Why this exists.** The repository currently treats the original brief as provisional. The group
+page describes an active 2024–2028 project, *An interdisciplinary approach to learn and test the
+causal mapping between neural network dynamics and behavior*, but it does not publish a project
+brief or a Denis-specific specification. The studio therefore cannot honestly claim to do "exactly
+what Denis wants" until the choices below are confirmed.
+
+## 1. Six decisions that fix the scope
+
+Please answer in writing; one line per question is enough.
+
+1. **Primary object.** Which is primary for the next project?
+   - (a) a causal test of a named-neuron or circuit perturbation;
+   - (b) external generalization of the representation/forecast;
+   - (c) a reusable lab workbench (data intake, QC, annotation, provenance);
+   - (d) a BCI/NeuroAI translation project, separate from the worm work.
+
+2. **Primary endpoint.** Which endpoint should be pre-registered as primary?
+   - the released eight behavioural states;
+   - binary reversal onset/offset;
+   - dorsal versus ventral turn;
+   - a continuous kinematic variable;
+   - another endpoint (please specify).
+
+3. **Data actually available.** Which of these exist, and under what access conditions?
+   - a sixth held-out worm with the exact BunDLe-Net consistent embedding;
+   - raw traces plus behaviour video for the three validation recordings;
+   - a randomized optogenetic/ablation intervention with matched sham;
+   - an independent eight-behaviour video annotation;
+   - none of the above yet.
+
+4. **Definition of success.** At the end of the project, what would count as success?
+   - a positive predictive or causal result;
+   - a rigorous negative result;
+   - a reusable benchmark/protocol;
+   - a design for a wet-lab experiment;
+   - a working product demo for the group.
+
+5. **Biological target and intervention.** If an intervention is in scope, which circuit and which
+   modality are biologically justified, and which positive control should prove the assay works?
+   The current model ranking is not sufficient to choose a target: random control neurons produced
+   effects of similar or larger magnitude.
+
+6. **Stop rule and budget.** What is the time/ECTS budget, and what result would make you stop or
+   change direction? The existing evidence is mostly negative; a pre-agreed stop rule prevents
+   another architecture search on reused data.
+
+## 2. Decision matrix
+
+| If the answer is… | First workstream | Deferred |
+|---|---|---|
+| causal mechanism | randomized intervention + power + independent labels | BCI; sixth worm as a goal in itself |
+| external generalization | sixth worm + independent annotations | intervention; BCI |
+| lab workbench | intake, QC, annotation UI, provenance | no new scientific claim |
+| BCI/NeuroAI | separate EEG/BCI lane, ethics, BIDS | any mixing with worm claims |
+| digital twin | L0–L3 readiness plan; no promise of L3 | twin claim until L2 + L3 |
+
+## 3. Digital-twin readiness levels
+
+The project will use these labels and no stronger one:
+
+| Level | Meaning | Current |
+|---|---|---|
+| L0 descriptive replay | reproduces published dynamics; no individual calibration | **current** |
+| L1 external validity | held-out animal + independent behaviour + calibrated uncertainty | not yet |
+| L2 causal validity | randomized intervention, replicated, prospective effect | not yet |
+| L3 individual/closed-loop twin | per-animal parameters, online prediction/control | not yet |
+
+A "digital twin" requires **L2 + L3**. The current studio is L0.
+
+## 4. What the project will not do without an answer
+
+- It will not choose a target neuron on the basis of a non-specific model ranking.
+- It will not call a model-based counterfactual a causal effect.
+- It will not treat released labels as independent video annotations.
+- It will not duplicate or resample a worm and call it a sixth worm.
+- It will not integrate BCI/EEG/fMRI/MeDIL into the worm claim.
+
+## 5. Confirmation block
+
+```text
+Primary object:
+Primary endpoint:
+Available data:
+Success criterion:
+Target / intervention (if any):
+Stop rule:
+Budget / deadline:
+Confirmed by: ____________________   Date: __________
+```
+
+**Return to:** the project owner. The project team will freeze the answers in
+`docs/GAP_CLOSURE_MATRIX.md` before collecting or analysing new data.
