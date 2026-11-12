@@ -26,6 +26,10 @@ from neurobranch.bundlenet_sim.clamped import (  # noqa: E402
 )
 from neurobranch.bundlenet_sim.dataset import BEHAVIOR_NAMES  # noqa: E402
 from neurobranch.bundlenet_sim.handoff import build_gap_packet  # noqa: E402
+from neurobranch.bundlenet_sim.intake import (  # noqa: E402
+    validate_annotation_uploads,
+    validate_trial_upload,
+)
 from neurobranch.bundlenet_sim.premotor import PremotorParameters  # noqa: E402
 from neurobranch.bundlenet_sim.workbench import ViennaWorkbench  # noqa: E402
 
@@ -2047,6 +2051,67 @@ def gap_closure_section(wb: ViennaWorkbench) -> None:
         )
 
 
+def _show_gate_report(label: str, report: dict) -> None:
+    if report.get("passed"):
+        st.success(f"{label}: gate passed")
+    else:
+        st.error(f"{label}: gate failed")
+    for error in report.get("errors") or []:
+        st.markdown(f"- {error}")
+    for warning in report.get("warnings") or []:
+        st.caption(f"warning: {warning}")
+    st.json(report)
+
+
+def incoming_check_section() -> None:
+    """Run the same incoming-data gates as the CLI without leaving the app."""
+    st.markdown("**Incoming data check**")
+    st.caption(
+        "Processed only by this local app process and discarded after the check. "
+        "Passing a gate is necessary, not sufficient, for a scientific claim."
+    )
+    with st.expander("Validate annotation or intervention files", expanded=False):
+        annotation_tab, trial_tab = st.tabs(["Annotations", "Intervention trials"])
+        with annotation_tab:
+            annotation_files = st.file_uploader(
+                "Annotation CSVs (one per blinded annotator)",
+                type=["csv"],
+                accept_multiple_files=True,
+                key="intake_annotation_files",
+            )
+            if st.button("Check annotations", key="intake_annotation_run"):
+                if not annotation_files:
+                    st.warning("Add at least one annotation CSV.")
+                else:
+                    try:
+                        report = validate_annotation_uploads(
+                            [(item.name, item.getvalue()) for item in annotation_files]
+                        )
+                    except (OSError, ValueError) as exc:
+                        st.error(str(exc))
+                    else:
+                        _show_gate_report("Annotation agreement", report)
+        with trial_tab:
+            trial_file = st.file_uploader(
+                "Pre-unblinding intervention trial CSV",
+                type=["csv"],
+                key="intake_trial_file",
+            )
+            if st.button("Check trial table", key="intake_trial_run"):
+                if trial_file is None:
+                    st.warning("Add a trial CSV.")
+                else:
+                    try:
+                        report = validate_trial_upload(
+                            trial_file.name,
+                            trial_file.getvalue(),
+                        )
+                    except (OSError, ValueError) as exc:
+                        st.error(str(exc))
+                    else:
+                        _show_gate_report("Intervention trial table", report)
+
+
 def lab_tab(wb: ViennaWorkbench) -> None:
     page_header(
         "Lab alignment · University of Vienna",
@@ -2225,6 +2290,7 @@ def lab_tab(wb: ViennaWorkbench) -> None:
         "released labels; Tier 3 AUC is a binary reversal proxy check. See docs/VIENNA_LABEL_COVERAGE.md."
     )
     gap_closure_section(wb)
+    incoming_check_section()
     st.markdown("**Open protocols and scope**")
     st.caption(
         "These are prepared handoff documents, not data. The sixth-worm gate fails loudly "

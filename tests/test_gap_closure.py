@@ -54,6 +54,9 @@ def test_lab_tab_exposes_gap_closure_without_new_claim() -> None:
     assert "Gap closure" in app
     assert "blocked on data" in app
     assert "not claimed — L0 only" in app
+    assert "def incoming_check_section" in app
+    assert "Check annotations" in app
+    assert "Check trial table" in app
 
 
 def test_gap_nav_contains_all_new_documents() -> None:
@@ -73,10 +76,15 @@ def test_gap_closure_page_renders_with_documents() -> None:
     assert not at.exception, at.exception
     text = " ".join(str(m.value) for m in at.markdown)
     assert "Gap closure" in text
+    assert "Incoming data check" in text
     labels = [str(button.label) for button in at.get("download_button")]
     assert any("Denis brief" in label for label in labels)
     assert any("Gap matrix" in label for label in labels)
     assert any("ZIP" in label for label in labels)
+    assert len(at.get("file_uploader")) == 2
+    button_labels = [str(button.label) for button in at.get("button")]
+    assert any("Check annotations" in label for label in button_labels)
+    assert any("Check trial table" in label for label in button_labels)
     gap_tables = [
         frame
         for frame in at.dataframe

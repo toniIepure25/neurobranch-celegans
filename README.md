@@ -79,6 +79,9 @@ python scripts/validate_intervention_trials.py --trials data/incoming/interventi
 python scripts/analyze_intervention_trials.py --trials data/incoming/intervention/trials_with_outcomes.csv
 ```
 
+The Gap closure page can also validate uploaded annotation and trial CSVs in-session; the files are
+processed by that local app process and discarded after the check.
+
 ## Core dynamics simulator (research branch)
 
 The `research/core-dynamics-simulator` branch implements a free-running
