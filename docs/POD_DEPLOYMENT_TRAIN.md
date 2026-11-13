@@ -18,6 +18,14 @@ a claim that any open data gap is closed.
 The pod has no `/workspace`; `/work` is persistent and writable. Do not assume the old
 `/workspace/vienna-studio` deployment exists on this pod.
 
+## Verified run
+
+On 2026-11-13 the archive built from app commit `5f05a4c` was deployed to `train-01-0-0` with
+Streamlit `1.67.0` and Plotly `7.1.0`. The pod-side health endpoint returned `ok`, the local
+forward returned HTTP `200`, and the Streamlit `AppTest` harness reported zero exceptions on all
+seven workspace pages. The deployed `app.py` SHA-256 was
+`6e921810456e18c99dc6122165eb8768ea4cfd594158224aefdfc7013ffcc7b5`.
+
 ## What is transferred
 
 The deployment is deliberately smaller than the repository:
