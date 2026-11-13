@@ -1,0 +1,191 @@
+# Deploying the Vienna Studio on the `train` pod
+
+**Status:** deployment runbook. This is infrastructure documentation, not a scientific result and not
+a claim that any open data gap is closed.
+
+## Target
+
+- Run:ai workload: **`train-01-0-0`**
+- Namespace: **`runai-romania-dev`**
+- Pod path: **`/work/neurobranch-celegans`**
+- App port inside the pod: **`8502`**
+- Local port-forward port: **`8504`**
+- Runtime: Python 3.13; the image already has NumPy, pandas, SciPy, scikit-learn, h5py, PyTorch and
+  PyYAML. Streamlit and Plotly are installed at deployment time.
+- Kubeconfig: supplied locally, never committed. The `runai` CLI token may be expired; use
+  `kubectl --kubeconfig "$env:KUBECONFIG"` instead.
+
+The pod has no `/workspace`; `/work` is persistent and writable. Do not assume the old
+`/workspace/vienna-studio` deployment exists on this pod.
+
+## What is transferred
+
+The deployment is deliberately smaller than the repository:
+
+| Content | Purpose |
+|---|---|
+| tracked files from `git archive HEAD` | source, scripts, schemas, docs, reports |
+| `data/processed/` | Tier 1/2/3 processed artifacts |
+| `data/metadata/` | premotor neuron names |
+| `references/external/Celegans_premotor/data/Atanas_data/` | Tier 3 recordings |
+
+The other external reference checkouts, `.git`, tests, artifacts and figures are not needed at
+runtime. The Atanas files are third-party research data; this is an internal, local-only deployment.
+Do not expose the forwarded port publicly or redistribute those files without a licence review.
+
+## 1. Build the archive locally
+
+Run from the repository root after the branch is clean and pushed:
+
+```powershell
+$stage = Join-Path $env:TEMP "vienna-deploy"
+$tar   = Join-Path $env:TEMP "vienna-deploy.tar.gz"
+Remove-Item $stage,$tar -Recurse -Force -ErrorAction SilentlyContinue
+New-Item -ItemType Directory -Path $stage | Out-Null
+
+git archive --format=tar --output="$env:TEMP\vienna-repo.tar" HEAD
+tar -xf "$env:TEMP\vienna-repo.tar" -C $stage
+Copy-Item data\processed -Destination "$stage\data\processed" -Recurse
+Copy-Item data\metadata  -Destination "$stage\data\metadata"  -Recurse
+New-Item -ItemType Directory -Path "$stage\references\external\Celegans_premotor\data" -Force | Out-Null
+Copy-Item references\external\Celegans_premotor\data\Atanas_data `
+  -Destination "$stage\references\external\Celegans_premotor\data\Atanas_data" -Recurse
+
+tar -czf $tar -C $stage .
+Get-FileHash $tar -Algorithm SHA256
+```
+
+Record the SHA-256. Keep the archive out of Git.
+
+## 2. Copy and verify the archive
+
+`kubectl cp` on Windows rejects a source path with a drive-letter colon, so run it from the archive's
+directory with a relative source path:
+
+```powershell
+$KUBECONFIG = "<path-to-kubeconfig>"
+Push-Location $env:TEMP
+kubectl --kubeconfig $KUBECONFIG cp .\vienna-deploy.tar.gz `
+  runai-romania-dev/train-01-0-0:/work/vienna-deploy.tar.gz
+Pop-Location
+
+kubectl --kubeconfig $KUBECONFIG -n runai-romania-dev exec train-01-0-0 -- `
+  sha256sum /work/vienna-deploy.tar.gz
+```
+
+The remote hash must equal the local hash before extraction.
+
+## 3. Extract in `/work`
+
+```powershell
+kubectl --kubeconfig $KUBECONFIG -n runai-romania-dev exec train-01-0-0 -- bash -lc @'
+mkdir -p /work/neurobranch-celegans
+tar -xzf /work/vienna-deploy.tar.gz -C /work/neurobranch-celegans
+ls -la /work/neurobranch-celegans | head
+'@
+```
+
+Verify that these paths exist:
+
+```text
+/work/neurobranch-celegans/src/neurobranch/bundlenet_sim/app.py
+/work/neurobranch-celegans/data/processed/bundlenet_sim/
+/work/neurobranch-celegans/data/processed/ncmcm/
+/work/neurobranch-celegans/data/processed/premotor/
+/work/neurobranch-celegans/references/external/Celegans_premotor/data/Atanas_data/
+```
+
+## 4. Install the missing runtime packages
+
+Do not reinstall PyTorch or the scientific stack. Only Streamlit and Plotly are missing:
+
+```powershell
+kubectl --kubeconfig $KUBECONFIG -n runai-romania-dev exec train-01-0-0 -- `
+  python -m pip install --user --no-cache-dir "streamlit>=1.35" "plotly>=5.20"
+
+kubectl --kubeconfig $KUBECONFIG -n runai-romania-dev exec train-01-0-0 -- `
+  python -c "import streamlit, plotly; print(streamlit.__version__, plotly.__version__)"
+```
+
+If pip changes NumPy in an incompatible way, pin the existing version or use a virtual environment
+with `--system-site-packages`. Record the installed versions in the deployment log.
+
+## 5. Start the app
+
+```powershell
+kubectl --kubeconfig $KUBECONFIG -n runai-romania-dev exec train-01-0-0 -- bash -lc @'
+cd /work/neurobranch-celegans
+nohup env PYTHONPATH="$PWD/src" \
+  python -m streamlit run src/neurobranch/bundlenet_sim/app.py \
+  --server.port 8502 --server.address 127.0.0.1 --server.headless true \
+  > /work/vienna-studio.log 2>&1 &
+echo $! > /work/vienna-studio.pid
+sleep 5
+curl -fsS http://127.0.0.1:8502/_stcore/health && echo
+pgrep -af "streamlit run" || true
+'@
+```
+
+If the process does not survive the `kubectl exec` session, use `setsid -f` or a detached launcher.
+Keep `/work/vienna-studio.log` for diagnosis.
+
+## 6. Port-forward and verify
+
+The `kubectl port-forward` command exposes the pod-local port only on this workstation:
+
+```powershell
+kubectl --kubeconfig $KUBECONFIG -n runai-romania-dev port-forward `
+  pod/train-01-0-0 8504:8502
+```
+
+Run the forward as a background job and verify:
+
+```powershell
+(Invoke-WebRequest -UseBasicParsing http://127.0.0.1:8504/_stcore/health -TimeoutSec 10).Content
+(Invoke-WebRequest -UseBasicParsing http://127.0.0.1:8504 -TimeoutSec 10).StatusCode
+```
+
+Acceptance is `ok` and `200`. The forwarded app is local to this workstation; it is not a public URL.
+
+Then open **Evidence & lab** and check:
+
+- Gap closure table and the six gates;
+- `Download all gap documents (ZIP)`;
+- Incoming data check with the annotation and trial uploaders;
+- Tier 3 can see the Atanas recordings.
+
+If the page fails, read the pod log:
+
+```powershell
+kubectl --kubeconfig $KUBECONFIG -n runai-romania-dev exec train-01-0-0 -- `
+  tail -100 /work/vienna-studio.log
+```
+
+## 7. Update, restart and stop
+
+To update, rebuild the archive from the new commit, repeat sections 1–3, then restart Streamlit:
+
+```powershell
+kubectl --kubeconfig $KUBECONFIG -n runai-romania-dev exec train-01-0-0 -- bash -lc @'
+pkill -f "streamlit run src/neurobranch/bundlenet_sim/app.py" || true
+cd /work/neurobranch-celegans
+nohup env PYTHONPATH="$PWD/src" \
+  python -m streamlit run src/neurobranch/bundlenet_sim/app.py \
+  --server.port 8502 --server.address 127.0.0.1 --server.headless true \
+  > /work/vienna-studio.log 2>&1 &
+'@
+```
+
+Stop the local port-forward job with its job id or `Ctrl-C`; stop the app with the `pkill` command.
+The deployment directory is removed only on an explicit request:
+
+```text
+rm -rf /work/neurobranch-celegans
+```
+
+## Known limits
+
+- `/work` persistence is provided by the cluster, not guaranteed by this repository.
+- A pod restart can stop the app; the port-forward must be restarted too.
+- The kubeconfig token and pod credentials are never committed.
+- The deployment does not add data, close a scientific gap, or change any claim in the ledger.

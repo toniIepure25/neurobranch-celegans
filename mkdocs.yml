@@ -95,6 +95,7 @@ nav:
       - Annotation protocol: ANNOTATION_PROTOCOL.md
       - Intervention power plan: INTERVENTION_POWER_PLAN.md
       - Public-data gap memo: PUBLIC_DATA_GAP_MEMO.md
+      - Train pod deployment: POD_DEPLOYMENT_TRAIN.md
   - Context-conditioned dynamics:
       - Protocol: SIMULATOR_CONTEXT_RESEARCH_PROTOCOL.md
       - Technical audit: SIMULATOR_CONTEXT_TECHNICAL_AUDIT.md

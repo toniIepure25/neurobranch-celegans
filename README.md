@@ -82,6 +82,9 @@ python scripts/analyze_intervention_trials.py --trials data/incoming/interventio
 The Gap closure page can also validate uploaded annotation and trial CSVs in-session; the files are
 processed by that local app process and discarded after the check.
 
+For the Run:ai `train` pod deployment, including the exact transfer subset, health checks and
+restart/stop commands, see [`docs/POD_DEPLOYMENT_TRAIN.md`](docs/POD_DEPLOYMENT_TRAIN.md).
+
 ## Core dynamics simulator (research branch)
 
 The `research/core-dynamics-simulator` branch implements a free-running
