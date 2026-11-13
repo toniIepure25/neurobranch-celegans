@@ -45,3 +45,22 @@ def test_train_deployment_is_linked_from_readme_and_nav() -> None:
     nav = (ROOT / "mkdocs.yml").read_text(encoding="utf-8")
     assert "POD_DEPLOYMENT_TRAIN.md" in readme
     assert "POD_DEPLOYMENT_TRAIN.md" in nav
+
+
+def test_train_health_checker_is_documented_and_read_only() -> None:
+    doc = (DOCS / "POD_DEPLOYMENT_TRAIN.md").read_text(encoding="utf-8")
+    script = (ROOT / "scripts" / "check_train_pod.ps1").read_text(encoding="utf-8")
+    assert "check_train_pod.ps1" in doc
+    assert "-SkipLocal" in doc
+    for required in [
+        "#Requires -Version 5.1",
+        "train-01-0-0",
+        "runai-romania-dev",
+        "sha256sum",
+        "Get-FileHash",
+        "exit 1",
+    ]:
+        assert required in script, required
+    assert "Set-Content" not in script
+    assert "Remove-Item" not in script
+    assert "Start-Process" not in script

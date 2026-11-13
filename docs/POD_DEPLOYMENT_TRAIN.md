@@ -26,6 +26,20 @@ forward returned HTTP `200`, and the Streamlit `AppTest` harness reported zero e
 seven workspace pages. The deployed `app.py` SHA-256 was
 `6e921810456e18c99dc6122165eb8768ea4cfd594158224aefdfc7013ffcc7b5`.
 
+## Quick status check
+
+The read-only checker validates the pod phase, both health endpoints and the deployed `app.py`
+hash. It exits `0` only when every check passes:
+
+```powershell
+powershell -NoProfile -ExecutionPolicy Bypass -File scripts\check_train_pod.ps1 `
+  -Kubeconfig "<path-to-kubeconfig>"
+```
+
+Use `-SkipLocal` when checking from a host without the port-forward. On success the command prints a
+JSON report with `status: pass`; on failure it prints a `FAIL:` line and exits `1`. It never starts,
+stops or modifies the deployment.
+
 ## What is transferred
 
 The deployment is deliberately smaller than the repository:
