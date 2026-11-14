@@ -48,6 +48,11 @@ contract show what each answer commits the project to; they never fill an answer
 A recorded answer is a transcription, not a signature. The signed block in
 [`DENIS_REQUIREMENTS_BRIEF.md`](DENIS_REQUIREMENTS_BRIEF.md) remains authoritative.
 
+The room checks consistency as well as completeness. A causal object without a specified target
+and a BCI/NeuroAI object with a worm endpoint are shown as blockers. After an export, any changed
+decision is listed field by field and blocks the digest stage until a fresh transcription is
+downloaded; the provenance fields are not bound by that digest.
+
 When the block is returned, the Scope & decisions page checks it in this order: required fields,
 `YYYY-MM-DD` date, digest syntax, and equality between the signed digest and the current
 transcription digest. A match is reported as **signature fields present — identity not verified**.

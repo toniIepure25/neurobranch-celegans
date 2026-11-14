@@ -34,6 +34,7 @@ def test_scope_page_starts_unanswered_and_unconfirmed() -> None:
     assert "decision-rail" in page_text
     assert "contract-kicker" in page_text
     assert "G0 is open" in page_text
+    assert "Changed since export" not in page_text
     labels = [str(button.label) for button in at.get("download_button")]
     assert not any("scope transcription" in label for label in labels)
     assert not any("decision contract" in label for label in labels)

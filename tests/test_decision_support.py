@@ -104,6 +104,36 @@ def test_bci_scope_is_a_separate_lane() -> None:
     assert "no transfer" in contract.claim_ceiling or "no transfer" in " ".join(contract.blockers)
 
 
+def test_causal_scope_without_target_is_a_consistency_advisory() -> None:
+    answers = complete(
+        primary_endpoint="eight_states",
+        available_data=("randomized_intervention", "independent_annotations"),
+        target_mode="not_in_scope",
+    )
+    advisories = {item["code"]: item["text"] for item in answers.claim_advisories()}
+    assert "causal_without_target" in advisories
+    assert "no intervention is in scope" in advisories["causal_without_target"]
+    contract = build_contract(answers)
+    assert any("no intervention is in scope" in item for item in contract.blockers)
+    assert "specify the target" in contract.first_action
+    assert "randomized matched intervention" in contract.first_action
+
+
+def test_bci_scope_with_worm_endpoint_is_a_consistency_advisory() -> None:
+    answers = complete(
+        primary_object="bci_neuroai",
+        primary_endpoint="eight_states",
+        available_data=("independent_annotations",),
+        target_mode="not_in_scope",
+    )
+    advisories = {item["code"]: item["text"] for item in answers.claim_advisories()}
+    assert "bci_with_worm_endpoint" in advisories
+    assert "C. elegans endpoint" in advisories["bci_with_worm_endpoint"]
+    contract = build_contract(answers)
+    assert "separate endpoint" in contract.first_action
+    assert "separate cohort" in contract.first_action
+
+
 def test_contract_rows_are_blank_without_answers() -> None:
     contract = build_contract(ScopeAnswers())
     assert [row.status for row in contract.rows] == ["missing"] * 6
@@ -158,3 +188,62 @@ def test_contract_rendering_does_not_change_the_scope_digest() -> None:
     build_contract(answers)
     contract_markdown(build_contract(answers))
     assert answers.scope_digest() == before
+
+
+def test_changed_export_is_reported_field_by_field() -> None:
+    answers = complete()
+    exported = answers.to_payload()
+    changed = complete(stop_rule="Stop after one batch.")
+    contract = build_contract(
+        changed,
+        exported_digest=exported["scope_digest"],
+        exported_payload=exported,
+    )
+    changes = {change.label: change for change in contract.changed_fields}
+    assert set(changes) == {"Stop rule"}
+    assert changes["Stop rule"].before == "Stop after two independent batches fail."
+    assert changes["Stop rule"].after == "Stop after one batch."
+    digest_stage = next(stage for stage in contract.readiness if stage.key == "digest")
+    assert digest_stage.status == "blocked"
+    assert "changed after" in digest_stage.detail
+    assert "stale export" in contract.first_action
+
+
+def test_unchanged_export_has_no_diff_and_keeps_digest_done() -> None:
+    answers = complete()
+    exported = answers.to_payload()
+    contract = build_contract(
+        answers,
+        exported_digest=exported["scope_digest"],
+        exported_payload=exported,
+    )
+    assert contract.changed_fields == ()
+    assert next(stage for stage in contract.readiness if stage.key == "digest").status == "done"
+
+
+def test_invalid_exported_payload_is_ignored() -> None:
+    answers = complete()
+    contract = build_contract(
+        answers,
+        exported_digest=answers.scope_digest(),
+        exported_payload={"schema": "not-the-scope-schema", "decisions": {}},
+    )
+    assert contract.changed_fields == ()
+    assert next(stage for stage in contract.readiness if stage.key == "digest").status == "done"
+
+
+def test_legacy_digest_without_payload_blocks_but_has_no_field_diff() -> None:
+    answers = complete()
+    contract = build_contract(answers, exported_digest="a" * 64)
+    assert contract.changed_fields == ()
+    digest_stage = next(stage for stage in contract.readiness if stage.key == "digest")
+    assert digest_stage.status == "blocked"
+    assert "changed after" in digest_stage.detail
+
+
+def test_contract_markdown_escapes_table_cells() -> None:
+    answers = complete(stop_rule="Stop | now\nnew line")
+    markdown = contract_markdown(build_contract(answers))
+    assert "Stop \\| now<br>new line" in markdown
+    assert UNCONFIRMED_BANNER in markdown
+    assert "manual_required" in markdown

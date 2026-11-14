@@ -13,6 +13,7 @@ from neurobranch.bundlenet_sim.scope import (
     AVAILABLE_DATA,
     PRIMARY_ENDPOINTS,
     PRIMARY_OBJECTS,
+    SCOPE_SCHEMA,
     SUCCESS_CRITERIA,
     TARGET_MODES,
     ScopeAnswers,
@@ -256,6 +257,16 @@ def _first_action(answers: ScopeAnswers) -> str:
     if not answers.is_complete:
         return "G0 is open: ask Denis the six questions and record his written answer; do not collect new data."
     advisories = {item["code"] for item in answers.claim_advisories()}
+    if "causal_without_target" in advisories:
+        return (
+            "Resolve the causal scope: specify the target, then obtain the randomized matched "
+            "intervention and independent labels."
+        )
+    if "bci_with_worm_endpoint" in advisories:
+        return (
+            "Resolve the BCI lane: choose a separate endpoint and scope the separate cohort, "
+            "ethics, BIDS/QC and subject-level split."
+        )
     if "causal_without_intervention" in advisories or "intervention_without_randomization" in advisories:
         return "Design or obtain a randomized matched intervention and independent labels."
     if "external_without_sixth_worm" in advisories:
@@ -267,6 +278,78 @@ def _first_action(answers: ScopeAnswers) -> str:
     if "none_yet_scope" in advisories:
         return "Obtain one named data asset before running the current models."
     return "Export the transcription, return it for signature, then check the signer identity manually."
+
+
+def _decision_values(decisions: dict[str, Any]) -> dict[str, str]:
+    """Return the decision fields that are bound by the scope digest."""
+    primary = decisions.get("primary_object")
+    endpoint = decisions.get("primary_endpoint")
+    success = decisions.get("success_criterion")
+    target = decisions.get("target")
+    data = decisions.get("available_data")
+    if not isinstance(primary, dict):
+        primary = {}
+    if not isinstance(endpoint, dict):
+        endpoint = {}
+    if not isinstance(success, dict):
+        success = {}
+    if not isinstance(target, dict):
+        target = {}
+    if not isinstance(data, list):
+        data = []
+    data_labels = " · ".join(
+        str(item.get("label", ""))
+        for item in data
+        if isinstance(item, dict) and item.get("label")
+    )
+    endpoint_detail = str(endpoint.get("detail", "") or "").strip()
+    target_detail = str(target.get("detail", "") or "").strip()
+    endpoint_label = str(endpoint.get("label", "") or "").strip()
+    target_label = str(target.get("label", "") or "").strip()
+    return {
+        "Primary object": str(primary.get("label", "") or "").strip(),
+        "Primary endpoint": (
+            f"{endpoint_label}: {endpoint_detail}" if endpoint_detail else endpoint_label
+        ),
+        "Available data": data_labels,
+        "Data detail": str(decisions.get("data_detail", "") or "").strip(),
+        "Success criterion": str(success.get("label", "") or "").strip(),
+        "Target / intervention": (
+            f"{target_label}: {target_detail}" if target_detail else target_label
+        ),
+        "Stop rule": str(decisions.get("stop_rule", "") or "").strip(),
+        "Budget / deadline": str(decisions.get("budget_deadline", "") or "").strip(),
+    }
+
+
+def diff_scope_payload(
+    old_payload: dict[str, Any] | None,
+    answers: ScopeAnswers,
+) -> tuple[FieldChange, ...]:
+    """Return decision fields that changed since an exported transcription.
+
+    The scope digest binds only the schema and decisions, so this comparison
+    intentionally ignores provenance metadata. An absent or foreign payload
+    produces no diff rather than a misleading all-fields change.
+    """
+    if not isinstance(old_payload, dict) or old_payload.get("schema") != SCOPE_SCHEMA:
+        return ()
+    old_decisions = old_payload.get("decisions")
+    if not isinstance(old_decisions, dict) or not old_decisions:
+        return ()
+    try:
+        new_decisions = answers.to_payload()["decisions"]
+    except ValueError:
+        return ()
+    if not isinstance(new_decisions, dict):
+        return ()
+    old_values = _decision_values(old_decisions)
+    new_values = _decision_values(new_decisions)
+    return tuple(
+        FieldChange(label=label, before=before or "—", after=new_values[label] or "—")
+        for label, before in old_values.items()
+        if before != new_values[label]
+    )
 
 
 def _readiness(
@@ -291,6 +374,13 @@ def _readiness(
         provenance = ReadinessStage("provenance", "Provenance", "done", "Provenance is complete.")
         if digest and exported_digest == digest:
             digest_stage = ReadinessStage("digest", "Digest exported", "done", "Export digest recorded in this session.")
+        elif exported_digest:
+            digest_stage = ReadinessStage(
+                "digest",
+                "Digest exported",
+                "blocked",
+                "The transcription changed after the last export; download a fresh copy before sending it.",
+            )
         else:
             digest_stage = ReadinessStage("digest", "Digest exported", "current", "Download the JSON or contract to record the digest.")
         if signed_status == MATCHES_UNVERIFIED:
@@ -314,6 +404,7 @@ def build_contract(
     answers: ScopeAnswers,
     *,
     exported_digest: str = "",
+    exported_payload: dict[str, Any] | None = None,
     signed_status: str = "",
 ) -> ScopeContract:
     """Build a live contract from answers without changing their meaning."""
@@ -340,14 +431,35 @@ def build_contract(
     if not answers.is_complete:
         blockers.extend(answers.decision_errors())
     blockers.extend(item["text"] for item in answers.claim_advisories())
+    changed_fields = diff_scope_payload(exported_payload, answers)
+    first_action = _first_action(answers)
+    if changed_fields:
+        first_action = (
+            "Download a fresh transcription, then re-request the signature; do not send the "
+            "stale export."
+        )
     return ScopeContract(
         rows=rows,
         claim_ceiling=_claim_ceiling(answers),
         blockers=tuple(dict.fromkeys(blockers)),
-        first_action=_first_action(answers),
+        first_action=first_action,
         readiness=_readiness(answers, exported_digest=exported_digest, signed_status=signed_status),
         digest=answers.scope_digest() if answers.is_exportable else "",
         exportable=answers.is_exportable,
+        changed_fields=changed_fields,
+    )
+
+
+def _md_cell(value: str) -> str:
+    """Make a value safe for a Markdown table cell."""
+    text = str(value or "—")
+    return (
+        text.replace("&", "&amp;")
+        .replace("<", "&lt;")
+        .replace(">", "&gt;")
+        .replace("|", "\\|")
+        .replace("\r\n", "\n")
+        .replace("\n", "<br>")
     )
 
 
@@ -363,7 +475,10 @@ def contract_markdown(contract: ScopeContract) -> str:
         "| Decision | Answer | Status |",
         "|---|---|---|",
     ]
-    lines.extend(f"| {row.label} | {row.value} | {row.status} |" for row in contract.rows)
+    lines.extend(
+        f"| {_md_cell(row.label)} | {_md_cell(row.value)} | {row.status} |"
+        for row in contract.rows
+    )
     lines.extend(
         [
             "",
@@ -377,7 +492,24 @@ def contract_markdown(contract: ScopeContract) -> str:
             "|---|---|---|",
         ]
     )
-    lines.extend(f"| {stage.label} | {stage.status} | {stage.detail} |" for stage in contract.readiness)
+    lines.extend(
+        f"| {_md_cell(stage.label)} | {stage.status} | {_md_cell(stage.detail)} |"
+        for stage in contract.readiness
+    )
+    if contract.changed_fields:
+        lines.extend(
+            [
+                "",
+                "## Changes since export",
+                "",
+                "| Field | Before | After |",
+                "|---|---|---|",
+            ]
+        )
+        lines.extend(
+            f"| {_md_cell(change.label)} | {_md_cell(change.before)} | {_md_cell(change.after)} |"
+            for change in contract.changed_fields
+        )
     lines.extend(
         [
             "",
@@ -387,7 +519,8 @@ def contract_markdown(contract: ScopeContract) -> str:
             "",
             f"**Scope digest:** `{contract.digest or '—'}`",
             "",
-            "**identity_verification:** `manual_required`",        ]
+            "**identity_verification:** `manual_required`",
+        ]
     )
     return "\n".join(lines)
 
@@ -419,6 +552,13 @@ class ReadinessStage:
 
 
 @dataclass(frozen=True)
+class FieldChange:
+    label: str
+    before: str
+    after: str
+
+
+@dataclass(frozen=True)
 class ScopeContract:
     rows: tuple[ContractRow, ...]
     claim_ceiling: str
@@ -427,3 +567,4 @@ class ScopeContract:
     readiness: tuple[ReadinessStage, ...]
     digest: str
     exportable: bool
+    changed_fields: tuple[FieldChange, ...] = ()

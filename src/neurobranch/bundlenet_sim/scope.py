@@ -206,6 +206,20 @@ class ScopeAnswers:
             advisories.append({"code": code, "text": text})
 
         if self.primary_object == "causal_mechanism":
+            if self.target_mode != "specified":
+                if self.target_mode == "not_in_scope":
+                    add(
+                        "causal_without_target",
+                        "A causal object is selected, but the target decision says no intervention "
+                        "is in scope. Specify the target, or change the primary object before "
+                        "claiming a causal design.",
+                    )
+                else:
+                    add(
+                        "causal_without_target",
+                        "A causal object is selected, but the target/intervention decision is "
+                        "unanswered. Specify the target before describing a causal design.",
+                    )
             if "randomized_intervention" not in data:
                 add(
                     "causal_without_intervention",
@@ -238,6 +252,12 @@ class ScopeAnswers:
                 "The BCI/NeuroAI lane cannot be evaluated from C. elegans assets. EEG, MEG, fMRI "
                 "or MeDIL data, a separate endpoint and an ethics path must be scoped explicitly.",
             )
+            if self.primary_endpoint in {"eight_states", "binary_reversal"}:
+                add(
+                    "bci_with_worm_endpoint",
+                    "A BCI/NeuroAI lane is selected with a C. elegans endpoint. Choose a separate "
+                    "human-data endpoint; do not mix the two claims.",
+                )
 
         if self.primary_endpoint == "eight_states" and "independent_annotations" not in data:
             add(

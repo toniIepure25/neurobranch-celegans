@@ -398,7 +398,7 @@ button[kind="primary"] {
 }
 .guidance-box b { color: #143d34; }
 .guidance-box .guidance-meta { color: #55766d; font-size: 0.76rem; margin-top: 0.3rem; }
-.contract-panel { position: sticky; top: 1rem; }
+.contract-panel { position: static; }
 .contract-kicker {
   color: var(--teal); font-size: 0.67rem; font-weight: 700; letter-spacing: 0.12em;
   text-transform: uppercase; margin-bottom: 0.15rem;
@@ -409,14 +409,24 @@ button[kind="primary"] {
 .contract-value { color: var(--ink); font-size: 0.84rem; line-height: 1.4; }
 .contract-blocker { color: #7d3d1a; font-size: 0.8rem; line-height: 1.4; margin: 0.25rem 0; }
 .claim-ceiling { color: #26483f; font-size: 0.8rem; line-height: 1.45; }
+.contract-change { border-top: 1px dashed #e6c27a; padding: 0.45rem 0; }
+.contract-change-label { color: #7d3d1a; font-size: 0.68rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.07em; }
+.contract-change-values { color: var(--muted); font-size: 0.8rem; line-height: 1.4; }
+.contract-change-before { color: #8a5a2b; text-decoration: line-through; }
+.contract-change-after { color: #143d34; font-weight: 600; }
 div[data-testid="stVerticalBlockBorderWrapper"]:has(.step-number) {
   border-radius: 14px; border-color: var(--line); background: #fff;
 }
+.st-key-scope_contract_card,
 div[data-testid="stVerticalBlockBorderWrapper"]:has(.contract-panel) {
   border-radius: 16px; border-color: #c7d9d4; background: #fbfefd;
+  position: sticky; top: 1rem; max-height: calc(100vh - 2rem); overflow-y: auto;
 }
 @media (max-width: 900px) {
-  .contract-panel { position: static; }
+  .st-key-scope_contract_card,
+  div[data-testid="stVerticalBlockBorderWrapper"]:has(.contract-panel) {
+    position: static; max-height: none; overflow: visible;
+  }
   .decision-rail { gap: 0.35rem; }
   .decision-stage { padding: 0.4rem 0.5rem; font-size: 0.7rem; }
 }
@@ -2473,6 +2483,24 @@ def _render_scope_contract(contract, answers: ScopeAnswers) -> None:
             "</div>",
             unsafe_allow_html=True,
         )
+    if contract.changed_fields:
+        st.warning("This transcription changed after the last export.")
+        st.markdown("**Changed since export**")
+        for change in contract.changed_fields:
+            st.markdown(
+                '<div class="contract-change">'
+                f'<div class="contract-change-label">{html.escape(change.label)}</div>'
+                '<div class="contract-change-values">'
+                f'<span class="contract-change-before">{html.escape(change.before)}</span>'
+                " → "
+                f'<span class="contract-change-after">{html.escape(change.after)}</span>'
+                "</div></div>",
+                unsafe_allow_html=True,
+            )
+        st.caption("Download a fresh transcription and re-request the signature. Provenance is not bound by the scope digest.")
+    elif any(stage.key == "digest" and stage.status == "blocked" for stage in contract.readiness):
+        st.warning("This transcription changed after the last export.")
+        st.caption("Field-level detail is unavailable for the previous export; download a fresh transcription before sending it.")
     st.markdown("**Claim ceiling**")
     st.markdown(
         f'<div class="claim-ceiling">{html.escape(contract.claim_ceiling)}</div>',
@@ -2490,6 +2518,11 @@ def _render_scope_contract(contract, answers: ScopeAnswers) -> None:
     else:
         st.caption("The scope digest appears after provenance is complete.")
     st.caption("An upload never changes the global unconfirmed status.")
+
+
+def _remember_scope_export(payload: dict[str, object]) -> None:
+    st.session_state["scope_exported_digest"] = str(payload["scope_digest"])
+    st.session_state["scope_export_payload"] = payload
 
 
 def scope_tab(wb: ViennaWorkbench) -> None:
@@ -2575,6 +2608,11 @@ def scope_tab(wb: ViennaWorkbench) -> None:
             if st.button("Load into the form", key="scope_import_apply"):
                 for key, value in imported.to_widget_state().items():
                     st.session_state[key] = value
+                if has_digest:
+                    _remember_scope_export(imported_payload)
+                else:
+                    st.session_state.pop("scope_exported_digest", None)
+                    st.session_state.pop("scope_export_payload", None)
                 st.session_state["scope_import_status"] = (
                     "Loaded a digest-validated transcription; review every field before export."
                 )
@@ -2746,9 +2784,10 @@ def scope_tab(wb: ViennaWorkbench) -> None:
     contract = build_contract(
         answers,
         exported_digest=str(st.session_state.get("scope_exported_digest", "")),
+        exported_payload=st.session_state.get("scope_export_payload"),
         signed_status=signed_status,
     )
-    with right, st.container(border=True):
+    with right, st.container(border=True, key="scope_contract_card"):
         _render_scope_contract(contract, answers)
     rail_slot.markdown(_scope_rail_html(contract), unsafe_allow_html=True)
 
@@ -2799,7 +2838,7 @@ def scope_tab(wb: ViennaWorkbench) -> None:
                 mime="text/markdown",
                 key="scope_contract_download",
             ):
-                st.session_state["scope_exported_digest"] = answers.scope_digest()
+                _remember_scope_export(payload)
             if st.download_button(
                 "Download scope transcription (JSON)",
                 data=json.dumps(payload, indent=2, sort_keys=True, ensure_ascii=False).encode("utf-8"),
@@ -2807,7 +2846,7 @@ def scope_tab(wb: ViennaWorkbench) -> None:
                 mime="application/json",
                 key="scope_json_download",
             ):
-                st.session_state["scope_exported_digest"] = answers.scope_digest()
+                _remember_scope_export(payload)
             if st.download_button(
                 "Download scope transcription (Markdown)",
                 data=answers.to_markdown().encode("utf-8"),
@@ -2815,7 +2854,7 @@ def scope_tab(wb: ViennaWorkbench) -> None:
                 mime="text/markdown",
                 key="scope_md_download",
             ):
-                st.session_state["scope_exported_digest"] = answers.scope_digest()
+                _remember_scope_export(payload)
 
     st.info(
         "A completed form is a transcription, not a signature. Do not present this scope as "

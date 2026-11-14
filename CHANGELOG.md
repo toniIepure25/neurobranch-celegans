@@ -1,5 +1,19 @@
 # Changelog
 
+## 2026-11-15 - Decision Room v4
+
+- Added cross-decision consistency advisories: a causal object with no specified
+  intervention target and a BCI/NeuroAI object with a worm endpoint now produce
+  explicit blockers and a corrected first action.
+- Export now stores the decision snapshot. Editing any decision after export shows a
+  field-by-field before/after diff, blocks the digest stage, and tells the user to
+  download a fresh transcription before requesting a signature.
+- Contract Markdown escapes table delimiters and line breaks, and the contract card
+  is now genuinely sticky and internally scrollable on tall screens; it becomes static
+  below 900 px.
+- Importing a digest-bound JSON restores the snapshot, so change detection survives
+  a resume; legacy payloads without a digest do not pretend to be bound.
+
 ## 2026-11-14 - Decision Room v3
 
 - Scope & decisions is now a two-column decision room: a readiness rail, per-option

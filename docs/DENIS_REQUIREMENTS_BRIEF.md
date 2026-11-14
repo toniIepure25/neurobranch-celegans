@@ -126,6 +126,13 @@ which gate is open, each option explains what it commits the project to, and a l
 shows the current claim ceiling, hard blockers and first action. These are derived from the
 recorded answers; they are not a signature and not a scientific result.
 
+The room also checks consistency between decisions: a causal object without a specified
+target, or a BCI/NeuroAI object paired with a worm endpoint, is surfaced as a blocker rather
+than silently accepted. After an export, editing any decision produces a field-by-field
+before/after diff, marks the digest stage blocked, and asks for a fresh transcription before
+the signature is requested. The diff covers the decisions bound by the digest, not the
+provenance metadata.
+
 Upload the returned Markdown on the Scope & decisions page. The page parses the fenced confirmation
 block and reports one of these states:
 
