@@ -23,6 +23,7 @@ PACKET_FILES: tuple[str, ...] = (
     "docs/PUBLIC_DATA_GAP_MEMO.md",
     "reports/vienna_workbench/intervention_power.json",
     "schemas/cohort_manifest.schema.json",
+    "schemas/scope_response.schema.json",
 )
 
 _FIXED_TIME = (1980, 1, 1, 0, 0, 0)

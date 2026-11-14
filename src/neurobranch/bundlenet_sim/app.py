@@ -2554,6 +2554,19 @@ def scope_tab(wb: ViennaWorkbench) -> None:
         with impact_2, st.container(border=True):
             st.markdown("**Deferred**")
             st.write(deferred)
+        advisories = answers.claim_advisories()
+        if advisories:
+            st.warning(
+                "Claim-readiness advisories: the scope can be recorded, but its strongest claim "
+                "still lacks a prerequisite. These are not validation errors."
+            )
+            st.markdown(
+                "\n".join(
+                    f"- **`{item['code']}`** — {item['text']}" for item in advisories
+                )
+            )
+        else:
+            st.caption("No claim-readiness advisory is implied by the recorded answers.")
         if metadata_errors:
             st.warning("Decisions recorded, but provenance is incomplete; exports are disabled.")
             st.markdown("\n".join(f"- {error}" for error in metadata_errors))

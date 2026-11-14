@@ -1,0 +1,216 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://neurobranch.local/schemas/scope_response.schema.json",
+  "title": "Vienna scope response (unconfirmed transcription)",
+  "description": "A recorded transcription of Denis's six decisions. This schema cannot represent a signature; confirmation_status is always unconfirmed_transcription.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema",
+    "confirmation_status",
+    "warning",
+    "decisions",
+    "workstream",
+    "claim_readiness",
+    "metadata"
+  ],
+  "properties": {
+    "schema": {"const": "vienna-scope-response-v1"},
+    "confirmation_status": {"const": "unconfirmed_transcription"},
+    "warning": {"type": "string", "minLength": 1},
+    "decisions": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "primary_object",
+        "primary_endpoint",
+        "available_data",
+        "data_detail",
+        "success_criterion",
+        "target",
+        "stop_rule",
+        "budget_deadline"
+      ],
+      "properties": {
+        "primary_object": {"$ref": "#/$defs/primary_object_selection"},
+        "primary_endpoint": {"$ref": "#/$defs/endpoint_selection"},
+        "available_data": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {"$ref": "#/$defs/data_selection"}
+        },
+        "data_detail": {"type": "string"},
+        "success_criterion": {"$ref": "#/$defs/success_selection"},
+        "target": {"$ref": "#/$defs/target_selection"},
+        "stop_rule": {"type": "string", "minLength": 1},
+        "budget_deadline": {"type": "string", "minLength": 1}
+      }
+    },
+    "workstream": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["first", "deferred"],
+      "properties": {
+        "first": {"type": "string", "minLength": 1},
+        "deferred": {"type": "string", "minLength": 1}
+      }
+    },
+    "claim_readiness": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["note", "warnings"],
+      "properties": {
+        "note": {"type": "string", "minLength": 1},
+        "warnings": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["code", "text"],
+            "properties": {
+              "code": {
+                "enum": [
+                  "causal_without_intervention",
+                  "causal_without_independent_labels",
+                  "external_without_sixth_worm",
+                  "external_without_independent_labels",
+                  "bci_without_separate_lane",
+                  "eight_states_without_independent_labels",
+                  "binary_without_video",
+                  "intervention_without_randomization",
+                  "positive_result_without_data",
+                  "workbench_scientific_success",
+                  "none_yet_scope"
+                ]
+              },
+              "text": {"type": "string", "minLength": 1}
+            }
+          }
+        }
+      }
+    },
+    "metadata": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["recorded_by", "recorded_on", "answer_source"],
+      "properties": {
+        "recorded_by": {"type": "string", "minLength": 1},
+        "recorded_on": {"type": "string", "format": "date"},
+        "answer_source": {"$ref": "#/$defs/source_selection"}
+      }
+    }
+  },
+  "$defs": {
+    "selection": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "label"],
+      "properties": {
+        "id": {"type": "string", "minLength": 1},
+        "label": {"type": "string", "minLength": 1}
+      }
+    },
+    "selection_with_detail": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "label", "detail"],
+      "properties": {
+        "id": {"type": "string", "minLength": 1},
+        "label": {"type": "string", "minLength": 1},
+        "detail": {"type": "string"}
+      }
+    },
+    "primary_object_selection": {
+      "allOf": [
+        {"$ref": "#/$defs/selection"},
+        {
+          "properties": {
+            "id": {
+              "enum": [
+                "causal_mechanism",
+                "external_generalization",
+                "lab_workbench",
+                "bci_neuroai"
+              ]
+            }
+          }
+        }
+      ]
+    },
+    "endpoint_selection": {
+      "allOf": [
+        {"$ref": "#/$defs/selection_with_detail"},
+        {
+          "properties": {
+            "id": {
+              "enum": [
+                "eight_states",
+                "binary_reversal",
+                "turn_direction",
+                "continuous_kinematics",
+                "other"
+              ]
+            }
+          }
+        }
+      ]
+    },
+    "data_selection": {
+      "allOf": [
+        {"$ref": "#/$defs/selection"},
+        {
+          "properties": {
+            "id": {
+              "enum": [
+                "sixth_worm",
+                "raw_traces_video",
+                "randomized_intervention",
+                "independent_annotations",
+                "none_yet"
+              ]
+            }
+          }
+        }
+      ]
+    },
+    "success_selection": {
+      "allOf": [
+        {"$ref": "#/$defs/selection"},
+        {
+          "properties": {
+            "id": {
+              "enum": [
+                "positive_result",
+                "rigorous_negative",
+                "reusable_benchmark",
+                "wet_lab_design",
+                "working_demo"
+              ]
+            }
+          }
+        }
+      ]
+    },
+    "target_selection": {
+      "allOf": [
+        {"$ref": "#/$defs/selection_with_detail"},
+        {
+          "properties": {
+            "id": {"enum": ["not_in_scope", "specified"]}
+          }
+        }
+      ]
+    },
+    "source_selection": {
+      "allOf": [
+        {"$ref": "#/$defs/selection"},
+        {
+          "properties": {
+            "id": {"enum": ["email", "meeting_notes", "written_note", "other"]}
+          }
+        }
+      ]
+    }
+  }
+}

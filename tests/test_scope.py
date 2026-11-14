@@ -3,7 +3,9 @@
 from __future__ import annotations
 
 import json
+from pathlib import Path
 
+import jsonschema
 import pytest
 
 from neurobranch.bundlenet_sim.scope import (
@@ -11,6 +13,8 @@ from neurobranch.bundlenet_sim.scope import (
     SCOPE_SCHEMA,
     ScopeAnswers,
 )
+
+ROOT = Path(__file__).resolve().parents[1]
 
 
 def complete_answers() -> ScopeAnswers:
@@ -108,12 +112,74 @@ def test_payload_round_trip() -> None:
     assert restored == answers
 
 
+def test_payload_matches_the_published_schema() -> None:
+    schema = json.loads(
+        (ROOT / "schemas" / "scope_response.schema.json").read_text(encoding="utf-8")
+    )
+    jsonschema.Draft202012Validator.check_schema(schema)
+    payload = complete_answers().to_payload()
+    jsonschema.validate(instance=payload, schema=schema)
+
+    payload["decisions"]["primary_object"]["id"] = "digital_twin"
+    with pytest.raises(jsonschema.ValidationError):
+        jsonschema.validate(instance=payload, schema=schema)
+
+
 def test_markdown_is_explicitly_unconfirmed() -> None:
     markdown = complete_answers().to_markdown()
     assert "UNCONFIRMED — NOT SIGNED BY DENIS" in markdown
     assert "confirmation_status" not in markdown
     assert "confirmed by" not in markdown.lower()
     assert "Randomized intervention" in markdown
+
+
+def test_claim_advisories_are_explicit_and_non_blocking() -> None:
+    answers = complete_answers()
+    assert answers.is_exportable is True
+    codes = [item["code"] for item in answers.claim_advisories()]
+    assert codes == ["binary_without_video"]
+
+    answers.available_data = ()
+    answers.primary_object = "external_generalization"
+    codes = [item["code"] for item in answers.claim_advisories()]
+    assert "external_without_sixth_worm" in codes
+    assert "external_without_independent_labels" in codes
+
+    answers.primary_object = "causal_mechanism"
+    answers.success_criterion = "positive_result"
+    codes = [item["code"] for item in answers.claim_advisories()]
+    assert "causal_without_intervention" in codes
+    assert "causal_without_independent_labels" in codes
+    assert "positive_result_without_data" in codes
+
+
+def test_bci_and_workbench_advisories_do_not_mix_lanes() -> None:
+    answers = complete_answers()
+    answers.primary_object = "bci_neuroai"
+    codes = [item["code"] for item in answers.claim_advisories()]
+    assert "bci_without_separate_lane" in codes
+
+    answers.primary_object = "lab_workbench"
+    answers.success_criterion = "positive_result"
+    codes = [item["code"] for item in answers.claim_advisories()]
+    assert "workbench_scientific_success" in codes
+
+
+def test_advisories_are_in_payload_and_markdown() -> None:
+    answers = complete_answers()
+    payload = answers.to_payload()
+    assert payload["claim_readiness"]["warnings"][0]["code"] == "binary_without_video"
+    markdown = answers.to_markdown()
+    assert "## Claim-readiness advisories" in markdown
+    assert "binary_without_video" in markdown
+    assert "not validation errors" in payload["claim_readiness"]["note"]
+
+
+def test_markdown_has_no_advisory_placeholder_when_none_apply() -> None:
+    answers = complete_answers()
+    answers.primary_endpoint = "turn_direction"
+    markdown = answers.to_markdown()
+    assert "- None implied by the recorded answers." in markdown
 
 
 def test_unknown_values_are_rejected() -> None:

@@ -183,6 +183,98 @@ class ScopeAnswers:
             return IMPACT[self.primary_object]
         return ("Blocked on G0: primary object unanswered", "All new workstreams")
 
+    def claim_advisories(self) -> list[dict[str, str]]:
+        """Return claim-readiness warnings implied by the selected answers.
+
+        These are advisories, not validation errors: a scope can be recorded even
+        when the data needed to support its strongest claim do not exist yet. The
+        point is to make that dependency explicit before anyone writes a claim.
+        """
+        data = set(self.available_data)
+        advisories: list[dict[str, str]] = []
+
+        def add(code: str, text: str) -> None:
+            advisories.append({"code": code, "text": text})
+
+        if self.primary_object == "causal_mechanism":
+            if "randomized_intervention" not in data:
+                add(
+                    "causal_without_intervention",
+                    "A causal object is selected without a randomized intervention with matched "
+                    "sham. The project can design or analyse one, but cannot validate a causal "
+                    "effect from the current assets.",
+                )
+            if "independent_annotations" not in data:
+                add(
+                    "causal_without_independent_labels",
+                    "A causal object is selected without independent behaviour annotation. A "
+                    "neural-to-behaviour result would remain exposed to label circularity.",
+                )
+        elif self.primary_object == "external_generalization":
+            if "sixth_worm" not in data:
+                add(
+                    "external_without_sixth_worm",
+                    "External generalization is selected, but no sixth held-out worm with the "
+                    "exact BunDLe-Net embedding is available. The current release contains five.",
+                )
+            if "independent_annotations" not in data:
+                add(
+                    "external_without_independent_labels",
+                    "External generalization is selected without an independent eight-behaviour "
+                    "annotation. Agreement would still be measured against released labels.",
+                )
+        elif self.primary_object == "bci_neuroai":
+            add(
+                "bci_without_separate_lane",
+                "The BCI/NeuroAI lane cannot be evaluated from C. elegans assets. EEG, MEG, fMRI "
+                "or MeDIL data, a separate endpoint and an ethics path must be scoped explicitly.",
+            )
+
+        if self.primary_endpoint == "eight_states" and "independent_annotations" not in data:
+            add(
+                "eight_states_without_independent_labels",
+                "The eight-state endpoint will use the released labels; no independent video "
+                "annotation is available for this endpoint.",
+            )
+        if self.primary_endpoint == "binary_reversal" and "raw_traces_video" not in data:
+            add(
+                "binary_without_video",
+                "The binary reversal endpoint has no independent raw video in the current assets; "
+                "interval and onset/offset alignment remain inferred.",
+            )
+        if self.target_mode == "specified" and "randomized_intervention" not in data:
+            add(
+                "intervention_without_randomization",
+                "An intervention is specified without randomized intervention data. It remains a "
+                "design target, not a testable contrast in the current release.",
+            )
+        if self.success_criterion == "positive_result" and (
+            not data or data == {"none_yet"}
+        ):
+            add(
+                "positive_result_without_data",
+                "A positive result is the success criterion while no usable data are recorded. "
+                "Pre-register the decision rule or revise the criterion before data collection.",
+            )
+        if self.primary_object == "lab_workbench" and self.success_criterion in {
+            "positive_result",
+            "rigorous_negative",
+            "wet_lab_design",
+        }:
+            add(
+                "workbench_scientific_success",
+                "A reusable workbench is selected, but success is defined as a scientific result "
+                "or wet-lab design. Keep the product deliverable and the scientific claim as "
+                "separate workstreams.",
+            )
+        if "none_yet" in data and self.success_criterion != "working_demo":
+            add(
+                "none_yet_scope",
+                "No data are recorded yet, but success is not defined as a working demo. The next "
+                "step is to obtain one of the named data assets, not to run the current models.",
+            )
+        return advisories
+
     def status_label(self) -> str:
         """Return the only honest scope label for the current form state."""
         if not self.is_complete:
@@ -243,6 +335,13 @@ class ScopeAnswers:
                 "first": self.impact()[0],
                 "deferred": self.impact()[1],
             },
+            "claim_readiness": {
+                "note": (
+                    "Advisories describe what the selected scope would still need before its "
+                    "strongest claim could be tested; they are not validation errors."
+                ),
+                "warnings": self.claim_advisories(),
+            },
             "metadata": {
                 "recorded_by": _clean(self.recorded_by),
                 "recorded_on": _clean(self.recorded_on),
@@ -301,8 +400,16 @@ class ScopeAnswers:
                 f"- **First workstream:** {payload['workstream']['first']}",
                 f"- **Deferred:** {payload['workstream']['deferred']}",
                 "",
+                "## Claim-readiness advisories",
+                "",
             ]
         )
+        warnings = payload["claim_readiness"]["warnings"]
+        if warnings:
+            lines.extend(f"- **{item['code']}** — {item['text']}" for item in warnings)
+        else:
+            lines.append("- None implied by the recorded answers.")
+        lines.append("")
         return "\n".join(lines)
 
     @classmethod

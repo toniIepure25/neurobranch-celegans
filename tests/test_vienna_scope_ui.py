@@ -53,7 +53,10 @@ def test_scope_page_exports_only_after_complete_provenance() -> None:
 
     assert not at.exception, at.exception
     assert "Recorded, not signed" in " ".join(str(item.value) for item in at.success)
-    assert not at.warning
+    warnings = " ".join(str(item.value) for item in at.warning)
+    assert "Claim-readiness advisories" in warnings
+    page_text = " ".join(str(item.value) for item in at.markdown)
+    assert "causal_without_independent_labels" in page_text
     labels = [str(button.label) for button in at.get("download_button")]
     assert any("scope transcription (JSON)" in label for label in labels)
     assert any("scope transcription (Markdown)" in label for label in labels)

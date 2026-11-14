@@ -103,3 +103,10 @@ Confirmed by: ____________________   Date: __________
 decisions page, but the scope is confirmed only when Denis returns this block with `Confirmed by`
 and `Date` completed. Until then every artifact from the page carries
 `confirmation_status: unconfirmed_transcription`.
+
+The page also prints **claim-readiness advisories** when a selected scope lacks a prerequisite, for
+example a causal object without a randomized intervention, external generalization without a sixth
+worm, or a binary reversal endpoint without independent video. These are not validation errors and
+do not block recording; they state what the strongest claim would still need before it can be
+tested. The exported JSON is validated against `schemas/scope_response.schema.json`; the schema's
+`confirmation_status` is fixed to `unconfirmed_transcription`, so it cannot encode a signature.

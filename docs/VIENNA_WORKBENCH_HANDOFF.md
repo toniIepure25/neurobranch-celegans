@@ -17,7 +17,8 @@ delivery snapshot and the product brief is downloadable in the sidebar):
 
 1. **Overview** — product, headline metrics, claim boundaries.
 2. **Scope & decisions** — the six Denis decisions, recorded without inferred defaults; exports
-   stay marked as unconfirmed until the signed brief is returned.
+   stay marked as unconfirmed until the signed brief is returned, and **claim-readiness advisories**
+   name any prerequisite the selected scope still lacks.
 3. **BunDLe-Net** — five released 3-D embeddings; manifold walk, switching linear and quadratic
    models; held-out-worm benchmark with CRPS, 90% coverage, behaviour NLL and horizon curves;
    32-sample predictive spread.
