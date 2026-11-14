@@ -65,6 +65,16 @@ full suite reported **697 passed**. Local and deployed browser QA found the read
 contract, and signed-block rail update with zero console errors and zero horizontal overflow at
 1280 and 1024 px; the complete import → export → signed-block path was exercised locally.
 
+On 2026-11-15, repo commit `f68a1cc` added the change-aware Decision Room v4. The pod process was
+restarted after the incremental copy because Streamlit had cached the previous module. The checker
+passed with local and remote `app.py` SHA-256
+`430b52a82d4fc0df3db34a22788d9cbbe6e61599b4eb5cfd9b6e917b38b1c016`; the marker records
+`app_source_commit=f68a1cc`. The full suite reported **704 passed**. Local and deployed QA exercised
+import → contract export → decision edit: the contract showed one field-level change, the digest
+stage became `BLOCKED`, and no console error or horizontal overflow appeared at 1440, 1024 or
+768 px. The contract card was sticky with internal scrolling at desktop width and static below
+900 px.
+
 ## Quick status check
 
 The read-only checker validates the pod phase, both health endpoints and the deployed `app.py`
