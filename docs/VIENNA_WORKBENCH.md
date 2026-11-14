@@ -21,9 +21,9 @@ workbench is a scaffold for the group's own next experiments, not a substitute f
 | 2. NC-MCM | Five precomputed NC-MCM models (`x`, 20 cluster solutions, 8 behaviours, 28 pairwise probabilities, Markov p-values) | Choose K, transition matrix, state sequence, behaviour composition, **bootstrap transition intervals, model-based intervention trajectories, cross-worm behaviour JS, assumption audit, order-2 temporal-holdout follow-up** | Descriptive causal-state model; **`do()` not identified**; strict Markov/stationarity rejected |
 | 3. Premotor | Published 205×205 `A`, drive `d`, **recovered W and 205 neuron names** | **Published clamped core** (15 intrinsic integrated, 69 signals clamped to recording), signal pulses, intrinsic residual, behaviour readout, validation report; separate exploratory 205-node free-run | Clamped replay/sandbox with approximate fidelity; **not** a digital twin |
 
-The UI is one Streamlit app with a sidebar workspace switch: Overview, three tiers, Evidence
-report, Evidence & lab, and Provenance. A Python facade (`ViennaWorkbench`) exposes the same
-functionality to notebooks.
+The UI is one Streamlit app with a sidebar workspace switch: Overview, Scope & decisions, three
+tiers, Evidence report, Evidence & lab, and Provenance. A Python facade (`ViennaWorkbench`) exposes
+the same functionality to notebooks.
 
 ![Studio overview](assets/vienna_studio_overview.png)
 
@@ -317,7 +317,7 @@ t, y = wb.tier3_simulate(PremotorParameters(duration=12.0, beta=0.0))
 | `.../behavior_metrics.py` | event alignment, lag curves, LOO shift selection, block bootstrap, event-level metrics |
 | `.../premotor.py` | JLD2 loader + recovered W/names + 205-node sandbox |
 | `.../workbench.py` | unified facade |
-| `.../app.py` | seven-tab Streamlit product UI |
+| `.../app.py` | eight-page Streamlit product UI |
 | `.../persistence.py` | NPZ model persistence (no pickle) |
 | `.../train.py` | Tier 1 CLI |
 | `scripts/fetch_vienna_artifacts.py` | copy + SHA-256 manifest + premotor builder |

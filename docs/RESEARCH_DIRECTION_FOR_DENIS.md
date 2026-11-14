@@ -1,5 +1,9 @@
 # Research direction for Denis Kovačević
 
+> **Proposal, not a confirmed requirement.** The canonical decision surface is the
+> **Scope & decisions** page and [`DENIS_REQUIREMENTS_BRIEF.md`](DENIS_REQUIREMENTS_BRIEF.md).
+> Public sources are audited in [`DENIS_PUBLIC_SOURCE_AUDIT.md`](DENIS_PUBLIC_SOURCE_AUDIT.md).
+
 **Prepared:** 2026-10-31. **Branch:** `research/external-validation-readiness`.
 This is a proposal for a bounded 6-ECTS project, not a request to launch another
 architecture search.

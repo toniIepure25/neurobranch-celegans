@@ -31,6 +31,15 @@ from neurobranch.bundlenet_sim.intake import (  # noqa: E402
     validate_trial_upload,
 )
 from neurobranch.bundlenet_sim.premotor import PremotorParameters  # noqa: E402
+from neurobranch.bundlenet_sim.scope import (  # noqa: E402
+    ANSWER_SOURCES,
+    AVAILABLE_DATA,
+    PRIMARY_ENDPOINTS,
+    PRIMARY_OBJECTS,
+    SUCCESS_CRITERIA,
+    TARGET_MODES,
+    ScopeAnswers,
+)
 from neurobranch.bundlenet_sim.workbench import ViennaWorkbench  # noqa: E402
 
 st.set_page_config(page_title="Vienna Neuroinformatics Studio", page_icon="🧠", layout="wide")
@@ -50,6 +59,7 @@ COLORS = [
 
 NAV_LABELS = [
     "Overview",
+    "Scope & decisions",
     "Tier 1 · BunDLe-Net",
     "Tier 2 · NC-MCM",
     "Tier 3 · Premotor",
@@ -395,10 +405,11 @@ def render_sidebar() -> str:
             """
 <div class="side-status">
 <b>Prototype v2</b> · lab-facing<br>
-✓ 40 contract tests · local + pod<br>
+✓ contract suite · local + pod<br>
 ✓ Julia trace parity 0.9999998<br>
 ✓ external reversal audit complete<br>
-△ clamped replay is not a validated predictor
+△ clamped replay is not a validated predictor<br>
+△ scope unconfirmed · needs Denis
 </div>
 """,
             unsafe_allow_html=True,
@@ -415,9 +426,8 @@ def render_sidebar() -> str:
                 width="stretch",
             )
         st.markdown(
-            '<div class="side-foot">Prepared for Denis Kovačević and the '
-            "Neuroinformatics group. Papers remain attributed to their authors; "
-            "no digital-twin claim.</div>",
+            '<div class="side-foot">Prepared for lab review; scope not yet confirmed by Denis. '
+            "Papers remain attributed to their authors; no digital-twin claim.</div>",
             unsafe_allow_html=True,
         )
     return page
@@ -1624,6 +1634,7 @@ def overview_tab(wb: ViennaWorkbench) -> None:
     <span class="chip">Prototype v2</span>
     <span class="chip">Source-traceable</span>
     <span class="chip">Not a digital twin</span>
+    <span class="chip">Scope unconfirmed</span>
     <span class="chip">Built for a first lab review</span>
   </div>
 </section>
@@ -1701,9 +1712,9 @@ def overview_tab(wb: ViennaWorkbench) -> None:
         help="Three validation recordings; max |Δ| ≈ 0.013. Validates the port, not the biology.",
     )
     m3.metric(
-        "Contract tests",
-        "40",
-        help="Local and pod; includes calibration, order-2 and lag/bootstrap tests.",
+        "Held-out worms",
+        "5",
+        help="BunDLe-Net release; no sixth held-out worm. Not a population claim.",
     )
     m4.metric(
         "Reversal AUC: model / persistence",
@@ -1731,7 +1742,7 @@ def overview_tab(wb: ViennaWorkbench) -> None:
 - Published 84/15/69 clamped core, β=0 and zero-signal controls.
 - Python ↔ Julia parity on three validation recordings.
 - Baseline-controlled, lag-aware external reversal audit with bootstrap CIs.
-- Reproducible artifacts, 40 contract tests, product brief and claim ledger.
+- Reproducible artifacts, contract suite, product brief and claim ledger.
 """
         )
     with missing, st.container(border=True):
@@ -1756,6 +1767,11 @@ def overview_tab(wb: ViennaWorkbench) -> None:
         unsafe_allow_html=True,
     )
     st.write("")
+    st.markdown("**0 · Scope — what does Denis actually want?**")
+    st.caption(
+        "Start on Scope & decisions. No answer is preselected; a completed form is a transcription, "
+        "not a signed requirement."
+    )
     s1, s2 = st.columns(2, gap="medium")
     with s1, st.container(border=True):
         st.markdown("**1 · Tier 1 — what is predictable?**")
@@ -1786,11 +1802,14 @@ def overview_tab(wb: ViennaWorkbench) -> None:
     with st.expander("What to ask Denis in the first meeting"):
         st.markdown(
             """
-1. Which object is closest to the lab's next grant or paper: latent manifold, NC-MCM, or premotor replay?
-2. Is a sixth held-out worm, or an external recording, available — and with what protocol?
-3. Is there an intervention dataset that could support a pre-registered `do()` or perturbation test?
-4. Should the next iteration prioritise external replication of the order-2 result, worm-conditional
-   interval calibration, or an experimental perturbation of the matched premotor replay?
+The canonical surface is **Scope & decisions**. Record the six answers in writing; do not infer
+them from the group page or from this product.
+1. Primary object: causal mechanism, external generalization, reusable workbench, or BCI/NeuroAI?
+2. Primary endpoint: released eight states, binary reversal, turn direction, continuous kinematics, or other?
+3. Which data actually exist, and under what access conditions?
+4. What would count as success: positive result, rigorous negative, benchmark, wet-lab design, or demo?
+5. If an intervention is in scope, which circuit, modality and positive control?
+6. What is the stop rule, budget and deadline?
 """
         )
 
@@ -2191,8 +2210,9 @@ def lab_tab(wb: ViennaWorkbench) -> None:
   BCI translation. [Projects](https://ni.cs.univie.ac.at/research/projects) ·
   [Code](https://ni.cs.univie.ac.at/research/code).
 - **Denis Kovacevic** is a member of the group's research team
-  ([team page](https://ni.cs.univie.ac.at/about-us/team/person/unitid/81/denis-kovacevic)).
-  No publications are attributed to him here.
+  ([stable team page](https://ni.cs.univie.ac.at/about-us/team/) ·
+  [UCris profile](https://ucrisportal.univie.ac.at/en/persons/denis-kovacevic/)).
+  No publications are attributed to him here; the checked pages list none.
 """
     )
     st.markdown("**Next experiments that would change the claim level**")
@@ -2331,6 +2351,265 @@ def lab_tab(wb: ViennaWorkbench) -> None:
     )
 
 
+def _scope_label_to_id(options: dict[str, str], label: str | None) -> str | None:
+    if label is None:
+        return None
+    for item_id, item_label in options.items():
+        if item_label == label:
+            return item_id
+    return None
+
+
+def scope_tab(wb: ViennaWorkbench) -> None:
+    page_header(
+        "Denis review · scope",
+        "What exactly should this project be?",
+        "The public record does not contain a Denis-specific brief. This page records his six "
+        "decisions; it does not infer them. Until the signed brief is returned, every answer "
+        "here is an unconfirmed transcription.",
+        "Unconfirmed · needs Denis",
+        "amber",
+    )
+
+    st.markdown("**What the public record says**")
+    source_1, source_2, source_3 = st.columns(3, gap="medium")
+    with source_1, st.container(border=True):
+        st.markdown("**Group profile**")
+        st.markdown(
+            "Denis Kovacevic is listed as research and teaching staff (BSc M.Sc.) on the "
+            "[stable team page](https://ni.cs.univie.ac.at/about-us/team/). The page contains "
+            "no research statement."
+        )
+    with source_2, st.container(border=True):
+        st.markdown("**Publication record**")
+        st.markdown(
+            "No publication is listed on the checked group or "
+            "[UCris profile](https://ucrisportal.univie.ac.at/en/persons/denis-kovacevic/). "
+            "This is not evidence that no publication exists elsewhere."
+        )
+    with source_3, st.container(border=True):
+        st.markdown("**Group scope**")
+        st.markdown(
+            "The group project runs 2024-07-01 to 2028-06-30: *An interdisciplinary approach "
+            "to learn and test the causal mapping between neural network dynamics and behavior*. "
+            "See [projects](https://ni.cs.univie.ac.at/research/projects)."
+        )
+    st.caption(
+        "Public pages checked 2026-11-13. No Denis-specific written brief or research statement "
+        "was found. Group-level alignment is not a Denis requirement."
+    )
+    audit_path = wb.root / "docs" / "DENIS_PUBLIC_SOURCE_AUDIT.md"
+    if audit_path.exists():
+        st.download_button(
+            "Download public-source audit (Markdown)",
+            data=audit_path.read_bytes(),
+            file_name=audit_path.name,
+            mime="text/markdown",
+            key="scope_audit_download",
+        )
+
+    st.divider()
+    st.markdown("**Record the six decisions**")
+    st.caption(
+        "Nothing is preselected. A blank answer is not a default; it means G0 is still open. "
+        "Use the words Denis actually gave you, not the wording you would prefer."
+    )
+
+    primary_label = st.selectbox(
+        "1. Primary object",
+        list(PRIMARY_OBJECTS.values()),
+        index=None,
+        placeholder="Select the primary object",
+        key="scope_primary_object",
+    )
+    endpoint_label = st.selectbox(
+        "2. Primary endpoint",
+        list(PRIMARY_ENDPOINTS.values()),
+        index=None,
+        placeholder="Select the primary endpoint",
+        key="scope_primary_endpoint",
+    )
+    endpoint_id = _scope_label_to_id(PRIMARY_ENDPOINTS, endpoint_label)
+    endpoint_detail = ""
+    if endpoint_id == "other":
+        endpoint_detail = st.text_input(
+            "Endpoint detail (required for 'other')",
+            key="scope_endpoint_detail",
+            placeholder="Name the endpoint in Denis's words",
+        )
+
+    data_labels = st.multiselect(
+        "3. Data actually available",
+        list(AVAILABLE_DATA.values()),
+        default=[],
+        placeholder="Select every item that exists; choose 'none yet' if none",
+        key="scope_available_data",
+    )
+    available_data = tuple(
+        item_id
+        for item_id, item_label in AVAILABLE_DATA.items()
+        if item_label in data_labels
+    )
+    data_detail = ""
+    if "none_yet" not in available_data and available_data:
+        data_detail = st.text_input(
+            "Data access conditions or caveats (optional)",
+            key="scope_data_detail",
+            placeholder="Access, identifiers, protocol, or contact path",
+        )
+
+    success_label = st.selectbox(
+        "4. Definition of success",
+        list(SUCCESS_CRITERIA.values()),
+        index=None,
+        placeholder="Select what would count as success",
+        key="scope_success_criterion",
+    )
+    target_label = st.selectbox(
+        "5. Biological target and intervention",
+        list(TARGET_MODES.values()),
+        index=None,
+        placeholder="Select whether an intervention is in scope",
+        key="scope_target_mode",
+    )
+    target_id = _scope_label_to_id(TARGET_MODES, target_label)
+    target_detail = ""
+    if target_id == "specified":
+        target_detail = st.text_area(
+            "Circuit, modality and positive control",
+            key="scope_target_detail",
+            placeholder="Name the circuit, perturbation modality and assay positive control",
+            height=90,
+        )
+
+    stop_col, budget_col = st.columns(2, gap="medium")
+    with stop_col:
+        stop_rule = st.text_area(
+            "6a. Stop rule",
+            key="scope_stop_rule",
+            placeholder="What result would make you stop or change direction?",
+            height=90,
+        )
+    with budget_col:
+        budget_deadline = st.text_area(
+            "6b. Budget and deadline",
+            key="scope_budget_deadline",
+            placeholder="ECTS or time budget, and the hard deadline",
+            height=90,
+        )
+
+    st.markdown("**Provenance of this transcription**")
+    provenance_1, provenance_2, provenance_3 = st.columns(3, gap="medium")
+    with provenance_1:
+        recorded_by = st.text_input(
+            "Recorded by",
+            key="scope_recorded_by",
+            placeholder="Name of the person transcribing",
+        )
+    with provenance_2:
+        recorded_on = st.text_input(
+            "Recorded on",
+            key="scope_recorded_on",
+            placeholder="YYYY-MM-DD",
+        )
+    with provenance_3:
+        source_label = st.selectbox(
+            "Answer source",
+            list(ANSWER_SOURCES.values()),
+            index=None,
+            placeholder="Where did the answer come from?",
+            key="scope_answer_source",
+        )
+
+    answers = ScopeAnswers(
+        primary_object=_scope_label_to_id(PRIMARY_OBJECTS, primary_label),
+        primary_endpoint=endpoint_id,
+        endpoint_detail=endpoint_detail,
+        available_data=available_data,
+        data_detail=data_detail,
+        success_criterion=_scope_label_to_id(SUCCESS_CRITERIA, success_label),
+        target_mode=target_id,
+        target_detail=target_detail,
+        stop_rule=stop_rule,
+        budget_deadline=budget_deadline,
+        recorded_by=recorded_by,
+        recorded_on=recorded_on,
+        answer_source=_scope_label_to_id(ANSWER_SOURCES, source_label),
+    )
+
+    st.divider()
+    st.markdown("**Scope status**")
+    decision_errors = answers.decision_errors()
+    metadata_errors = answers.metadata_errors()
+    if decision_errors:
+        st.warning("G0 open — scope unconfirmed. Do not start new data collection.")
+        st.markdown("\n".join(f"- {error}" for error in decision_errors))
+    else:
+        st.success("Recorded, not signed. The signed brief remains the authoritative confirmation.")
+        first, deferred = answers.impact()
+        impact_1, impact_2 = st.columns(2, gap="medium")
+        with impact_1, st.container(border=True):
+            st.markdown("**First workstream**")
+            st.write(first)
+        with impact_2, st.container(border=True):
+            st.markdown("**Deferred**")
+            st.write(deferred)
+        if metadata_errors:
+            st.warning("Decisions recorded, but provenance is incomplete; exports are disabled.")
+            st.markdown("\n".join(f"- {error}" for error in metadata_errors))
+        else:
+            payload = answers.to_payload()
+            st.download_button(
+                "Download scope transcription (JSON)",
+                data=json.dumps(payload, indent=2, sort_keys=True, ensure_ascii=False).encode("utf-8"),
+                file_name="denis_scope_response.json",
+                mime="application/json",
+                key="scope_json_download",
+            )
+            st.download_button(
+                "Download scope transcription (Markdown)",
+                data=answers.to_markdown().encode("utf-8"),
+                file_name="denis_scope_response.md",
+                mime="text/markdown",
+                key="scope_md_download",
+            )
+
+    st.info(
+        "A completed form is a transcription, not a signature. Do not say Denis confirmed this "
+        "scope until the signed block in DENIS_REQUIREMENTS_BRIEF.md is returned."
+    )
+    brief_path = wb.root / "docs" / "DENIS_REQUIREMENTS_BRIEF.md"
+    if brief_path.exists():
+        st.download_button(
+            "Download six-decision request (Markdown)",
+            data=brief_path.read_bytes(),
+            file_name=brief_path.name,
+            mime="text/markdown",
+            key="scope_brief_download",
+        )
+    request_col, matrix_col = st.columns(2, gap="medium")
+    data_request = wb.root / "docs" / "DATA_REQUEST_PACKAGE.md"
+    gap_matrix = wb.root / "docs" / "GAP_CLOSURE_MATRIX.md"
+    with request_col:
+        if data_request.exists():
+            st.download_button(
+                "Download data request package (Markdown)",
+                data=data_request.read_bytes(),
+                file_name=data_request.name,
+                mime="text/markdown",
+                key="scope_data_request_download",
+            )
+    with matrix_col:
+        if gap_matrix.exists():
+            st.download_button(
+                "Download gap closure matrix (Markdown)",
+                data=gap_matrix.read_bytes(),
+                file_name=gap_matrix.name,
+                mime="text/markdown",
+                key="scope_gap_matrix_download",
+            )
+
+
 def main() -> None:
     inject_styles()
     wb = get_workbench()
@@ -2338,6 +2617,8 @@ def main() -> None:
 
     if page == "Overview":
         overview_tab(wb)
+    elif page == "Scope & decisions":
+        scope_tab(wb)
     elif page == "Tier 1 · BunDLe-Net":
         try:
             tier1_tab(wb)

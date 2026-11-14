@@ -16,18 +16,20 @@ Sidebar workspace (each section states its own claim level; the overview include
 delivery snapshot and the product brief is downloadable in the sidebar):
 
 1. **Overview** — product, headline metrics, claim boundaries.
-2. **BunDLe-Net** — five released 3-D embeddings; manifold walk, switching linear and quadratic
+2. **Scope & decisions** — the six Denis decisions, recorded without inferred defaults; exports
+   stay marked as unconfirmed until the signed brief is returned.
+3. **BunDLe-Net** — five released 3-D embeddings; manifold walk, switching linear and quadratic
    models; held-out-worm benchmark with CRPS, 90% coverage, behaviour NLL and horizon curves;
    32-sample predictive spread.
-3. **NC-MCM** — choose K, transition matrix, state sequence, behaviour composition, Dirichlet
+4. **NC-MCM** — choose K, transition matrix, state sequence, behaviour composition, Dirichlet
    transition intervals, model-based intervention trajectories, cross-worm behaviour divergence,
    **assumption audit**.
-4. **Premotor** — two modes: **published clamped core** (15 intrinsic integrated, 69 signals
+5. **Premotor** — two modes: **published clamped core** (15 intrinsic integrated, 69 signals
    clamped to recording) and the exploratory 205-node free-run. Clamped mode supports signal
    pulses, intrinsic residual plots and a validation report.
-5. **Evidence report** — one-click Markdown report with every number and caveat.
-6. **Evidence & lab** — claim ledger, map to the group's published work, next experiments.
-7. **Provenance** — citations and machine-readable run provenance.
+6. **Evidence report** — one-click Markdown report with every number and caveat.
+7. **Evidence & lab** — claim ledger, map to the group's published work, next experiments.
+8. **Provenance** — citations and machine-readable run provenance.
 
 ## What is measured, not assumed
 

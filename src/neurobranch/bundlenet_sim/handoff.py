@@ -15,6 +15,7 @@ from pathlib import Path
 
 PACKET_FILES: tuple[str, ...] = (
     "docs/DENIS_REQUIREMENTS_BRIEF.md",
+    "docs/DENIS_PUBLIC_SOURCE_AUDIT.md",
     "docs/GAP_CLOSURE_MATRIX.md",
     "docs/DATA_REQUEST_PACKAGE.md",
     "docs/ANNOTATION_PROTOCOL.md",

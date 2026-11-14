@@ -1,5 +1,10 @@
 # Questions for Denis Kovacevic
 
+> **Supporting questions, not the canonical scope.** The canonical decision surface is the
+> **Scope & decisions** page and [`DENIS_REQUIREMENTS_BRIEF.md`](DENIS_REQUIREMENTS_BRIEF.md).
+> Record only Denis's written answers; do not infer them. Public sources are audited in
+> [`DENIS_PUBLIC_SOURCE_AUDIT.md`](DENIS_PUBLIC_SOURCE_AUDIT.md).
+
 > These are questions, not reconstructed requirements. The earlier conversation
 > was reconstructed provisionally in `docs/ORIGINAL_RESEARCH_OBJECTIVE.md`; do
 > not treat that reconstruction as a confirmed brief. Please correct any premise

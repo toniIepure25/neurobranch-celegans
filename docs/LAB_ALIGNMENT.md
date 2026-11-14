@@ -23,14 +23,26 @@ generic "digital twin" label.
 - Group site: https://ni.cs.univie.ac.at/
 - Projects: https://ni.cs.univie.ac.at/research/projects
 - Code: https://ni.cs.univie.ac.at/research/code
-- Denis Kovačević team page: https://ni.cs.univie.ac.at/about-us/team/person/unitid/81/denis-kovacevic
+- Denis Kovačević stable team page: https://ni.cs.univie.ac.at/about-us/team/
+- Denis Kovačević UCris profile: https://ucrisportal.univie.ac.at/en/persons/denis-kovacevic/
+- Public-source audit: [`DENIS_PUBLIC_SOURCE_AUDIT.md`](DENIS_PUBLIC_SOURCE_AUDIT.md)
+
+No publication is listed on the checked group or UCris pages. That is a statement about the pages
+checked on 2026-11-13, not proof that no publication exists elsewhere.
 
 ## What to ask Denis in the first meeting
 
-1. Which of the three objects is closest to the lab's next grant or paper?
-2. Is a sixth held-out worm available, and what is its recording/protocol?
-3. Is there an intervention dataset (optogenetic, ablation, microfluidic) that could test a
-   pre-registered `do()` claim?
-4. Should the next iteration target a higher-order NC-MCM model, a better calibrated Tier-1
-   generator, or a perturbation experiment that can test the now-matched clamped replay? The
-   Julia-reference parity check is already complete for all three validation recordings.
+The canonical surface is the **Scope & decisions** page. Record the six decisions in writing; do not
+infer them from the group page or from this product.
+
+1. Primary object: causal mechanism, external generalization, reusable workbench, or BCI/NeuroAI?
+2. Primary endpoint: released eight states, binary reversal, turn direction, continuous kinematics,
+   or another endpoint?
+3. Which data actually exist, and under what access conditions?
+4. What would count as success: positive result, rigorous negative, reusable benchmark, wet-lab
+   design, or working demo?
+5. If an intervention is in scope, which circuit, modality and positive control?
+6. What is the stop rule, budget and deadline?
+
+A recorded answer is a transcription, not a signature. The signed block in
+[`DENIS_REQUIREMENTS_BRIEF.md`](DENIS_REQUIREMENTS_BRIEF.md) remains authoritative.

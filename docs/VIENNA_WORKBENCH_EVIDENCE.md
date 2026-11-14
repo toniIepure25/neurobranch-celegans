@@ -11,9 +11,10 @@ and our own computations. It is a scoped engineering/research note, not a system
 | NC-MCM | Grosse-Wentrup, Kumar, Meunier, Zimmer, “Neuro-cognitive multilevel causal modeling…”, PLoS Comput Biol 2024 | Crossref `10.1371/journal.pcbi.1012674`: `journal-article`; PubMed PMID 39680605: `Journal Article`, notices `[]` | Peer-reviewed; no recorded PubMed notice (absence is not proof of a clean record elsewhere) |
 | Premotor | Morrison & Young, “A data-driven biology-based network model reproduces C. elegans premotor neural dynamics”, PLoS Comput Biol 2025 | Crossref `10.1371/journal.pcbi.1013818`: `journal-article`; PubMed PMID 41460929: `Journal Article`, notices `[]`; PMC12768384 | Peer-reviewed; no recorded PubMed notice |
 
-No publication by Denis Kovačević was found on the group page/UCris during this work. The
-workbench therefore starts from the group's published papers. Do **not** attribute BunDLe-Net or
-NC-MCM to Denis.
+No publication is listed for Denis Kovačević on the group or UCris pages checked on 2026-11-13.
+That is not proof that no publication exists elsewhere, and it is not a Denis-specific research
+statement. The workbench therefore starts from the group's published papers. Do **not** attribute
+BunDLe-Net or NC-MCM to Denis. See [`DENIS_PUBLIC_SOURCE_AUDIT.md`](DENIS_PUBLIC_SOURCE_AUDIT.md).
 
 ## 2. Claim ledger
 

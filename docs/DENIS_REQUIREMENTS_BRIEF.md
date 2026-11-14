@@ -1,14 +1,16 @@
 # Denis requirements brief — draft for confirmation
 
-**Status:** draft, not confirmed. This document is a request for a written specification, not a
-reconstruction of Denis Kovačević's requirements. No answer below may be inferred or filled in by
-the project team.
+**Status:** draft, not confirmed. This is the **canonical capture form** for the six decisions,
+not a reconstruction of Denis Kovačević's requirements. No answer below may be inferred or filled
+in by the project team. The public record is audited separately in
+[`DENIS_PUBLIC_SOURCE_AUDIT.md`](DENIS_PUBLIC_SOURCE_AUDIT.md).
 
 **Why this exists.** The repository currently treats the original brief as provisional. The group
 page describes an active 2024–2028 project, *An interdisciplinary approach to learn and test the
 causal mapping between neural network dynamics and behavior*, but it does not publish a project
 brief or a Denis-specific specification. The studio therefore cannot honestly claim to do "exactly
-what Denis wants" until the choices below are confirmed.
+what Denis wants" until the choices below are confirmed. The **Scope & decisions** page records a
+transcription; it is not a signature.
 
 ## 1. Six decisions that fix the scope
 
@@ -96,3 +98,8 @@ Confirmed by: ____________________   Date: __________
 
 **Return to:** the project owner. The project team will freeze the answers in
 `docs/GAP_CLOSURE_MATRIX.md` before collecting or analysing new data.
+
+**A transcription is not a signature.** A team member may record a reported answer on the Scope &
+decisions page, but the scope is confirmed only when Denis returns this block with `Confirmed by`
+and `Date` completed. Until then every artifact from the page carries
+`confirmation_status: unconfirmed_transcription`.

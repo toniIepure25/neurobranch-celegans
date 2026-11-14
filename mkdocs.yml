@@ -90,6 +90,7 @@ nav:
       - Research direction for Denis: RESEARCH_DIRECTION_FOR_DENIS.md
   - Vienna gap closure:
       - Denis requirements brief: DENIS_REQUIREMENTS_BRIEF.md
+      - Denis public-source audit: DENIS_PUBLIC_SOURCE_AUDIT.md
       - Gap closure matrix: GAP_CLOSURE_MATRIX.md
       - Data request package: DATA_REQUEST_PACKAGE.md
       - Annotation protocol: ANNOTATION_PROTOCOL.md
