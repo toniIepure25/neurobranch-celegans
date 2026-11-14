@@ -46,3 +46,9 @@ infer them from the group page or from this product.
 
 A recorded answer is a transcription, not a signature. The signed block in
 [`DENIS_REQUIREMENTS_BRIEF.md`](DENIS_REQUIREMENTS_BRIEF.md) remains authoritative.
+
+When the block is returned, the Scope & decisions page checks it in this order: required fields,
+`YYYY-MM-DD` date, digest syntax, and equality between the signed digest and the current
+transcription digest. A match is reported as **signature fields present — identity not verified**.
+A human must then compare `Confirmed by` with the document received from Denis; the upload never
+changes the global unconfirmed status or closes G0 by itself.

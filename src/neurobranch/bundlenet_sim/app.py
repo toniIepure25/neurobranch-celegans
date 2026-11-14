@@ -40,6 +40,15 @@ from neurobranch.bundlenet_sim.scope import (  # noqa: E402
     TARGET_MODES,
     ScopeAnswers,
 )
+from neurobranch.bundlenet_sim.signed_brief import (  # noqa: E402
+    BLOCKED_ON_TRANSCRIPTION,
+    DIGEST_MISMATCH,
+    INCOMPLETE,
+    INVALID_FORMAT,
+    MATCHES_UNVERIFIED,
+    NO_DIGEST,
+    SignedBrief,
+)
 from neurobranch.bundlenet_sim.workbench import ViennaWorkbench  # noqa: E402
 
 st.set_page_config(page_title="Vienna Neuroinformatics Studio", page_icon="🧠", layout="wide")
@@ -2645,6 +2654,65 @@ def scope_tab(wb: ViennaWorkbench) -> None:
             mime="text/markdown",
             key="scope_brief_download",
         )
+
+    st.markdown("**Returned signed brief**")
+    st.caption(
+        "Upload the returned Markdown. This checks required fields, the date and the scope digest. "
+        "It cannot authenticate the signer, so a human must still check who signed it."
+    )
+    signed_file = st.file_uploader(
+        "Signed brief (Markdown)",
+        type=["md", "txt"],
+        key="scope_signed_file",
+        label_visibility="collapsed",
+    )
+    if signed_file is not None:
+        try:
+            signed_text = signed_file.getvalue().decode("utf-8")
+            signed_brief = SignedBrief.parse_markdown(signed_text)
+            comparison = signed_brief.compare(answers)
+        except UnicodeDecodeError as exc:
+            st.error(f"Cannot read this signed brief as UTF-8: {exc}")
+        else:
+            if comparison.status == BLOCKED_ON_TRANSCRIPTION:
+                st.warning(str(comparison.note))
+            elif comparison.status == INVALID_FORMAT:
+                st.error(f"The signed block could not be parsed: {comparison.note}")
+            elif comparison.status == INCOMPLETE:
+                st.warning(f"The signed block is incomplete: {comparison.note}")
+            elif comparison.status == NO_DIGEST:
+                st.warning(str(comparison.note))
+            elif comparison.status == DIGEST_MISMATCH:
+                st.error(str(comparison.note))
+            elif comparison.status == MATCHES_UNVERIFIED:
+                st.info(
+                    "Signature fields are complete and the digest matches. The signer identity "
+                    "is not verified; check Confirmed by manually. Do not treat this as Denis's "
+                    "confirmation."
+                )
+            st.markdown(
+                f"- **Reported signer:** {signed_brief.confirmed_by or '—'}\n"
+                f"- **Reported date:** {signed_brief.date or '—'}\n"
+                f"- **Signed digest:** `{comparison.signed_digest or '—'}`\n"
+                f"- **Current digest:** `{comparison.current_digest or '—'}`\n"
+                f"- **Digest match:** {comparison.digest_match}"
+            )
+            if comparison.missing_fields:
+                st.markdown(
+                    "**Missing fields:** "
+                    + ", ".join(comparison.missing_fields)
+                )
+            audit = signed_brief.to_audit_payload(comparison)
+            st.download_button(
+                "Download signed-brief audit (JSON)",
+                data=json.dumps(audit, indent=2, sort_keys=True, ensure_ascii=False).encode(
+                    "utf-8"
+                ),
+                file_name="signed_brief_audit.json",
+                mime="application/json",
+                key="scope_signed_audit_download",
+            )
+
     request_col, matrix_col = st.columns(2, gap="medium")
     data_request = wb.root / "docs" / "DATA_REQUEST_PACKAGE.md"
     gap_matrix = wb.root / "docs" / "GAP_CLOSURE_MATRIX.md"

@@ -22,6 +22,7 @@ def test_packet_contains_documents_and_hashes() -> None:
         assert "gap-closure/docs/DENIS_REQUIREMENTS_BRIEF.md" in names
         assert "gap-closure/docs/DENIS_PUBLIC_SOURCE_AUDIT.md" in names
         assert "gap-closure/schemas/scope_response.schema.json" in names
+        assert "gap-closure/schemas/signed_brief_audit.schema.json" in names
         assert "gap-closure/reports/vienna_workbench/intervention_power.json" in names
         manifest = json.loads(archive.read("MANIFEST.json"))
         assert manifest["format"] == "vienna-gap-closure-packet-v1"

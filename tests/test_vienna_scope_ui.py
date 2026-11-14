@@ -29,6 +29,7 @@ def test_scope_page_starts_unanswered_and_unconfirmed() -> None:
     assert at.selectbox(key="scope_success_criterion").value is None
     assert at.selectbox(key="scope_target_mode").value is None
     assert "G0 open" in " ".join(str(item.value) for item in at.warning)
+    assert len(at.get("file_uploader")) == 2
     labels = [str(button.label) for button in at.get("download_button")]
     assert not any("scope transcription" in label for label in labels)
 

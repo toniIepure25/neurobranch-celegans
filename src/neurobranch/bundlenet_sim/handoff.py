@@ -24,6 +24,7 @@ PACKET_FILES: tuple[str, ...] = (
     "reports/vienna_workbench/intervention_power.json",
     "schemas/cohort_manifest.schema.json",
     "schemas/scope_response.schema.json",
+    "schemas/signed_brief_audit.schema.json",
 )
 
 _FIXED_TIME = (1980, 1, 1, 0, 0, 0)

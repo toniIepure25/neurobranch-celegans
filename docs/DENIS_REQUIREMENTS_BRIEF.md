@@ -118,3 +118,22 @@ a later edit or a mismatch between the signed brief and the transcription.
 
 The exported JSON is validated against `schemas/scope_response.schema.json`; the schema's
 `confirmation_status` is fixed to `unconfirmed_transcription`, so it cannot encode a signature.
+
+## 6. How the returned block is checked
+
+Upload the returned Markdown on the Scope & decisions page. The page parses the fenced confirmation
+block and reports one of these states:
+
+| State | Meaning | What happens |
+|---|---|---|
+| `invalid_format` | no usable fenced block, or duplicate known fields | nothing is accepted |
+| `incomplete` | a required field is empty, the date is not `YYYY-MM-DD`, or the digest is malformed | nothing is accepted |
+| `no_digest` | an older block without a scope digest | cannot be bound to the transcription |
+| `digest_mismatch` | the signed digest differs from the current transcription | nothing is accepted; no override |
+| `blocked_on_transcription` | the six decisions or provenance are incomplete | complete the form first |
+| `matches_unverified_identity` | fields are complete and the digest matches | consistency only; identity is still manual |
+
+A matching digest proves that the returned block refers to these exact decisions. It does **not**
+prove who signed it, and no upload changes the global unconfirmed status. A human must check the
+reported `Confirmed by` value against the document received from Denis. The downloadable audit JSON
+therefore always records `identity_verification: manual_required`.

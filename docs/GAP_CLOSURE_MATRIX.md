@@ -20,7 +20,7 @@ has a gate; a row becomes "closed" only when its artifact exists and passes the 
 
 | ID | Gap | Current state | What closes it | Owner | Gate | Claim after closure |
 |---|---|---|---|---|---|---|
-| G0 | Written specification | provisional conversation | signed `DENIS_REQUIREMENTS_BRIEF.md` | Denis | all six decisions answered | scope fixed; no scientific claim |
+| G0 | Written specification | provisional conversation | signed `DENIS_REQUIREMENTS_BRIEF.md` with a matching scope digest | Denis | all six decisions answered; digest matches; signer identity manually checked | scope fixed; no scientific claim |
 | G1 | Sixth held-out worm | n=5 | exact `bundlenet_consistent_embedding_worm_5.npz`, or raw + exact pipeline + commit | Denis/lab | `validate_new_worm.py` passes; no overlap with training; report generated | external validity on one animal, not a population claim |
 | G2 | Independent eight-behaviour labels | released labels only | raw video + 2 blinded annotators + Fleiss kappa | lab + annotators | kappa ≥0.6; frozen taxonomy; 20% stratified sample | independent behavioural agreement |
 | G3 | Randomized intervention | none | target vs sham, randomized, blinded, common clock | lab | ≥6 animals/arm screening; 12/arm confirmatory; preregistration | causal effect of that intervention in that assay, after replication |

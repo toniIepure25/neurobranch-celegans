@@ -1,0 +1,63 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://neurobranch.local/schemas/signed_brief_audit.schema.json",
+  "title": "Vienna signed brief audit",
+  "description": "A consistency audit of a returned confirmation block. It does not authenticate the signer.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema",
+    "status",
+    "identity_verification",
+    "signed_digest",
+    "current_digest",
+    "digest_match",
+    "missing_fields",
+    "confirmed_by",
+    "date",
+    "note"
+  ],
+  "properties": {
+    "schema": {"const": "vienna-signed-brief-audit-v1"},
+    "status": {
+      "enum": [
+        "invalid_format",
+        "incomplete",
+        "no_digest",
+        "digest_mismatch",
+        "blocked_on_transcription",
+        "matches_unverified_identity"
+      ]
+    },
+    "identity_verification": {"const": "manual_required"},
+    "signed_digest": {
+      "type": "string",
+      "pattern": "^([0-9a-f]{64})?$"
+    },
+    "current_digest": {
+      "type": "string",
+      "pattern": "^([0-9a-f]{64})?$"
+    },
+    "digest_match": {"type": "boolean"},
+    "missing_fields": {
+      "type": "array",
+      "items": {
+        "enum": [
+          "Primary object",
+          "Primary endpoint",
+          "Available data",
+          "Success criterion",
+          "Target / intervention (if any)",
+          "Stop rule",
+          "Budget / deadline",
+          "Scope digest",
+          "Confirmed by",
+          "Date"
+        ]
+      }
+    },
+    "confirmed_by": {"type": "string"},
+    "date": {"type": "string"},
+    "note": {"type": "string", "minLength": 1}
+  }
+}
