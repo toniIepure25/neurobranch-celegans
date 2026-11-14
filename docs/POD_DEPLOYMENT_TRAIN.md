@@ -54,7 +54,7 @@ the checker passed with local and remote `app.py` SHA-256
 `3f34de3fb66fe27dbfb5c8c749c26114b2943c0841cc6615e53974587ce192c7`. The full suite reported
 **666 passed**. Browser QA repeated 24 page captures with zero errors/overflow, and a synthetic
 signed block (reported signer `QA reviewer`, not Denis) reached
-`matches_unverified_identity` on the deployed pod, produced the audit download, and kept the
+`matches_unverified_identity` on the deployed pod, offered the audit download, and kept the
 identity caveat visible.
 
 ## Quick status check
