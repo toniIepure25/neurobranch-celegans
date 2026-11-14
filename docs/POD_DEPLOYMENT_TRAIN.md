@@ -26,6 +26,15 @@ forward returned HTTP `200`, and the Streamlit `AppTest` harness reported zero e
 seven workspace pages. The deployed `app.py` SHA-256 was
 `6e921810456e18c99dc6122165eb8768ea4cfd594158224aefdfc7013ffcc7b5`.
 
+On 2026-11-14, repo commit `6c73235` was copied incrementally (no archive rebuild) to the same
+pod: `app.py`, the new `scope.py`, `handoff.py`, and the updated Denis documents. The app was
+restarted and the checker passed with local and remote `app.py` SHA-256
+`f2d6c22eea681b867448d1ccbeb34c4bb6801fd787d5770e7906b34aa5e65a36`. `AppTest` reported zero
+exceptions on all **eight** workspace pages. The same app hash was browser-QA'd locally at 1280,
+1440 and 1920 px (24 page captures: zero console errors, zero horizontal overflow); the deployed
+health endpoint and hash matched the local copy. This is infrastructure evidence, not a scientific
+result.
+
 ## Quick status check
 
 The read-only checker validates the pod phase, both health endpoints and the deployed `app.py`
