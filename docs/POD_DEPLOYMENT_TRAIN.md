@@ -42,6 +42,13 @@ the checker passed with local and remote `app.py` SHA-256
 **648 passed**, `AppTest` covered eight pages, and the same hash passed 24 browser captures at the
 three widths with zero console errors and zero horizontal overflow.
 
+On 2026-11-14, repo commit `96494a5` added the SHA-256 scope digest and digest-validated JSON
+import. The app was restarted; the checker passed with local and remote `app.py` SHA-256
+`98be1ff4ad665123ba3c58578147c4c5bea454daba2eb97f2ffb23df5e0091de`. The full suite reported
+**653 passed**. Browser QA repeated 24 page captures at the three widths with zero errors/overflow,
+and a downloaded JSON transcription was re-imported into the form with its digest and stop rule
+intact.
+
 ## Quick status check
 
 The read-only checker validates the pod phase, both health endpoints and the deployed `app.py`
