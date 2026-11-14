@@ -121,6 +121,11 @@ The exported JSON is validated against `schemas/scope_response.schema.json`; the
 
 ## 6. How the returned block is checked
 
+The Scope & decisions page is a decision room, not a free-text form. A readiness rail shows
+which gate is open, each option explains what it commits the project to, and a live contract
+shows the current claim ceiling, hard blockers and first action. These are derived from the
+recorded answers; they are not a signature and not a scientific result.
+
 Upload the returned Markdown on the Scope & decisions page. The page parses the fenced confirmation
 block and reports one of these states:
 

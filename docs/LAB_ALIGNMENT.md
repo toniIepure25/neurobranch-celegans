@@ -33,7 +33,8 @@ checked on 2026-11-13, not proof that no publication exists elsewhere.
 ## What to ask Denis in the first meeting
 
 The canonical surface is the **Scope & decisions** page. Record the six decisions in writing; do not
-infer them from the group page or from this product.
+infer them from the group page or from this product. The readiness rail, option guidance and live
+contract show what each answer commits the project to; they never fill an answer on Denis's behalf.
 
 1. Primary object: causal mechanism, external generalization, reusable workbench, or BCI/NeuroAI?
 2. Primary endpoint: released eight states, binary reversal, turn direction, continuous kinematics,

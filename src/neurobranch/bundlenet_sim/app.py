@@ -6,6 +6,7 @@ Run from the repository root:
 
 from __future__ import annotations
 
+import html
 import io
 import json
 import sys
@@ -25,6 +26,11 @@ from neurobranch.bundlenet_sim.clamped import (  # noqa: E402
     SignalPulse,
 )
 from neurobranch.bundlenet_sim.dataset import BEHAVIOR_NAMES  # noqa: E402
+from neurobranch.bundlenet_sim.decision_support import (  # noqa: E402
+    build_contract,
+    contract_markdown,
+    option_guidance,
+)
 from neurobranch.bundlenet_sim.handoff import build_gap_packet  # noqa: E402
 from neurobranch.bundlenet_sim.intake import (  # noqa: E402
     validate_annotation_uploads,
@@ -364,6 +370,56 @@ button[kind="primary"] {
     min-width: 150px;
   }
 }
+.decision-rail { display: flex; flex-wrap: wrap; gap: 0.45rem; margin: 0.25rem 0 1.1rem; }
+.decision-stage {
+  display: inline-flex; align-items: center; gap: 0.45rem; padding: 0.48rem 0.66rem;
+  border: 1px solid var(--line); border-radius: 999px; background: #fff;
+  color: var(--muted); font-size: 0.75rem; line-height: 1.15;
+}
+.decision-stage strong { color: var(--ink); font-weight: 600; }
+.decision-stage small { text-transform: uppercase; letter-spacing: 0.08em; font-size: 0.58rem; }
+.stage-dot { width: 7px; height: 7px; border-radius: 50%; background: #aab7c9; flex: 0 0 auto; }
+.decision-stage.done .stage-dot { background: var(--teal); }
+.decision-stage.current { border-color: #e6c27a; background: #fffaf0; }
+.decision-stage.current .stage-dot { background: var(--amber); }
+.decision-stage.blocked { border-color: #e8b4b4; background: #fff5f5; }
+.decision-stage.blocked .stage-dot { background: #b23b3b; }
+.decision-stage.manual .stage-dot { background: var(--blue); }
+.decision-stage.done { border-color: #b8d8d1; background: #f2fbf8; }
+.step-number {
+  display: inline-block; color: var(--teal); font-size: 0.7rem; font-weight: 700;
+  letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 0.15rem;
+}
+.decision-context { color: var(--muted); font-size: 0.84rem; line-height: 1.45; margin: 0.1rem 0 0.55rem; }
+.guidance-box {
+  border-left: 3px solid #9ec8bf; background: #f7fcfa; padding: 0.65rem 0.75rem;
+  margin: 0.6rem 0 0.2rem; border-radius: 0 8px 8px 0; color: #26483f;
+  font-size: 0.82rem; line-height: 1.45;
+}
+.guidance-box b { color: #143d34; }
+.guidance-box .guidance-meta { color: #55766d; font-size: 0.76rem; margin-top: 0.3rem; }
+.contract-panel { position: sticky; top: 1rem; }
+.contract-kicker {
+  color: var(--teal); font-size: 0.67rem; font-weight: 700; letter-spacing: 0.12em;
+  text-transform: uppercase; margin-bottom: 0.15rem;
+}
+.contract-row { border-top: 1px solid var(--line); padding: 0.5rem 0; }
+.contract-row:first-of-type { border-top: 0; }
+.contract-label { color: var(--muted); font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.08em; }
+.contract-value { color: var(--ink); font-size: 0.84rem; line-height: 1.4; }
+.contract-blocker { color: #7d3d1a; font-size: 0.8rem; line-height: 1.4; margin: 0.25rem 0; }
+.claim-ceiling { color: #26483f; font-size: 0.8rem; line-height: 1.45; }
+div[data-testid="stVerticalBlockBorderWrapper"]:has(.step-number) {
+  border-radius: 14px; border-color: var(--line); background: #fff;
+}
+div[data-testid="stVerticalBlockBorderWrapper"]:has(.contract-panel) {
+  border-radius: 16px; border-color: #c7d9d4; background: #fbfefd;
+}
+@media (max-width: 900px) {
+  .contract-panel { position: static; }
+  .decision-rail { gap: 0.35rem; }
+  .decision-stage { padding: 0.4rem 0.5rem; font-size: 0.7rem; }
+}
 </style>
 """
 
@@ -413,7 +469,7 @@ def render_sidebar() -> str:
         st.markdown(
             """
 <div class="side-status">
-<b>Prototype v2</b> · lab-facing<br>
+<b>Prototype v3</b> · decision room<br>
 ✓ contract suite · local + pod<br>
 ✓ Julia trace parity 0.9999998<br>
 ✓ external reversal audit complete<br>
@@ -1640,7 +1696,7 @@ def overview_tab(wb: ViennaWorkbench) -> None:
     Three objects, three claim levels, one evidence trail.
   </p>
   <div class="hero-chips">
-    <span class="chip">Prototype v2</span>
+    <span class="chip">Prototype v3 · decision room</span>
     <span class="chip">Source-traceable</span>
     <span class="chip">Not a digital twin</span>
     <span class="chip">Scope unconfirmed</span>
@@ -1649,6 +1705,13 @@ def overview_tab(wb: ViennaWorkbench) -> None:
 </section>
 """,
         unsafe_allow_html=True,
+    )
+    st.button(
+        "Open Decision Room →",
+        key="ov_scope",
+        on_click=_navigate,
+        args=("Scope & decisions",),
+        width="stretch",
     )
 
     st.markdown('<div class="section-title">Three objects, three claim levels</div>', unsafe_allow_html=True)
@@ -2369,6 +2432,66 @@ def _scope_label_to_id(options: dict[str, str], label: str | None) -> str | None
     return None
 
 
+def _scope_rail_html(contract) -> str:
+    stages = "".join(
+        f'<div class="decision-stage {html.escape(stage.status)}">'
+        f'<span class="stage-dot"></span><strong>{html.escape(stage.label)}</strong>'
+        f"<small>{html.escape(stage.status)}</small></div>"
+        for stage in contract.readiness
+    )
+    return f'<div class="decision-rail">{stages}</div>'
+
+
+def _render_scope_guidance(guidance) -> None:
+    if guidance is None:
+        return
+    requires = " ".join(guidance.requires) or "No extra prerequisite recorded."
+    st.markdown(
+        '<div class="guidance-box">'
+        f"<b>{html.escape(guidance.commitment)}</b>"
+        f'<div class="guidance-meta">Requires: {html.escape(requires)}</div>'
+        f'<div class="guidance-meta">Ceiling: {html.escape(guidance.claim_ceiling)} · '
+        f"Source: {html.escape(guidance.source_note)}</div>"
+        "</div>",
+        unsafe_allow_html=True,
+    )
+
+
+def _render_scope_contract(contract, answers: ScopeAnswers) -> None:
+    st.markdown(
+        '<div class="contract-panel"></div>'
+        '<div class="contract-kicker">Live contract</div>',
+        unsafe_allow_html=True,
+    )
+    st.markdown(f"**{answers.status_label()}**")
+    st.caption("Derived from the current answers; not a signature and not a scientific result.")
+    for row in contract.rows:
+        st.markdown(
+            '<div class="contract-row">'
+            f'<div class="contract-label">{html.escape(row.label)}</div>'
+            f'<div class="contract-value">{html.escape(row.value)}</div>'
+            "</div>",
+            unsafe_allow_html=True,
+        )
+    st.markdown("**Claim ceiling**")
+    st.markdown(
+        f'<div class="claim-ceiling">{html.escape(contract.claim_ceiling)}</div>',
+        unsafe_allow_html=True,
+    )
+    st.markdown("**Hard blockers**")
+    if contract.blockers:
+        st.markdown("\n".join(f"- {blocker}" for blocker in contract.blockers))
+    else:
+        st.caption("No advisory blocker is implied by the recorded answers.")
+    st.markdown("**First action**")
+    st.write(contract.first_action)
+    if contract.digest:
+        st.caption(f"Scope digest: `{contract.digest}`")
+    else:
+        st.caption("The scope digest appears after provenance is complete.")
+    st.caption("An upload never changes the global unconfirmed status.")
+
+
 def scope_tab(wb: ViennaWorkbench) -> None:
     page_header(
         "Denis review · scope",
@@ -2380,42 +2503,44 @@ def scope_tab(wb: ViennaWorkbench) -> None:
         "amber",
     )
 
-    st.markdown("**What the public record says**")
-    source_1, source_2, source_3 = st.columns(3, gap="medium")
-    with source_1, st.container(border=True):
-        st.markdown("**Group profile**")
-        st.markdown(
-            "Denis Kovacevic is listed as research and teaching staff (BSc M.Sc.) on the "
-            "[stable team page](https://ni.cs.univie.ac.at/about-us/team/). The page contains "
-            "no research statement."
+    rail_slot = st.empty()
+
+    with st.expander("Why these six questions? Read the public record", expanded=False):
+        source_1, source_2, source_3 = st.columns(3, gap="medium")
+        with source_1, st.container(border=True):
+            st.markdown("**Group profile**")
+            st.markdown(
+                "Denis Kovacevic is listed as research and teaching staff (BSc M.Sc.) on the "
+                "[stable team page](https://ni.cs.univie.ac.at/about-us/team/). The page contains "
+                "no research statement."
+            )
+        with source_2, st.container(border=True):
+            st.markdown("**Publication record**")
+            st.markdown(
+                "No publication is listed on the checked group or "
+                "[UCris profile](https://ucrisportal.univie.ac.at/en/persons/denis-kovacevic/). "
+                "This is not evidence that no publication exists elsewhere."
+            )
+        with source_3, st.container(border=True):
+            st.markdown("**Group scope**")
+            st.markdown(
+                "The group project runs 2024-07-01 to 2028-06-30: *An interdisciplinary approach "
+                "to learn and test the causal mapping between neural network dynamics and behavior*. "
+                "See [projects](https://ni.cs.univie.ac.at/research/projects)."
+            )
+        st.caption(
+            "Public pages checked 2026-11-13. No Denis-specific written brief or research statement "
+            "was found. Group-level alignment is not a Denis requirement."
         )
-    with source_2, st.container(border=True):
-        st.markdown("**Publication record**")
-        st.markdown(
-            "No publication is listed on the checked group or "
-            "[UCris profile](https://ucrisportal.univie.ac.at/en/persons/denis-kovacevic/). "
-            "This is not evidence that no publication exists elsewhere."
-        )
-    with source_3, st.container(border=True):
-        st.markdown("**Group scope**")
-        st.markdown(
-            "The group project runs 2024-07-01 to 2028-06-30: *An interdisciplinary approach "
-            "to learn and test the causal mapping between neural network dynamics and behavior*. "
-            "See [projects](https://ni.cs.univie.ac.at/research/projects)."
-        )
-    st.caption(
-        "Public pages checked 2026-11-13. No Denis-specific written brief or research statement "
-        "was found. Group-level alignment is not a Denis requirement."
-    )
-    audit_path = wb.root / "docs" / "DENIS_PUBLIC_SOURCE_AUDIT.md"
-    if audit_path.exists():
-        st.download_button(
-            "Download public-source audit (Markdown)",
-            data=audit_path.read_bytes(),
-            file_name=audit_path.name,
-            mime="text/markdown",
-            key="scope_audit_download",
-        )
+        audit_path = wb.root / "docs" / "DENIS_PUBLIC_SOURCE_AUDIT.md"
+        if audit_path.exists():
+            st.download_button(
+                "Download public-source audit (Markdown)",
+                data=audit_path.read_bytes(),
+                file_name=audit_path.name,
+                mime="text/markdown",
+                key="scope_audit_download",
+            )
 
     st.markdown("**Resume a recorded transcription**")
     st.caption(
@@ -2458,133 +2583,174 @@ def scope_tab(wb: ViennaWorkbench) -> None:
         st.success(str(st.session_state["scope_import_status"]))
 
     st.divider()
-    st.markdown("**Record the six decisions**")
+    st.markdown('<div class="section-title">Decision workspace</div>', unsafe_allow_html=True)
     st.caption(
-        "Nothing is preselected. A blank answer is not a default; it means G0 is still open. "
-        "Use the words Denis actually gave you, not the wording you would prefer."
+        "Start with the object, then the endpoint and the data. Nothing is preselected; a blank "
+        "answer means G0 is still open. Each option shows what it commits the project to."
     )
 
-    primary_label = st.selectbox(
-        "1. Primary object",
-        list(PRIMARY_OBJECTS.values()),
-        index=None,
-        placeholder="Select the primary object",
-        key="scope_primary_object",
-    )
-    endpoint_label = st.selectbox(
-        "2. Primary endpoint",
-        list(PRIMARY_ENDPOINTS.values()),
-        index=None,
-        placeholder="Select the primary endpoint",
-        key="scope_primary_endpoint",
-    )
-    endpoint_id = _scope_label_to_id(PRIMARY_ENDPOINTS, endpoint_label)
-    endpoint_detail = ""
-    if endpoint_id == "other":
-        endpoint_detail = st.text_input(
-            "Endpoint detail (required for 'other')",
-            key="scope_endpoint_detail",
-            placeholder="Name the endpoint in Denis's words",
-        )
-
-    data_labels = st.multiselect(
-        "3. Data actually available",
-        list(AVAILABLE_DATA.values()),
-        default=[],
-        placeholder="Select every item that exists; choose 'none yet' if none",
-        key="scope_available_data",
-    )
-    available_data = tuple(
-        item_id
-        for item_id, item_label in AVAILABLE_DATA.items()
-        if item_label in data_labels
-    )
-    data_detail = ""
-    if "none_yet" not in available_data and available_data:
-        data_detail = st.text_input(
-            "Data access conditions or caveats (optional)",
-            key="scope_data_detail",
-            placeholder="Access, identifiers, protocol, or contact path",
-        )
-
-    success_label = st.selectbox(
-        "4. Definition of success",
-        list(SUCCESS_CRITERIA.values()),
-        index=None,
-        placeholder="Select what would count as success",
-        key="scope_success_criterion",
-    )
-    target_label = st.selectbox(
-        "5. Biological target and intervention",
-        list(TARGET_MODES.values()),
-        index=None,
-        placeholder="Select whether an intervention is in scope",
-        key="scope_target_mode",
-    )
-    target_id = _scope_label_to_id(TARGET_MODES, target_label)
-    target_detail = ""
-    if target_id == "specified":
-        target_detail = st.text_area(
-            "Circuit, modality and positive control",
-            key="scope_target_detail",
-            placeholder="Name the circuit, perturbation modality and assay positive control",
-            height=90,
-        )
-
-    stop_col, budget_col = st.columns(2, gap="medium")
-    with stop_col:
-        stop_rule = st.text_area(
-            "6a. Stop rule",
-            key="scope_stop_rule",
-            placeholder="What result would make you stop or change direction?",
-            height=90,
-        )
-    with budget_col:
-        budget_deadline = st.text_area(
-            "6b. Budget and deadline",
-            key="scope_budget_deadline",
-            placeholder="ECTS or time budget, and the hard deadline",
-            height=90,
-        )
-
-    st.markdown("**Provenance of this transcription**")
-    provenance_1, provenance_2, provenance_3 = st.columns(3, gap="medium")
-    with provenance_1:
-        recorded_by = st.text_input(
-            "Recorded by",
-            key="scope_recorded_by",
-            placeholder="Name of the person transcribing",
-        )
-    with provenance_2:
-        recorded_on = st.text_input(
-            "Recorded on",
-            key="scope_recorded_on",
-            placeholder="YYYY-MM-DD",
-        )
-    with provenance_3:
-        source_label = st.selectbox(
-            "Answer source",
-            list(ANSWER_SOURCES.values()),
+    left, right = st.columns([1.6, 1], gap="large")
+    with left:
+        st.markdown('<div class="step-number">01 · Primary object</div>', unsafe_allow_html=True)
+        primary_label = st.selectbox(
+            "1. Primary object",        list(PRIMARY_OBJECTS.values()),
             index=None,
-            placeholder="Where did the answer come from?",
-            key="scope_answer_source",
+            placeholder="Select the primary object",
+            key="scope_primary_object",
+        )
+        _render_scope_guidance(
+            option_guidance("primary_object", _scope_label_to_id(PRIMARY_OBJECTS, primary_label))
+        )
+        st.markdown('<div class="step-number">02 · Primary endpoint</div>', unsafe_allow_html=True)
+        endpoint_label = st.selectbox(
+            "2. Primary endpoint",
+            list(PRIMARY_ENDPOINTS.values()),
+            index=None,
+            placeholder="Select the primary endpoint",
+            key="scope_primary_endpoint",
+        )
+        endpoint_id = _scope_label_to_id(PRIMARY_ENDPOINTS, endpoint_label)
+        endpoint_detail = ""
+        if endpoint_id == "other":
+            endpoint_detail = st.text_input(
+                "Endpoint detail (required for 'other')",
+                key="scope_endpoint_detail",
+                placeholder="Name the endpoint in Denis's words",
+            )
+        _render_scope_guidance(option_guidance("primary_endpoint", endpoint_id))
+
+        st.markdown('<div class="step-number">03 · Available data</div>', unsafe_allow_html=True)
+        data_labels = st.multiselect(
+            "3. Data actually available",
+            list(AVAILABLE_DATA.values()),
+            default=[],
+            placeholder="Select every item that exists; choose 'none yet' if none",
+            key="scope_available_data",
+        )
+        available_data = tuple(
+            item_id
+            for item_id, item_label in AVAILABLE_DATA.items()
+            if item_label in data_labels
+        )
+        for item_id in available_data:
+            guidance = option_guidance("available_data", item_id)
+            if guidance is not None:
+                st.markdown(
+                    f"- **{guidance.label}** — {guidance.commitment} "
+                    f"*Requires:* {' '.join(guidance.requires)}"
+                )
+        data_detail = ""
+        if "none_yet" not in available_data and available_data:
+            data_detail = st.text_input(
+                "Data access conditions or caveats (optional)",
+                key="scope_data_detail",
+                placeholder="Access, identifiers, protocol, or contact path",
+            )
+
+        st.markdown('<div class="step-number">04 · Success criterion</div>', unsafe_allow_html=True)
+        success_label = st.selectbox(
+            "4. Definition of success",
+            list(SUCCESS_CRITERIA.values()),
+            index=None,
+            placeholder="Select what would count as success",
+            key="scope_success_criterion",
+        )
+        _render_scope_guidance(
+            option_guidance("success_criterion", _scope_label_to_id(SUCCESS_CRITERIA, success_label))
+        )
+        st.markdown(
+            '<div class="step-number">05 · Target and intervention</div>',
+            unsafe_allow_html=True,
+        )
+        target_label = st.selectbox(
+            "5. Biological target and intervention",
+            list(TARGET_MODES.values()),
+            index=None,
+            placeholder="Select whether an intervention is in scope",
+            key="scope_target_mode",
+        )
+        target_id = _scope_label_to_id(TARGET_MODES, target_label)
+        target_detail = ""
+        if target_id == "specified":
+            target_detail = st.text_area(
+                "Circuit, modality and positive control",
+                key="scope_target_detail",
+                placeholder="Name the circuit, perturbation modality and assay positive control",
+                height=90,
+            )
+        _render_scope_guidance(option_guidance("target_mode", target_id))
+
+        st.markdown(
+            '<div class="step-number">06 · Stop rule and budget</div>',
+            unsafe_allow_html=True,
+        )
+        stop_col, budget_col = st.columns(2, gap="medium")
+        with stop_col:
+            stop_rule = st.text_area(
+                "6a. Stop rule",
+                key="scope_stop_rule",
+                placeholder="What result would make you stop or change direction?",
+                height=90,
+            )
+        with budget_col:
+            budget_deadline = st.text_area(
+                "6b. Budget and deadline",
+                key="scope_budget_deadline",
+                placeholder="ECTS or time budget, and the hard deadline",
+                height=90,
+            )
+
+        st.markdown("**Provenance of this transcription**")
+        provenance_1, provenance_2, provenance_3 = st.columns(3, gap="medium")
+        with provenance_1:
+            recorded_by = st.text_input(
+                "Recorded by",
+                key="scope_recorded_by",
+                placeholder="Name of the person transcribing",
+            )
+        with provenance_2:
+            recorded_on = st.text_input(
+                "Recorded on",
+                key="scope_recorded_on",
+                placeholder="YYYY-MM-DD",
+            )
+        with provenance_3:
+            source_label = st.selectbox(
+                "Answer source",
+                list(ANSWER_SOURCES.values()),
+                index=None,
+                placeholder="Where did the answer come from?",
+                key="scope_answer_source",
+            )
+
+        answers = ScopeAnswers(
+            primary_object=_scope_label_to_id(PRIMARY_OBJECTS, primary_label),
+            primary_endpoint=endpoint_id,
+            endpoint_detail=endpoint_detail,
+            available_data=available_data,
+            data_detail=data_detail,
+            success_criterion=_scope_label_to_id(SUCCESS_CRITERIA, success_label),
+            target_mode=target_id,
+            target_detail=target_detail,
+            stop_rule=stop_rule,
+            budget_deadline=budget_deadline,
+            recorded_by=recorded_by,
+            recorded_on=recorded_on,
+            answer_source=_scope_label_to_id(ANSWER_SOURCES, source_label),
         )
 
-    answers = ScopeAnswers(
-        primary_object=_scope_label_to_id(PRIMARY_OBJECTS, primary_label),
-        primary_endpoint=endpoint_id,
-        endpoint_detail=endpoint_detail,
-        available_data=available_data,
-        data_detail=data_detail,
-        success_criterion=_scope_label_to_id(SUCCESS_CRITERIA, success_label),
-        target_mode=target_id,
-        target_detail=target_detail,
-        stop_rule=stop_rule,
-        budget_deadline=budget_deadline,
-        recorded_by=recorded_by,
-        recorded_on=recorded_on,
-        answer_source=_scope_label_to_id(ANSWER_SOURCES, source_label),
+    signed_status = str(st.session_state.get("scope_signed_status", ""))
+    signed_digest = str(st.session_state.get("scope_signed_digest", ""))
+    if answers.is_exportable and signed_digest != answers.scope_digest():
+        signed_status = ""
+    contract = build_contract(
+        answers,
+        exported_digest=str(st.session_state.get("scope_exported_digest", "")),
+        signed_status=signed_status,
     )
+    with right, st.container(border=True):
+        _render_scope_contract(contract, answers)
+    rail_slot.markdown(_scope_rail_html(contract), unsafe_allow_html=True)
 
     st.divider()
     st.markdown("**Scope status**")
@@ -2626,24 +2792,34 @@ def scope_tab(wb: ViennaWorkbench) -> None:
                 "Copy this digest into the signed block in DENIS_REQUIREMENTS_BRIEF.md. It binds "
                 "the signature to these exact decisions; it does not authenticate the signer."
             )
-            st.download_button(
+            if st.download_button(
+                "Download decision contract (Markdown)",
+                data=contract_markdown(contract).encode("utf-8"),
+                file_name="denis_scope_contract.md",
+                mime="text/markdown",
+                key="scope_contract_download",
+            ):
+                st.session_state["scope_exported_digest"] = answers.scope_digest()
+            if st.download_button(
                 "Download scope transcription (JSON)",
                 data=json.dumps(payload, indent=2, sort_keys=True, ensure_ascii=False).encode("utf-8"),
                 file_name="denis_scope_response.json",
                 mime="application/json",
                 key="scope_json_download",
-            )
-            st.download_button(
+            ):
+                st.session_state["scope_exported_digest"] = answers.scope_digest()
+            if st.download_button(
                 "Download scope transcription (Markdown)",
                 data=answers.to_markdown().encode("utf-8"),
                 file_name="denis_scope_response.md",
                 mime="text/markdown",
                 key="scope_md_download",
-            )
+            ):
+                st.session_state["scope_exported_digest"] = answers.scope_digest()
 
     st.info(
-        "A completed form is a transcription, not a signature. Do not say Denis confirmed this "
-        "scope until the signed block in DENIS_REQUIREMENTS_BRIEF.md is returned."
+        "A completed form is a transcription, not a signature. Do not present this scope as "
+        "Denis's confirmation until the signed block in DENIS_REQUIREMENTS_BRIEF.md is returned."
     )
     brief_path = wb.root / "docs" / "DENIS_REQUIREMENTS_BRIEF.md"
     if brief_path.exists():
@@ -2671,6 +2847,10 @@ def scope_tab(wb: ViennaWorkbench) -> None:
             signed_text = signed_file.getvalue().decode("utf-8")
             signed_brief = SignedBrief.parse_markdown(signed_text)
             comparison = signed_brief.compare(answers)
+            st.session_state["scope_signed_status"] = comparison.status
+            st.session_state["scope_signed_digest"] = comparison.signed_digest
+            if comparison.status != signed_status:
+                st.rerun()
         except UnicodeDecodeError as exc:
             st.error(f"Cannot read this signed brief as UTF-8: {exc}")
         else:

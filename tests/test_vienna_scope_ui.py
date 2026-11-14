@@ -30,8 +30,13 @@ def test_scope_page_starts_unanswered_and_unconfirmed() -> None:
     assert at.selectbox(key="scope_target_mode").value is None
     assert "G0 open" in " ".join(str(item.value) for item in at.warning)
     assert len(at.get("file_uploader")) == 2
+    page_text = " ".join(str(item.value) for item in at.markdown)
+    assert "decision-rail" in page_text
+    assert "contract-kicker" in page_text
+    assert "G0 is open" in page_text
     labels = [str(button.label) for button in at.get("download_button")]
     assert not any("scope transcription" in label for label in labels)
+    assert not any("decision contract" in label for label in labels)
 
 
 def test_scope_page_exports_only_after_complete_provenance() -> None:
@@ -59,6 +64,7 @@ def test_scope_page_exports_only_after_complete_provenance() -> None:
     page_text = " ".join(str(item.value) for item in at.markdown)
     assert "causal_without_independent_labels" in page_text
     labels = [str(button.label) for button in at.get("download_button")]
+    assert any("decision contract" in label for label in labels)
     assert any("scope transcription (JSON)" in label for label in labels)
     assert any("scope transcription (Markdown)" in label for label in labels)
     page_text = " ".join(str(item.value) for item in at.markdown).lower()

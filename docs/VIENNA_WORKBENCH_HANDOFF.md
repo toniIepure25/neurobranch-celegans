@@ -16,11 +16,13 @@ Sidebar workspace (each section states its own claim level; the overview include
 delivery snapshot and the product brief is downloadable in the sidebar):
 
 1. **Overview** — product, headline metrics, claim boundaries.
-2. **Scope & decisions** — the six Denis decisions, recorded without inferred defaults; exports
-   stay marked as unconfirmed until the signed brief is returned, **claim-readiness advisories**
-   name any prerequisite the selected scope still lacks, JSON export/import is bound by a
-   SHA-256 scope digest so an edited transcription is rejected, and a returned signed block is
-   checked for fields, date and digest without claiming to authenticate the signer.
+2. **Scope & decisions** — a two-column decision room with a readiness rail, per-option
+   commitment and claim-ceiling guidance, and a live contract. It records the six Denis
+   decisions without inferred defaults; exports stay marked as unconfirmed until the signed
+   brief is returned. **Claim-readiness advisories** name any prerequisite the selected scope
+   still lacks. JSON export/import is bound by a SHA-256 scope digest so an edited
+   transcription is rejected, and a returned signed block is checked for fields, date and
+   digest without claiming to authenticate the signer.
 3. **BunDLe-Net** — five released 3-D embeddings; manifold walk, switching linear and quadratic
    models; held-out-worm benchmark with CRPS, 90% coverage, behaviour NLL and horizon curves;
    32-sample predictive spread.

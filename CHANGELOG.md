@@ -1,5 +1,17 @@
 # Changelog
 
+## 2026-11-14 - Decision Room v3
+
+- Scope & decisions is now a two-column decision room: a readiness rail, per-option
+  commitment/claim-ceiling guidance, a live contract (claim ceiling, blockers, first
+  action, digest), and the existing six widgets with unchanged keys and types.
+- Added a downloadable decision contract. Contract export records the exported digest;
+  a later edit shows the stale-export state instead of hiding it.
+- Signed-brief upload stores the audit status and digest in session state, so the
+  readiness rail updates after parsing; signer identity remains `manual_required`.
+- Overview now labels the build `Prototype v3 · decision room` and links directly to
+  the room.
+
 ## Unreleased - core dynamics simulator research branch
 
 A free-running simulator, latent comparison, branching evaluation and named-neuron
