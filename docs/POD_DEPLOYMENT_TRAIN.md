@@ -49,6 +49,14 @@ import. The app was restarted; the checker passed with local and remote `app.py`
 and a downloaded JSON transcription was re-imported into the form with its digest and stop rule
 intact.
 
+On 2026-11-14, repo commit `98098c5` added the returned signed-brief audit. The app was restarted;
+the checker passed with local and remote `app.py` SHA-256
+`3f34de3fb66fe27dbfb5c8c749c26114b2943c0841cc6615e53974587ce192c7`. The full suite reported
+**666 passed**. Browser QA repeated 24 page captures with zero errors/overflow, and a synthetic
+signed block (reported signer `QA reviewer`, not Denis) reached
+`matches_unverified_identity` on the deployed pod, produced the audit download, and kept the
+identity caveat visible.
+
 ## Quick status check
 
 The read-only checker validates the pod phase, both health endpoints and the deployed `app.py`
