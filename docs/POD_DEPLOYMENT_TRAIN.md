@@ -35,6 +35,13 @@ exceptions on all **eight** workspace pages. The same app hash was browser-QA'd 
 health endpoint and hash matched the local copy. This is infrastructure evidence, not a scientific
 result.
 
+On 2026-11-14, repo commit `3a14432` added the scope claim-readiness advisories and the
+`schemas/scope_response.schema.json` contract. The incremental copy was restarted on the same pod;
+the checker passed with local and remote `app.py` SHA-256
+`c4c93b74a83ed0d5188cdfe976d6a233bf46ae7559f488ea2d0d3672fa9d57a6`. The full suite reported
+**648 passed**, `AppTest` covered eight pages, and the same hash passed 24 browser captures at the
+three widths with zero console errors and zero horizontal overflow.
+
 ## Quick status check
 
 The read-only checker validates the pod phase, both health endpoints and the deployed `app.py`
