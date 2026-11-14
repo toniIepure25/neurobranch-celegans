@@ -9,6 +9,8 @@ an unconfirmed transcription. A completed form is not a signature.
 from __future__ import annotations
 
 import datetime as dt
+import hashlib
+import json
 from dataclasses import dataclass, field
 from typing import Any
 
@@ -79,6 +81,13 @@ IMPACT: dict[str, tuple[str, str]] = {
 
 def _clean(value: str) -> str:
     return value.strip()
+
+
+def _digest_payload(payload: dict[str, Any]) -> str:
+    """Hash only the schema and decisions, not the provenance metadata."""
+    core = {"schema": payload["schema"], "decisions": payload["decisions"]}
+    canonical = json.dumps(core, sort_keys=True, separators=(",", ":"), ensure_ascii=False)
+    return hashlib.sha256(canonical.encode("utf-8")).hexdigest()
 
 
 @dataclass
@@ -297,7 +306,7 @@ class ScopeAnswers:
         assert self.success_criterion is not None
         assert self.target_mode is not None
         assert self.answer_source is not None
-        return {
+        payload = {
             "schema": SCOPE_SCHEMA,
             "confirmation_status": CONFIRMATION_STATUS,
             "warning": (
@@ -351,6 +360,37 @@ class ScopeAnswers:
                 },
             },
         }
+        payload["scope_digest"] = _digest_payload(payload)
+        return payload
+
+    def scope_digest(self) -> str:
+        """Return the digest binding the decisions to a signed brief."""
+        return str(self.to_payload()["scope_digest"])
+
+    def to_widget_state(self) -> dict[str, object]:
+        """Return the Streamlit widget values for a validated transcription."""
+        if not self.is_exportable:
+            raise ValueError("; ".join(self.validate()))
+        assert self.primary_object is not None
+        assert self.primary_endpoint is not None
+        assert self.success_criterion is not None
+        assert self.target_mode is not None
+        assert self.answer_source is not None
+        return {
+            "scope_primary_object": PRIMARY_OBJECTS[self.primary_object],
+            "scope_primary_endpoint": PRIMARY_ENDPOINTS[self.primary_endpoint],
+            "scope_endpoint_detail": _clean(self.endpoint_detail),
+            "scope_available_data": [AVAILABLE_DATA[item] for item in self.available_data],
+            "scope_data_detail": _clean(self.data_detail),
+            "scope_success_criterion": SUCCESS_CRITERIA[self.success_criterion],
+            "scope_target_mode": TARGET_MODES[self.target_mode],
+            "scope_target_detail": _clean(self.target_detail),
+            "scope_stop_rule": _clean(self.stop_rule),
+            "scope_budget_deadline": _clean(self.budget_deadline),
+            "scope_recorded_by": _clean(self.recorded_by),
+            "scope_recorded_on": _clean(self.recorded_on),
+            "scope_answer_source": ANSWER_SOURCES[self.answer_source],
+        }
 
     def to_markdown(self) -> str:
         """Return a portable, visibly unconfirmed transcription."""
@@ -367,6 +407,7 @@ class ScopeAnswers:
             f"- **Recorded on:** {payload['metadata']['recorded_on']}",
             f"- **Answer source:** {payload['metadata']['answer_source']['label']}",
             f"- **Schema:** `{payload['schema']}`",
+            f"- **Scope digest:** `{payload['scope_digest']}`",
             "",
             "## Decisions",
             "",
@@ -421,6 +462,12 @@ class ScopeAnswers:
         """
         if payload.get("schema") != SCOPE_SCHEMA:
             raise ValueError(f"Unsupported scope schema: {payload.get('schema')!r}")
+        status = payload.get("confirmation_status")
+        if status is not None and status != CONFIRMATION_STATUS:
+            raise ValueError(
+                "Only an unconfirmed transcription can be imported; a JSON file cannot assert "
+                "that Denis signed it."
+            )
         decisions = payload.get("decisions")
         metadata = payload.get("metadata")
         if not isinstance(decisions, dict) or not isinstance(metadata, dict):
@@ -429,7 +476,7 @@ class ScopeAnswers:
             available = decisions["available_data"]
             if not isinstance(available, list):
                 raise TypeError("available_data must be a list")
-            return cls(
+            answers = cls(
                 primary_object=decisions["primary_object"]["id"],
                 primary_endpoint=decisions["primary_endpoint"]["id"],
                 endpoint_detail=decisions["primary_endpoint"].get("detail", ""),
@@ -446,3 +493,16 @@ class ScopeAnswers:
             )
         except (KeyError, TypeError) as exc:
             raise ValueError(f"Malformed scope payload: {exc}") from exc
+
+        errors = answers.validate()
+        if errors:
+            raise ValueError(f"Scope payload is not exportable: {'; '.join(errors)}")
+        digest = payload.get("scope_digest")
+        if digest is not None and (
+            not isinstance(digest, str) or digest != answers.scope_digest()
+        ):
+            raise ValueError(
+                "Scope digest does not match the decisions; the transcription was edited "
+                "or corrupted after export."
+            )
+        return answers

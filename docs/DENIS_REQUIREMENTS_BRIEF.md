@@ -93,6 +93,7 @@ Success criterion:
 Target / intervention (if any):
 Stop rule:
 Budget / deadline:
+Scope digest: ________________________________________________
 Confirmed by: ____________________   Date: __________
 ```
 
@@ -108,5 +109,12 @@ The page also prints **claim-readiness advisories** when a selected scope lacks 
 example a causal object without a randomized intervention, external generalization without a sixth
 worm, or a binary reversal endpoint without independent video. These are not validation errors and
 do not block recording; they state what the strongest claim would still need before it can be
-tested. The exported JSON is validated against `schemas/scope_response.schema.json`; the schema's
+tested.
+
+The exported JSON includes a **scope digest**: SHA-256 over the schema and the six decisions only.
+Copy that digest into the signed block so the signature is bound to the exact recorded scope. The
+digest does not authenticate the signer and does not replace `Confirmed by` / `Date`; it only detects
+a later edit or a mismatch between the signed brief and the transcription.
+
+The exported JSON is validated against `schemas/scope_response.schema.json`; the schema's
 `confirmation_status` is fixed to `unconfirmed_transcription`, so it cannot encode a signature.

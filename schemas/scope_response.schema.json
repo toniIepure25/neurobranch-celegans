@@ -9,15 +9,20 @@
     "schema",
     "confirmation_status",
     "warning",
+    "scope_digest",
     "decisions",
     "workstream",
     "claim_readiness",
     "metadata"
-  ],
-  "properties": {
+  ],  "properties": {
     "schema": {"const": "vienna-scope-response-v1"},
     "confirmation_status": {"const": "unconfirmed_transcription"},
     "warning": {"type": "string", "minLength": 1},
+    "scope_digest": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$",
+      "description": "SHA-256 over the schema and decisions only; binds a signature to this exact scope."
+    },
     "decisions": {
       "type": "object",
       "additionalProperties": false,

@@ -2408,6 +2408,46 @@ def scope_tab(wb: ViennaWorkbench) -> None:
             key="scope_audit_download",
         )
 
+    st.markdown("**Resume a recorded transcription**")
+    st.caption(
+        "Load a previously exported JSON to continue editing. A valid digest proves the decisions "
+        "were not changed after export; it still does not make the result signed."
+    )
+    uploaded = st.file_uploader(
+        "Scope transcription JSON",
+        type=["json"],
+        key="scope_import_file",
+        label_visibility="collapsed",
+    )
+    if uploaded is not None:
+        try:
+            imported_payload = json.loads(uploaded.getvalue().decode("utf-8"))
+            imported = ScopeAnswers.from_payload(imported_payload)
+        except (UnicodeDecodeError, ValueError) as exc:
+            st.error(f"Cannot import this transcription: {exc}")
+        else:
+            has_digest = isinstance(imported_payload.get("scope_digest"), str)
+            if has_digest:
+                st.info(
+                    "Digest-validated transcription. It remains unconfirmed until the signed "
+                    "brief is returned."
+                )
+                st.caption(f"Imported scope digest: `{imported.scope_digest()}`")
+            else:
+                st.warning(
+                    "Legacy transcription without a digest. It can be loaded, but later edits "
+                    "cannot be detected; it is still unconfirmed."
+                )
+            if st.button("Load into the form", key="scope_import_apply"):
+                for key, value in imported.to_widget_state().items():
+                    st.session_state[key] = value
+                st.session_state["scope_import_status"] = (
+                    "Loaded a digest-validated transcription; review every field before export."
+                )
+                st.rerun()
+    if st.session_state.get("scope_import_status"):
+        st.success(str(st.session_state["scope_import_status"]))
+
     st.divider()
     st.markdown("**Record the six decisions**")
     st.caption(
@@ -2572,6 +2612,11 @@ def scope_tab(wb: ViennaWorkbench) -> None:
             st.markdown("\n".join(f"- {error}" for error in metadata_errors))
         else:
             payload = answers.to_payload()
+            st.markdown(f"**Scope digest:** `{answers.scope_digest()}`")
+            st.caption(
+                "Copy this digest into the signed block in DENIS_REQUIREMENTS_BRIEF.md. It binds "
+                "the signature to these exact decisions; it does not authenticate the signer."
+            )
             st.download_button(
                 "Download scope transcription (JSON)",
                 data=json.dumps(payload, indent=2, sort_keys=True, ensure_ascii=False).encode("utf-8"),

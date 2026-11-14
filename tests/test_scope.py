@@ -112,6 +112,50 @@ def test_payload_round_trip() -> None:
     assert restored == answers
 
 
+def test_scope_digest_binds_decisions_not_provenance() -> None:
+    answers = complete_answers()
+    digest = answers.scope_digest()
+    assert len(digest) == 64
+    assert digest == answers.scope_digest()
+    answers.recorded_by = "Another recorder"
+    assert answers.scope_digest() == digest
+    answers.stop_rule = "Stop immediately."
+    assert answers.scope_digest() != digest
+
+
+def test_tampered_export_is_rejected_by_digest() -> None:
+    payload = complete_answers().to_payload()
+    payload["decisions"]["stop_rule"] = "A different stop rule."
+    with pytest.raises(ValueError, match="Scope digest does not match"):
+        ScopeAnswers.from_payload(payload)
+
+
+def test_import_accepts_an_untampered_export() -> None:
+    answers = complete_answers()
+    payload = answers.to_payload()
+    assert ScopeAnswers.from_payload(payload) == answers
+    assert payload["scope_digest"] in answers.to_markdown()
+
+
+def test_widget_state_maps_answers_back_to_the_form() -> None:
+    answers = complete_answers()
+    state = answers.to_widget_state()
+    assert state["scope_primary_object"] == "A causal test of a named-neuron or circuit perturbation"
+    assert state["scope_available_data"] == [
+        "A randomized optogenetic/ablation intervention with matched sham",
+        "An independent eight-behaviour video annotation",
+    ]
+    assert state["scope_recorded_on"] == "2026-11-20"
+    assert state["scope_answer_source"] == "Written email"
+
+
+def test_import_cannot_assert_a_signature() -> None:
+    payload = complete_answers().to_payload()
+    payload["confirmation_status"] = "confirmed"
+    with pytest.raises(ValueError, match="JSON file cannot assert"):
+        ScopeAnswers.from_payload(payload)
+
+
 def test_payload_matches_the_published_schema() -> None:
     schema = json.loads(
         (ROOT / "schemas" / "scope_response.schema.json").read_text(encoding="utf-8")
