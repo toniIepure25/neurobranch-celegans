@@ -59,8 +59,8 @@ identity caveat visible.
 
 Later on 2026-11-14, repo commit `8bbe377` replaced the scope form with the two-column Decision
 Room v3. The checker passed with local and remote `app.py` SHA-256
-`79d8b3cf6cc0368ae52169392879641871249f7e9a64be8ab40442e511c8a80b`; the marker was updated to
-`repo_commit=8bbe377`, `app_source_commit=8bbe377`, `deployment_method=incremental_copy`. The
+`79d8b3cf6cc0368ae52169392879641871249f7e9a64be8ab40442e511c8a80b`; the marker records
+`app_source_commit=8bbe377` and `deployment_method=incremental_copy`. The
 full suite reported **697 passed**. Local and deployed browser QA found the readiness rail, live
 contract, and signed-block rail update with zero console errors and zero horizontal overflow at
 1280 and 1024 px; the complete import → export → signed-block path was exercised locally.
