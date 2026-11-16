@@ -75,6 +75,17 @@ stage became `BLOCKED`, and no console error or horizontal overflow appeared at 
 768 px. The contract card was sticky with internal scrolling at desktop width and static below
 900 px.
 
+On 2026-11-16, repo commit `b12692c` added Decision Room v5 (option atlas, copyable digest and
+decision packet). The pod was found Running with no listener on `8502`; its Python environment also
+lacked `streamlit` and `plotly`, so both were installed at `streamlit==1.66.1` and `plotly==7.1.0`
+before the app was restarted. The checker passed with local and remote `app.py` SHA-256
+`3f08b9c85d5133356ea16b0c4af2468abf9ae7c3a5a177435039201c03379df3`; the marker records
+`app_source_commit=b12692c`. The full suite reported **709 passed**. Local and deployed QA found the
+atlas (4, 5 or 6 option cards depending on the inspected decision), the copyable digest, a
+10-entry packet with a 9-file hash manifest and `unconfirmed_transcription` status, and the
+post-export diff still blocking the digest stage. No console errors or horizontal overflow appeared
+at 1440, 1024 or 768 px.
+
 ## Quick status check
 
 The read-only checker validates the pod phase, both health endpoints and the deployed `app.py`
