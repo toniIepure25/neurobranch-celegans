@@ -31,7 +31,10 @@ from neurobranch.bundlenet_sim.decision_support import (  # noqa: E402
     contract_markdown,
     option_guidance,
 )
-from neurobranch.bundlenet_sim.handoff import build_gap_packet  # noqa: E402
+from neurobranch.bundlenet_sim.handoff import (  # noqa: E402
+    build_decision_packet,
+    build_gap_packet,
+)
 from neurobranch.bundlenet_sim.intake import (  # noqa: E402
     validate_annotation_uploads,
     validate_trial_upload,
@@ -479,7 +482,7 @@ def render_sidebar() -> str:
         st.markdown(
             """
 <div class="side-status">
-<b>Prototype v3</b> · decision room<br>
+<b>Prototype v5</b> · decision room<br>
 ✓ contract suite · local + pod<br>
 ✓ Julia trace parity 0.9999998<br>
 ✓ external reversal audit complete<br>
@@ -1706,7 +1709,7 @@ def overview_tab(wb: ViennaWorkbench) -> None:
     Three objects, three claim levels, one evidence trail.
   </p>
   <div class="hero-chips">
-    <span class="chip">Prototype v3 · decision room</span>
+    <span class="chip">Prototype v5 · decision room</span>
     <span class="chip">Source-traceable</span>
     <span class="chip">Not a digital twin</span>
     <span class="chip">Scope unconfirmed</span>
@@ -2467,6 +2470,38 @@ def _render_scope_guidance(guidance) -> None:
     )
 
 
+_ATLAS_DECISIONS: tuple[tuple[str, str, dict[str, str]], ...] = (
+    ("primary_object", "Primary object", PRIMARY_OBJECTS),
+    ("primary_endpoint", "Primary endpoint", PRIMARY_ENDPOINTS),
+    ("available_data", "Available data", AVAILABLE_DATA),
+    ("success_criterion", "Success criterion", SUCCESS_CRITERIA),
+    ("target_mode", "Target / intervention", TARGET_MODES),
+)
+
+
+def _render_option_atlas() -> None:
+    with st.expander("Option atlas — compare consequences", expanded=False):
+        st.caption(
+            "This atlas is informational. It does not select an answer, recommend a choice, "
+            "or enter the scope transcript. The form below remains the only place an answer "
+            "is recorded."
+        )
+        selected_label = st.selectbox(
+            "Decision to inspect",
+            [label for _, label, _ in _ATLAS_DECISIONS],
+            key="scope_atlas_decision",
+        )
+        selected_id, _, options = next(
+            item for item in _ATLAS_DECISIONS if item[1] == selected_label
+        )
+        for option_id, option_label in options.items():
+            guidance = option_guidance(selected_id, option_id)
+            if guidance is None:
+                continue
+            st.markdown(f"**{option_label}**")
+            _render_scope_guidance(guidance)
+
+
 def _render_scope_contract(contract, answers: ScopeAnswers) -> None:
     st.markdown(
         '<div class="contract-panel"></div>'
@@ -2626,6 +2661,7 @@ def scope_tab(wb: ViennaWorkbench) -> None:
         "Start with the object, then the endpoint and the data. Nothing is preselected; a blank "
         "answer means G0 is still open. Each option shows what it commits the project to."
     )
+    _render_option_atlas()
 
     left, right = st.columns([1.6, 1], gap="large")
     with left:
@@ -2639,6 +2675,7 @@ def scope_tab(wb: ViennaWorkbench) -> None:
         _render_scope_guidance(
             option_guidance("primary_object", _scope_label_to_id(PRIMARY_OBJECTS, primary_label))
         )
+        st.divider()
         st.markdown('<div class="step-number">02 · Primary endpoint</div>', unsafe_allow_html=True)
         endpoint_label = st.selectbox(
             "2. Primary endpoint",
@@ -2657,6 +2694,7 @@ def scope_tab(wb: ViennaWorkbench) -> None:
             )
         _render_scope_guidance(option_guidance("primary_endpoint", endpoint_id))
 
+        st.divider()
         st.markdown('<div class="step-number">03 · Available data</div>', unsafe_allow_html=True)
         data_labels = st.multiselect(
             "3. Data actually available",
@@ -2685,6 +2723,7 @@ def scope_tab(wb: ViennaWorkbench) -> None:
                 placeholder="Access, identifiers, protocol, or contact path",
             )
 
+        st.divider()
         st.markdown('<div class="step-number">04 · Success criterion</div>', unsafe_allow_html=True)
         success_label = st.selectbox(
             "4. Definition of success",
@@ -2696,6 +2735,7 @@ def scope_tab(wb: ViennaWorkbench) -> None:
         _render_scope_guidance(
             option_guidance("success_criterion", _scope_label_to_id(SUCCESS_CRITERIA, success_label))
         )
+        st.divider()
         st.markdown(
             '<div class="step-number">05 · Target and intervention</div>',
             unsafe_allow_html=True,
@@ -2718,6 +2758,7 @@ def scope_tab(wb: ViennaWorkbench) -> None:
             )
         _render_scope_guidance(option_guidance("target_mode", target_id))
 
+        st.divider()
         st.markdown(
             '<div class="step-number">06 · Stop rule and budget</div>',
             unsafe_allow_html=True,
@@ -2738,6 +2779,7 @@ def scope_tab(wb: ViennaWorkbench) -> None:
                 height=90,
             )
 
+        st.divider()
         st.markdown("**Provenance of this transcription**")
         provenance_1, provenance_2, provenance_3 = st.columns(3, gap="medium")
         with provenance_1:
@@ -2826,11 +2868,36 @@ def scope_tab(wb: ViennaWorkbench) -> None:
             st.markdown("\n".join(f"- {error}" for error in metadata_errors))
         else:
             payload = answers.to_payload()
-            st.markdown(f"**Scope digest:** `{answers.scope_digest()}`")
+            st.markdown("**Scope digest**")
+            st.code(answers.scope_digest(), language=None)
             st.caption(
                 "Copy this digest into the signed block in DENIS_REQUIREMENTS_BRIEF.md. It binds "
                 "the signature to these exact decisions; it does not authenticate the signer."
             )
+            try:
+                decision_packet = build_decision_packet(
+                    wb.root,
+                    contract_markdown=contract_markdown(contract),
+                    answers_markdown=answers.to_markdown(),
+                    payload=payload,
+                    scope_digest=answers.scope_digest(),
+                )
+            except (OSError, ValueError) as exc:
+                st.caption(f"Decision packet unavailable: {exc}")
+            else:
+                if st.download_button(
+                    "Download decision packet (ZIP)",
+                    data=decision_packet,
+                    file_name="denis_decision_packet.zip",
+                    mime="application/zip",
+                    key="scope_packet_download",
+                ):
+                    _remember_scope_export(payload)
+                st.caption(
+                    "The packet bundles the request brief, public-source audit, data request, "
+                    "gap matrix, current contract, JSON/Markdown transcription, schemas and a "
+                    "hash manifest. It is still an unconfirmed transcription."
+                )
             if st.download_button(
                 "Download decision contract (Markdown)",
                 data=contract_markdown(contract).encode("utf-8"),

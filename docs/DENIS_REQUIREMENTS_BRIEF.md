@@ -133,6 +133,13 @@ before/after diff, marks the digest stage blocked, and asks for a fresh transcri
 the signature is requested. The diff covers the decisions bound by the digest, not the
 provenance metadata.
 
+An option atlas shows the consequence of every choice without recording an answer, and the
+scope digest is offered as a copy-ready code block. Once the transcription and provenance are
+complete, the page can download one deterministic ZIP containing this brief, the public-source
+audit, the data request, the gap matrix, the current contract, the JSON/Markdown transcription,
+the two schemas and a hash manifest. The manifest keeps the confirmation status
+`unconfirmed_transcription`; the packet is a transfer convenience, not a signature.
+
 Upload the returned Markdown on the Scope & decisions page. The page parses the fenced confirmation
 block and reports one of these states:
 

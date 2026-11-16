@@ -35,9 +35,26 @@ def test_scope_page_starts_unanswered_and_unconfirmed() -> None:
     assert "contract-kicker" in page_text
     assert "G0 is open" in page_text
     assert "Changed since export" not in page_text
+    captions = " ".join(str(item.value) for item in at.caption)
+    assert "This atlas is informational" in captions
+    assert "does not select an answer" in captions
     labels = [str(button.label) for button in at.get("download_button")]
     assert not any("scope transcription" in label for label in labels)
     assert not any("decision contract" in label for label in labels)
+    assert not any("decision packet" in label for label in labels)
+
+
+def test_option_atlas_changes_only_the_inspected_decision() -> None:
+    at = _open_scope()
+    at.selectbox(key="scope_atlas_decision").set_value("Target / intervention")
+    at.run()
+
+    assert not at.exception, at.exception
+    assert at.selectbox(key="scope_primary_object").value is None
+    assert at.selectbox(key="scope_target_mode").value is None
+    page_text = " ".join(str(item.value) for item in at.markdown)
+    assert "Not in scope for this project" in page_text
+    assert "Specified below" in page_text
 
 
 def test_scope_page_exports_only_after_complete_provenance() -> None:
@@ -66,8 +83,11 @@ def test_scope_page_exports_only_after_complete_provenance() -> None:
     assert "causal_without_independent_labels" in page_text
     labels = [str(button.label) for button in at.get("download_button")]
     assert any("decision contract" in label for label in labels)
+    assert any("decision packet (ZIP)" in label for label in labels)
     assert any("scope transcription (JSON)" in label for label in labels)
     assert any("scope transcription (Markdown)" in label for label in labels)
+    captions = " ".join(str(item.value) for item in at.caption)
+    assert "bundles the request brief" in captions
     page_text = " ".join(str(item.value) for item in at.markdown).lower()
     assert "denis confirmed" not in page_text
     assert "exactly what denis wants" not in page_text

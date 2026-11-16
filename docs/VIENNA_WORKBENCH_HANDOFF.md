@@ -23,8 +23,11 @@ delivery snapshot and the product brief is downloadable in the sidebar):
    still lacks, including cross-decision contradictions (causal object without a target,
    BCI object with a worm endpoint). JSON export/import is bound by a SHA-256 scope digest,
    and exporting also stores a decision snapshot: a later edit shows a field-by-field
-   before/after diff and blocks the digest stage until a fresh export. A returned signed
-   block is checked for fields, date and digest without claiming to authenticate the signer.
+   before/after diff and blocks the digest stage until a fresh export. An option atlas compares
+   every choice without recording one, the digest has a copy control, and a complete scope can
+   download one deterministic ZIP with the request, contract, transcription, schemas and hash
+   manifest. A returned signed block is checked for fields, date and digest without claiming to
+   authenticate the signer.
 3. **BunDLe-Net** — five released 3-D embeddings; manifold walk, switching linear and quadratic
    models; held-out-worm benchmark with CRPS, 90% coverage, behaviour NLL and horizon curves;
    32-sample predictive spread.

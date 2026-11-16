@@ -53,6 +53,11 @@ and a BCI/NeuroAI object with a worm endpoint are shown as blockers. After an ex
 decision is listed field by field and blocks the digest stage until a fresh transcription is
 downloaded; the provenance fields are not bound by that digest.
 
+The option atlas is an explanation surface, not a seventh answer: it never writes a value or
+changes the digest. The downloadable decision packet is a transfer convenience with a hash
+manifest; it keeps `unconfirmed_transcription` and is neither evidence nor a signature. Its
+source documents and schemas remain in the repository, where they can be reviewed directly.
+
 When the block is returned, the Scope & decisions page checks it in this order: required fields,
 `YYYY-MM-DD` date, digest syntax, and equality between the signed digest and the current
 transcription digest. A match is reported as **signature fields present — identity not verified**.

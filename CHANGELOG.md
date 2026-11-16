@@ -1,5 +1,16 @@
 # Changelog
 
+## 2026-11-16 - Decision Room v5
+
+- Added an option atlas that shows the commitment, prerequisites and claim ceiling for every
+  choice without recording an answer or changing the scope digest.
+- Made the scope digest a copy-friendly code block.
+- Added a deterministic decision packet ZIP: request brief, public-source audit, data request,
+  gap matrix, current contract, JSON/Markdown transcription, schemas and a hash manifest. The
+  manifest keeps `unconfirmed_transcription` and says the packet is not a signature.
+- Changed the visible build label to `Prototype v5` and separated the six decisions with
+  dividers for faster review.
+
 ## 2026-11-15 - Decision Room v4
 
 - Added cross-decision consistency advisories: a causal object with no specified
