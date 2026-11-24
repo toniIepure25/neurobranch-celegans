@@ -1,0 +1,61 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://neurobranch.local/schemas/information_contract.schema.json",
+  "title": "Neural abstraction information contract",
+  "description": "Declares which information a method receives. Two methods may be compared as representations only when their contracts are identical, except for history_length.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "method", "channels", "history_length"],
+  "properties": {
+    "schema_version": {
+      "const": "ic-contract-v1"
+    },
+    "method": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 120
+    },
+    "channels": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "current_observations",
+        "observation_history",
+        "future_observations",
+        "behavior_labels",
+        "neuron_ids",
+        "missingness_mask",
+        "measurement_operator",
+        "true_latent_state",
+        "intervention_type",
+        "intervention_target",
+        "intervention_magnitude",
+        "test_animal_adaptation"
+      ],
+      "properties": {
+        "current_observations": {"type": "boolean"},
+        "observation_history": {"type": "boolean"},
+        "future_observations": {"type": "boolean"},
+        "behavior_labels": {"type": "boolean"},
+        "neuron_ids": {"type": "boolean"},
+        "missingness_mask": {"type": "boolean"},
+        "measurement_operator": {"type": "boolean"},
+        "true_latent_state": {"type": "boolean"},
+        "intervention_type": {"type": "boolean"},
+        "intervention_target": {"type": "boolean"},
+        "intervention_magnitude": {"type": "boolean"},
+        "test_animal_adaptation": {"type": "boolean"}
+      }
+    },
+    "history_length": {
+      "type": ["integer", "null"],
+      "minimum": 1,
+      "description": "Number of observations in the history window, or null when the method uses no history."
+    },
+    "notes": {
+      "type": "array",
+      "items": {"type": "string", "maxLength": 300},
+      "maxItems": 20
+    }
+  }
+}
