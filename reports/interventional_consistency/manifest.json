@@ -1,0 +1,29 @@
+{
+  "created_utc": "2026-11-24T20:09:52+00:00",
+  "git": {
+    "branch": "research/interventional-consistency",
+    "commit": "547e7b1892b2932d9b7092a62763d878e5ac02ab",
+    "dirty": true
+  },
+  "outputs": {
+    "artifacts/interventional_consistency/ic1/contracts.json": "cbeb5e5cdce090405204d8197cbf08c12b0429d7c8ed9a23fc5446478a9aa28b",
+    "artifacts/interventional_consistency/ic1/metrics.json": "42e2e33d8544aa19d3b7a4942b06bb5d70c8d66153be56c10441de2527599081",
+    "reports/interventional_consistency/CONFORMANCE.md": "7597577e40d667c42ef7a179fd834678cd6b566bae92f1a1de0876bc7c22cc6a",
+    "reports/interventional_consistency/SUMMARY.md": "c500c1b9fc72d61bfa4659e5d4a5eff878e824524b1bc15155bd156d3723fda9",
+    "reports/interventional_consistency/commutation_by_cell.csv": "e0a2aaa582e8714065add5e0c536c42e7e75556fcc4ef87c58fb927d69cdcd40",
+    "reports/interventional_consistency/metrics.json": "42e2e33d8544aa19d3b7a4942b06bb5d70c8d66153be56c10441de2527599081"
+  },
+  "protocol_sha256": "37eba808bc549a394cdc7673eed09ecda01e000f2a66ef9bb8aec18d78abef1f",
+  "schema": "neurobranch-ic-stage1-manifest-v1",
+  "seed": 0,
+  "verdict": {
+    "if_no_go": [],
+    "not_claimed": [
+      "biological or cognitive interpretation of any number here",
+      "reproduction of NC-MCM or BunDLe-Net",
+      "that the benchmark is exhaustive over representations or systems"
+    ],
+    "stage_two_justified": true,
+    "technical_go": true
+  }
+}

@@ -12,6 +12,25 @@ perturbation** on real calcium imaging and optogenetic atlases.
 > `interventions/safety.py` refuses to label any output as empirically
 > validated without a matched, provenance-checked intervention dataset.
 
+## Research direction: interventional consistency (branch)
+
+A separate line of work asks a narrower and more defensible question than "which
+embedding wins": *when does a coarse-grained representation learned from partial
+observations preserve the dynamics and the effects of interventions?* It lives on
+`research/interventional-consistency` and does not modify any historical artifact.
+
+- Direction and evidence status: [`docs/RESEARCH_DIRECTION_INTERVENTIONAL_CONSISTENCY.md`](docs/RESEARCH_DIRECTION_INTERVENTIONAL_CONSISTENCY.md)
+- Frozen Stage-One protocol: [`research/interventional_consistency_protocol.md`](research/interventional_consistency_protocol.md)
+- Implementation and gate results: [`docs/INTERVENTIONAL_CONSISTENCY_STAGE1.md`](docs/INTERVENTIONAL_CONSISTENCY_STAGE1.md)
+
+```powershell
+python -m neurobranch.cli.main abstraction contracts --check
+python -m neurobranch.cli.main abstraction stage1
+```
+
+Stage One is synthetic: it validates the instrument, not the biology. No NC-MCM or
+BunDLe-Net implementation was reproduced.
+
 ## NeuroBranch Scientific Studio (current surface)
 
 The active Kato reanalysis is presented by a read-only, seven-section Studio:

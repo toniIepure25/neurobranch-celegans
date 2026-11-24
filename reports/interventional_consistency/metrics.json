@@ -1,0 +1,968 @@
+{
+  "agreement": {
+    "exactly_lumpable/behaviour_only|passive": {
+      "absolute_gap": 0.005893162077,
+      "diagnostics": {
+        "burn_in": 20,
+        "cell_visits": {
+          "0": 36163,
+          "1": 34092,
+          "2": 25745
+        },
+        "estimator": "simulation",
+        "n_chains": 400,
+        "n_steps": 240,
+        "noise_floor": 0.05,
+        "pseudo_count": 0.5,
+        "visits_without_support": 0,
+        "weak_cells": []
+      },
+      "estimated_dynamic": 0.185893162077,
+      "exact_dynamic": 0.18,
+      "noise_floor": 0.05,
+      "same_side_of_tolerance": true,
+      "within_floor_or_tolerance": true
+    },
+    "exactly_lumpable/intervention_only|lesion": {
+      "absolute_gap": 0.004182876636,
+      "diagnostics": {
+        "burn_in": 20,
+        "cell_visits": {
+          "0": 51981,
+          "1": 22548,
+          "2": 21471
+        },
+        "estimator": "simulation",
+        "n_chains": 400,
+        "n_steps": 240,
+        "noise_floor": 0.05,
+        "pseudo_count": 0.5,
+        "visits_without_support": 0,
+        "weak_cells": []
+      },
+      "estimated_dynamic": 0.495817123364,
+      "exact_dynamic": 0.5,
+      "noise_floor": 0.05,
+      "same_side_of_tolerance": true,
+      "within_floor_or_tolerance": true
+    },
+    "exactly_lumpable/intervention_only|passive": {
+      "absolute_gap": 0.01150316895,
+      "diagnostics": {
+        "burn_in": 20,
+        "cell_visits": {
+          "0": 44779,
+          "1": 30359,
+          "2": 20862
+        },
+        "estimator": "simulation",
+        "n_chains": 400,
+        "n_steps": 240,
+        "noise_floor": 0.05,
+        "pseudo_count": 0.5,
+        "visits_without_support": 0,
+        "weak_cells": []
+      },
+      "estimated_dynamic": 0.01150316895,
+      "exact_dynamic": 0.0,
+      "noise_floor": 0.05,
+      "same_side_of_tolerance": true,
+      "within_floor_or_tolerance": true
+    },
+    "exactly_lumpable/positive|passive": {
+      "absolute_gap": 0.01150316895,
+      "diagnostics": {
+        "burn_in": 20,
+        "cell_visits": {
+          "0": 44779,
+          "1": 30359,
+          "2": 20862
+        },
+        "estimator": "simulation",
+        "n_chains": 400,
+        "n_steps": 240,
+        "noise_floor": 0.05,
+        "pseudo_count": 0.5,
+        "visits_without_support": 0,
+        "weak_cells": []
+      },
+      "estimated_dynamic": 0.01150316895,
+      "exact_dynamic": 0.0,
+      "noise_floor": 0.05,
+      "same_side_of_tolerance": true,
+      "within_floor_or_tolerance": true
+    }
+  },
+  "baseline": {
+    "checked": 44,
+    "mismatched": [],
+    "missing": [],
+    "path": "interventional_consistency_frozen_baseline.sha256",
+    "status": "ok"
+  },
+  "circuit": {
+    "clamp": {
+      "diagnostics": {
+        "burn_in": 20,
+        "caveat": "Monte Carlo noise inflates a worst-case estimator; treat these values as descriptive and do not gate any claim on them.",
+        "cell_visits": {
+          "0": 19,
+          "1": 28,
+          "2": 29,
+          "3": 16,
+          "4": 23,
+          "5": 37,
+          "6": 25,
+          "7": 28,
+          "8": 26,
+          "9": 28,
+          "10": 33,
+          "11": 19,
+          "12": 13,
+          "13": 29,
+          "14": 20,
+          "15": 27
+        },
+        "estimator": "rollout",
+        "n_chains": 400,
+        "noise_floor": 0.08,
+        "replicates": 80,
+        "weak_cells": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          6,
+          7,
+          8,
+          9,
+          11,
+          12,
+          13,
+          14,
+          15
+        ]
+      },
+      "error": {
+        "behavior": 0.19999999999999996,
+        "ci": null,
+        "definition": "sup over within-cell pairs of total variation between next-macro-state (dynamic) or behaviour (behavior) distributions",
+        "dynamic": 1.0,
+        "mean_pairwise": 0.2889034315694879,
+        "min_cell_count": 2,
+        "n_cells": 16,
+        "n_cells_singleton": 0,
+        "n_unsupported": 0,
+        "not_supported": [
+          "a mean over cells (it hides aliasing)",
+          "a ranking across information contracts",
+          "any biological or causal interpretation"
+        ],
+        "occupancy_floor": 0.0,
+        "operator": "clamp",
+        "reason": "",
+        "status": "ok",
+        "support_coverage": 1.0000000000000004,
+        "worst_case": 1.0
+      }
+    },
+    "lesion": {
+      "diagnostics": {
+        "burn_in": 20,
+        "caveat": "Monte Carlo noise inflates a worst-case estimator; treat these values as descriptive and do not gate any claim on them.",
+        "cell_visits": {
+          "0": 19,
+          "1": 24,
+          "2": 28,
+          "3": 15,
+          "4": 22,
+          "5": 39,
+          "6": 33,
+          "7": 21,
+          "8": 27,
+          "9": 33,
+          "10": 35,
+          "11": 15,
+          "12": 18,
+          "13": 20,
+          "14": 33,
+          "15": 18
+        },
+        "estimator": "rollout",
+        "n_chains": 400,
+        "noise_floor": 0.08,
+        "replicates": 80,
+        "weak_cells": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          7,
+          8,
+          11,
+          12,
+          13,
+          15
+        ]
+      },
+      "error": {
+        "behavior": 0.38749999999999996,
+        "ci": null,
+        "definition": "sup over within-cell pairs of total variation between next-macro-state (dynamic) or behaviour (behavior) distributions",
+        "dynamic": 1.0,
+        "mean_pairwise": 0.3919356243781545,
+        "min_cell_count": 2,
+        "n_cells": 16,
+        "n_cells_singleton": 0,
+        "n_unsupported": 0,
+        "not_supported": [
+          "a mean over cells (it hides aliasing)",
+          "a ranking across information contracts",
+          "any biological or causal interpretation"
+        ],
+        "occupancy_floor": 0.0,
+        "operator": "lesion",
+        "reason": "",
+        "status": "ok",
+        "support_coverage": 1.0000000000000002,
+        "worst_case": 1.0
+      }
+    },
+    "passive": {
+      "diagnostics": {
+        "burn_in": 20,
+        "caveat": "Monte Carlo noise inflates a worst-case estimator; treat these values as descriptive and do not gate any claim on them.",
+        "cell_visits": {
+          "0": 22,
+          "1": 29,
+          "2": 22,
+          "3": 14,
+          "4": 28,
+          "5": 39,
+          "6": 42,
+          "7": 25,
+          "8": 18,
+          "9": 33,
+          "10": 26,
+          "11": 32,
+          "12": 13,
+          "13": 22,
+          "14": 22,
+          "15": 13
+        },
+        "estimator": "rollout",
+        "n_chains": 400,
+        "noise_floor": 0.08,
+        "replicates": 80,
+        "weak_cells": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          7,
+          8,
+          10,
+          12,
+          13,
+          14,
+          15
+        ]
+      },
+      "error": {
+        "behavior": 0.30000000000000004,
+        "ci": null,
+        "definition": "sup over within-cell pairs of total variation between next-macro-state (dynamic) or behaviour (behavior) distributions",
+        "dynamic": 1.0,
+        "mean_pairwise": 0.5117316443261986,
+        "min_cell_count": 2,
+        "n_cells": 16,
+        "n_cells_singleton": 0,
+        "n_unsupported": 0,
+        "not_supported": [
+          "a mean over cells (it hides aliasing)",
+          "a ranking across information contracts",
+          "any biological or causal interpretation"
+        ],
+        "occupancy_floor": 0.0,
+        "operator": "passive",
+        "reason": "",
+        "status": "ok",
+        "support_coverage": 1.0000000000000004,
+        "worst_case": 1.0
+      }
+    }
+  },
+  "conformance": [
+    {
+      "detail": "The official NC-MCM implementation is Julia and no Julia executable is present, so its 15 source files cannot run here. 16 precomputed model archives exist and are loadable, but a precomputed embedding is an output, not the method: it cannot establish that a re-implementation is conformant.",
+      "evidence": "D:/ComputaCenter/NeuroBranch/neurobranch-interventional/references/external/nc-mcm (vendored, GPL-3.0, read-only)",
+      "name": "nc-mcm",
+      "status": "not_reproduced"
+    },
+    {
+      "detail": "BunDLe-Net v5 is a preprint with no executed reference here; the identifier was verified at Crossref, but no conformance run is claimed.",
+      "evidence": "DOI 10.1101/2023.08.08.551978 (preprint, v5)",
+      "name": "bundlenet-v5",
+      "status": "not_reproduced"
+    },
+    {
+      "detail": "The oracle is an exact enumeration over synthetic kernels. It is ground truth for the benchmark, not evidence about any biological system; it agreed with the independent sampling estimator on 4 fixtures.",
+      "evidence": "neurobranch.abstraction.reference.exact_commutation",
+      "name": "enumerating-reference",
+      "status": "simulated"
+    },
+    {
+      "detail": "Under the witness operator the error does not shrink with the observation window, because the operator's effect depends on a context that never enters the observation. The correct report is not_identified, not a small error.",
+      "evidence": "ring_witness/L{1,2,4}, operator asym",
+      "name": "identifiability-witness",
+      "status": "unidentifiable"
+    }
+  ],
+  "contracts": {
+    "contracts": {
+      "behaviour_supervised": {
+        "channels": {
+          "behavior_labels": true,
+          "current_observations": true,
+          "future_observations": false,
+          "intervention_magnitude": false,
+          "intervention_target": false,
+          "intervention_type": false,
+          "measurement_operator": false,
+          "missingness_mask": false,
+          "neuron_ids": false,
+          "observation_history": false,
+          "test_animal_adaptation": false,
+          "true_latent_state": false
+        },
+        "history_length": null,
+        "method": "behaviour_supervised",
+        "notes": [],
+        "schema_version": "ic-contract-v1"
+      },
+      "oracle": {
+        "channels": {
+          "behavior_labels": true,
+          "current_observations": true,
+          "future_observations": false,
+          "intervention_magnitude": false,
+          "intervention_target": false,
+          "intervention_type": false,
+          "measurement_operator": false,
+          "missingness_mask": false,
+          "neuron_ids": false,
+          "observation_history": false,
+          "test_animal_adaptation": false,
+          "true_latent_state": true
+        },
+        "history_length": null,
+        "method": "oracle",
+        "notes": [],
+        "schema_version": "ic-contract-v1"
+      },
+      "pca_known_H": {
+        "channels": {
+          "behavior_labels": false,
+          "current_observations": true,
+          "future_observations": false,
+          "intervention_magnitude": false,
+          "intervention_target": false,
+          "intervention_type": false,
+          "measurement_operator": true,
+          "missingness_mask": false,
+          "neuron_ids": false,
+          "observation_history": false,
+          "test_animal_adaptation": false,
+          "true_latent_state": false
+        },
+        "history_length": null,
+        "method": "pca_known_H",
+        "notes": [],
+        "schema_version": "ic-contract-v1"
+      },
+      "pca_observation": {
+        "channels": {
+          "behavior_labels": false,
+          "current_observations": true,
+          "future_observations": false,
+          "intervention_magnitude": false,
+          "intervention_target": false,
+          "intervention_type": false,
+          "measurement_operator": false,
+          "missingness_mask": false,
+          "neuron_ids": false,
+          "observation_history": false,
+          "test_animal_adaptation": false,
+          "true_latent_state": false
+        },
+        "history_length": null,
+        "method": "pca_observation",
+        "notes": [],
+        "schema_version": "ic-contract-v1"
+      },
+      "pca_observation_history": {
+        "channels": {
+          "behavior_labels": false,
+          "current_observations": true,
+          "future_observations": false,
+          "intervention_magnitude": false,
+          "intervention_target": false,
+          "intervention_type": false,
+          "measurement_operator": false,
+          "missingness_mask": false,
+          "neuron_ids": false,
+          "observation_history": true,
+          "test_animal_adaptation": false,
+          "true_latent_state": false
+        },
+        "history_length": 4,
+        "method": "pca_observation_history",
+        "notes": [],
+        "schema_version": "ic-contract-v1"
+      }
+    },
+    "cross_contract_refusal": {
+      "detail": "'pca_observation' and 'oracle' cannot be compared as representations: pca_observation vs oracle: NOT comparable as representations (information differs: behavior_labels False->True, true_latent_state False->True)",
+      "refused": true
+    },
+    "history_length_exception_allowed": true,
+    "labels": {
+      "behaviour_supervised": "behaviour_supervised",
+      "oracle": "oracle",
+      "pca_known_H": "privileged",
+      "pca_observation": "observation_only",
+      "pca_observation_history": "observation_history"
+    },
+    "privileged_excluded_from_ranking": [
+      "oracle",
+      "pca_known_H"
+    ]
+  },
+  "determinism": {
+    "checked": true,
+    "digest": "c481e2fa4967af3876d7f9fab97bc8d2e6f279842d1da8b4abdeae68fca9ce33",
+    "identical": true
+  },
+  "exact": {
+    "exactly_lumpable/behaviour_only": {
+      "errors": {
+        "passive": {
+          "behavior": 0.0,
+          "ci": null,
+          "definition": "sup over within-cell pairs of total variation between next-macro-state (dynamic) or behaviour (behavior) distributions",
+          "dynamic": 0.18,
+          "mean_pairwise": 0.06,
+          "min_cell_count": 2,
+          "n_cells": 3,
+          "n_cells_singleton": 0,
+          "n_unsupported": 0,
+          "not_supported": [
+            "a mean over cells (it hides aliasing)",
+            "a ranking across information contracts",
+            "any biological or causal interpretation"
+          ],
+          "occupancy_floor": 1e-06,
+          "operator": "passive",
+          "reason": "",
+          "status": "ok",
+          "support_coverage": 1.0,
+          "worst_case": 0.18
+        }
+      },
+      "identifiable_operators": [
+        "passive"
+      ],
+      "lumpable": {
+        "passive": false
+      },
+      "n_cells": 3,
+      "n_states": 6,
+      "operators": [
+        "passive"
+      ]
+    },
+    "exactly_lumpable/intervention_only": {
+      "errors": {
+        "lesion": {
+          "behavior": 0.0,
+          "ci": null,
+          "definition": "sup over within-cell pairs of total variation between next-macro-state (dynamic) or behaviour (behavior) distributions",
+          "dynamic": 0.49999999999999994,
+          "mean_pairwise": 0.16666666666666666,
+          "min_cell_count": 2,
+          "n_cells": 3,
+          "n_cells_singleton": 0,
+          "n_unsupported": 0,
+          "not_supported": [
+            "a mean over cells (it hides aliasing)",
+            "a ranking across information contracts",
+            "any biological or causal interpretation"
+          ],
+          "occupancy_floor": 1e-06,
+          "operator": "lesion",
+          "reason": "",
+          "status": "ok",
+          "support_coverage": 1.0,
+          "worst_case": 0.49999999999999994
+        },
+        "passive": {
+          "behavior": 0.0,
+          "ci": null,
+          "definition": "sup over within-cell pairs of total variation between next-macro-state (dynamic) or behaviour (behavior) distributions",
+          "dynamic": 0.0,
+          "mean_pairwise": 0.0,
+          "min_cell_count": 2,
+          "n_cells": 3,
+          "n_cells_singleton": 0,
+          "n_unsupported": 0,
+          "not_supported": [
+            "a mean over cells (it hides aliasing)",
+            "a ranking across information contracts",
+            "any biological or causal interpretation"
+          ],
+          "occupancy_floor": 1e-06,
+          "operator": "passive",
+          "reason": "",
+          "status": "ok",
+          "support_coverage": 1.0,
+          "worst_case": 0.0
+        }
+      },
+      "identifiable_operators": [
+        "passive",
+        "lesion"
+      ],
+      "lumpable": {
+        "lesion": false,
+        "passive": true
+      },
+      "n_cells": 3,
+      "n_states": 6,
+      "operators": [
+        "passive",
+        "lesion"
+      ]
+    },
+    "exactly_lumpable/positive": {
+      "errors": {
+        "passive": {
+          "behavior": 0.0,
+          "ci": null,
+          "definition": "sup over within-cell pairs of total variation between next-macro-state (dynamic) or behaviour (behavior) distributions",
+          "dynamic": 0.0,
+          "mean_pairwise": 0.0,
+          "min_cell_count": 2,
+          "n_cells": 3,
+          "n_cells_singleton": 0,
+          "n_unsupported": 0,
+          "not_supported": [
+            "a mean over cells (it hides aliasing)",
+            "a ranking across information contracts",
+            "any biological or causal interpretation"
+          ],
+          "occupancy_floor": 1e-06,
+          "operator": "passive",
+          "reason": "",
+          "status": "ok",
+          "support_coverage": 1.0,
+          "worst_case": 0.0
+        }
+      },
+      "identifiable_operators": [
+        "passive"
+      ],
+      "lumpable": {
+        "passive": true
+      },
+      "n_cells": 3,
+      "n_states": 6,
+      "operators": [
+        "passive"
+      ]
+    },
+    "ring/L1": {
+      "errors": {
+        "passive": {
+          "behavior": 0.0,
+          "ci": null,
+          "definition": "sup over within-cell pairs of total variation between next-macro-state (dynamic) or behaviour (behavior) distributions",
+          "dynamic": 0.7,
+          "mean_pairwise": 0.6999999999999998,
+          "min_cell_count": 2,
+          "n_cells": 3,
+          "n_cells_singleton": 0,
+          "n_unsupported": 0,
+          "not_supported": [
+            "a mean over cells (it hides aliasing)",
+            "a ranking across information contracts",
+            "any biological or causal interpretation"
+          ],
+          "occupancy_floor": 1e-06,
+          "operator": "passive",
+          "reason": "",
+          "status": "ok",
+          "support_coverage": 1.0,
+          "worst_case": 0.7
+        }
+      },
+      "identifiable_operators": [
+        "passive"
+      ],
+      "lumpable": {
+        "passive": false
+      },
+      "n_cells": 3,
+      "n_states": 18,
+      "operators": [
+        "passive"
+      ]
+    },
+    "ring/L2": {
+      "errors": {
+        "passive": {
+          "behavior": 0.0,
+          "ci": null,
+          "definition": "sup over within-cell pairs of total variation between next-macro-state (dynamic) or behaviour (behavior) distributions",
+          "dynamic": 0.0,
+          "mean_pairwise": null,
+          "min_cell_count": 2,
+          "n_cells": 6,
+          "n_cells_singleton": 6,
+          "n_unsupported": 3,
+          "not_supported": [
+            "a mean over cells (it hides aliasing)",
+            "a ranking across information contracts",
+            "any biological or causal interpretation"
+          ],
+          "occupancy_floor": 1e-06,
+          "operator": "passive",
+          "reason": "",
+          "status": "ok",
+          "support_coverage": 1.0,
+          "worst_case": 0.0
+        }
+      },
+      "identifiable_operators": [
+        "passive"
+      ],
+      "lumpable": {
+        "passive": false
+      },
+      "n_cells": 9,
+      "n_states": 54,
+      "operators": [
+        "passive"
+      ]
+    },
+    "ring/L4": {
+      "errors": {
+        "passive": {
+          "behavior": 0.0,
+          "ci": null,
+          "definition": "sup over within-cell pairs of total variation between next-macro-state (dynamic) or behaviour (behavior) distributions",
+          "dynamic": 0.0,
+          "mean_pairwise": null,
+          "min_cell_count": 2,
+          "n_cells": 24,
+          "n_cells_singleton": 24,
+          "n_unsupported": 57,
+          "not_supported": [
+            "a mean over cells (it hides aliasing)",
+            "a ranking across information contracts",
+            "any biological or causal interpretation"
+          ],
+          "occupancy_floor": 1e-06,
+          "operator": "passive",
+          "reason": "",
+          "status": "ok",
+          "support_coverage": 1.0,
+          "worst_case": 0.0
+        }
+      },
+      "identifiable_operators": [
+        "passive"
+      ],
+      "lumpable": {
+        "passive": false
+      },
+      "n_cells": 81,
+      "n_states": 486,
+      "operators": [
+        "passive"
+      ]
+    },
+    "ring_witness/L1": {
+      "errors": {
+        "asym": {
+          "behavior": 0.0,
+          "ci": null,
+          "definition": "sup over within-cell pairs of total variation between next-macro-state (dynamic) or behaviour (behavior) distributions",
+          "dynamic": 0.85,
+          "mean_pairwise": 0.6833333333333332,
+          "min_cell_count": 2,
+          "n_cells": 3,
+          "n_cells_singleton": 0,
+          "n_unsupported": 0,
+          "not_supported": [
+            "a mean over cells (it hides aliasing)",
+            "a ranking across information contracts",
+            "any biological or causal interpretation"
+          ],
+          "occupancy_floor": 1e-06,
+          "operator": "asym",
+          "reason": "",
+          "status": "ok",
+          "support_coverage": 1.0,
+          "worst_case": 0.85
+        },
+        "passive": {
+          "behavior": 0.0,
+          "ci": null,
+          "definition": "sup over within-cell pairs of total variation between next-macro-state (dynamic) or behaviour (behavior) distributions",
+          "dynamic": 0.7,
+          "mean_pairwise": 0.4666666666666667,
+          "min_cell_count": 2,
+          "n_cells": 3,
+          "n_cells_singleton": 0,
+          "n_unsupported": 0,
+          "not_supported": [
+            "a mean over cells (it hides aliasing)",
+            "a ranking across information contracts",
+            "any biological or causal interpretation"
+          ],
+          "occupancy_floor": 1e-06,
+          "operator": "passive",
+          "reason": "",
+          "status": "ok",
+          "support_coverage": 1.0,
+          "worst_case": 0.7
+        }
+      },
+      "identifiable_operators": [
+        "passive"
+      ],
+      "lumpable": {
+        "asym": false,
+        "passive": false
+      },
+      "n_cells": 3,
+      "n_states": 36,
+      "operators": [
+        "passive",
+        "asym"
+      ]
+    },
+    "ring_witness/L2": {
+      "errors": {
+        "asym": {
+          "behavior": 0.0,
+          "ci": null,
+          "definition": "sup over within-cell pairs of total variation between next-macro-state (dynamic) or behaviour (behavior) distributions",
+          "dynamic": 0.85,
+          "mean_pairwise": 0.85,
+          "min_cell_count": 2,
+          "n_cells": 6,
+          "n_cells_singleton": 0,
+          "n_unsupported": 3,
+          "not_supported": [
+            "a mean over cells (it hides aliasing)",
+            "a ranking across information contracts",
+            "any biological or causal interpretation"
+          ],
+          "occupancy_floor": 1e-06,
+          "operator": "asym",
+          "reason": "",
+          "status": "ok",
+          "support_coverage": 1.0000000000000002,
+          "worst_case": 0.85
+        },
+        "passive": {
+          "behavior": 0.0,
+          "ci": null,
+          "definition": "sup over within-cell pairs of total variation between next-macro-state (dynamic) or behaviour (behavior) distributions",
+          "dynamic": 0.0,
+          "mean_pairwise": 0.0,
+          "min_cell_count": 2,
+          "n_cells": 6,
+          "n_cells_singleton": 0,
+          "n_unsupported": 3,
+          "not_supported": [
+            "a mean over cells (it hides aliasing)",
+            "a ranking across information contracts",
+            "any biological or causal interpretation"
+          ],
+          "occupancy_floor": 1e-06,
+          "operator": "passive",
+          "reason": "",
+          "status": "ok",
+          "support_coverage": 1.0000000000000002,
+          "worst_case": 0.0
+        }
+      },
+      "identifiable_operators": [
+        "passive"
+      ],
+      "lumpable": {
+        "asym": false,
+        "passive": false
+      },
+      "n_cells": 9,
+      "n_states": 108,
+      "operators": [
+        "passive",
+        "asym"
+      ]
+    },
+    "ring_witness/L4": {
+      "errors": {
+        "asym": {
+          "behavior": 0.0,
+          "ci": null,
+          "definition": "sup over within-cell pairs of total variation between next-macro-state (dynamic) or behaviour (behavior) distributions",
+          "dynamic": 0.85,
+          "mean_pairwise": 0.8500000000000001,
+          "min_cell_count": 2,
+          "n_cells": 24,
+          "n_cells_singleton": 0,
+          "n_unsupported": 57,
+          "not_supported": [
+            "a mean over cells (it hides aliasing)",
+            "a ranking across information contracts",
+            "any biological or causal interpretation"
+          ],
+          "occupancy_floor": 1e-06,
+          "operator": "asym",
+          "reason": "",
+          "status": "ok",
+          "support_coverage": 1.0,
+          "worst_case": 0.85
+        },
+        "passive": {
+          "behavior": 0.0,
+          "ci": null,
+          "definition": "sup over within-cell pairs of total variation between next-macro-state (dynamic) or behaviour (behavior) distributions",
+          "dynamic": 0.0,
+          "mean_pairwise": 0.0,
+          "min_cell_count": 2,
+          "n_cells": 24,
+          "n_cells_singleton": 0,
+          "n_unsupported": 57,
+          "not_supported": [
+            "a mean over cells (it hides aliasing)",
+            "a ranking across information contracts",
+            "any biological or causal interpretation"
+          ],
+          "occupancy_floor": 1e-06,
+          "operator": "passive",
+          "reason": "",
+          "status": "ok",
+          "support_coverage": 1.0,
+          "worst_case": 0.0
+        }
+      },
+      "identifiable_operators": [
+        "passive"
+      ],
+      "lumpable": {
+        "asym": false,
+        "passive": false
+      },
+      "n_cells": 81,
+      "n_states": 972,
+      "operators": [
+        "passive",
+        "asym"
+      ]
+    }
+  },
+  "gates": [
+    {
+      "detail": "exact_commutation completed with DiscreteFixture.simulate disabled",
+      "gate": "G1a_independent_reference",
+      "passed": true
+    },
+    {
+      "detail": "the sampling estimator reproduces the enumerator within its declared noise floor on 4/4 operator-fixture pairs",
+      "gate": "G1b_simulation_agreement",
+      "pairs": 4,
+      "passed": true
+    },
+    {
+      "detail": "the exactly lumpable fixture has zero dynamic error with at least one genuine pair per cell",
+      "dynamic": 0.0,
+      "gate": "G2_positive_control",
+      "passed": true,
+      "singleton_cells": 0
+    },
+    {
+      "behaviour_only_dynamic": 0.18,
+      "detail": "behaviour-only and intervention-only negatives separate on the intended estimand and only there",
+      "gate": "G3_negative_controls",
+      "intervention_only_lesion": 0.49999999999999994,
+      "intervention_only_passive": 0.0,
+      "passed": true
+    },
+    {
+      "detail": "history length 1 fails and length 2 succeeds, exactly",
+      "gate": "G3b_history_ladder",
+      "l1": 0.7,
+      "l2": 0.0,
+      "passed": true
+    },
+    {
+      "detail": "'pca_observation' and 'oracle' cannot be compared as representations: pca_observation vs oracle: NOT comparable as representations (information differs: behavior_labels False->True, true_latent_state False->True)",
+      "gate": "G4_contract_enforcement",
+      "passed": true
+    },
+    {
+      "detail": "the witness operator's error stays above tolerance and does not shrink with the window",
+      "gate": "G5_identifiability_witness",
+      "passed": true,
+      "values": {
+        "1": 0.85,
+        "2": 0.85,
+        "4": 0.85
+      }
+    },
+    {
+      "detail": "two in-process runs with the same seed produced identical metrics",
+      "gate": "G6_determinism",
+      "passed": true
+    },
+    {
+      "detail": "44 recorded historical manifests re-hashed",
+      "gate": "G7_frozen_history",
+      "mismatched": [],
+      "missing": [],
+      "passed": true
+    }
+  ],
+  "independence": {
+    "detail": "exact_commutation completed with DiscreteFixture.simulate disabled",
+    "status": "ok"
+  },
+  "provenance": {
+    "baseline": "interventional_consistency_frozen_baseline.sha256",
+    "numpy": "2.3.1",
+    "platform": "win32",
+    "protocol": "interventional_consistency_protocol.md",
+    "protocol_sha256": "37eba808bc549a394cdc7673eed09ecda01e000f2a66ef9bb8aec18d78abef1f",
+    "python": "3.13.5",
+    "quick": false,
+    "seed": 0
+  },
+  "schema": "neurobranch-ic-stage1-v1",
+  "verdict": {
+    "if_no_go": [],
+    "not_claimed": [
+      "biological or cognitive interpretation of any number here",
+      "reproduction of NC-MCM or BunDLe-Net",
+      "that the benchmark is exhaustive over representations or systems"
+    ],
+    "stage_two_justified": true,
+    "technical_go": true
+  }
+}

@@ -1,0 +1,120 @@
+{
+  "contracts": {
+    "behaviour_supervised": {
+      "channels": {
+        "behavior_labels": true,
+        "current_observations": true,
+        "future_observations": false,
+        "intervention_magnitude": false,
+        "intervention_target": false,
+        "intervention_type": false,
+        "measurement_operator": false,
+        "missingness_mask": false,
+        "neuron_ids": false,
+        "observation_history": false,
+        "test_animal_adaptation": false,
+        "true_latent_state": false
+      },
+      "history_length": null,
+      "method": "behaviour_supervised",
+      "notes": [],
+      "schema_version": "ic-contract-v1"
+    },
+    "oracle": {
+      "channels": {
+        "behavior_labels": true,
+        "current_observations": true,
+        "future_observations": false,
+        "intervention_magnitude": false,
+        "intervention_target": false,
+        "intervention_type": false,
+        "measurement_operator": false,
+        "missingness_mask": false,
+        "neuron_ids": false,
+        "observation_history": false,
+        "test_animal_adaptation": false,
+        "true_latent_state": true
+      },
+      "history_length": null,
+      "method": "oracle",
+      "notes": [],
+      "schema_version": "ic-contract-v1"
+    },
+    "pca_known_H": {
+      "channels": {
+        "behavior_labels": false,
+        "current_observations": true,
+        "future_observations": false,
+        "intervention_magnitude": false,
+        "intervention_target": false,
+        "intervention_type": false,
+        "measurement_operator": true,
+        "missingness_mask": false,
+        "neuron_ids": false,
+        "observation_history": false,
+        "test_animal_adaptation": false,
+        "true_latent_state": false
+      },
+      "history_length": null,
+      "method": "pca_known_H",
+      "notes": [],
+      "schema_version": "ic-contract-v1"
+    },
+    "pca_observation": {
+      "channels": {
+        "behavior_labels": false,
+        "current_observations": true,
+        "future_observations": false,
+        "intervention_magnitude": false,
+        "intervention_target": false,
+        "intervention_type": false,
+        "measurement_operator": false,
+        "missingness_mask": false,
+        "neuron_ids": false,
+        "observation_history": false,
+        "test_animal_adaptation": false,
+        "true_latent_state": false
+      },
+      "history_length": null,
+      "method": "pca_observation",
+      "notes": [],
+      "schema_version": "ic-contract-v1"
+    },
+    "pca_observation_history": {
+      "channels": {
+        "behavior_labels": false,
+        "current_observations": true,
+        "future_observations": false,
+        "intervention_magnitude": false,
+        "intervention_target": false,
+        "intervention_type": false,
+        "measurement_operator": false,
+        "missingness_mask": false,
+        "neuron_ids": false,
+        "observation_history": true,
+        "test_animal_adaptation": false,
+        "true_latent_state": false
+      },
+      "history_length": 4,
+      "method": "pca_observation_history",
+      "notes": [],
+      "schema_version": "ic-contract-v1"
+    }
+  },
+  "cross_contract_refusal": {
+    "detail": "'pca_observation' and 'oracle' cannot be compared as representations: pca_observation vs oracle: NOT comparable as representations (information differs: behavior_labels False->True, true_latent_state False->True)",
+    "refused": true
+  },
+  "history_length_exception_allowed": true,
+  "labels": {
+    "behaviour_supervised": "behaviour_supervised",
+    "oracle": "oracle",
+    "pca_known_H": "privileged",
+    "pca_observation": "observation_only",
+    "pca_observation_history": "observation_history"
+  },
+  "privileged_excluded_from_ranking": [
+    "oracle",
+    "pca_known_H"
+  ]
+}

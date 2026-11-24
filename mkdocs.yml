@@ -34,6 +34,9 @@ plugins:
 nav:
   - Home: README.md
   - Current status: CURRENT_STATUS.md
+  - Interventional consistency:
+      - Research direction: RESEARCH_DIRECTION_INTERVENTIONAL_CONSISTENCY.md
+      - Stage One: INTERVENTIONAL_CONSISTENCY_STAGE1.md
   - Scientific Studio:
       - User guide: STUDIO_USER_GUIDE.md
       - Architecture: STUDIO_ARCHITECTURE.md

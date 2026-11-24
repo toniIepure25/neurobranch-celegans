@@ -1,5 +1,25 @@
 # Changelog
 
+## 2026-11-24 - Interventional consistency, Stage One
+
+- Added `neurobranch.abstraction`, a self-contained instrument for measuring whether a
+  macrostate abstraction commutes with the interventions of its micro system. It does
+  not import the untracked P2-P8.5 `mechanistic` package, so it reproduces from a clean
+  checkout.
+- Added a 12-channel information contract with a JSON Schema; a comparison across
+  different contracts is refused instead of quietly reported.
+- Added the sup-based behavioural and dynamic commutation errors with an occupancy
+  floor, a support guard (`insufficient_support`, never imputed) and a separate
+  occupancy-weighted mean for continuous systems.
+- Added three ground-truth families: an exactly lumpable chain with behaviour-only and
+  intervention-only negatives, a ring state space with a history ladder and an
+  identifiability witness, and a sampled rate circuit.
+- Added `abstraction stage1` and `abstraction contracts` to the CLI. Nine frozen gates
+  pass, including independence of the enumerating reference, agreement between two
+  estimators, and determinism.
+- Documented that the P2-P8.5 report directories and `src/neurobranch/mechanistic/`
+  are untracked at the base commit; that gap is reported, not repaired here.
+
 ## 2026-11-16 - Decision Room v5
 
 - Added an option atlas that shows the commitment, prerequisites and claim ceiling for every

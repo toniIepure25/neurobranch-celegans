@@ -376,5 +376,76 @@ def launch_app(
     subprocess.run(cmd, check=False)
 
 
+abstraction_app = typer.Typer(
+    no_args_is_help=True,
+    help="Interventional consistency of neural abstractions (NeuroBranch-IC, Stage One).",
+)
+app.add_typer(abstraction_app, name="abstraction")
+
+
+@abstraction_app.command("stage1")
+def abstraction_stage1(
+    seed: Annotated[int, typer.Option(help="Single seed for every stochastic component.")] = 0,
+    quick: Annotated[bool, typer.Option(help="Smaller sample sizes; gates are still evaluated.")] = False,
+) -> None:
+    """Run every ground-truth fixture, evaluate the frozen gates and write the report."""
+    from neurobranch.abstraction.stage1 import run_stage1, summary_line
+
+    metrics = run_stage1(seed=seed, quick=quick)
+    table = Table(title="Stage-One gates")
+    table.add_column("gate")
+    table.add_column("result")
+    for gate in metrics["gates"]:
+        table.add_row(gate["gate"], "PASS" if gate["passed"] else "FAIL")
+    console.print(table)
+    console.print(summary_line(metrics))
+    if not metrics["verdict"]["technical_go"]:
+        raise typer.Exit(code=1)
+
+
+@abstraction_app.command("contracts")
+def abstraction_contracts(
+    check: Annotated[bool, typer.Option(help="Validate against the JSON Schema and refuse bad comparisons.")] = False,
+) -> None:
+    """Show the information contract of every Stage-One method."""
+    from neurobranch.abstraction.contract import (
+        ContractError,
+        require_comparable,
+        stage1_contracts,
+        validate_payload,
+    )
+
+    contracts = stage1_contracts()
+    table = Table(title="Information contracts")
+    table.add_column("method")
+    table.add_column("label")
+    table.add_column("history")
+    table.add_column("privileged")
+    for name, contract in contracts.items():
+        table.add_row(
+            name,
+            contract.label(),
+            str(contract.history_length) if contract.history_length else "-",
+            "yes" if contract.privileged() else "no",
+        )
+    console.print(table)
+    if not check:
+        return
+    try:
+        for contract in contracts.values():
+            validate_payload(contract.to_dict())
+    except ContractError as exc:
+        console.print(f"[red]invalid contract:[/red] {exc}")
+        raise typer.Exit(code=2) from exc
+    console.print("[green]all contracts validate against the packaged schema[/green]")
+    try:
+        require_comparable({"pca_observation": contracts["pca_observation"], "oracle": contracts["oracle"]})
+    except ContractError as exc:
+        console.print(f"[yellow]ranking refused as designed:[/yellow] {exc}")
+    else:
+        console.print("[red]a privileged method was not refused; the contract gate is broken[/red]")
+        raise typer.Exit(code=3)
+
+
 if __name__ == "__main__":
     app()
