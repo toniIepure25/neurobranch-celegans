@@ -1,0 +1,814 @@
+{
+  "indexed": {
+    "date-parts": [
+      [
+        2026,
+        11,
+        19
+      ]
+    ],
+    "date-time": "2026-11-19T03:18:05Z",
+    "timestamp": 1795058285027,
+    "version": "4.10.2"
+  },
+  "reference-count": 47,
+  "publisher": "Elsevier BV",
+  "issue": "3",
+  "license": [
+    {
+      "start": {
+        "date-parts": [
+          [
+            2015,
+            10,
+            1
+          ]
+        ],
+        "date-time": "2015-10-01T00:00:00Z",
+        "timestamp": 1443657600000
+      },
+      "content-version": "tdm",
+      "delay-in-days": 0,
+      "URL": "https://www.elsevier.com/tdm/userlicense/1.0/"
+    },
+    {
+      "start": {
+        "date-parts": [
+          [
+            2016,
+            10,
+            22
+          ]
+        ],
+        "date-time": "2016-10-22T00:00:00Z",
+        "timestamp": 1477094400000
+      },
+      "content-version": "vor",
+      "delay-in-days": 387,
+      "URL": "https://www.elsevier.com/open-access/userlicense/1.0/"
+    }
+  ],
+  "content-domain": {
+    "domain": [
+      "cell.com",
+      "elsevier.com",
+      "sciencedirect.com"
+    ],
+    "crossmark-restriction": true
+  },
+  "short-container-title": [
+    "Cell"
+  ],
+  "published-print": {
+    "date-parts": [
+      [
+        2015,
+        10
+      ]
+    ]
+  },
+  "DOI": "10.1016/j.cell.2015.09.034",
+  "type": "journal-article",
+  "created": {
+    "date-parts": [
+      [
+        2015,
+        10,
+        22
+      ]
+    ],
+    "date-time": "2015-10-22T22:13:34Z",
+    "timestamp": 1445552014000
+  },
+  "page": "656-669",
+  "update-policy": "https://doi.org/10.1016/elsevier_cm_policy",
+  "source": "Crossref",
+  "is-referenced-by-count": 531,
+  "title": [
+    "Global Brain Dynamics Embed the Motor Command Sequence of Caenorhabditis elegans"
+  ],
+  "prefix": "10.1016",
+  "volume": "163",
+  "author": [
+    {
+      "given": "Saul",
+      "family": "Kato",
+      "sequence": "first",
+      "affiliation": [],
+      "role": [
+        {
+          "vocabulary": "crossref",
+          "role": "author"
+        }
+      ]
+    },
+    {
+      "given": "Harris\u00a0S.",
+      "family": "Kaplan",
+      "sequence": "additional",
+      "affiliation": [],
+      "role": [
+        {
+          "vocabulary": "crossref",
+          "role": "author"
+        }
+      ]
+    },
+    {
+      "given": "Tina",
+      "family": "Schr\u00f6del",
+      "sequence": "additional",
+      "affiliation": [],
+      "role": [
+        {
+          "vocabulary": "crossref",
+          "role": "author"
+        }
+      ]
+    },
+    {
+      "given": "Susanne",
+      "family": "Skora",
+      "sequence": "additional",
+      "affiliation": [],
+      "role": [
+        {
+          "vocabulary": "crossref",
+          "role": "author"
+        }
+      ]
+    },
+    {
+      "given": "Theodore\u00a0H.",
+      "family": "Lindsay",
+      "sequence": "additional",
+      "affiliation": [],
+      "role": [
+        {
+          "vocabulary": "crossref",
+          "role": "author"
+        }
+      ]
+    },
+    {
+      "given": "Eviatar",
+      "family": "Yemini",
+      "sequence": "additional",
+      "affiliation": [],
+      "role": [
+        {
+          "vocabulary": "crossref",
+          "role": "author"
+        }
+      ]
+    },
+    {
+      "given": "Shawn",
+      "family": "Lockery",
+      "sequence": "additional",
+      "affiliation": [],
+      "role": [
+        {
+          "vocabulary": "crossref",
+          "role": "author"
+        }
+      ]
+    },
+    {
+      "given": "Manuel",
+      "family": "Zimmer",
+      "sequence": "additional",
+      "affiliation": [],
+      "role": [
+        {
+          "vocabulary": "crossref",
+          "role": "author"
+        }
+      ]
+    }
+  ],
+  "member": "78",
+  "reference": [
+    {
+      "key": "10.1016/j.cell.2015.09.034_bib1",
+      "doi-asserted-by": "crossref",
+      "first-page": "471",
+      "DOI": "10.1038/nature11057",
+      "article-title": "Brain-wide neuronal dynamics during motor adaptation in zebrafish",
+      "volume": "485",
+      "author": "Ahrens",
+      "year": "2012",
+      "journal-title": "Nature"
+    },
+    {
+      "key": "10.1016/j.cell.2015.09.034_bib2",
+      "doi-asserted-by": "crossref",
+      "first-page": "413",
+      "DOI": "10.1038/nmeth.2434",
+      "article-title": "Whole-brain functional imaging at cellular resolution using light-sheet microscopy",
+      "volume": "10",
+      "author": "Ahrens",
+      "year": "2013",
+      "journal-title": "Nat. Methods"
+    },
+    {
+      "key": "10.1016/j.cell.2015.09.034_bib3",
+      "doi-asserted-by": "crossref",
+      "first-page": "18",
+      "DOI": "10.1016/j.neuron.2014.09.005",
+      "article-title": "Toward a science of computational ethology",
+      "volume": "84",
+      "author": "Anderson",
+      "year": "2014",
+      "journal-title": "Neuron"
+    },
+    {
+      "key": "10.1016/j.cell.2015.09.034_bib4",
+      "doi-asserted-by": "crossref",
+      "first-page": "327",
+      "DOI": "10.1038/nature11911",
+      "article-title": "Functional organization of human sensorimotor cortex for speech articulation",
+      "volume": "495",
+      "author": "Bouchard",
+      "year": "2013",
+      "journal-title": "Nature"
+    },
+    {
+      "key": "10.1016/j.cell.2015.09.034_bib5",
+      "doi-asserted-by": "crossref",
+      "first-page": "896",
+      "DOI": "10.1126/science.1103736",
+      "article-title": "Optical imaging of neuronal populations during decision-making",
+      "volume": "307",
+      "author": "Briggman",
+      "year": "2005",
+      "journal-title": "Science"
+    },
+    {
+      "key": "10.1016/j.cell.2015.09.034_bib6",
+      "doi-asserted-by": "crossref",
+      "first-page": "304",
+      "DOI": "10.1016/j.neuron.2015.03.005",
+      "article-title": "Modular deconstruction reveals the dynamical and physical building blocks of a locomotion motor program",
+      "volume": "86",
+      "author": "Bruno",
+      "year": "2015",
+      "journal-title": "Neuron"
+    },
+    {
+      "key": "10.1016/j.cell.2015.09.034_bib7",
+      "doi-asserted-by": "crossref",
+      "first-page": "581",
+      "DOI": "10.1038/nn.3061",
+      "article-title": "Tonic signaling from O2 sensors sets neural circuit activity and behavioral state",
+      "volume": "15",
+      "author": "Busch",
+      "year": "2012",
+      "journal-title": "Nat. Neurosci."
+    },
+    {
+      "key": "10.1016/j.cell.2015.09.034_bib8",
+      "doi-asserted-by": "crossref",
+      "first-page": "63",
+      "DOI": "10.1038/nature06292",
+      "article-title": "Dissecting a circuit for olfactory behaviour in Caenorhabditis elegans",
+      "volume": "450",
+      "author": "Chalasani",
+      "year": "2007",
+      "journal-title": "Nature"
+    },
+    {
+      "key": "10.1016/j.cell.2015.09.034_bib9",
+      "doi-asserted-by": "crossref",
+      "first-page": "956",
+      "DOI": "10.1523/JNEUROSCI.05-04-00956.1985",
+      "article-title": "The neural circuit for touch sensitivity in Caenorhabditis elegans",
+      "volume": "5",
+      "author": "Chalfie",
+      "year": "1985",
+      "journal-title": "J.\u00a0Neurosci."
+    },
+    {
+      "key": "10.1016/j.cell.2015.09.034_bib10",
+      "doi-asserted-by": "crossref",
+      "first-page": "1",
+      "DOI": "10.5402/2011/164564",
+      "article-title": "Numerical differentiation of noisy, nonsmooth data",
+      "volume": "2011",
+      "author": "Chartrand",
+      "year": "2011",
+      "journal-title": "ISRN Applied Mathematics"
+    },
+    {
+      "key": "10.1016/j.cell.2015.09.034_bib11",
+      "doi-asserted-by": "crossref",
+      "first-page": "51",
+      "DOI": "10.1038/nature11129",
+      "article-title": "Neural population dynamics during reaching",
+      "volume": "487",
+      "author": "Churchland",
+      "year": "2012",
+      "journal-title": "Nature"
+    },
+    {
+      "key": "10.1016/j.cell.2015.09.034_bib12",
+      "doi-asserted-by": "crossref",
+      "first-page": "269",
+      "DOI": "10.1146/annurev.neuro.051508.135409",
+      "article-title": "Neural mechanisms for interacting with a world full of action choices",
+      "volume": "33",
+      "author": "Cisek",
+      "year": "2010",
+      "journal-title": "Annu. Rev. Neurosci."
+    },
+    {
+      "key": "10.1016/j.cell.2015.09.034_bib13",
+      "doi-asserted-by": "crossref",
+      "first-page": "1500",
+      "DOI": "10.1038/nn.3776",
+      "article-title": "Dimensionality reduction for large-scale neural recordings",
+      "volume": "17",
+      "author": "Cunningham",
+      "year": "2014",
+      "journal-title": "Nat. Neurosci."
+    },
+    {
+      "key": "10.1016/j.cell.2015.09.034_bib14",
+      "doi-asserted-by": "crossref",
+      "first-page": "297",
+      "DOI": "10.1038/nmeth.1310",
+      "article-title": "Automated monitoring and analysis of social behavior in Drosophila",
+      "volume": "6",
+      "author": "Dankert",
+      "year": "2009",
+      "journal-title": "Nat. Methods"
+    },
+    {
+      "key": "10.1016/j.cell.2015.09.034_bib15",
+      "doi-asserted-by": "crossref",
+      "first-page": "e1001529",
+      "DOI": "10.1371/journal.pbio.1001529",
+      "article-title": "Monoaminergic orchestration of motor programs in a complex C. elegans behavior",
+      "volume": "11",
+      "author": "Donnelly",
+      "year": "2013",
+      "journal-title": "PLoS Biol."
+    },
+    {
+      "key": "10.1016/j.cell.2015.09.034_bib16",
+      "doi-asserted-by": "crossref",
+      "first-page": "e24666",
+      "DOI": "10.1371/journal.pone.0024666",
+      "article-title": "An image-free opto-mechanical system for creating virtual environments and imaging neuronal activity in freely moving Caenorhabditis elegans",
+      "volume": "6",
+      "author": "Faumont",
+      "year": "2011",
+      "journal-title": "PLoS ONE"
+    },
+    {
+      "key": "10.1016/j.cell.2015.09.034_bib17",
+      "doi-asserted-by": "crossref",
+      "first-page": "34",
+      "DOI": "10.1016/j.conb.2015.01.012",
+      "article-title": "Coding of movements in the motor cortex",
+      "volume": "33",
+      "author": "Georgopoulos",
+      "year": "2015",
+      "journal-title": "Curr. Opin. Neurobiol."
+    },
+    {
+      "key": "10.1016/j.cell.2015.09.034_bib18",
+      "doi-asserted-by": "crossref",
+      "first-page": "215",
+      "DOI": "10.1016/j.cell.2015.02.018",
+      "article-title": "Feedback from network states generates variability in a probabilistic olfactory circuit",
+      "volume": "161",
+      "author": "Gordus",
+      "year": "2015",
+      "journal-title": "Cell"
+    },
+    {
+      "key": "10.1016/j.cell.2015.09.034_bib19",
+      "doi-asserted-by": "crossref",
+      "first-page": "3184",
+      "DOI": "10.1073/pnas.0409009101",
+      "article-title": "A circuit for navigation in Caenorhabditis elegans",
+      "volume": "102",
+      "author": "Gray",
+      "year": "2005",
+      "journal-title": "Proc. Natl. Acad. Sci. USA"
+    },
+    {
+      "key": "10.1016/j.cell.2015.09.034_bib20",
+      "doi-asserted-by": "crossref",
+      "first-page": "751",
+      "DOI": "10.1016/j.neuron.2006.11.008",
+      "article-title": "Biological pattern generation: the cellular and computational logic of networks in motion",
+      "volume": "52",
+      "author": "Grillner",
+      "year": "2006",
+      "journal-title": "Neuron"
+    },
+    {
+      "key": "10.1016/j.cell.2015.09.034_bib21",
+      "doi-asserted-by": "crossref",
+      "first-page": "1173",
+      "DOI": "10.1016/j.neuron.2010.11.025",
+      "article-title": "Functional organization of a neural network for aversive olfactory learning in Caenorhabditis elegans",
+      "volume": "68",
+      "author": "Ha",
+      "year": "2010",
+      "journal-title": "Neuron"
+    },
+    {
+      "key": "10.1016/j.cell.2015.09.034_bib22",
+      "doi-asserted-by": "crossref",
+      "first-page": "62",
+      "DOI": "10.1038/nature10918",
+      "article-title": "Choice-specific sequences in parietal cortex during a virtual-navigation decision task",
+      "volume": "484",
+      "author": "Harvey",
+      "year": "2012",
+      "journal-title": "Nature"
+    },
+    {
+      "key": "10.1016/j.cell.2015.09.034_bib23",
+      "doi-asserted-by": "crossref",
+      "first-page": "99",
+      "DOI": "10.1038/nature11081",
+      "article-title": "Compartmentalized calcium dynamics in a C. elegans interneuron encode head movement",
+      "volume": "487",
+      "author": "Hendricks",
+      "year": "2012",
+      "journal-title": "Nature"
+    },
+    {
+      "key": "10.1016/j.cell.2015.09.034_bib24",
+      "series-title": "The neuronal genome of Caenorhabditis elegans",
+      "first-page": "1",
+      "author": "Hobert",
+      "year": "2013"
+    },
+    {
+      "key": "10.1016/j.cell.2015.09.034_bib25",
+      "doi-asserted-by": "crossref",
+      "first-page": "5370",
+      "DOI": "10.1523/JNEUROSCI.3633-08.2009",
+      "article-title": "Parallel use of two behavioral mechanisms for chemotaxis in Caenorhabditis elegans",
+      "volume": "29",
+      "author": "Iino",
+      "year": "2009",
+      "journal-title": "J.\u00a0Neurosci."
+    },
+    {
+      "key": "10.1016/j.cell.2015.09.034_bib26",
+      "doi-asserted-by": "crossref",
+      "first-page": "423",
+      "DOI": "10.1038/nn.3632",
+      "article-title": "Basal ganglia subcircuits distinctively encode the parsing and concatenation of action sequences",
+      "volume": "17",
+      "author": "Jin",
+      "year": "2014",
+      "journal-title": "Nat. Neurosci."
+    },
+    {
+      "key": "10.1016/j.cell.2015.09.034_bib27",
+      "series-title": "Principal Component Analysis",
+      "author": "Jolliffe",
+      "year": "2002"
+    },
+    {
+      "key": "10.1016/j.cell.2015.09.034_bib28",
+      "doi-asserted-by": "crossref",
+      "first-page": "572",
+      "DOI": "10.1016/j.neuron.2011.09.005",
+      "article-title": "An imbalancing act: gap junctions reduce the backward motor circuit activity to bias C. elegans for forward locomotion",
+      "volume": "72",
+      "author": "Kawano",
+      "year": "2011",
+      "journal-title": "Neuron"
+    },
+    {
+      "key": "10.1016/j.cell.2015.09.034_bib29",
+      "doi-asserted-by": "crossref",
+      "first-page": "31",
+      "DOI": "10.4161/worm.19504",
+      "article-title": "Thermotaxis of C. elegans as a model for temperature perception, neural information processing and neural plasticity",
+      "volume": "1",
+      "author": "Kimata",
+      "year": "2012",
+      "journal-title": "Worm"
+    },
+    {
+      "key": "10.1016/j.cell.2015.09.034_bib30",
+      "doi-asserted-by": "crossref",
+      "first-page": "4",
+      "DOI": "10.7554/eLife.04241",
+      "article-title": "Decoding a neural circuit controlling global animal state in C. elegans",
+      "volume": "4",
+      "author": "Laurent",
+      "year": "2015",
+      "journal-title": "eLife"
+    },
+    {
+      "key": "10.1016/j.cell.2015.09.034_bib31",
+      "doi-asserted-by": "crossref",
+      "first-page": "7924",
+      "DOI": "10.1038/ncomms8924",
+      "article-title": "Whole-central nervous system functional imaging in larval Drosophila",
+      "volume": "6",
+      "author": "Lemon",
+      "year": "2015",
+      "journal-title": "Nat. Commun."
+    },
+    {
+      "key": "10.1016/j.cell.2015.09.034_bib32",
+      "doi-asserted-by": "crossref",
+      "first-page": "751",
+      "DOI": "10.1016/j.cell.2014.09.056",
+      "article-title": "Encoding of both analog- and digital-like behavioral outputs by one C. elegans interneuron",
+      "volume": "159",
+      "author": "Li",
+      "year": "2014",
+      "journal-title": "Cell"
+    },
+    {
+      "key": "10.1016/j.cell.2015.09.034_bib33",
+      "doi-asserted-by": "crossref",
+      "first-page": "1115",
+      "DOI": "10.1016/j.neuron.2014.05.010",
+      "article-title": "Dynamic encoding of perception, memory, and movement in a C. elegans chemotaxis circuit",
+      "volume": "82",
+      "author": "Luo",
+      "year": "2014",
+      "journal-title": "Neuron"
+    },
+    {
+      "key": "10.1016/j.cell.2015.09.034_bib34",
+      "doi-asserted-by": "crossref",
+      "first-page": "1",
+      "DOI": "10.1038/nature12742",
+      "article-title": "Context-dependent computation by recurrent dynamics in prefrontal cortex",
+      "volume": "503",
+      "author": "Mante",
+      "year": "2013",
+      "journal-title": "Nature"
+    },
+    {
+      "key": "10.1016/j.cell.2015.09.034_bib35",
+      "doi-asserted-by": "crossref",
+      "first-page": "291",
+      "DOI": "10.1146/annurev.physiol.69.031905.161516",
+      "article-title": "Understanding circuit dynamics using the stomatogastric nervous system of lobsters and crabs",
+      "volume": "69",
+      "author": "Marder",
+      "year": "2007",
+      "journal-title": "Annu. Rev. Physiol."
+    },
+    {
+      "key": "10.1016/j.cell.2015.09.034_bib36",
+      "doi-asserted-by": "crossref",
+      "first-page": "65",
+      "DOI": "10.3389/fncir.2013.00065",
+      "article-title": "Fast functional imaging of multiple brain regions in intact zebrafish larvae using selective plane illumination microscopy",
+      "volume": "7",
+      "author": "Panier",
+      "year": "2013",
+      "journal-title": "Front. Neural Circuits"
+    },
+    {
+      "key": "10.1016/j.cell.2015.09.034_bib37",
+      "doi-asserted-by": "crossref",
+      "first-page": "9557",
+      "DOI": "10.1523/JNEUROSCI.19-21-09557.1999",
+      "article-title": "The fundamental role of pirouettes in Caenorhabditis elegans chemotaxis",
+      "volume": "19",
+      "author": "Pierce-Shimomura",
+      "year": "1999",
+      "journal-title": "J.\u00a0Neurosci."
+    },
+    {
+      "key": "10.1016/j.cell.2015.09.034_bib38",
+      "doi-asserted-by": "crossref",
+      "first-page": "2770",
+      "DOI": "10.1073/pnas.1400615111",
+      "article-title": "Inducible and titratable silencing of Caenorhabditis elegans neurons in\u00a0vivo with histamine-gated chloride channels",
+      "volume": "111",
+      "author": "Pokala",
+      "year": "2014",
+      "journal-title": "Proc. Natl. Acad. Sci. USA"
+    },
+    {
+      "key": "10.1016/j.cell.2015.09.034_bib39",
+      "doi-asserted-by": "crossref",
+      "first-page": "727",
+      "DOI": "10.1038/nmeth.2964",
+      "article-title": "Simultaneous whole-animal 3D imaging of neuronal activity using light-field microscopy",
+      "volume": "11",
+      "author": "Prevedel",
+      "year": "2014",
+      "journal-title": "Nat. Methods"
+    },
+    {
+      "key": "10.1016/j.cell.2015.09.034_bib40",
+      "doi-asserted-by": "crossref",
+      "first-page": "1013",
+      "DOI": "10.1038/nmeth.2637",
+      "article-title": "Brain-wide 3D imaging of neuronal activity in Caenorhabditis elegans with sculpted light",
+      "volume": "10",
+      "author": "Schr\u00f6del",
+      "year": "2013",
+      "journal-title": "Nat. Methods"
+    },
+    {
+      "key": "10.1016/j.cell.2015.09.034_bib41",
+      "doi-asserted-by": "crossref",
+      "first-page": "e02951",
+      "DOI": "10.7554/eLife.02951",
+      "article-title": "A suppression hierarchy among competing motor programs drives sequential grooming in Drosophila",
+      "volume": "3",
+      "author": "Seeds",
+      "year": "2014",
+      "journal-title": "eLife"
+    },
+    {
+      "key": "10.1016/j.cell.2015.09.034_bib42",
+      "doi-asserted-by": "crossref",
+      "first-page": "337",
+      "DOI": "10.1146/annurev-neuro-062111-150509",
+      "article-title": "Cortical control of arm movements: a dynamical systems perspective",
+      "volume": "36",
+      "author": "Shenoy",
+      "year": "2013",
+      "journal-title": "Annu. Rev. Neurosci."
+    },
+    {
+      "key": "10.1016/j.cell.2015.09.034_bib43",
+      "doi-asserted-by": "crossref",
+      "first-page": "e1000028",
+      "DOI": "10.1371/journal.pcbi.1000028",
+      "article-title": "Dimensionality and dynamics in the behavior of C. elegans",
+      "volume": "4",
+      "author": "Stephens",
+      "year": "2008",
+      "journal-title": "PLoS Comput. Biol."
+    },
+    {
+      "key": "10.1016/j.cell.2015.09.034_bib44",
+      "doi-asserted-by": "crossref",
+      "first-page": "e1001066",
+      "DOI": "10.1371/journal.pcbi.1001066",
+      "article-title": "Structural properties of the Caenorhabditis elegans neuronal network",
+      "volume": "7",
+      "author": "Varshney",
+      "year": "2011",
+      "journal-title": "PLoS Comput. Biol."
+    },
+    {
+      "key": "10.1016/j.cell.2015.09.034_bib45",
+      "doi-asserted-by": "crossref",
+      "first-page": "750",
+      "DOI": "10.1016/j.neuron.2012.08.039",
+      "article-title": "Proprioceptive coupling within motor neurons drives C. elegans forward locomotion",
+      "volume": "76",
+      "author": "Wen",
+      "year": "2012",
+      "journal-title": "Neuron"
+    },
+    {
+      "key": "10.1016/j.cell.2015.09.034_bib46",
+      "doi-asserted-by": "crossref",
+      "first-page": "1",
+      "DOI": "10.1098/rstb.1986.0056",
+      "article-title": "The structure of the nervous system of the nematode Caenorhabditis elegans",
+      "volume": "314",
+      "author": "White",
+      "year": "1986",
+      "journal-title": "Philos. Trans. R. Soc. Lond. B Biol. Sci."
+    },
+    {
+      "key": "10.1016/j.cell.2015.09.034_bib47",
+      "doi-asserted-by": "crossref",
+      "first-page": "865",
+      "DOI": "10.1016/j.neuron.2009.02.013",
+      "article-title": "Neurons detect increases and decreases in oxygen levels using distinct guanylate cyclases",
+      "volume": "61",
+      "author": "Zimmer",
+      "year": "2009",
+      "journal-title": "Neuron"
+    }
+  ],
+  "container-title": [
+    "Cell"
+  ],
+  "original-title": [],
+  "language": "en",
+  "link": [
+    {
+      "URL": "https://api.elsevier.com/content/article/PII:S0092867415011964?httpAccept=text/xml",
+      "content-type": "text/xml",
+      "content-version": "vor",
+      "intended-application": "text-mining"
+    },
+    {
+      "URL": "https://api.elsevier.com/content/article/PII:S0092867415011964?httpAccept=text/plain",
+      "content-type": "text/plain",
+      "content-version": "vor",
+      "intended-application": "text-mining"
+    }
+  ],
+  "deposited": {
+    "date-parts": [
+      [
+        2019,
+        8,
+        31
+      ]
+    ],
+    "date-time": "2019-08-31T16:34:05Z",
+    "timestamp": 1567269245000
+  },
+  "score": 1,
+  "resource": {
+    "primary": {
+      "URL": "https://linkinghub.elsevier.com/retrieve/pii/S0092867415011964"
+    }
+  },
+  "subtitle": [],
+  "short-title": [],
+  "issued": {
+    "date-parts": [
+      [
+        2015,
+        10
+      ]
+    ]
+  },
+  "references-count": 47,
+  "journal-issue": {
+    "issue": "3",
+    "published-print": {
+      "date-parts": [
+        [
+          2015,
+          10
+        ]
+      ]
+    }
+  },
+  "alternative-id": [
+    "S0092867415011964"
+  ],
+  "URL": "https://doi.org/10.1016/j.cell.2015.09.034",
+  "relation": {},
+  "ISSN": [
+    "0092-8674"
+  ],
+  "issn-type": [
+    {
+      "value": "0092-8674",
+      "type": "print"
+    }
+  ],
+  "subject": [],
+  "published": {
+    "date-parts": [
+      [
+        2015,
+        10
+      ]
+    ]
+  },
+  "assertion": [
+    {
+      "value": "Elsevier",
+      "name": "publisher",
+      "label": "This article is maintained by"
+    },
+    {
+      "value": "Global Brain Dynamics Embed the Motor Command Sequence of Caenorhabditis elegans",
+      "name": "articletitle",
+      "label": "Article Title"
+    },
+    {
+      "value": "Cell",
+      "name": "journaltitle",
+      "label": "Journal Title"
+    },
+    {
+      "value": "https://doi.org/10.1016/j.cell.2015.09.034",
+      "name": "articlelink",
+      "label": "CrossRef DOI link to publisher maintained version"
+    },
+    {
+      "value": "article",
+      "name": "content_type",
+      "label": "Content Type"
+    },
+    {
+      "value": "Copyright \u00a9 2015 Elsevier Inc. All rights reserved.",
+      "name": "copyright",
+      "label": "Copyright"
+    }
+  ]
+}

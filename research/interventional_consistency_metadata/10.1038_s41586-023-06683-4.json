@@ -1,0 +1,1109 @@
+{
+  "indexed": {
+    "date-parts": [
+      [
+        2026,
+        11,
+        19
+      ]
+    ],
+    "date-time": "2026-11-19T03:18:03Z",
+    "timestamp": 1795058283654,
+    "version": "4.10.2"
+  },
+  "reference-count": 74,
+  "publisher": "Springer Science and Business Media LLC",
+  "issue": "7986",
+  "license": [
+    {
+      "start": {
+        "date-parts": [
+          [
+            2023,
+            11,
+            1
+          ]
+        ],
+        "date-time": "2023-11-01T00:00:00Z",
+        "timestamp": 1698796800000
+      },
+      "content-version": "tdm",
+      "delay-in-days": 0,
+      "URL": "https://creativecommons.org/licenses/by/4.0"
+    },
+    {
+      "start": {
+        "date-parts": [
+          [
+            2023,
+            11,
+            1
+          ]
+        ],
+        "date-time": "2023-11-01T00:00:00Z",
+        "timestamp": 1698796800000
+      },
+      "content-version": "vor",
+      "delay-in-days": 0,
+      "URL": "https://creativecommons.org/licenses/by/4.0"
+    }
+  ],
+  "content-domain": {
+    "domain": [
+      "link.springer.com"
+    ],
+    "crossmark-restriction": false
+  },
+  "short-container-title": [
+    "Nature"
+  ],
+  "published-print": {
+    "date-parts": [
+      [
+        2023,
+        11,
+        9
+      ]
+    ]
+  },
+  "abstract": "<jats:title>Abstract</jats:title><jats:p>Establishing how neural function emerges from network properties is a fundamental problem in neuroscience<jats:sup>1</jats:sup>. Here, to better understand the relationship between the structure and the function of a nervous system, we systematically measure signal propagation in 23,433 pairs of neurons across the head of the nematode <jats:italic>Caenorhabditis elegans</jats:italic> by direct optogenetic activation and simultaneous whole-brain calcium imaging. We measure the sign (excitatory or inhibitory), strength, temporal properties and causal direction of signal propagation between these neurons to create a functional atlas. We find that signal propagation differs from model predictions that are based on anatomy. Using mutants, we show that extrasynaptic signalling not visible from anatomy contributes to this difference. We identify many instances of dense-core-vesicle-dependent signalling,\u00a0including on timescales of less than a\u00a0second, that evoke acute calcium transients\u2014often where no direct wired connection exists but where relevant neuropeptides and receptors are expressed. We propose that, in such cases, extrasynaptically released neuropeptides serve a similar function to that of classical neurotransmitters. Finally, our measured signal propagation atlas better predicts the neural dynamics of spontaneous activity than do models based on anatomy. We conclude that both synaptic and extrasynaptic signalling drive neural dynamics on short timescales, and that measurements of evoked signal propagation are crucial for interpreting neural function.</jats:p>",
+  "DOI": "10.1038/s41586-023-06683-4",
+  "type": "journal-article",
+  "created": {
+    "date-parts": [
+      [
+        2023,
+        11,
+        1
+      ]
+    ],
+    "date-time": "2023-11-01T17:02:10Z",
+    "timestamp": 1698858130000
+  },
+  "page": "406-414",
+  "update-policy": "https://doi.org/10.1007/springer_crossmark_policy",
+  "source": "Crossref",
+  "is-referenced-by-count": 176,
+  "title": [
+    "Neural signal propagation atlas of Caenorhabditis elegans"
+  ],
+  "prefix": "10.1038",
+  "volume": "623",
+  "author": [
+    {
+      "ORCID": "https://orcid.org/0000-0002-6200-7254",
+      "authenticated-orcid": false,
+      "given": "Francesco",
+      "family": "Randi",
+      "sequence": "first",
+      "affiliation": [],
+      "role": [
+        {
+          "vocabulary": "crossref",
+          "role": "author"
+        }
+      ]
+    },
+    {
+      "ORCID": "https://orcid.org/0000-0001-5061-9731",
+      "authenticated-orcid": false,
+      "given": "Anuj K.",
+      "family": "Sharma",
+      "sequence": "additional",
+      "affiliation": [],
+      "role": [
+        {
+          "vocabulary": "crossref",
+          "role": "author"
+        }
+      ]
+    },
+    {
+      "ORCID": "https://orcid.org/0000-0001-8565-7148",
+      "authenticated-orcid": false,
+      "given": "Sophie",
+      "family": "Dvali",
+      "sequence": "additional",
+      "affiliation": [],
+      "role": [
+        {
+          "vocabulary": "crossref",
+          "role": "author"
+        }
+      ]
+    },
+    {
+      "ORCID": "https://orcid.org/0000-0002-5362-5093",
+      "authenticated-orcid": false,
+      "given": "Andrew M.",
+      "family": "Leifer",
+      "sequence": "additional",
+      "affiliation": [],
+      "role": [
+        {
+          "vocabulary": "crossref",
+          "role": "author"
+        }
+      ]
+    }
+  ],
+  "member": "297",
+  "published-online": {
+    "date-parts": [
+      [
+        2023,
+        11,
+        1
+      ]
+    ]
+  },
+  "reference": [
+    {
+      "key": "6683_CR1",
+      "first-page": "1",
+      "volume": "314",
+      "author": "JG White",
+      "year": "1986",
+      "unstructured": "White, J. G., Southgate, E., Thomson, J. N. & Brenner, S. The structure of the nervous system of the nematode Caenorhabditis elegans. Phil. Trans. R. Soc. B 314, 1\u2013340 (1986).",
+      "journal-title": "Phil. Trans. R. Soc. B"
+    },
+    {
+      "key": "6683_CR2",
+      "doi-asserted-by": "publisher",
+      "first-page": "5",
+      "DOI": "10.1002/ana.20368",
+      "volume": "57",
+      "author": "M Mesulam",
+      "year": "2005",
+      "unstructured": "Mesulam, M. Imaging connectivity in the human cerebral cortex: the next frontier? Ann. Neurol. 57, 5\u20137 (2005).",
+      "journal-title": "Ann. Neurol."
+    },
+    {
+      "key": "6683_CR3",
+      "doi-asserted-by": "publisher",
+      "first-page": "1372",
+      "DOI": "10.1016/j.cell.2020.08.010",
+      "volume": "182",
+      "author": "LF Abbott",
+      "year": "2020",
+      "unstructured": "Abbott, L. F. et al. The mind of a mouse. Cell 182, 1372\u20131376 (2020).",
+      "journal-title": "Cell"
+    },
+    {
+      "key": "6683_CR4",
+      "doi-asserted-by": "publisher",
+      "unstructured": "Veraszt\u00f3, C. et al. Whole-animal connectome and cell-type complement of the three-segmented Platynereis dumerilii larva. Preprint at bioRxiv https://doi.org/10.1101/2020.08.21.260984 (2020).",
+      "DOI": "10.1101/2020.08.21.260984"
+    },
+    {
+      "key": "6683_CR5",
+      "doi-asserted-by": "publisher",
+      "first-page": "63",
+      "DOI": "10.1038/s41586-019-1352-7",
+      "volume": "571",
+      "author": "SJ Cook",
+      "year": "2019",
+      "unstructured": "Cook, S. J. et al. Whole-animal connectomes of both Caenorhabditis elegans sexes. Nature 571, 63\u201371 (2019).",
+      "journal-title": "Nature"
+    },
+    {
+      "key": "6683_CR6",
+      "doi-asserted-by": "publisher",
+      "first-page": "257",
+      "DOI": "10.1038/s41586-021-03778-8",
+      "volume": "596",
+      "author": "D Witvliet",
+      "year": "2021",
+      "unstructured": "Witvliet, D. et al. Connectomes across development reveal principles of brain maturation. Nature 596, 257\u2013261 (2021).",
+      "journal-title": "Nature"
+    },
+    {
+      "key": "6683_CR7",
+      "doi-asserted-by": "publisher",
+      "first-page": "956",
+      "DOI": "10.1523/JNEUROSCI.05-04-00956.1985",
+      "volume": "5",
+      "author": "M Chalfie",
+      "year": "1985",
+      "unstructured": "Chalfie, M. et al. The neural circuit for touch sensitivity in Caenorhabditis elegans. J. Neurosci. 5, 956\u2013964 (1985).",
+      "journal-title": "J. Neurosci."
+    },
+    {
+      "key": "6683_CR8",
+      "doi-asserted-by": "publisher",
+      "first-page": "3184",
+      "DOI": "10.1073/pnas.0409009101",
+      "volume": "102",
+      "author": "JM Gray",
+      "year": "2005",
+      "unstructured": "Gray, J. M., Hill, J. J. & Bargmann, C. I. A circuit for navigation in Caenorhabditis elegans. Proc. Natl Acad. Sci. USA 102, 3184\u20133191 (2005).",
+      "journal-title": "Proc. Natl Acad. Sci. USA"
+    },
+    {
+      "key": "6683_CR9",
+      "doi-asserted-by": "publisher",
+      "first-page": "53",
+      "DOI": "10.3389/fncom.2017.00053",
+      "volume": "11",
+      "author": "JM Kunert-Graf",
+      "year": "2017",
+      "unstructured": "Kunert-Graf, J. M., Shlizerman, E., Walker, A. & Kutz, J. N. Multistability and long-timescale transients encoded by network structure in a model of C. elegans connectome dynamics. Front. Comput. Neurosci. 11, 53 (2017).",
+      "journal-title": "Front. Comput. Neurosci."
+    },
+    {
+      "key": "6683_CR10",
+      "doi-asserted-by": "publisher",
+      "first-page": "519",
+      "DOI": "10.1038/nature24056",
+      "volume": "550",
+      "author": "G Yan",
+      "year": "2017",
+      "unstructured": "Yan, G. et al. Network control principles predict neuron function in the Caenorhabditis elegans connectome. Nature 550, 519\u2013523 (2017).",
+      "journal-title": "Nature"
+    },
+    {
+      "key": "6683_CR11",
+      "doi-asserted-by": "publisher",
+      "first-page": "25",
+      "DOI": "10.1016/j.conb.2014.04.010",
+      "volume": "29",
+      "author": "CE Vaaga",
+      "year": "2014",
+      "unstructured": "Vaaga, C. E., Borisovska, M. & Westbrook, G. L. Dual-transmitter neurons: functional implications of co-release and co-transmission. Curr. Opin. Neurobiol. 29, 25\u201332 (2014).",
+      "journal-title": "Curr. Opin. Neurobiol."
+    },
+    {
+      "key": "6683_CR12",
+      "doi-asserted-by": "publisher",
+      "first-page": "1394",
+      "DOI": "10.1523/JNEUROSCI.12-04-01394.1992",
+      "volume": "12",
+      "author": "DM O\u2019Malley",
+      "year": "1992",
+      "unstructured": "O\u2019Malley, D. M., Sandell, J. H. & Masland, R. H. Co-release of acetylcholine and GABA by the starburst amacrine cells. J. Neurosci. 12, 1394\u20131408 (1992).",
+      "journal-title": "J. Neurosci."
+    },
+    {
+      "key": "6683_CR13",
+      "doi-asserted-by": "publisher",
+      "first-page": "433",
+      "DOI": "10.1016/0896-6273(94)90283-6",
+      "volume": "12",
+      "author": "MD Johnson",
+      "year": "1994",
+      "unstructured": "Johnson, M. D. Synaptic glutamate release by postnatal rat serotonergic neurons in microculture. Neuron 12, 433\u2013442 (1994).",
+      "journal-title": "Neuron"
+    },
+    {
+      "key": "6683_CR14",
+      "doi-asserted-by": "publisher",
+      "DOI": "10.1038/ncomms13697",
+      "volume": "7",
+      "author": "JH Yoo",
+      "year": "2016",
+      "unstructured": "Yoo, J. H. et al. Ventral tegmental area glutamate neurons co-release GABA and promote positive reinforcement. Nat. Commun. 7, 13697 (2016).",
+      "journal-title": "Nat. Commun."
+    },
+    {
+      "key": "6683_CR15",
+      "doi-asserted-by": "publisher",
+      "first-page": "121",
+      "DOI": "10.1038/s41586-019-1772-4",
+      "volume": "576",
+      "author": "YE Fisher",
+      "year": "2019",
+      "unstructured": "Fisher, Y. E., Lu, J., D\u2019Alessandro, I. & Wilson, R. I. Sensorimotor experience remaps visual input to a heading-direction network. Nature 576, 121\u2013125 (2019).",
+      "journal-title": "Nature"
+    },
+    {
+      "key": "6683_CR16",
+      "doi-asserted-by": "publisher",
+      "first-page": "39",
+      "DOI": "10.1146/annurev.ne.14.030191.000351",
+      "volume": "14",
+      "author": "RM Harris-Warrick",
+      "year": "1991",
+      "unstructured": "Harris-Warrick, R. M. & Marder, E. Modulation of neural networks for behavior. Annu. Rev. Neurosci. 14, 39\u201357 (1991).",
+      "journal-title": "Annu. Rev. Neurosci."
+    },
+    {
+      "key": "6683_CR17",
+      "doi-asserted-by": "publisher",
+      "first-page": "663",
+      "DOI": "10.1038/nn1891",
+      "volume": "10",
+      "author": "L Petreanu",
+      "year": "2007",
+      "unstructured": "Petreanu, L., Huber, D., Sobczyk, A. & Svoboda, K. Channelrhodopsin-2-assisted circuit mapping of long-range callosal projections. Nat. Neurosci. 10, 663\u2013668 (2007).",
+      "journal-title": "Nat. Neurosci."
+    },
+    {
+      "key": "6683_CR18",
+      "doi-asserted-by": "publisher",
+      "first-page": "891",
+      "DOI": "10.1038/nmeth.1397",
+      "volume": "6",
+      "author": "ZV Guo",
+      "year": "2009",
+      "unstructured": "Guo, Z. V., Hart, A. C. & Ramanathan, S. Optical interrogation of neural circuits in Caenorhabditis elegans. Nat. Methods 6, 891\u2013896 (2009).",
+      "journal-title": "Nat. Methods"
+    },
+    {
+      "key": "6683_CR19",
+      "doi-asserted-by": "publisher",
+      "first-page": "1816",
+      "DOI": "10.1038/nn.3866",
+      "volume": "17",
+      "author": "JP Rickgauer",
+      "year": "2014",
+      "unstructured": "Rickgauer, J. P., Deisseroth, K. & Tank, D. W. Simultaneous cellular-resolution optical perturbation and imaging of place cell firing fields. Nat. Neurosci. 17, 1816\u20131824 (2014).",
+      "journal-title": "Nat. Neurosci."
+    },
+    {
+      "key": "6683_CR20",
+      "doi-asserted-by": "publisher",
+      "first-page": "140",
+      "DOI": "10.1038/nmeth.3217",
+      "volume": "12",
+      "author": "AM Packer",
+      "year": "2015",
+      "unstructured": "Packer, A. M., Russell, L. E., Dalgleish, H. W. P. & H\u00e4usser, M. Simultaneous all-optical manipulation and recording of neural circuit activity with cellular resolution in vivo. Nat. Methods 12, 140\u2013146 (2015).",
+      "journal-title": "Nat. Methods"
+    },
+    {
+      "key": "6683_CR21",
+      "doi-asserted-by": "publisher",
+      "first-page": "13917",
+      "DOI": "10.1523/JNEUROSCI.2916-15.2015",
+      "volume": "35",
+      "author": "V Emiliani",
+      "year": "2015",
+      "unstructured": "Emiliani, V., Cohen, A. E., Deisseroth, K. & Haeusser, M. All-optical interrogation of neural circuits. J. Neurosci. 35, 13917\u201313926 (2015).",
+      "journal-title": "J. Neurosci."
+    },
+    {
+      "key": "6683_CR22",
+      "doi-asserted-by": "publisher",
+      "first-page": "e37017",
+      "DOI": "10.7554/eLife.37017",
+      "volume": "7",
+      "author": "R Franconville",
+      "year": "2018",
+      "unstructured": "Franconville, R., Beron, C. & Jayaraman, V. Building a functional connectome of the Drosophila central complex. eLife 7, e37017 (2018).",
+      "journal-title": "eLife"
+    },
+    {
+      "key": "6683_CR23",
+      "doi-asserted-by": "publisher",
+      "unstructured": "Sharma, A. K., Randi, F., Kumar, S., Dvali, S. & Leifer, A. M. TWISP: a transgenic worm for interrogating signal propagation in C. elegans. Preprint at bioRxiv https://doi.org/10.1101/2023.08.03.551820 (2023).",
+      "DOI": "10.1101/2023.08.03.551820"
+    },
+    {
+      "key": "6683_CR24",
+      "doi-asserted-by": "publisher",
+      "first-page": "804",
+      "DOI": "10.1016/j.neuron.2014.12.061",
+      "volume": "85",
+      "author": "N Bhatla",
+      "year": "2015",
+      "unstructured": "Bhatla, N. & Horvitz, H. R. Light and hydrogen peroxide inhibit C. elegans feeding through gustatory receptor orthologs and pharyngeal neurons. Neuron 85, 804\u2013818 (2015).",
+      "journal-title": "Neuron"
+    },
+    {
+      "key": "6683_CR25",
+      "doi-asserted-by": "publisher",
+      "first-page": "e0274226",
+      "DOI": "10.1371/journal.pone.0274226",
+      "volume": "17",
+      "author": "S Quintin",
+      "year": "2022",
+      "unstructured": "Quintin, S., Aspert, T., Ye, T. & Charvin, G. Distinct mechanisms underlie H2O2 sensing in C. elegans head and tail. PLoS ONE 17, e0274226 (2022).",
+      "journal-title": "PLoS ONE"
+    },
+    {
+      "key": "6683_CR26",
+      "doi-asserted-by": "publisher",
+      "first-page": "295",
+      "DOI": "10.1038/nature12354",
+      "volume": "499",
+      "author": "T-W Chen",
+      "year": "2013",
+      "unstructured": "Chen, T.-W. et al. Ultrasensitive fluorescent proteins for imaging neuronal activity. Nature 499, 295\u2013300 (2013).",
+      "journal-title": "Nature"
+    },
+    {
+      "key": "6683_CR27",
+      "doi-asserted-by": "publisher",
+      "first-page": "272\u2013288",
+      "DOI": "10.1016/j.cell.2020.12.012",
+      "volume": "184",
+      "author": "E Yemini",
+      "year": "2021",
+      "unstructured": "Yemini, E. et al. NeuroPAL: a multicolor atlas for whole-brain neuronal identification in C. elegans. Cell 184, 272\u2013288 (2021).",
+      "journal-title": "Cell"
+    },
+    {
+      "key": "6683_CR28",
+      "doi-asserted-by": "publisher",
+      "first-page": "eade1249",
+      "DOI": "10.1126/sciadv.ade1249",
+      "volume": "9",
+      "author": "A Lin",
+      "year": "2023",
+      "unstructured": "Lin, A. et al. Functional imaging and quantification of multineuronal olfactory responses in C. elegans. Sci. Adv. 9, eade1249 (2023).",
+      "journal-title": "Sci. Adv."
+    },
+    {
+      "key": "6683_CR29",
+      "doi-asserted-by": "publisher",
+      "first-page": "303",
+      "DOI": "10.1002/neu.10014",
+      "volume": "49",
+      "author": "LA Hardaker",
+      "year": "2001",
+      "unstructured": "Hardaker, L. A., Singer, E., Kerr, R., Zhou, G. & Schafer, W. R. Serotonin modulates locomotory behavior and coordinates egg-laying and movement in Caenorhabditis elegans. J. Neurobiol. 49, 303\u2013313 (2001).",
+      "journal-title": "J. Neurobiol."
+    },
+    {
+      "key": "6683_CR30",
+      "doi-asserted-by": "publisher",
+      "first-page": "4017",
+      "DOI": "10.1523/JNEUROSCI.16-12-04017.1996",
+      "volume": "16",
+      "author": "SR Wicks",
+      "year": "1996",
+      "unstructured": "Wicks, S. R., Roehrig, C. J. & Rankin, C. H. A dynamic network simulation of the nematode tap withdrawal circuit: predictions concerning synaptic function using behavioral criteria. J. Neurosci. 16, 4017\u20134031 (1996).",
+      "journal-title": "J. Neurosci."
+    },
+    {
+      "key": "6683_CR31",
+      "doi-asserted-by": "publisher",
+      "first-page": "572",
+      "DOI": "10.1016/j.neuron.2011.09.005",
+      "volume": "72",
+      "author": "T Kawano",
+      "year": "2011",
+      "unstructured": "Kawano, T. et al. An imbalancing act: gap junctions reduce the backward motor circuit activity to bias C. elegans for forward locomotion. Neuron 72, 572\u2013586 (2011).",
+      "journal-title": "Neuron"
+    },
+    {
+      "key": "6683_CR32",
+      "doi-asserted-by": "publisher",
+      "first-page": "229",
+      "DOI": "10.1016/j.jneumeth.2010.01.011",
+      "volume": "187",
+      "author": "JB Arous",
+      "year": "2010",
+      "unstructured": "Arous, J. B., Tanizawa, Y., Rabinowitch, I., Chatenay, D. & Schafer, W. R. Automated imaging of neuronal activity in freely behaving Caenorhabditis elegans. J. Neurosci. Methods 187, 229\u2013234 (2010).",
+      "journal-title": "J. Neurosci. Methods"
+    },
+    {
+      "key": "6683_CR33",
+      "doi-asserted-by": "publisher",
+      "first-page": "e24666",
+      "DOI": "10.1371/journal.pone.0024666",
+      "volume": "6",
+      "author": "S Faumont",
+      "year": "2011",
+      "unstructured": "Faumont, S. et al. An image-free opto-mechanical system for creating virtual environments and imaging neuronal activity in freely moving Caenorhabditis elegans. PLoS ONE 6, e24666 (2011).",
+      "journal-title": "PLoS ONE"
+    },
+    {
+      "key": "6683_CR34",
+      "doi-asserted-by": "publisher",
+      "first-page": "28",
+      "DOI": "10.3389/fncir.2014.00028",
+      "volume": "8",
+      "author": "FB Shipley",
+      "year": "2014",
+      "unstructured": "Shipley, F. B., Clark, C. M., Alkema, M. J. & Leifer, A. M. Simultaneous optogenetic manipulation and calcium imaging in freely moving C. elegans.\u00a0Front. Neural Circuits 8, 28 (2014).",
+      "journal-title": "Front. Neural Circuits"
+    },
+    {
+      "key": "6683_CR35",
+      "doi-asserted-by": "publisher",
+      "first-page": "656",
+      "DOI": "10.1016/j.cell.2015.09.034",
+      "volume": "163",
+      "author": "S Kato",
+      "year": "2015",
+      "unstructured": "Kato, S. et al. Global brain dynamics embed the motor command sequence of Caenorhabditis elegans. Cell 163, 656\u2013669 (2015).",
+      "journal-title": "Cell"
+    },
+    {
+      "key": "6683_CR36",
+      "doi-asserted-by": "publisher",
+      "first-page": "e56942",
+      "DOI": "10.7554/eLife.56942",
+      "volume": "9",
+      "author": "Y Wang",
+      "year": "2020",
+      "unstructured": "Wang, Y. et al. Flexible motor sequence generation during stereotyped escape responses. eLife 9, e56942 (2020).",
+      "journal-title": "eLife"
+    },
+    {
+      "key": "6683_CR37",
+      "doi-asserted-by": "publisher",
+      "first-page": "e1007974",
+      "DOI": "10.1371/journal.pcbi.1007974",
+      "volume": "16",
+      "author": "BG Fenyves",
+      "year": "2020",
+      "unstructured": "Fenyves, B. G., Szil\u00e1gyi, G. S., Vassy, Z., S\u00f6ti, C. & Csermely, P. Synaptic polarity and sign-balance prediction using gene expression data in the Caenorhabditis elegans chemical synapse neuronal connectome network. PLoS Comput. Biol. 16, e1007974 (2020).",
+      "journal-title": "PLoS Comput. Biol."
+    },
+    {
+      "key": "6683_CR38",
+      "doi-asserted-by": "publisher",
+      "first-page": "4329\u20134347",
+      "DOI": "10.1016/j.cell.2021.06.023",
+      "volume": "184",
+      "author": "SR Taylor",
+      "year": "2021",
+      "unstructured": "Taylor, S. R. et al. Molecular topography of an entire nervous system. Cell 184, 4329\u20134347 (2021).",
+      "journal-title": "Cell"
+    },
+    {
+      "key": "6683_CR39",
+      "doi-asserted-by": "publisher",
+      "first-page": "41",
+      "DOI": "10.1007/s10158-008-0068-4",
+      "volume": "8",
+      "author": "AK Jones",
+      "year": "2008",
+      "unstructured": "Jones, A. K. & Sattelle, D. B. The cys-loop ligand-gated ion channel gene superfamily of the nematode, Caenorhabditis elegans. Invert. Neurosci. 8, 41\u201347 (2008).",
+      "journal-title": "Invert. Neurosci."
+    },
+    {
+      "key": "6683_CR40",
+      "doi-asserted-by": "publisher",
+      "first-page": "9440",
+      "DOI": "10.1073/pnas.1530509100",
+      "volume": "100",
+      "author": "JD Storey",
+      "year": "2003",
+      "unstructured": "Storey, J. D. & Tibshirani, R. Statistical significance for genomewide studies. Proc. Natl Acad. Sci. USA 100, 9440\u20139445 (2003).",
+      "journal-title": "Proc. Natl Acad. Sci. USA"
+    },
+    {
+      "key": "6683_CR41",
+      "doi-asserted-by": "publisher",
+      "first-page": "3443",
+      "DOI": "10.1016/j.cub.2022.06.039",
+      "volume": "32",
+      "author": "K Uzel",
+      "year": "2022",
+      "unstructured": "Uzel, K., Kato, S. & Zimmer, M. A set of hub neurons and non-local connectivity features support global brain dynamics in C. elegans. Curr. Biol. 32, 3443\u20133459 (2022).",
+      "journal-title": "Curr. Biol."
+    },
+    {
+      "key": "6683_CR42",
+      "doi-asserted-by": "publisher",
+      "first-page": "1724",
+      "DOI": "10.1126/science.274.5293.1724",
+      "volume": "274",
+      "author": "C van Vreeswijk",
+      "year": "1996",
+      "unstructured": "van Vreeswijk, C. & Sompolinsky, H. Chaos in neuronal networks with balanced excitatory and inhibitory activity. Science 274, 1724\u20131726 (1996).",
+      "journal-title": "Science"
+    },
+    {
+      "key": "6683_CR43",
+      "doi-asserted-by": "publisher",
+      "first-page": "231",
+      "DOI": "10.1016/j.neuron.2011.09.027",
+      "volume": "72",
+      "author": "JS Isaacson",
+      "year": "2011",
+      "unstructured": "Isaacson, J. S. & Scanziani, M. How inhibition shapes cortical activity. Neuron 72, 231\u2013243 (2011).",
+      "journal-title": "Neuron"
+    },
+    {
+      "key": "6683_CR44",
+      "doi-asserted-by": "publisher",
+      "first-page": "388",
+      "DOI": "10.1002/cne.902610305",
+      "volume": "261",
+      "author": "DL Meinecke",
+      "year": "1987",
+      "unstructured": "Meinecke, D. L. & Peters, A. GABA immunoreactive neurons in rat visual cortex. J. Comp. Neurol. 261, 388\u2013404 (1987).",
+      "journal-title": "J. Comp. Neurol."
+    },
+    {
+      "key": "6683_CR45",
+      "doi-asserted-by": "publisher",
+      "first-page": "215",
+      "DOI": "10.1016/j.cell.2015.02.018",
+      "volume": "161",
+      "author": "A Gordus",
+      "year": "2015",
+      "unstructured": "Gordus, A., Pokala, N., Levy, S., Flavell, S. W. & Bargmann, C. I. Feedback from network states generates variability in a probabilistic olfactory circuit. Cell 161, 215\u2013227 (2015).",
+      "journal-title": "Cell"
+    },
+    {
+      "key": "6683_CR46",
+      "doi-asserted-by": "publisher",
+      "first-page": "1649\u20131662",
+      "DOI": "10.1016/j.cell.2017.10.041",
+      "volume": "171",
+      "author": "S Stern",
+      "year": "2017",
+      "unstructured": "Stern, S., Kirst, C. & Bargmann, C. I. Neuromodulatory control of long-term behavioral patterns and individuality across development. Cell 171, 1649\u20131662(2017).",
+      "journal-title": "Cell"
+    },
+    {
+      "key": "6683_CR47",
+      "doi-asserted-by": "publisher",
+      "first-page": "052805",
+      "DOI": "10.1103/PhysRevE.89.052805",
+      "volume": "89",
+      "author": "J Kunert",
+      "year": "2014",
+      "unstructured": "Kunert, J., Shlizerman, E. & Kutz, J. N. Low-dimensional functionality of complex network dynamics: neurosensory integration in the Caenorhabditis connectome. Phys. Rev. E 89, 052805 (2014).",
+      "journal-title": "Phys. Rev. E"
+    },
+    {
+      "key": "6683_CR48",
+      "doi-asserted-by": "publisher",
+      "first-page": "9667",
+      "DOI": "10.1073/pnas.1106617108",
+      "volume": "108",
+      "author": "A Narayan",
+      "year": "2011",
+      "unstructured": "Narayan, A., Laurent, G. & Sternberg, P. W. Transfer characteristics of a thermosensory synapse in Caenorhabditis elegans. Proc. Natl Acad. Sci. USA 108, 9667\u20139672 (2011).",
+      "journal-title": "Proc. Natl Acad. Sci. USA"
+    },
+    {
+      "key": "6683_CR49",
+      "doi-asserted-by": "publisher",
+      "first-page": "e1005283",
+      "DOI": "10.1371/journal.pcbi.1005283",
+      "volume": "12",
+      "author": "B Bentley",
+      "year": "2016",
+      "unstructured": "Bentley, B. et al. The multilayer connectome of Caenorhabditis elegans. PLoS Comput. Biol. 12, e1005283 (2016).",
+      "journal-title": "PLoS Comput. Biol."
+    },
+    {
+      "key": "6683_CR50",
+      "doi-asserted-by": "publisher",
+      "first-page": "e47889",
+      "DOI": "10.7554/eLife.47889",
+      "volume": "8",
+      "author": "SJ Smith",
+      "year": "2019",
+      "unstructured": "Smith, S. J. et al. Single-cell transcriptomic evidence for dense intracortical neuropeptide networks. eLife 8, e47889 (2019).",
+      "journal-title": "eLife"
+    },
+    {
+      "key": "6683_CR51",
+      "doi-asserted-by": "publisher",
+      "unstructured": "Ripoll-S\u00e1nchez, L. et al. The neuropeptidergic connectome of C. elegans. Preprint at bioRxiv https://doi.org/10.1101/2022.10.30.514396 (2022).",
+      "DOI": "10.1101/2022.10.30.514396"
+    },
+    {
+      "key": "6683_CR52",
+      "doi-asserted-by": "publisher",
+      "first-page": "113058",
+      "DOI": "10.1016/j.celrep.2023.113058",
+      "volume": "42",
+      "author": "I Beets",
+      "year": "2023",
+      "unstructured": "Beets, I. et al. System-wide mapping of neuropeptide\u2013GPCR interactions in C. elegans. Cell Rep. 42, 113058 (2023).",
+      "journal-title": "Cell Rep."
+    },
+    {
+      "key": "6683_CR53",
+      "doi-asserted-by": "publisher",
+      "first-page": "6150",
+      "DOI": "10.1523/JNEUROSCI.1466-07.2007",
+      "volume": "27",
+      "author": "S Speese",
+      "year": "2007",
+      "unstructured": "Speese, S. et al. UNC-31 (CAPS) Is required for dense-core vesicle but not synaptic vesicle exocytosis in Caenorhabditis elegans. J. Neurosci. 27, 6150\u20136162 (2007).",
+      "journal-title": "J. Neurosci."
+    },
+    {
+      "key": "6683_CR54",
+      "doi-asserted-by": "publisher",
+      "first-page": "e19887",
+      "DOI": "10.7554/eLife.19887",
+      "volume": "5",
+      "author": "MA Lim",
+      "year": "2016",
+      "unstructured": "Lim, M. A. et al. Neuroendocrine modulation sustains the C. elegans forward motor state. eLife 5, e19887 (2016).",
+      "journal-title": "eLife"
+    },
+    {
+      "key": "6683_CR55",
+      "doi-asserted-by": "publisher",
+      "first-page": "118102",
+      "DOI": "10.1103/PhysRevLett.126.118102",
+      "volume": "126",
+      "author": "F Randi",
+      "year": "2021",
+      "unstructured": "Randi, F. & Leifer, A. M. Nonequilibrium Green\u2019s functions for functional connectivity in the brain. Phys. Rev. Lett. 126, 118102 (2021).",
+      "journal-title": "Phys. Rev. Lett."
+    },
+    {
+      "key": "6683_CR56",
+      "doi-asserted-by": "publisher",
+      "first-page": "2091",
+      "DOI": "10.1534/g3.118.200158",
+      "volume": "8",
+      "author": "K Noma",
+      "year": "2018",
+      "unstructured": "Noma, K. & Jin, Y. Rapid integration of multi-copy transgenes using optogenetic mutagenesis in Caenorhabditis elegans. G3 8, 2091\u20132097 (2018).",
+      "journal-title": "G3"
+    },
+    {
+      "key": "6683_CR57",
+      "doi-asserted-by": "publisher",
+      "unstructured": "Evans, T. In WormBook https://doi.org/10.1895/wormbook.1.108.1 (2006).",
+      "DOI": "10.1895/wormbook.1.108.1"
+    },
+    {
+      "key": "6683_CR58",
+      "doi-asserted-by": "publisher",
+      "first-page": "e66410",
+      "DOI": "10.7554/eLife.66410",
+      "volume": "10",
+      "author": "X Yu",
+      "year": "2021",
+      "unstructured": "Yu, X. et al. Fast deep neural correspondence for tracking and identifying neurons in C. elegans using semi-synthetic training. eLife 10, e66410 (2021).",
+      "journal-title": "eLife"
+    },
+    {
+      "key": "6683_CR59",
+      "doi-asserted-by": "publisher",
+      "first-page": "86",
+      "DOI": "10.1016/j.ymeth.2017.03.023",
+      "volume": "121\u2013122",
+      "author": "A Paix",
+      "year": "2017",
+      "unstructured": "Paix, A., Folkmann, A. & Seydoux, G. Precision genome editing using CRISPR\u2013Cas9 and linear repair templates in C. elegans. Methods 121\u2013122, 86\u201393 (2017).",
+      "journal-title": "Methods"
+    },
+    {
+      "key": "6683_CR60",
+      "doi-asserted-by": "publisher",
+      "first-page": "751",
+      "DOI": "10.1016/j.cell.2014.09.056",
+      "volume": "159",
+      "author": "Z Li",
+      "year": "2014",
+      "unstructured": "Li, Z., Liu, J., Zheng, M. & Xu, X. Z. S. Encoding of both analog- and digital-like behavioral outputs by one C. elegans interneuron. Cell 159, 751\u2013765 (2014).",
+      "journal-title": "Cell"
+    },
+    {
+      "key": "6683_CR61",
+      "doi-asserted-by": "publisher",
+      "first-page": "419",
+      "DOI": "10.1534/genetics.118.301705",
+      "volume": "211",
+      "author": "GC Monsalve",
+      "year": "2019",
+      "unstructured": "Monsalve, G. C., Yamamoto, K. R. & Ward, J. D. A new tool for inducible gene expression in Caenorhabditis elegans. Genetics 211, 419\u2013430 (2019).",
+      "journal-title": "Genetics"
+    },
+    {
+      "key": "6683_CR62",
+      "doi-asserted-by": "publisher",
+      "first-page": "E1074",
+      "DOI": "10.1073/pnas.1507110112",
+      "volume": "113",
+      "author": "JP Nguyen",
+      "year": "2016",
+      "unstructured": "Nguyen, J. P. et al. Whole-brain calcium imaging with cellular resolution in freely behaving Caenorhabditis elegans. Proc. Natl Acad. Sci. USA 113, E1074\u2013E1081 (2016).",
+      "journal-title": "Proc. Natl Acad. Sci. USA"
+    },
+    {
+      "key": "6683_CR63",
+      "doi-asserted-by": "publisher",
+      "first-page": "E1082",
+      "DOI": "10.1073/pnas.1507109113",
+      "volume": "113",
+      "author": "V Venkatachalam",
+      "year": "2016",
+      "unstructured": "Venkatachalam, V. et al. Pan-neuronal imaging in roaming Caenorhabditis elegans. Proc. Natl Acad. Sci. USA 113, E1082\u20131088 (2016).",
+      "journal-title": "Proc. Natl Acad. Sci. USA"
+    },
+    {
+      "key": "6683_CR64",
+      "doi-asserted-by": "publisher",
+      "first-page": "73",
+      "DOI": "10.1126/science.2321027",
+      "volume": "248",
+      "author": "W Denk",
+      "year": "1990",
+      "unstructured": "Denk, W., Strickler, J. H. & Webb, W. W. Two-photon laser scanning fluorescence microscopy. Science 248, 73\u201376 (1990).",
+      "journal-title": "Science"
+    },
+    {
+      "key": "6683_CR65",
+      "doi-asserted-by": "publisher",
+      "first-page": "15025",
+      "DOI": "10.1073/pnas.0907084106",
+      "volume": "106",
+      "author": "JP Rickgauer",
+      "year": "2009",
+      "unstructured": "Rickgauer, J. P. & Tank, D. W. Two-photon excitation of channelrhodopsin-2 at saturation. Proc. Natl Acad. Sci. USA 106, 15025\u201315030 (2009).",
+      "journal-title": "Proc. Natl Acad. Sci. USA"
+    },
+    {
+      "key": "6683_CR66",
+      "unstructured": "Bhatla, N. C. elegans neural network. WormWeb http://wormweb.org/neuralnet (2009)."
+    },
+    {
+      "key": "6683_CR67",
+      "first-page": "E1074",
+      "volume": "113",
+      "author": "JP Nguyen",
+      "year": "2015",
+      "unstructured": "Nguyen, J. P. et al. Whole-brain calcium imaging with cellular resolution in freely behaving Caenorhabditis elegans. Proc. Natl Acad. Sci. USA 113, E1074\u2013E1081 (2015).",
+      "journal-title": "Proc. Natl Acad. Sci. USA"
+    },
+    {
+      "key": "6683_CR68",
+      "doi-asserted-by": "publisher",
+      "first-page": "e66135",
+      "DOI": "10.7554/eLife.66135",
+      "volume": "10",
+      "author": "KM Hallinen",
+      "year": "2021",
+      "unstructured": "Hallinen, K. M. et al. Decoding locomotion from population neural activity in moving C. elegans. eLife 10, e66135 (2021).",
+      "journal-title": "eLife"
+    },
+    {
+      "key": "6683_CR69",
+      "doi-asserted-by": "publisher",
+      "first-page": "e1005517",
+      "DOI": "10.1371/journal.pcbi.1005517",
+      "volume": "13",
+      "author": "JP Nguyen",
+      "year": "2017",
+      "unstructured": "Nguyen, J. P., Linder, A. N., Plummer, G. S., Shaevitz, J. W. & Leifer, A. M. Automatically tracking neurons in a moving and deforming brain. PLoS Comput. Biol. 13, e1005517 (2017).",
+      "journal-title": "PLoS Comput. Biol."
+    },
+    {
+      "key": "6683_CR70",
+      "doi-asserted-by": "publisher",
+      "DOI": "10.1038/s41598-018-26288-6",
+      "volume": "8",
+      "author": "Z Zhou",
+      "year": "2018",
+      "unstructured": "Zhou, Z. et al. Accurate and robust non-rigid point set registration using Student\u2019s-t mixture model with prior probability modeling. Sci. Rep. 8, 8742 (2018).",
+      "journal-title": "Sci. Rep."
+    },
+    {
+      "key": "6683_CR71",
+      "doi-asserted-by": "publisher",
+      "first-page": "22039",
+      "DOI": "10.1364/OE.16.022039",
+      "volume": "16",
+      "author": "E Papagiakoumou",
+      "year": "2008",
+      "unstructured": "Papagiakoumou, E., Sars, V. D., Oron, D. & Emiliani, V. Patterned two-photon illumination by spatiotemporal shaping of ultrashort pulses. Opt. Express 16, 22039\u201322047 (2008).",
+      "journal-title": "Opt. Express"
+    },
+    {
+      "key": "6683_CR72",
+      "doi-asserted-by": "publisher",
+      "first-page": "657",
+      "DOI": "10.1007/BF01068419",
+      "volume": "15",
+      "author": "DJ Schuirmann",
+      "year": "1987",
+      "unstructured": "Schuirmann, D. J. A comparison of the two one-sided tests procedure and the power approach for assessing the equivalence of average bioavailability. J. Pharmacokinet. Biopharm. 15, 657\u2013680 (1987).",
+      "journal-title": "J. Pharmacokinet. Biopharm."
+    },
+    {
+      "key": "6683_CR73",
+      "doi-asserted-by": "publisher",
+      "first-page": "20170374",
+      "DOI": "10.1098/rstb.2017.0374",
+      "volume": "373",
+      "author": "EJ Izquierdo",
+      "year": "2018",
+      "unstructured": "Izquierdo, E. J. & Beer, R. D. From head to tail: a neuromechanical model of forward locomotion in Caenorhabditis elegans. Phil. Trans. R. Soc. B 373, 20170374 (2018).",
+      "journal-title": "Phil. Trans. R. Soc. B"
+    },
+    {
+      "key": "6683_CR74",
+      "doi-asserted-by": "publisher",
+      "first-page": "167",
+      "DOI": "10.3389/fendo.2012.00167",
+      "volume": "3",
+      "author": "L Frooninckx",
+      "year": "2012",
+      "unstructured": "Frooninckx, L. et al. Neuropeptide GPCRs in C. elegans. Front. Endocrinol. 3, 167 (2012).",
+      "journal-title": "Front. Endocrinol."
+    }
+  ],
+  "container-title": [
+    "Nature"
+  ],
+  "original-title": [],
+  "language": "en",
+  "link": [
+    {
+      "URL": "https://www.nature.com/articles/s41586-023-06683-4.pdf",
+      "content-type": "application/pdf",
+      "content-version": "vor",
+      "intended-application": "text-mining"
+    },
+    {
+      "URL": "https://www.nature.com/articles/s41586-023-06683-4",
+      "content-type": "text/html",
+      "content-version": "vor",
+      "intended-application": "text-mining"
+    },
+    {
+      "URL": "https://www.nature.com/articles/s41586-023-06683-4.pdf",
+      "content-type": "application/pdf",
+      "content-version": "vor",
+      "intended-application": "similarity-checking"
+    }
+  ],
+  "deposited": {
+    "date-parts": [
+      [
+        2024,
+        1,
+        17
+      ]
+    ],
+    "date-time": "2024-01-17T12:11:17Z",
+    "timestamp": 1705493477000
+  },
+  "score": 1,
+  "resource": {
+    "primary": {
+      "URL": "https://www.nature.com/articles/s41586-023-06683-4"
+    }
+  },
+  "subtitle": [],
+  "short-title": [],
+  "issued": {
+    "date-parts": [
+      [
+        2023,
+        11,
+        1
+      ]
+    ]
+  },
+  "references-count": 74,
+  "journal-issue": {
+    "issue": "7986",
+    "published-print": {
+      "date-parts": [
+        [
+          2023,
+          11,
+          9
+        ]
+      ]
+    }
+  },
+  "alternative-id": [
+    "6683"
+  ],
+  "URL": "https://doi.org/10.1038/s41586-023-06683-4",
+  "relation": {},
+  "ISSN": [
+    "0028-0836",
+    "1476-4687"
+  ],
+  "issn-type": [
+    {
+      "value": "0028-0836",
+      "type": "print"
+    },
+    {
+      "value": "1476-4687",
+      "type": "electronic"
+    }
+  ],
+  "subject": [],
+  "published": {
+    "date-parts": [
+      [
+        2023,
+        11,
+        1
+      ]
+    ]
+  },
+  "assertion": [
+    {
+      "value": "15 July 2022",
+      "order": 1,
+      "name": "received",
+      "label": "Received",
+      "group": {
+        "name": "ArticleHistory",
+        "label": "Article History"
+      }
+    },
+    {
+      "value": "27 September 2023",
+      "order": 2,
+      "name": "accepted",
+      "label": "Accepted",
+      "group": {
+        "name": "ArticleHistory",
+        "label": "Article History"
+      }
+    },
+    {
+      "value": "1 November 2023",
+      "order": 3,
+      "name": "first_online",
+      "label": "First Online",
+      "group": {
+        "name": "ArticleHistory",
+        "label": "Article History"
+      }
+    },
+    {
+      "value": "15 January 2024",
+      "order": 4,
+      "name": "change_date",
+      "label": "Change Date",
+      "group": {
+        "name": "ArticleHistory",
+        "label": "Article History"
+      }
+    },
+    {
+      "value": "Update",
+      "order": 5,
+      "name": "change_type",
+      "label": "Change Type",
+      "group": {
+        "name": "ArticleHistory",
+        "label": "Article History"
+      }
+    },
+    {
+      "value": "In the original publication, source data files for some of the main figures and Extended Data figures were omitted owing to a production error. These files are now included for Figs. 2\u20136 and Extended Data Figs. 2\u20137 & 9.",
+      "order": 6,
+      "name": "change_details",
+      "label": "Change Details",
+      "group": {
+        "name": "ArticleHistory",
+        "label": "Article History"
+      }
+    },
+    {
+      "value": "The authors declare no competing interests.",
+      "order": 1,
+      "name": "Ethics",
+      "group": {
+        "name": "EthicsHeading",
+        "label": "Competing interests"
+      }
+    }
+  ]
+}

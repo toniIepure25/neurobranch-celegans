@@ -1,0 +1,1144 @@
+{
+  "indexed": {
+    "date-parts": [
+      [
+        2026,
+        10,
+        21
+      ]
+    ],
+    "date-time": "2026-10-21T13:47:24Z",
+    "timestamp": 1792590444899,
+    "version": "4.5.0"
+  },
+  "reference-count": 75,
+  "publisher": "Springer Science and Business Media LLC",
+  "issue": "6",
+  "license": [
+    {
+      "start": {
+        "date-parts": [
+          [
+            2026,
+            4,
+            10
+          ]
+        ],
+        "date-time": "2026-04-10T00:00:00Z",
+        "timestamp": 1775779200000
+      },
+      "content-version": "tdm",
+      "delay-in-days": 0,
+      "URL": "https://creativecommons.org/licenses/by/4.0"
+    },
+    {
+      "start": {
+        "date-parts": [
+          [
+            2026,
+            4,
+            10
+          ]
+        ],
+        "date-time": "2026-04-10T00:00:00Z",
+        "timestamp": 1775779200000
+      },
+      "content-version": "vor",
+      "delay-in-days": 0,
+      "URL": "https://creativecommons.org/licenses/by/4.0"
+    }
+  ],
+  "content-domain": {
+    "domain": [
+      "link.springer.com"
+    ],
+    "crossmark-restriction": false
+  },
+  "short-container-title": [
+    "Nat Neurosci"
+  ],
+  "published-print": {
+    "date-parts": [
+      [
+        2026,
+        6
+      ]
+    ]
+  },
+  "abstract": "<jats:title>Abstract</jats:title>\n                  <jats:p>\n                    Complex behaviors, such as navigation, rely on sequenced motor outputs that combine to generate effective movement. The brain-wide organization of the circuits that integrate sensory signals to select appropriate motor sequences remains poorly understood. Here we characterize the architecture of neural circuits that control\n                    <jats:italic>Caenorhabditis</jats:italic>\n                    <jats:italic>elegans</jats:italic>\n                    olfactory navigation. We identify error-correcting turns during navigation and use whole-brain calcium imaging and cell-specific perturbations to determine their neural underpinnings. These turns occur as motor sequences accompanied by neural sequences, in which defined neurons activate in a stereotyped order during each turn. Distinct neurons in this sequence respond to the spatial distribution of attractive and aversive olfactory cues, anticipate upcoming turn directions and drive movement, linking key features of this sensorimotor behavior across time. The neuromodulator tyramine coordinates these sequential brain dynamics. Our results illustrate how neuromodulation can act on a defined neural architecture to link sensory cues to motor actions.\n                  </jats:p>",
+  "DOI": "10.1038/s41593-026-02257-5",
+  "type": "journal-article",
+  "created": {
+    "date-parts": [
+      [
+        2026,
+        4,
+        10
+      ]
+    ],
+    "date-time": "2026-04-10T09:02:55Z",
+    "timestamp": 1775811775000
+  },
+  "page": "1408-1424",
+  "update-policy": "https://doi.org/10.1007/springer_crossmark_policy",
+  "source": "Crossref",
+  "is-referenced-by-count": 7,
+  "title": [
+    "Neural sequences underlying directed turning in Caenorhabditis elegans"
+  ],
+  "prefix": "10.1038",
+  "volume": "29",
+  "author": [
+    {
+      "given": "Talya S.",
+      "family": "Kramer",
+      "sequence": "first",
+      "affiliation": [],
+      "role": [
+        {
+          "vocabulary": "crossref",
+          "role": "author"
+        }
+      ]
+    },
+    {
+      "ORCID": "https://orcid.org/0009-0009-2444-3109",
+      "authenticated-orcid": false,
+      "given": "Flossie K.",
+      "family": "Wan",
+      "sequence": "additional",
+      "affiliation": [],
+      "role": [
+        {
+          "vocabulary": "crossref",
+          "role": "author"
+        }
+      ]
+    },
+    {
+      "given": "Sarah M.",
+      "family": "Pugliese",
+      "sequence": "additional",
+      "affiliation": [],
+      "role": [
+        {
+          "vocabulary": "crossref",
+          "role": "author"
+        }
+      ]
+    },
+    {
+      "given": "Adam A.",
+      "family": "Atanas",
+      "sequence": "additional",
+      "affiliation": [],
+      "role": [
+        {
+          "vocabulary": "crossref",
+          "role": "author"
+        }
+      ]
+    },
+    {
+      "given": "Sreeparna",
+      "family": "Pradhan",
+      "sequence": "additional",
+      "affiliation": [],
+      "role": [
+        {
+          "vocabulary": "crossref",
+          "role": "author"
+        }
+      ]
+    },
+    {
+      "given": "Alex W.",
+      "family": "Hiser",
+      "sequence": "additional",
+      "affiliation": [],
+      "role": [
+        {
+          "vocabulary": "crossref",
+          "role": "author"
+        }
+      ]
+    },
+    {
+      "given": "Lillie M.",
+      "family": "Godinez",
+      "sequence": "additional",
+      "affiliation": [],
+      "role": [
+        {
+          "vocabulary": "crossref",
+          "role": "author"
+        }
+      ]
+    },
+    {
+      "given": "Jinyue",
+      "family": "Luo",
+      "sequence": "additional",
+      "affiliation": [],
+      "role": [
+        {
+          "vocabulary": "crossref",
+          "role": "author"
+        }
+      ]
+    },
+    {
+      "ORCID": "https://orcid.org/0000-0001-8751-5354",
+      "authenticated-orcid": false,
+      "given": "Eric",
+      "family": "Bueno",
+      "sequence": "additional",
+      "affiliation": [],
+      "role": [
+        {
+          "vocabulary": "crossref",
+          "role": "author"
+        }
+      ]
+    },
+    {
+      "given": "Thomas",
+      "family": "Felt",
+      "sequence": "additional",
+      "affiliation": [],
+      "role": [
+        {
+          "vocabulary": "crossref",
+          "role": "author"
+        }
+      ]
+    },
+    {
+      "ORCID": "https://orcid.org/0000-0001-9464-1877",
+      "authenticated-orcid": false,
+      "given": "Steven W.",
+      "family": "Flavell",
+      "sequence": "additional",
+      "affiliation": [],
+      "role": [
+        {
+          "vocabulary": "crossref",
+          "role": "author"
+        }
+      ]
+    }
+  ],
+  "member": "297",
+  "published-online": {
+    "date-parts": [
+      [
+        2026,
+        4,
+        10
+      ]
+    ]
+  },
+  "reference": [
+    {
+      "key": "2257_CR1",
+      "doi-asserted-by": "publisher",
+      "DOI": "10.1016/j.conb.2022.102665",
+      "volume": "78",
+      "author": "EA Aery Jones",
+      "year": "2023",
+      "unstructured": "Aery Jones, E. A. & Giocomo, L. M. Neural ensembles in navigation: from single cells to population codes. Curr. Opin. Neurobiol. 78, 102665 (2023).",
+      "journal-title": "Curr. Opin. Neurobiol."
+    },
+    {
+      "key": "2257_CR2",
+      "doi-asserted-by": "publisher",
+      "first-page": "403",
+      "DOI": "10.1146/annurev-neuro-110920-032645",
+      "volume": "46",
+      "author": "RI Wilson",
+      "year": "2023",
+      "unstructured": "Wilson, R. I. Neural networks for navigation: from connections to computations. Annu. Rev. Neurosci. 46, 403\u2013423 (2023).",
+      "journal-title": "Annu. Rev. Neurosci."
+    },
+    {
+      "key": "2257_CR3",
+      "doi-asserted-by": "publisher",
+      "first-page": "121",
+      "DOI": "10.1038/s41586-019-1772-4",
+      "volume": "576",
+      "author": "YE Fisher",
+      "year": "2019",
+      "unstructured": "Fisher, Y. E., Lu, J., D\u2019Alessandro, I. & Wilson, R. I. Sensorimotor experience remaps visual input to a heading-direction network. Nature 576, 121\u2013125 (2019).",
+      "journal-title": "Nature"
+    },
+    {
+      "key": "2257_CR4",
+      "doi-asserted-by": "publisher",
+      "first-page": "808",
+      "DOI": "10.1038/s41586-023-07006-3",
+      "volume": "626",
+      "author": "P Mussells Pires",
+      "year": "2024",
+      "unstructured": "Mussells Pires, P., Zhang, L., Parache, V., Abbott, L. F. & Maimon, G. Converting an allocentric goal into an egocentric steering signal. Nature 626, 808\u2013818 (2024).",
+      "journal-title": "Nature"
+    },
+    {
+      "key": "2257_CR5",
+      "doi-asserted-by": "publisher",
+      "first-page": "819",
+      "DOI": "10.1038/s41586-024-07039-2",
+      "volume": "626",
+      "author": "EA Westeinde",
+      "year": "2024",
+      "unstructured": "Westeinde, E. A. et al. Transforming a head direction signal into a goal-oriented steering command. Nature 626, 819\u2013826 (2024).",
+      "journal-title": "Nature"
+    },
+    {
+      "key": "2257_CR6",
+      "doi-asserted-by": "publisher",
+      "first-page": "10",
+      "DOI": "10.1016/j.conb.2019.11.017",
+      "volume": "64",
+      "author": "TA Currier",
+      "year": "2020",
+      "unstructured": "Currier, T. A. & Nagel, K. I. Multisensory control of navigation in the fruit fly. Curr. Opin. Neurobiol. 64, 10\u201316 (2020).",
+      "journal-title": "Curr. Opin. Neurobiol."
+    },
+    {
+      "key": "2257_CR7",
+      "doi-asserted-by": "publisher",
+      "first-page": "459",
+      "DOI": "10.1146/annurev-neuro-072116-031033",
+      "volume": "42",
+      "author": "A Klaus",
+      "year": "2019",
+      "unstructured": "Klaus, A., Alves da Silva, J. & Costa, R. M. What, if, and when to move: basal ganglia circuits and self-paced action initiation. Annu. Rev. Neurosci. 42, 459\u2013483 (2019).",
+      "journal-title": "Annu. Rev. Neurosci."
+    },
+    {
+      "key": "2257_CR8",
+      "doi-asserted-by": "crossref",
+      "unstructured": "Bargmann, C. I. Chemosensation in C. elegans. In WormBook: The Online Review of C. elegans Biology [Internet] (ed. The C. elegans Research Community) (WormBook, 2006).",
+      "DOI": "10.1895/wormbook.1.123.1"
+    },
+    {
+      "key": "2257_CR9",
+      "doi-asserted-by": "publisher",
+      "DOI": "10.1093/genetics/iyab004",
+      "volume": "217",
+      "author": "DM Ferkey",
+      "year": "2021",
+      "unstructured": "Ferkey, D. M., Sengupta, P. & L\u2019Etoile, N. D. Chemosensory signal transduction in Caenorhabditis elegans. Genetics 217, iyab004 (2021).",
+      "journal-title": "Genetics"
+    },
+    {
+      "key": "2257_CR10",
+      "doi-asserted-by": "publisher",
+      "first-page": "63",
+      "DOI": "10.1038/s41586-019-1352-7",
+      "volume": "571",
+      "author": "SJ Cook",
+      "year": "2019",
+      "unstructured": "Cook, S. J. et al. Whole-animal connectomes of both Caenorhabditis elegans sexes. Nature 571, 63\u201371 (2019).",
+      "journal-title": "Nature"
+    },
+    {
+      "key": "2257_CR11",
+      "doi-asserted-by": "publisher",
+      "first-page": "1",
+      "DOI": "10.1098/rstb.1986.0056",
+      "volume": "314",
+      "author": "JG White",
+      "year": "1986",
+      "unstructured": "White, J. G., Southgate, J. N. & Brenner, S. The structure of the nervous system of the nematode Caenorhabditis elegans. Philos. Trans. R. Soc. Lond. B Biol. Sci. 314, 1\u2013340 (1986).",
+      "journal-title": "Philos. Trans. R. Soc. Lond. B Biol. Sci."
+    },
+    {
+      "key": "2257_CR12",
+      "doi-asserted-by": "publisher",
+      "first-page": "257",
+      "DOI": "10.1038/s41586-021-03778-8",
+      "volume": "596",
+      "author": "D Witvliet",
+      "year": "2021",
+      "unstructured": "Witvliet, D. et al. Connectomes across development reveal principles of brain maturation. Nature 596, 257\u2013261 (2021).",
+      "journal-title": "Nature"
+    },
+    {
+      "key": "2257_CR13",
+      "doi-asserted-by": "publisher",
+      "first-page": "E1074",
+      "DOI": "10.1073/pnas.1507110112",
+      "volume": "113",
+      "author": "JP Nguyen",
+      "year": "2016",
+      "unstructured": "Nguyen, J. P. et al. Whole-brain calcium imaging with cellular resolution in freely behaving Caenorhabditis elegans. Proc. Natl Acad. Sci. USA 113, E1074\u2013E1081 (2016).",
+      "journal-title": "Proc. Natl Acad. Sci. USA"
+    },
+    {
+      "key": "2257_CR14",
+      "doi-asserted-by": "publisher",
+      "first-page": "E1082",
+      "DOI": "10.1073/pnas.1507109113",
+      "volume": "113",
+      "author": "V Venkatachalam",
+      "year": "2016",
+      "unstructured": "Venkatachalam, V. et al. Pan-neuronal imaging in roaming Caenorhabditis elegans. Proc. Natl Acad. Sci. USA 113, E1082\u2013E1088 (2016).",
+      "journal-title": "Proc. Natl Acad. Sci. USA"
+    },
+    {
+      "key": "2257_CR15",
+      "doi-asserted-by": "publisher",
+      "first-page": "4134",
+      "DOI": "10.1016/j.cell.2023.07.035",
+      "volume": "186",
+      "author": "AA Atanas",
+      "year": "2023",
+      "unstructured": "Atanas, A.A. et al. Brain-wide representations of behavior spanning multiple timescales and states in C. elegans. Cell 186, 4134\u20134151 (2023).",
+      "journal-title": "Cell"
+    },
+    {
+      "key": "2257_CR16",
+      "doi-asserted-by": "publisher",
+      "first-page": "5122",
+      "DOI": "10.1016/j.cell.2021.08.024",
+      "volume": "184",
+      "author": "V Susoy",
+      "year": "2021",
+      "unstructured": "Susoy, V. et al. Natural sensory context drives diverse brain-wide activity during C. elegans mating. Cell 184, 5122\u20135137 (2021).",
+      "journal-title": "Cell"
+    },
+    {
+      "key": "2257_CR17",
+      "doi-asserted-by": "publisher",
+      "first-page": "272",
+      "DOI": "10.1016/j.cell.2020.12.012",
+      "volume": "184",
+      "author": "E Yemini",
+      "year": "2021",
+      "unstructured": "Yemini, E. et al. NeuroPAL: a multicolor atlas for whole-brain neuronal identification in C. elegans. Cell 184, 272\u2013288 (2021).",
+      "journal-title": "Cell"
+    },
+    {
+      "key": "2257_CR18",
+      "doi-asserted-by": "publisher",
+      "DOI": "10.1038/s41467-025-58478-y",
+      "volume": "16",
+      "author": "S Pradhan",
+      "year": "2025",
+      "unstructured": "Pradhan, S. et al. Pathogen infection induces sickness behaviors through neuromodulators linked to stress and satiety in C. elegans. Nat. Commun. 16, 3200 (2025).",
+      "journal-title": "Nat. Commun."
+    },
+    {
+      "key": "2257_CR19",
+      "doi-asserted-by": "publisher",
+      "DOI": "10.1016/j.conb.2024.102868",
+      "volume": "86",
+      "author": "TS Kramer",
+      "year": "2024",
+      "unstructured": "Kramer, T. S. & Flavell, S. W. Building and integrating brain-wide maps of nervous system function in invertebrates. Curr. Opin. Neurobiol. 86, 102868 (2024).",
+      "journal-title": "Curr. Opin. Neurobiol."
+    },
+    {
+      "key": "2257_CR20",
+      "doi-asserted-by": "publisher",
+      "first-page": "9557",
+      "DOI": "10.1523/JNEUROSCI.19-21-09557.1999",
+      "volume": "19",
+      "author": "JT Pierce-Shimomura",
+      "year": "1999",
+      "unstructured": "Pierce-Shimomura, J. T., Morse, T. M. & Lockery, S. R. The fundamental role of pirouettes in Caenorhabditis elegans chemotaxis. J. Neurosci. 19, 9557\u20139569 (1999).",
+      "journal-title": "J. Neurosci."
+    },
+    {
+      "key": "2257_CR21",
+      "doi-asserted-by": "publisher",
+      "first-page": "599",
+      "DOI": "10.1038/nmeth.1630",
+      "volume": "8",
+      "author": "DR Albrecht",
+      "year": "2011",
+      "unstructured": "Albrecht, D. R. & Bargmann, C. I. High-content behavioral analysis of Caenorhabditis elegans in precise spatiotemporal chemical environments. Nat. Methods 8, 599\u2013605 (2011).",
+      "journal-title": "Nat. Methods"
+    },
+    {
+      "key": "2257_CR22",
+      "doi-asserted-by": "publisher",
+      "first-page": "1115",
+      "DOI": "10.1016/j.neuron.2014.05.010",
+      "volume": "82",
+      "author": "L Luo",
+      "year": "2014",
+      "unstructured": "Luo, L. et al. Dynamic encoding of perception, memory, and movement in a C. elegans chemotaxis circuit. Neuron 82, 1115\u20131128 (2014).",
+      "journal-title": "Neuron"
+    },
+    {
+      "key": "2257_CR23",
+      "doi-asserted-by": "publisher",
+      "first-page": "5370",
+      "DOI": "10.1523/JNEUROSCI.3633-08.2009",
+      "volume": "29",
+      "author": "Y Iino",
+      "year": "2009",
+      "unstructured": "Iino, Y. & Yoshida, K. Parallel use of two behavioral mechanisms for chemotaxis in Caenorhabditis elegans. J. Neurosci. 29, 5370\u20135380 (2009).",
+      "journal-title": "J. Neurosci."
+    },
+    {
+      "key": "2257_CR24",
+      "doi-asserted-by": "publisher",
+      "first-page": "1748",
+      "DOI": "10.1016/j.celrep.2015.08.032",
+      "volume": "12",
+      "author": "J Larsch",
+      "year": "2015",
+      "unstructured": "Larsch, J. et al. A circuit for gradient climbing in C. elegans chemotaxis. Cell Rep. 12, 1748\u20131760 (2015).",
+      "journal-title": "Cell Rep."
+    },
+    {
+      "key": "2257_CR25",
+      "doi-asserted-by": "publisher",
+      "DOI": "10.7554/eLife.21629",
+      "volume": "6",
+      "author": "Y Tanimoto",
+      "year": "2017",
+      "unstructured": "Tanimoto, Y. et al. Calcium dynamics regulating the timing of decision-making in C. elegans. eLife 6, e21629 (2017).",
+      "journal-title": "eLife"
+    },
+    {
+      "key": "2257_CR26",
+      "doi-asserted-by": "publisher",
+      "first-page": "18673",
+      "DOI": "10.1073/pnas.1821716116",
+      "volume": "116",
+      "author": "MS Jang",
+      "year": "2019",
+      "unstructured": "Jang, M. S., Toyoshima, Y., Tomioka, M., Kunitomo, H. & Iino, Y. Multiple sensory neurons mediate starvation-dependent aversive navigation in Caenorhabditis elegans. Proc. Natl Acad. Sci. USA 116, 18673\u201318683 (2019).",
+      "journal-title": "Proc. Natl Acad. Sci. USA"
+    },
+    {
+      "key": "2257_CR27",
+      "doi-asserted-by": "publisher",
+      "first-page": "1173",
+      "DOI": "10.1016/j.neuron.2010.11.025",
+      "volume": "68",
+      "author": "H Ha",
+      "year": "2010",
+      "unstructured": "Ha, H. et al. Functional organization of a neural network for aversive olfactory learning in Caenorhabditis elegans. Neuron 68, 1173\u20131186 (2010).",
+      "journal-title": "Neuron"
+    },
+    {
+      "key": "2257_CR28",
+      "doi-asserted-by": "publisher",
+      "first-page": "2776",
+      "DOI": "10.1073/pnas.1315205111",
+      "volume": "111",
+      "author": "L Luo",
+      "year": "2014",
+      "unstructured": "Luo, L. et al. Bidirectional thermotaxis in Caenorhabditis elegans is mediated by distinct sensorimotor strategies driven by the AFD thermosensory neurons. Proc. Natl Acad. Sci. USA 111, 2776\u20132781 (2014).",
+      "journal-title": "Proc. Natl Acad. Sci. USA"
+    },
+    {
+      "key": "2257_CR29",
+      "first-page": "RP96143",
+      "volume": "13",
+      "author": "WM Rozemuller",
+      "year": "2024",
+      "unstructured": "Rozemuller, W. M., Werner, S., Costa, A. C., O'Shaughnessy, L., Stephens, G. J. & Shimizu, T. S. Statistics of C. elegans turning behavior reveals optimality under biasing constraints. eLife 13, RP96143 (2024).",
+      "journal-title": "eLife"
+    },
+    {
+      "key": "2257_CR30",
+      "doi-asserted-by": "publisher",
+      "DOI": "10.7554/eLife.108159.2",
+      "volume": "14",
+      "author": "AA Atanas",
+      "year": "2026",
+      "unstructured": "Atanas, A. A. et al. Deep neural networks to register and annotate cells in moving and deforming nervous systems. eLife 14, RP108159 (2026).",
+      "journal-title": "eLife"
+    },
+    {
+      "key": "2257_CR31",
+      "doi-asserted-by": "publisher",
+      "first-page": "515",
+      "DOI": "10.1016/0092-8674(93)80053-H",
+      "volume": "74",
+      "author": "CI Bargmann",
+      "year": "1993",
+      "unstructured": "Bargmann, C. I., Hartwieg, E. & Horvitz, H. R. Odorant-selective genes and neurons mediate olfaction in C. elegans. Cell 74, 515\u2013527 (1993).",
+      "journal-title": "Cell"
+    },
+    {
+      "key": "2257_CR32",
+      "doi-asserted-by": "publisher",
+      "first-page": "15512",
+      "DOI": "10.1073/pnas.0403369101",
+      "volume": "101",
+      "author": "MY Chao",
+      "year": "2004",
+      "unstructured": "Chao, M. Y., Komatsu, H., Fukuto, H. S., Dionne, H. M. & Hart, A. C. Feeding status and serotonin rapidly and reversibly modulate a Caenorhabditis elegans chemosensory circuit. Proc. Natl Acad. Sci. USA 101, 15512\u201315517 (2004).",
+      "journal-title": "Proc. Natl Acad. Sci. USA"
+    },
+    {
+      "key": "2257_CR33",
+      "doi-asserted-by": "publisher",
+      "first-page": "3184",
+      "DOI": "10.1073/pnas.0409009101",
+      "volume": "102",
+      "author": "JM Gray",
+      "year": "2005",
+      "unstructured": "Gray, J. M., Hill, J. J. & Bargmann, C. I. A circuit for navigation in Caenorhabditis elegans. Proc. Natl Acad. Sci. USA 102, 3184\u20133191 (2005).",
+      "journal-title": "Proc. Natl Acad. Sci. USA"
+    },
+    {
+      "key": "2257_CR34",
+      "doi-asserted-by": "publisher",
+      "first-page": "562",
+      "DOI": "10.1016/j.neuron.2019.10.037",
+      "volume": "105",
+      "author": "HS Kaplan",
+      "year": "2020",
+      "unstructured": "Kaplan, H. S., Salazar Thula, O., Khoss, N. & Zimmer, M. Nested neuronal dynamics orchestrate a behavioral hierarchy across timescales. Neuron 105, 562\u2013576 (2020).",
+      "journal-title": "Neuron"
+    },
+    {
+      "key": "2257_CR35",
+      "doi-asserted-by": "publisher",
+      "first-page": "273",
+      "DOI": "10.1038/nature11431",
+      "volume": "490",
+      "author": "A Kocabas",
+      "year": "2012",
+      "unstructured": "Kocabas, A., Shen, C.-H., Guo, Z. V. & Ramanathan, S. Controlling interneuron activity in Caenorhabditis elegans to evoke chemotactic behaviour. Nature 490, 273\u2013277 (2012).",
+      "journal-title": "Nature"
+    },
+    {
+      "key": "2257_CR36",
+      "unstructured": "Kalogeropoulou, E. Role of the SAA and SMB Neurons in Locomotion in the Nematode Caenorhabditis elegans, With a Focus on Steering. PhD thesis, University of Leeds (2018)."
+    },
+    {
+      "key": "2257_CR37",
+      "doi-asserted-by": "publisher",
+      "DOI": "10.1371/journal.pgen.1005480",
+      "volume": "11",
+      "author": "J Kim",
+      "year": "2015",
+      "unstructured": "Kim, J. et al. The evolutionarily conserved LIM homeodomain protein LIM-4/LHX6 specifies the terminal identity of a cholinergic and peptidergic C. elegans sensory/inter/motor neuron-type. PLoS Genet. 11, e1005480 (2015).",
+      "journal-title": "PLoS Genet."
+    },
+    {
+      "key": "2257_CR38",
+      "doi-asserted-by": "publisher",
+      "DOI": "10.7554/eLife.14197",
+      "volume": "5",
+      "author": "Y Shen",
+      "year": "2016",
+      "unstructured": "Shen, Y. et al. An extrasynaptic GABAergic signal modulates a pattern of forward movement in Caenorhabditis elegans. eLife 5, e14197 (2016).",
+      "journal-title": "eLife"
+    },
+    {
+      "key": "2257_CR39",
+      "doi-asserted-by": "publisher",
+      "DOI": "10.1073/pnas.2410789121",
+      "volume": "121",
+      "author": "J Huo",
+      "year": "2024",
+      "unstructured": "Huo, J. et al. Hierarchical behavior control by a single class of interneurons. Proc. Natl Acad. Sci. USA 121, e2410789121 (2024).",
+      "journal-title": "Proc. Natl Acad. Sci. USA"
+    },
+    {
+      "key": "2257_CR40",
+      "doi-asserted-by": "publisher",
+      "DOI": "10.7554/eLife.56942",
+      "volume": "9",
+      "author": "Y Wang",
+      "year": "2020",
+      "unstructured": "Wang, Y. et al. Flexible motor sequence generation during stereotyped escape responses. eLife 9, e56942 (2020).",
+      "journal-title": "eLife"
+    },
+    {
+      "key": "2257_CR41",
+      "doi-asserted-by": "publisher",
+      "first-page": "656",
+      "DOI": "10.1016/j.cell.2015.09.034",
+      "volume": "163",
+      "author": "S Kato",
+      "year": "2015",
+      "unstructured": "Kato, S. et al. Global brain dynamics embed the motor command sequence of Caenorhabditis elegans. Cell 163, 656\u2013669 (2015).",
+      "journal-title": "Cell"
+    },
+    {
+      "key": "2257_CR42",
+      "doi-asserted-by": "publisher",
+      "first-page": "1794",
+      "DOI": "10.1101/gad.13.14.1794",
+      "volume": "13",
+      "author": "A Sagasti",
+      "year": "1999",
+      "unstructured": "Sagasti, A., Hobert, O., Troemel, E. R., Ruvkun, G. & Bargmann, C. I. Alternative olfactory neuron fates are specified by the LIM homeobox gene lim-4. Genes Dev. 13, 1794\u20131806 (1999).",
+      "journal-title": "Genes Dev."
+    },
+    {
+      "key": "2257_CR43",
+      "doi-asserted-by": "publisher",
+      "first-page": "751",
+      "DOI": "10.1016/j.cell.2014.09.056",
+      "volume": "159",
+      "author": "Z Li",
+      "year": "2014",
+      "unstructured": "Li, Z., Liu, J., Zheng, M. & Xu, X. Z. S. Encoding of both analog- and digital-like behavioral outputs by one C. elegans interneuron. Cell 159, 751\u2013765 (2014).",
+      "journal-title": "Cell"
+    },
+    {
+      "key": "2257_CR44",
+      "doi-asserted-by": "publisher",
+      "DOI": "10.7554/eLife.19887",
+      "volume": "5",
+      "author": "MA Lim",
+      "year": "2016",
+      "unstructured": "Lim, M. A. et al. Neuroendocrine modulation sustains the C. elegans forward motor state. eLife 5, e19887 (2016).",
+      "journal-title": "eLife"
+    },
+    {
+      "key": "2257_CR45",
+      "doi-asserted-by": "publisher",
+      "first-page": "E4493",
+      "DOI": "10.1073/pnas.1717022115",
+      "volume": "115",
+      "author": "T Xu",
+      "year": "2018",
+      "unstructured": "Xu, T. et al. Descending pathway facilitates undulatory wave propagation in Caenorhabditis elegans through gap junctions. Proc. Natl Acad. Sci. USA 115, E4493\u2013E4502 (2018).",
+      "journal-title": "Proc. Natl Acad. Sci. USA"
+    },
+    {
+      "key": "2257_CR46",
+      "doi-asserted-by": "publisher",
+      "first-page": "126",
+      "DOI": "10.1038/s41592-018-0233-6",
+      "volume": "16",
+      "author": "JB Lee",
+      "year": "2019",
+      "unstructured": "Lee, J. B. et al. A compressed sensing framework for efficient dissection of neural circuits. Nat. Methods 16, 126\u2013133 (2019).",
+      "journal-title": "Nat. Methods"
+    },
+    {
+      "key": "2257_CR47",
+      "doi-asserted-by": "publisher",
+      "first-page": "247",
+      "DOI": "10.1016/j.neuron.2005.02.024",
+      "volume": "46",
+      "author": "MJ Alkema",
+      "year": "2005",
+      "unstructured": "Alkema, M. J., Hunter-Ensor, M., Ringstad, N. & Horvitz, H. R. Tyramine functions independently of octopamine in the Caenorhabditis elegans nervous system. Neuron 46, 247\u2013260 (2005).",
+      "journal-title": "Neuron"
+    },
+    {
+      "key": "2257_CR48",
+      "doi-asserted-by": "publisher",
+      "first-page": "4329",
+      "DOI": "10.1016/j.cell.2021.06.023",
+      "volume": "184",
+      "author": "SR Taylor",
+      "year": "2021",
+      "unstructured": "Taylor, S. R. et al. Molecular topography of an entire nervous system. Cell 184, 4329\u20134347 (2021).",
+      "journal-title": "Cell"
+    },
+    {
+      "key": "2257_CR49",
+      "doi-asserted-by": "publisher",
+      "DOI": "10.1371/journal.pbio.1001529",
+      "volume": "11",
+      "author": "JL Donnelly",
+      "year": "2013",
+      "unstructured": "Donnelly, J. L. et al. Monoaminergic orchestration of motor programs in a complex C. elegans behavior. PLoS Biol. 11, e1001529 (2013).",
+      "journal-title": "PLoS Biol."
+    },
+    {
+      "key": "2257_CR50",
+      "doi-asserted-by": "publisher",
+      "DOI": "10.1371/journal.pgen.1010091",
+      "volume": "18",
+      "author": "JT Florman",
+      "year": "2022",
+      "unstructured": "Florman, J. T. & Alkema, M. J. Co-transmission of neuropeptides and monoamines choreograph the C. elegans escape response. PLoS Genet. 18, e1010091 (2022).",
+      "journal-title": "PLoS Genet."
+    },
+    {
+      "key": "2257_CR51",
+      "doi-asserted-by": "publisher",
+      "first-page": "526",
+      "DOI": "10.1016/j.neuron.2009.04.013",
+      "volume": "62",
+      "author": "JK Pirri",
+      "year": "2009",
+      "unstructured": "Pirri, J. K., McPherson, A. D., Donnelly, J. L., Francis, M. M. & Alkema, M. J. A tyramine-gated chloride channel coordinates distinct motor programs of a Caenorhabditis elegans escape response. Neuron 62, 526\u2013538 (2009).",
+      "journal-title": "Neuron"
+    },
+    {
+      "key": "2257_CR52",
+      "doi-asserted-by": "publisher",
+      "DOI": "10.7554/eLife.67723",
+      "volume": "10",
+      "author": "A Sordillo",
+      "year": "2021",
+      "unstructured": "Sordillo, A. & Bargmann, C. I. Behavioral control by depolarized and hyperpolarized states of an integrating neuron. eLife 10, e67723 (2021).",
+      "journal-title": "eLife"
+    },
+    {
+      "key": "2257_CR53",
+      "doi-asserted-by": "publisher",
+      "first-page": "407",
+      "DOI": "10.1016/j.neuron.2019.01.053",
+      "volume": "102",
+      "author": "A L\u00f3pez-Cruz",
+      "year": "2019",
+      "unstructured": "L\u00f3pez-Cruz, A. et al. Parallel multimodal circuits control an innate foraging behavior. Neuron 102, 407\u2013419 (2019).",
+      "journal-title": "Neuron"
+    },
+    {
+      "key": "2257_CR54",
+      "doi-asserted-by": "publisher",
+      "first-page": "RP95402",
+      "DOI": "10.7554/eLife.95402.3",
+      "volume": "13",
+      "author": "C Wang",
+      "year": "2024",
+      "unstructured": "Wang, C. et al. A neurotransmitter atlas of the nervous system of C. elegans males and hermaphrodites. eLife 13, RP95402 (2024).",
+      "journal-title": "eLife"
+    },
+    {
+      "key": "2257_CR55",
+      "doi-asserted-by": "publisher",
+      "first-page": "970405",
+      "DOI": "10.3389/fphys.2023.970405",
+      "volume": "14",
+      "author": "KD Rosikon",
+      "year": "2023",
+      "unstructured": "Rosikon, K. D., Bone, M. C. & Lawal, H. O. Regulation and modulation of biogenic amine neurotransmission in Drosophila and Caenorhabditis elegans. Front. Physiol. 14, 970405 (2023).",
+      "journal-title": "Front. Physiol."
+    },
+    {
+      "key": "2257_CR56",
+      "doi-asserted-by": "publisher",
+      "first-page": "1111",
+      "DOI": "10.1523/JNEUROSCI.1516-22.2022",
+      "volume": "43",
+      "author": "I Hardege",
+      "year": "2023",
+      "unstructured": "Hardege, I., Morud, J., Courtney, A. & Schafer, W. R. A novel and functionally diverse class of acetylcholine-gated ion channels. J. Neurosci. 43, 1111\u20131124 (2023).",
+      "journal-title": "J. Neurosci."
+    },
+    {
+      "key": "2257_CR57",
+      "doi-asserted-by": "publisher",
+      "DOI": "10.1111/gtc.70026",
+      "volume": "30",
+      "author": "K Suwazono",
+      "year": "2025",
+      "unstructured": "Suwazono, K. et al. Dissection of behavioral components and the role of omega/\u03b4 turns for the chemotaxis of C. elegans. Genes Cells 30, e70026 (2025).",
+      "journal-title": "Genes Cells"
+    },
+    {
+      "key": "2257_CR58",
+      "doi-asserted-by": "publisher",
+      "first-page": "817",
+      "DOI": "10.1073/pnas.70.3.817",
+      "volume": "70",
+      "author": "S Ward",
+      "year": "1973",
+      "unstructured": "Ward, S. Chemotaxis by the nematode Caenorhabditis elegans: identification of attractants and analysis of the response by use of mutants. Proc. Natl Acad. Sci. USA 70, 817\u2013821 (1973).",
+      "journal-title": "Proc. Natl Acad. Sci. USA"
+    },
+    {
+      "key": "2257_CR59",
+      "doi-asserted-by": "publisher",
+      "first-page": "5582",
+      "DOI": "10.1016/j.cub.2025.10.018",
+      "volume": "35",
+      "author": "RL Dunn",
+      "year": "2025",
+      "unstructured": "Dunn, R. L. et al. Short-term memory by distributed neural network oscillators in a simple nervous system. Curr. Biol. 35, 5582\u20135593 (2025).",
+      "journal-title": "Curr. Biol."
+    },
+    {
+      "key": "2257_CR60",
+      "doi-asserted-by": "publisher",
+      "first-page": "710",
+      "DOI": "10.1016/j.cub.2023.12.063",
+      "volume": "34",
+      "author": "BE Brezovec",
+      "year": "2024",
+      "unstructured": "Brezovec, B. E. et al. Mapping the neural dynamics of locomotion across the Drosophila brain. Curr. Biol. 34, 710\u2013726 (2024).",
+      "journal-title": "Curr. Biol."
+    },
+    {
+      "key": "2257_CR61",
+      "doi-asserted-by": "publisher",
+      "first-page": "536",
+      "DOI": "10.1016/j.cell.2019.12.018",
+      "volume": "180",
+      "author": "Q Lin",
+      "year": "2020",
+      "unstructured": "Lin, Q. et al. Cerebellar neurodynamics predict decision timing and outcome on the single-trial level. Cell 180, 536\u2013551 (2020).",
+      "journal-title": "Cell"
+    },
+    {
+      "key": "2257_CR62",
+      "doi-asserted-by": "publisher",
+      "first-page": "1023",
+      "DOI": "10.1016/j.cell.2013.08.001",
+      "volume": "154",
+      "author": "SW Flavell",
+      "year": "2013",
+      "unstructured": "Flavell, S. W. et al. Serotonin and the neuropeptide PDF initiate and extend opposing behavioral states in C. elegans. Cell 154, 1023\u20131035 (2013).",
+      "journal-title": "Cell"
+    },
+    {
+      "key": "2257_CR63",
+      "doi-asserted-by": "publisher",
+      "first-page": "135",
+      "DOI": "10.1038/s41586-019-1524-5",
+      "volume": "573",
+      "author": "MJ De Rosa",
+      "year": "2019",
+      "unstructured": "De Rosa, M. J. et al. The flight response impairs cytoprotective mechanisms by activating the insulin pathway. Nature 573, 135\u2013138 (2019).",
+      "journal-title": "Nature"
+    },
+    {
+      "key": "2257_CR64",
+      "doi-asserted-by": "publisher",
+      "DOI": "10.7554/eLife.79557",
+      "volume": "11",
+      "author": "IG McLachlan",
+      "year": "2022",
+      "unstructured": "McLachlan, I. G. et al. Diverse states and stimuli tune olfactory receptor expression levels to modulate food-seeking behavior. eLife 11, e79557 (2022).",
+      "journal-title": "eLife"
+    },
+    {
+      "key": "2257_CR65",
+      "doi-asserted-by": "publisher",
+      "first-page": "161",
+      "DOI": "10.1016/S0092-8674(00)80399-2",
+      "volume": "91",
+      "author": "ER Troemel",
+      "year": "1997",
+      "unstructured": "Troemel, E. R., Kimmel, B. E. & Bargmann, C. I. Reprogramming chemotaxis responses: sensory neurons define olfactory preferences in C. elegans. Cell 91, 161\u2013169 (1997).",
+      "journal-title": "Cell"
+    },
+    {
+      "key": "2257_CR66",
+      "doi-asserted-by": "publisher",
+      "DOI": "10.1038/ncomms1750",
+      "volume": "3",
+      "author": "K Yoshida",
+      "year": "2012",
+      "unstructured": "Yoshida, K. et al. Odour concentration-dependent olfactory preference change in C. elegans. Nat. Commun. 3, 739 (2012).",
+      "journal-title": "Nat. Commun."
+    },
+    {
+      "key": "2257_CR67",
+      "doi-asserted-by": "crossref",
+      "unstructured": "Haspel, G. & Hart, A. C. (eds) in C. elegans: Methods and Applications 357\u2013373 (Springer, 2022).",
+      "DOI": "10.1007/978-1-0716-2181-3"
+    },
+    {
+      "key": "2257_CR68",
+      "doi-asserted-by": "publisher",
+      "first-page": "4430",
+      "DOI": "10.1016/j.cub.2023.08.088",
+      "volume": "33",
+      "author": "Y-C Huang",
+      "year": "2023",
+      "unstructured": "Huang, Y.-C. et al. A single neuron in C. elegans orchestrates multiple motor outputs through parallel modes of transmission. Curr. Biol. 33, 4430\u20134445 (2023).",
+      "journal-title": "Curr. Biol."
+    },
+    {
+      "key": "2257_CR69",
+      "doi-asserted-by": "publisher",
+      "first-page": "2574",
+      "DOI": "10.1016/j.cell.2023.04.023",
+      "volume": "186",
+      "author": "U Dag",
+      "year": "2023",
+      "unstructured": "Dag, U. et al. Dissecting the functional organization of the C. elegans serotonergic system at whole-brain scale. Cell 186, 2574\u20132592 (2023).",
+      "journal-title": "Cell"
+    },
+    {
+      "key": "2257_CR70",
+      "doi-asserted-by": "publisher",
+      "DOI": "10.7554/eLife.57093",
+      "volume": "9",
+      "author": "N Cermak",
+      "year": "2020",
+      "unstructured": "Cermak, N. et al. Whole-organism behavioral profiling reveals a role for dopamine in state-dependent motor program coupling in C. elegans. eLife 9, e57093 (2020).",
+      "journal-title": "eLife"
+    },
+    {
+      "key": "2257_CR71",
+      "doi-asserted-by": "publisher",
+      "first-page": "698",
+      "DOI": "10.1038/35070581",
+      "volume": "410",
+      "author": "PD Wes",
+      "year": "2001",
+      "unstructured": "Wes, P. D. & Bargmann, C. I. C. elegans odour discrimination requires asymmetric diversity in olfactory neurons. Nature 410, 698\u2013701 (2001).",
+      "journal-title": "Nature"
+    },
+    {
+      "key": "2257_CR72",
+      "doi-asserted-by": "publisher",
+      "unstructured": "Kingma, D. P. & Ba, J. Adam: a method for stochastic optimization. Preprint at arXiv https://doi.org/10.48550/arXiv.1412.6980 (2017).",
+      "DOI": "10.48550/arXiv.1412.6980"
+    },
+    {
+      "key": "2257_CR73",
+      "doi-asserted-by": "publisher",
+      "unstructured": "Chung, J., Gulcehre, C., Cho, K. & Bengio, Y. Empirical evaluation of gated recurrent neural networks on sequence modeling. Preprint at arXiv https://doi.org/10.48550/arXiv.1412.3555 (2014).",
+      "DOI": "10.48550/arXiv.1412.3555"
+    },
+    {
+      "key": "2257_CR74",
+      "unstructured": "Bradbury, J. et al. JAX: composable transformations of Python\u2009+\u2009NumPy programs. GitHub http://github.com/google/jax (2018)."
+    },
+    {
+      "key": "2257_CR75",
+      "doi-asserted-by": "publisher",
+      "unstructured": "Kidger, P. & Garcia, C. Equinox: neural networks in JAX via callable PyTrees and filtered transformations. Preprint at arXiv https://doi.org/10.48550/arXiv.2111.00254 (2021).",
+      "DOI": "10.48550/arXiv.2111.00254"
+    }
+  ],
+  "container-title": [
+    "Nature Neuroscience"
+  ],
+  "original-title": [],
+  "language": "en",
+  "link": [
+    {
+      "URL": "https://www.nature.com/articles/s41593-026-02257-5.pdf",
+      "content-type": "application/pdf",
+      "content-version": "vor",
+      "intended-application": "text-mining"
+    },
+    {
+      "URL": "https://www.nature.com/articles/s41593-026-02257-5",
+      "content-type": "text/html",
+      "content-version": "vor",
+      "intended-application": "text-mining"
+    },
+    {
+      "URL": "https://www.nature.com/articles/s41593-026-02257-5.pdf",
+      "content-type": "application/pdf",
+      "content-version": "vor",
+      "intended-application": "similarity-checking"
+    }
+  ],
+  "deposited": {
+    "date-parts": [
+      [
+        2026,
+        6,
+        8
+      ]
+    ],
+    "date-time": "2026-06-08T18:03:26Z",
+    "timestamp": 1780941806000
+  },
+  "score": 1,
+  "resource": {
+    "primary": {
+      "URL": "https://www.nature.com/articles/s41593-026-02257-5"
+    }
+  },
+  "subtitle": [],
+  "short-title": [],
+  "issued": {
+    "date-parts": [
+      [
+        2026,
+        4,
+        10
+      ]
+    ]
+  },
+  "references-count": 75,
+  "journal-issue": {
+    "issue": "6",
+    "published-print": {
+      "date-parts": [
+        [
+          2026,
+          6
+        ]
+      ]
+    }
+  },
+  "alternative-id": [
+    "2257"
+  ],
+  "URL": "https://doi.org/10.1038/s41593-026-02257-5",
+  "relation": {},
+  "ISSN": [
+    "1097-6256",
+    "1546-1726"
+  ],
+  "issn-type": [
+    {
+      "value": "1097-6256",
+      "type": "print"
+    },
+    {
+      "value": "1546-1726",
+      "type": "electronic"
+    }
+  ],
+  "subject": [],
+  "published": {
+    "date-parts": [
+      [
+        2026,
+        4,
+        10
+      ]
+    ]
+  },
+  "assertion": [
+    {
+      "value": "4 December 2024",
+      "order": 1,
+      "name": "received",
+      "label": "Received",
+      "group": {
+        "name": "ArticleHistory",
+        "label": "Article History"
+      }
+    },
+    {
+      "value": "5 March 2026",
+      "order": 2,
+      "name": "accepted",
+      "label": "Accepted",
+      "group": {
+        "name": "ArticleHistory",
+        "label": "Article History"
+      }
+    },
+    {
+      "value": "10 April 2026",
+      "order": 3,
+      "name": "first_online",
+      "label": "First Online",
+      "group": {
+        "name": "ArticleHistory",
+        "label": "Article History"
+      }
+    },
+    {
+      "value": "All authors declare no competing interests.",
+      "order": 1,
+      "name": "Ethics",
+      "group": {
+        "name": "EthicsHeading",
+        "label": "Competing interests"
+      }
+    }
+  ]
+}

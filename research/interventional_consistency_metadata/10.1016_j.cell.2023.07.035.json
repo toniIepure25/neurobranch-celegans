@@ -1,0 +1,1079 @@
+{
+  "indexed": {
+    "date-parts": [
+      [
+        2026,
+        11,
+        15
+      ]
+    ],
+    "date-time": "2026-11-15T19:05:45Z",
+    "timestamp": 1794769545158,
+    "version": "4.9.1"
+  },
+  "reference-count": 63,
+  "publisher": "Elsevier BV",
+  "issue": "19",
+  "license": [
+    {
+      "start": {
+        "date-parts": [
+          [
+            2023,
+            9,
+            1
+          ]
+        ],
+        "date-time": "2023-09-01T00:00:00Z",
+        "timestamp": 1693526400000
+      },
+      "content-version": "tdm",
+      "delay-in-days": 0,
+      "URL": "https://www.elsevier.com/tdm/userlicense/1.0/"
+    },
+    {
+      "start": {
+        "date-parts": [
+          [
+            2023,
+            9,
+            1
+          ]
+        ],
+        "date-time": "2023-09-01T00:00:00Z",
+        "timestamp": 1693526400000
+      },
+      "content-version": "tdm",
+      "delay-in-days": 0,
+      "URL": "https://www.elsevier.com/legal/tdmrep-license"
+    },
+    {
+      "start": {
+        "date-parts": [
+          [
+            2023,
+            7,
+            29
+          ]
+        ],
+        "date-time": "2023-07-29T00:00:00Z",
+        "timestamp": 1690588800000
+      },
+      "content-version": "vor",
+      "delay-in-days": 0,
+      "URL": "http://creativecommons.org/licenses/by-nc/4.0/"
+    }
+  ],
+  "content-domain": {
+    "domain": [
+      "cell.com",
+      "elsevier.com",
+      "sciencedirect.com"
+    ],
+    "crossmark-restriction": true
+  },
+  "short-container-title": [
+    "Cell"
+  ],
+  "published-print": {
+    "date-parts": [
+      [
+        2023,
+        9
+      ]
+    ]
+  },
+  "DOI": "10.1016/j.cell.2023.07.035",
+  "type": "journal-article",
+  "created": {
+    "date-parts": [
+      [
+        2023,
+        8,
+        21
+      ]
+    ],
+    "date-time": "2023-08-21T10:34:09Z",
+    "timestamp": 1692614049000
+  },
+  "page": "4134-4151.e31",
+  "update-policy": "https://doi.org/10.1016/elsevier_cm_policy",
+  "source": "Crossref",
+  "is-referenced-by-count": 101,
+  "title": [
+    "Brain-wide representations of behavior spanning multiple timescales and states in C.\u00a0elegans"
+  ],
+  "prefix": "10.1016",
+  "volume": "186",
+  "author": [
+    {
+      "given": "Adam A.",
+      "family": "Atanas",
+      "sequence": "first",
+      "affiliation": [],
+      "role": [
+        {
+          "vocabulary": "crossref",
+          "role": "author"
+        }
+      ]
+    },
+    {
+      "given": "Jungsoo",
+      "family": "Kim",
+      "sequence": "additional",
+      "affiliation": [],
+      "role": [
+        {
+          "vocabulary": "crossref",
+          "role": "author"
+        }
+      ]
+    },
+    {
+      "given": "Ziyu",
+      "family": "Wang",
+      "sequence": "additional",
+      "affiliation": [],
+      "role": [
+        {
+          "vocabulary": "crossref",
+          "role": "author"
+        }
+      ]
+    },
+    {
+      "given": "Eric",
+      "family": "Bueno",
+      "sequence": "additional",
+      "affiliation": [],
+      "role": [
+        {
+          "vocabulary": "crossref",
+          "role": "author"
+        }
+      ]
+    },
+    {
+      "given": "McCoy",
+      "family": "Becker",
+      "sequence": "additional",
+      "affiliation": [],
+      "role": [
+        {
+          "vocabulary": "crossref",
+          "role": "author"
+        }
+      ]
+    },
+    {
+      "given": "Di",
+      "family": "Kang",
+      "sequence": "additional",
+      "affiliation": [],
+      "role": [
+        {
+          "vocabulary": "crossref",
+          "role": "author"
+        }
+      ]
+    },
+    {
+      "given": "Jungyeon",
+      "family": "Park",
+      "sequence": "additional",
+      "affiliation": [],
+      "role": [
+        {
+          "vocabulary": "crossref",
+          "role": "author"
+        }
+      ]
+    },
+    {
+      "given": "Talya S.",
+      "family": "Kramer",
+      "sequence": "additional",
+      "affiliation": [],
+      "role": [
+        {
+          "vocabulary": "crossref",
+          "role": "author"
+        }
+      ]
+    },
+    {
+      "given": "Flossie K.",
+      "family": "Wan",
+      "sequence": "additional",
+      "affiliation": [],
+      "role": [
+        {
+          "vocabulary": "crossref",
+          "role": "author"
+        }
+      ]
+    },
+    {
+      "given": "Saba",
+      "family": "Baskoylu",
+      "sequence": "additional",
+      "affiliation": [],
+      "role": [
+        {
+          "vocabulary": "crossref",
+          "role": "author"
+        }
+      ]
+    },
+    {
+      "given": "Ugur",
+      "family": "Dag",
+      "sequence": "additional",
+      "affiliation": [],
+      "role": [
+        {
+          "vocabulary": "crossref",
+          "role": "author"
+        }
+      ]
+    },
+    {
+      "given": "Elpiniki",
+      "family": "Kalogeropoulou",
+      "sequence": "additional",
+      "affiliation": [],
+      "role": [
+        {
+          "vocabulary": "crossref",
+          "role": "author"
+        }
+      ]
+    },
+    {
+      "given": "Matthew A.",
+      "family": "Gomes",
+      "sequence": "additional",
+      "affiliation": [],
+      "role": [
+        {
+          "vocabulary": "crossref",
+          "role": "author"
+        }
+      ]
+    },
+    {
+      "given": "Cassi",
+      "family": "Estrem",
+      "sequence": "additional",
+      "affiliation": [],
+      "role": [
+        {
+          "vocabulary": "crossref",
+          "role": "author"
+        }
+      ]
+    },
+    {
+      "given": "Netta",
+      "family": "Cohen",
+      "sequence": "additional",
+      "affiliation": [],
+      "role": [
+        {
+          "vocabulary": "crossref",
+          "role": "author"
+        }
+      ]
+    },
+    {
+      "given": "Vikash K.",
+      "family": "Mansinghka",
+      "sequence": "additional",
+      "affiliation": [],
+      "role": [
+        {
+          "vocabulary": "crossref",
+          "role": "author"
+        }
+      ]
+    },
+    {
+      "ORCID": "https://orcid.org/0000-0001-9464-1877",
+      "authenticated-orcid": false,
+      "given": "Steven W.",
+      "family": "Flavell",
+      "sequence": "additional",
+      "affiliation": [],
+      "role": [
+        {
+          "vocabulary": "crossref",
+          "role": "author"
+        }
+      ]
+    }
+  ],
+  "member": "78",
+  "reference": [
+    {
+      "key": "10.1016/j.cell.2023.07.035_bib1",
+      "doi-asserted-by": "crossref",
+      "DOI": "10.1126/science.aav3932",
+      "article-title": "Thirst regulates motivated behavior through modulation of brainwide neural population dynamics",
+      "volume": "364",
+      "author": "Allen",
+      "year": "2019",
+      "journal-title": "Science"
+    },
+    {
+      "key": "10.1016/j.cell.2023.07.035_bib2",
+      "article-title": "Mapping the neural dynamics of locomotion across the drosophila brain",
+      "author": "Brezovec",
+      "year": "2022",
+      "journal-title": "Preprint at bioRxiv"
+    },
+    {
+      "key": "10.1016/j.cell.2023.07.035_bib3",
+      "doi-asserted-by": "crossref",
+      "DOI": "10.7554/eLife.66135",
+      "article-title": "Decoding locomotion from population neural activity in moving C. elegans",
+      "volume": "10",
+      "author": "Hallinen",
+      "year": "2021",
+      "journal-title": "eLife"
+    },
+    {
+      "key": "10.1016/j.cell.2023.07.035_bib4",
+      "doi-asserted-by": "crossref",
+      "first-page": "239",
+      "DOI": "10.1038/s41586-019-1858-z",
+      "article-title": "Internal state dynamics shape brainwide activity and foraging behaviour",
+      "volume": "577",
+      "author": "Marques",
+      "year": "2020",
+      "journal-title": "Nature"
+    },
+    {
+      "key": "10.1016/j.cell.2023.07.035_bib5",
+      "doi-asserted-by": "crossref",
+      "first-page": "1677",
+      "DOI": "10.1038/s41593-019-0502-4",
+      "article-title": "Single-trial neural dynamics are dominated by richly varied movements",
+      "volume": "22",
+      "author": "Musall",
+      "year": "2019",
+      "journal-title": "Nat. Neurosci."
+    },
+    {
+      "key": "10.1016/j.cell.2023.07.035_bib6",
+      "article-title": "Flygenvectors: The spatial and temporal structure of neural activity across the fly brain",
+      "author": "Schaffer",
+      "year": "2021",
+      "journal-title": "Preprint at bioRxiv"
+    },
+    {
+      "key": "10.1016/j.cell.2023.07.035_bib7",
+      "doi-asserted-by": "crossref",
+      "DOI": "10.1126/science.aav7893",
+      "article-title": "Spontaneous behaviors drive multidimensional, brainwide activity",
+      "volume": "364",
+      "author": "Stringer",
+      "year": "2019",
+      "journal-title": "Science"
+    },
+    {
+      "key": "10.1016/j.cell.2023.07.035_bib8",
+      "doi-asserted-by": "crossref",
+      "first-page": "472",
+      "DOI": "10.1016/j.neuron.2010.01.033",
+      "article-title": "Modulation of visual responses by behavioral state in mouse visual cortex",
+      "volume": "65",
+      "author": "Niell",
+      "year": "2010",
+      "journal-title": "Neuron"
+    },
+    {
+      "key": "10.1016/j.cell.2023.07.035_bib9",
+      "doi-asserted-by": "crossref",
+      "first-page": "63",
+      "DOI": "10.1038/s41586-019-1352-7",
+      "article-title": "Whole-animal connectomes of both Caenorhabditis elegans sexes",
+      "volume": "571",
+      "author": "Cook",
+      "year": "2019",
+      "journal-title": "Nature"
+    },
+    {
+      "key": "10.1016/j.cell.2023.07.035_bib10",
+      "doi-asserted-by": "crossref",
+      "first-page": "1",
+      "DOI": "10.1098/rstb.1986.0056",
+      "article-title": "The structure of the nervous system of the nematode Caenorhabditis elegans",
+      "volume": "314",
+      "author": "White",
+      "year": "1986",
+      "journal-title": "Philos. Trans. R. Soc. Lond. B Biol. Sci."
+    },
+    {
+      "key": "10.1016/j.cell.2023.07.035_bib11",
+      "doi-asserted-by": "crossref",
+      "first-page": "257",
+      "DOI": "10.1038/s41586-021-03778-8",
+      "article-title": "Connectomes across development reveal principles of brain maturation",
+      "volume": "596",
+      "author": "Witvliet",
+      "year": "2021",
+      "journal-title": "Nature"
+    },
+    {
+      "key": "10.1016/j.cell.2023.07.035_bib12",
+      "doi-asserted-by": "crossref",
+      "first-page": "105",
+      "DOI": "10.1038/s41586-021-03284-x",
+      "article-title": "A\u00a0multi-scale brain map derived from whole-brain volumetric reconstructions",
+      "volume": "591",
+      "author": "Brittin",
+      "year": "2021",
+      "journal-title": "Nature"
+    },
+    {
+      "key": "10.1016/j.cell.2023.07.035_bib13",
+      "doi-asserted-by": "crossref",
+      "first-page": "99",
+      "DOI": "10.1038/s41586-020-03169-5",
+      "article-title": "Structural and developmental principles of neuropil assembly in C. elegans",
+      "volume": "591",
+      "author": "Moyle",
+      "year": "2021",
+      "journal-title": "Nature"
+    },
+    {
+      "key": "10.1016/j.cell.2023.07.035_bib14",
+      "doi-asserted-by": "crossref",
+      "first-page": "315",
+      "DOI": "10.1534/genetics.120.303539",
+      "article-title": "Behavioral states",
+      "volume": "216",
+      "author": "Flavell",
+      "year": "2020",
+      "journal-title": "Genetics"
+    },
+    {
+      "key": "10.1016/j.cell.2023.07.035_bib15",
+      "doi-asserted-by": "crossref",
+      "DOI": "10.1016/j.conb.2021.12.002",
+      "article-title": "Dynamic functional connectivity in the static connectome of Caenorhabditis elegans",
+      "volume": "73",
+      "author": "Flavell",
+      "year": "2022",
+      "journal-title": "Curr. Opin. Neurobiol."
+    },
+    {
+      "key": "10.1016/j.cell.2023.07.035_bib16",
+      "doi-asserted-by": "crossref",
+      "first-page": "569",
+      "DOI": "10.1038/nature06535",
+      "article-title": "Lethargus is a Caenorhabditis elegans sleep-like state",
+      "volume": "451",
+      "author": "Raizen",
+      "year": "2008",
+      "journal-title": "Nature"
+    },
+    {
+      "key": "10.1016/j.cell.2023.07.035_bib17",
+      "doi-asserted-by": "crossref",
+      "first-page": "1300",
+      "DOI": "10.1038/nn1981",
+      "article-title": "Epidermal growth factor signaling induces behavioral quiescence in Caenorhabditis elegans",
+      "volume": "10",
+      "author": "Van Buskirk",
+      "year": "2007",
+      "journal-title": "Nat. Neurosci."
+    },
+    {
+      "key": "10.1016/j.cell.2023.07.035_bib18",
+      "doi-asserted-by": "crossref",
+      "first-page": "1023",
+      "DOI": "10.1016/j.cell.2013.08.001",
+      "article-title": "Serotonin and the neuropeptide PDF initiate and extend opposing behavioral states in C. elegans",
+      "volume": "154",
+      "author": "Flavell",
+      "year": "2013",
+      "journal-title": "Cell"
+    },
+    {
+      "key": "10.1016/j.cell.2023.07.035_bib19",
+      "doi-asserted-by": "crossref",
+      "first-page": "1091",
+      "DOI": "10.1016/S0896-6273(02)01093-0",
+      "article-title": "Regulation of body size and behavioral state of C. elegans by sensory perception and the EGL-4 cGMP-dependent protein kinase",
+      "volume": "36",
+      "author": "Fujiwara",
+      "year": "2002",
+      "journal-title": "Neuron"
+    },
+    {
+      "key": "10.1016/j.cell.2023.07.035_bib20",
+      "doi-asserted-by": "crossref",
+      "DOI": "10.7554/eLife.62889",
+      "article-title": "A neural circuit for flexible control of persistent behavioral states",
+      "volume": "10",
+      "author": "Ji",
+      "year": "2021",
+      "journal-title": "eLife"
+    },
+    {
+      "key": "10.1016/j.cell.2023.07.035_bib21",
+      "doi-asserted-by": "crossref",
+      "first-page": "2574",
+      "DOI": "10.1016/j.cell.2023.04.023",
+      "article-title": "Dissecting the functional organization of the C.\u00a0elegans serotonergic system at whole-brain scale",
+      "volume": "186",
+      "author": "Dag",
+      "year": "2023",
+      "journal-title": "Cell"
+    },
+    {
+      "key": "10.1016/j.cell.2023.07.035_bib22",
+      "doi-asserted-by": "crossref",
+      "DOI": "10.1038/s41539-017-0011-8",
+      "article-title": "Habituation as an adaptive shift in response strategy mediated by neuropeptides",
+      "volume": "2",
+      "author": "Ardiel",
+      "year": "2017",
+      "journal-title": "NPJ Sci. Learn."
+    },
+    {
+      "key": "10.1016/j.cell.2023.07.035_bib23",
+      "doi-asserted-by": "crossref",
+      "first-page": "1233",
+      "DOI": "10.1016/j.neuron.2018.08.003",
+      "article-title": "An afferent neuropeptide system transmits mechanosensory signals triggering sensitization and arousal in C.\u00a0elegans",
+      "volume": "99",
+      "author": "Chew",
+      "year": "2018",
+      "journal-title": "Neuron"
+    },
+    {
+      "key": "10.1016/j.cell.2023.07.035_bib24",
+      "doi-asserted-by": "crossref",
+      "first-page": "215",
+      "DOI": "10.1016/j.cell.2015.02.018",
+      "article-title": "Feedback from network states generates variability in a probabilistic olfactory circuit",
+      "volume": "161",
+      "author": "Gordus",
+      "year": "2015",
+      "journal-title": "Cell"
+    },
+    {
+      "key": "10.1016/j.cell.2023.07.035_bib25",
+      "doi-asserted-by": "crossref",
+      "first-page": "562",
+      "DOI": "10.1016/j.neuron.2019.10.037",
+      "article-title": "Nested neuronal dynamics orchestrate a behavioral hierarchy across timescales",
+      "volume": "105",
+      "author": "Kaplan",
+      "year": "2020",
+      "journal-title": "Neuron"
+    },
+    {
+      "key": "10.1016/j.cell.2023.07.035_bib26",
+      "doi-asserted-by": "crossref",
+      "first-page": "656",
+      "DOI": "10.1016/j.cell.2015.09.034",
+      "article-title": "Global brain dynamics embed the motor command sequence of Caenorhabditis elegans",
+      "volume": "163",
+      "author": "Kato",
+      "year": "2015",
+      "journal-title": "Cell"
+    },
+    {
+      "key": "10.1016/j.cell.2023.07.035_bib27",
+      "doi-asserted-by": "crossref",
+      "first-page": "751",
+      "DOI": "10.1016/j.cell.2014.09.056",
+      "article-title": "Encoding of both analog- and digital-like behavioral outputs by one C. elegans interneuron",
+      "volume": "159",
+      "author": "Li",
+      "year": "2014",
+      "journal-title": "Cell"
+    },
+    {
+      "key": "10.1016/j.cell.2023.07.035_bib28",
+      "doi-asserted-by": "crossref",
+      "DOI": "10.7554/eLife.19887",
+      "article-title": "Neuroendocrine modulation sustains the C. elegans forward motor state",
+      "volume": "5",
+      "author": "Lim",
+      "year": "2016",
+      "journal-title": "eLife"
+    },
+    {
+      "key": "10.1016/j.cell.2023.07.035_bib29",
+      "doi-asserted-by": "crossref",
+      "first-page": "1115",
+      "DOI": "10.1016/j.neuron.2014.05.010",
+      "article-title": "Dynamic encoding of perception, memory, and movement in a C. elegans chemotaxis circuit",
+      "volume": "82",
+      "author": "Luo",
+      "year": "2014",
+      "journal-title": "Neuron"
+    },
+    {
+      "key": "10.1016/j.cell.2023.07.035_bib30",
+      "doi-asserted-by": "crossref",
+      "DOI": "10.7554/eLife.12572",
+      "article-title": "A stochastic neuronal model predicts random search behaviors at multiple spatial scales in C. elegans",
+      "volume": "5",
+      "author": "Roberts",
+      "year": "2016",
+      "journal-title": "eLife"
+    },
+    {
+      "key": "10.1016/j.cell.2023.07.035_bib31",
+      "doi-asserted-by": "crossref",
+      "first-page": "1445",
+      "DOI": "10.1016/j.cub.2008.08.047",
+      "article-title": "A self-regulating feed-forward circuit controlling C. elegans egg-laying behavior",
+      "volume": "18",
+      "author": "Zhang",
+      "year": "2008",
+      "journal-title": "Curr. Biol."
+    },
+    {
+      "key": "10.1016/j.cell.2023.07.035_bib32",
+      "doi-asserted-by": "crossref",
+      "DOI": "10.7554/eLife.68848",
+      "article-title": "Corollary discharge promotes a sustained motor state in a neural circuit for navigation",
+      "volume": "10",
+      "author": "Ji",
+      "year": "2021",
+      "journal-title": "eLife"
+    },
+    {
+      "key": "10.1016/j.cell.2023.07.035_bib33",
+      "doi-asserted-by": "crossref",
+      "first-page": "3048",
+      "DOI": "10.1016/j.cub.2022.05.051",
+      "article-title": "Tyraminergic corollary discharge filters reafferent perception in a chemosensory neuron",
+      "volume": "32",
+      "author": "Riedl",
+      "year": "2022",
+      "journal-title": "Curr. Biol."
+    },
+    {
+      "key": "10.1016/j.cell.2023.07.035_bib34",
+      "doi-asserted-by": "crossref",
+      "first-page": "99",
+      "DOI": "10.1038/nature11081",
+      "article-title": "Compartmentalized calcium dynamics in a C. elegans interneuron encode head movement",
+      "volume": "487",
+      "author": "Hendricks",
+      "year": "2012",
+      "journal-title": "Nature"
+    },
+    {
+      "key": "10.1016/j.cell.2023.07.035_bib35",
+      "doi-asserted-by": "crossref",
+      "first-page": "E4493",
+      "DOI": "10.1073/pnas.1717022115",
+      "article-title": "Descending pathway facilitates undulatory wave propagation in Caenorhabditis elegans through gap junctions",
+      "volume": "115",
+      "author": "Xu",
+      "year": "2018",
+      "journal-title": "Proc. Natl. Acad. Sci. USA"
+    },
+    {
+      "key": "10.1016/j.cell.2023.07.035_bib36",
+      "doi-asserted-by": "crossref",
+      "DOI": "10.1371/journal.pbio.2004929",
+      "article-title": "A sensory-motor neuron type mediates proprioceptive coordination of steering in C. elegans via two TRPC channels",
+      "volume": "16",
+      "author": "Yeon",
+      "year": "2018",
+      "journal-title": "PLoS Biol."
+    },
+    {
+      "key": "10.1016/j.cell.2023.07.035_bib37",
+      "doi-asserted-by": "crossref",
+      "DOI": "10.1098/rstb.2018.0208",
+      "article-title": "Signatures of proprioceptive control in Caenorhabditis elegans locomotion",
+      "volume": "373",
+      "author": "Denham",
+      "year": "2018",
+      "journal-title": "Philos. Trans. R. Soc. Lond. B Biol. Sci."
+    },
+    {
+      "key": "10.1016/j.cell.2023.07.035_bib38",
+      "doi-asserted-by": "crossref",
+      "first-page": "E1074",
+      "DOI": "10.1073/pnas.1507110112",
+      "article-title": "Whole-brain calcium imaging with cellular resolution in freely behaving Caenorhabditis elegans",
+      "volume": "113",
+      "author": "Nguyen",
+      "year": "2016",
+      "journal-title": "Proc. Natl. Acad. Sci. USA"
+    },
+    {
+      "key": "10.1016/j.cell.2023.07.035_bib39",
+      "doi-asserted-by": "crossref",
+      "first-page": "E1082",
+      "DOI": "10.1073/pnas.1507109113",
+      "article-title": "Pan-neuronal imaging in roaming Caenorhabditis elegans",
+      "volume": "113",
+      "author": "Venkatachalam",
+      "year": "2016",
+      "journal-title": "Proc. Natl. Acad. Sci. USA"
+    },
+    {
+      "key": "10.1016/j.cell.2023.07.035_bib40",
+      "doi-asserted-by": "crossref",
+      "first-page": "1281",
+      "DOI": "10.1038/s41593-018-0209-y",
+      "article-title": "DeepLabCut: markerless pose estimation of user-defined body parts with deep learning",
+      "volume": "21",
+      "author": "Mathis",
+      "year": "2018",
+      "journal-title": "Nat. Neurosci."
+    },
+    {
+      "key": "10.1016/j.cell.2023.07.035_bib41",
+      "doi-asserted-by": "crossref",
+      "DOI": "10.7554/eLife.57613",
+      "article-title": "Accurate and versatile 3D segmentation of plant tissues at cellular resolution",
+      "volume": "9",
+      "author": "Wolny",
+      "year": "2020",
+      "journal-title": "eLife"
+    },
+    {
+      "key": "10.1016/j.cell.2023.07.035_bib42",
+      "doi-asserted-by": "crossref",
+      "first-page": "649",
+      "DOI": "10.1038/s41592-019-0435-6",
+      "article-title": "High-performance calcium sensors for imaging activity in neuronal populations and microcompartments",
+      "volume": "16",
+      "author": "Dana",
+      "year": "2019",
+      "journal-title": "Nat. Methods"
+    },
+    {
+      "key": "10.1016/j.cell.2023.07.035_bib43",
+      "doi-asserted-by": "crossref",
+      "DOI": "10.1371/journal.pcbi.1008198",
+      "article-title": "A comparison of neuronal population dynamics measured with calcium imaging and electrophysiology",
+      "volume": "16",
+      "author": "Wei",
+      "year": "2020",
+      "journal-title": "PLoS Comput. Biol."
+    },
+    {
+      "key": "10.1016/j.cell.2023.07.035_bib44",
+      "series-title": "Proceedings of the 40th ACM SIGPLAN Conference on Programming Language Design and Implementation PLDI 2019",
+      "first-page": "221",
+      "article-title": "Gen: a general-purpose probabilistic programming system with programmable inference",
+      "author": "Cusumano-Towner",
+      "year": "2019"
+    },
+    {
+      "key": "10.1016/j.cell.2023.07.035_bib45",
+      "article-title": "Validating Bayesian inference algorithms with simulation-based calibration",
+      "author": "Talts",
+      "year": "2020",
+      "journal-title": "Preprint at arXiv"
+    },
+    {
+      "key": "10.1016/j.cell.2023.07.035_bib46",
+      "doi-asserted-by": "crossref",
+      "first-page": "272",
+      "DOI": "10.1016/j.cell.2020.12.012",
+      "article-title": "NeuroPAL: A multicolor atlas for whole-brain neuronal identification in C.\u00a0elegans",
+      "volume": "184",
+      "author": "Yemini",
+      "year": "2021",
+      "journal-title": "Cell"
+    },
+    {
+      "key": "10.1016/j.cell.2023.07.035_bib47",
+      "article-title": "High-throughput submicron-resolution microscopy of Caenorhabditis elegans populations under strong immobilization by cooling cultivation plates",
+      "volume": "26",
+      "author": "Wang",
+      "year": "2023",
+      "journal-title": "iScience"
+    },
+    {
+      "key": "10.1016/j.cell.2023.07.035_bib48",
+      "doi-asserted-by": "crossref",
+      "first-page": "187",
+      "DOI": "10.1016/j.cell.2014.03.003",
+      "article-title": "A framework for studying emotions across species",
+      "volume": "157",
+      "author": "Anderson",
+      "year": "2014",
+      "journal-title": "Cell"
+    },
+    {
+      "key": "10.1016/j.cell.2023.07.035_bib49",
+      "doi-asserted-by": "crossref",
+      "first-page": "2545",
+      "DOI": "10.1016/j.neuron.2022.04.030",
+      "article-title": "The emergence and influence of internal states",
+      "volume": "110",
+      "author": "Flavell",
+      "year": "2022",
+      "journal-title": "Neuron"
+    },
+    {
+      "key": "10.1016/j.cell.2023.07.035_bib50",
+      "doi-asserted-by": "crossref",
+      "DOI": "10.1371/journal.pone.0229399",
+      "article-title": "Targeted thermal stimulation and high-content phenotyping reveal that the C. elegans escape response integrates current behavioral state and past experience",
+      "volume": "15",
+      "author": "Byrne Rodgers",
+      "year": "2020",
+      "journal-title": "PLoS One"
+    },
+    {
+      "key": "10.1016/j.cell.2023.07.035_bib51",
+      "doi-asserted-by": "crossref",
+      "DOI": "10.7554/eLife.19021",
+      "article-title": "Pan-neuronal screening in Caenorhabditis elegans reveals asymmetric dynamics of AWC neurons is critical for thermal avoidance behavior",
+      "volume": "5",
+      "author": "Kotera",
+      "year": "2016",
+      "journal-title": "eLife"
+    },
+    {
+      "key": "10.1016/j.cell.2023.07.035_bib52",
+      "doi-asserted-by": "crossref",
+      "first-page": "25",
+      "DOI": "10.1534/genetics.118.300241",
+      "article-title": "How Caenorhabditis elegans Senses mechanical stress, temperature, and other physical stimuli",
+      "volume": "212",
+      "author": "Goodman",
+      "year": "2019",
+      "journal-title": "Genetics"
+    },
+    {
+      "key": "10.1016/j.cell.2023.07.035_bib53",
+      "doi-asserted-by": "crossref",
+      "first-page": "11",
+      "DOI": "10.1038/s41593-021-00980-9",
+      "article-title": "Large-scale neural recordings call for new insights to link brain and behavior",
+      "volume": "25",
+      "author": "Urai",
+      "year": "2022",
+      "journal-title": "Nat. Neurosci."
+    },
+    {
+      "key": "10.1016/j.cell.2023.07.035_bib54",
+      "doi-asserted-by": "crossref",
+      "first-page": "2283",
+      "DOI": "10.1073/pnas.0610877104",
+      "article-title": "Targeted cell killing by reconstituted caspases",
+      "volume": "104",
+      "author": "Chelur",
+      "year": "2007",
+      "journal-title": "Proc. Natl. Acad. Sci. USA"
+    },
+    {
+      "key": "10.1016/j.cell.2023.07.035_bib55",
+      "article-title": "High-throughput submicron-resolution microscopy of entire C. elegans populations under strong immobilization by cooling cultivation plates",
+      "author": "Wang",
+      "year": "2022",
+      "journal-title": "Preprint at bioRxiv"
+    },
+    {
+      "key": "10.1016/j.cell.2023.07.035_bib56",
+      "doi-asserted-by": "crossref",
+      "first-page": "156",
+      "DOI": "10.1364/OL.33.000156",
+      "article-title": "Efficient subpixel image registration algorithms",
+      "volume": "33",
+      "author": "Guizar-Sicairos",
+      "year": "2008",
+      "journal-title": "Opt. Lett."
+    },
+    {
+      "key": "10.1016/j.cell.2023.07.035_bib57",
+      "doi-asserted-by": "crossref",
+      "first-page": "259",
+      "DOI": "10.1016/0167-2789(92)90242-F",
+      "article-title": "Nonlinear total variation based noise removal algorithms",
+      "volume": "60",
+      "author": "Rudin",
+      "year": "1992",
+      "journal-title": "Phys. D: Nonlinear Phenom."
+    },
+    {
+      "key": "10.1016/j.cell.2023.07.035_bib58",
+      "doi-asserted-by": "crossref",
+      "first-page": "97",
+      "DOI": "10.1093/biomet/57.1.97",
+      "article-title": "Monte Carlo sampling methods using markov chains and their applications",
+      "volume": "57",
+      "author": "Hastings",
+      "year": "1970",
+      "journal-title": "Biometrika"
+    },
+    {
+      "key": "10.1016/j.cell.2023.07.035_bib59",
+      "article-title": "MCMC using Hamiltonian dynamics",
+      "author": "Neal",
+      "year": "2011",
+      "journal-title": "Preprint at arXiv"
+    },
+    {
+      "key": "10.1016/j.cell.2023.07.035_bib60",
+      "series-title": "Proceedings of the 39th ACM SIGPLAN Conference on Programming Language Design and Implementation",
+      "first-page": "603",
+      "article-title": "Probabilistic programming with programmable inference",
+      "author": "Mansinghka",
+      "year": "2018"
+    },
+    {
+      "key": "10.1016/j.cell.2023.07.035_bib61",
+      "doi-asserted-by": "crossref",
+      "DOI": "10.1371/journal.pcbi.1001066",
+      "article-title": "Structural properties of the Caenorhabditis elegans neuronal network",
+      "volume": "7",
+      "author": "Varshney",
+      "year": "2011",
+      "journal-title": "PLoS Comput. Biol."
+    },
+    {
+      "key": "10.1016/j.cell.2023.07.035_bib62",
+      "doi-asserted-by": "crossref",
+      "first-page": "85",
+      "DOI": "10.1016/j.cell.2018.11.023",
+      "article-title": "ASICs mediate food responses in an enteric serotonergic neuron that controls foraging behaviors",
+      "volume": "176",
+      "author": "Rhoades",
+      "year": "2019",
+      "journal-title": "Cell"
+    },
+    {
+      "key": "10.1016/j.cell.2023.07.035_bib63",
+      "doi-asserted-by": "crossref",
+      "DOI": "10.7554/eLife.57093",
+      "article-title": "Whole-organism behavioral profiling reveals a role for dopamine in state-dependent motor program coupling in C. elegans",
+      "volume": "9",
+      "author": "Cermak",
+      "year": "2020",
+      "journal-title": "eLife"
+    }
+  ],
+  "container-title": [
+    "Cell"
+  ],
+  "original-title": [],
+  "language": "en",
+  "link": [
+    {
+      "URL": "https://api.elsevier.com/content/article/PII:S0092867423008504?httpAccept=text/xml",
+      "content-type": "text/xml",
+      "content-version": "vor",
+      "intended-application": "text-mining"
+    },
+    {
+      "URL": "https://api.elsevier.com/content/article/PII:S0092867423008504?httpAccept=text/plain",
+      "content-type": "text/plain",
+      "content-version": "vor",
+      "intended-application": "text-mining"
+    }
+  ],
+  "deposited": {
+    "date-parts": [
+      [
+        2025,
+        9,
+        25
+      ]
+    ],
+    "date-time": "2025-09-25T12:10:41Z",
+    "timestamp": 1758802241000
+  },
+  "score": 1,
+  "resource": {
+    "primary": {
+      "URL": "https://linkinghub.elsevier.com/retrieve/pii/S0092867423008504"
+    }
+  },
+  "subtitle": [],
+  "short-title": [],
+  "issued": {
+    "date-parts": [
+      [
+        2023,
+        9
+      ]
+    ]
+  },
+  "references-count": 63,
+  "journal-issue": {
+    "issue": "19",
+    "published-print": {
+      "date-parts": [
+        [
+          2023,
+          9
+        ]
+      ]
+    }
+  },
+  "alternative-id": [
+    "S0092867423008504"
+  ],
+  "URL": "https://doi.org/10.1016/j.cell.2023.07.035",
+  "relation": {},
+  "ISSN": [
+    "0092-8674"
+  ],
+  "issn-type": [
+    {
+      "value": "0092-8674",
+      "type": "print"
+    }
+  ],
+  "subject": [],
+  "published": {
+    "date-parts": [
+      [
+        2023,
+        9
+      ]
+    ]
+  },
+  "assertion": [
+    {
+      "value": "Elsevier",
+      "name": "publisher",
+      "label": "This article is maintained by"
+    },
+    {
+      "value": "Brain-wide representations of behavior spanning multiple timescales and states in C.\u00a0elegans",
+      "name": "articletitle",
+      "label": "Article Title"
+    },
+    {
+      "value": "Cell",
+      "name": "journaltitle",
+      "label": "Journal Title"
+    },
+    {
+      "value": "https://doi.org/10.1016/j.cell.2023.07.035",
+      "name": "articlelink",
+      "label": "CrossRef DOI link to publisher maintained version"
+    },
+    {
+      "value": "article",
+      "name": "content_type",
+      "label": "Content Type"
+    },
+    {
+      "value": "\u00a9 2023 The Author(s). Published by Elsevier Inc.",
+      "name": "copyright",
+      "label": "Copyright"
+    }
+  ]
+}

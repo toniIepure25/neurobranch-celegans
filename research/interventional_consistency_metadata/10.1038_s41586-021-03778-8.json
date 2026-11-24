@@ -1,0 +1,871 @@
+{
+  "indexed": {
+    "date-parts": [
+      [
+        2026,
+        11,
+        24
+      ]
+    ],
+    "date-time": "2026-11-24T17:46:34Z",
+    "timestamp": 1795542394481,
+    "version": "4.11.0"
+  },
+  "reference-count": 42,
+  "publisher": "Springer Science and Business Media LLC",
+  "issue": "7871",
+  "license": [
+    {
+      "start": {
+        "date-parts": [
+          [
+            2021,
+            8,
+            4
+          ]
+        ],
+        "date-time": "2021-08-04T00:00:00Z",
+        "timestamp": 1628035200000
+      },
+      "content-version": "tdm",
+      "delay-in-days": 0,
+      "URL": "https://www.springer.com/tdm"
+    },
+    {
+      "start": {
+        "date-parts": [
+          [
+            2021,
+            8,
+            4
+          ]
+        ],
+        "date-time": "2021-08-04T00:00:00Z",
+        "timestamp": 1628035200000
+      },
+      "content-version": "vor",
+      "delay-in-days": 0,
+      "URL": "https://www.springer.com/tdm"
+    }
+  ],
+  "content-domain": {
+    "domain": [
+      "link.springer.com"
+    ],
+    "crossmark-restriction": false
+  },
+  "short-container-title": [
+    "Nature"
+  ],
+  "published-print": {
+    "date-parts": [
+      [
+        2021,
+        8,
+        12
+      ]
+    ]
+  },
+  "DOI": "10.1038/s41586-021-03778-8",
+  "type": "journal-article",
+  "created": {
+    "date-parts": [
+      [
+        2021,
+        8,
+        4
+      ]
+    ],
+    "date-time": "2021-08-04T12:06:04Z",
+    "timestamp": 1628078764000
+  },
+  "page": "257-261",
+  "update-policy": "https://doi.org/10.1007/springer_crossmark_policy",
+  "source": "Crossref",
+  "is-referenced-by-count": 458,
+  "title": [
+    "Connectomes across development reveal principles of brain maturation"
+  ],
+  "prefix": "10.1038",
+  "volume": "596",
+  "author": [
+    {
+      "given": "Daniel",
+      "family": "Witvliet",
+      "sequence": "first",
+      "affiliation": [],
+      "role": [
+        {
+          "vocabulary": "crossref",
+          "role": "author"
+        }
+      ]
+    },
+    {
+      "ORCID": "https://orcid.org/0000-0002-3336-245X",
+      "authenticated-orcid": false,
+      "given": "Ben",
+      "family": "Mulcahy",
+      "sequence": "additional",
+      "affiliation": [],
+      "role": [
+        {
+          "vocabulary": "crossref",
+          "role": "author"
+        }
+      ]
+    },
+    {
+      "ORCID": "https://orcid.org/0000-0003-3359-6165",
+      "authenticated-orcid": false,
+      "given": "James K.",
+      "family": "Mitchell",
+      "sequence": "additional",
+      "affiliation": [],
+      "role": [
+        {
+          "vocabulary": "crossref",
+          "role": "author"
+        }
+      ]
+    },
+    {
+      "ORCID": "https://orcid.org/0000-0002-1946-8012",
+      "authenticated-orcid": false,
+      "given": "Yaron",
+      "family": "Meirovitch",
+      "sequence": "additional",
+      "affiliation": [],
+      "role": [
+        {
+          "vocabulary": "crossref",
+          "role": "author"
+        }
+      ]
+    },
+    {
+      "given": "Daniel R.",
+      "family": "Berger",
+      "sequence": "additional",
+      "affiliation": [],
+      "role": [
+        {
+          "vocabulary": "crossref",
+          "role": "author"
+        }
+      ]
+    },
+    {
+      "given": "Yuelong",
+      "family": "Wu",
+      "sequence": "additional",
+      "affiliation": [],
+      "role": [
+        {
+          "vocabulary": "crossref",
+          "role": "author"
+        }
+      ]
+    },
+    {
+      "given": "Yufang",
+      "family": "Liu",
+      "sequence": "additional",
+      "affiliation": [],
+      "role": [
+        {
+          "vocabulary": "crossref",
+          "role": "author"
+        }
+      ]
+    },
+    {
+      "given": "Wan Xian",
+      "family": "Koh",
+      "sequence": "additional",
+      "affiliation": [],
+      "role": [
+        {
+          "vocabulary": "crossref",
+          "role": "author"
+        }
+      ]
+    },
+    {
+      "given": "Rajeev",
+      "family": "Parvathala",
+      "sequence": "additional",
+      "affiliation": [],
+      "role": [
+        {
+          "vocabulary": "crossref",
+          "role": "author"
+        }
+      ]
+    },
+    {
+      "given": "Douglas",
+      "family": "Holmyard",
+      "sequence": "additional",
+      "affiliation": [],
+      "role": [
+        {
+          "vocabulary": "crossref",
+          "role": "author"
+        }
+      ]
+    },
+    {
+      "given": "Richard L.",
+      "family": "Schalek",
+      "sequence": "additional",
+      "affiliation": [],
+      "role": [
+        {
+          "vocabulary": "crossref",
+          "role": "author"
+        }
+      ]
+    },
+    {
+      "given": "Nir",
+      "family": "Shavit",
+      "sequence": "additional",
+      "affiliation": [],
+      "role": [
+        {
+          "vocabulary": "crossref",
+          "role": "author"
+        }
+      ]
+    },
+    {
+      "given": "Andrew D.",
+      "family": "Chisholm",
+      "sequence": "additional",
+      "affiliation": [],
+      "role": [
+        {
+          "vocabulary": "crossref",
+          "role": "author"
+        }
+      ]
+    },
+    {
+      "ORCID": "https://orcid.org/0000-0002-0208-3212",
+      "authenticated-orcid": false,
+      "given": "Jeff W.",
+      "family": "Lichtman",
+      "sequence": "additional",
+      "affiliation": [],
+      "role": [
+        {
+          "vocabulary": "crossref",
+          "role": "author"
+        }
+      ]
+    },
+    {
+      "ORCID": "https://orcid.org/0000-0002-1672-8720",
+      "authenticated-orcid": false,
+      "given": "Aravinthan D. T.",
+      "family": "Samuel",
+      "sequence": "additional",
+      "affiliation": [],
+      "role": [
+        {
+          "vocabulary": "crossref",
+          "role": "author"
+        }
+      ]
+    },
+    {
+      "ORCID": "https://orcid.org/0000-0003-0086-9622",
+      "authenticated-orcid": false,
+      "given": "Mei",
+      "family": "Zhen",
+      "sequence": "additional",
+      "affiliation": [],
+      "role": [
+        {
+          "vocabulary": "crossref",
+          "role": "author"
+        }
+      ]
+    }
+  ],
+  "member": "297",
+  "published-online": {
+    "date-parts": [
+      [
+        2021,
+        8,
+        4
+      ]
+    ]
+  },
+  "reference": [
+    {
+      "key": "3778_CR1",
+      "doi-asserted-by": "publisher",
+      "first-page": "1611",
+      "DOI": "10.1523/JNEUROSCI.3679-04.2005",
+      "volume": "25",
+      "author": "D Bucher",
+      "year": "2005",
+      "unstructured": "Bucher, D., Prinz, A. A. & Marder, E. Animal-to-animal variability in motor pattern production in adults and during growth. J. Neurosci. 25, 1611\u20131619 (2005).",
+      "journal-title": "J. Neurosci."
+    },
+    {
+      "key": "3778_CR2",
+      "doi-asserted-by": "publisher",
+      "first-page": "23",
+      "DOI": "10.1016/0300-9629(94)90308-5",
+      "volume": "109",
+      "author": "G K\u00e4mper",
+      "year": "1994",
+      "unstructured": "K\u00e4mper, G. & Murphey, R. Maturation of an insect nervous system: Constancy in the face of change. Comp. Biochem. Physiol. A 109, 23\u201332 (1994).",
+      "journal-title": "Comp. Biochem. Physiol. A"
+    },
+    {
+      "key": "3778_CR3",
+      "doi-asserted-by": "publisher",
+      "DOI": "10.7554/eLife.29089",
+      "volume": "6",
+      "author": "S Gerhard",
+      "year": "2017",
+      "unstructured": "Gerhard, S., Andrade, I., Fetter, R. D., Cardona, A. & Schneider-Mizell, C. M. Conserved neural circuit structure across Drosophila larval development revealed by comparative connectomics. eLife 6, e29089 (2017).",
+      "journal-title": "eLife"
+    },
+    {
+      "key": "3778_CR4",
+      "doi-asserted-by": "crossref",
+      "unstructured": "Kagan, J., Herschkowitz, N. & Herschkowitz, E. C. A Young Mind in a Growing Brain (Lawrence Erlbaum, 2005).",
+      "DOI": "10.4324/9781410613592"
+    },
+    {
+      "key": "3778_CR5",
+      "doi-asserted-by": "publisher",
+      "DOI": "10.7554/eLife.42135",
+      "volume": "8",
+      "author": "A Pujala",
+      "year": "2019",
+      "unstructured": "Pujala, A. & Koyama, M. Chronology-based architecture of descending circuits that underlie the development of locomotor repertoire after birth. eLife 8, e42135 (2019).",
+      "journal-title": "eLife"
+    },
+    {
+      "key": "3778_CR6",
+      "unstructured": "Hebb, D. O. The Organization of Behavior: A Neuropsychological Theory (John Wiley & Sons, 1949)."
+    },
+    {
+      "key": "3778_CR7",
+      "doi-asserted-by": "publisher",
+      "first-page": "150",
+      "DOI": "10.1038/scientificamerican0979-150",
+      "volume": "241",
+      "author": "DH Hubel",
+      "year": "1979",
+      "unstructured": "Hubel, D. H. & Wiesel, T. N. Brain mechanisms of vision. Sci. Am. 241, 150\u2013162 (1979).",
+      "journal-title": "Sci. Am."
+    },
+    {
+      "key": "3778_CR8",
+      "doi-asserted-by": "publisher",
+      "first-page": "113",
+      "DOI": "10.1016/j.conb.2018.10.002",
+      "volume": "54",
+      "author": "MR Van Horn",
+      "year": "2019",
+      "unstructured": "Van Horn, M. R. & Ruthazer, E. S. Glial regulation of synapse maturation and stabilization in the developing nervous system. Curr. Opin. Neurobiol. 54, 113\u2013119 (2019).",
+      "journal-title": "Curr. Opin. Neurobiol."
+    },
+    {
+      "key": "3778_CR9",
+      "doi-asserted-by": "publisher",
+      "first-page": "1",
+      "DOI": "10.1098/rstb.1986.0056",
+      "volume": "314",
+      "author": "JG White",
+      "year": "1986",
+      "unstructured": "White, J. G., Southgate, E., Thomson, J. N. & Brenner, S. The structure of the nervous system of the nematode Caenorhabditis elegans. Phil. Trans. R. Soc. Lond. B 314, 1\u2013340 (1986).",
+      "journal-title": "Phil. Trans. R. Soc. Lond. B"
+    },
+    {
+      "key": "3778_CR10",
+      "doi-asserted-by": "publisher",
+      "DOI": "10.7554/eLife.57443",
+      "volume": "9",
+      "author": "LK Scheffer",
+      "year": "2020",
+      "unstructured": "Scheffer, L. K. et al. A connectome and analysis of the adult Drosophila central brain. eLife 9, e57443 (2020).",
+      "journal-title": "eLife"
+    },
+    {
+      "key": "3778_CR11",
+      "doi-asserted-by": "publisher",
+      "DOI": "10.7554/eLife.46876",
+      "volume": "9",
+      "author": "A Karimi",
+      "year": "2020",
+      "unstructured": "Karimi, A., Odenthal, J., Drawitsch, F., Boergens, K. M. & Helmstaedter, M. Cell-type specific innervation of cortical pyramidal cells at their apical dendrites. eLife 9, e46876 (2020).",
+      "journal-title": "eLife"
+    },
+    {
+      "key": "3778_CR12",
+      "doi-asserted-by": "publisher",
+      "first-page": "468",
+      "DOI": "10.1016/j.neuron.2020.02.001",
+      "volume": "106",
+      "author": "JL Morgan",
+      "year": "2020",
+      "unstructured": "Morgan, J. L. & Lichtman, J. W. An individual interneuron participates in many kinds of inhibition and innervates much of the mouse visual thalamus. Neuron 106, 468\u2013481.e2 (2020).",
+      "journal-title": "Neuron"
+    },
+    {
+      "key": "3778_CR13",
+      "doi-asserted-by": "publisher",
+      "DOI": "10.7554/eLife.08069",
+      "volume": "4",
+      "author": "N Randel",
+      "year": "2015",
+      "unstructured": "Randel, N. et al. Inter-individual stereotypy of the Platynereis larval visual connectome. eLife 4, e08069 (2015).",
+      "journal-title": "eLife"
+    },
+    {
+      "key": "3778_CR14",
+      "doi-asserted-by": "publisher",
+      "unstructured": "Kornfeld, J. et al. An anatomical substrate of credit assignment in reinforcement learning. Preprint at https://doi.org/10.1101/2020.02.18.954354 (2020).",
+      "DOI": "10.1101/2020.02.18.954354"
+    },
+    {
+      "key": "3778_CR15",
+      "doi-asserted-by": "publisher",
+      "unstructured": "Schneider-Mizell, C. M. et al. Chandelier cell anatomy and function reveal a variably distributed but common signal. preprint. Preprint at https://doi.org/10.1101/2020.03.31.018952 (2020).",
+      "DOI": "10.1101/2020.03.31.018952"
+    },
+    {
+      "key": "3778_CR16",
+      "doi-asserted-by": "publisher",
+      "first-page": "221",
+      "DOI": "10.1093/comnet/cnu026",
+      "volume": "3",
+      "author": "C Aicher",
+      "year": "2015",
+      "unstructured": "Aicher, C., Jacobs, A. Z. & Clauset, A. Learning latent block structure in weighted networks. J. Complex Netw. 3, 221\u2013248 (2015).",
+      "journal-title": "J. Complex Netw."
+    },
+    {
+      "key": "3778_CR17",
+      "doi-asserted-by": "publisher",
+      "first-page": "632",
+      "DOI": "10.1016/j.cell.2016.01.007",
+      "volume": "164",
+      "author": "X Jin",
+      "year": "2016",
+      "unstructured": "Jin, X., Pokala, N. & Bargmann, C. I. Distinct circuits for the formation and retrieval of an imprinted olfactory memory. Cell 164, 632\u2013643 (2016).",
+      "journal-title": "Cell"
+    },
+    {
+      "key": "3778_CR18",
+      "doi-asserted-by": "publisher",
+      "first-page": "764",
+      "DOI": "10.1038/271764a0",
+      "volume": "271",
+      "author": "JG White",
+      "year": "1978",
+      "unstructured": "White, J. G., Albertson, D. G. & Anness, M. A. Connectivity changes in a class of motoneurone during the development of a nematode. Nature 271, 764\u2013766 (1978).",
+      "journal-title": "Nature"
+    },
+    {
+      "key": "3778_CR19",
+      "doi-asserted-by": "publisher",
+      "first-page": "483",
+      "DOI": "10.1038/nmeth.2451",
+      "volume": "10",
+      "author": "CI Bargmann",
+      "year": "2013",
+      "unstructured": "Bargmann, C. I. & Marder, E. From the connectome to brain function. Nat. Methods 10, 483\u2013490 (2013).",
+      "journal-title": "Nat. Methods"
+    },
+    {
+      "key": "3778_CR20",
+      "doi-asserted-by": "publisher",
+      "DOI": "10.1371/journal.pcbi.1001066",
+      "volume": "7",
+      "author": "LR Varshney",
+      "year": "2011",
+      "unstructured": "Varshney, L. R., Chen, B. L., Paniagua, E., Hall, D. H. & Chklovskii, D. B. Structural properties of the Caenorhabditis elegans neuronal network. PLoS Comput. Biol. 7, e1001066 (2011).",
+      "journal-title": "PLoS Comput. Biol."
+    },
+    {
+      "key": "3778_CR21",
+      "doi-asserted-by": "publisher",
+      "first-page": "71",
+      "DOI": "10.1093/genetics/77.1.71",
+      "volume": "77",
+      "author": "S Brenner",
+      "year": "1974",
+      "unstructured": "Brenner, S. The genetics of Caenorhabditis elegans. Genetics 77, 71\u201394 (1974).",
+      "journal-title": "Genetics"
+    },
+    {
+      "key": "3778_CR22",
+      "doi-asserted-by": "publisher",
+      "first-page": "94",
+      "DOI": "10.3389/fncir.2018.00094",
+      "volume": "12",
+      "author": "B Mulcahy",
+      "year": "2018",
+      "unstructured": "Mulcahy, B. et al. A pipeline for volume electron microscopy of the Caenorhabditis elegans nervous system. Front. Neural Circuits 12, 94 (2018).",
+      "journal-title": "Front. Neural Circuits"
+    },
+    {
+      "key": "3778_CR23",
+      "doi-asserted-by": "publisher",
+      "first-page": "110",
+      "DOI": "10.1016/0012-1606(77)90158-0",
+      "volume": "56",
+      "author": "JE Sulston",
+      "year": "1977",
+      "unstructured": "Sulston, J. E. & Horvitz, H. R. Post-embryonic cell lineages of the nematode, Caenorhabditis elegans. Dev. Biol. 56, 110\u2013156 (1977).",
+      "journal-title": "Dev. Biol."
+    },
+    {
+      "key": "3778_CR24",
+      "doi-asserted-by": "publisher",
+      "first-page": "41",
+      "DOI": "10.1016/bs.mcb.2019.04.004",
+      "volume": "152",
+      "author": "V Baena",
+      "year": "2019",
+      "unstructured": "Baena, V., Schalek, R. L., Lichtman, J. W. & Terasaki, M. Serial-section electron microscopy using automated tape-collecting ultramicrotome (ATUM). Methods Cell Biol. 152, 41\u201367 (2019).",
+      "journal-title": "Methods Cell Biol."
+    },
+    {
+      "key": "3778_CR25",
+      "doi-asserted-by": "publisher",
+      "first-page": "68",
+      "DOI": "10.3389/fncir.2014.00068",
+      "volume": "8",
+      "author": "KJ Hayworth",
+      "year": "2014",
+      "unstructured": "Hayworth, K. J. et al. Imaging ATUM ultrathin section libraries with WaferMapper: a multi-scale approach to EM reconstruction of neural circuits. Front. Neural Circuits 8, 68 (2014).",
+      "journal-title": "Front. Neural Circuits"
+    },
+    {
+      "key": "3778_CR26",
+      "doi-asserted-by": "publisher",
+      "DOI": "10.1371/journal.pone.0038011",
+      "volume": "7",
+      "author": "A Cardona",
+      "year": "2012",
+      "unstructured": "Cardona, A. et al. TrakEM2 software for neural circuit reconstruction. PLoS One 7, e38011 (2012).",
+      "journal-title": "PLoS One"
+    },
+    {
+      "key": "3778_CR27",
+      "doi-asserted-by": "publisher",
+      "first-page": "717",
+      "DOI": "10.1038/nmeth.2072",
+      "volume": "9",
+      "author": "S Saalfeld",
+      "year": "2012",
+      "unstructured": "Saalfeld, S., Fetter, R., Cardona, A. & Tomancak, P. Elastic volume reconstruction from series of ultra-thin microscopy sections. Nat. Methods 9, 717\u2013720 (2012).",
+      "journal-title": "Nat. Methods"
+    },
+    {
+      "key": "3778_CR28",
+      "doi-asserted-by": "publisher",
+      "first-page": "1984",
+      "DOI": "10.1093/bioinformatics/btp266",
+      "volume": "25",
+      "author": "S Saalfeld",
+      "year": "2009",
+      "unstructured": "Saalfeld, S., Cardona, A., Hartenstein, V. & Tomancak, P. CATMAID: collaborative annotation toolkit for massive amounts of image data. Bioinformatics 25, 1984\u20131986 (2009).",
+      "journal-title": "Bioinformatics"
+    },
+    {
+      "key": "3778_CR29",
+      "doi-asserted-by": "publisher",
+      "DOI": "10.7554/eLife.19887",
+      "volume": "5",
+      "author": "MA Lim",
+      "year": "2016",
+      "unstructured": "Lim, M. A. et al. Neuroendocrine modulation sustains the C. elegans forward motor state. eLife 5, e19887 (2016).",
+      "journal-title": "eLife"
+    },
+    {
+      "key": "3778_CR30",
+      "doi-asserted-by": "publisher",
+      "first-page": "1745",
+      "DOI": "10.1038/emboj.2013.91",
+      "volume": "32",
+      "author": "WL Hung",
+      "year": "2013",
+      "unstructured": "Hung, W. L. et al. Attenuation of insulin signalling contributes to FSN-1-mediated regulation of synapse development. EMBO J. 32, 1745\u20131760 (2013).",
+      "journal-title": "EMBO J."
+    },
+    {
+      "key": "3778_CR31",
+      "doi-asserted-by": "publisher",
+      "first-page": "648",
+      "DOI": "10.1016/j.cell.2015.06.054",
+      "volume": "162",
+      "author": "N Kasthuri",
+      "year": "2015",
+      "unstructured": "Kasthuri, N. et al. Saturated reconstruction of a volume of neocortex. Cell 162, 648\u2013661 (2015).",
+      "journal-title": "Cell"
+    },
+    {
+      "key": "3778_CR32",
+      "unstructured": "Meirovitch, Y. et al. A multi-pass approach to large-scale connectomics. Preprint at https://arxiv.org/abs/1612.02120 (2016)."
+    },
+    {
+      "key": "3778_CR33",
+      "doi-asserted-by": "crossref",
+      "unstructured": "Matveev, A. et al. A multicore path to connectomics-on-demand. In Proc. 22nd ACM SIGPLAN Symposium on Principles and Practice of Parallel Programming, 267\u2013281 (2017).",
+      "DOI": "10.1145/3018743.3018766"
+    },
+    {
+      "key": "3778_CR34",
+      "doi-asserted-by": "crossref",
+      "unstructured": "Meirovitch, Y. et al. Cross-classification clustering: an efficient multi-object tracking technique for 3-d instance segmentation in connectomics. In Proc. IEEE Conference on Computer Vision and Pattern Recognition, 8425\u20138435 (2019).",
+      "DOI": "10.1109/CVPR.2019.00862"
+    },
+    {
+      "key": "3778_CR35",
+      "doi-asserted-by": "publisher",
+      "first-page": "55",
+      "DOI": "10.1006/jpdc.1996.0107",
+      "volume": "37",
+      "author": "RD Blumofe",
+      "year": "1996",
+      "unstructured": "Blumofe, R. D. et al. Cilk: An efficient multithreaded runtime system. J. Parallel Distrib. Comput. 37, 55\u201369 (1996).",
+      "journal-title": "J. Parallel Distrib. Comput."
+    },
+    {
+      "key": "3778_CR36",
+      "doi-asserted-by": "publisher",
+      "first-page": "88",
+      "DOI": "10.3389/fncir.2018.00088",
+      "volume": "12",
+      "author": "DR Berger",
+      "year": "2018",
+      "unstructured": "Berger, D. R., Seung, H. S. & Lichtman, J. W. VAST (volume annotation and segmentation tool): efficient manual and semi-automatic labeling of large 3D image stacks. Front. Neural Circuits 12, 88 (2018).",
+      "journal-title": "Front. Neural Circuits"
+    },
+    {
+      "key": "3778_CR37",
+      "doi-asserted-by": "publisher",
+      "DOI": "10.7554/eLife.35692",
+      "volume": "7",
+      "author": "A Philbrook",
+      "year": "2018",
+      "unstructured": "Philbrook, A. et al. Neurexin directs partner-specific synaptic connectivity in C. elegans. eLife 7, e35692 (2018).",
+      "journal-title": "eLife"
+    },
+    {
+      "key": "3778_CR38",
+      "doi-asserted-by": "publisher",
+      "first-page": "215",
+      "DOI": "10.1002/cne.901630207",
+      "volume": "163",
+      "author": "J Sulston",
+      "year": "1975",
+      "unstructured": "Sulston, J., Dew, M. & Brenner, S. Dopaminergic neurons in the nematode Caenorhabditis elegans. J. Comp. Neurol. 163, 215\u2013226 (1975).",
+      "journal-title": "J. Comp. Neurol."
+    },
+    {
+      "key": "3778_CR39",
+      "doi-asserted-by": "publisher",
+      "first-page": "72",
+      "DOI": "10.1523/JNEUROSCI.19-01-00072.1999",
+      "volume": "19",
+      "author": "JS Duerr",
+      "year": "1999",
+      "unstructured": "Duerr, J. S. et al. The cat-1 gene of Caenorhabditis elegans encodes a vesicular monoamine transporter required for specific monoamine-dependent behaviors. J. Neurosci. 19, 72\u201384 (1999).",
+      "journal-title": "J. Neurosci."
+    },
+    {
+      "key": "3778_CR40",
+      "unstructured": "Durbin, R. M. Studies on the Development and Organisation of the Nervous System of Caenorhabditis elegans (Univ. of Cambridge, 1987)."
+    },
+    {
+      "key": "3778_CR41",
+      "doi-asserted-by": "publisher",
+      "first-page": "63",
+      "DOI": "10.1038/s41586-019-1352-7",
+      "volume": "571",
+      "author": "SJ Cook",
+      "year": "2019",
+      "unstructured": "Cook, S. J. et al. Whole-animal connectomes of both Caenorhabditis elegans sexes. Nature 571, 63\u201371 (2019).",
+      "journal-title": "Nature"
+    },
+    {
+      "key": "3778_CR42",
+      "doi-asserted-by": "publisher",
+      "DOI": "10.1038/s41598-018-31202-1",
+      "volume": "8",
+      "author": "J Faskowitz",
+      "year": "2018",
+      "unstructured": "Faskowitz, J., Yan, X., Zuo, X.-N. & Sporns, O. Weighted stochastic block models of the human connectome across the life span. Sci. Rep. 8, 12997 (2018).",
+      "journal-title": "Sci. Rep."
+    }
+  ],
+  "container-title": [
+    "Nature"
+  ],
+  "original-title": [],
+  "language": "en",
+  "link": [
+    {
+      "URL": "https://www.nature.com/articles/s41586-021-03778-8.pdf",
+      "content-type": "application/pdf",
+      "content-version": "vor",
+      "intended-application": "text-mining"
+    },
+    {
+      "URL": "https://www.nature.com/articles/s41586-021-03778-8",
+      "content-type": "text/html",
+      "content-version": "vor",
+      "intended-application": "text-mining"
+    },
+    {
+      "URL": "https://www.nature.com/articles/s41586-021-03778-8.pdf",
+      "content-type": "application/pdf",
+      "content-version": "vor",
+      "intended-application": "similarity-checking"
+    }
+  ],
+  "deposited": {
+    "date-parts": [
+      [
+        2023,
+        1,
+        6
+      ]
+    ],
+    "date-time": "2023-01-06T09:46:02Z",
+    "timestamp": 1672998362000
+  },
+  "score": 1,
+  "resource": {
+    "primary": {
+      "URL": "https://www.nature.com/articles/s41586-021-03778-8"
+    }
+  },
+  "subtitle": [],
+  "short-title": [],
+  "issued": {
+    "date-parts": [
+      [
+        2021,
+        8,
+        4
+      ]
+    ]
+  },
+  "references-count": 42,
+  "journal-issue": {
+    "issue": "7871",
+    "published-print": {
+      "date-parts": [
+        [
+          2021,
+          8,
+          12
+        ]
+      ]
+    }
+  },
+  "alternative-id": [
+    "3778"
+  ],
+  "URL": "https://doi.org/10.1038/s41586-021-03778-8",
+  "relation": {
+    "has-review": [
+      {
+        "id-type": "doi",
+        "id": "10.3410/f.740589678.793588769",
+        "asserted-by": "object"
+      },
+      {
+        "id-type": "doi",
+        "id": "10.3410/f.740589678.793587876",
+        "asserted-by": "object"
+      }
+    ],
+    "has-preprint": [
+      {
+        "id-type": "doi",
+        "id": "10.1101/2020.04.30.066209",
+        "asserted-by": "object"
+      }
+    ]
+  },
+  "ISSN": [
+    "0028-0836",
+    "1476-4687"
+  ],
+  "issn-type": [
+    {
+      "value": "0028-0836",
+      "type": "print"
+    },
+    {
+      "value": "1476-4687",
+      "type": "electronic"
+    }
+  ],
+  "subject": [],
+  "published": {
+    "date-parts": [
+      [
+        2021,
+        8,
+        4
+      ]
+    ]
+  },
+  "assertion": [
+    {
+      "value": "21 May 2020",
+      "order": 1,
+      "name": "received",
+      "label": "Received",
+      "group": {
+        "name": "ArticleHistory",
+        "label": "Article History"
+      }
+    },
+    {
+      "value": "29 June 2021",
+      "order": 2,
+      "name": "accepted",
+      "label": "Accepted",
+      "group": {
+        "name": "ArticleHistory",
+        "label": "Article History"
+      }
+    },
+    {
+      "value": "4 August 2021",
+      "order": 3,
+      "name": "first_online",
+      "label": "First Online",
+      "group": {
+        "name": "ArticleHistory",
+        "label": "Article History"
+      }
+    },
+    {
+      "value": "The authors declare no competing interests.",
+      "order": 1,
+      "name": "Ethics",
+      "group": {
+        "name": "EthicsHeading",
+        "label": "Competing interests"
+      }
+    }
+  ]
+}

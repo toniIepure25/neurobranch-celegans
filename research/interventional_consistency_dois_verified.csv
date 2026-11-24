@@ -1,0 +1,15 @@
+doi,status,expected_fragment,title,year,container,type
+10.1371/journal.pcbi.1012674,verified,Neuro-cognitive multilevel causal modeling,Neuro-cognitive multilevel causal modeling: A framework that bridges the explanatory gap between neuronal activity and cognition,2024,PLOS Computational Biology,journal-article
+10.1101/2023.08.08.551978,verified,BunDLe-Net,BunDLe-Net: Learning minimal neural manifolds that represent only behaviourally relevant dynamics,2023,,posted-content
+10.1038/s41586-023-06031-6,verified,Learnable latent embeddings for joint behavioural and neural analysis,Learnable latent embeddings for joint behavioural and neural analysis,2023,Nature,journal-article
+10.1038/s41593-020-00733-0,verified,preferential subspace identification,Modeling behaviorally relevant neural dynamics enabled by preferential subspace identification,2020,Nature Neuroscience,journal-article
+10.1038/s41592-024-02582-2,verified,MARBLE,MARBLE: interpretable representations of neural population dynamics using geometric deep learning,2025,Nature Methods,journal-article
+10.1038/s42003-025-08599-3,verified,Decomposed Linear Dynamical Systems,"Decomposed Linear Dynamical Systems (dLDS) models reveal instantaneous, context-dependent dynamic connectivity in C. elegans",2025,Communications Biology,journal-article
+10.64898/2026.06.05.730482,verified,unified latent dynamics,Generating whole-brain neural activity and behavior through unified latent dynamics,2026,,posted-content
+10.1016/j.cell.2015.09.034,verified,Global Brain Dynamics Embed the Motor Command Sequence,Global Brain Dynamics Embed the Motor Command Sequence of Caenorhabditis elegans,2015,Cell,journal-article
+10.1016/j.cell.2023.07.035,verified,Brain-wide representations of behavior,Brain-wide representations of behavior spanning multiple timescales and states in C. elegans,2023,Cell,journal-article
+10.1038/s41586-023-06683-4,verified,Neural signal propagation atlas,Neural signal propagation atlas of Caenorhabditis elegans,2023,Nature,journal-article
+10.1038/s41593-026-02257-5,verified,Neural sequences underlying directed turning,Neural sequences underlying directed turning in Caenorhabditis elegans,2026,Nature Neuroscience,journal-article
+10.1101/2025.03.09.642241,verified,intrinsic neuronal manifold,"An intrinsic neuronal manifold underlies brain-wide hierarchical organization of behavior in
+                  <i>C. elegans</i>",2025,,posted-content
+10.1038/s41586-021-03778-8,verified,Connectomes across development,Connectomes across development reveal principles of brain maturation,2021,Nature,journal-article

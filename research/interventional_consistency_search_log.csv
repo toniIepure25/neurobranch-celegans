@@ -1,0 +1,7 @@
+query_id,index,query,filters,retrieved_utc,hits,purpose,outcome
+Q01,Europe PMC,"TITLE:\"Modeling behaviorally relevant neural dynamics enabled by preferential subspace identification\"",none,2026-11-24,2,resolve the PSID identifier after a wrong-DOI hit,2 records; DOI 10.1038/s41593-020-00733-0 confirmed
+Q02,Europe PMC,"PSID preferential subspace identification neural dynamics Sani Shanechi",none,2026-11-24,7,check for a later PSID variant that should be cited instead,3 shown; no replacement publication
+Q03,Crossref,"13 DOI lookups without title fragments",none,2026-11-24,13,first pass,1 wrong work resolved: 10.1016/j.neuron.2021.09.039 is a thermoregulation paper
+Q04,Crossref,"13 DOI lookups with mandatory title fragment",none,2026-11-24,13,re-verify every prior-art identifier,13/13 verified
+Q05,local repository,"grep -r 'commut|lumpab|abstraction' src docs research",none,2026-11-24,0,confirm no commutation or lumpability code exists,no hits: the estimand is unimplemented
+Q06,local repository,"inspect references/external and data/processed",none,2026-11-24,4,decide whether NC-MCM/BunDLe conformance can execute locally,nc-mcm and BunDLe-Net vendored; Julia absent

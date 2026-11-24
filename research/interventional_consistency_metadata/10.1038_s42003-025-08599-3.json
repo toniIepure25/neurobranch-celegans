@@ -1,0 +1,825 @@
+{
+  "indexed": {
+    "date-parts": [
+      [
+        2026,
+        11,
+        9
+      ]
+    ],
+    "date-time": "2026-11-09T04:32:49Z",
+    "timestamp": 1794198769285,
+    "version": "4.8.0"
+  },
+  "reference-count": 59,
+  "publisher": "Springer Science and Business Media LLC",
+  "issue": "1",
+  "license": [
+    {
+      "start": {
+        "date-parts": [
+          [
+            2025,
+            8,
+            13
+          ]
+        ],
+        "date-time": "2025-08-13T00:00:00Z",
+        "timestamp": 1755043200000
+      },
+      "content-version": "tdm",
+      "delay-in-days": 0,
+      "URL": "https://creativecommons.org/licenses/by/4.0"
+    },
+    {
+      "start": {
+        "date-parts": [
+          [
+            2025,
+            8,
+            13
+          ]
+        ],
+        "date-time": "2025-08-13T00:00:00Z",
+        "timestamp": 1755043200000
+      },
+      "content-version": "vor",
+      "delay-in-days": 0,
+      "URL": "https://creativecommons.org/licenses/by/4.0"
+    }
+  ],
+  "funder": [
+    {
+      "DOI": "10.13039/100000001",
+      "name": "National Science Foundation",
+      "doi-asserted-by": "publisher",
+      "award": [
+        "CAREER 2340338"
+      ],
+      "award-info": [
+        {
+          "award-number": [
+            "CAREER 2340338"
+          ]
+        }
+      ],
+      "id": [
+        {
+          "id": "10.13039/100000001",
+          "id-type": "DOI",
+          "asserted-by": "publisher"
+        }
+      ]
+    },
+    {
+      "DOI": "10.13039/100001201",
+      "name": "Kavli Foundation",
+      "doi-asserted-by": "publisher",
+      "award": [
+        "Graduate Student Fellowship"
+      ],
+      "award-info": [
+        {
+          "award-number": [
+            "Graduate Student Fellowship"
+          ]
+        }
+      ],
+      "id": [
+        {
+          "id": "10.13039/100001201",
+          "id-type": "DOI",
+          "asserted-by": "publisher"
+        }
+      ]
+    }
+  ],
+  "content-domain": {
+    "domain": [
+      "link.springer.com"
+    ],
+    "crossmark-restriction": false
+  },
+  "short-container-title": [
+    "Commun Biol"
+  ],
+  "abstract": "<jats:title>Abstract</jats:title>\n                  <jats:p>\n                    Mounting evidence indicates that neural \u201ctuning\u201d can be highly variable within an individual across time and across individuals. Furthermore, modulatory effects can change the relationship between neurons as a function of behavioral or other conditions, meaning that the changes in activity (the derivative) may be as important as the activity itself. Current computational models cannot capture the nonstationarity and variability of neural coding, preventing the quantitative evaluation of these effects. We therefore present a novel approach to analyze these effects in a well-studied organisms,\n                    <jats:italic>C. elegans</jats:italic>\n                    , leveraging recent advances in dynamical systems modeling: decomposed Linear Dynamical Systems (dLDS). Our approach enables the discovery of multiple parallel neural processes on different timescales using a set of linear operators that can be recombined in different ratios. Our model identifies \u201cdynamic connectivity\u201d, describing patterns of dynamic neural interactions in time. We use these patterns to identify instantaneous, contextually-dependent, hierarchical roles of neurons; discover the underlying variability of neural representations even under seemingly discrete behaviors; and learn an aligned latent space underlying multiple worms\u2019 activity. By analyzing individual worms and neurons, we found that (1) changes in interneuron connectivity mediate efficient task-switching and (2) changes in sensory neuron connectivity show a mechanism of adaptation.\n                  </jats:p>",
+  "DOI": "10.1038/s42003-025-08599-3",
+  "type": "journal-article",
+  "created": {
+    "date-parts": [
+      [
+        2025,
+        8,
+        13
+      ]
+    ],
+    "date-time": "2025-08-13T18:40:05Z",
+    "timestamp": 1755110405000
+  },
+  "update-policy": "https://doi.org/10.1007/springer_crossmark_policy",
+  "source": "Crossref",
+  "is-referenced-by-count": 7,
+  "title": [
+    "Decomposed Linear Dynamical Systems (dLDS) models reveal instantaneous, context-dependent dynamic connectivity in C. elegans"
+  ],
+  "prefix": "10.1038",
+  "volume": "8",
+  "author": [
+    {
+      "ORCID": "https://orcid.org/0000-0003-3054-8061",
+      "authenticated-orcid": false,
+      "given": "Eva",
+      "family": "Yezerets",
+      "sequence": "first",
+      "affiliation": [],
+      "role": [
+        {
+          "vocabulary": "crossref",
+          "role": "author"
+        }
+      ]
+    },
+    {
+      "ORCID": "https://orcid.org/0000-0001-7086-9308",
+      "authenticated-orcid": false,
+      "given": "Noga",
+      "family": "Mudrik",
+      "sequence": "additional",
+      "affiliation": [],
+      "role": [
+        {
+          "vocabulary": "crossref",
+          "role": "author"
+        }
+      ]
+    },
+    {
+      "ORCID": "https://orcid.org/0000-0002-9045-3489",
+      "authenticated-orcid": false,
+      "given": "Adam S.",
+      "family": "Charles",
+      "sequence": "additional",
+      "affiliation": [],
+      "role": [
+        {
+          "vocabulary": "crossref",
+          "role": "author"
+        }
+      ]
+    }
+  ],
+  "member": "297",
+  "published-online": {
+    "date-parts": [
+      [
+        2025,
+        8,
+        13
+      ]
+    ]
+  },
+  "reference": [
+    {
+      "key": "8599_CR1",
+      "doi-asserted-by": "publisher",
+      "first-page": "102515",
+      "DOI": "10.1016/j.conb.2021.12.002",
+      "volume": "73",
+      "author": "SW Flavell",
+      "year": "2022",
+      "unstructured": "Flavell, S. W. & Gordus, A. Dynamic functional connectivity in the static connectome of Caenorhabditis elegans. Curr. Opin. Neurobiol. 73, 102515 (2022).",
+      "journal-title": "Curr. Opin. Neurobiol."
+    },
+    {
+      "key": "8599_CR2",
+      "doi-asserted-by": "publisher",
+      "first-page": "103",
+      "DOI": "10.1016/j.conb.2019.02.002",
+      "volume": "55",
+      "author": "S Saxena",
+      "year": "2019",
+      "unstructured": "Saxena, S. & Cunningham, J. P. Towards the neural population doctrine. Curr. Opin. Neurobiol. 55, 103\u2013111 (2019).",
+      "journal-title": "Curr. Opin. Neurobiol."
+    },
+    {
+      "key": "8599_CR3",
+      "doi-asserted-by": "crossref",
+      "unstructured": "Charles, A. S. Data mining the functional architecture of the brain\u2019s circuitry. In Proc. 2025 SIAM International Conference on Data Mining (SDM) 435\u2013438 (SIAM, 2025).",
+      "DOI": "10.1137/1.9781611978520.46"
+    },
+    {
+      "key": "8599_CR4",
+      "doi-asserted-by": "publisher",
+      "first-page": "656",
+      "DOI": "10.1016/j.cell.2015.09.034",
+      "volume": "163",
+      "author": "S Kato",
+      "year": "2015",
+      "unstructured": "Kato, S. et al. Global brain dynamics embed the motor command sequence of Caenorhabditis elegans. Cell 163, 656\u2013669 (2015).",
+      "journal-title": "Cell"
+    },
+    {
+      "key": "8599_CR5",
+      "doi-asserted-by": "publisher",
+      "first-page": "102284",
+      "DOI": "10.1016/j.isci.2021.102284",
+      "volume": "24",
+      "author": "E Gourgou",
+      "year": "2021",
+      "unstructured": "Gourgou, E., Adiga, K., Goettemoeller, A., Chen, C. & Hsu, Ao. Lin Caenorhabditis elegans learning in a structured maze is a multisensory behavior. iScience 24, 102284 (2021).",
+      "journal-title": "iScience"
+    },
+    {
+      "key": "8599_CR6",
+      "doi-asserted-by": "publisher",
+      "first-page": "865",
+      "DOI": "10.1016/j.neuron.2009.02.013",
+      "volume": "61",
+      "author": "M Zimmer",
+      "year": "2009",
+      "unstructured": "Zimmer, M. et al. Neurons detect increases and decreases in oxygen levels using distinct guanylate cyclases. Neuron 61, 865\u2013879 (2009).",
+      "journal-title": "Neuron"
+    },
+    {
+      "key": "8599_CR7",
+      "doi-asserted-by": "publisher",
+      "first-page": "86",
+      "DOI": "10.1016/j.nlm.2014.07.011",
+      "volume": "115",
+      "author": "GM Stein",
+      "year": "2014",
+      "unstructured": "Stein, G. M. & Murphy, C. T. C. elegans positive olfactory associative memory is a molecularly conserved behavioral paradigm. Neurobiol. Learn. Mem. 115, 86\u201394 (2014).",
+      "journal-title": "Neurobiol. Learn. Mem."
+    },
+    {
+      "key": "8599_CR8",
+      "unstructured": "Neuronal Wiring. https://www.wormatlas.org/neuronalwiring.html#NeuronalconnectivityII."
+    },
+    {
+      "key": "8599_CR9",
+      "doi-asserted-by": "publisher",
+      "first-page": "1",
+      "DOI": "10.1098/rstb.1986.0056",
+      "volume": "314",
+      "author": "JG White",
+      "year": "1986",
+      "unstructured": "White, J. G., Southgate, E., Thomson, J. N. & Brenner, S. The structure of the nervous system of the nematode Caenorhabditis elegans. Philos. Trans. R. Soc. Lond. B: Biol. Sci. 314, 1\u2013340 (1986).",
+      "journal-title": "Philos. Trans. R. Soc. Lond. B: Biol. Sci."
+    },
+    {
+      "key": "8599_CR10",
+      "doi-asserted-by": "publisher",
+      "first-page": "63",
+      "DOI": "10.1038/s41586-019-1352-7",
+      "volume": "571",
+      "author": "SJ Cook",
+      "year": "2019",
+      "unstructured": "Cook, S. J. et al. Whole-animal connectomes of both Caenorhabditis elegans sexes. Nature 571, 63\u201371 (2019).",
+      "journal-title": "Nature"
+    },
+    {
+      "key": "8599_CR11",
+      "doi-asserted-by": "publisher",
+      "first-page": "257",
+      "DOI": "10.1038/s41586-021-03778-8",
+      "volume": "596",
+      "author": "D Witvliet",
+      "year": "2021",
+      "unstructured": "Witvliet, D. et al. Connectomes across development reveal principles of brain maturation. Nature 596, 257\u2013261 (2021).",
+      "journal-title": "Nature"
+    },
+    {
+      "key": "8599_CR12",
+      "doi-asserted-by": "publisher",
+      "first-page": "406",
+      "DOI": "10.1038/s41586-023-06683-4",
+      "volume": "623",
+      "author": "F Randi",
+      "year": "2023",
+      "unstructured": "Randi, F., Sharma, A. K., Dvali, S. & Leifer, A. M. Neural signal propagation atlas of Caenorhabditis elegans. Nature 623, 406\u2013414 (2023).",
+      "journal-title": "Nature"
+    },
+    {
+      "key": "8599_CR13",
+      "doi-asserted-by": "publisher",
+      "first-page": "e84312",
+      "DOI": "10.7554/eLife.84312",
+      "volume": "12",
+      "author": "ReemyAli Nasser",
+      "year": "2023",
+      "unstructured": "Nasser, ReemyAli, Harel, Y. & Stern, S. Early-life experience reorganizes neuromodulatory regulation of stage-specific behavioral responses and individuality dimensions during development. eLife 12, e84312 (2023).",
+      "journal-title": "eLife"
+    },
+    {
+      "key": "8599_CR14",
+      "doi-asserted-by": "publisher",
+      "first-page": "1649\u20131662.e10",
+      "DOI": "10.1016/j.cell.2017.10.041",
+      "volume": "171",
+      "author": "S Stern",
+      "year": "2017",
+      "unstructured": "Stern, S., Kirst, C. & Bargmann, C. I. Neuromodulatory control of long-term behavioral patterns and individuality across development. Cell 171, 1649\u20131662.e10 (2017).",
+      "journal-title": "Cell"
+    },
+    {
+      "key": "8599_CR15",
+      "doi-asserted-by": "publisher",
+      "first-page": "e46814",
+      "DOI": "10.7554/eLife.46814",
+      "volume": "8",
+      "author": "C Brennan",
+      "year": "2019",
+      "unstructured": "Brennan, C. & Proekt, A. A quantitative model of conserved macroscopic dynamics predicts future motor commands. Elife 8, e46814 (2019).",
+      "journal-title": "Elife"
+    },
+    {
+      "key": "8599_CR16",
+      "doi-asserted-by": "publisher",
+      "unstructured": "Beets, I. et al. System-wide mapping of neuropeptide-gpcr interactions in C. elegans bioRxiv, https://doi.org/10.1101/2022.10.30.514428 (2022).",
+      "DOI": "10.1101/2022.10.30.514428"
+    },
+    {
+      "key": "8599_CR17",
+      "doi-asserted-by": "publisher",
+      "unstructured": "Ripoll-S\u00e1nchez, L. et al. The neuropeptidergic connectome of C. elegans. bioRxiv 2022.10.30.514396, 11. https://doi.org/10.1101/2022.10.30.514396 (2022).",
+      "DOI": "10.1101/2022.10.30.514396"
+    },
+    {
+      "key": "8599_CR18",
+      "doi-asserted-by": "publisher",
+      "first-page": "1",
+      "DOI": "10.1007/s12038-025-00513-7",
+      "volume": "50",
+      "author": "K Venkatesh",
+      "year": "2025",
+      "unstructured": "Venkatesh, K., Ripoll-S\u00e1nchez, L., Beets, I. & Schafer, W. R. C. elegans wired and wireless connectome: insights into principles of nervous system structure and function. J. Biosci. 50, 1\u201317 (2025).",
+      "journal-title": "J. Biosci."
+    },
+    {
+      "key": "8599_CR19",
+      "doi-asserted-by": "publisher",
+      "DOI": "10.1038/ncomms1304",
+      "volume": "2",
+      "author": "TH Lindsay",
+      "year": "2011",
+      "unstructured": "Lindsay, T. H., Thiele, T. R. & Lockery, S. R. Optogenetic analysis of synaptic transmission in the central nervous system of the nematode Caenorhabditis elegans. Nat. Commun. 2, 306 (2011).",
+      "journal-title": "Nat. Commun."
+    },
+    {
+      "key": "8599_CR20",
+      "doi-asserted-by": "publisher",
+      "DOI": "10.1038/s41467-022-30452-y",
+      "volume": "13",
+      "author": "J Jiang",
+      "year": "2022",
+      "unstructured": "Jiang, J. et al. C. elegans enteric motor neurons fire synchronized action potentials underlying the defecation motor program. Nat. Commun. 13, 2783 (2022).",
+      "journal-title": "Nat. Commun."
+    },
+    {
+      "key": "8599_CR21",
+      "doi-asserted-by": "publisher",
+      "first-page": "746",
+      "DOI": "10.1016/j.cub.2013.03.049",
+      "volume": "23",
+      "author": "H Wang",
+      "year": "2013",
+      "unstructured": "Wang, H. et al. Neuropeptide secreted from a pacemaker activates neurons to control a rhythmic behavior. Curr. Biol. 23, 746\u2013754 (2013).",
+      "journal-title": "Curr. Biol."
+    },
+    {
+      "key": "8599_CR22",
+      "doi-asserted-by": "publisher",
+      "first-page": "500",
+      "DOI": "10.1080/01677063.2020.1802724",
+      "volume": "34",
+      "author": "DH Kim",
+      "year": "2020",
+      "unstructured": "Kim, D. H. & Flavell, S. W. Host-microbe interactions and the behavior of Caenorhabditis elegans. J. Neurogenet. 34, 500\u2013509 (2020).",
+      "journal-title": "J. Neurogenet."
+    },
+    {
+      "key": "8599_CR23",
+      "doi-asserted-by": "publisher",
+      "first-page": "e66135",
+      "DOI": "10.7554/eLife.66135",
+      "volume": "10",
+      "author": "KM Hallinen",
+      "year": "2021",
+      "unstructured": "Hallinen, K. M. et al. Decoding locomotion from population neural activity in moving C. elegans. eLife 10, e66135 (2021).",
+      "journal-title": "eLife"
+    },
+    {
+      "key": "8599_CR24",
+      "doi-asserted-by": "publisher",
+      "first-page": "4134",
+      "DOI": "10.1016/j.cell.2023.07.035",
+      "volume": "186",
+      "author": "AA Atanas",
+      "year": "2023",
+      "unstructured": "Atanas, A. A. et al. Brain-wide representations of behavior spanning multiple timescales and states in C. elegans. Cell 186, 4134\u20134151 (2023).",
+      "journal-title": "Cell"
+    },
+    {
+      "key": "8599_CR25",
+      "doi-asserted-by": "crossref",
+      "unstructured": "Ji, N. et al. A neural circuit for flexible control of persistent behavioral states. eLife 10, e62889 (2021).",
+      "DOI": "10.7554/eLife.62889"
+    },
+    {
+      "key": "8599_CR26",
+      "doi-asserted-by": "publisher",
+      "first-page": "3048\u20133058.e6",
+      "DOI": "10.1016/j.cub.2022.05.051",
+      "volume": "32",
+      "author": "J Riedl",
+      "year": "2022",
+      "unstructured": "Riedl, J., Fieseler, C. & Zimmer, M. Tyraminergic corollary discharge filters reafferent perception in a chemosensory neuron. Curr. Biol. 32, 3048\u20133058.e6 (2022).",
+      "journal-title": "Curr. Biol."
+    },
+    {
+      "key": "8599_CR27",
+      "doi-asserted-by": "publisher",
+      "unstructured": "Sandeep Kumar, Anuj K. Sharma, and Andrew M. Leifer. An inhibitory acetylcholine receptor gates context dependent mechanosensory processing in C. elegans. iScience 110776, 10, https://doi.org/10.1016/j.isci.2024.110776 (2024).",
+      "DOI": "10.1016/j.isci.2024.110776"
+    },
+    {
+      "key": "8599_CR28",
+      "doi-asserted-by": "publisher",
+      "unstructured": "Khan, M. et al. Context-dependent inversion of the response in a single sensory neuron type reverses olfactory preference behavior. 11. https://doi.org/10.1101/2021.11.08.467792 (2021).",
+      "DOI": "10.1101/2021.11.08.467792"
+    },
+    {
+      "key": "8599_CR29",
+      "doi-asserted-by": "publisher",
+      "first-page": "5122\u20135137.e17",
+      "DOI": "10.1016/j.cell.2021.08.024",
+      "volume": "184",
+      "author": "V Susoy",
+      "year": "2021",
+      "unstructured": "Susoy, V. et al. Natural sensory context drives diverse brain-wide activity during C. elegans mating. Cell 184, 5122\u20135137.e17 (2021).",
+      "journal-title": "Cell"
+    },
+    {
+      "key": "8599_CR30",
+      "doi-asserted-by": "publisher",
+      "unstructured": "Flavell, S. W., Raizen, D. M. & You, Y. J. Behavioral states. 10, https://doi.org/10.1534/genetics.120.303539 (2020).",
+      "DOI": "10.1534/genetics.120.303539"
+    },
+    {
+      "key": "8599_CR31",
+      "doi-asserted-by": "crossref",
+      "unstructured": "Rankin, C. H. & Broster, B. S. Factors affecting habituation and recovery from habituation in the nematode Caenorhabditis elegans. Behav. Neurosci. 106, 239\u2013249 (1992).",
+      "DOI": "10.1037//0735-7044.106.2.239"
+    },
+    {
+      "key": "8599_CR32",
+      "doi-asserted-by": "crossref",
+      "unstructured": "Rahmani, A. & Chew, Y. L. Investigating the molecular mechanisms of learning and memory using Caenorhabditis elegans. J. Neurochemistry 159, 417\u2013451 (2021).",
+      "DOI": "10.1111/jnc.15510"
+    },
+    {
+      "key": "8599_CR33",
+      "doi-asserted-by": "publisher",
+      "first-page": "89",
+      "DOI": "10.1016/0166-4328(90)90074-O",
+      "volume": "37",
+      "author": "CH Rankin",
+      "year": "1990",
+      "unstructured": "Rankin, C. H., Beck, ChristineD. O., Chiba, C. M. & Rankin, C. H. Caenorhabditis elegans: a new model system for the study of learning and memory. Behav. Brain Res. 37, 89\u201392 (1990).",
+      "journal-title": "Behav. Brain Res."
+    },
+    {
+      "key": "8599_CR34",
+      "doi-asserted-by": "publisher",
+      "first-page": "63",
+      "DOI": "10.1101/lm.37801",
+      "volume": "8",
+      "author": "JK Rose",
+      "year": "2001",
+      "unstructured": "Rose, J. K. & Rankin, C. H. Analyses of habituation in Caenorhabditis elegans. Learn. Mem. 8, 63\u201369 (2001).",
+      "journal-title": "Learn. Mem."
+    },
+    {
+      "key": "8599_CR35",
+      "doi-asserted-by": "publisher",
+      "first-page": "191",
+      "DOI": "10.1101/lm.960510",
+      "volume": "17",
+      "author": "EL Ardiel",
+      "year": "2010",
+      "unstructured": "Ardiel, E. L. & Rankin, C. H. An elegant mind: learning and memory in Caenorhabditis elegans. Learn. Mem. 17, 191\u2013201 (2010).",
+      "journal-title": "Learn. Mem."
+    },
+    {
+      "key": "8599_CR36",
+      "doi-asserted-by": "publisher",
+      "first-page": "3443\u20133459.e8",
+      "DOI": "10.1016/j.cub.2022.06.039",
+      "volume": "32",
+      "author": "K Uzel",
+      "year": "2022",
+      "unstructured": "Uzel, K., Kato, S. & Zimmer, M. A set of hub neurons and non-local connectivity features support global brain dynamics in C. elegans. Curr. Biol. 32, 3443\u20133459.e8 (2022).",
+      "journal-title": "Curr. Biol."
+    },
+    {
+      "key": "8599_CR37",
+      "doi-asserted-by": "publisher",
+      "unstructured": "Fieseler, C. et al. An intrinsic neuronal manifold underlies brain-wide hierarchical organization of behavior in C. elegans, 3, https://doi.org/10.1101/2025.03.09.642241 (2025).",
+      "DOI": "10.1101/2025.03.09.642241"
+    },
+    {
+      "key": "8599_CR38",
+      "doi-asserted-by": "publisher",
+      "unstructured": "Linderman, S., Nichols, A., Blei, D., Zimmer, M. & Paninski, L. Hierarchical recurrent state space models reveal discrete and continuous dynamics of neural activity in C. elegans. bioRxiv, page 621540, https://doi.org/10.1101/621540 (2019).",
+      "DOI": "10.1101/621540"
+    },
+    {
+      "key": "8599_CR39",
+      "doi-asserted-by": "publisher",
+      "first-page": "1501",
+      "DOI": "10.1073/pnas.1813476116",
+      "volume": "116",
+      "author": "AC Costa",
+      "year": "2019",
+      "unstructured": "Costa, A. C., Ahamed, T. & Stephens, G. J. Adaptive, locally linear models of complex dynamics. Proc. Natl Acad. Sci. USA 116, 1501\u20131510 (2019).",
+      "journal-title": "Proc. Natl Acad. Sci. USA"
+    },
+    {
+      "key": "8599_CR40",
+      "doi-asserted-by": "publisher",
+      "first-page": "167",
+      "DOI": "10.1016/j.conb.2020.11.001",
+      "volume": "65",
+      "author": "F Randi",
+      "year": "2020",
+      "unstructured": "Randi, F. & Leifer, A. M. Measuring and modeling whole-brain neural dynamics in Caenorhabditis elegans. Curr. Opin. Neurobiol. 65, 167\u2013175 (2020).",
+      "journal-title": "Curr. Opin. Neurobiol."
+    },
+    {
+      "key": "8599_CR41",
+      "doi-asserted-by": "publisher",
+      "first-page": "1",
+      "DOI": "10.1016/j.jneumeth.2015.10.010",
+      "volume": "258",
+      "author": "BW Brunton",
+      "year": "2016",
+      "unstructured": "Brunton, B. W., Johnson, L. A., Ojemann, J. G. & Kutz, J. N. Extracting spatial-temporal coherent patterns in large-scale neural recordings using dynamic mode decomposition. J. Neurosci. Methods 258, 1\u201315 (2016).",
+      "journal-title": "J. Neurosci. Methods"
+    },
+    {
+      "key": "8599_CR42",
+      "doi-asserted-by": "publisher",
+      "unstructured": "Creamer, M. S., Leifer, A. M., & Pillow, J. W. Bridging the gap between the connectome and whole-brain activity in C. elegans 9, https://doi.org/10.1101/2024.09.22.614271 (2024).",
+      "DOI": "10.1101/2024.09.22.614271"
+    },
+    {
+      "key": "8599_CR43",
+      "first-page": "1",
+      "volume": "25",
+      "author": "N Mudrik",
+      "year": "2024",
+      "unstructured": "Mudrik, N., Chen, Y., Yezerets, E., Rozell, C. J. & Charles, A. S. Decomposed linear dynamical systems (dlds) for learning the latent components of neural dynamics. J. Mach. Learn. Res. 25, 1\u201344 (2024).",
+      "journal-title": "J. Mach. Learn. Res."
+    },
+    {
+      "key": "8599_CR44",
+      "unstructured": "Ji, J. Ai alignment: a comprehensive survey. 10. http://arxiv.org/abs/2310.19852 (2023)."
+    },
+    {
+      "key": "8599_CR45",
+      "first-page": "104443",
+      "volume": "37",
+      "author": "Y Chen",
+      "year": "2024",
+      "unstructured": "Chen, Y. et al. Probabilistic decomposed linear dynamical systems for robust discovery of latent neural dynamics. Adv. Neural Inf. Process. Syst. 37, 104443\u2013104470 (2024).",
+      "journal-title": "Adv. Neural Inf. Process. Syst."
+    },
+    {
+      "key": "8599_CR46",
+      "unstructured": "Mudrik, N., Yezerets, E., Chen, Y., Rozell, C. J. & Charles, A. S. Linocs: Lookahead Inference of Networked Operators for Continuous Stability. Trans. Mach. Learn. Res. 2024, https://openreview.net/forum?id=A6D3PYSyqJ (2024)."
+    },
+    {
+      "key": "8599_CR47",
+      "doi-asserted-by": "crossref",
+      "unstructured": "Altun, Z. WormAtlas individual neurons, https://www.wormatlas.org/neurons/Individual%20Neurons/Neuronframeset.html (2014).",
+      "DOI": "10.3908/wormatlas.5.104"
+    },
+    {
+      "key": "8599_CR48",
+      "doi-asserted-by": "publisher",
+      "first-page": "1247",
+      "DOI": "10.1126/science.aam6851",
+      "volume": "356",
+      "author": "AnnikaLA Nichols",
+      "year": "2017",
+      "unstructured": "Nichols, AnnikaL. A., Eichler, Tom\u00e1\u0161., Latham, R. & Zimmer, M. A global brain state underlies C. elegans sleep behavior. Science 356, 1247\u20131256 (2017).",
+      "journal-title": "Science"
+    },
+    {
+      "key": "8599_CR49",
+      "doi-asserted-by": "publisher",
+      "first-page": "e14197",
+      "DOI": "10.7554/eLife.14197",
+      "volume": "5",
+      "author": "Y Shen",
+      "year": "2016",
+      "unstructured": "Shen, Y. et al. An extrasynaptic gabaergic signal modulates a pattern of forward movement in Caenorhabditis elegans. Elife 5, e14197 (2016).",
+      "journal-title": "Elife"
+    },
+    {
+      "key": "8599_CR50",
+      "unstructured": "Mudrik, N., Ly, R., Ruebel, O. & Charles, A. S. CREIMBO: Cross-Regional Ensemble Interactions in Multi-view Brain Observations. In The Thirteenth International Conference on Learning Representations (Singapore, OpenReview.net. 2025)."
+    },
+    {
+      "key": "8599_CR51",
+      "doi-asserted-by": "publisher",
+      "first-page": "e1007526",
+      "DOI": "10.1371/journal.pcbi.1007526",
+      "volume": "16",
+      "author": "KM Sabrin",
+      "year": "2020",
+      "unstructured": "Sabrin, K. M., Wei, Y., van den Heuvel, MartijnPieter & Dovrolis, C. The hourglass organization of the Caenorhabditis elegans connectome. PLoS Comput. Biol. 16, e1007526 (2020).",
+      "journal-title": "PLoS Comput. Biol."
+    },
+    {
+      "key": "8599_CR52",
+      "doi-asserted-by": "publisher",
+      "DOI": "10.1038/s41467-020-16710-x",
+      "volume": "11",
+      "author": "KM Anderson",
+      "year": "2020",
+      "unstructured": "Anderson, K. M. et al. Transcriptional and imaging-genetic association of cortical interneurons, brain function, and schizophrenia risk. Nat. Commun. 11, 2889 (2020).",
+      "journal-title": "Nat. Commun."
+    },
+    {
+      "key": "8599_CR53",
+      "doi-asserted-by": "publisher",
+      "unstructured": "Zimmer, M. Kato2015 whole brain imaging data, January osf.io/2395t, https://doi.org/10.17605/OSF.IO/2395T (2021).",
+      "DOI": "10.17605/OSF.IO/2395T"
+    },
+    {
+      "key": "8599_CR54",
+      "unstructured": "Kassebaum, P. circular Graph. GitHub, https://www.mathworks.com/matlabcentral/fileexchange/48576-circulargraph (2025)."
+    },
+    {
+      "key": "8599_CR55",
+      "unstructured": "Axensten, P. chi2test, https://www.mathworks.com/matlabcentral/fileexchange/16177-chi2test (2007)."
+    },
+    {
+      "key": "8599_CR56",
+      "unstructured": "Analysis of variance (ANOVA) results - MATLAB. https://www.mathworks.com/help/stats/anova.html."
+    },
+    {
+      "key": "8599_CR57",
+      "unstructured": "Multivariate analysis of variance (MANOVA) results - MATLAB. https://www.mathworks.com/help/stats/manova.html."
+    },
+    {
+      "key": "8599_CR58",
+      "unstructured": "Linderman, S., Antin, B., Zoltowski, D. & Glaser, J. SSM: Bayesian Learning and Inference for State Space Models (version 0.0.1, 10 https://github.com/lindermanlab/ssm (2020)."
+    },
+    {
+      "key": "8599_CR59",
+      "unstructured": "Savitzky-golay filtering (sgolayfilt) - MATLAB. https://www.mathworks.com/help/signal/ref/sgolayfilt.html."
+    }
+  ],
+  "container-title": [
+    "Communications Biology"
+  ],
+  "original-title": [],
+  "language": "en",
+  "link": [
+    {
+      "URL": "https://www.nature.com/articles/s42003-025-08599-3.pdf",
+      "content-type": "application/pdf",
+      "content-version": "vor",
+      "intended-application": "text-mining"
+    },
+    {
+      "URL": "https://www.nature.com/articles/s42003-025-08599-3",
+      "content-type": "text/html",
+      "content-version": "vor",
+      "intended-application": "text-mining"
+    },
+    {
+      "URL": "https://www.nature.com/articles/s42003-025-08599-3.pdf",
+      "content-type": "application/pdf",
+      "content-version": "vor",
+      "intended-application": "similarity-checking"
+    }
+  ],
+  "deposited": {
+    "date-parts": [
+      [
+        2025,
+        9,
+        9
+      ]
+    ],
+    "date-time": "2025-09-09T13:04:53Z",
+    "timestamp": 1757423093000
+  },
+  "score": 1,
+  "resource": {
+    "primary": {
+      "URL": "https://www.nature.com/articles/s42003-025-08599-3"
+    }
+  },
+  "subtitle": [],
+  "short-title": [],
+  "issued": {
+    "date-parts": [
+      [
+        2025,
+        8,
+        13
+      ]
+    ]
+  },
+  "references-count": 59,
+  "journal-issue": {
+    "issue": "1",
+    "published-online": {
+      "date-parts": [
+        [
+          2025,
+          12
+        ]
+      ]
+    }
+  },
+  "alternative-id": [
+    "8599"
+  ],
+  "URL": "https://doi.org/10.1038/s42003-025-08599-3",
+  "relation": {
+    "has-preprint": [
+      {
+        "id-type": "doi",
+        "id": "10.1101/2024.05.31.596903",
+        "asserted-by": "object"
+      }
+    ]
+  },
+  "ISSN": [
+    "2399-3642"
+  ],
+  "issn-type": [
+    {
+      "value": "2399-3642",
+      "type": "electronic"
+    }
+  ],
+  "subject": [],
+  "published": {
+    "date-parts": [
+      [
+        2025,
+        8,
+        13
+      ]
+    ]
+  },
+  "assertion": [
+    {
+      "value": "3 July 2025",
+      "order": 1,
+      "name": "received",
+      "label": "Received",
+      "group": {
+        "name": "ArticleHistory",
+        "label": "Article History"
+      }
+    },
+    {
+      "value": "25 July 2025",
+      "order": 2,
+      "name": "accepted",
+      "label": "Accepted",
+      "group": {
+        "name": "ArticleHistory",
+        "label": "Article History"
+      }
+    },
+    {
+      "value": "13 August 2025",
+      "order": 3,
+      "name": "first_online",
+      "label": "First Online",
+      "group": {
+        "name": "ArticleHistory",
+        "label": "Article History"
+      }
+    },
+    {
+      "value": "The authors declare no competing interests.",
+      "order": 1,
+      "name": "Ethics",
+      "group": {
+        "name": "EthicsHeading",
+        "label": "Competing interests"
+      }
+    }
+  ],
+  "article-number": "1218"
+}

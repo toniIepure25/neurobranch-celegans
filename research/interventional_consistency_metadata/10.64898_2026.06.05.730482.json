@@ -1,0 +1,574 @@
+{
+  "institution": [
+    {
+      "name": "bioRxiv"
+    }
+  ],
+  "indexed": {
+    "date-parts": [
+      [
+        2026,
+        7,
+        30
+      ]
+    ],
+    "date-time": "2026-07-30T17:09:53Z",
+    "timestamp": 1785431393151,
+    "version": "3.56.0"
+  },
+  "posted": {
+    "date-parts": [
+      [
+        2026,
+        6,
+        10
+      ]
+    ]
+  },
+  "group-title": "Animal Behavior and Cognition",
+  "reference-count": 49,
+  "publisher": "openRxiv",
+  "license": [
+    {
+      "start": {
+        "date-parts": [
+          [
+            2026,
+            6,
+            10
+          ]
+        ],
+        "date-time": "2026-06-10T00:00:00Z",
+        "timestamp": 1781049600000
+      },
+      "content-version": "vor",
+      "delay-in-days": 0,
+      "URL": "http://creativecommons.org/licenses/by-nc/4.0/"
+    }
+  ],
+  "funder": [
+    {
+      "award": [
+        "820213"
+      ],
+      "award-info": [
+        {
+          "award-number": [
+            "820213"
+          ]
+        }
+      ],
+      "id": [
+        {
+          "id": "https://ror.org/0472cxd90",
+          "id-type": "ROR",
+          "asserted-by": "publisher"
+        }
+      ]
+    }
+  ],
+  "content-domain": {
+    "domain": [],
+    "crossmark-restriction": false
+  },
+  "short-container-title": [],
+  "accepted": {
+    "date-parts": [
+      [
+        2026,
+        7,
+        14
+      ]
+    ]
+  },
+  "abstract": "<jats:title>Abstract</jats:title>\n                <jats:p>\n                  Understanding how high-dimensional neural activity and behavior emerge from shared underlying dynamics remains a fundamental challenge in neuroscience. Addressing this problem is key to enabling digital twins that can faithfully reproduce and predict the multiscale brain\u2013behavior dynamics of living systems. Here we present NEBULA (NEural and Behavioral modeling through Unified LAtent dynamics), a generative framework that jointly models whole-brain neural activity and behavior. By applying NEBULA to brain-wide recordings from\n                  <jats:italic>C. elegans</jats:italic>\n                  , we identify a shared low-dimensional dynamical manifold that underlies both neural activity and behavior, enabling long-horizon generation and targeted in silico interventions. Perturbations of the learned dynamics reveal behaviorally relevant transition points, whereas steering interventions enable controlled manipulation of neural and behavioral states without retraining. These results establish a framework for linking brain dynamics to behavior in a living organism and provide a foundation for scalable virtual experimentation in neuroscience.\n                </jats:p>",
+  "DOI": "10.64898/2026.06.05.730482",
+  "type": "posted-content",
+  "created": {
+    "date-parts": [
+      [
+        2026,
+        6,
+        10
+      ]
+    ],
+    "date-time": "2026-06-10T22:05:12Z",
+    "timestamp": 1781129112000
+  },
+  "source": "Crossref",
+  "is-referenced-by-count": 0,
+  "title": [
+    "Generating whole-brain neural activity and behavior through unified latent dynamics"
+  ],
+  "prefix": "10.64898",
+  "author": [
+    {
+      "ORCID": "https://orcid.org/0009-0004-6904-5618",
+      "authenticated-orcid": false,
+      "given": "Davide",
+      "family": "Nuzzi",
+      "sequence": "first",
+      "affiliation": [
+        {
+          "name": "Institute of Cognitive Sciences and Technologies, National Research Council, Rome, Italy"
+        }
+      ],
+      "role": [
+        {
+          "vocabulary": "crossref",
+          "role": "author"
+        }
+      ]
+    },
+    {
+      "ORCID": "https://orcid.org/0000-0002-2356-4509",
+      "authenticated-orcid": false,
+      "given": "Maurizio",
+      "family": "Mattia",
+      "sequence": "additional",
+      "affiliation": [
+        {
+          "name": "Department of Neuroscience, Istituto Superiore di Sanit\u00e0, Rome, Italy"
+        }
+      ],
+      "role": [
+        {
+          "vocabulary": "crossref",
+          "role": "author"
+        }
+      ]
+    },
+    {
+      "ORCID": "https://orcid.org/0000-0001-6813-8282",
+      "authenticated-orcid": false,
+      "given": "Giovanni",
+      "family": "Pezzulo",
+      "sequence": "additional",
+      "affiliation": [
+        {
+          "name": "Institute of Cognitive Sciences and Technologies, National Research Council, Rome, Italy"
+        }
+      ],
+      "role": [
+        {
+          "vocabulary": "crossref",
+          "role": "author"
+        }
+      ]
+    }
+  ],
+  "member": "54368",
+  "reference": [
+    {
+      "issue": "2",
+      "key": "2026071618251358000_2026.06.05.730482v2.1",
+      "doi-asserted-by": "crossref",
+      "first-page": "275",
+      "DOI": "10.1038/s41567-020-01036-8",
+      "article-title": "Capturing the continuous complexity of behaviour in caenorhabditis elegans",
+      "volume": "17",
+      "year": "2021",
+      "journal-title": "Nature Physics"
+    },
+    {
+      "key": "2026071618251358000_2026.06.05.730482v2.2",
+      "doi-asserted-by": "crossref",
+      "unstructured": "Albor\u00e9, N. , Galluzzi, A. , Pani, P. , Ferraina, S. , and Mattia, M. (2025). In search for the invisible: motor inhibition in monkey premotor cortex and its RNN replicas. bioRxiv, page 2025.11.24.690225.",
+      "DOI": "10.1101/2025.11.24.690225"
+    },
+    {
+      "key": "2026071618251358000_2026.06.05.730482v2.3",
+      "doi-asserted-by": "publisher",
+      "DOI": "10.1038/s41586-024-07633-4"
+    },
+    {
+      "key": "2026071618251358000_2026.06.05.730482v2.4",
+      "doi-asserted-by": "crossref",
+      "unstructured": "Angelaki, D. E. , Batista, A. , Fitzgerald, T. , Kominsky, J. F. , Lengyel, M. , Mathis, A. , Mathis, M. W. , Moss, C. F. , Niell, C. M. , Noel, J.-P. , et al. (2026). The simons collaboration on ecological neuroscience: Studying how the brain interacts with the world. Neuron.",
+      "DOI": "10.1016/j.neuron.2026.04.036"
+    },
+    {
+      "key": "2026071618251358000_2026.06.05.730482v2.5",
+      "doi-asserted-by": "publisher",
+      "DOI": "10.1073/pnas.1607601113"
+    },
+    {
+      "key": "2026071618251358000_2026.06.05.730482v2.6",
+      "doi-asserted-by": "publisher",
+      "DOI": "10.1038/nrn2558"
+    },
+    {
+      "key": "2026071618251358000_2026.06.05.730482v2.7",
+      "doi-asserted-by": "publisher",
+      "DOI": "10.1103/PhysRevE.99.052418"
+    },
+    {
+      "key": "2026071618251358000_2026.06.05.730482v2.8",
+      "doi-asserted-by": "crossref",
+      "first-page": "RP92562",
+      "DOI": "10.7554/eLife.92562",
+      "article-title": "Development of equation of motion deciphering locomotion including omega turns of caenorhabditis elegans",
+      "volume": "12",
+      "year": "2024",
+      "journal-title": "Elife"
+    },
+    {
+      "issue": "2",
+      "key": "2026071618251358000_2026.06.05.730482v2.9",
+      "doi-asserted-by": "crossref",
+      "first-page": "199",
+      "DOI": "10.1007/BF02522826",
+      "article-title": "Three-dimensional graph drawing",
+      "volume": "17",
+      "year": "1997",
+      "journal-title": "Algorithmica"
+    },
+    {
+      "key": "2026071618251358000_2026.06.05.730482v2.10",
+      "article-title": "A foundation model of vision, audition, and language for in-silico neuroscience",
+      "year": "2026",
+      "journal-title": "arXiv preprint"
+    },
+    {
+      "key": "2026071618251358000_2026.06.05.730482v2.11",
+      "doi-asserted-by": "publisher",
+      "DOI": "10.1038/nn.4091"
+    },
+    {
+      "key": "2026071618251358000_2026.06.05.730482v2.12",
+      "doi-asserted-by": "crossref",
+      "first-page": "e17234",
+      "DOI": "10.1002/advs.202517234",
+      "article-title": "Linearizing and forecasting: A reservoir computing route to digital twins of the brain",
+      "volume": "13",
+      "year": "2026",
+      "journal-title": "Advanced Science"
+    },
+    {
+      "key": "2026071618251358000_2026.06.05.730482v2.13",
+      "doi-asserted-by": "crossref",
+      "unstructured": "Doya, K. (2007). Bayesian brain: Probabilistic approaches to neural coding. MIT press.",
+      "DOI": "10.7551/mitpress/9780262042383.001.0001"
+    },
+    {
+      "issue": "6",
+      "key": "2026071618251358000_2026.06.05.730482v2.14",
+      "doi-asserted-by": "crossref",
+      "first-page": "e1005542",
+      "DOI": "10.1371/journal.pcbi.1005542",
+      "article-title": "A state space approach for piecewise-linear recurrent neural networks for identifying computational dynamics from neural measurements",
+      "volume": "13",
+      "year": "2017",
+      "journal-title": "PLoS computational biology"
+    },
+    {
+      "key": "2026071618251358000_2026.06.05.730482v2.15",
+      "doi-asserted-by": "publisher",
+      "DOI": "10.1016/J.TINS.2022.06.007"
+    },
+    {
+      "key": "2026071618251358000_2026.06.05.730482v2.16",
+      "first-page": "111",
+      "article-title": "Principles and operation of virtual brain twins",
+      "volume": "19",
+      "year": "2025",
+      "journal-title": "IEEE Reviews in Biomedical Engineering"
+    },
+    {
+      "key": "2026071618251358000_2026.06.05.730482v2.17",
+      "first-page": "16405",
+      "article-title": "Large brain model for learning generic representations with tremendous eeg data in bci",
+      "volume": "2024",
+      "year": "2024",
+      "journal-title": "In International Conference on Learning Representations"
+    },
+    {
+      "issue": "5",
+      "key": "2026071618251358000_2026.06.05.730482v2.18",
+      "doi-asserted-by": "crossref",
+      "first-page": "443",
+      "DOI": "10.1016/S1474-4422(23)00008-X",
+      "article-title": "Personalised virtual brain models in epilepsy",
+      "volume": "22",
+      "year": "2023",
+      "journal-title": "The Lancet Neurology"
+    },
+    {
+      "key": "2026071618251358000_2026.06.05.730482v2.19",
+      "doi-asserted-by": "publisher",
+      "DOI": "10.1016/j.cell.2015.09.034"
+    },
+    {
+      "key": "2026071618251358000_2026.06.05.730482v2.20",
+      "doi-asserted-by": "publisher",
+      "DOI": "10.1016/j.neuron.2018.10.003"
+    },
+    {
+      "key": "2026071618251358000_2026.06.05.730482v2.21",
+      "doi-asserted-by": "publisher",
+      "DOI": "10.1016/j.tins.2004.10.007"
+    },
+    {
+      "key": "2026071618251358000_2026.06.05.730482v2.22",
+      "doi-asserted-by": "publisher",
+      "DOI": "10.1371/journal.pcbi.1007263"
+    },
+    {
+      "key": "2026071618251358000_2026.06.05.730482v2.23",
+      "first-page": "249",
+      "article-title": "Representational similarity analysis-connecting the branches of systems neuroscience",
+      "volume": "2",
+      "year": "2008",
+      "journal-title": "Frontiers in systems neuroscience"
+    },
+    {
+      "key": "2026071618251358000_2026.06.05.730482v2.24",
+      "doi-asserted-by": "publisher",
+      "DOI": "10.1016/j.tics.2024.03.009"
+    },
+    {
+      "key": "2026071618251358000_2026.06.05.730482v2.25",
+      "doi-asserted-by": "crossref",
+      "unstructured": "Kumar, A. , Gilra, A. , Gonzalez-Soto, M. , Meunier, A. , and Grosse-Wentrup, M. (2023). Bunddle-net: Neuronal manifold learning meets behaviour. bioRxiv, pages 2023\u201308.",
+      "DOI": "10.1101/2023.08.08.551978"
+    },
+    {
+      "issue": "5",
+      "key": "2026071618251358000_2026.06.05.730482v2.26",
+      "doi-asserted-by": "crossref",
+      "first-page": "052805",
+      "DOI": "10.1103/PhysRevE.89.052805",
+      "article-title": "Low-dimensional functionality of complex network dynamics: Neurosensory integration in the caenorhabditis elegans connectome",
+      "volume": "89",
+      "year": "2014",
+      "journal-title": "Physical Review E"
+    },
+    {
+      "issue": "1",
+      "key": "2026071618251358000_2026.06.05.730482v2.27",
+      "doi-asserted-by": "crossref",
+      "first-page": "e1005303",
+      "DOI": "10.1371/journal.pcbi.1005303",
+      "article-title": "Spatiotemporal feedback and network structure drive and encode caenorhabditis elegans locomotion",
+      "volume": "13",
+      "year": "2017",
+      "journal-title": "PLoS computational biology"
+    },
+    {
+      "key": "2026071618251358000_2026.06.05.730482v2.28",
+      "doi-asserted-by": "crossref",
+      "first-page": "53",
+      "DOI": "10.3389/fncom.2017.00053",
+      "article-title": "Multistability and long-timescale transients encoded by network structure in a model of c. elegans connectome dynamics",
+      "volume": "11",
+      "year": "2017",
+      "journal-title": "Frontiers in computational neuroscience"
+    },
+    {
+      "key": "2026071618251358000_2026.06.05.730482v2.29",
+      "doi-asserted-by": "publisher",
+      "DOI": "10.1038/s41593-025-01869-7"
+    },
+    {
+      "key": "2026071618251358000_2026.06.05.730482v2.30",
+      "doi-asserted-by": "crossref",
+      "unstructured": "Linderman, S. , Nichols, A. , Blei, D. , Zimmer, M. , and Paninski, L. (2019). Hierarchical recurrent state space models reveal discrete and continuous dynamics of neural activity in c. elegans. BioRxiv, page 621540.",
+      "DOI": "10.1101/621540"
+    },
+    {
+      "key": "2026071618251358000_2026.06.05.730482v2.31",
+      "doi-asserted-by": "publisher",
+      "DOI": "10.1162/089976602760407955"
+    },
+    {
+      "issue": "2",
+      "key": "2026071618251358000_2026.06.05.730482v2.32",
+      "doi-asserted-by": "crossref",
+      "first-page": "87",
+      "DOI": "10.1038/s41583-025-00996-1",
+      "article-title": "Joint modelling of brain and behaviour dynamics with artificial intelligence",
+      "volume": "27",
+      "year": "2026",
+      "journal-title": "Nature Reviews Neuroscience"
+    },
+    {
+      "key": "2026071618251358000_2026.06.05.730482v2.33",
+      "first-page": "33428",
+      "article-title": "Toward a realistic model of speech processing in the brain with self-supervised learning",
+      "volume": "35",
+      "year": "2022",
+      "journal-title": "Advances in Neural Information Processing Systems"
+    },
+    {
+      "key": "2026071618251358000_2026.06.05.730482v2.34",
+      "doi-asserted-by": "crossref",
+      "first-page": "1204134",
+      "DOI": "10.3389/fnagi.2023.1204134",
+      "article-title": "Virtual brain simulations reveal network-specific parameters in neurodegenerative dementias",
+      "volume": "15",
+      "year": "2023",
+      "journal-title": "Frontiers in Aging Neuroscience"
+    },
+    {
+      "key": "2026071618251358000_2026.06.05.730482v2.35",
+      "doi-asserted-by": "crossref",
+      "first-page": "616639",
+      "DOI": "10.3389/fncom.2020.616639",
+      "article-title": "Nonlinear control in the nematode c",
+      "volume": "14",
+      "year": "2021",
+      "journal-title": "elegans. Frontiers in Computational Neuroscience"
+    },
+    {
+      "issue": "12",
+      "key": "2026071618251358000_2026.06.05.730482v2.36",
+      "doi-asserted-by": "crossref",
+      "first-page": "e1013818",
+      "DOI": "10.1371/journal.pcbi.1013818",
+      "article-title": "A data-driven biology-based network model reproduces c. elegans premotor neural dynamics",
+      "volume": "21",
+      "year": "2025",
+      "journal-title": "PLOS Computational Biology"
+    },
+    {
+      "key": "2026071618251358000_2026.06.05.730482v2.37",
+      "doi-asserted-by": "publisher",
+      "DOI": "10.1073/pnas.1507110112"
+    },
+    {
+      "key": "2026071618251358000_2026.06.05.730482v2.38",
+      "first-page": "565",
+      "article-title": "Brainlm: A foundation model for brain activity recordings",
+      "volume": "2024",
+      "year": "2024",
+      "journal-title": "In International Conference on Learning Representations"
+    },
+    {
+      "key": "2026071618251358000_2026.06.05.730482v2.39",
+      "doi-asserted-by": "crossref",
+      "unstructured": "Parr, T. , Pezzulo, G. , and Friston, K. J. (2022). Active inference: the free energy principle in mind, brain, and behavior. MIT Press.",
+      "DOI": "10.7551/mitpress/12441.001.0001"
+    },
+    {
+      "issue": "1",
+      "key": "2026071618251358000_2026.06.05.730482v2.40",
+      "doi-asserted-by": "crossref",
+      "first-page": "53",
+      "DOI": "10.1038/s43586-024-00336-0",
+      "article-title": "Whole-brain modelling: an essential tool for understanding brain dynamics",
+      "volume": "4",
+      "year": "2024",
+      "journal-title": "Nature Reviews Methods Primers"
+    },
+    {
+      "key": "2026071618251358000_2026.06.05.730482v2.41",
+      "doi-asserted-by": "publisher",
+      "DOI": "10.1016/j.tics.2018.01.009"
+    },
+    {
+      "key": "2026071618251358000_2026.06.05.730482v2.42",
+      "doi-asserted-by": "publisher",
+      "DOI": "10.7554/eLife.83970"
+    },
+    {
+      "key": "2026071618251358000_2026.06.05.730482v2.43",
+      "doi-asserted-by": "publisher",
+      "DOI": "10.1038/s41586-023-06031-6"
+    },
+    {
+      "issue": "4",
+      "key": "2026071618251358000_2026.06.05.730482v2.44",
+      "doi-asserted-by": "crossref",
+      "first-page": "e1000028",
+      "DOI": "10.1371/journal.pcbi.1000028",
+      "article-title": "Dimensionality and dynamics in the behavior of c. elegans",
+      "volume": "4",
+      "year": "2008",
+      "journal-title": "PLoS computational biology"
+    },
+    {
+      "key": "2026071618251358000_2026.06.05.730482v2.45",
+      "doi-asserted-by": "publisher",
+      "DOI": "10.1038/s41586-025-09029-4"
+    },
+    {
+      "key": "2026071618251358000_2026.06.05.730482v2.46",
+      "article-title": "Towards a general-purpose foundation model for fmri analysis",
+      "year": "2025",
+      "journal-title": "arXiv preprint"
+    },
+    {
+      "key": "2026071618251358000_2026.06.05.730482v2.47",
+      "doi-asserted-by": "publisher",
+      "DOI": "10.1038/s41586-025-08829-y"
+    },
+    {
+      "key": "2026071618251358000_2026.06.05.730482v2.48",
+      "doi-asserted-by": "publisher",
+      "DOI": "10.1093/nsr/nwae079"
+    },
+    {
+      "issue": "8077",
+      "key": "2026071618251358000_2026.06.05.730482v2.49",
+      "doi-asserted-by": "crossref",
+      "first-page": "741",
+      "DOI": "10.1038/s41586-025-09180-y",
+      "article-title": "Unsupervised pretraining in biological neural networks",
+      "volume": "644",
+      "year": "2025",
+      "journal-title": "Nature"
+    }
+  ],
+  "container-title": [],
+  "original-title": [],
+  "link": [
+    {
+      "URL": "https://syndication.highwire.org/content/doi/10.64898/2026.06.05.730482",
+      "content-type": "unspecified",
+      "content-version": "vor",
+      "intended-application": "similarity-checking"
+    }
+  ],
+  "deposited": {
+    "date-parts": [
+      [
+        2026,
+        7,
+        17
+      ]
+    ],
+    "date-time": "2026-07-17T01:25:23Z",
+    "timestamp": 1784251523000
+  },
+  "score": 1,
+  "resource": {
+    "primary": {
+      "URL": "http://biorxiv.org/lookup/doi/10.64898/2026.06.05.730482"
+    }
+  },
+  "subtitle": [],
+  "short-title": [],
+  "issued": {
+    "date-parts": [
+      [
+        2026,
+        6,
+        10
+      ]
+    ]
+  },
+  "references-count": 49,
+  "URL": "https://doi.org/10.64898/2026.06.05.730482",
+  "relation": {},
+  "subject": [],
+  "published": {
+    "date-parts": [
+      [
+        2026,
+        6,
+        10
+      ]
+    ]
+  },
+  "subtype": "preprint"
+}

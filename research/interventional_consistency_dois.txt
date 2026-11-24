@@ -1,0 +1,23 @@
+# Prior-art identifiers for the interventional-consistency ledger (2026-11-24).
+# Format: DOI | expected title fragment (mandatory).
+# A resolving DOI with a non-matching title is `title_mismatch`, not a citation.
+# Unresolved identifiers may not be cited in any document.
+#
+# Causal abstraction / consistency
+10.1371/journal.pcbi.1012674 | Neuro-cognitive multilevel causal modeling
+#
+# Representation-learning comparators
+10.1101/2023.08.08.551978 | BunDLe-Net
+10.1038/s41586-023-06031-6 | Learnable latent embeddings for joint behavioural and neural analysis
+10.1038/s41593-020-00733-0 | preferential subspace identification
+10.1038/s41592-024-02582-2 | MARBLE
+10.1038/s42003-025-08599-3 | Decomposed Linear Dynamical Systems
+10.64898/2026.06.05.730482 | unified latent dynamics
+#
+# C. elegans atlases and structural anchors
+10.1016/j.cell.2015.09.034 | Global Brain Dynamics Embed the Motor Command Sequence
+10.1016/j.cell.2023.07.035 | Brain-wide representations of behavior
+10.1038/s41586-023-06683-4 | Neural signal propagation atlas
+10.1038/s41593-026-02257-5 | Neural sequences underlying directed turning
+10.1101/2025.03.09.642241 | intrinsic neuronal manifold
+10.1038/s41586-021-03778-8 | Connectomes across development

@@ -1,0 +1,833 @@
+{
+  "indexed": {
+    "date-parts": [
+      [
+        2026,
+        11,
+        22
+      ]
+    ],
+    "date-time": "2026-11-22T09:32:03Z",
+    "timestamp": 1795339923332,
+    "version": "4.10.3"
+  },
+  "reference-count": 62,
+  "publisher": "Springer Science and Business Media LLC",
+  "issue": "7960",
+  "license": [
+    {
+      "start": {
+        "date-parts": [
+          [
+            2023,
+            5,
+            3
+          ]
+        ],
+        "date-time": "2023-05-03T00:00:00Z",
+        "timestamp": 1683072000000
+      },
+      "content-version": "tdm",
+      "delay-in-days": 0,
+      "URL": "https://creativecommons.org/licenses/by/4.0"
+    },
+    {
+      "start": {
+        "date-parts": [
+          [
+            2023,
+            5,
+            3
+          ]
+        ],
+        "date-time": "2023-05-03T00:00:00Z",
+        "timestamp": 1683072000000
+      },
+      "content-version": "vor",
+      "delay-in-days": 0,
+      "URL": "https://creativecommons.org/licenses/by/4.0"
+    }
+  ],
+  "content-domain": {
+    "domain": [
+      "link.springer.com"
+    ],
+    "crossmark-restriction": false
+  },
+  "short-container-title": [
+    "Nature"
+  ],
+  "published-print": {
+    "date-parts": [
+      [
+        2023,
+        5,
+        11
+      ]
+    ]
+  },
+  "abstract": "<jats:title>Abstract</jats:title>\n                  <jats:p>\n                    Mapping behavioural actions to neural activity is a fundamental goal of neuroscience. As our ability to record large neural and behavioural data increases, there is growing interest in modelling neural dynamics during adaptive behaviours to probe neural representations\n                    <jats:sup>1\u20133</jats:sup>\n                    . In particular, although neural latent embeddings can reveal underlying correlates of behaviour, we lack nonlinear techniques that can explicitly and flexibly leverage joint behaviour and neural data to uncover neural dynamics\n                    <jats:sup>3\u20135</jats:sup>\n                    . Here, we fill this gap with a new encoding method, CEBRA, that jointly uses behavioural and neural data in a (supervised) hypothesis- or (self-supervised) discovery-driven manner to produce both consistent and high-performance latent spaces. We show that consistency can be used as a metric for uncovering meaningful differences, and the inferred latents can be used for decoding. We validate its accuracy and demonstrate our tool\u2019s utility for both calcium and electrophysiology datasets, across sensory and motor tasks and in simple or complex behaviours across species. It allows leverage of single- and multi-session datasets for hypothesis testing or can be used label free. Lastly, we show that CEBRA can be used for the mapping of space, uncovering complex kinematic features, for the production of consistent latent spaces across two-photon and Neuropixels data, and can provide rapid, high-accuracy decoding of natural videos from visual cortex.\n                  </jats:p>",
+  "DOI": "10.1038/s41586-023-06031-6",
+  "type": "journal-article",
+  "created": {
+    "date-parts": [
+      [
+        2023,
+        5,
+        3
+      ]
+    ],
+    "date-time": "2023-05-03T12:02:23Z",
+    "timestamp": 1683115343000
+  },
+  "page": "360-368",
+  "update-policy": "https://doi.org/10.1007/springer_crossmark_policy",
+  "source": "Crossref",
+  "is-referenced-by-count": 396,
+  "title": [
+    "Learnable latent embeddings for joint behavioural and neural analysis"
+  ],
+  "prefix": "10.1038",
+  "volume": "617",
+  "author": [
+    {
+      "given": "Steffen",
+      "family": "Schneider",
+      "sequence": "first",
+      "affiliation": [],
+      "role": [
+        {
+          "vocabulary": "crossref",
+          "role": "author"
+        }
+      ]
+    },
+    {
+      "given": "Jin Hwa",
+      "family": "Lee",
+      "sequence": "additional",
+      "affiliation": [],
+      "role": [
+        {
+          "vocabulary": "crossref",
+          "role": "author"
+        }
+      ]
+    },
+    {
+      "ORCID": "https://orcid.org/0000-0001-7368-4456",
+      "authenticated-orcid": false,
+      "given": "Mackenzie Weygandt",
+      "family": "Mathis",
+      "sequence": "additional",
+      "affiliation": [],
+      "role": [
+        {
+          "vocabulary": "crossref",
+          "role": "author"
+        }
+      ]
+    }
+  ],
+  "member": "297",
+  "published-online": {
+    "date-parts": [
+      [
+        2023,
+        5,
+        3
+      ]
+    ]
+  },
+  "reference": [
+    {
+      "key": "6031_CR1",
+      "doi-asserted-by": "publisher",
+      "first-page": "11",
+      "DOI": "10.1038/s41593-021-00980-9",
+      "volume": "25",
+      "author": "AE Urai",
+      "year": "2021",
+      "unstructured": "Urai, A. E., Doiron, B., Leifer, A. M. & Churchland, A. K. Large-scale neural recordings call for new insights to link brain and behavior. Nat. Neurosci. 25, 11\u201319 (2021).",
+      "journal-title": "Nat. Neurosci."
+    },
+    {
+      "key": "6031_CR2",
+      "doi-asserted-by": "publisher",
+      "first-page": "480",
+      "DOI": "10.1016/j.neuron.2016.12.041",
+      "volume": "93",
+      "author": "JW Krakauer",
+      "year": "2017",
+      "unstructured": "Krakauer, J. W., Ghazanfar, A. A., Gomez-Marin, A., MacIver, M. A. & Poeppel, D. Neuroscience needs behavior: correcting a reductionist bias. Neuron 93, 480\u2013490 (2017).",
+      "journal-title": "Neuron"
+    },
+    {
+      "key": "6031_CR3",
+      "doi-asserted-by": "publisher",
+      "first-page": "113",
+      "DOI": "10.1016/j.conb.2021.08.002",
+      "volume": "70",
+      "author": "M Jazayeri",
+      "year": "2021",
+      "unstructured": "Jazayeri, M. & Ostojic, S. Interpreting neural computations by examining intrinsic and embedding dimensionality of neural activity. Curr. Opin. Neurobiol. 70, 113\u2013120 (2021).",
+      "journal-title": "Curr. Opin. Neurobiol."
+    },
+    {
+      "key": "6031_CR4",
+      "doi-asserted-by": "crossref",
+      "unstructured": "Humphries, M. D. Strong and weak principles of neural dimension reduction. Neuron. Behav. Data Anal. Theory https://nbdt.scholasticahq.com/article/24619 (2020).",
+      "DOI": "10.51628/001c.24619"
+    },
+    {
+      "key": "6031_CR5",
+      "unstructured": "Zhou, D., & Wei, X. Learning identifiable and interpretable latent models of high-dimensional neural activity using pi-VAE. Adv. Neural Inf. Process. Syst. https://proceedings.neurips.cc//paper/2020/file/510f2318f324cf07fce24c3a4b89c771-Paper.pdf (2020)."
+    },
+    {
+      "key": "6031_CR6",
+      "doi-asserted-by": "publisher",
+      "first-page": "9659",
+      "DOI": "10.1523/JNEUROSCI.5443-09.2010",
+      "volume": "30",
+      "author": "CE Vargas-Irwin",
+      "year": "2010",
+      "unstructured": "Vargas-Irwin, C. E. et al. Decoding complete reach and grasp actions from local primary motor cortex populations. J. Neurosci. 30, 9659\u20139669 (2010).",
+      "journal-title": "J. Neurosci."
+    },
+    {
+      "key": "6031_CR7",
+      "doi-asserted-by": "crossref",
+      "unstructured": "Okorokova, E. V., Goodman, J. M., Hatsopoulos, N. G. & Bensmaia, S. J. Decoding hand kinematics from population responses in sensorimotor cortex during grasping. J. Neural Eng. 17, 046035 (2020).",
+      "DOI": "10.1088/1741-2552/ab95ea"
+    },
+    {
+      "key": "6031_CR8",
+      "doi-asserted-by": "publisher",
+      "first-page": "614",
+      "DOI": "10.1152/jn.90941.2008",
+      "volume": "102",
+      "author": "BM Yu",
+      "year": "2008",
+      "unstructured": "Yu, B. M. et al. Gaussian-process factor analysis for low-dimensional single-trial analysis of neural population activity. J. Neurophysiol. 102, 614\u2013635 (2008).",
+      "journal-title": "J. Neurophysiol."
+    },
+    {
+      "key": "6031_CR9",
+      "doi-asserted-by": "publisher",
+      "first-page": "51",
+      "DOI": "10.1038/nature11129",
+      "volume": "487",
+      "author": "M Churchland",
+      "year": "2012",
+      "unstructured": "Churchland, M. et al. Neural population dynamics during reaching. Nature 487, 51\u201356 (2012).",
+      "journal-title": "Nature"
+    },
+    {
+      "key": "6031_CR10",
+      "doi-asserted-by": "publisher",
+      "DOI": "10.1038/s41467-018-06560-z",
+      "volume": "9",
+      "author": "JA Gallego",
+      "year": "2018",
+      "unstructured": "Gallego, J. A. et al. Cortical population activity within a preserved neural manifold underlies multiple motor behaviors. Nat. Commun. 9, 4233 (2018).",
+      "journal-title": "Nat. Commun."
+    },
+    {
+      "key": "6031_CR11",
+      "doi-asserted-by": "publisher",
+      "first-page": "861",
+      "DOI": "10.21105/joss.00861",
+      "volume": "3",
+      "author": "L McInnes",
+      "year": "2018",
+      "unstructured": "McInnes, L., Healy, J., Saul, N. & Gro\u00dfberger, L. UMAP: Uniform Manifold Approximation and Projection for dimension reduction. J. Open Source Softw. 3, 861 (2018).",
+      "journal-title": "J. Open Source Softw."
+    },
+    {
+      "key": "6031_CR12",
+      "first-page": "13",
+      "volume": "10",
+      "author": "LV Maaten",
+      "year": "2009",
+      "unstructured": "Maaten, L. V., Postma, E. O. & Herik, J. V. Dimensionality reduction: a comparative review. J. Mach. Learn. Res. 10, 13 (2009).",
+      "journal-title": "J. Mach. Learn. Res."
+    },
+    {
+      "key": "6031_CR13",
+      "unstructured": "Roeder, G., Metz, L. & Kingma, D. P. On linear identifiability of learned representations. Proc. Mach. Learn. Res. 139, 9030\u20139039 (2021)."
+    },
+    {
+      "key": "6031_CR14",
+      "unstructured": "Hyv\u00e4rinen, A., Sasaki, H. & Turner, R. E. Nonlinear ICA using auxiliary variables and generalized contrastive learning. Proc. Mach. Learn. Res. 89, 859\u2013868 (2019)."
+    },
+    {
+      "key": "6031_CR15",
+      "doi-asserted-by": "publisher",
+      "first-page": "140",
+      "DOI": "10.1038/s41593-020-00733-0",
+      "volume": "24",
+      "author": "OG Sani",
+      "year": "2020",
+      "unstructured": "Sani, O. G., Abbaspourazad, H., Wong, Y. T., Pesaran, B. & Shanechi, M. M. Modeling behaviorally relevant neural dynamics enabled by preferential subspace identification. Nat. Neurosci. 24, 140\u2013149 (2020).",
+      "journal-title": "Nat. Neurosci."
+    },
+    {
+      "key": "6031_CR16",
+      "unstructured": "Klindt, D. A. et al. Towards nonlinear disentanglement in natural data with temporal sparse coding. International Conference on Learning Representations https://openreview.net/forum?id=EbIDjBynYJ8 (2021)."
+    },
+    {
+      "key": "6031_CR17",
+      "doi-asserted-by": "publisher",
+      "first-page": "805",
+      "DOI": "10.1038/s41592-018-0109-9",
+      "volume": "15",
+      "author": "C Pandarinath",
+      "year": "2017",
+      "unstructured": "Pandarinath, C. et al. Inferring single-trial neural population dynamics using sequential auto-encoders. Nat. Methods 15, 805\u2013815 (2017).",
+      "journal-title": "Nat. Methods"
+    },
+    {
+      "key": "6031_CR18",
+      "doi-asserted-by": "crossref",
+      "unstructured": "Prince, L. Y., Bakhtiari, S., Gillon, C. J., & Richards, B. A. Parallel inference of hierarchical latent dynamics in two-photon calcium imaging of neuronal populations. Preprint at https://www.biorxiv.org/content/10.1101/2021.03.05.434105v1 (2021).",
+      "DOI": "10.1101/2021.03.05.434105"
+    },
+    {
+      "key": "6031_CR19",
+      "first-page": "307",
+      "volume": "13",
+      "author": "MU Gutmann",
+      "year": "2012",
+      "unstructured": "Gutmann, M. U. & Hyv\u00e4rinen, A. Noise-contrastive estimation of unnormalized statistical models, with applications to natural image statistics. J. Mach. Learn. Res. 13, 307\u2013361 (2012).",
+      "journal-title": "J. Mach. Learn. Res."
+    },
+    {
+      "key": "6031_CR20",
+      "doi-asserted-by": "publisher",
+      "unstructured": "Oord, A. V., Li, Y. & Vinyals, O. Representation learning with contrastive predictive coding. Preprint at https://doi.org/10.48550/arXiv.1807.03748 (2018).",
+      "DOI": "10.48550/arXiv.1807.03748"
+    },
+    {
+      "key": "6031_CR21",
+      "first-page": "18661",
+      "volume": "33",
+      "author": "P Khosla",
+      "year": "2020",
+      "unstructured": "Khosla, P. et al. Supervised contrastive learning. Adv. Neural Inf. Process. Syst. 33, 18661\u201318673 (2020).",
+      "journal-title": "Adv. Neural Inf. Process. Syst."
+    },
+    {
+      "key": "6031_CR22",
+      "unstructured": "Chen, T., Kornblith, S., Norouzi, M. & Hinton, G. E. A simple framework for contrastive learning of visual representations. Proc. Mach. Learn. Res. 119, 1597\u20131607 (2020)."
+    },
+    {
+      "key": "6031_CR23",
+      "first-page": "1624",
+      "volume": "34",
+      "author": "H H\u00e4lv\u00e4",
+      "year": "2021",
+      "unstructured": "H\u00e4lv\u00e4, H. et al. Disentangling identifiable features from noisy data with structured nonlinear ICA. Adv. Neural Inf. Process. Syst. 34, 1624\u20131633 (2021).",
+      "journal-title": "Adv. Neural Inf. Process. Syst."
+    },
+    {
+      "key": "6031_CR24",
+      "unstructured": "Zimmermann, R. S., Sharma, Y., Schneider, S., Bethge, M. & Brendel, W. Contrastive learning inverts the data generating process. Proc. Mach. Learn. Res. 139, 12979\u201312990 (2021)."
+    },
+    {
+      "key": "6031_CR25",
+      "doi-asserted-by": "publisher",
+      "first-page": "1572",
+      "DOI": "10.1038/s41592-022-01675-0",
+      "volume": "19",
+      "author": "MR Keshtkaran",
+      "year": "2022",
+      "unstructured": "Keshtkaran, M. R. et al. A large-scale neural network training framework for generalized estimation of single-trial population dynamics. Nat. Methods 19, 1572\u20131577 (2022).",
+      "journal-title": "Nat. Methods"
+    },
+    {
+      "key": "6031_CR26",
+      "doi-asserted-by": "publisher",
+      "first-page": "1440",
+      "DOI": "10.1126/science.aad1935",
+      "volume": "351",
+      "author": "AD Grosmark",
+      "year": "2016",
+      "unstructured": "Grosmark, A. D. & Buzs\u00e1ki, G. Diversity in neural firing dynamics supports both rigid and learned hippocampal sequences. Science 351, 1440\u20131443 (2016).",
+      "journal-title": "Science"
+    },
+    {
+      "key": "6031_CR27",
+      "doi-asserted-by": "publisher",
+      "first-page": "828",
+      "DOI": "10.1038/nature02058",
+      "volume": "425",
+      "author": "JR Huxter",
+      "year": "2003",
+      "unstructured": "Huxter, J. R., Burgess, N. & O\u2019Keefe, J. Independent rate and temporal coding in hippocampal pyramidal cells. Nature 425, 828\u2013832 (2003).",
+      "journal-title": "Nature"
+    },
+    {
+      "key": "6031_CR28",
+      "doi-asserted-by": "publisher",
+      "first-page": "69",
+      "DOI": "10.1146/annurev.neuro.31.061307.090723",
+      "volume": "31",
+      "author": "EI Moser",
+      "year": "2008",
+      "unstructured": "Moser, E. I., Kropff, E. & Moser, M. Place cells, grid cells, and the brain\u2019s spatial representation system. Annu. Rev. Neurosci. 31, 69\u201389 (2008).",
+      "journal-title": "Annu. Rev. Neurosci."
+    },
+    {
+      "key": "6031_CR29",
+      "doi-asserted-by": "publisher",
+      "first-page": "1433",
+      "DOI": "10.1038/nn.2648",
+      "volume": "13",
+      "author": "DA Dombeck",
+      "year": "2010",
+      "unstructured": "Dombeck, D. A., Harvey, C. D., Tian, L., Looger, L. L. & Tank, D. W. Functional imaging of hippocampal place cells at cellular resolution during virtual navigation. Nat. Neurosci. 13, 1433\u20131440 (2010).",
+      "journal-title": "Nat. Neurosci."
+    },
+    {
+      "key": "6031_CR30",
+      "doi-asserted-by": "publisher",
+      "first-page": "63",
+      "DOI": "10.1090/bull/1554",
+      "volume": "54",
+      "author": "C Curto",
+      "year": "2016",
+      "unstructured": "Curto, C. What can topology tell us about the neural code? Bull. Am. Math. Soc 54, 63\u201378 (2016).",
+      "journal-title": "Bull. Am. Math. Soc"
+    },
+    {
+      "key": "6031_CR31",
+      "doi-asserted-by": "publisher",
+      "first-page": "1512",
+      "DOI": "10.1038/s41593-019-0460-x",
+      "volume": "22",
+      "author": "R Chaudhuri",
+      "year": "2019",
+      "unstructured": "Chaudhuri, R., Ger\u00e7ek, B., Pandey, B., Peyrache, A. & Fiete, I. R. The intrinsic attractor manifold and population dynamics of a canonical cognitive circuit across waking and sleep. Nat. Neurosci. 22, 1512\u20131520 (2019).",
+      "journal-title": "Nat. Neurosci."
+    },
+    {
+      "key": "6031_CR32",
+      "doi-asserted-by": "publisher",
+      "first-page": "737",
+      "DOI": "10.1007/s00454-011-9344-x",
+      "volume": "45",
+      "author": "VD Silva",
+      "year": "2009",
+      "unstructured": "Silva, V. D., Morozov, D. & Vejdemo-Johansson, M. Persistent cohomology and circular coordinates. Discrete Comput. Geom. 45, 737\u2013759 (2009).",
+      "journal-title": "Discrete Comput. Geom."
+    },
+    {
+      "key": "6031_CR33",
+      "doi-asserted-by": "publisher",
+      "first-page": "123",
+      "DOI": "10.1038/s41586-021-04268-7",
+      "volume": "602",
+      "author": "RJ Gardner",
+      "year": "2022",
+      "unstructured": "Gardner, R. J. et al. Toroidal topology of population activity in grid cells. Nature 602, 123\u2013128 (2022).",
+      "journal-title": "Nature"
+    },
+    {
+      "key": "6031_CR34",
+      "doi-asserted-by": "publisher",
+      "first-page": "e48198",
+      "DOI": "10.7554/eLife.48198",
+      "volume": "9",
+      "author": "RH Chowdhury",
+      "year": "2019",
+      "unstructured": "Chowdhury, R. H., Glaser, J. I. & Miller, L. E. Area 2 of primary somatosensory cortex encodes kinematics of the whole arm. eLife 9, e48198 (2019).",
+      "journal-title": "eLife"
+    },
+    {
+      "key": "6031_CR35",
+      "doi-asserted-by": "publisher",
+      "first-page": "2280",
+      "DOI": "10.1152/jn.1994.72.5.2280",
+      "volume": "72",
+      "author": "MJ Prud\u2019homme",
+      "year": "1994",
+      "unstructured": "Prud\u2019homme, M. J. & Kalaska, J. F. Proprioceptive activity in primate primary somatosensory cortex during active arm reaching movements. J. Neurophysiol. 72, 2280\u20132301 (1994).",
+      "journal-title": "J. Neurophysiol."
+    },
+    {
+      "key": "6031_CR36",
+      "doi-asserted-by": "publisher",
+      "first-page": "1505",
+      "DOI": "10.1152/jn.00372.2012",
+      "volume": "109",
+      "author": "BM London",
+      "year": "2013",
+      "unstructured": "London, B. M. & Miller, L. E. Responses of somatosensory area 2 neurons to actively and passively generated limb movements. J. Neurophysiol. 109, 1505\u20131513 (2013).",
+      "journal-title": "J. Neurophysiol."
+    },
+    {
+      "key": "6031_CR37",
+      "unstructured": "Pei, F. et al. Neural Latents Benchmark \u201821: Evaluating latent variable models of neural population activity. Proceedings of the Neural Information Processing Systems Track on Datasets and Benchmarks https://openreview.net/forum?id=KVMS3fl4Rsv (2021)."
+    },
+    {
+      "key": "6031_CR38",
+      "doi-asserted-by": "publisher",
+      "first-page": "e1006157",
+      "DOI": "10.1371/journal.pcbi.1006157",
+      "volume": "14",
+      "author": "P Berens",
+      "year": "2018",
+      "unstructured": "Berens, P. et al. Community-based benchmarking improves spike rate inference from two-photon calcium imaging data. PLoS Comput. Biol. 14, e1006157 (2018).",
+      "journal-title": "PLoS Comput. Biol."
+    },
+    {
+      "key": "6031_CR39",
+      "doi-asserted-by": "publisher",
+      "first-page": "801",
+      "DOI": "10.1038/nature03721",
+      "volume": "436",
+      "author": "T Hafting",
+      "year": "2005",
+      "unstructured": "Hafting, T., Fyhn, M., Molden, S., Moser, M. & Moser, E. I. Microstructure of a spatial map in the entorhinal cortex. Nature 436, 801\u2013806 (2005).",
+      "journal-title": "Nature"
+    },
+    {
+      "key": "6031_CR40",
+      "doi-asserted-by": "publisher",
+      "first-page": "1593",
+      "DOI": "10.1126/science.275.5306.1593",
+      "volume": "275",
+      "author": "W Schultz",
+      "year": "1997",
+      "unstructured": "Schultz, W., Dayan, P. & Montague, P. R. A neural substrate of prediction and reward. Science 275, 1593\u20131599 (1997).",
+      "journal-title": "Science"
+    },
+    {
+      "key": "6031_CR41",
+      "doi-asserted-by": "publisher",
+      "first-page": "85",
+      "DOI": "10.1038/nature10754",
+      "volume": "482",
+      "author": "JY Cohen",
+      "year": "2011",
+      "unstructured": "Cohen, J. Y., Haesler, S., Vong, L., Lowell, B. B. & Uchida, N. Neuron-type specific signals for reward and punishment in the ventral tegmental area. Nature 482, 85\u201388 (2011).",
+      "journal-title": "Nature"
+    },
+    {
+      "key": "6031_CR42",
+      "doi-asserted-by": "publisher",
+      "first-page": "e10032",
+      "DOI": "10.7554/eLife.10032",
+      "volume": "4",
+      "author": "W Menegas",
+      "year": "2015",
+      "unstructured": "Menegas, W. et al. Dopamine neurons projecting to the posterior striatum form an anatomically distinct subclass. eLife 4, e10032 (2015).",
+      "journal-title": "eLife"
+    },
+    {
+      "key": "6031_CR43",
+      "doi-asserted-by": "publisher",
+      "first-page": "1",
+      "DOI": "10.1098/rspb.1977.0085",
+      "volume": "198",
+      "author": "DH Hubel",
+      "year": "1977",
+      "unstructured": "Hubel, D. H. & Wiesel, T. N. Ferrier lecture \u2013 functional architecture of macaque monkey visual cortex. Proc. R. Soc. Lond. B Biol. Sci. 198, 1\u201359 (1977).",
+      "journal-title": "Proc. R. Soc. Lond. B Biol. Sci."
+    },
+    {
+      "key": "6031_CR44",
+      "doi-asserted-by": "publisher",
+      "first-page": "7520",
+      "DOI": "10.1523/JNEUROSCI.0623-08.2008",
+      "volume": "28",
+      "author": "CM Niell",
+      "year": "2008",
+      "unstructured": "Niell, C. M., Stryker, M. P. & Keck, W. M. Highly selective receptive fields in mouse visual cortex. J. Neurosci. 28, 7520\u20137536 (2008).",
+      "journal-title": "J. Neurosci."
+    },
+    {
+      "key": "6031_CR45",
+      "doi-asserted-by": "publisher",
+      "DOI": "10.1038/ncomms12270",
+      "volume": "7",
+      "author": "DL Ringach",
+      "year": "2016",
+      "unstructured": "Ringach, D. L. et al. Spatial clustering of tuning in mouse primary visual cortex. Nat. Commun. 7, 12270 (2016).",
+      "journal-title": "Nat. Commun."
+    },
+    {
+      "key": "6031_CR46",
+      "doi-asserted-by": "publisher",
+      "first-page": "138",
+      "DOI": "10.1038/s41593-019-0550-9",
+      "volume": "23",
+      "author": "SE de Vries",
+      "year": "2019",
+      "unstructured": "de Vries, S. E. et al. A large-scale standardized physiological survey reveals functional organization of the mouse visual cortex. Nat. Neurosci. 23, 138\u2013151 (2019).",
+      "journal-title": "Nat. Neurosci."
+    },
+    {
+      "key": "6031_CR47",
+      "doi-asserted-by": "publisher",
+      "first-page": "86",
+      "DOI": "10.1038/s41586-020-03171-x",
+      "volume": "592",
+      "author": "JH Siegle",
+      "year": "2021",
+      "unstructured": "Siegle, J. H. et al. Survey of spiking in the mouse visual system reveals functional hierarchy. Nature 592, 86\u201392 (2021).",
+      "journal-title": "Nature"
+    },
+    {
+      "key": "6031_CR48",
+      "doi-asserted-by": "crossref",
+      "unstructured": "Caron, M. et al. Emerging properties in self-supervised vision transformers. IEEE/CVF International Conference on Computer Vision 9630\u20139640 (2021).",
+      "DOI": "10.1109/ICCV48922.2021.00951"
+    },
+    {
+      "key": "6031_CR49",
+      "doi-asserted-by": "crossref",
+      "unstructured": "Esfahany, K., Siergiej, I., Zhao, Y. & Park, I. M. Organization of neural population code in mouse visual system. eNeuro 5, ENEURO.0414-17.2018 (2018).",
+      "DOI": "10.1523/ENEURO.0414-17.2018"
+    },
+    {
+      "key": "6031_CR50",
+      "doi-asserted-by": "publisher",
+      "first-page": "4682",
+      "DOI": "10.1016/j.cub.2020.09.015",
+      "volume": "30",
+      "author": "M Jin",
+      "year": "2020",
+      "unstructured": "Jin, M. & Glickfeld, L. L. Mouse higher visual areas provide both distributed and specialized contributions to visually guided behaviors. Curr. Biol. 30, 4682\u20134692 (2020).",
+      "journal-title": "Curr. Biol."
+    },
+    {
+      "key": "6031_CR51",
+      "unstructured": "Dinh, L., Sohl-Dickstein, J. N. & Bengio, S. Density estimation using Real NVP. International Conference on Learning Representations https://openreview.net/pdf?id=HkpbnH9lx (2017)."
+    },
+    {
+      "key": "6031_CR52",
+      "doi-asserted-by": "publisher",
+      "first-page": "4327",
+      "DOI": "10.1016/j.cub.2021.07.062",
+      "volume": "31",
+      "author": "D Deitch",
+      "year": "2021",
+      "unstructured": "Deitch, D., Rubin, A. & Ziv, Y. Representational drift in the mouse visual cortex. Curr. Biol. 31, 4327\u20134339 (2021).",
+      "journal-title": "Curr. Biol."
+    },
+    {
+      "key": "6031_CR53",
+      "unstructured": "Wang, T. & Isola, P. Understanding contrastive representation learning through alignment and uniformity on the hypersphere. Proc. Mach. Learn. Res. 119, 9929\u20139939 (2020)."
+    },
+    {
+      "key": "6031_CR54",
+      "doi-asserted-by": "publisher",
+      "unstructured": "Hendrycks, D. & Gimpel, K. Gaussian error linear units (GELUs). Preprint at https://doi.org/10.48550/arXiv.1606.08415 (2016).",
+      "DOI": "10.48550/arXiv.1606.08415"
+    },
+    {
+      "key": "6031_CR55",
+      "unstructured": "Paszke, A. et al. PyTorch: an imperative style, high-performance deep learning library. Neural Inf. Process. Syst. 32, 8024\u20138035 (2019)."
+    },
+    {
+      "key": "6031_CR56",
+      "doi-asserted-by": "publisher",
+      "first-page": "22",
+      "DOI": "10.1109/MCSE.2011.37",
+      "volume": "13",
+      "author": "SV Walt",
+      "year": "2011",
+      "unstructured": "Walt, S. V., Colbert, S. C. & Varoquaux, G. The NumPy array: a structure for efficient numerical computation. Comput. Sci. Eng. 13, 22\u201330 (2011).",
+      "journal-title": "Comput. Sci. Eng."
+    },
+    {
+      "key": "6031_CR57",
+      "first-page": "2825",
+      "volume": "12",
+      "author": "F Pedregosa",
+      "year": "2011",
+      "unstructured": "Pedregosa, F. et al. Scikit-learn: machine learning in Python. J. Mach. Learn. Res. 12, 2825\u20132830 (2011).",
+      "journal-title": "J. Mach. Learn. Res."
+    },
+    {
+      "key": "6031_CR58",
+      "doi-asserted-by": "publisher",
+      "unstructured": "Policar, P. G., Stra\u017ear, M. & Zupan, B. openTSNE: a modular Python library for t-SNE dimensionality reduction and embedding. Preprint at bioRxiv https://doi.org/10.1101/731877 (2019).",
+      "DOI": "10.1101/731877"
+    },
+    {
+      "key": "6031_CR59",
+      "doi-asserted-by": "publisher",
+      "first-page": "156",
+      "DOI": "10.1038/s41587-020-00809-z",
+      "volume": "39",
+      "author": "D Kobak",
+      "year": "2021",
+      "unstructured": "Kobak, D. & Linderman, G. C. Initialization is critical for preserving global data structure in both t-SNE and UMAP. Nat. Biotechnol. 39, 156\u2013157 (2021).",
+      "journal-title": "Nat. Biotechnol."
+    },
+    {
+      "key": "6031_CR60",
+      "doi-asserted-by": "publisher",
+      "first-page": "1",
+      "DOI": "10.1007/BF02289451",
+      "volume": "31",
+      "author": "PH Sch\u00f6nemann",
+      "year": "1966",
+      "unstructured": "Sch\u00f6nemann, P. H. A generalized solution of the orthogonal procrustes problem. Psychometrika 31, 1\u201310 (1966).",
+      "journal-title": "Psychometrika"
+    },
+    {
+      "key": "6031_CR61",
+      "doi-asserted-by": "publisher",
+      "first-page": "925",
+      "DOI": "10.21105/joss.00925",
+      "volume": "3",
+      "author": "CJ Tralie",
+      "year": "2018",
+      "unstructured": "Tralie, C. J., Saul, N. & Bar-On, R. Ripser.py: a lean persistent homology library for Python. J. Open Source Softw. 3, 925 (2018).",
+      "journal-title": "J. Open Source Softw."
+    },
+    {
+      "key": "6031_CR62",
+      "unstructured": "Tralie, C. J., Mease, T. & Perea, J. Dreimac: dimension reduction with Eilenberg\u2013Maclane coordinates. GitHub https://github.com/ctralie/DREiMac/tree/cdd6d02ba53c3597a931db9da478fd198d6ed00f (2018)."
+    }
+  ],
+  "container-title": [
+    "Nature"
+  ],
+  "original-title": [],
+  "language": "en",
+  "link": [
+    {
+      "URL": "https://www.nature.com/articles/s41586-023-06031-6.pdf",
+      "content-type": "application/pdf",
+      "content-version": "vor",
+      "intended-application": "text-mining"
+    },
+    {
+      "URL": "https://www.nature.com/articles/s41586-023-06031-6",
+      "content-type": "text/html",
+      "content-version": "vor",
+      "intended-application": "text-mining"
+    },
+    {
+      "URL": "https://www.nature.com/articles/s41586-023-06031-6.pdf",
+      "content-type": "application/pdf",
+      "content-version": "vor",
+      "intended-application": "similarity-checking"
+    }
+  ],
+  "deposited": {
+    "date-parts": [
+      [
+        2023,
+        5,
+        10
+      ]
+    ],
+    "date-time": "2023-05-10T09:18:55Z",
+    "timestamp": 1683710335000
+  },
+  "score": 1,
+  "resource": {
+    "primary": {
+      "URL": "https://www.nature.com/articles/s41586-023-06031-6"
+    }
+  },
+  "subtitle": [],
+  "short-title": [],
+  "issued": {
+    "date-parts": [
+      [
+        2023,
+        5,
+        3
+      ]
+    ]
+  },
+  "references-count": 62,
+  "journal-issue": {
+    "issue": "7960",
+    "published-print": {
+      "date-parts": [
+        [
+          2023,
+          5,
+          11
+        ]
+      ]
+    }
+  },
+  "alternative-id": [
+    "6031"
+  ],
+  "URL": "https://doi.org/10.1038/s41586-023-06031-6",
+  "relation": {},
+  "ISSN": [
+    "0028-0836",
+    "1476-4687"
+  ],
+  "issn-type": [
+    {
+      "value": "0028-0836",
+      "type": "print"
+    },
+    {
+      "value": "1476-4687",
+      "type": "electronic"
+    }
+  ],
+  "subject": [],
+  "published": {
+    "date-parts": [
+      [
+        2023,
+        5,
+        3
+      ]
+    ]
+  },
+  "assertion": [
+    {
+      "value": "30 March 2022",
+      "order": 1,
+      "name": "received",
+      "label": "Received",
+      "group": {
+        "name": "ArticleHistory",
+        "label": "Article History"
+      }
+    },
+    {
+      "value": "28 March 2023",
+      "order": 2,
+      "name": "accepted",
+      "label": "Accepted",
+      "group": {
+        "name": "ArticleHistory",
+        "label": "Article History"
+      }
+    },
+    {
+      "value": "3 May 2023",
+      "order": 3,
+      "name": "first_online",
+      "label": "First Online",
+      "group": {
+        "name": "ArticleHistory",
+        "label": "Article History"
+      }
+    },
+    {
+      "value": "S.S. and M.W.M. have filed a patent pertaining to the method presented in this work (filing no. 63/302,670). The remaining author declares no competing interests.",
+      "order": 1,
+      "name": "Ethics",
+      "group": {
+        "name": "EthicsHeading",
+        "label": "Competing interests"
+      }
+    }
+  ]
+}

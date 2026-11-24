@@ -1,0 +1,1601 @@
+{
+  "indexed": {
+    "date-parts": [
+      [
+        2026,
+        11,
+        6
+      ]
+    ],
+    "date-time": "2026-11-06T07:06:03Z",
+    "timestamp": 1793948763600,
+    "version": "4.8.0"
+  },
+  "reference-count": 89,
+  "publisher": "Elsevier BV",
+  "issue": "2",
+  "license": [
+    {
+      "start": {
+        "date-parts": [
+          [
+            2022,
+            1,
+            1
+          ]
+        ],
+        "date-time": "2022-01-01T00:00:00Z",
+        "timestamp": 1640995200000
+      },
+      "content-version": "tdm",
+      "delay-in-days": 0,
+      "URL": "https://www.elsevier.com/tdm/userlicense/1.0/"
+    },
+    {
+      "start": {
+        "date-parts": [
+          [
+            2022,
+            1,
+            1
+          ]
+        ],
+        "date-time": "2022-01-01T00:00:00Z",
+        "timestamp": 1640995200000
+      },
+      "content-version": "tdm",
+      "delay-in-days": 0,
+      "URL": "https://www.elsevier.com/legal/tdmrep-license"
+    },
+    {
+      "start": {
+        "date-parts": [
+          [
+            2023,
+            1,
+            19
+          ]
+        ],
+        "date-time": "2023-01-19T00:00:00Z",
+        "timestamp": 1674086400000
+      },
+      "content-version": "vor",
+      "delay-in-days": 383,
+      "URL": "http://www.elsevier.com/open-access/userlicense/1.0/"
+    },
+    {
+      "start": {
+        "date-parts": [
+          [
+            2022,
+            1,
+            1
+          ]
+        ],
+        "date-time": "2022-01-01T00:00:00Z",
+        "timestamp": 1640995200000
+      },
+      "content-version": "stm-asf",
+      "delay-in-days": 0,
+      "URL": "https://doi.org/10.15223/policy-017"
+    },
+    {
+      "start": {
+        "date-parts": [
+          [
+            2022,
+            1,
+            1
+          ]
+        ],
+        "date-time": "2022-01-01T00:00:00Z",
+        "timestamp": 1640995200000
+      },
+      "content-version": "stm-asf",
+      "delay-in-days": 0,
+      "URL": "https://doi.org/10.15223/policy-037"
+    },
+    {
+      "start": {
+        "date-parts": [
+          [
+            2022,
+            1,
+            1
+          ]
+        ],
+        "date-time": "2022-01-01T00:00:00Z",
+        "timestamp": 1640995200000
+      },
+      "content-version": "stm-asf",
+      "delay-in-days": 0,
+      "URL": "https://doi.org/10.15223/policy-012"
+    },
+    {
+      "start": {
+        "date-parts": [
+          [
+            2022,
+            1,
+            1
+          ]
+        ],
+        "date-time": "2022-01-01T00:00:00Z",
+        "timestamp": 1640995200000
+      },
+      "content-version": "stm-asf",
+      "delay-in-days": 0,
+      "URL": "https://doi.org/10.15223/policy-029"
+    },
+    {
+      "start": {
+        "date-parts": [
+          [
+            2022,
+            1,
+            1
+          ]
+        ],
+        "date-time": "2022-01-01T00:00:00Z",
+        "timestamp": 1640995200000
+      },
+      "content-version": "stm-asf",
+      "delay-in-days": 0,
+      "URL": "https://doi.org/10.15223/policy-004"
+    }
+  ],
+  "funder": [
+    {
+      "DOI": "10.13039/501100003725",
+      "name": "National Research Foundation of Korea",
+      "doi-asserted-by": "publisher",
+      "id": [
+        {
+          "id": "10.13039/501100003725",
+          "id-type": "DOI",
+          "asserted-by": "publisher"
+        }
+      ]
+    },
+    {
+      "DOI": "10.13039/501100000854",
+      "name": "Human Frontier Science Program",
+      "doi-asserted-by": "publisher",
+      "award": [
+        "RGY0064/2017"
+      ],
+      "award-info": [
+        {
+          "award-number": [
+            "RGY0064/2017"
+          ]
+        }
+      ],
+      "id": [
+        {
+          "id": "10.13039/501100000854",
+          "id-type": "DOI",
+          "asserted-by": "publisher"
+        }
+      ]
+    },
+    {
+      "DOI": "10.13039/501100002551",
+      "name": "Seoul National University",
+      "doi-asserted-by": "publisher",
+      "id": [
+        {
+          "id": "10.13039/501100002551",
+          "id-type": "DOI",
+          "asserted-by": "publisher"
+        }
+      ]
+    },
+    {
+      "DOI": "10.13039/501100003621",
+      "name": "Ministry of Science, ICT and Future Planning",
+      "doi-asserted-by": "publisher",
+      "award": [
+        "2020R1C1C1003350"
+      ],
+      "award-info": [
+        {
+          "award-number": [
+            "2020R1C1C1003350"
+          ]
+        }
+      ],
+      "id": [
+        {
+          "id": "10.13039/501100003621",
+          "id-type": "DOI",
+          "asserted-by": "publisher"
+        }
+      ]
+    },
+    {
+      "DOI": "10.13039/501100003621",
+      "name": "Ministry of Science, ICT and Future Planning",
+      "doi-asserted-by": "publisher",
+      "award": [
+        "2021M3H4A1A03048661"
+      ],
+      "award-info": [
+        {
+          "award-number": [
+            "2021M3H4A1A03048661"
+          ]
+        }
+      ],
+      "id": [
+        {
+          "id": "10.13039/501100003621",
+          "id-type": "DOI",
+          "asserted-by": "publisher"
+        }
+      ]
+    },
+    {
+      "DOI": "10.13039/501100003625",
+      "name": "Ministry of Health and Welfare",
+      "doi-asserted-by": "publisher",
+      "award": [
+        "HI15C2887"
+      ],
+      "award-info": [
+        {
+          "award-number": [
+            "HI15C2887"
+          ]
+        }
+      ],
+      "id": [
+        {
+          "id": "10.13039/501100003625",
+          "id-type": "DOI",
+          "asserted-by": "publisher"
+        }
+      ]
+    },
+    {
+      "DOI": "10.13039/501100003625",
+      "name": "Ministry of Health and Welfare",
+      "doi-asserted-by": "publisher",
+      "award": [
+        "HI17C2665"
+      ],
+      "award-info": [
+        {
+          "award-number": [
+            "HI17C2665"
+          ]
+        }
+      ],
+      "id": [
+        {
+          "id": "10.13039/501100003625",
+          "id-type": "DOI",
+          "asserted-by": "publisher"
+        }
+      ]
+    },
+    {
+      "DOI": "10.13039/501100003710",
+      "name": "Korea Health Industry Development Institute",
+      "doi-asserted-by": "publisher",
+      "id": [
+        {
+          "id": "10.13039/501100003710",
+          "id-type": "DOI",
+          "asserted-by": "publisher"
+        }
+      ]
+    }
+  ],
+  "content-domain": {
+    "domain": [
+      "cell.com",
+      "elsevier.com",
+      "sciencedirect.com"
+    ],
+    "crossmark-restriction": true
+  },
+  "short-container-title": [
+    "Neuron"
+  ],
+  "published-print": {
+    "date-parts": [
+      [
+        2022,
+        1
+      ]
+    ]
+  },
+  "DOI": "10.1016/j.neuron.2021.09.039",
+  "type": "journal-article",
+  "created": {
+    "date-parts": [
+      [
+        2021,
+        10,
+        22
+      ]
+    ],
+    "date-time": "2021-10-22T17:18:53Z",
+    "timestamp": 1634923133000
+  },
+  "page": "266-279.e9",
+  "update-policy": "https://doi.org/10.1016/elsevier_cm_policy",
+  "source": "Crossref",
+  "is-referenced-by-count": 54,
+  "title": [
+    "A forebrain neural substrate for behavioral thermoregulation"
+  ],
+  "prefix": "10.1016",
+  "volume": "110",
+  "author": [
+    {
+      "given": "Sieun",
+      "family": "Jung",
+      "sequence": "first",
+      "affiliation": [],
+      "role": [
+        {
+          "vocabulary": "crossref",
+          "role": "author"
+        }
+      ]
+    },
+    {
+      "given": "Myungsun",
+      "family": "Lee",
+      "sequence": "additional",
+      "affiliation": [],
+      "role": [
+        {
+          "vocabulary": "crossref",
+          "role": "author"
+        }
+      ]
+    },
+    {
+      "given": "Dong-Yoon",
+      "family": "Kim",
+      "sequence": "additional",
+      "affiliation": [],
+      "role": [
+        {
+          "vocabulary": "crossref",
+          "role": "author"
+        }
+      ]
+    },
+    {
+      "ORCID": "https://orcid.org/0000-0002-3093-7895",
+      "authenticated-orcid": false,
+      "given": "Celine",
+      "family": "Son",
+      "sequence": "additional",
+      "affiliation": [],
+      "role": [
+        {
+          "vocabulary": "crossref",
+          "role": "author"
+        }
+      ]
+    },
+    {
+      "given": "Benjamin Hyunju",
+      "family": "Ahn",
+      "sequence": "additional",
+      "affiliation": [],
+      "role": [
+        {
+          "vocabulary": "crossref",
+          "role": "author"
+        }
+      ]
+    },
+    {
+      "given": "Gyuryang",
+      "family": "Heo",
+      "sequence": "additional",
+      "affiliation": [],
+      "role": [
+        {
+          "vocabulary": "crossref",
+          "role": "author"
+        }
+      ]
+    },
+    {
+      "given": "Junkoo",
+      "family": "Park",
+      "sequence": "additional",
+      "affiliation": [],
+      "role": [
+        {
+          "vocabulary": "crossref",
+          "role": "author"
+        }
+      ]
+    },
+    {
+      "given": "Minyoo",
+      "family": "Kim",
+      "sequence": "additional",
+      "affiliation": [],
+      "role": [
+        {
+          "vocabulary": "crossref",
+          "role": "author"
+        }
+      ]
+    },
+    {
+      "given": "Han-Eol",
+      "family": "Park",
+      "sequence": "additional",
+      "affiliation": [],
+      "role": [
+        {
+          "vocabulary": "crossref",
+          "role": "author"
+        }
+      ]
+    },
+    {
+      "given": "Dong-Jun",
+      "family": "Koo",
+      "sequence": "additional",
+      "affiliation": [],
+      "role": [
+        {
+          "vocabulary": "crossref",
+          "role": "author"
+        }
+      ]
+    },
+    {
+      "given": "Jong Hwi",
+      "family": "Park",
+      "sequence": "additional",
+      "affiliation": [],
+      "role": [
+        {
+          "vocabulary": "crossref",
+          "role": "author"
+        }
+      ]
+    },
+    {
+      "ORCID": "https://orcid.org/0000-0003-2722-8200",
+      "authenticated-orcid": false,
+      "given": "Jung Weon",
+      "family": "Lee",
+      "sequence": "additional",
+      "affiliation": [],
+      "role": [
+        {
+          "vocabulary": "crossref",
+          "role": "author"
+        }
+      ]
+    },
+    {
+      "ORCID": "https://orcid.org/0000-0001-7849-7094",
+      "authenticated-orcid": false,
+      "given": "Han Kyoung",
+      "family": "Choe",
+      "sequence": "additional",
+      "affiliation": [],
+      "role": [
+        {
+          "vocabulary": "crossref",
+          "role": "author"
+        }
+      ]
+    },
+    {
+      "ORCID": "https://orcid.org/0000-0003-0791-7308",
+      "authenticated-orcid": false,
+      "given": "Sung-Yon",
+      "family": "Kim",
+      "sequence": "additional",
+      "affiliation": [],
+      "role": [
+        {
+          "vocabulary": "crossref",
+          "role": "author"
+        }
+      ]
+    }
+  ],
+  "member": "78",
+  "reference": [
+    {
+      "key": "10.1016/j.neuron.2021.09.039_bib1",
+      "doi-asserted-by": "crossref",
+      "first-page": "1149",
+      "DOI": "10.1126/science.aan6747",
+      "article-title": "Thirst-associated preoptic neurons encode an aversive motivational drive",
+      "volume": "357",
+      "author": "Allen",
+      "year": "2017",
+      "journal-title": "Science"
+    },
+    {
+      "key": "10.1016/j.neuron.2021.09.039_bib2",
+      "doi-asserted-by": "crossref",
+      "first-page": "e1",
+      "DOI": "10.1371/journal.pone.0000001",
+      "article-title": "Neural substrate of cold-seeking behavior in endotoxin shock",
+      "volume": "1",
+      "author": "Almeida",
+      "year": "2006",
+      "journal-title": "PLoS ONE"
+    },
+    {
+      "key": "10.1016/j.neuron.2021.09.039_bib3",
+      "doi-asserted-by": "crossref",
+      "first-page": "483",
+      "DOI": "10.1080/23328940.2015.1095270",
+      "article-title": "Current understanding on the neurophysiology of behavioral thermoregulation",
+      "volume": "2",
+      "author": "Almeida",
+      "year": "2015",
+      "journal-title": "Temperature"
+    },
+    {
+      "key": "10.1016/j.neuron.2021.09.039_bib4",
+      "series-title": "Well-Being: The Foundations of Hedonic Psychology",
+      "first-page": "525",
+      "article-title": "Pleasure, pain, desire, and dread: Hidden core processes of emotion",
+      "author": "Berridge",
+      "year": "1999"
+    },
+    {
+      "key": "10.1016/j.neuron.2021.09.039_bib5",
+      "doi-asserted-by": "crossref",
+      "first-page": "29",
+      "DOI": "10.1016/j.physbeh.2011.04.051",
+      "article-title": "The lateral hypothalamus as integrator of metabolic and environmental needs: from electrical self-stimulation to opto-genetics",
+      "volume": "104",
+      "author": "Berthoud",
+      "year": "2011",
+      "journal-title": "Physiol. Behav."
+    },
+    {
+      "key": "10.1016/j.neuron.2021.09.039_bib6",
+      "doi-asserted-by": "crossref",
+      "first-page": "6443",
+      "DOI": "10.1113/JP271946",
+      "article-title": "Hubs and spokes of the lateral hypothalamus: cell types, circuits and behaviour",
+      "volume": "594",
+      "author": "Bonnavion",
+      "year": "2016",
+      "journal-title": "J.\u00a0Physiol."
+    },
+    {
+      "key": "10.1016/j.neuron.2021.09.039_bib7",
+      "doi-asserted-by": "crossref",
+      "first-page": "9",
+      "DOI": "10.3389/fnsys.2015.00009",
+      "article-title": "To ingest or rest? Specialized roles of lateral hypothalamic area neurons in coordinating energy balance",
+      "volume": "9",
+      "author": "Brown",
+      "year": "2015",
+      "journal-title": "Front. Syst. Neurosci."
+    },
+    {
+      "key": "10.1016/j.neuron.2021.09.039_bib8",
+      "doi-asserted-by": "crossref",
+      "first-page": "1873",
+      "DOI": "10.1038/s41598-018-38143-9",
+      "article-title": "Distinct Subsets of Lateral Hypothalamic Neurotensin Neurons are Activated by Leptin or Dehydration",
+      "volume": "9",
+      "author": "Brown",
+      "year": "2019",
+      "journal-title": "Sci. Rep."
+    },
+    {
+      "key": "10.1016/j.neuron.2021.09.039_bib9",
+      "doi-asserted-by": "crossref",
+      "first-page": "61",
+      "DOI": "10.1016/j.neuropharm.2018.10.024",
+      "article-title": "Reactive and predictive homeostasis: Roles of orexin/hypocretin neurons",
+      "volume": "154",
+      "author": "Burdakov",
+      "year": "2019",
+      "journal-title": "Neuropharmacology"
+    },
+    {
+      "key": "10.1016/j.neuron.2021.09.039_bib10",
+      "doi-asserted-by": "crossref",
+      "first-page": "391",
+      "DOI": "10.1037/h0028170",
+      "article-title": "Effect of preoptic and anterior hypothalamic lesions on behavioral thermoregulation in the cold",
+      "volume": "69",
+      "author": "Carlisle",
+      "year": "1969",
+      "journal-title": "J.\u00a0Comp. Physiol. Psychol."
+    },
+    {
+      "key": "10.1016/j.neuron.2021.09.039_bib11",
+      "doi-asserted-by": "crossref",
+      "first-page": "1344",
+      "DOI": "10.1126/science.128.3335.1344.a",
+      "article-title": "Cold exposure and heat reinforced operant behavior",
+      "volume": "128",
+      "author": "Carlton",
+      "year": "1958",
+      "journal-title": "Science"
+    },
+    {
+      "key": "10.1016/j.neuron.2021.09.039_bib12",
+      "doi-asserted-by": "crossref",
+      "first-page": "eaav1640",
+      "DOI": "10.1126/sciadv.aav1640",
+      "article-title": "A lateral hypothalamus to basal forebrain neurocircuit promotes feeding by suppressing responses to anxiogenic environmental cues",
+      "volume": "5",
+      "author": "Cassidy",
+      "year": "2019",
+      "journal-title": "Sci. Adv."
+    },
+    {
+      "key": "10.1016/j.neuron.2021.09.039_bib13",
+      "doi-asserted-by": "crossref",
+      "first-page": "276",
+      "DOI": "10.1126/science.aap8586",
+      "article-title": "An amygdalar neural ensemble that encodes the unpleasantness of pain",
+      "volume": "363",
+      "author": "Corder",
+      "year": "2019",
+      "journal-title": "Science"
+    },
+    {
+      "key": "10.1016/j.neuron.2021.09.039_bib14",
+      "doi-asserted-by": "crossref",
+      "first-page": "655",
+      "DOI": "10.1038/nrn894",
+      "article-title": "How do you feel? Interoception: the sense of the physiological condition of the body",
+      "volume": "3",
+      "author": "Craig",
+      "year": "2002",
+      "journal-title": "Nat. Rev. Neurosci."
+    },
+    {
+      "key": "10.1016/j.neuron.2021.09.039_bib15",
+      "doi-asserted-by": "crossref",
+      "first-page": "1123",
+      "DOI": "10.1002/oby.22495",
+      "article-title": "Effects of GABA and Leptin Receptor-Expressing Neurons in the Lateral Hypothalamus on Feeding, Locomotion, and Thermogenesis",
+      "volume": "27",
+      "author": "de Vrind",
+      "year": "2019",
+      "journal-title": "Obesity (Silver Spring)"
+    },
+    {
+      "key": "10.1016/j.neuron.2021.09.039_bib16",
+      "doi-asserted-by": "crossref",
+      "first-page": "e58764",
+      "DOI": "10.7554/eLife.58764",
+      "article-title": "Cold-induced hyperphagia requires AgRP neuron activation in mice",
+      "volume": "9",
+      "author": "Deem",
+      "year": "2020",
+      "journal-title": "eLife"
+    },
+    {
+      "key": "10.1016/j.neuron.2021.09.039_bib17",
+      "doi-asserted-by": "crossref",
+      "first-page": "460",
+      "DOI": "10.1038/s41593-018-0318-7",
+      "article-title": "Temporal evolution of cortical ensembles promoting remote memory retrieval",
+      "volume": "22",
+      "author": "DeNardo",
+      "year": "2019",
+      "journal-title": "Nat. Neurosci."
+    },
+    {
+      "key": "10.1016/j.neuron.2021.09.039_bib18",
+      "doi-asserted-by": "crossref",
+      "first-page": "763",
+      "DOI": "10.1038/nmeth.2996",
+      "article-title": "Targeting cells with single vectors using multiple-feature Boolean logic",
+      "volume": "11",
+      "author": "Fenno",
+      "year": "2014",
+      "journal-title": "Nat. Methods"
+    },
+    {
+      "key": "10.1016/j.neuron.2021.09.039_bib19",
+      "doi-asserted-by": "crossref",
+      "first-page": "608047",
+      "DOI": "10.3389/fnins.2020.608047",
+      "article-title": "Lateral Hypothalamic GABAergic Neurons Encode and Potentiate Sucrose\u2019s Palatability",
+      "volume": "14",
+      "author": "Garcia",
+      "year": "2021",
+      "journal-title": "Front. Neurosci."
+    },
+    {
+      "key": "10.1016/j.neuron.2021.09.039_bib20",
+      "doi-asserted-by": "crossref",
+      "first-page": "R41",
+      "DOI": "10.1152/ajpregu.00094.2015",
+      "article-title": "Genetic identity of thermosensory relay neurons in the lateral parabrachial nucleus",
+      "volume": "310",
+      "author": "Geerling",
+      "year": "2016",
+      "journal-title": "Am. J. Physiol. Regul. Integr. Comp. Physiol."
+    },
+    {
+      "key": "10.1016/j.neuron.2021.09.039_bib21",
+      "doi-asserted-by": "crossref",
+      "first-page": "746",
+      "DOI": "10.3181/00379727-102-25385",
+      "article-title": "Thermal behavior of the rat before and after feeding",
+      "volume": "102",
+      "author": "Hamilton",
+      "year": "1959",
+      "journal-title": "Proc. Soc. Exp. Biol. Med."
+    },
+    {
+      "key": "10.1016/j.neuron.2021.09.039_bib22",
+      "doi-asserted-by": "crossref",
+      "first-page": "7",
+      "DOI": "10.1016/j.cophys.2019.11.008",
+      "article-title": "Sleep and thermoregulation",
+      "volume": "15",
+      "author": "Harding",
+      "year": "2020",
+      "journal-title": "Curr. Opin. Physiol."
+    },
+    {
+      "key": "10.1016/j.neuron.2021.09.039_bib23",
+      "doi-asserted-by": "crossref",
+      "first-page": "216",
+      "DOI": "10.3389/fnsys.2014.00216",
+      "article-title": "The role of the lateral hypothalamus and orexin in ingestive behavior: a model for the translation of past experience and sensed deficits into motivated behaviors",
+      "volume": "8",
+      "author": "Hurley",
+      "year": "2014",
+      "journal-title": "Front. Syst. Neurosci."
+    },
+    {
+      "key": "10.1016/j.neuron.2021.09.039_bib24",
+      "doi-asserted-by": "crossref",
+      "first-page": "516",
+      "DOI": "10.1016/j.cell.2014.12.026",
+      "article-title": "Visualizing hypothalamic network dynamics for appetitive and consummatory behaviors",
+      "volume": "160",
+      "author": "Jennings",
+      "year": "2015",
+      "journal-title": "Cell"
+    },
+    {
+      "key": "10.1016/j.neuron.2021.09.039_bib25",
+      "doi-asserted-by": "crossref",
+      "first-page": "645",
+      "DOI": "10.1038/s41586-018-0866-8",
+      "article-title": "Interacting neural ensembles in orbitofrontal cortex for social and feeding behaviour",
+      "volume": "565",
+      "author": "Jennings",
+      "year": "2019",
+      "journal-title": "Nature"
+    },
+    {
+      "key": "10.1016/j.neuron.2021.09.039_bib26",
+      "doi-asserted-by": "crossref",
+      "first-page": "692",
+      "DOI": "10.1016/j.celrep.2016.03.067",
+      "article-title": "Improved Monosynaptic Neural Circuit Tracing Using Engineered Rabies Virus Glycoproteins",
+      "volume": "15",
+      "author": "Kim",
+      "year": "2016",
+      "journal-title": "Cell Rep."
+    },
+    {
+      "key": "10.1016/j.neuron.2021.09.039_bib27",
+      "doi-asserted-by": "crossref",
+      "first-page": "713",
+      "DOI": "10.1016/j.cell.2019.09.020",
+      "article-title": "Multimodal Analysis of Cell Types in a Hypothalamic Node Controlling Social Behavior",
+      "volume": "179",
+      "author": "Kim",
+      "year": "2019",
+      "journal-title": "Cell"
+    },
+    {
+      "key": "10.1016/j.neuron.2021.09.039_bib28",
+      "doi-asserted-by": "crossref",
+      "first-page": "376",
+      "DOI": "10.1038/s41586-020-2167-2",
+      "article-title": "A neural circuit mechanism for mechanosensory feedback control of ingestion",
+      "volume": "580",
+      "author": "Kim",
+      "year": "2020",
+      "journal-title": "Nature"
+    },
+    {
+      "key": "10.1016/j.neuron.2021.09.039_bib29",
+      "doi-asserted-by": "crossref",
+      "first-page": "1424",
+      "DOI": "10.1172/JCI46229",
+      "article-title": "Rapid, reversible activation of AgRP neurons drives feeding behavior in mice",
+      "volume": "121",
+      "author": "Krashes",
+      "year": "2011",
+      "journal-title": "J.\u00a0Clin. Invest."
+    },
+    {
+      "key": "10.1016/j.neuron.2021.09.039_bib30",
+      "doi-asserted-by": "crossref",
+      "first-page": "635",
+      "DOI": "10.1016/j.cell.2015.07.014",
+      "article-title": "Intact-Brain Analyses Reveal Distinct Information Carried by SNc Dopamine Subcircuits",
+      "volume": "162",
+      "author": "Lerner",
+      "year": "2015",
+      "journal-title": "Cell"
+    },
+    {
+      "key": "10.1016/j.neuron.2021.09.039_bib31",
+      "doi-asserted-by": "crossref",
+      "first-page": "213",
+      "DOI": "10.1038/s41586-018-0772-0",
+      "article-title": "A circuit from hippocampal CA2 to lateral septum disinhibits social aggression",
+      "volume": "564",
+      "author": "Leroy",
+      "year": "2018",
+      "journal-title": "Nature"
+    },
+    {
+      "key": "10.1016/j.neuron.2021.09.039_bib32",
+      "doi-asserted-by": "crossref",
+      "first-page": "911",
+      "DOI": "10.1016/j.neuron.2018.01.005",
+      "article-title": "Hypothalamic Circuits for Predation and Evasion",
+      "volume": "97",
+      "author": "Li",
+      "year": "2018",
+      "journal-title": "Neuron"
+    },
+    {
+      "key": "10.1016/j.neuron.2021.09.039_bib33",
+      "doi-asserted-by": "crossref",
+      "first-page": "165",
+      "DOI": "10.1016/0031-9384(68)90049-8",
+      "article-title": "Effects of preoptic lesions on heat-escape responding and colonic temperature in the rat",
+      "volume": "3",
+      "author": "Lipton",
+      "year": "1968",
+      "journal-title": "Physiol. Behav."
+    },
+    {
+      "key": "10.1016/j.neuron.2021.09.039_bib34",
+      "doi-asserted-by": "crossref",
+      "first-page": "1094",
+      "DOI": "10.1016/j.neuron.2019.12.027",
+      "article-title": "Estimation of Current and Future Physiological States in Insular Cortex",
+      "volume": "105",
+      "author": "Livneh",
+      "year": "2020",
+      "journal-title": "Neuron"
+    },
+    {
+      "key": "10.1016/j.neuron.2021.09.039_bib35",
+      "doi-asserted-by": "crossref",
+      "first-page": "256",
+      "DOI": "10.1016/j.neuron.2018.03.040",
+      "article-title": "Genetic Dissection of Neural Circuits: A Decade of Progress",
+      "volume": "98",
+      "author": "Luo",
+      "year": "2018",
+      "journal-title": "Neuron"
+    },
+    {
+      "key": "10.1016/j.neuron.2021.09.039_bib36",
+      "doi-asserted-by": "crossref",
+      "first-page": "133",
+      "DOI": "10.1038/nn.2467",
+      "article-title": "A robust and high-throughput Cre reporting and characterization system for the whole mouse brain",
+      "volume": "13",
+      "author": "Madisen",
+      "year": "2010",
+      "journal-title": "Nat. Neurosci."
+    },
+    {
+      "key": "10.1016/j.neuron.2021.09.039_bib37",
+      "doi-asserted-by": "crossref",
+      "first-page": "577",
+      "DOI": "10.1038/nn.3664",
+      "article-title": "Designer receptors show role for ventral pallidum input to ventral tegmental area in cocaine seeking",
+      "volume": "17",
+      "author": "Mahler",
+      "year": "2014",
+      "journal-title": "Nat. Neurosci."
+    },
+    {
+      "key": "10.1016/j.neuron.2021.09.039_bib38",
+      "doi-asserted-by": "crossref",
+      "first-page": "8611",
+      "DOI": "10.1073/pnas.1909340117",
+      "article-title": "Control of food approach and eating by a GABAergic projection from lateral hypothalamus to dorsal pons",
+      "volume": "117",
+      "author": "Marino",
+      "year": "2020",
+      "journal-title": "Proc. Natl. Acad. Sci. USA"
+    },
+    {
+      "key": "10.1016/j.neuron.2021.09.039_bib39",
+      "first-page": "170",
+      "article-title": "Integrating Competing Demands of Osmoregulatory and Thermoregulatory Homeostasis",
+      "volume": "33",
+      "author": "McKinley",
+      "year": "2018",
+      "journal-title": "Physiology (Bethesda)"
+    },
+    {
+      "key": "10.1016/j.neuron.2021.09.039_bib40",
+      "doi-asserted-by": "crossref",
+      "first-page": "642",
+      "DOI": "10.1038/s41593-019-0349-8",
+      "article-title": "Single-cell transcriptomic analysis of the lateral hypothalamic area reveals molecularly distinct populations of inhibitory and excitatory neurons",
+      "volume": "22",
+      "author": "Mickelsen",
+      "year": "2019",
+      "journal-title": "Nat. Neurosci."
+    },
+    {
+      "key": "10.1016/j.neuron.2021.09.039_bib41",
+      "doi-asserted-by": "crossref",
+      "first-page": "1232",
+      "DOI": "10.1016/j.neuron.2013.08.027",
+      "article-title": "Dissecting local circuits: parvalbumin interneurons underlie broad feedback control of olfactory bulb output",
+      "volume": "80",
+      "author": "Miyamichi",
+      "year": "2013",
+      "journal-title": "Neuron"
+    },
+    {
+      "key": "10.1016/j.neuron.2021.09.039_bib42",
+      "doi-asserted-by": "crossref",
+      "first-page": "74",
+      "DOI": "10.2741/3677",
+      "article-title": "Central neural pathways for thermoregulation",
+      "volume": "16",
+      "author": "Morrison",
+      "year": "2011",
+      "journal-title": "Front. Biosci."
+    },
+    {
+      "key": "10.1016/j.neuron.2021.09.039_bib43",
+      "doi-asserted-by": "crossref",
+      "first-page": "285",
+      "DOI": "10.1146/annurev-physiol-020518-114546",
+      "article-title": "Central Mechanisms for Thermoregulation",
+      "volume": "81",
+      "author": "Morrison",
+      "year": "2019",
+      "journal-title": "Annu. Rev. Physiol."
+    },
+    {
+      "key": "10.1016/j.neuron.2021.09.039_bib44",
+      "doi-asserted-by": "crossref",
+      "first-page": "103",
+      "DOI": "10.3164/jcbn.3.103",
+      "article-title": "Lesions in the Lateral Part of the Dorsal Parabrachial Nucleus Caused Hyperphagia and Obesity",
+      "volume": "3",
+      "author": "Nagai",
+      "year": "1987",
+      "journal-title": "J.\u00a0Clin. Biochem. Nutr."
+    },
+    {
+      "key": "10.1016/j.neuron.2021.09.039_bib45",
+      "doi-asserted-by": "crossref",
+      "first-page": "320",
+      "DOI": "10.1080/23328940.2015.1066926",
+      "article-title": "Thermoregulation and menstrual cycle",
+      "volume": "2",
+      "author": "Nagashima",
+      "year": "2015",
+      "journal-title": "Temperature"
+    },
+    {
+      "key": "10.1016/j.neuron.2021.09.039_bib46",
+      "doi-asserted-by": "crossref",
+      "first-page": "R1207",
+      "DOI": "10.1152/ajpregu.00109.2011",
+      "article-title": "Central circuitries for body temperature regulation and fever",
+      "volume": "301",
+      "author": "Nakamura",
+      "year": "2011",
+      "journal-title": "Am. J. Physiol. Regul. Integr. Comp. Physiol."
+    },
+    {
+      "key": "10.1016/j.neuron.2021.09.039_bib47",
+      "first-page": "263",
+      "article-title": "Afferent pathways for autonomic and shivering thermoeffectors",
+      "volume": "Chapter 16",
+      "author": "Nakamura",
+      "year": "2018"
+    },
+    {
+      "key": "10.1016/j.neuron.2021.09.039_bib48",
+      "doi-asserted-by": "crossref",
+      "first-page": "R127",
+      "DOI": "10.1152/ajpregu.00427.2006",
+      "article-title": "Central efferent pathways mediating skin cooling-evoked sympathetic thermogenesis in brown adipose tissue",
+      "volume": "292",
+      "author": "Nakamura",
+      "year": "2007",
+      "journal-title": "Am. J. Physiol. Regul. Integr. Comp. Physiol."
+    },
+    {
+      "key": "10.1016/j.neuron.2021.09.039_bib49",
+      "doi-asserted-by": "crossref",
+      "first-page": "62",
+      "DOI": "10.1038/nn2027",
+      "article-title": "A thermosensory pathway that controls body temperature",
+      "volume": "11",
+      "author": "Nakamura",
+      "year": "2008",
+      "journal-title": "Nat. Neurosci."
+    },
+    {
+      "key": "10.1016/j.neuron.2021.09.039_bib50",
+      "doi-asserted-by": "crossref",
+      "first-page": "8848",
+      "DOI": "10.1073/pnas.0913358107",
+      "article-title": "A thermosensory pathway mediating heat-defense responses",
+      "volume": "107",
+      "author": "Nakamura",
+      "year": "2010",
+      "journal-title": "Proc. Natl. Acad. Sci. USA"
+    },
+    {
+      "key": "10.1016/j.neuron.2021.09.039_bib51",
+      "doi-asserted-by": "crossref",
+      "first-page": "1110",
+      "DOI": "10.1038/s41593-019-0408-1",
+      "article-title": "Single-cell activity tracking reveals that orbitofrontal neurons acquire and maintain a long-term memory to guide behavioral adaptation",
+      "volume": "22",
+      "author": "Namboodiri",
+      "year": "2019",
+      "journal-title": "Nat. Neurosci."
+    },
+    {
+      "key": "10.1016/j.neuron.2021.09.039_bib52",
+      "doi-asserted-by": "crossref",
+      "first-page": "1505",
+      "DOI": "10.1038/npp.2015.304",
+      "article-title": "Lateral Hypothalamus GABAergic Neurons Modulate Consummatory Behaviors Regardless of the Caloric Content or Biological Relevance of the Consumed Stimuli",
+      "volume": "41",
+      "author": "Navarro",
+      "year": "2016",
+      "journal-title": "Neuropsychopharmacology"
+    },
+    {
+      "key": "10.1016/j.neuron.2021.09.039_bib53",
+      "doi-asserted-by": "crossref",
+      "first-page": "528",
+      "DOI": "10.1016/j.cell.2015.01.003",
+      "article-title": "Decoding neural circuits that control compulsive sucrose seeking",
+      "volume": "160",
+      "author": "Nieh",
+      "year": "2015",
+      "journal-title": "Cell"
+    },
+    {
+      "key": "10.1016/j.neuron.2021.09.039_bib54",
+      "doi-asserted-by": "crossref",
+      "first-page": "1286",
+      "DOI": "10.1016/j.neuron.2016.04.035",
+      "article-title": "Inhibitory Input from the Lateral Hypothalamus to the Ventral Tegmental Area Disinhibits Dopamine Neurons and Promotes Behavioral Activation",
+      "volume": "90",
+      "author": "Nieh",
+      "year": "2016",
+      "journal-title": "Neuron"
+    },
+    {
+      "key": "10.1016/j.neuron.2021.09.039_bib55",
+      "doi-asserted-by": "crossref",
+      "first-page": "19590",
+      "DOI": "10.1073/pnas.1921909117",
+      "article-title": "REM sleep stabilizes hypothalamic representation of feeding behavior",
+      "volume": "117",
+      "author": "Oesch",
+      "year": "2020",
+      "journal-title": "Proc. Natl. Acad. Sci. USA"
+    },
+    {
+      "key": "10.1016/j.neuron.2021.09.039_bib56",
+      "doi-asserted-by": "crossref",
+      "first-page": "423",
+      "DOI": "10.1016/j.neuron.2019.05.018",
+      "article-title": "Paraventricular Thalamus Projection Neurons Integrate Cortical and Hypothalamic Signals for Cue-Reward Processing",
+      "volume": "103",
+      "author": "Otis",
+      "year": "2019",
+      "journal-title": "Neuron"
+    },
+    {
+      "key": "10.1016/j.neuron.2021.09.039_bib57",
+      "doi-asserted-by": "crossref",
+      "first-page": "140",
+      "DOI": "10.1038/nmeth.3217",
+      "article-title": "Simultaneous all-optical manipulation and recording of neural circuit activity with cellular resolution in\u00a0vivo",
+      "volume": "12",
+      "author": "Packer",
+      "year": "2015",
+      "journal-title": "Nat. Methods"
+    },
+    {
+      "key": "10.1016/j.neuron.2021.09.039_bib58",
+      "doi-asserted-by": "crossref",
+      "first-page": "14",
+      "DOI": "10.3389/fnsys.2018.00014",
+      "article-title": "Lateral Hypothalamus as a Motivation-Cognition Interface in the Control of Feeding Behavior",
+      "volume": "12",
+      "author": "Petrovich",
+      "year": "2018",
+      "journal-title": "Front. Syst. Neurosci."
+    },
+    {
+      "key": "10.1016/j.neuron.2021.09.039_bib59",
+      "doi-asserted-by": "crossref",
+      "first-page": "83",
+      "DOI": "10.1016/j.jneumeth.2017.07.031",
+      "article-title": "NoRMCorre: An online algorithm for piecewise rigid motion correction of calcium imaging data",
+      "volume": "291",
+      "author": "Pnevmatikakis",
+      "year": "2017",
+      "journal-title": "J.\u00a0Neurosci. Methods"
+    },
+    {
+      "key": "10.1016/j.neuron.2021.09.039_bib60",
+      "doi-asserted-by": "crossref",
+      "first-page": "6053",
+      "DOI": "10.1523/JNEUROSCI.0155-17.2017",
+      "article-title": "Galanin-Expressing GABA Neurons in the Lateral Hypothalamus Modulate Food Reward and Noncompulsive Locomotion",
+      "volume": "37",
+      "author": "Qualls-Creekmore",
+      "year": "2017",
+      "journal-title": "J.\u00a0Neurosci."
+    },
+    {
+      "key": "10.1016/j.neuron.2021.09.039_bib61",
+      "doi-asserted-by": "crossref",
+      "first-page": "1201",
+      "DOI": "10.1038/nn.4350",
+      "article-title": "The coding of cutaneous temperature in the spinal cord",
+      "volume": "19",
+      "author": "Ran",
+      "year": "2016",
+      "journal-title": "Nat. Neurosci."
+    },
+    {
+      "key": "10.1016/j.neuron.2021.09.039_bib62",
+      "doi-asserted-by": "crossref",
+      "first-page": "219",
+      "DOI": "10.1016/0031-9384(86)90157-5",
+      "article-title": "Effects of lateral hypothalamic lesions on thermoregulation in the rat",
+      "volume": "38",
+      "author": "Refinetti",
+      "year": "1986",
+      "journal-title": "Physiol. Behav."
+    },
+    {
+      "key": "10.1016/j.neuron.2021.09.039_bib63",
+      "doi-asserted-by": "crossref",
+      "first-page": "189",
+      "DOI": "10.1016/0031-9384(87)90206-X",
+      "article-title": "A reevaluation of the role of the lateral hypothalamus in behavioral temperature regulation",
+      "volume": "40",
+      "author": "Refinetti",
+      "year": "1987",
+      "journal-title": "Physiol. Behav."
+    },
+    {
+      "key": "10.1016/j.neuron.2021.09.039_bib64",
+      "doi-asserted-by": "crossref",
+      "first-page": "363",
+      "DOI": "10.1111/j.1749-6632.1988.tb38620.x",
+      "article-title": "Differential thermosensor control of thermoregulatory grooming, locomotion, and relaxed postural extension",
+      "volume": "525",
+      "author": "Roberts",
+      "year": "1988",
+      "journal-title": "Ann. N Y Acad. Sci."
+    },
+    {
+      "key": "10.1016/j.neuron.2021.09.039_bib65",
+      "doi-asserted-by": "crossref",
+      "first-page": "503",
+      "DOI": "10.1016/0031-9384(77)90226-8",
+      "article-title": "Effects of lesions in central thermosensitive areas on thermoregulatory responses in rat",
+      "volume": "19",
+      "author": "Roberts",
+      "year": "1977",
+      "journal-title": "Physiol. Behav."
+    },
+    {
+      "key": "10.1016/j.neuron.2021.09.039_bib66",
+      "doi-asserted-by": "crossref",
+      "first-page": "470",
+      "DOI": "10.1037/h0036147",
+      "article-title": "Brain areas controlling thermoregulatory grooming, prone extension, locomotion, and tail vasodilation in rats",
+      "volume": "86",
+      "author": "Roberts",
+      "year": "1974",
+      "journal-title": "J.\u00a0Comp. Physiol. Psychol."
+    },
+    {
+      "key": "10.1016/j.neuron.2021.09.039_bib67",
+      "doi-asserted-by": "crossref",
+      "first-page": "3",
+      "DOI": "10.1016/B978-0-444-63912-7.00001-1",
+      "article-title": "The thermoregulation system and how it works",
+      "volume": "156",
+      "author": "Romanovsky",
+      "year": "2018",
+      "journal-title": "Handb. Clin. Neurol."
+    },
+    {
+      "key": "10.1016/j.neuron.2021.09.039_bib68",
+      "doi-asserted-by": "crossref",
+      "first-page": "1271",
+      "DOI": "10.1126/science.aax1184",
+      "article-title": "Obesity remodels activity and transcriptional state of a lateral hypothalamic brake on feeding",
+      "volume": "364",
+      "author": "Rossi",
+      "year": "2019",
+      "journal-title": "Science"
+    },
+    {
+      "key": "10.1016/j.neuron.2021.09.039_bib69",
+      "doi-asserted-by": "crossref",
+      "first-page": "291",
+      "DOI": "10.1016/0006-8993(80)91117-8",
+      "article-title": "Efferent connections of the parabrachial nucleus in the rat",
+      "volume": "197",
+      "author": "Saper",
+      "year": "1980",
+      "journal-title": "Brain Res."
+    },
+    {
+      "key": "10.1016/j.neuron.2021.09.039_bib70",
+      "doi-asserted-by": "crossref",
+      "first-page": "199",
+      "DOI": "10.1016/S0896-6273(02)00969-8",
+      "article-title": "The need to feed: homeostatic and hedonic control of eating",
+      "volume": "36",
+      "author": "Saper",
+      "year": "2002",
+      "journal-title": "Neuron"
+    },
+    {
+      "key": "10.1016/j.neuron.2021.09.039_bib71",
+      "doi-asserted-by": "crossref",
+      "first-page": "77",
+      "DOI": "10.1037/h0028959",
+      "article-title": "Behavioral thermoregulation in rats with anterior hypothalamic lesions",
+      "volume": "71",
+      "author": "Satinoff",
+      "year": "1970",
+      "journal-title": "J.\u00a0Comp. Physiol. Psychol."
+    },
+    {
+      "key": "10.1016/j.neuron.2021.09.039_bib72",
+      "doi-asserted-by": "crossref",
+      "first-page": "302",
+      "DOI": "10.1037/h0031652",
+      "article-title": "Loss of behavioral thermoregulation after lateral hypothalamic lesions in rats",
+      "volume": "77",
+      "author": "Satinoff",
+      "year": "1971",
+      "journal-title": "J.\u00a0Comp. Physiol. Psychol."
+    },
+    {
+      "key": "10.1016/j.neuron.2021.09.039_bib73",
+      "doi-asserted-by": "crossref",
+      "first-page": "553",
+      "DOI": "10.1016/0361-9230(76)90082-4",
+      "article-title": "Thermoregulatory cold-defense deficits in rats with preoptic/anterior hypothalamic lesions",
+      "volume": "1",
+      "author": "Satinoff",
+      "year": "1976",
+      "journal-title": "Brain Res. Bull."
+    },
+    {
+      "key": "10.1016/j.neuron.2021.09.039_bib74",
+      "doi-asserted-by": "crossref",
+      "first-page": "17",
+      "DOI": "10.1038/s41592-019-0693-3",
+      "article-title": "Single-cell biology: beyond the sum of its parts",
+      "volume": "17",
+      "author": "Schier",
+      "year": "2020",
+      "journal-title": "Nat. Methods"
+    },
+    {
+      "key": "10.1016/j.neuron.2021.09.039_bib75",
+      "doi-asserted-by": "crossref",
+      "first-page": "672",
+      "DOI": "10.1016/j.cell.2019.05.048",
+      "article-title": "Regulation of Energy Expenditure by Brainstem GABA Neurons",
+      "volume": "178",
+      "author": "Schneeberger",
+      "year": "2019",
+      "journal-title": "Cell"
+    },
+    {
+      "key": "10.1016/j.neuron.2021.09.039_bib76",
+      "doi-asserted-by": "crossref",
+      "first-page": "2089",
+      "DOI": "10.1016/j.cub.2017.06.024",
+      "article-title": "Lateral Hypothalamic GABAergic Neurons Encode Reward Predictions that Are Relayed to the Ventral Tegmental Area to Regulate Learning",
+      "volume": "27",
+      "author": "Sharpe",
+      "year": "2017",
+      "journal-title": "Curr. Biol."
+    },
+    {
+      "key": "10.1016/j.neuron.2021.09.039_bib77",
+      "doi-asserted-by": "crossref",
+      "first-page": "3797",
+      "DOI": "10.1016/j.cub.2021.06.048",
+      "article-title": "Hypothalamic control of interoceptive hunger",
+      "volume": "31",
+      "author": "Siemian",
+      "year": "2021",
+      "journal-title": "Curr. Biol."
+    },
+    {
+      "key": "10.1016/j.neuron.2021.09.039_bib78",
+      "doi-asserted-by": "crossref",
+      "first-page": "109615",
+      "DOI": "10.1016/j.celrep.2021.109615",
+      "article-title": "Lateral hypothalamic LEPR neurons drive appetitive but not consummatory behaviors",
+      "volume": "36",
+      "author": "Siemian",
+      "year": "2021",
+      "journal-title": "Cell Rep."
+    },
+    {
+      "key": "10.1016/j.neuron.2021.09.039_bib79",
+      "doi-asserted-by": "crossref",
+      "first-page": "1393",
+      "DOI": "10.1126/science.aaf7537",
+      "article-title": "The TRPM2 channel is a hypothalamic heat sensor that limits fever and can drive hypothermia",
+      "volume": "353",
+      "author": "Song",
+      "year": "2016",
+      "journal-title": "Science"
+    },
+    {
+      "key": "10.1016/j.neuron.2021.09.039_bib80",
+      "doi-asserted-by": "crossref",
+      "first-page": "198",
+      "DOI": "10.1038/nn.4220",
+      "article-title": "Lateral hypothalamic circuits for feeding and reward",
+      "volume": "19",
+      "author": "Stuber",
+      "year": "2016",
+      "journal-title": "Nat. Neurosci."
+    },
+    {
+      "key": "10.1016/j.neuron.2021.09.039_bib81",
+      "doi-asserted-by": "crossref",
+      "first-page": "31",
+      "DOI": "10.1016/j.neuron.2018.02.022",
+      "article-title": "Regulation of Body Temperature by the Nervous System",
+      "volume": "98",
+      "author": "Tan",
+      "year": "2018",
+      "journal-title": "Neuron"
+    },
+    {
+      "key": "10.1016/j.neuron.2021.09.039_bib82",
+      "doi-asserted-by": "crossref",
+      "first-page": "47",
+      "DOI": "10.1016/j.cell.2016.08.028",
+      "article-title": "Warm-Sensitive Neurons that Control Body Temperature",
+      "volume": "167",
+      "author": "Tan",
+      "year": "2016",
+      "journal-title": "Cell"
+    },
+    {
+      "key": "10.1016/j.neuron.2021.09.039_bib83",
+      "doi-asserted-by": "crossref",
+      "first-page": "436",
+      "DOI": "10.1016/j.neuron.2018.10.001",
+      "article-title": "Neural Circuit Motifs in Valence Processing",
+      "volume": "100",
+      "author": "Tye",
+      "year": "2018",
+      "journal-title": "Neuron"
+    },
+    {
+      "key": "10.1016/j.neuron.2021.09.039_bib84",
+      "doi-asserted-by": "crossref",
+      "first-page": "989",
+      "DOI": "10.1037/h0077400",
+      "article-title": "Effects of preoptic, lateral hypothalamic, or dopamine-depleting lesions on behavioral thermoregulation in rats exposed to the cold",
+      "volume": "91",
+      "author": "Van Zoeren",
+      "year": "1977",
+      "journal-title": "J.\u00a0Comp. Physiol. Psychol."
+    },
+    {
+      "key": "10.1016/j.neuron.2021.09.039_bib85",
+      "doi-asserted-by": "crossref",
+      "first-page": "309",
+      "DOI": "10.1016/j.neuron.2019.04.035",
+      "article-title": "Thermoregulation via Temperature-Dependent PGD2 Production in Mouse Preoptic Area",
+      "volume": "103",
+      "author": "Wang",
+      "year": "2019",
+      "journal-title": "Neuron"
+    },
+    {
+      "key": "10.1016/j.neuron.2021.09.039_bib86",
+      "doi-asserted-by": "crossref",
+      "first-page": "5031",
+      "DOI": "10.1038/s41598-017-05327-8",
+      "article-title": "The lateral parabrachial nucleus, but not the thalamus, mediates thermosensory pathways for behavioural thermoregulation",
+      "volume": "7",
+      "author": "Yahiro",
+      "year": "2017",
+      "journal-title": "Sci. Rep."
+    },
+    {
+      "key": "10.1016/j.neuron.2021.09.039_bib87",
+      "doi-asserted-by": "crossref",
+      "first-page": "eabb9414",
+      "DOI": "10.1126/sciadv.abb9414",
+      "article-title": "Parabrachial neuron types categorically encode thermoregulation variables during heat defense",
+      "volume": "6",
+      "author": "Yang",
+      "year": "2020",
+      "journal-title": "Sci. Adv."
+    },
+    {
+      "key": "10.1016/j.neuron.2021.09.039_bib88",
+      "doi-asserted-by": "crossref",
+      "first-page": "R134",
+      "DOI": "10.1152/ajpregu.2000.278.1.R134",
+      "article-title": "Effects of food deprivation on daily changes in body temperature and behavioral thermoregulation in rats",
+      "volume": "278",
+      "author": "Yoda",
+      "year": "2000",
+      "journal-title": "Am. J. Physiol. Regul. Integr. Comp. Physiol."
+    },
+    {
+      "key": "10.1016/j.neuron.2021.09.039_bib89",
+      "doi-asserted-by": "crossref",
+      "first-page": "2042",
+      "DOI": "10.1073/pnas.1616255114",
+      "article-title": "A hypothalamic circuit that controls body temperature",
+      "volume": "114",
+      "author": "Zhao",
+      "year": "2017",
+      "journal-title": "Proc. Natl. Acad. Sci. USA"
+    }
+  ],
+  "container-title": [
+    "Neuron"
+  ],
+  "original-title": [],
+  "language": "en",
+  "link": [
+    {
+      "URL": "https://api.elsevier.com/content/article/PII:S0896627321007121?httpAccept=text/xml",
+      "content-type": "text/xml",
+      "content-version": "vor",
+      "intended-application": "text-mining"
+    },
+    {
+      "URL": "https://api.elsevier.com/content/article/PII:S0896627321007121?httpAccept=text/plain",
+      "content-type": "text/plain",
+      "content-version": "vor",
+      "intended-application": "text-mining"
+    }
+  ],
+  "deposited": {
+    "date-parts": [
+      [
+        2025,
+        10,
+        12
+      ]
+    ],
+    "date-time": "2025-10-12T07:37:17Z",
+    "timestamp": 1760254637000
+  },
+  "score": 1,
+  "resource": {
+    "primary": {
+      "URL": "https://linkinghub.elsevier.com/retrieve/pii/S0896627321007121"
+    }
+  },
+  "subtitle": [],
+  "short-title": [],
+  "issued": {
+    "date-parts": [
+      [
+        2022,
+        1
+      ]
+    ]
+  },
+  "references-count": 89,
+  "journal-issue": {
+    "issue": "2",
+    "published-print": {
+      "date-parts": [
+        [
+          2022,
+          1
+        ]
+      ]
+    }
+  },
+  "alternative-id": [
+    "S0896627321007121"
+  ],
+  "URL": "https://doi.org/10.1016/j.neuron.2021.09.039",
+  "relation": {},
+  "ISSN": [
+    "0896-6273"
+  ],
+  "issn-type": [
+    {
+      "value": "0896-6273",
+      "type": "print"
+    }
+  ],
+  "subject": [],
+  "published": {
+    "date-parts": [
+      [
+        2022,
+        1
+      ]
+    ]
+  },
+  "assertion": [
+    {
+      "value": "Elsevier",
+      "name": "publisher",
+      "label": "This article is maintained by"
+    },
+    {
+      "value": "A forebrain neural substrate for behavioral thermoregulation",
+      "name": "articletitle",
+      "label": "Article Title"
+    },
+    {
+      "value": "Neuron",
+      "name": "journaltitle",
+      "label": "Journal Title"
+    },
+    {
+      "value": "https://doi.org/10.1016/j.neuron.2021.09.039",
+      "name": "articlelink",
+      "label": "CrossRef DOI link to publisher maintained version"
+    },
+    {
+      "value": "article",
+      "name": "content_type",
+      "label": "Content Type"
+    },
+    {
+      "value": "\u00a9 2021 Elsevier Inc.",
+      "name": "copyright",
+      "label": "Copyright"
+    }
+  ]
+}

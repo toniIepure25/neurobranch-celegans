@@ -1,0 +1,228 @@
+{
+  "institution": [
+    {
+      "name": "bioRxiv"
+    }
+  ],
+  "indexed": {
+    "date-parts": [
+      [
+        2026,
+        9,
+        11
+      ]
+    ],
+    "date-time": "2026-09-11T05:42:37Z",
+    "timestamp": 1789105357946,
+    "version": "build-2803163510"
+  },
+  "posted": {
+    "date-parts": [
+      [
+        2025,
+        3,
+        11
+      ]
+    ]
+  },
+  "group-title": "Neuroscience",
+  "reference-count": 0,
+  "publisher": "openRxiv",
+  "license": [
+    {
+      "start": {
+        "date-parts": [
+          [
+            2025,
+            3,
+            11
+          ]
+        ],
+        "date-time": "2025-03-11T00:00:00Z",
+        "timestamp": 1741651200000
+      },
+      "content-version": "vor",
+      "delay-in-days": 0,
+      "URL": "http://creativecommons.org/licenses/by-nc-nd/4.0/"
+    }
+  ],
+  "content-domain": {
+    "domain": [],
+    "crossmark-restriction": false
+  },
+  "short-container-title": [],
+  "accepted": {
+    "date-parts": [
+      [
+        2025,
+        3,
+        28
+      ]
+    ]
+  },
+  "abstract": "<jats:p>\n                  Large-scale neuronal recordings in various species have revealed behavior-related activity patterns. Surprisingly, these activities are distributed across brain regions, including sensory areas. However, their origins and functions are incompletely understood. Using whole-brain imaging in freely behaving\n                  <jats:italic>C. elegans</jats:italic>\n                  , we discover that such distributed brain activity is dominated by a low dimensional manifold, corresponding to the major action sequence of\n                  <jats:italic>C. elegans</jats:italic>\n                  . The manifold originates largely from intrinsic dynamics, with minor contributions from movement-induced sensations. We discover a new function of the manifold: to gate the activity of a large number of neuron classes. This gating constrains them to selectively encode faster time-scale motor patterns during specific brain states. We therefore propose that one principle function of brain-wide dynamics is to enable hierarchical organization of behavior: information about major actions is broadcast via a distributed manifold, to enable nesting of granular motor patterns within those major actions.\n                </jats:p>",
+  "DOI": "10.1101/2025.03.09.642241",
+  "type": "posted-content",
+  "created": {
+    "date-parts": [
+      [
+        2025,
+        3,
+        11
+      ]
+    ],
+    "date-time": "2025-03-11T11:01:28Z",
+    "timestamp": 1741690888000
+  },
+  "source": "Crossref",
+  "is-referenced-by-count": 10,
+  "title": [
+    "An intrinsic neuronal manifold underlies brain-wide hierarchical organization of behavior in\n                  <i>C. elegans</i>"
+  ],
+  "prefix": "10.64898",
+  "author": [
+    {
+      "ORCID": "https://orcid.org/0000-0002-2680-3341",
+      "authenticated-orcid": false,
+      "given": "Charles",
+      "family": "Fieseler",
+      "sequence": "first",
+      "affiliation": [],
+      "role": [
+        {
+          "vocabulary": "crossref",
+          "role": "author"
+        }
+      ]
+    },
+    {
+      "ORCID": "https://orcid.org/0000-0002-9100-5100",
+      "authenticated-orcid": false,
+      "given": "Itamar",
+      "family": "Lev",
+      "sequence": "additional",
+      "affiliation": [],
+      "role": [
+        {
+          "vocabulary": "crossref",
+          "role": "author"
+        }
+      ]
+    },
+    {
+      "ORCID": "https://orcid.org/0000-0003-0032-8738",
+      "authenticated-orcid": false,
+      "given": "Ulises",
+      "family": "Rey",
+      "sequence": "additional",
+      "affiliation": [],
+      "role": [
+        {
+          "vocabulary": "crossref",
+          "role": "author"
+        }
+      ]
+    },
+    {
+      "given": "Lukas",
+      "family": "Hille",
+      "sequence": "additional",
+      "affiliation": [],
+      "role": [
+        {
+          "vocabulary": "crossref",
+          "role": "author"
+        }
+      ]
+    },
+    {
+      "ORCID": "https://orcid.org/0009-0004-7048-129X",
+      "authenticated-orcid": false,
+      "given": "Hannah",
+      "family": "Brenner",
+      "sequence": "additional",
+      "affiliation": [],
+      "role": [
+        {
+          "vocabulary": "crossref",
+          "role": "author"
+        }
+      ]
+    },
+    {
+      "ORCID": "https://orcid.org/0000-0002-8072-787X",
+      "authenticated-orcid": false,
+      "given": "Manuel",
+      "family": "Zimmer",
+      "sequence": "additional",
+      "affiliation": [],
+      "role": [
+        {
+          "vocabulary": "crossref",
+          "role": "author"
+        }
+      ]
+    }
+  ],
+  "member": "54368",
+  "container-title": [],
+  "original-title": [],
+  "link": [
+    {
+      "URL": "https://syndication.highwire.org/content/doi/10.1101/2025.03.09.642241",
+      "content-type": "unspecified",
+      "content-version": "vor",
+      "intended-application": "similarity-checking"
+    }
+  ],
+  "deposited": {
+    "date-parts": [
+      [
+        2026,
+        1,
+        15
+      ]
+    ],
+    "date-time": "2026-01-15T08:13:55Z",
+    "timestamp": 1768464835000
+  },
+  "score": 1,
+  "resource": {
+    "primary": {
+      "URL": "http://biorxiv.org/lookup/doi/10.1101/2025.03.09.642241"
+    }
+  },
+  "subtitle": [],
+  "short-title": [],
+  "issued": {
+    "date-parts": [
+      [
+        2025,
+        3,
+        11
+      ]
+    ]
+  },
+  "references-count": 0,
+  "URL": "https://doi.org/10.1101/2025.03.09.642241",
+  "relation": {
+    "is-basis-for": [
+      {
+        "id-type": "doi",
+        "id": "10.52843/cassyni.t6jg2p",
+        "asserted-by": "object"
+      }
+    ]
+  },
+  "subject": [],
+  "published": {
+    "date-parts": [
+      [
+        2025,
+        3,
+        11
+      ]
+    ]
+  },
+  "subtype": "preprint"
+}

@@ -1,0 +1,1266 @@
+{
+  "indexed": {
+    "date-parts": [
+      [
+        2026,
+        11,
+        18
+      ]
+    ],
+    "date-time": "2026-11-18T01:36:11Z",
+    "timestamp": 1794965771738,
+    "version": "4.9.1"
+  },
+  "reference-count": 84,
+  "publisher": "Springer Science and Business Media LLC",
+  "issue": "1",
+  "license": [
+    {
+      "start": {
+        "date-parts": [
+          [
+            2020,
+            11,
+            9
+          ]
+        ],
+        "date-time": "2020-11-09T00:00:00Z",
+        "timestamp": 1604880000000
+      },
+      "content-version": "tdm",
+      "delay-in-days": 0,
+      "URL": "http://www.springer.com/tdm"
+    },
+    {
+      "start": {
+        "date-parts": [
+          [
+            2020,
+            11,
+            9
+          ]
+        ],
+        "date-time": "2020-11-09T00:00:00Z",
+        "timestamp": 1604880000000
+      },
+      "content-version": "vor",
+      "delay-in-days": 0,
+      "URL": "http://www.springer.com/tdm"
+    }
+  ],
+  "funder": [
+    {
+      "name": "University of Southern California Annenberg Fellowship"
+    },
+    {
+      "DOI": "10.13039/100000002",
+      "name": "U.S. Department of Health & Human Services | National Institutes of Health",
+      "doi-asserted-by": "publisher",
+      "award": [
+        "R01-NS104923"
+      ],
+      "award-info": [
+        {
+          "award-number": [
+            "R01-NS104923"
+          ]
+        }
+      ],
+      "id": [
+        {
+          "id": "10.13039/100000002",
+          "id-type": "DOI",
+          "asserted-by": "publisher"
+        }
+      ]
+    },
+    {
+      "DOI": "10.13039/100000002",
+      "name": "U.S. Department of Health & Human Services | National Institutes of Health",
+      "doi-asserted-by": "publisher",
+      "award": [
+        "R01-NS104923"
+      ],
+      "award-info": [
+        {
+          "award-number": [
+            "R01-NS104923"
+          ]
+        }
+      ],
+      "id": [
+        {
+          "id": "10.13039/100000002",
+          "id-type": "DOI",
+          "asserted-by": "publisher"
+        }
+      ]
+    },
+    {
+      "DOI": "10.13039/100000183",
+      "name": "United States Department of Defense | United States Army | U.S. Army Research, Development and Engineering Command | Army Research Office",
+      "doi-asserted-by": "publisher",
+      "award": [
+        "W911NF-16-1-0368"
+      ],
+      "award-info": [
+        {
+          "award-number": [
+            "W911NF-16-1-0368"
+          ]
+        }
+      ],
+      "id": [
+        {
+          "id": "10.13039/100000183",
+          "id-type": "DOI",
+          "asserted-by": "publisher"
+        }
+      ]
+    },
+    {
+      "DOI": "10.13039/100000183",
+      "name": "United States Department of Defense | United States Army | U.S. Army Research, Development and Engineering Command | Army Research Office",
+      "doi-asserted-by": "publisher",
+      "award": [
+        "W911NF1810434"
+      ],
+      "award-info": [
+        {
+          "award-number": [
+            "W911NF1810434"
+          ]
+        }
+      ],
+      "id": [
+        {
+          "id": "10.13039/100000183",
+          "id-type": "DOI",
+          "asserted-by": "publisher"
+        }
+      ]
+    },
+    {
+      "DOI": "10.13039/100000006",
+      "name": "United States Department of Defense | United States Navy | Office of Naval Research",
+      "doi-asserted-by": "publisher",
+      "award": [
+        "N00014-19-1-2128"
+      ],
+      "award-info": [
+        {
+          "award-number": [
+            "N00014-19-1-2128"
+          ]
+        }
+      ],
+      "id": [
+        {
+          "id": "10.13039/100000006",
+          "id-type": "DOI",
+          "asserted-by": "publisher"
+        }
+      ]
+    },
+    {
+      "DOI": "10.13039/100000001",
+      "name": "National Science Foundation",
+      "doi-asserted-by": "publisher",
+      "award": [
+        "CCF-1453868"
+      ],
+      "award-info": [
+        {
+          "award-number": [
+            "CCF-1453868"
+          ]
+        }
+      ],
+      "id": [
+        {
+          "id": "10.13039/100000001",
+          "id-type": "DOI",
+          "asserted-by": "publisher"
+        }
+      ]
+    }
+  ],
+  "content-domain": {
+    "domain": [
+      "link.springer.com"
+    ],
+    "crossmark-restriction": false
+  },
+  "short-container-title": [
+    "Nat Neurosci"
+  ],
+  "published-print": {
+    "date-parts": [
+      [
+        2021,
+        1
+      ]
+    ]
+  },
+  "DOI": "10.1038/s41593-020-00733-0",
+  "type": "journal-article",
+  "created": {
+    "date-parts": [
+      [
+        2020,
+        11,
+        9
+      ]
+    ],
+    "date-time": "2020-11-09T12:05:16Z",
+    "timestamp": 1604923516000
+  },
+  "page": "140-149",
+  "update-policy": "https://doi.org/10.1007/springer_crossmark_policy",
+  "source": "Crossref",
+  "is-referenced-by-count": 164,
+  "title": [
+    "Modeling behaviorally relevant neural dynamics enabled by preferential subspace identification"
+  ],
+  "prefix": "10.1038",
+  "volume": "24",
+  "author": [
+    {
+      "ORCID": "https://orcid.org/0000-0003-3032-5669",
+      "authenticated-orcid": false,
+      "given": "Omid G.",
+      "family": "Sani",
+      "sequence": "first",
+      "affiliation": [],
+      "role": [
+        {
+          "vocabulary": "crossref",
+          "role": "author"
+        }
+      ]
+    },
+    {
+      "ORCID": "https://orcid.org/0000-0002-2049-9588",
+      "authenticated-orcid": false,
+      "given": "Hamidreza",
+      "family": "Abbaspourazad",
+      "sequence": "additional",
+      "affiliation": [],
+      "role": [
+        {
+          "vocabulary": "crossref",
+          "role": "author"
+        }
+      ]
+    },
+    {
+      "given": "Yan T.",
+      "family": "Wong",
+      "sequence": "additional",
+      "affiliation": [],
+      "role": [
+        {
+          "vocabulary": "crossref",
+          "role": "author"
+        }
+      ]
+    },
+    {
+      "ORCID": "https://orcid.org/0000-0003-4116-0038",
+      "authenticated-orcid": false,
+      "given": "Bijan",
+      "family": "Pesaran",
+      "sequence": "additional",
+      "affiliation": [],
+      "role": [
+        {
+          "vocabulary": "crossref",
+          "role": "author"
+        }
+      ]
+    },
+    {
+      "ORCID": "https://orcid.org/0000-0002-0544-7720",
+      "authenticated-orcid": false,
+      "given": "Maryam M.",
+      "family": "Shanechi",
+      "sequence": "additional",
+      "affiliation": [],
+      "role": [
+        {
+          "vocabulary": "crossref",
+          "role": "author"
+        }
+      ]
+    }
+  ],
+  "member": "297",
+  "published-online": {
+    "date-parts": [
+      [
+        2020,
+        11,
+        9
+      ]
+    ]
+  },
+  "reference": [
+    {
+      "key": "733_CR1",
+      "doi-asserted-by": "crossref",
+      "first-page": "205",
+      "DOI": "10.1016/j.neuron.2006.09.019",
+      "volume": "52",
+      "author": "AB Schwartz",
+      "year": "2006",
+      "unstructured": "Schwartz, A. B., Cui, X. T., Weber, D. J. & Moran, D. W. Brain-controlled interfaces: movement restoration with neural prosthetics. Neuron 52, 205\u2013220 (2006).",
+      "journal-title": "Neuron"
+    },
+    {
+      "key": "733_CR2",
+      "doi-asserted-by": "crossref",
+      "first-page": "337",
+      "DOI": "10.1146/annurev-neuro-062111-150509",
+      "volume": "36",
+      "author": "KV Shenoy",
+      "year": "2013",
+      "unstructured": "Shenoy, K. V., Sahani, M. & Churchland, M. M. Cortical control of arm movements: a dynamical systems perspective. Annu. Rev. Neurosci. 36, 337\u2013359 (2013).",
+      "journal-title": "Annu. Rev. Neurosci."
+    },
+    {
+      "key": "733_CR3",
+      "doi-asserted-by": "crossref",
+      "first-page": "1725",
+      "DOI": "10.1109/TNSRE.2016.2639501",
+      "volume": "25",
+      "author": "MM Shanechi",
+      "year": "2017",
+      "unstructured": "Shanechi, M. M. Brain\u2013machine interface control algorithms. IEEE Trans. Neural Syst. Rehabil. Eng. 25, 1725\u20131734 (2017).",
+      "journal-title": "IEEE Trans. Neural Syst. Rehabil. Eng."
+    },
+    {
+      "key": "733_CR4",
+      "doi-asserted-by": "crossref",
+      "first-page": "1554",
+      "DOI": "10.1038/s41593-019-0488-y",
+      "volume": "22",
+      "author": "MM Shanechi",
+      "year": "2019",
+      "unstructured": "Shanechi, M. M. Brain\u2013machine interfaces from motor to mood. Nat. Neurosci. 22, 1554\u20131564 (2019).",
+      "journal-title": "Nat. Neurosci."
+    },
+    {
+      "key": "733_CR5",
+      "doi-asserted-by": "crossref",
+      "first-page": "429",
+      "DOI": "10.3389/fnins.2016.00429",
+      "volume": "10",
+      "author": "C Herff",
+      "year": "2016",
+      "unstructured": "Herff, C. & Schultz, T. Automatic speech recognition from neural signals: a focused review. Front. Neurosci. 10, 429 (2016).",
+      "journal-title": "Front. Neurosci."
+    },
+    {
+      "key": "733_CR6",
+      "doi-asserted-by": "crossref",
+      "first-page": "954",
+      "DOI": "10.1038/nbt.4200",
+      "volume": "36",
+      "author": "OG Sani",
+      "year": "2018",
+      "unstructured": "Sani, O. G. et al. Mood variations decoded from multi-site intracranial human brain activity. Nat. Biotechnol. 36, 954\u2013961 (2018).",
+      "journal-title": "Nat. Biotechnol."
+    },
+    {
+      "key": "733_CR7",
+      "doi-asserted-by": "crossref",
+      "first-page": "78",
+      "DOI": "10.1038/nature12742",
+      "volume": "503",
+      "author": "V Mante",
+      "year": "2013",
+      "unstructured": "Mante, V., Sussillo, D., Shenoy, K. V. & Newsome, W. T. Context-dependent computation by recurrent dynamics in prefrontal cortex. Nature 503, 78\u201384 (2013).",
+      "journal-title": "Nature"
+    },
+    {
+      "key": "733_CR8",
+      "doi-asserted-by": "crossref",
+      "first-page": "564",
+      "DOI": "10.3389/fnins.2017.00564",
+      "volume": "11",
+      "author": "KB Hoang",
+      "year": "2017",
+      "unstructured": "Hoang, K. B., Cassar, I. R., Grill, W. M. & Turner, D. A. Biomarkers and stimulation algorithms for adaptive brain stimulation. Front. Neurosci. 11, 564 (2017).",
+      "journal-title": "Front. Neurosci."
+    },
+    {
+      "key": "733_CR9",
+      "doi-asserted-by": "publisher",
+      "unstructured": "Kaufman, M. T. et al. The largest response component in the motor cortex reflects movement timing but not movement type. eNeuro https://doi.org/10.1523/ENEURO.0085-16.2016 (2016).",
+      "DOI": "10.1523/ENEURO.0085-16.2016"
+    },
+    {
+      "key": "733_CR10",
+      "doi-asserted-by": "crossref",
+      "first-page": "4233",
+      "DOI": "10.1038/s41467-018-06560-z",
+      "volume": "9",
+      "author": "JA Gallego",
+      "year": "2018",
+      "unstructured": "Gallego, J. A. et al. Cortical population activity within a preserved neural manifold underlies multiple motor behaviors. Nat. Commun. 9, 4233 (2018).",
+      "journal-title": "Nat. Commun."
+    },
+    {
+      "key": "733_CR11",
+      "doi-asserted-by": "crossref",
+      "first-page": "953",
+      "DOI": "10.1016/j.neuron.2018.01.004",
+      "volume": "97",
+      "author": "AA Russo",
+      "year": "2018",
+      "unstructured": "Russo, A. A. et al. Motor cortex embeds muscle-like commands in an untangled population response. Neuron 97, 953\u2013966.e8 (2018).",
+      "journal-title": "Neuron"
+    },
+    {
+      "key": "733_CR12",
+      "doi-asserted-by": "crossref",
+      "first-page": "eaav3932",
+      "DOI": "10.1126/science.aax6175",
+      "volume": "364",
+      "author": "WE Allen",
+      "year": "2019",
+      "unstructured": "Allen, W. E. et al. Thirst regulates motivated behavior through modulation of brainwide neural population dynamics. Science 364, eaav3932 (2019).",
+      "journal-title": "Science"
+    },
+    {
+      "key": "733_CR13",
+      "doi-asserted-by": "crossref",
+      "first-page": "eaav7893",
+      "DOI": "10.1126/science.aav7893",
+      "volume": "364",
+      "author": "C Stringer",
+      "year": "2019",
+      "unstructured": "Stringer, C. et al. Spontaneous behaviors drive multidimensional, brainwide activity. Science 364, eaav7893 (2019).",
+      "journal-title": "Science"
+    },
+    {
+      "key": "733_CR14",
+      "doi-asserted-by": "crossref",
+      "first-page": "e40145",
+      "DOI": "10.7554/eLife.40145",
+      "volume": "8",
+      "author": "D Susilaradeya",
+      "year": "2019",
+      "unstructured": "Susilaradeya, D. et al. Extrinsic and intrinsic dynamics in movement intermittency. eLife 8, e40145 (2019).",
+      "journal-title": "eLife"
+    },
+    {
+      "key": "733_CR15",
+      "doi-asserted-by": "crossref",
+      "first-page": "1500",
+      "DOI": "10.1038/nn.3776",
+      "volume": "17",
+      "author": "JP Cunningham",
+      "year": "2014",
+      "unstructured": "Cunningham, J. P. & Yu, B. M. Dimensionality reduction for large-scale neural recordings. Nat. Neurosci. 17, 1500\u20131509 (2014).",
+      "journal-title": "Nat. Neurosci."
+    },
+    {
+      "key": "733_CR16",
+      "doi-asserted-by": "crossref",
+      "first-page": "978",
+      "DOI": "10.1016/j.neuron.2017.05.025",
+      "volume": "94",
+      "author": "JA Gallego",
+      "year": "2017",
+      "unstructured": "Gallego, J. A., Perich, M. G., Miller, L. E. & Solla, S. A. Neural manifolds for the control of movement. Neuron 94, 978\u2013984 (2017).",
+      "journal-title": "Neuron"
+    },
+    {
+      "key": "733_CR17",
+      "doi-asserted-by": "crossref",
+      "first-page": "938",
+      "DOI": "10.1016/j.tics.2018.07.010",
+      "volume": "22",
+      "author": "ED Remington",
+      "year": "2018",
+      "unstructured": "Remington, E. D., Egger, S. W., Narain, D., Wang, J. & Jazayeri, M. A dynamical systems perspective on flexible motor timing. Trends Cogn. Sci. 22, 938\u2013952 (2018).",
+      "journal-title": "Trends Cogn. Sci."
+    },
+    {
+      "key": "733_CR18",
+      "doi-asserted-by": "crossref",
+      "first-page": "423",
+      "DOI": "10.1038/nature13665",
+      "volume": "512",
+      "author": "PT Sadtler",
+      "year": "2014",
+      "unstructured": "Sadtler, P. T. et al. Neural constraints on learning. Nature 512, 423\u2013426 (2014).",
+      "journal-title": "Nature"
+    },
+    {
+      "key": "733_CR19",
+      "doi-asserted-by": "crossref",
+      "first-page": "148",
+      "DOI": "10.1016/j.conb.2015.04.003",
+      "volume": "32",
+      "author": "P Gao",
+      "year": "2015",
+      "unstructured": "Gao, P. & Ganguli, S. On simplicity and complexity in the brave new world of large-scale neuroscience. Curr. Opin. Neurobiol. 32, 148\u2013155 (2015).",
+      "journal-title": "Curr. Opin. Neurobiol."
+    },
+    {
+      "key": "733_CR20",
+      "doi-asserted-by": "publisher",
+      "unstructured": "Gao, P. et al. A theory of multineuronal dimensionality, dynamics and measurement. Preprint at bioRxiv https://doi.org/10.1101/214262 (2017).",
+      "DOI": "10.1101/214262"
+    },
+    {
+      "key": "733_CR21",
+      "doi-asserted-by": "crossref",
+      "first-page": "51",
+      "DOI": "10.1038/nature11129",
+      "volume": "487",
+      "author": "MM Churchland",
+      "year": "2012",
+      "unstructured": "Churchland, M. M. et al. Neural population dynamics during reaching. Nature 487, 51\u201356 (2012).",
+      "journal-title": "Nature"
+    },
+    {
+      "key": "733_CR22",
+      "volume": "6",
+      "author": "JC Kao",
+      "year": "2015",
+      "unstructured": "Kao, J. C. et al. Single-trial dynamics of motor cortex and their applications to brain\u2013machine interfaces. Nat. Commun. 6, 7759 (2015).",
+      "journal-title": "Nat. Commun."
+    },
+    {
+      "key": "733_CR23",
+      "doi-asserted-by": "crossref",
+      "first-page": "805",
+      "DOI": "10.1038/s41592-018-0109-9",
+      "volume": "15",
+      "author": "C Pandarinath",
+      "year": "2018",
+      "unstructured": "Pandarinath, C. et al. Inferring single-trial neural population dynamics using sequential auto-encoders. Nat. Methods 15, 805\u2013815 (2018).",
+      "journal-title": "Nat. Methods"
+    },
+    {
+      "key": "733_CR24",
+      "doi-asserted-by": "crossref",
+      "first-page": "666",
+      "DOI": "10.1109/JPROC.2014.2307357",
+      "volume": "102",
+      "author": "JC Kao",
+      "year": "2014",
+      "unstructured": "Kao, J. C., Stavisky, S. D., Sussillo, D., Nuyujukian, P. & Shenoy, K. V. Information systems opportunities in brain\u2013machine interface decoders. Proc. IEEE 102, 666\u2013682 (2014).",
+      "journal-title": "Proc. IEEE"
+    },
+    {
+      "key": "733_CR25",
+      "doi-asserted-by": "crossref",
+      "first-page": "1091",
+      "DOI": "10.1016/j.tics.2018.09.002",
+      "volume": "22",
+      "author": "JD Wallis",
+      "year": "2018",
+      "unstructured": "Wallis, J. D. Decoding cognitive processes from neural ensembles. Trends Cogn. Sci. 22, 1091\u20131102 (2018).",
+      "journal-title": "Trends Cogn. Sci."
+    },
+    {
+      "key": "733_CR26",
+      "doi-asserted-by": "crossref",
+      "first-page": "e10989",
+      "DOI": "10.7554/eLife.10989",
+      "volume": "5",
+      "author": "D Kobak",
+      "year": "2016",
+      "unstructured": "Kobak, D. et al. Demixed principal component analysis of neural population data. eLife 5, e10989 (2016).",
+      "journal-title": "eLife"
+    },
+    {
+      "key": "733_CR27",
+      "doi-asserted-by": "crossref",
+      "first-page": "33",
+      "DOI": "10.1016/j.conb.2017.10.023",
+      "volume": "49",
+      "author": "K Svoboda",
+      "year": "2018",
+      "unstructured": "Svoboda, K. & Li, N. Neural mechanisms of movement planning: motor cortex and beyond. Curr. Opin. Neurobiol. 49, 33\u201341 (2018).",
+      "journal-title": "Curr. Opin. Neurobiol."
+    },
+    {
+      "key": "733_CR28",
+      "doi-asserted-by": "crossref",
+      "first-page": "eaav8736",
+      "DOI": "10.1126/science.aav8736",
+      "volume": "364",
+      "author": "J Gr\u00fcndemann",
+      "year": "2019",
+      "unstructured": "Gr\u00fcndemann, J. et al. Amygdala ensembles encode behavioral states. Science 364, eaav8736 (2019).",
+      "journal-title": "Science"
+    },
+    {
+      "key": "733_CR29",
+      "doi-asserted-by": "crossref",
+      "first-page": "370",
+      "DOI": "10.1109/TNSRE.2009.2023307",
+      "volume": "17",
+      "author": "W Wu",
+      "year": "2009",
+      "unstructured": "Wu, W., Kulkarni, J. E., Hatsopoulos, N. G. & Paninski, L. Neural decoding of hand motion using a linear state-space model with hidden states. IEEE Trans. Neural Syst. Rehabil. Eng. 17, 370\u2013378 (2009).",
+      "journal-title": "IEEE Trans. Neural Syst. Rehabil. Eng."
+    },
+    {
+      "key": "733_CR30",
+      "doi-asserted-by": "crossref",
+      "first-page": "272",
+      "DOI": "10.1109/TNSRE.2015.2470527",
+      "volume": "24",
+      "author": "M Aghagolzadeh",
+      "year": "2016",
+      "unstructured": "Aghagolzadeh, M. & Truccolo, W. Inference and decoding of motor cortex low-dimensional dynamics via latent state-space models. IEEE Trans. Neural Syst. Rehabil. Eng. 24, 272\u2013282 (2016).",
+      "journal-title": "IEEE Trans. Neural Syst. Rehabil. Eng."
+    },
+    {
+      "key": "733_CR31",
+      "doi-asserted-by": "crossref",
+      "first-page": "066007",
+      "DOI": "10.1088/1741-2552/aad1a8",
+      "volume": "15",
+      "author": "Y Yang",
+      "year": "2018",
+      "unstructured": "Yang, Y., Connolly, A. T. & Shanechi, M. M. A control-theoretic system identification framework and a real-time closed-loop clinical simulation testbed for electrical brain stimulation. J. Neural Eng. 15, 066007 (2018).",
+      "journal-title": "J. Neural Eng."
+    },
+    {
+      "key": "733_CR32",
+      "doi-asserted-by": "crossref",
+      "first-page": "1128",
+      "DOI": "10.1109/TNSRE.2019.2913218",
+      "volume": "27",
+      "author": "H Abbaspourazad",
+      "year": "2019",
+      "unstructured": "Abbaspourazad, H., Hsieh, H. & Shanechi, M. M. A multiscale dynamical modeling and identification framework for spike\u2013field activity. IEEE Trans. Neural Syst. Rehabil. Eng. 27, 1128\u20131138 (2019).",
+      "journal-title": "IEEE Trans. Neural Syst. Rehabil. Eng."
+    },
+    {
+      "key": "733_CR33",
+      "doi-asserted-by": "crossref",
+      "first-page": "056014",
+      "DOI": "10.1088/1741-2552/ab2214",
+      "volume": "16",
+      "author": "Y Yang",
+      "year": "2019",
+      "unstructured": "Yang, Y., Sani, O. G., Chang, E. F. & Shanechi, M. M. Dynamic network modeling and dimensionality reduction for human ECoG activity. J. Neural Eng. 16, 056014 (2019).",
+      "journal-title": "J. Neural Eng."
+    },
+    {
+      "key": "733_CR34",
+      "unstructured": "Yang, Y. et al. Model-based prediction of large-scale brain network dynamic response to direct electrical stimulation. Nat. Biomed. Eng. (in the press)."
+    },
+    {
+      "key": "733_CR35",
+      "doi-asserted-by": "crossref",
+      "unstructured": "Van Overschee, P. & De Moor, B. Subspace Identification for Linear Systems (Springer US, 1996).",
+      "DOI": "10.1007/978-1-4613-0465-4"
+    },
+    {
+      "key": "733_CR36",
+      "doi-asserted-by": "crossref",
+      "first-page": "11084",
+      "DOI": "10.1073/pnas.1504172112",
+      "volume": "112",
+      "author": "DA Markowitz",
+      "year": "2015",
+      "unstructured": "Markowitz, D. A., Curtis, C. E. & Pesaran, B. Multiple component networks support working memory in prefrontal cortex. Proc. Natl Acad. Sci. USA 112, 11084\u201311089 (2015).",
+      "journal-title": "Proc. Natl Acad. Sci. USA"
+    },
+    {
+      "key": "733_CR37",
+      "unstructured": "Buesing, L., Macke, J. H. & Sahani, M. in Advances in Neural Information Processing Systems 25 (eds Pereira, F. et al) 1682\u20131690 (Curran Associates, 2012)."
+    },
+    {
+      "key": "733_CR38",
+      "doi-asserted-by": "crossref",
+      "first-page": "614",
+      "DOI": "10.1152/jn.90941.2008",
+      "volume": "102",
+      "author": "BM Yu",
+      "year": "2009",
+      "unstructured": "Yu, B. M. et al. Gaussian-process factor analysis for low-dimensional single-trial analysis of neural population activity. J. Neurophysiol. 102, 614\u2013635 (2009).",
+      "journal-title": "J. Neurophysiol."
+    },
+    {
+      "key": "733_CR39",
+      "doi-asserted-by": "crossref",
+      "first-page": "249",
+      "DOI": "10.1016/j.neuron.2019.01.026",
+      "volume": "102",
+      "author": "JD Semedo",
+      "year": "2019",
+      "unstructured": "Semedo, J. D., Zandvakili, A., Machens, C. K., Yu, B. M. & Kohn, A. Cortical areas interact through a communication subspace. Neuron 102, 249\u2013259.e4 (2019).",
+      "journal-title": "Neuron"
+    },
+    {
+      "key": "733_CR40",
+      "first-page": "2859",
+      "volume": "16",
+      "author": "JP Cunningham",
+      "year": "2015",
+      "unstructured": "Cunningham, J. P. & Ghahramani, Z. Linear dimensionality reduction: survey, insights, and generalizations. J. Mach. Learn. Res. 16, 2859\u20132900 (2015).",
+      "journal-title": "J. Mach. Learn. Res."
+    },
+    {
+      "key": "733_CR41",
+      "doi-asserted-by": "crossref",
+      "first-page": "016018",
+      "DOI": "10.1088/1741-2552/aaeb1a",
+      "volume": "16",
+      "author": "H-L Hsieh",
+      "year": "2018",
+      "unstructured": "Hsieh, H.-L., Wong, Y. T., Pesaran, B. & Shanechi, M. M. Multiscale modeling and decoding algorithms for spike\u2013field activity. J. Neural Eng. 16, 016018 (2018).",
+      "journal-title": "J. Neural Eng."
+    },
+    {
+      "key": "733_CR42",
+      "doi-asserted-by": "crossref",
+      "first-page": "e1004730",
+      "DOI": "10.1371/journal.pcbi.1004730",
+      "volume": "12",
+      "author": "MM Shanechi",
+      "year": "2016",
+      "unstructured": "Shanechi, M. M., Orsborn, A. L. & Carmena, J. M. Robust brain\u2013machine interface design using optimal feedback control modeling and adaptive point process filtering. PLoS Comput. Biol. 12, e1004730 (2016).",
+      "journal-title": "PLoS Comput. Biol."
+    },
+    {
+      "key": "733_CR43",
+      "doi-asserted-by": "crossref",
+      "DOI": "10.1038/ncomms13825",
+      "volume": "8",
+      "author": "MM Shanechi",
+      "year": "2017",
+      "unstructured": "Shanechi, M. M. et al. Rapid control and feedback rates enhance neuroprosthetic control. Nat. Commun. 8, 13825 (2017).",
+      "journal-title": "Nat. Commun."
+    },
+    {
+      "key": "733_CR44",
+      "doi-asserted-by": "crossref",
+      "first-page": "036009",
+      "DOI": "10.1088/1741-2560/12/3/036009",
+      "volume": "12",
+      "author": "SD Stavisky",
+      "year": "2015",
+      "unstructured": "Stavisky, S. D., Kao, J. C., Nuyujukian, P., Ryu, S. I. & Shenoy, K. V. A high performing brain\u2013machine interface driven by low-frequency local field potentials alone and together with spikes. J. Neural Eng. 12, 036009 (2015).",
+      "journal-title": "J. Neural Eng."
+    },
+    {
+      "key": "733_CR45",
+      "doi-asserted-by": "crossref",
+      "first-page": "056022",
+      "DOI": "10.1088/1741-2552/ab225b",
+      "volume": "16",
+      "author": "R Bighamian",
+      "year": "2019",
+      "unstructured": "Bighamian, R., Wong, Y. T., Pesaran, B. & Shanechi, M. M. Sparse model-based estimation of functional dependence in high-dimensional field and spike multiscale networks. J. Neural Eng. 16, 056022 (2019).",
+      "journal-title": "J. Neural Eng."
+    },
+    {
+      "key": "733_CR46",
+      "doi-asserted-by": "crossref",
+      "first-page": "857",
+      "DOI": "10.1109/TNSRE.2019.2908156",
+      "volume": "27",
+      "author": "C Wang",
+      "year": "2019",
+      "unstructured": "Wang, C. & Shanechi, M. M. Estimating multiscale direct causality graphs in neural spike\u2013field networks. IEEE Trans. Neural Syst. Rehabil. Eng. 27, 857\u2013866 (2019).",
+      "journal-title": "IEEE Trans. Neural Syst. Rehabil. Eng."
+    },
+    {
+      "key": "733_CR47",
+      "doi-asserted-by": "crossref",
+      "first-page": "036022",
+      "DOI": "10.1088/1741-2552/ab0ea4",
+      "volume": "16",
+      "author": "Y Yang",
+      "year": "2019",
+      "unstructured": "Yang, Y. et al. Developing a personalized closed-loop controller of medically-induced coma in a rodent model. J. Neural Eng. 16, 036022 (2019).",
+      "journal-title": "J. Neural Eng."
+    },
+    {
+      "key": "733_CR48",
+      "doi-asserted-by": "publisher",
+      "unstructured": "Ahmadipour, P., Yang, Y., Chang, E. F. & Shanechi, M. M. Adaptive tracking of human ECoG network dynamics. J. Neural Eng. https://doi.org/10.1088/1741-2552/abae42 (2020).",
+      "DOI": "10.1088/1741-2552/abae42"
+    },
+    {
+      "key": "733_CR49",
+      "doi-asserted-by": "crossref",
+      "first-page": "e1006168",
+      "DOI": "10.1371/journal.pcbi.1006168",
+      "volume": "14",
+      "author": "H-L Hsieh",
+      "year": "2018",
+      "unstructured": "Hsieh, H.-L. & Shanechi, M. M. Optimizing the learning rate for adaptive estimation of neural encoding models. PLoS Comput. Biol. 14, e1006168 (2018).",
+      "journal-title": "PLoS Comput. Biol."
+    },
+    {
+      "key": "733_CR50",
+      "volume": "2",
+      "author": "K Yun",
+      "year": "2012",
+      "unstructured": "Yun, K., Watanabe, K. & Shimojo, S. Interpersonal body and neural synchronization as a marker of implicit social interaction. Sci. Rep. 2, 959 (2012).",
+      "journal-title": "Sci. Rep."
+    },
+    {
+      "key": "733_CR51",
+      "doi-asserted-by": "crossref",
+      "first-page": "1401",
+      "DOI": "10.1016/j.neuron.2014.01.031",
+      "volume": "81",
+      "author": "D Thura",
+      "year": "2014",
+      "unstructured": "Thura, D. & Cisek, P. Deliberation and commitment in the premotor and primary motor cortex during dynamic decision making. Neuron 81, 1401\u20131416 (2014).",
+      "journal-title": "Neuron"
+    },
+    {
+      "key": "733_CR52",
+      "doi-asserted-by": "crossref",
+      "first-page": "1233",
+      "DOI": "10.1016/j.cell.2015.01.045",
+      "volume": "160",
+      "author": "K Haroush",
+      "year": "2015",
+      "unstructured": "Haroush, K. & Williams, Z. M. Neuronal prediction of opponent\u2019s behavior during cooperative social interchange in primates. Cell 160, 1233\u20131245 (2015).",
+      "journal-title": "Cell"
+    },
+    {
+      "key": "733_CR53",
+      "doi-asserted-by": "crossref",
+      "first-page": "439",
+      "DOI": "10.1038/nature15693",
+      "volume": "526",
+      "author": "DJ Herzfeld",
+      "year": "2015",
+      "unstructured": "Herzfeld, D. J., Kojima, Y., Soetedjo, R. & Shadmehr, R. Encoding of action by the Purkinje cells of the cerebellum. Nature 526, 439\u2013442 (2015).",
+      "journal-title": "Nature"
+    },
+    {
+      "key": "733_CR54",
+      "doi-asserted-by": "crossref",
+      "first-page": "e0160851",
+      "DOI": "10.1371/journal.pone.0160851",
+      "volume": "11",
+      "author": "P Ramkumar",
+      "year": "2016",
+      "unstructured": "Ramkumar, P., Dekleva, B., Cooler, S., Miller, L. & Kording, K. Premotor and motor cortices encode reward. PLoS ONE 11, e0160851 (2016).",
+      "journal-title": "PLoS ONE"
+    },
+    {
+      "key": "733_CR55",
+      "doi-asserted-by": "crossref",
+      "first-page": "795",
+      "DOI": "10.1016/j.celrep.2015.12.068",
+      "volume": "14",
+      "author": "CJ Whitmire",
+      "year": "2016",
+      "unstructured": "Whitmire, C. J., Waiblinger, C., Schwarz, C. & Stanley, G. B. Information coding through adaptive gating of synchronized thalamic bursting. Cell Rep. 14, 795\u2013807 (2016).",
+      "journal-title": "Cell Rep."
+    },
+    {
+      "key": "733_CR56",
+      "doi-asserted-by": "crossref",
+      "first-page": "111",
+      "DOI": "10.1016/j.tics.2016.12.007",
+      "volume": "21",
+      "author": "TB Christophel",
+      "year": "2017",
+      "unstructured": "Christophel, T. B., Klink, P. C., Spitzer, B., Roelfsema, P. R. & Haynes, J.-D. The distributed nature of working memory. Trends Cogn. Sci. 21, 111\u2013124 (2017).",
+      "journal-title": "Trends Cogn. Sci."
+    },
+    {
+      "key": "733_CR57",
+      "doi-asserted-by": "crossref",
+      "first-page": "1733",
+      "DOI": "10.1523/JNEUROSCI.1537-16.2016",
+      "volume": "37",
+      "author": "K Takahashi",
+      "year": "2017",
+      "unstructured": "Takahashi, K. et al. Encoding of both reaching and grasping kinematics in dorsal and ventral premotor cortices. J. Neurosci. 37, 1733\u20131746 (2017).",
+      "journal-title": "J. Neurosci."
+    },
+    {
+      "key": "733_CR58",
+      "doi-asserted-by": "crossref",
+      "first-page": "056016",
+      "DOI": "10.1088/1741-2560/12/5/056016",
+      "volume": "12",
+      "author": "VK Menz",
+      "year": "2015",
+      "unstructured": "Menz, V. K., Schaffelhofer, S. & Scherberger, H. Representation of continuous hand and arm movements in macaque areas M1, F5, and AIP: a comparative decoding study. J. Neural Eng. 12, 056016 (2015).",
+      "journal-title": "J. Neural Eng."
+    },
+    {
+      "key": "733_CR59",
+      "doi-asserted-by": "crossref",
+      "first-page": "80",
+      "DOI": "10.1162/089976606774841585",
+      "volume": "18",
+      "author": "W Wu",
+      "year": "2006",
+      "unstructured": "Wu, W., Gao, Y., Bienenstock, E., Donoghue, J. P. & Black, M. J. Bayesian population decoding of motor cortical activity using a Kalman filter. Neural Comput. 18, 80\u2013118 (2006).",
+      "journal-title": "Neural Comput."
+    },
+    {
+      "key": "733_CR60",
+      "doi-asserted-by": "crossref",
+      "first-page": "1337",
+      "DOI": "10.1152/jn.00781.2011",
+      "volume": "107",
+      "author": "AK Bansal",
+      "year": "2011",
+      "unstructured": "Bansal, A. K., Truccolo, W., Vargas-Irwin, C. E. & Donoghue, J. P. Decoding 3D reach and grasp from hybrid signals in motor and premotor cortices: spikes, multiunit activity, and local field potentials. J. Neurophysiol. 107, 1337\u20131355 (2011).",
+      "journal-title": "J. Neurophysiol."
+    },
+    {
+      "key": "733_CR61",
+      "unstructured": "Obinata, G. & Anderson, B. D. O. Model Reduction for Control System Design (Springer Science & Business Media, 2012)."
+    },
+    {
+      "key": "733_CR62",
+      "doi-asserted-by": "crossref",
+      "unstructured": "Katayama, T. Subspace Methods for System Identification (Springer Science & Business Media, 2006).",
+      "DOI": "10.1007/1-84628-158-X"
+    },
+    {
+      "key": "733_CR63",
+      "doi-asserted-by": "crossref",
+      "first-page": "665",
+      "DOI": "10.1016/j.neuron.2014.08.038",
+      "volume": "84",
+      "author": "KV Shenoy",
+      "year": "2014",
+      "unstructured": "Shenoy, K. V. & Carmena, J. M. Combining decoder design and neural adaptation in brain\u2013machine interfaces. Neuron 84, 665\u2013680 (2014).",
+      "journal-title": "Neuron"
+    },
+    {
+      "key": "733_CR64",
+      "doi-asserted-by": "crossref",
+      "first-page": "066019",
+      "DOI": "10.1088/1741-2560/13/6/066019",
+      "volume": "13",
+      "author": "Y Yang",
+      "year": "2016",
+      "unstructured": "Yang, Y. & Shanechi, M. M. An adaptive and generalizable closed-loop system for control of medically induced coma and other states of anesthesia. J. Neural Eng. 13, 066019 (2016).",
+      "journal-title": "J. Neural Eng."
+    },
+    {
+      "key": "733_CR65",
+      "doi-asserted-by": "crossref",
+      "unstructured": "Yang, Y., Chang, E. F. & Shanechi, M. M. Dynamic tracking of non-stationarity in human ECoG activity. In 2017 39th Annual International Conference of the IEEE Engineering in Medicine and Biology Society (EMBC) 1660\u20131663 (2017).",
+      "DOI": "10.1109/EMBC.2017.8037159"
+    },
+    {
+      "key": "733_CR66",
+      "doi-asserted-by": "crossref",
+      "unstructured": "Ahmadipour, P., Yang, Y. & Shanechi, M. M. Investigating the effect of forgetting factor on tracking non-stationary neural dynamics. In 2019 9th International IEEE/EMBS Conference on Neural Engineering (NER) 291\u2013294 (2019).",
+      "DOI": "10.1109/NER.2019.8717119"
+    },
+    {
+      "key": "733_CR67",
+      "unstructured": "Fu, Z.-F. & He, J. Modal Analysis (Elsevier, 2001)."
+    },
+    {
+      "key": "733_CR68",
+      "doi-asserted-by": "crossref",
+      "unstructured": "Wong, Y. T., Putrino, D., Weiss, A. & Pesaran, B. Utilizing movement synergies to improve decoding performance for a brain machine interface. In 2013 35th Annual International Conference of the IEEE Engineering in Medicine and Biology Society (EMBC) 289\u2013292 (2013).",
+      "DOI": "10.1109/EMBC.2013.6609494"
+    },
+    {
+      "key": "733_CR69",
+      "doi-asserted-by": "crossref",
+      "first-page": "922",
+      "DOI": "10.1152/jn.00607.2002",
+      "volume": "89",
+      "author": "P Cisek",
+      "year": "2003",
+      "unstructured": "Cisek, P., Crammond, D. J. & Kalaska, J. F. Neural activity in primary motor and dorsal premotor cortex in reaching tasks with the contralateral versus ipsilateral arm. J. Neurophysiol. 89, 922\u2013942 (2003).",
+      "journal-title": "J. Neurophysiol."
+    },
+    {
+      "key": "733_CR70",
+      "doi-asserted-by": "crossref",
+      "first-page": "e46159",
+      "DOI": "10.7554/eLife.46159",
+      "volume": "8",
+      "author": "KC Ames",
+      "year": "2019",
+      "unstructured": "Ames, K. C. & Churchland, M. M. Motor cortex signals for each arm are mixed across hemispheres and neurons yet partitioned within the population response. eLife 8, e46159 (2019).",
+      "journal-title": "eLife"
+    },
+    {
+      "key": "733_CR71",
+      "doi-asserted-by": "crossref",
+      "first-page": "68",
+      "DOI": "10.1016/j.jneumeth.2014.03.010",
+      "volume": "244",
+      "author": "D Putrino",
+      "year": "2015",
+      "unstructured": "Putrino, D., Wong, Y. T., Weiss, A. & Pesaran, B. A training platform for many-dimensional prosthetic devices using a virtual reality environment. J. Neurosci. Methods 244, 68\u201377 (2015).",
+      "journal-title": "J. Neurosci. Methods"
+    },
+    {
+      "key": "733_CR72",
+      "doi-asserted-by": "crossref",
+      "first-page": "18",
+      "DOI": "10.1152/jn.00832.2011",
+      "volume": "108",
+      "author": "RD Flint",
+      "year": "2012",
+      "unstructured": "Flint, R. D., Ethier, C., Oby, E. R., Miller, L. E. & Slutzky, M. W. Local field potentials allow accurate decoding of muscle activity. J. Neurophysiol. 108, 18\u201324 (2012).",
+      "journal-title": "J. Neurophysiol."
+    },
+    {
+      "key": "733_CR73",
+      "doi-asserted-by": "crossref",
+      "first-page": "026021",
+      "DOI": "10.1088/1741-2560/13/2/026021",
+      "volume": "13",
+      "author": "DT Bundy",
+      "year": "2016",
+      "unstructured": "Bundy, D. T., Pahwa, M., Szrama, N. & Leuthardt, E. C. Decoding three-dimensional reaching movements using electrocorticographic signals in humans. J. Neural Eng. 13, 026021 (2016).",
+      "journal-title": "J. Neural Eng."
+    },
+    {
+      "key": "733_CR74",
+      "unstructured": "Oppenheim, A. V. & Schafer, R. W. Discrete-Time Signal Processing (Pearson Higher Education, 2011)."
+    },
+    {
+      "key": "733_CR75",
+      "doi-asserted-by": "crossref",
+      "first-page": "1099",
+      "DOI": "10.1016/j.neuron.2018.05.015",
+      "volume": "98",
+      "author": "AH Williams",
+      "year": "2018",
+      "unstructured": "Williams, A. H. et al. Unsupervised discovery of demixed, low-dimensional neural dynamics across multiple timescales through tensor component analysis. Neuron 98, 1099\u20131115.e8 (2018).",
+      "journal-title": "Neuron"
+    },
+    {
+      "key": "733_CR76",
+      "doi-asserted-by": "crossref",
+      "first-page": "292",
+      "DOI": "10.1016/j.neuron.2019.05.003",
+      "volume": "103",
+      "author": "EM Trautmann",
+      "year": "2019",
+      "unstructured": "Trautmann, E. M. et al. Accurate estimation of neural population dynamics without spike sorting. Neuron 103, 292\u2013308.e4 (2019).",
+      "journal-title": "Neuron"
+    },
+    {
+      "key": "733_CR77",
+      "doi-asserted-by": "crossref",
+      "first-page": "260",
+      "DOI": "10.1038/s41593-019-0555-4",
+      "volume": "23",
+      "author": "JA Gallego",
+      "year": "2020",
+      "unstructured": "Gallego, J. A., Perich, M. G., Chowdhury, R. H., Solla, S. A. & Miller, L. E. Long-term stability of cortical population dynamics underlying consistent behavior. Nat. Neurosci. 23, 260\u2013270 (2020).",
+      "journal-title": "Nat. Neurosci."
+    },
+    {
+      "key": "733_CR78",
+      "doi-asserted-by": "crossref",
+      "first-page": "066016",
+      "DOI": "10.1088/1741-2552/ab3dbc",
+      "volume": "16",
+      "author": "N Sadras",
+      "year": "2019",
+      "unstructured": "Sadras, N., Pesaran, B. & Shanechi, M. M. A point-process matched filter for event detection and decoding from population spike trains. J. Neural Eng. 16, 066016 (2019).",
+      "journal-title": "J. Neural Eng."
+    },
+    {
+      "key": "733_CR79",
+      "unstructured": "Ghahramani, Z. & Hinton, G. E. Parameter Estimation for Linear Dynamical Systems. Technical Report CRG-TR-92-2, 1\u20136 (University of Toronto, 1996); https://www.cs.toronto.edu/~hinton/absps/tr96-2.html"
+    },
+    {
+      "key": "733_CR80",
+      "unstructured": "Bishop, C. M. Pattern Recognition and Machine Learning (Springer, 2011)."
+    },
+    {
+      "key": "733_CR81",
+      "unstructured": "Archer, E. W., Koster, U., Pillow, J. W. & Macke, J. H. Low-dimensional models of neural population activity in sensory cortical circuits. In Advances in Neural Information Processing Systems 27 (eds Ghahramani, Z. et al.) 343\u2013351 (Curran Associates, 2014)."
+    },
+    {
+      "key": "733_CR82",
+      "doi-asserted-by": "crossref",
+      "first-page": "1",
+      "DOI": "10.1145/1961189.1961199",
+      "volume": "2",
+      "author": "C-C Chang",
+      "year": "2011",
+      "unstructured": "Chang, C.-C. & Lin, C.-J. LIBSVM: a library for support vector machines. ACM Trans. Intell. Syst. Technol. 2, 1\u201327 (2011).",
+      "journal-title": "ACM Trans. Intell. Syst. Technol."
+    },
+    {
+      "key": "733_CR83",
+      "doi-asserted-by": "crossref",
+      "unstructured": "Medsker, L. & Jain, L. C. Recurrent Neural Networks: Design and Applications (CRC Press, 1999).",
+      "DOI": "10.1201/9781420049176"
+    },
+    {
+      "key": "733_CR84",
+      "doi-asserted-by": "crossref",
+      "first-page": "289",
+      "DOI": "10.1111/j.2517-6161.1995.tb02031.x",
+      "volume": "57",
+      "author": "Y Benjamini",
+      "year": "1995",
+      "unstructured": "Benjamini, Y. & Hochberg, Y. Controlling the false discovery rate: a practical and powerful approach to multiple testing. J. R. Stat. Soc. Ser. B Methodol. 57, 289\u2013300 (1995).",
+      "journal-title": "J. R. Stat. Soc. Ser. B Methodol."
+    }
+  ],
+  "container-title": [
+    "Nature Neuroscience"
+  ],
+  "original-title": [],
+  "language": "en",
+  "link": [
+    {
+      "URL": "http://www.nature.com/articles/s41593-020-00733-0.pdf",
+      "content-type": "application/pdf",
+      "content-version": "vor",
+      "intended-application": "text-mining"
+    },
+    {
+      "URL": "http://www.nature.com/articles/s41593-020-00733-0",
+      "content-type": "text/html",
+      "content-version": "vor",
+      "intended-application": "text-mining"
+    },
+    {
+      "URL": "http://www.nature.com/articles/s41593-020-00733-0.pdf",
+      "content-type": "application/pdf",
+      "content-version": "vor",
+      "intended-application": "similarity-checking"
+    }
+  ],
+  "deposited": {
+    "date-parts": [
+      [
+        2024,
+        8,
+        17
+      ]
+    ],
+    "date-time": "2024-08-17T00:44:16Z",
+    "timestamp": 1723855456000
+  },
+  "score": 1,
+  "resource": {
+    "primary": {
+      "URL": "https://www.nature.com/articles/s41593-020-00733-0"
+    }
+  },
+  "subtitle": [],
+  "short-title": [],
+  "issued": {
+    "date-parts": [
+      [
+        2020,
+        11,
+        9
+      ]
+    ]
+  },
+  "references-count": 84,
+  "journal-issue": {
+    "issue": "1",
+    "published-print": {
+      "date-parts": [
+        [
+          2021,
+          1
+        ]
+      ]
+    }
+  },
+  "alternative-id": [
+    "733"
+  ],
+  "URL": "https://doi.org/10.1038/s41593-020-00733-0",
+  "relation": {
+    "has-preprint": [
+      {
+        "id-type": "doi",
+        "id": "10.1101/808154",
+        "asserted-by": "object"
+      }
+    ]
+  },
+  "ISSN": [
+    "1097-6256",
+    "1546-1726"
+  ],
+  "issn-type": [
+    {
+      "value": "1097-6256",
+      "type": "print"
+    },
+    {
+      "value": "1546-1726",
+      "type": "electronic"
+    }
+  ],
+  "subject": [],
+  "published": {
+    "date-parts": [
+      [
+        2020,
+        11,
+        9
+      ]
+    ]
+  },
+  "assertion": [
+    {
+      "value": "4 September 2019",
+      "order": 1,
+      "name": "received",
+      "label": "Received",
+      "group": {
+        "name": "ArticleHistory",
+        "label": "Article History"
+      }
+    },
+    {
+      "value": "2 October 2020",
+      "order": 2,
+      "name": "accepted",
+      "label": "Accepted",
+      "group": {
+        "name": "ArticleHistory",
+        "label": "Article History"
+      }
+    },
+    {
+      "value": "9 November 2020",
+      "order": 3,
+      "name": "first_online",
+      "label": "First Online",
+      "group": {
+        "name": "ArticleHistory",
+        "label": "Article History"
+      }
+    },
+    {
+      "value": "The authors declare no competing interests.",
+      "order": 1,
+      "name": "Ethics",
+      "group": {
+        "name": "EthicsHeading",
+        "label": "Competing interests"
+      }
+    }
+  ]
+}
