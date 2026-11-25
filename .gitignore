@@ -47,6 +47,9 @@ reports/phase8/selection_log.jsonl
 reports/phase8/models/
 reports/*_quick/
 
+# The held-out runner keeps its one-shot output as local evidence.
+/research/ic1_v2/HELDOUT_RESULTS_V2.json
+
 # OS/editor
 .DS_Store
 Thumbs.db

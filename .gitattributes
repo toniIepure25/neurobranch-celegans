@@ -42,3 +42,25 @@ reports/simulator/supervisor_handoff/** -text
 
 # Markdown sources are hashed in the handoff manifest; force stable LF checkout.
 docs/HANDOFF_*.md text eol=lf
+
+# The IC1-v2 freeze manifest verifies checkout bytes.
+research/ic1_v2/** text eol=lf
+scripts/ic1_msc_v2.py text eol=lf
+scripts/ic1_v2_acceptance.py text eol=lf
+src/neurobranch/abstraction/ic1_msc_oracle.py text eol=lf
+src/neurobranch/abstraction/ic1_v2_*.py text eol=lf
+tests/abstraction/test_ic1_msc_freeze.py text eol=lf
+tests/abstraction/test_ic1_v2.py text eol=lf
+
+# Existing inputs were fingerprinted from a CRLF checkout.
+.python-version text eol=crlf
+pyproject.toml text eol=crlf
+uv.lock text eol=crlf
+research/interventional_consistency_protocol.md text eol=crlf
+research/interventional_consistency_protocol.sha256 text eol=crlf
+src/neurobranch/__init__.py text eol=crlf
+src/neurobranch/abstraction/__init__.py text eol=crlf
+src/neurobranch/abstraction/commutation.py text eol=crlf
+src/neurobranch/abstraction/estimands.py text eol=crlf
+src/neurobranch/abstraction/reference.py text eol=crlf
+src/neurobranch/abstraction/systems.py text eol=crlf
