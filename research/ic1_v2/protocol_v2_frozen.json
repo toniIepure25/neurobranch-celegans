@@ -1,0 +1,40 @@
+{
+  "version": "msc-ic1-v2.0",
+  "model": {
+    "positions": 3,
+    "velocities": [-1, 1],
+    "contexts": [0, 1],
+    "context_prior": ["1/2", "1/2"],
+    "position_velocity_initial": "independent uniform",
+    "velocity_persistence": "17/20",
+    "passive_steps": 1,
+    "intervention_steps": 1,
+    "intervention": "after updating velocity, add velocity plus context modulo three",
+    "sensor": "perfect pre-probe context observation, cost one read, no transition effect",
+    "response": "physical position after probe"
+  },
+  "learner": {
+    "name": "tabular conditional-response predictor",
+    "pseudocount_per_category": 0.5,
+    "training": "one realized probe outcome per independent episode",
+    "inputs": ["full_base", "compressed_base", "full_sensor", "compressed_sensor"]
+  },
+  "analysis": {
+    "loss": "TV to exact micro-start conditional categorical law",
+    "primary": "compressed_sensor minus full_sensor fitted episode-mean TV at largest nested training size",
+    "risk": "equal-prior Bayes risk for each fitted predictor, averaged over independent blocks",
+    "oracle_compression_reference": "7/20",
+    "agreement_margin": "1/20",
+    "confidence_level": 0.95,
+    "interval": "paired Student t interval on independent block means",
+    "heldout_realized_outcomes": false
+  },
+  "runtime": {
+    "python": "3.13.5",
+    "numpy": "2.3.1",
+    "scipy": "1.16.0",
+    "system": "Windows",
+    "compute": "local CPU",
+    "budget_seconds": 120
+  }
+}

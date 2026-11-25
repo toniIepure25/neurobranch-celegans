@@ -1,0 +1,8 @@
+{
+  "generator": "numpy.random.Generator(numpy.random.PCG64(numpy.random.SeedSequence(entropy, spawn_key=key)))",
+  "entropy": 20261125,
+  "key_order": ["namespace", "zero_based_block", "role"],
+  "namespaces": {"dev": 11, "heldout": 29},
+  "roles": {"train": 0, "score": 1},
+  "policy": "no RNG initialization with a heldout key before explicit authorization"
+}

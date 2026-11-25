@@ -1,0 +1,8 @@
+{
+  "unit": "fresh episode with independent context, initial position, velocity and transition draws",
+  "sampling": "iid under balanced context prior, without fixed stratum quotas",
+  "train_structure": "nested prefixes within block, shared by all four input conditions",
+  "score_structure": "fresh checkpoint episodes shared by all four input conditions",
+  "dev": {"blocks": 4, "train_sizes": [12, 48, 96], "score_episodes_per_block": 72},
+  "heldout": {"blocks": 200, "train_sizes": [48, 192, 768], "score_episodes_per_block": 512}
+}
